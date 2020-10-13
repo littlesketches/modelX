@@ -237,8 +237,6 @@
                 <a-entity id = "external-models">
                     <!-- ENVIRONMENT & NATURE -->
                     <a-asset-item id="mdl-alps" 				src="models/nature-alps.glb"></a-asset-item>
-                    <a-asset-item id="mdl-wheat" 				src="models/ag-wheat-group.glb"></a-asset-item>
-                    <a-asset-item id="mdl-corn" 				src="models/ag-corn-group.glb"></a-asset-item>
                     <!-- LIVESTOCK -->
                     <a-asset-item id="mdl-cow-brown" 			src="models/animal-cow-holstein.glb"></a-asset-item>
                     <a-asset-item id="mdl-cow-black" 			src="models/animal-cow-jersey.glb"></a-asset-item>
@@ -246,28 +244,19 @@
                     <a-asset-item id="mdl-sheep" 			    src="models/animal-sheep-01.glb"></a-asset-item>
                     <a-asset-item id="mdl-pig" 			        src="models/animal-pig.glb"></a-asset-item>
                     <!-- BUILT ENVIRONMENT-->
-                    <a-asset-item id="mdl-tower" 				src="models/builtEnv-tower.glb"></a-asset-item>
                     <a-asset-item id="mdl-shop-blue" 	        src="models/builtEnv-shop-blue.glb"></a-asset-item>
                     <a-asset-item id="mdl-shop-pink" 	        src="models/builtEnv-shop-pink.glb"></a-asset-item>
-                    <a-asset-item id="mdl-warehouse" 			src="models/builtEnv-factoryWithStacks.glb"></a-asset-item>
                     <a-asset-item id="mdl-lighthouse" 			src="models/builtEnv-lighthouse-01.glb"></a-asset-item>
                     <a-asset-item id="mdl-bar-corner" 			src="models/builtEnv-bar-corner.glb"></a-asset-item>
                     <a-asset-item id="mdl-church" 				src="models/builtEnv-church-02.glb"></a-asset-item>
                     <a-asset-item id="mdl-schoolHouse" 			src="models/builtEnv-schoolHouse-02.glb"></a-asset-item>
                     <!-- INFRASTRUCTURE-->
-                    <a-asset-item id="mdl-lampPole" 			src="models/infrastructure-lampPole.glb"></a-asset-item>
-                    <a-asset-item id="mdl-fountain" 			src="models/infrastructure-fountain.glb"></a-asset-item>
-                    <a-asset-item id="mdl-trafficLight" 		src="models/infrastructure-trafficLight.glb"></a-asset-item>
-                    <a-asset-item id="mdl-trafficLightOverhead"	src="models/infrastructure-trafficLight-overhanging.glb"></a-asset-item>
                     <!-- TRANSPORT-->
                     <a-asset-item id="mdl-tractor" 			    src="models/transportOffRoad-tractor.glb"></a-asset-item>
-                    <a-asset-item id="mdl-privateJet" 			src="models/transportAir-privateJet.glb"></a-asset-item>
                     <a-asset-item id="mdl-planeRed" 			src="models/transportAir-plane-red.glb"></a-asset-item>	
                     <a-asset-item id="mdl-train" 			    src="models/transportRail-train-blue.glb"></a-asset-item>	
                     <!-- MISCELLANEOUS DECORATION -->
                     <a-asset-item id="mdl-rubberDuck" 			src="models/misc-rubberDuck.glb" ></a-asset-item>
-                    <a-asset-item id="mdl-ferrisWheel" 			src="models/misc-ferrisWheel.glb" ></a-asset-item>
-                    <a-asset-item id="mdl-parkBench" 			src="models/misc-parkBench.glb" ></a-asset-item>
                 </a-entity>
 
                 <!-- TEMPLATES-->
@@ -883,8 +872,8 @@
                         </a-entity>
                     </script>
 
-                    <script id="temp-tower" type="text/html">
-                        <a-entity mixin="${trimcol}" buffer-geometry-merger>
+                    <script id="tmp-tower" type="text/html">
+                        <a-entity class="base" mixin="${trimcol}" buffer-geometry-merger>
                             <a-box position="0 0.6 0" scale="6  1.2 6"></a-box>
                             <a-box position="0 1.8 0" scale="6.3 1.2 6.3"></a-box>
                             <a-box position="-0.2 7.4 0" scale="0.2 10 3.02"></a-box>
@@ -892,7 +881,7 @@
                             <a-box position="0 7.4 -0.2" scale="3.02 10.02 0.2"></a-box>
                             <a-box position="0 7.4 0.2" scale="3.02 10.02 0.2"></a-box>
                         </a-entity>
-                        <a-entity mixin="${basecol}" buffer-geometry-merger>
+                        <a-entity class="trim"  mixin="${basecol}" buffer-geometry-merger>
                             <a-box position="0 7.4 0" scale="3 10 3"></a-box>
                             <a-entity position="0 1.9 0">
                                 <a-box position="1.5 1.5 1.5" scale="2 2 2"></a-box>
@@ -913,13 +902,13 @@
                                 <a-box  position="-1.1 1 1.1" scale="1.2 2 1.2" material="" geometry=""></a-box>
                             </a-entity>
                         </a-entity>
-                        <a-entity class = "${doorcol}" mixin="col-tower-door"  buffer-geometry-merger>
+                        <a-entity class ="door-group"  mixin="${doorcol}"  buffer-geometry-merger>
                             <a-box position="0.225 0.375 0" scale="0.4 0.75 6.02"></a-box>
                             <a-box position="-0.225 0.375 0" scale="0.4 0.75 6.02"></a-box>
                             <a-box position="0 0.375 0.225" scale="6.02 0.75 0.4"></a-box>
                             <a-box position="0 0.375 -0.225" scale="6.02 0.75 0.4"></a-box>
                         </a-entity>
-                        <a-entity class = "${windowcol}" mixin="col-tower-window" buffer-geometry-merger>
+                        <a-entity class ="window-group" mixin="${windowcol}" buffer-geometry-merger>
                             <a-entity position="0 0 0">
                                 <a-box position="1 0.5 0" scale="0.5 0.5 6.02"></a-box>
                                 <a-box position="1.75 0.5 0" scale="0.5 0.5 6.02"></a-box>
