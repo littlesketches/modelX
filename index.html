@@ -1664,12 +1664,12 @@
             <!-- LIGHTS -->
             <a-entity id='lighting-group'>
                 <a-entity id="ambient-hemiLight" class="light" position="0 0 0" 
-                    light="type: hemisphere; color: #f6e3fa; intensity: 0; groundColor: #454545"       
-                    animation__sunrise = "property: light.intensity; from: 0; to: 1.2; dur: 30000; autoplay: false"></a-entity>
+                    light="type: hemisphere; color: #f6e3fa; intensity: 0; groundColor: #454545"   ></a-entity>
 
                 <a-entity id="ambient-light" class="light"  position="-0.11 1 0.33" 
                     light="type: ambient; intensity: 0; shadowCameraLeft: -10; shadowCameraBottom: -10; shadowCameraRight: 10; shadowCameraTop: 10"
-                    ></a-entity>
+                    animation__sunrise = "property: light.intensity; from: 0; to: 1.2; dur: 30000; autoplay: false"
+                ></a-entity>
 
                 <a-entity id="sun-light" class="light"  position="-20 30 0" light="type: directional; intensity: 0.3; color: #DDD"></a-entity>
                 <a-entity id='spotlight-group'>
