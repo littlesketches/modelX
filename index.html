@@ -1691,11 +1691,11 @@
 
             <!-- CAMERAS-->
             <a-entity id="camera-group">
-                <a-entity id="vrcam-rig" position="0 3 0" rotation="0 0 0" wasd-controls="acceleration:150; fly: false"  position="0 8.6 5" >
-                    <a-entity id="vrcam" camera="active: false; fov: 100" look-controls ></a-entity>
+                <a-entity id="vrcam-rig" rotation="0 0 0" wasd-controls="acceleration:150; fly: false"  position="0 8.6 5" >
+                    <a-entity id="vrcam" camera="active: true; fov: 100" look-controls ></a-entity>
                 </a-entity>
                 <a-entity id="flycam-rig" position="180 60 0" rotation="-10 90 0"  wasd-controls="acceleration: 150">
-                    <a-entity id="flycam" camera="fov: 45; zoom: 0.9; near: 0.1" look-controls ></a-entity>
+                    <a-entity id="flycam" camera="active: false; fov: 45; zoom: 0.9; near: 0.1" look-controls ></a-entity>
                 </a-entity> 
 
             </a-entity>
