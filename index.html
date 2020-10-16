@@ -1695,7 +1695,7 @@
                     <a-entity id="vrcam" camera="active: false; fov: 100" look-controls ></a-entity>
                 </a-entity> -->
                 <a-entity id="flycam-rig" position="180 60 0" rotation="-10 90 0"  wasd-controls="acceleration: 150">
-                    <a-entity id="flycam" camera="active: true; fov: 45; zoom: 0.9; near: 0.1" look-controls ></a-entity>
+                    <a-entity id="flycam" camera="active: true; fov: 45; zoom: 0.9; near: 0.1" orbit-controls look-controls ></a-entity>
                 </a-entity> 
 
             </a-entity>
@@ -5216,7 +5216,7 @@
                     </a-entity>
                     
                     <!-- Livestock -->	
-                    <a-entity id="ag-livestock-group" class="livestock-group animals-group" visible="true">
+                    <a-entity id="ag-livestock-group" class="livestock-group animals-group" visible="false">
                         <a-entity id="livestock-farm-01" class="farm-livestock-group">                            
                             <a-entity class="pig piggery livestock" gltf-model="#mdl-pig" scale="0.005 0.005 0.005" position="-14.28 0.076 8.334" rotation="0 600"></a-entity>
                             <a-entity class="pig piggery livestock" gltf-model="#mdl-pig" scale="0.005 0.005 0.005" position="-14.47748 0.3 9.92796" rotation="0 90 0"></a-entity>                   
