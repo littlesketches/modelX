@@ -449,7 +449,7 @@ const modelSchema = {
 
         evening: {
             everyday: {
-                'sky-top':      '#fff', 
+                'sky-top':      '#000', 
                 'sky-bottom':   '#d78d37', 
                 'fog-type':     'exponetial', 
                 'fog-density':  0.01, 
@@ -468,8 +468,8 @@ const modelSchema = {
         },
 
         night: {
-            everyyday: {
-                'sky-top':      '#000', 
+            everyday: {
+                'sky-top':      '#666699', 
                 'sky-bottom':   '#d78d37', 
                 'fog-type':     'exponetial', 
                 'fog-density':  0.01, 

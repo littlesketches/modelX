@@ -119,6 +119,9 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
                         case 'Comma':
                                 externalEvents.changeHour('back')
                             break
+                        case 'Space':
+                                externalEvents.changeEnvironment()
+                            break
 
                         default:
                             console.log(`No event for ${key.code}`)
@@ -246,7 +249,7 @@ const externalEvents = {
 
 
     changeEnvironment: function(name = 'everyday', duration = 2000){
-
+        console.log('Changing environment to '+name, state.modelTime.timeOfDay())
         // Change the hemisphere sky colour
         sceneEls.enviro.sky.setAttribute('animation__topColour', {
             property: 'material.topColor',
