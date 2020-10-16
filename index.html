@@ -30,11 +30,11 @@
     </head>
 
     <body>
-        <a-scene id="scene" stats cycle-sun
-            fog="type: linear; color: #000; density: 0.025"
-            animation-timeline__1="timeline: #ambientLight-cycle; loop: true; direction: alternate"> 
+        <a-scene id="scene" 
+                setup add-external-listeners position-sun vr-mode-ui="enabled: false"
+                fog="type: linear; color: #000; density: 0.025"> <!-- animation-timeline__1="timeline: #ambientLight-cycle; loop: true; direction: alternate;">  -->
             <!-- ASSETS: MIXINS, MODELS AND TEMPLATES-->
-            <a-assets>
+            <a-assets timeout="5000">
                 <!-- PALETTES AND MATERIALS -->
                 <a-entity id = "mixins">
                     <a-mixin id="palette-A-01" 	    material = 'color: #FFA8CB'></a-mixin>
@@ -110,10 +110,10 @@
                     <a-mixin id="col-wasteToEnergy-door"   material="color: gray"></a-mixin>
                     <a-mixin id="col-wasteToEnergy-equip"  material="color: #fff"></a-mixin>
 
-                    <a-mixin id="col-recycling-base"       material="color: gray"></a-mixin>
+                    <a-mixin id="col-recycling-base"       material="color: yellow"></a-mixin>
                     <a-mixin id="col-recycling-window"     material="color: #fff"></a-mixin>
-                    <a-mixin id="col-recycling-roof"       material="color: #fff"></a-mixin>
-                    <a-mixin id="col-recycling-door"       material="color: gray"></a-mixin>
+                    <a-mixin id="col-recycling-roof"       material="color: green"></a-mixin>
+                    <a-mixin id="col-recycling-door"       material="color: green"></a-mixin>
                     <a-mixin id="col-recycling-equip"      material="color: #fff"></a-mixin>
 
                     <a-mixin id="col-office-A-base"      material='color: #F0EAD6'></a-mixin>
@@ -195,6 +195,15 @@
                         <a-mixin id="col-pavement" 	material='color: gray'></a-mixin>
                         <a-mixin id="col-road" 		material ="color: #525a60" ></a-mixin>
                         <a-mixin id="col-line" 		material ="color: #FFF" ></a-mixin>
+                        <a-mixin id="col-water-filtered-01" 		material ="color: #82B6DD" ></a-mixin>
+                        <a-mixin id="col-water-filtered-02" 		material ="color: #dae3cd" ></a-mixin>
+                        <a-mixin id="col-water-filtered-03" 		material ="color: #CBFFE2" ></a-mixin>
+                        <a-mixin id="col-water-filtered-04" 		material ="color: #A9844F" ></a-mixin>
+                        <a-mixin id="col-pondBank" 		    material ="color: gray" ></a-mixin>
+                        <a-mixin id="col-waste-01" 		    material ="color: #A98E72" ></a-mixin>
+                        <a-mixin id="col-waste-02" 		    material ="color: #847e08" ></a-mixin>
+                        <a-mixin id="col-waste-03" 		    material ="color: #D3D3D3" ></a-mixin>
+                        <a-mixin id="col-waste-04" 		    material ="color: #ae9973" ></a-mixin>
 
                     <!-- Vehicles -->
                         <a-mixin id="col-tire" 	                material='color: #2B2B2B'></a-mixin>
@@ -1254,7 +1263,6 @@
                         <a-entity class="industrial-building" position="-1 0 1">
                             <a-entity  mixin="${basecol}" buffer-geometry-merger>
                                 <a-box position="0 0.76 0" scale="3 1.5 4" ></a-box>
-                                <a-box position="-2 0.76 1.25" scale="1.5 1.52 1.5" ></a-box>
                                 <a-triangle position="-1.49678 2.5 2" scale="3 2 4" geometry="vertexA: 0 -0.245 0; vertexB: 0 -0.5 0; vertexC: 1 -0.5 0" material="side: double"> </a-triangle>
                                 <a-triangle position="-1.49678 2.5 -2" scale="3 2 4" geometry="vertexA: 0 -0.245 0; vertexB: 0 -0.5 0; vertexC: 1 -0.5 0" material="side: double"> </a-triangle>
                             </a-entity>
@@ -1619,47 +1627,52 @@
                 <!-- ANIMATION TIMELINES -->
                 <a-timeline id="ambientLight-cycle">
                     <a-timeline-animation select="#ambient-light" name="sunrise"></a-timeline-animation>
-                    <!-- <a-timeline-animation select="#ambient-light" name="sunset"></a-timeline-animation>             -->
                 </a-timeline>
 
                 <!-- ANIMATION MIXINS -->
                 <a-mixin id = "sunriseMixin" animation__sunrise = "property: light.intensity; from: 0; to: 1.5; dur: 15000; autoplay: false" ></a-mixin>
-                <!-- <a-mixin id = "sunsetMixin"  animation__sunset = "property: light.intensity; from: 1.5; to: 0; dur: 15000; autoplay: false" ></a-mixin> -->
             </a-assets>
 
             <!-- ANIMATION PATHS / CURVEs-->
             <a-entity id='animationPath-group'>
-                    <a-curve id="sun-path-points">
-                        <a-curve-point id="sun-0000" position="0  -100  0"></a-curve-point>
-                        <a-curve-point id="sun-0100" position="0  -100  -33.33"></a-curve-point>
-                        <a-curve-point id="sun-0200" position="0  -100  -66.67"></a-curve-point>
-                        <a-curve-point id="sun-0300" position="0  -100  -100"></a-curve-point>
-                        <a-curve-point id="sun-0400" position="0  -90  -140"></a-curve-point>
-                        <a-curve-point id="sun-0500" position="0  -60  -170"></a-curve-point>                         
-                        <a-curve-point id="sun-0600" position="0  0    -180"></a-curve-point>
-                        <a-curve-point id="sun-0700" position="0  45   -160"></a-curve-point>
-                        <a-curve-point id="sun-0800" position="0  70   -130"></a-curve-point>
-                        <a-curve-point id="sun-0900" position="0  85   -100"></a-curve-point>
-                        <a-curve-point id="sun-1000" position="0  92.5 -70"></a-curve-point>
-                        <a-curve-point id="sun-1100" position="0  97.5 -40"></a-curve-point>
-                        <a-curve-point id="sun-1200" position="0  100    0"></a-curve-point>
-                        <a-curve-point id="sun-1300" position="0  97.5  40"></a-curve-point>
-                        <a-curve-point id="sun-1400" position="0  92.5  70"></a-curve-point>
-                        <a-curve-point id="sun-1500" position="0  85    100"></a-curve-point>
-                        <a-curve-point id="sun-1600" position="0  70    130"></a-curve-point>
-                        <a-curve-point id="sun-1700" position="0  45    160"></a-curve-point>
-                        <a-curve-point id="sun-1800" position="0  0     180"></a-curve-point>
-                        <a-curve-point id="sun-1900" position="0  -60   170"></a-curve-point>
-                        <a-curve-point id="sun-2000" position="0  -90   140"></a-curve-point>
-                        <a-curve-point id="sun-2100" position="0  -100  100"></a-curve-point>
-                        <a-curve-point id="sun-2200" position="0  -100  66.66"></a-curve-point>
-                        <a-curve-point id="sun-2300" position="0  -100  0"></a-curve-point>
-                    </a-curve>
-                    <!-- <a-curve id="sun-path-pointsToNow"></a-curve> -->
-                    <!-- <a-draw-curve id="sun-pathToNow" curveref="#sun-path-pointsToNow" material="shader: line; color: none"></a-draw-curve> -->
-                    <a-draw-curve id="sun-path" curveref="#sun-path-points" material="opacity: 0"></a-draw-curve>
-            </a-entity>
+                <a-curve id="sun-path-points">
+                    <a-curve-point id="sun-0000" position="0  -100  0"></a-curve-point>
+                    <a-curve-point id="sun-0100" position="0  -100  -33.33"></a-curve-point>
+                    <a-curve-point id="sun-0200" position="0  -100  -66.67"></a-curve-point>
+                    <a-curve-point id="sun-0300" position="0  -100  -100"></a-curve-point>
+                    <a-curve-point id="sun-0400" position="0  -90  -140"></a-curve-point>
+                    <a-curve-point id="sun-0500" position="0  -60  -170"></a-curve-point>                         
+                    <a-curve-point id="sun-0600" position="0  0    -180"></a-curve-point>
+                    <a-curve-point id="sun-0700" position="0  45   -160"></a-curve-point>
+                    <a-curve-point id="sun-0800" position="0  70   -130"></a-curve-point>
+                    <a-curve-point id="sun-0900" position="0  85   -100"></a-curve-point>
+                    <a-curve-point id="sun-1000" position="0  92.5 -70"></a-curve-point>
+                    <a-curve-point id="sun-1100" position="0  97.5 -40"></a-curve-point>
+                    <a-curve-point id="sun-1200" position="0  100    0"></a-curve-point>
+                    <a-curve-point id="sun-1300" position="0  97.5  40"></a-curve-point>
+                    <a-curve-point id="sun-1400" position="0  92.5  70"></a-curve-point>
+                    <a-curve-point id="sun-1500" position="0  85    100"></a-curve-point>
+                    <a-curve-point id="sun-1600" position="0  70    130"></a-curve-point>
+                    <a-curve-point id="sun-1700" position="0  45    160"></a-curve-point>
+                    <a-curve-point id="sun-1800" position="0  0     180"></a-curve-point>
+                    <a-curve-point id="sun-1900" position="0  -60   170"></a-curve-point>
+                    <a-curve-point id="sun-2000" position="0  -90   140"></a-curve-point>
+                    <a-curve-point id="sun-2100" position="0  -100  100"></a-curve-point>
+                    <a-curve-point id="sun-2200" position="0  -100  50"></a-curve-point>
+                    <a-curve-point id="sun-2300" position="0  -100  0"></a-curve-point>
+                </a-curve>
+                <a-curve id="duck-path-points">
+                    <a-curve-point id="duck-001" position="-3.05 0.7 6.5"></a-curve-point>
+                    <a-curve-point id="duck-002" position="-9.05 0.7 9.5"></a-curve-point>
+                    <a-curve-point id="duck-003" position="-6.05 0.7 2.5"></a-curve-point>
+                    <a-curve-point id="duck-004" position="-3.05 0.7 6.5"></a-curve-point>
+                </a-curve>
 
+                <!-- <a-curve id="sun-path-pointsToNow"></a-curve> -->
+                <!-- <a-draw-curve id="sun-pathToNow" curveref="#sun-path-pointsToNow" material="shader: line; color: none"></a-draw-curve> -->
+                <a-draw-curve id="sun-path" curveref="#sun-path-points" material="opacity: 0"></a-draw-curve>
+                <a-draw-curve id="duck-path" curveref="#duck-path-points" material="opacity: 1" material="shader: line; color: red"></a-draw-curve>
+            </a-entity>
 
             <!-- LIGHTS -->
             <a-entity id='lighting-group'>
@@ -1668,8 +1681,7 @@
 
                 <a-entity id="ambient-light" class="light"  position="-0.11 1 0.33" 
                     light="type: ambient; intensity: 0; shadowCameraLeft: -10; shadowCameraBottom: -10; shadowCameraRight: 10; shadowCameraTop: 10"
-                    animation__sunrise = "property: light.intensity; from: 0; to: 1.2; dur: 30000; autoplay: false"
-                ></a-entity>
+                    animation__sunrise = "property: light.intensity; from: 0; to: 1.2; dur: 30000; autoplay: false"></a-entity>
 
                 <a-entity id="sun-light" class="light"  position="-20 30 0" light="type: directional; intensity: 0.3; color: #DDD"></a-entity>
                 <a-entity id='spotlight-group'>
@@ -1679,16 +1691,23 @@
 
             <!-- CAMERAS-->
             <a-entity id="camera-group">
-                <a-entity id="camera-rig" position="0 3 0" rotation="0 0 0">
-                    <a-entity camera="active: true; fov: 100" ortho look-controls wasd-controls="acceleration:150; fly: false"  position="0 8.6 5" ></a-entity>
+                <a-entity id="vrcam-rig" position="0 3 0" rotation="0 0 0" wasd-controls="acceleration:150; fly: false"  position="0 8.6 5" >
+                    <a-entity id="vrcam" camera="active: false; fov: 100" look-controls ></a-entity>
                 </a-entity>
+                <a-entity id="flycam-rig" position="180 60 0" rotation="-10 90 0"  wasd-controls="acceleration: 150">
+                    <a-entity id="flycam" camera="fov: 45; zoom: 0.9; near: 0.1" look-controls ></a-entity>
+                </a-entity> 
+
             </a-entity>
 
 
             <!-- ENVIRONMENT-->
             <a-entity id = "environment-group"  class="environment" >
                 <!-- SKY -->
-                <a-sky id="sky" radius="200" theta-length="110" material="shader: gradientshader; topColor: #edc7f5; bottomColor: #ddd" visible="" ></a-sky>
+                <a-sky id="sky" radius="200" theta-length="200" material="shader: gradientshader; topColor: #edc7f5; bottomColor: #ddd" visible="" ></a-sky>
+                <a-entity id = "cloud-group">
+                </a-entity>
+
                 <!--- OUTER BODIES: SUN BODY AND PATH -->		
                 <a-entity id='sun-group'>
                     <a-sphere id = "sun-body" radius="10" material="color: #e9ea8f; emissive: #fcff61" ></a-sphere>
@@ -1698,14 +1717,16 @@
 
                 <!-- PARTICLE SYSTEM-->
                 <a-entity id="global-particles" position="0 0 0" 
-                    particle-system="enabled: false; preset: rain ; size: 0.5; max-age: 6; particleCount: 10000; type: 3; velocityValue: 0 50 0; color: aqua,##fff; rotationAngle: 10"></a-entity>
+                    particle-system="enabled: false; preset: rain ; size: 0.5; max-age: 6; particleCount: 10000; type: 3; velocityValue: 0 50 0; color: aqua,#fff; rotationAngle: 10"></a-entity>
 
             </a-entity>
                 
             <!--- WORLD TOPOGRAPHY -->
             <a-entity id="topography-group">
                 <!-- Environment and topography-->
-                <a-entity id="alps" class="topography surface model" gltf-model="#mdl-alps" position="-40 1.16 47.33" rotation="0 138 0" scale="0.8 0.8 0.8" visibility = "false"></a-entity>                
+                <a-entity id="mountains-group">
+                    <a-entity id="alps" class="topography surface model" gltf-model="#mdl-alps" position="-40 1.16 47.33" rotation="0 138 0" scale="0.8 0.8 0.8" visibility = "false"></a-entity>                
+                </a-entity>
             
                 <a-entity id="ground-group" class="topography-group" position="0 2.85 0">
                     <a-entity id="central-ground"  class="surface"  mixin="ground-zone" position=""></a-entity>
@@ -1727,7 +1748,7 @@
                         <a-entity id="outer-ground-10" mixin="ground-zone subzone" position="-22.32 0 -77.8"></a-entity>
                         <a-entity id="outer-ground-11" mixin="ground-zone subzone" position="-22.32 0 -64.9"></a-entity>
                         <a-entity id="outer-ground-12" mixin="ground-zone subzone" position="-33.55 0 -58.4"></a-entity>
-                        <!-- <a-entity id="outer-ground-13" mixin="ground-zone subzone" position="-44.8  0 -51.8" visible="false"></a-entity> -->
+                        <a-entity id="outer-ground-13" mixin="ground-zone subzone" position="-44.8  0 -51.8"></a-entity>
                         <a-entity id="outer-ground-14" mixin="ground-zone subzone" position="-56    0 -58.4"></a-entity>
                         <a-entity id="outer-ground-15" mixin="ground-zone subzone" position="-67.2  0 -77.8"></a-entity>
                         <a-entity id="outer-ground-16" mixin="ground-zone subzone" position="-56    0 -97.3"></a-entity>
@@ -1755,7 +1776,7 @@
                         <a-entity id="outer-topSoil-10" mixin="topSoil-zone subzone" position="-22.32 0 -77.8"></a-entity>
                         <a-entity id="outer-topSoil-11" mixin="topSoil-zone subzone" position="-22.32 0 -64.9"></a-entity>
                         <a-entity id="outer-topSoil-12" mixin="topSoil-zone subzone" position="-33.55 0 -58.4"></a-entity>
-                        <!-- <a-entity id="outer-topSoil-13" mixin="topSoil-zone subzone" position="-44.8  0 -51.8" visible="false"></a-entity> -->
+                        <a-entity id="outer-topSoil-13" mixin="topSoil-zone subzone" position="-44.8  0 -51.8"></a-entity>
                         <a-entity id="outer-topSoil-14" mixin="topSoil-zone subzone" position="-56    0 -58.4"></a-entity>
                         <a-entity id="outer-topSoil-15" mixin="topSoil-zone subzone" position="-67.2  0 -77.8"></a-entity>
                         <a-entity id="outer-topSoil-16" mixin="topSoil-zone subzone" position="-56    0 -97.3"></a-entity>
@@ -1933,6 +1954,7 @@
 
             <!--- SHARED ELEMENTS -->
             <a-entity id="shared-features-group" visible="true">
+                <!-- Infrastructure -->
                 <a-entity id="shared-infrastructure-group" >
                     <!--- Main roads -->  
                     <a-entity id="arterial-roads" position="0 3 0">
@@ -1943,15 +1965,15 @@
                             <a-box class="road" mixin="road" position="-42.12 0 0.07" rotation="0 90 0" geometry="depth: 36" ></a-box>                            
                         </a-entity>		
                         <a-entity class="road-lines">
-                            <a-torus class="road-line" mixin="col-line"      position="0 0.2 0" geometry="radius: 22.5; radiusTubular: 0.05; segmentsRadial: 16; segmentsTubular: 27" rotation="90 0 0" scale="1 1 0.05" material=" flatShading: true"></a-torus>
-                            <a-box class="road-line" mixin="road-line"     position="-16.28 0 -27.79" rotation="0 30 0" geometry="depth: 16" ></a-box>
-                            <a-box class="road-line" mixin="road-stopline"  position="-11.70 0 -21.35" rotation="0 30 0" ></a-box>
-                            <a-box class="road-line" mixin="road-line"     position="-27.03 0 -46.35" rotation="0 30 0" geometry="depth: 12" ></a-box>
-                            <a-box class="road-line" mixin="road-stopline"  position="-20.87 0 -34.19" rotation="0 30 0" ></a-box>
-                            <a-box class="road-line" mixin="road-stopline"  position="-23.43 0 -41.67" rotation="0 30 0" ></a-box>
-                            <a-box class="road-line" mixin="road-line"     position="20.37 0 -36.65"   rotation="0 -30 0" geometry="depth: 35.5"></a-box>
+                            <a-torus class="road-line" mixin="col-line"    position="0 0.2 0"           geometry="radius: 22.5; radiusTubular: 0.05; segmentsRadial: 16; segmentsTubular: 27" rotation="90 0 0" scale="1 1 0.05" material=" flatShading: true"></a-torus>
+                            <a-box class="road-line" mixin="road-line"     position="-16.28 0 -27.79"   rotation="0 30 0" geometry="depth: 16" ></a-box>
+                            <a-box class="road-line" mixin="road-stopline" position="-11.70 0 -21.35"   rotation="0 30 0" ></a-box>
+                            <a-box class="road-line" mixin="road-line"     position="-27.03 0 -46.35"   rotation="0 30 0" geometry="depth: 12" ></a-box>
+                            <a-box class="road-line" mixin="road-stopline"  position="-20.87 0 -34.19"  rotation="0 30 0" ></a-box>
+                            <a-box class="road-line" mixin="road-stopline"  position="-23.43 0 -41.67"  rotation="0 30 0" ></a-box>
+                            <a-box class="road-line" mixin="road-line"     position="20.37 0 -36.65"    rotation="0 -30 0" geometry="depth: 35.5"></a-box>
                             <a-box class="road-line" mixin="road-stopline"  position="12.22 0 -21.04"   rotation="0 -30 0" ></a-box>
-                            <a-box class="road-line" mixin="road-line"     position="-42.12 0 0.07"    rotation="0 90 0" geometry="depth: 35.75"></a-box>	
+                            <a-box class="road-line" mixin="road-line"     position="-42.12 0 0.07"     rotation="0 90 0" geometry="depth: 35.75"></a-box>	
                             <a-box class="road-line" mixin="road-stopline"  position="-24.39 0 -0.68"   rotation="0 90 0" ></a-box>
                         </a-entity>	                        
                     </a-entity>   
@@ -2100,7 +2122,7 @@
                         <a-entity class="transmission-tower" template="src: #tmp-elecTrans-tower" position="-51.6 -0.25 47.8"></a-entity>   
                         <a-entity class="transmission-tower" template="src: #tmp-elecTrans-tower" position="-54.3 -0.25 4.8" ></a-entity>   
                         <a-entity class="transmission-tower" template="src: #tmp-elecTrans-tower" position="-42 -0.25 -21" rotation="0 -30 0" ></a-entity>   
-                        <a-entity class="transmission-tower" template="src: #tmp-elecTrans-tower" position="-23.2 -0.25 -57.1" ></a-entity>   
+                        <a-entity class="transmission-tower" template="src: #tmp-elecTrans-tower" position="-48 -0.25 -45" ></a-entity>   
                         <a-entity class="transmission-tower" template="src: #tmp-elecTrans-tower" position="-27 -0.25 -84" rotation="0 0 0" ></a-entity>   
                     </a-entity>
 
@@ -2165,6 +2187,7 @@
                     </a-entity>
                 </a-entity><!-- End Shared infrastructure-->
 
+                <!-- Vehicles -->
                 <a-entity id="vehicles-group" position="0 3 0"  visible="true">
                     <!-- <a-entity id="train" gltf-model="#mdl-train" position="0 0.2 -38.696" rotation="0 -90 0" scale="0.05 0.05 0.05"></a-entity>        -->
                     <a-entity class="ev-group" visible="">
@@ -2188,6 +2211,11 @@
                             template="src: #tmp-cybertruck" data-basecol="col-vehicle-purple" data-trimcol="col-vehicle-trimDark"></a-entity>
                     </a-entity>
                 </a-entity><!-- End of vehicles -->
+
+                <!-- Characters-->
+                <a-entity id="character-group" position = "0 3 0">
+                    <a-entity id="rubberDuck" gltf-model="#mdl-rubberDuck" position="45 -4.3 35" rotation="0 180 0"></a-entity>
+                </a-entity>
 
             </a-entity><!-- End of shared feautures -->
 
@@ -4079,6 +4107,7 @@
                             <a-cylinder position="0 2 0" rotation="0 90 0" geometry="radius: 0.33; height: 0.1"></a-cylinder>
                         </a-entity>
                     </a-entity>
+
                     <a-entity id="office-01" class="office-block three-level"  position="-12 0.3 6.5" rotation="0 -90 0"
                         template="src: #tmp-officeThreeLvl"  data-basecol="col-office-A-base"  data-trimcol="col-office-A-trim"  data-doorcol="col-office-A-door"  data-windowcol="col-office-A-window" data-equipcol="col-office-A-equip" >
                     </a-entity>
@@ -4111,7 +4140,6 @@
                 <!---WATERFRONT ZONE -->
                 <a-entity id="waterfront-zone" class="zone-group" position="44.8 0 26.2" rotation="0 90 0" visible="true">
                     <!-- Models-->
-                    <a-entity id="rubberDuck" gltf-model="#mdl-rubberDuck" position="-3.05 0.7 6.5" rotation="0 90 0"></a-entity>
                     <a-entity id="lighthouse" gltf-model="#mdl-lighthouse"  position="-21.96 1.09 -16.34"rotation="0 -62 0" scale="0.8 0.8 0.8"></a-entity>
                 </a-entity><!-- End of waterfront -->
 
@@ -5144,6 +5172,8 @@
                         </a-entity>
                         <a-entity class="hydro-station" position="-2.55 0 22" rotation="0 90 0" >
                             <a-box class="hydro-station-connector" mixin="col-hydro-base" position="-2.49 1.75 1" scale="0.02 0.5 4"></a-box>
+                            <a-box class="hydro-station-connector"  mixin="col-hydro-base"  position="-2 0.76 1.25" scale="1.5 1.52 1.5" ></a-box>
+
                             <a-entity class="power-station" template="src:#tmp-industrialBuilding" 
                                 data-basecol="col-hydro-base" data-roofcol="col-hydro-roof" data-doorcol="col-hydro-door" data-windowcol="col-hydro-window">
                             </a-entity>
@@ -5186,7 +5216,7 @@
                     </a-entity>
                     
                     <!-- Livestock -->	
-                    <a-entity id="ag-livestock-group" class="livestock-group animals-group" visible="false">
+                    <a-entity id="ag-livestock-group" class="livestock-group animals-group" visible="true">
                         <a-entity id="livestock-farm-01" class="farm-livestock-group">                            
                             <a-entity class="pig piggery livestock" gltf-model="#mdl-pig" scale="0.005 0.005 0.005" position="-14.28 0.076 8.334" rotation="0 600"></a-entity>
                             <a-entity class="pig piggery livestock" gltf-model="#mdl-pig" scale="0.005 0.005 0.005" position="-14.47748 0.3 9.92796" rotation="0 90 0"></a-entity>                   
@@ -5221,9 +5251,9 @@
                     <a-entity id="ag-produce-group" class="produce-group">
                         <a-entity id="ag-produce-group" class="cropping-group">
                             <a-entity id="crops-farm-04">
-                                <a-box class="field" mixin="col-field" height="0.1" width="7" depth="9" position="5.73065 -0.05 2.96438" rotation="0 30 0"></a-box>	
-                                <a-box class="field" mixin="col-field" height="0.1" width="7" depth="9" position="-2.38902 -0.05 -10.67232" rotation="0 30 0"></a-box>	
-                                <a-box class="field" mixin="col-field" height="0.1" width="7" depth="9" position="4.89605 -0.05 -14.93604" rotation="0 30 0"></a-box>	
+                                <a-box class="field" mixin="col-field" height="0.1" width="7" depth="9" position="5.73 0 2.96" rotation="0 30 0"></a-box>	
+                                <a-box class="field" mixin="col-field" height="0.1" width="7" depth="9" position="-2.39 0 -10.67" rotation="0 30 0"></a-box>	
+                                <a-box class="field" mixin="col-field" height="0.1" width="7" depth="9" position="4.90 0 -14.94" rotation="0 30 0"></a-box>	
 
                                 <a-entity id="wheatfields-01" position="5.40926 0 2.97425" scale="0.15 0.15 0.3" rotation="0 30 0" visible="false">
                                     <!-- <a-entity class="wheat" gltf-model="models/ag-wheat-group.glb" position="0 0 -10"></a-entity>
@@ -5297,15 +5327,33 @@
                     </a-entity>
 
                     <!-- Water treatment facility -->
-                    <a-entity id="waterTreatment-group" class="builtEnv-group utilities-group">
+                    <a-entity id="waterTreatment-group" position ="0 0 7" class="builtEnv-group utilities-group">
                         <a-entity id="filtration-ponds">
-                            <a-box class="water treatment" position="17 0 -7" geometry="width: 4; depth: 3; height: 0.2" color="blue" ></a-box>
-                            <a-box class="water treatment" position="17 0 -11" geometry="width: 4; depth: 3; height: 0.2" color="bluegreen" ></a-box>
-                            <a-box class="water treatment" position="22 0 -7" geometry="width: 4; depth: 3; height: 0.2" color="aqua" ></a-box>
-                            <a-box class="water treatment" position="22 0 -11" geometry="width: 4; depth: 3; height: 0.2" color="brown" ></a-box>
+                            <a-box class="water treatment" mixin="col-water-filtered-01" position="18 0.1 -7" geometry="width: 4; depth: 3; height: 0.2" ></a-box>
+                            <a-box class="water treatment" mixin="col-water-filtered-02"  position="18 0.1 -11" geometry="width: 4; depth: 3; height: 0.2" ></a-box>
+                            <a-box class="water treatment" mixin="col-water-filtered-03"  position="18 0.1 -15" geometry="width: 4; depth: 3; height: 0.2" ></a-box>
+                            <a-box class="water treatment" mixin="col-water-filtered-04" position="18 0.1 -19" geometry="width: 4; depth: 3; height: 0.2" ></a-box>
+                            <a-entity class = 'pondBanks' mixin="col-pondBank" buffer-geometry-merger>
+                                <a-box position="20 0.2 -7" scale="0.25 0.4 3.25" ></a-box>
+                                <a-box position="16 0.2 -7" scale="0.25 0.4 3.25" ></a-box>
+                                <a-box position="20 0.2 -11" scale="0.25 0.4 3.25" ></a-box>
+                                <a-box position="16 0.2 -11" scale="0.25 0.4 3.25" ></a-box>
+                                <a-box position="20 0.2 -15" scale="0.25 0.4 3.25" ></a-box>
+                                <a-box position="16 0.2 -15" scale="0.25 0.4 3.25" ></a-box>
+                                <a-box position="20 0.2 -19" scale="0.25 0.4 3.25" ></a-box>
+                                <a-box position="16 0.2 -19" scale="0.25 0.4 3.25" ></a-box>
+                                <a-box position="18 0.2 -8.5" scale="4.25 0.4 0.25" ></a-box>
+                                <a-box position="18 0.2 -5.5" scale="4.25 0.4 0.25" ></a-box>
+                                <a-box position="18 0.2 -12.5" scale="4.25 0.4 0.25" ></a-box>
+                                <a-box position="18 0.2 -9.5" scale="4.25 0.4 0.25" ></a-box>
+                                <a-box position="18 0.2 -13.5" scale="4.25 0.4 0.25" ></a-box>
+                                <a-box position="18 0.2 -16.5" scale="4.25 0.4 0.25" ></a-box>
+                                <a-box position="18 0.2 -17.5" scale="4.25 0.4 0.25" ></a-box>
+                                <a-box position="18 0.2 -20.5" scale="4.25 0.4 0.25" ></a-box>
+                            </a-entity>
                         </a-entity>
                         <!-- Water storage tank -->
-                        <a-entity class="water-tank" position="18.53171 0 -2.66315">
+                        <a-entity class="water-tank" position="17.85 0 -2.5">
                             <a-entity class ="origin-translation" position = "0 0 0"  mixin="col-waterTank" buffer-geometry-merger>
                                 <a-cylinder position="0 0.75 0" geometry="height: 0.2; radius: 0.65; segmentsRadial: 12"></a-cylinder>
                                 <a-cone     position="0 1.5 0" geometry="height: 1.5; radiusTop: 2; radiusBottom: 0.6; segmentsRadial: 12"></a-cone>
@@ -5336,12 +5384,12 @@
                     </a-entity>
 
                     <!-- Recyling facility -->
-                    <a-entity id="waste-recycling" class="services-group">
-                        <a-entity class="recylcing-center" position="-4 0 6" template="src:#tmp-industrialBuilding" 
-                            data-basecol="col-powerStn-base" 
-                            data-roofcol="col-powerStn-roof" 
-                            data-doorcol="col-powerStn-door" 
-                            data-windowcol="col-powerStn-window">
+                    <a-entity id="waste-recycling" position="22 0 12" class="services-group">
+                        <a-entity class="recylcing-center" position="0 0 0"  rotation ="0 210 0" template="src:#tmp-industrialBuilding" 
+                            data-basecol="col-recycling-base" 
+                            data-roofcol="col-recycling-roof" 
+                            data-doorcol="col-recycling-door" 
+                            data-windowcol="col-recycling-window">
                         </a-entity>
                     </a-entity>
 
@@ -5349,6 +5397,25 @@
 
                 <!-- THE OUTER ZONE -->
                 <a-entity id="outer-zone" class="zone-group" position="-44.8 3 -78.0" visible="true">
+                    <!-- Roads-->
+                    <a-entity id="outer-roads" class="roads-group">
+                        <a-entity class="tarmac" mixin="col-road" buffer-geometry-merger>  
+                            <a-torus class="road" position="5.47301 0 13.26408" geometry="radius: 13; radiusTubular: 0.74; segmentsRadial: 16; segmentsTubular: 27; arc: 90" rotation="90.00021045914971 -60 0" scale="1 1 0.05" mixin="col-road"></a-torus>
+                            <a-box class="road" mixin="road" position="7.25522 0 13.42285" geometry="depth: 30" material="" rotation="0 30 0"></a-box>
+                            <a-box class="road" mixin="road" position="-10.735 0 11.153" rotation="0 30 0" geometry="depth: 20" material=""></a-box>
+                            <a-box class="road" mixin="road" position="14.49 0 4.82" rotation="0 -60 0" geometry="depth: 18" material=""></a-box>
+                        </a-entity>
+                        <a-entity class="road-lines" mixin="col-line" buffer-geometry-merger>
+                            <a-torus class="road-line" position="5.47708 0.1 13.38354" geometry="radius: 13; radiusTubular: 0.04; segmentsRadial: 16; segmentsTubular: 27; arc: 90" rotation="90 -60 0" scale="1 1 0.05" material=""></a-torus>
+                            <a-box class="road-line" mixin="road-line" position="7.28582 0 13.52442" geometry="depth: 30" material="" rotation="0 30 0"></a-box>
+                            <a-box class="road-line" mixin="road-stopline" position="7.10842 0 9.86912" rotation="0 -60 0" material="" geometry=""></a-box>
+                            <a-box class="road-line" mixin="road-stopline" position="11.4423 0 24.0221" rotation="0 -60 0" material="" geometry=""></a-box>                                                       
+                            <a-box class="road-line" mixin="road-line" position="-10.735 0 11.153" rotation="0 30 0" geometry="depth: 20" material=""></a-box>
+                            <a-box class="road-line" mixin="road-line" position="14.49 0 4.82" rotation="0 120 0" geometry="depth: 18" material=""></a-box>
+                        </a-entity>
+                    </a-entity>
+
+                    <!-- Centralised power station -->
                     <a-entity id = "power-station" position="0 0 -10" rotation="0 0 0">
                         <a-entity id="power-station" position="18.45 0 -5.135">
                             <a-entity class="power-station" position="-4 0 6" template="src:#tmp-industrialBuilding" 
@@ -5376,6 +5443,47 @@
                             </a-entity>
                         </a-entity>
                     </a-entity>
+
+                    <!-- Landfill facility -->
+                    <a-entity id="waste-landfill" class="services-group">
+                        <a-entity id="waste-to-energy" class="warehouse-sawtooth" position="-10 0 25" rotation="0 120 0" template="src:#tmp-factory" data-basecol="col-warehouse-A-base" data-trimcol="col-warehouse-A-trim"></a-entity>
+
+                        <a-entity class="rubbish-group" position="-19.85608 -0.5 11.36838">
+                            <a-entity mixin="col-waste-01" geometry-buffer-merger>
+                                <a-dodecahedron mixin="col-waste-01" position="0.01613 -0.2665 -0.91014" scale="2 1.2 1.5" radius="1" rotation="0 45 0" material="" geometry=""></a-dodecahedron>
+                                <a-dodecahedron mixin="col-waste-01" position="-4.55871 0 -4.17565" scale="1.5 2 1" radius="1" rotation="" material="" geometry=""></a-dodecahedron>
+                                <a-dodecahedron mixin="col-waste-01" position="1.48677 0 6.63053" scale="1 2 1" radius="1" rotation="" material="" geometry=""></a-dodecahedron>
+                                <a-dodecahedron mixin="col-waste-01" position="0.93545 0 4.40902" scale="2 2 1" radius="1" rotation="300 0" material="" geometry=""></a-dodecahedron>
+                                <a-dodecahedron mixin="col-waste-01" position="3.42073 0 0.6706" scale="1 2 1" radius="1" rotation="" material="" geometry=""></a-dodecahedron>
+                                <a-dodecahedron mixin="col-waste-01" position="-3.79169 -1.05519 -2.22842" scale="1 2 2" radius="1" rotation="50 0 0" material="" geometry=""></a-dodecahedron>
+                            </a-entity> 
+                            <a-entity mixin="col-waste-02" geometry-buffer-merger>
+                                <a-dodecahedron mixin="col-waste-02" position="1.82348 -0.05045 -1.96605" scale="2 1 1" radius="1" rotation="" material="" geometry=""></a-dodecahedron>
+                                <a-dodecahedron mixin="col-waste-02" position="0.17334 0 2.21" scale="1.5 1.2 2" radius="1" rotation="" material="" geometry=""></a-dodecahedron>
+                                <a-dodecahedron mixin="col-waste-02" position="2.78906 -2.02202 5.55599" scale="1.3 1.3 1.7" radius="1" rotation="" material="" geometry=""></a-dodecahedron>
+                                <a-dodecahedron mixin="col-waste-02" position="3.84544 0.5216 2.47345" scale="1.3 1.3 1.7" radius="1" rotation="" material="" geometry=""></a-dodecahedron>
+                                <a-dodecahedron mixin="col-waste-02" position="-2.4075 -1.144 -1.30785" scale="1.3 1.3 3" radius="1" rotation="20 0 0" material="" geometry=""></a-dodecahedron>
+                                <a-dodecahedron mixin="col-waste-02" position="2.10337 -3.62115 -0.39454" scale="1.3 3 1.7" radius="1" rotation="" material="" geometry=""></a-dodecahedron>
+                            </a-entity> 
+                            <a-entity mixin="col-waste-03" geometry-buffer-merger>
+                                <a-dodecahedron mixin="col-waste-03" position="0.92736 0 -3.47037" scale="1.2 1.3 1.5" radius="1" rotation="0 300" material="" geometry=""></a-dodecahedron>
+                                <a-dodecahedron mixin="col-waste-03" position="2.94687 -0.42396 4.30917" scale="1.5 1.5 2" radius="1" rotation="0 40 0" material="" geometry=""></a-dodecahedron>
+                                <a-dodecahedron mixin="col-waste-03" position="2.31353 -0.0261 0.00026" scale="1.4 1 2" radius="1" rotation="" material="" geometry=""></a-dodecahedron>
+                                <a-dodecahedron mixin="col-waste-03" position="-1.42203 -0.40125 0.13771" scale="1.4 1 2" radius="1" rotation="" material="" geometry=""></a-dodecahedron>
+                                <a-dodecahedron mixin="col-waste-03" position="-0.69687 -2.76754 -1.59762" scale="1.4 2 2" radius="1" rotation="60 0 0" material="" geometry=""></a-dodecahedron>
+                                <a-dodecahedron mixin="col-waste-03" position="1.49633 -2.84184 3.19343" scale="1.4 1.5 2.5" radius="1" rotation="" material="" geometry=""></a-dodecahedron>
+                            </a-entity>
+                            <a-entity mixin="col-waste-03" geometry-buffer-merger>
+                                <a-dodecahedron mixin="col-waste-04" position="1.58094 0 2.16833" scale="1.8 1.2 1.5" radius="1" rotation="0 5 0" material="" geometry=""></a-dodecahedron>
+                                <a-dodecahedron mixin="col-waste-04" position="-1.34128 -0.24142 -3.79491" scale="2 1 2" radius="1" rotation="" material="" geometry=""></a-dodecahedron>
+                                <a-dodecahedron mixin="col-waste-04" position="3.22268 -5.56948 3.22145" scale="1.5 3 2" radius="1" rotation="0 20 0" material="" geometry=""></a-dodecahedron>
+                                <a-dodecahedron mixin="col-waste-04" position="-0.36659 -3.34749 -3.08453" scale="1.5 2 3" radius="1" rotation="45 300" material="" geometry=""></a-dodecahedron>
+                                <a-dodecahedron mixin="col-waste-04" position="3.22268 -3.85283 -1.58689" scale="1.5 1 2" radius="1" rotation="0 300" material="" geometry=""></a-dodecahedron>
+                                <a-dodecahedron mixin="col-waste-04" position="3.22268 -2.41208 0.4651" scale="1.5 1 2" radius="1" rotation="-30-300" material="" geometry=""></a-dodecahedron>
+                            </a-entity>
+                        </a-entity>
+                    </a-entity>
+
                 </a-entity><!-- End of Other Zone-->
 
             </a-entity><!-- End of zone groups-->
