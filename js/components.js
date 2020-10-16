@@ -122,6 +122,10 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
                         case 'Space':
                                 externalEvents.changeEnvironment()
                             break
+                        case 'Enter':
+                                document.getElementById('scene').components.inspector.openInspector()
+                            break
+
 
                         default:
                             console.log(`No event for ${key.code}`)
