@@ -1189,21 +1189,21 @@
                                 </a-entity>
                             </a-entity>
                         </a-entity>
-                        <a-entity class="pen" position="-1.25 0 0" mixin="${pencol}" buffer-geometry-merger>
-                                <a-box position="0 0.25 1.5" scale="0.05 0.5 0.05"> </a-box>
-                                <a-box position="-0.5 0.25 1.5" scale="0.05 0.5 0.05"> </a-box>
-                                <a-box position="-1.5 0.25 1.5" scale="0.05 0.5 0.05"> </a-box>
-                                <a-box position="-1.5 0.25 0.5" scale="0.05 0.5 0.05"> </a-box>
-                                <a-box position="-1.5 0.25 -0.5" scale="0.05 0.5 0.05"> </a-box>
-                                <a-box position="-1.5 0.25 -1.5" scale="0.05 0.5 0.05"> </a-box>
-                                <a-box position="-0.5 0.25 -1.5" scale="0.05 0.5 0.05"> </a-box>
-                                <a-box position="0 0.25 -1.5" scale="0.05 0.5 0.05"> </a-box>
-                                <a-box position="-0.75 0.2 1.5" scale="1.5 0.1 0.05"> </a-box>
-                                <a-box position="-0.75 0.4 1.5" scale="1.5 0.1 0.05"> </a-box>
-                                <a-box position="-1.5 0.2 0" scale="0.05 0.1 3"> </a-box>
-                                <a-box position="-1.5 0.4 0" scale="0.05 0.1 3"> </a-box>
-                                <a-box position="-0.75 0.2 -1.5" scale="1.5 0.1 0.05"> </a-box>
-                                <a-box position="-0.75 0.4 -1.5" scale="1.5 0.1 0.05"> </a-box>
+                        <a-entity class="pen" position="-0.625 0 0" mixin="${pencol}" buffer-geometry-merger>
+                            <a-box position="0 0.25 1.5" scale="0.05 0.5 0.05"> </a-box>
+                            <a-box position="-0.5 0.25 1.5" scale="0.05 0.5 0.05"> </a-box>
+                            <a-box position="-1.5 0.25 1.5" scale="0.05 0.5 0.05"> </a-box>
+                            <a-box position="-1.5 0.25 0.5" scale="0.05 0.5 0.05"> </a-box>
+                            <a-box position="-1.5 0.25 -0.5" scale="0.05 0.5 0.05"> </a-box>
+                            <a-box position="-1.5 0.25 -1.5" scale="0.05 0.5 0.05"> </a-box>
+                            <a-box position="-0.5 0.25 -1.5" scale="0.05 0.5 0.05"> </a-box>
+                            <a-box position="0 0.25 -1.5" scale="0.05 0.5 0.05"> </a-box>
+                            <a-box position="-0.75 0.2 1.5" scale="1.5 0.1 0.05"> </a-box>
+                            <a-box position="-0.75 0.4 1.5" scale="1.5 0.1 0.05"> </a-box>
+                            <a-box position="-1.5 0.2 0" scale="0.05 0.1 3"> </a-box>
+                            <a-box position="-1.5 0.4 0" scale="0.05 0.1 3"> </a-box>
+                            <a-box position="-0.75 0.2 -1.5" scale="1.5 0.1 0.05"> </a-box>
+                            <a-box position="-0.75 0.4 -1.5" scale="1.5 0.1 0.05"> </a-box>
                         </a-entity>
                         <a-entity class="silo" position="-2.5 0 -2.25">
                             <a-cylinder mixin="${silocol}" position="0 1 0" geometry="height: 2; radius: 0.65; segmentsRadial: 12" material="flatShading: true"></a-cylinder>
@@ -1851,8 +1851,8 @@
                         <a-entity id="bay-bedrock" class="subSurface"   mixin="bedrock-zone" position="44.8 0 26.2" ></a-entity>
                     </a-entity>
 
-                    <a-entity id="ocean-group" class="topography-group" position="0 -1 0" >   
-                        <!-- <a-ocean position="40.64402 0 -9" ocean="width: 10.8; amplitude: 0.25; amplitudeVariance: 0.25; density: 20; color: #00fdff" scale="12 19 2"></a-ocean> -->
+                    <a-entity id="ocean-group" class="topography-group" position="0 -3 0" >   
+                        <!-- <a-ocean position="40.64 2 -9" ocean="width: 10.8; amplitude: 0.25; amplitudeVariance: 0.25; density: 20; color: #00fdff" scale="12 19 2"></a-ocean> -->
                         <a-entity id="bay-ocean"  class="surface" mixin="ocean-zone"  position="44.8  0  25.9" ></a-entity>
                         <a-entity id="coast1-ocean" class="surface" mixin="coastal-zone" position="74.5  0  0"></a-entity>
                         <a-entity id="coast2-ocean" class="surface" mixin="coastal-zone" position="74.5  0 -51.8"></a-entity>
@@ -1862,7 +1862,7 @@
                         <a-entity id="coast6-ocean" class="surface" mixin="coastal-zone" position="29.6  0 -77.7"></a-entity>
                         <a-entity id="coast7-ocean" class="surface" mixin="coastal-zone" position="-14.8 0 -77.7"></a-entity>
                         <a-entity id="coast8-ocean" class="surface" mixin="coastal-zone" position="51.8  0 -64.7"></a-entity>
-                    </a-entity>
+                    </a-entity> 
 
                     <a-entity id="seaBed-seabed" class="topography" position="0 -7.5 0">                  
                         <a-entity id="coast1-seabed" mixin="seabed-zone" position="74.5 0 0"></a-entity>
@@ -1928,7 +1928,7 @@
 
                     <a-entity id="laked-dam" class="surface" mixin="lake-zone" position="-52.2 2 65.2"></a-entity>
 
-                    <a-entity id="river" position="0 1.5 0" mixin="col-river" buffer-geometry-merger >
+                    <a-entity id="river" position="0 0 0" mixin="col-river" buffer-geometry-merger >
                         <a-box position="-23.23772 0 66.47795" geometry="width: 3; depth: 30.98; height: 3" rotation="0 30 0"></a-box>
                         <a-box position="-39.65996 0 53.75406" geometry="width: 3; depth: 20; height: 3" rotation="0 90 0"></a-box>
                         <a-box position="-0.48342 -0.49407 79.17602" geometry="width: 3; depth: 32.69; height: 3" rotation="2 90 0"></a-box>
@@ -1951,7 +1951,6 @@
                         <a-entity       mixin="col-ground"  position="0 5 0"            geometry="primitive: cylinder; segmentsRadial: 6; height: 0.1; radius: 15" rotation="0 90 0"></a-entity>
                     </a-entity>
                 </a-entity>
-
 
                 <!--- SHARED ELEMENTS -->
                 <a-entity id="shared-features-group" visible="true">
@@ -2122,8 +2121,8 @@
                         <a-entity id="electricity-transmission" position="0 3 0">
                             <a-entity class="transmission-tower" template="src: #tmp-elecTrans-tower" position="-51.6 -0.25 47.8"></a-entity>   
                             <a-entity class="transmission-tower" template="src: #tmp-elecTrans-tower" position="-54.3 -0.25 4.8" ></a-entity>   
-                            <a-entity class="transmission-tower" template="src: #tmp-elecTrans-tower" position="-42 -0.25 -21" rotation="0 -30 0" ></a-entity>   
-                            <a-entity class="transmission-tower" template="src: #tmp-elecTrans-tower" position="-48 -0.25 -45" ></a-entity>   
+                            <!-- <a-entity class="transmission-tower" template="src: #tmp-elecTrans-tower" position="-42 -0.25 -21" rotation="0 -30 0" ></a-entity>    -->
+                            <a-entity class="transmission-tower" template="src: #tmp-elecTrans-tower" position="-48 -0.25 -48" ></a-entity>   
                             <a-entity class="transmission-tower" template="src: #tmp-elecTrans-tower" position="-27 -0.25 -84" rotation="0 0 0" ></a-entity>   
                         </a-entity>
 
@@ -2219,7 +2218,6 @@
                     </a-entity>
 
                 </a-entity><!-- End of shared feautures -->
-
 
                 <!---SCENES BY ZONE -->
                 <a-entity id = "featuresByzone-group" visible="true">
@@ -2453,29 +2451,29 @@
                             <a-entity class="tree-round" template="src:#tmp-tree-round" position="-22.623 0.3 -1.68259" scale=""></a-entity>
                             <a-entity class="tree-round" template="src:#tmp-tree-round" position="-22.76725 0.3 3.95325" scale=""></a-entity>
                             <a-entity class="tree-round" template="src:#tmp-tree-round" position="-22.41959 0.3 9.05005" scale=""></a-entity>
-                            <a-entity class="tree-round" template="src:#tmp-tree-round" position="-22.50862 0.3 13.81054" scale=""></a-entity>
+                            <!-- <a-entity class="tree-round" template="src:#tmp-tree-round" position="-22.50862 0.3 13.81054" scale=""></a-entity> -->
                             <a-entity class="tree-round" template="src:#tmp-tree-round" position="-10.26939 0 -24.07192" scale=""></a-entity>
                             <a-entity class="tree-round" template="src:#tmp-tree-round" position="-7.42664 0 -15.88383" scale=""></a-entity>
                             <a-entity class="tree-round" template="src:#tmp-tree-round" position="-4.10336 0 -15.8762" scale=""></a-entity>
                             <a-entity class="tree-round" template="src:#tmp-tree-round" position="-0.3619 0 -16.13021" scale=""></a-entity>
-                            <a-entity class="tree-round" template="src:#tmp-tree-round" position="14.88314 0 13.05711" scale=""></a-entity>
+                            <!-- <a-entity class="tree-round" template="src:#tmp-tree-round" position="14.88314 0 13.05711" scale=""></a-entity> -->
                             <a-entity class="tree-round" template="src:#tmp-tree-round" position="17.90832 0 -16.76569" scale=""></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-12.48409 0 19.46941" scale="2.5 2.5 2.5"></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-16.06589 0 19.08377" scale="1.5 1.5 1.5"></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="11.13594 0 19.11991" scale="2.5 2.5 2.5"></a-entity>
-                            <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="1.16558 0 13.12583" scale="2 2 2"></a-entity>
+                            <!-- <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="1.16558 0 13.12583" scale="2 2 2"></a-entity> -->
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="13.9735 0 19.09466" scale="1.5 1.5 1.5"></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-21.25399 0 -18.96371" scale="2 2 2.05"></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-9.54958 0 -21.07997" scale="1.5 1.5 1.5"></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="0.49533 0 -21.95663" scale=""></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="22.46062 0 13.43536" scale="2.5 2.5 2.5"></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-25.84183 0 -16.54463" scale="1.5 1.5 1.5"></a-entity>
-                            <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="8.32131 0 13.02088" scale="2.5 2.5 2.5"></a-entity>
-                            <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-2.21066 0 13.32708" scale="2 2 2"></a-entity>
-                            <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="4.66001 0 13.26545" scale="1.5 1.5 1.5"></a-entity>
+                            <!-- <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="8.32131 0 13.02088" scale="2.5 2.5 2.5"></a-entity> -->
+                            <!-- <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-2.21066 0 13.32708" scale="2 2 2"></a-entity> -->
+                            <!-- <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="4.66001 0 13.26545" scale="1.5 1.5 1.5"></a-entity> -->
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="17.51843 0 18.49305" scale="1.5 1.5 1.5"></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="7.91328 0 -22.0374" scale="2.5 2.5 2.5"></a-entity>
-                            <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-7.18278 0 13.26863" scale="1.5 1.5 1.5"></a-entity>
+                            <!-- <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-7.18278 0 13.26863" scale="1.5 1.5 1.5"></a-entity> -->
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="22.87854 0 -11.97559" scale="2.5 2.5 2.5"></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="22.51259 0 3.84197" scale="2 2 2"></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="7.9249 0 17.75547" scale="1.5 1.5 1.5"></a-entity>
@@ -2483,7 +2481,7 @@
                         </a-entity>
 
                         <!-- Built environment-->
-                        <a-entity id = "grand-hotel" class="hotel" position="0 0 18" rotation="0 0 0">
+                        <a-entity id = "grand-hotel" class="hotel" position="0 0 16" rotation="0 0 0">
                             <a-entity class="main-building" >
                                 <!-- Central Block-->
                                 <a-entity position="0 0 0">    
@@ -4913,7 +4911,7 @@
                         </a-entity>
                         <!-- Apple Orchard -->
                         <a-entity id="farm-05" class="farm">
-                            <a-entity id="apple-orchid" position="8.04831 0 -21.36797">
+                            <a-entity id="apple-orchid" position="10 0 -21">
                                 <a-entity class="tree-apple" template="src:#tmp-tree-apple" position="" rotation="0 30 0"></a-entity>
                                 <a-entity class="tree-apple" template="src:#tmp-tree-apple"  position="0 0 2" rotation="0 30 0"> </a-entity>
                                 <a-entity class="tree-apple" template="src:#tmp-tree-apple"  position="0 0 4" rotation="0 30 0"> </a-entity>
@@ -4930,12 +4928,6 @@
                                 <a-entity class="tree-apple" template="src:#tmp-tree-apple"  position="9 0 2" rotation="0 30 0"> </a-entity>
                                 <a-entity class="tree-apple" template="src:#tmp-tree-apple"  position="9 0 4" rotation="0 30 0"> </a-entity>
                                 <a-entity class="tree-apple" template="src:#tmp-tree-apple"  position="9 0 6" rotation="0 30 0"> </a-entity>
-                                <a-entity class="tree-apple" template="src:#tmp-tree-apple"  position="12 0 2" rotation="0 30 0"> </a-entity>
-                                <a-entity class="tree-apple" template="src:#tmp-tree-apple"  position="12 0 4" rotation="0 30 0"> </a-entity>
-                                <a-entity class="tree-apple" template="src:#tmp-tree-apple"  position="12 0 6" rotation="0 30 0"> </a-entity>
-                                <a-entity class="tree-apple" template="src:#tmp-tree-apple"  position="12 0 8" rotation="0 30 0"> </a-entity>
-                                <a-entity class="tree-apple" template="src:#tmp-tree-apple"  position="12 0 10" rotation="0 30 0"> </a-entity>
-                                <a-entity class="tree-apple" template="src:#tmp-tree-apple"  position="12 0 12" rotation="0 30 0"> </a-entity>
                                 <a-entity class="tree-apple" template="src:#tmp-tree-apple"  position="-3 0 0" rotation="0 30 0"> </a-entity>
                                 <a-entity class="tree-apple" template="src:#tmp-tree-apple"  position="-3 0 2" rotation="0 30 0"> </a-entity>
                                 <a-entity class="tree-apple" template="src:#tmp-tree-apple"  position="-3 0 4" rotation="0 30 0"> </a-entity>
@@ -4943,7 +4935,7 @@
                                 <a-entity class="tree-apple" template="src:#tmp-tree-apple"  position="-6 0 0" rotation="0 30 0"> </a-entity>
                                 <a-entity class="tree-apple" template="src:#tmp-tree-apple"  position="-6 0 2" rotation="0 30 0"> </a-entity>
                             </a-entity>
-                            <a-entity id="barn-05" class="barn"  position="13.1 0 -10.9" rotation="0 270 0"
+                            <a-entity id="barn-05" class="barn"  position="15 0 -11" rotation="0 270 0"
                                 template="src:#tmp-barn-large" 
                                 data-basecol="col-barn-A-base"
                                 data-trimcol="col-barn-A-trim"
@@ -5217,40 +5209,31 @@
                         </a-entity>
                         
                         <!-- Livestock -->	
-                        <a-entity id="ag-livestock-group" class="livestock-group animals-group" visible="true">
+                        <a-entity id="ag-livestock-group" class="livestock-group animals-group" visible="">
                             <a-entity id="livestock-farm-01" class="farm-livestock-group">                            
-<!--                                 <a-entity class="pig piggery livestock" gltf-model="#mdl-pig" scale="0.005 0.005 0.005" position="-14.28 0.076 8.334" rotation="0 600"></a-entity>
-                                <a-entity class="pig piggery livestock" gltf-model="#mdl-pig" scale="0.005 0.005 0.005" position="-14.47748 0.3 9.92796" rotation="0 90 0"></a-entity>                   
-                                <a-entity class="chicken poultry livestock" gltf-model="#mdl-chicken" scale="0.003 0.003 0.003" position="-13.33345 0 -6.92865" rotation="0 59 0"></a-entity>                         
-                                <a-entity class="chicken poultry livestock" gltf-model="#mdl-chicken" scale="0.003 0.003 0.003" position="-12.11237 0 -7.85723" rotation="0 210 0"></a-entity>                          -->
-                                <a-entity class="chicken poultry livestock" gltf-model="#mdl-chicken" scale="0.003 0.003 0.003" position="-13.49778 0 -11.16972" rotation="0 10 0"></a-entity>   
-                                <a-entity class="pig piggery livestock" gltf-model="#mdl-pig" scale="0.005 0.005 0.005" position="-12.84601 0.3 -9.19923" rotation="0 45 0"></a-entity>
-				<a-entity class="cattle dairy" gltf-model="#mdl-cow-black" scale="0.007 0.007 0.007" position="-18.24393 0.45 14.63073" rotation="0 10 0"></a-entity>
-                                <a-entity class="cattle dairy" gltf-model="#mdl-cow-black" scale="0.007 0.007 0.007" position="-20.34912 0.45 15.76713" rotation="0 150 0"></a-entity>	
-                               <a-entity class="cattle beef" gltf-model="#mdl-cow-brown" scale="0.007 0.007 0.007" position="-7.4 0.65 20" rotation="0 210 0"></a-entity>
-<!--                                 <a-entity class="cattle beef" gltf-model="#mdl-cow-brown" scale="0.007 0.007 0.007" position="-20.57755 0.65 11.93905" rotation="0 45 0"></a-entity>
-                                <a-entity class="cattle beef" gltf-model="#mdl-cow-brown" scale="0.007 0.007 0.007" position="-14.88002 0.65 16.40593" rotation="0 110 0"></a-entity>				 -->
-			</a-entity>        
-                            <a-entity id="livestock-farm-02" class="farm-livestock-group" visible="false">   
-                                <!-- <a-entity class="sheep livestock" gltf-model="#mdl-sheep" scale="0.5 0.5 0.5" position="-21.95367 0.40531 -5.21607" rotation="0 10 0"></a-entity>
+                                <a-entity class="pig piggery livestock" gltf-model="#mdl-pig" scale="0.005 0.005 0.005" position="-14.28 0.282 8.334" rotation="0 600"></a-entity>
+                                <a-entity class="pig piggery livestock" gltf-model="#mdl-pig" scale="0.005 0.005 0.005" position="-14.47748 0.282 9.92796" rotation="0 90 0"></a-entity>                   
+                            </a-entity>        
+                            <a-entity id="livestock-farm-02" class="farm-livestock-group">   
+                                <a-entity class="sheep livestock" gltf-model="#mdl-sheep" scale="0.5 0.5 0.5" position="-21.95367 0.40531 -5.21607" rotation="0 10 0"></a-entity>
                                 <a-entity class="sheep livestock" gltf-model="#mdl-sheep" scale="0.5 0.5 0.5" position="-13.41441 0.40531 -2.7282" rotation="0 50 0"></a-entity>
                                 <a-entity class="sheep livestock" gltf-model="#mdl-sheep" scale="0.5 0.5 0.5" position="-20.15429 0.40531 -5.03987" rotation="0 300 0"></a-entity>
                                 <a-entity class="sheep livestock" gltf-model="#mdl-sheep" scale="0.5 0.5 0.5" position="-18.60867 0.40531 -1.54481" rotation="0 230 0"></a-entity>
-                                <a-entity class="sheep livestock" gltf-model="#mdl-sheep" scale="0.5 0.5 0.5" position="-16.06976 0.40531 -3.59518" rotation="0 130 0"></a-entity> -->
-                                <a-entity class="chicken poultry livestock" gltf-model="#mdl-chicken" scale="0.003 0.003 0.003" position="-13.33345 0 -6.92865" rotation="0 59 0"></a-entity>                         
-                                <a-entity class="chicken poultry livestock" gltf-model="#mdl-chicken" scale="0.003 0.003 0.003" position="-12.11237 0 -7.85723" rotation="0 210 0"></a-entity>                         
-                                <a-entity class="chicken poultry livestock" gltf-model="#mdl-chicken" scale="0.003 0.003 0.003" position="-13.49778 0 -11.16972" rotation="0 10 0"></a-entity>   
-                                <a-entity class="pig piggery livestock" gltf-model="#mdl-pig" scale="0.005 0.005 0.005" position="-12.84601 0.3 -9.19923" rotation="0 45 0"></a-entity>                   
+                                <a-entity class="sheep livestock" gltf-model="#mdl-sheep" scale="0.5 0.5 0.5" position="-16.06976 0.40531 -3.59518" rotation="0 130 0"></a-entity>
+                                <a-entity class="chicken poultry livestock" gltf-model="#mdl-chicken" scale="0.003 0.003 0.003" position="-13.33345 0.282 -6.92865" rotation="0 59 0"></a-entity>                         
+                                <a-entity class="chicken poultry livestock" gltf-model="#mdl-chicken" scale="0.003 0.003 0.003" position="-12.11237 0.282 -7.85723" rotation="0 210 0"></a-entity>                         
+                                <a-entity class="chicken poultry livestock" gltf-model="#mdl-chicken" scale="0.003 0.003 0.003" position="-13.49778 0.282 -11.16972" rotation="0 10 0"></a-entity>   
+                                <!-- <a-entity class="pig piggery livestock" gltf-model="#mdl-pig" scale="0.005 0.005 0.005" position="-12.84601 0.3 -9.19923" rotation="0 45 0"></a-entity>                    -->
                             </a-entity>
-                            <a-entity id="livestock-farm-03" class="farm-livestock-group" visible="false">
-                                <a-entity class="cattle dairy" gltf-model="#mdl-cow-black" scale="0.007 0.007 0.007" position="-18.24393 0.45 14.63073" rotation="0 10 0"></a-entity>
-                                <a-entity class="cattle dairy" gltf-model="#mdl-cow-black" scale="0.007 0.007 0.007" position="-20.34912 0.45 15.76713" rotation="0 150 0"></a-entity>
-                                <a-entity class="cattle dairy" gltf-model="#mdl-cow-black" scale="0.007 0.007 0.007" position="-8 0.45 15" rotation="0 70 0"></a-entity>
-                                <a-entity class="cattle dairy" gltf-model="#mdl-cow-black" scale="0.007 0.007 0.007" position="-10.89619 0.45 19.93055" rotation="0 50 0"></a-entity>
-                                <a-entity class="cattle beef" gltf-model="#mdl-cow-brown" scale="0.007 0.007 0.007" position="-7.4 0.65 20" rotation="0 210 0"></a-entity>
-                                <a-entity class="cattle beef" gltf-model="#mdl-cow-brown" scale="0.007 0.007 0.007" position="-20.57755 0.65 11.93905" rotation="0 45 0"></a-entity>
-                                <a-entity class="cattle beef" gltf-model="#mdl-cow-brown" scale="0.007 0.007 0.007" position="-14.88002 0.65 16.40593" rotation="0 110 0"></a-entity>
-                                <a-entity class="cattle beef" gltf-model="#mdl-cow-brown" scale="0.007 0.007 0.007" position="-6.79452 0.65 24.81085"></a-entity>
+                            <a-entity id="livestock-farm-03" class="farm-livestock-group">
+                                <a-entity class="cattle dairy" gltf-model="#mdl-cow-black" scale="0.007 0.007 0.007" position="-18.24393 0.621 14.63073" rotation="0 10 0"></a-entity>
+                                <a-entity class="cattle dairy" gltf-model="#mdl-cow-black" scale="0.007 0.007 0.007" position="-20.34912 0.621 15.76713" rotation="0 150 0"></a-entity>
+                                <a-entity class="cattle dairy" gltf-model="#mdl-cow-black" scale="0.007 0.007 0.007" position="-8 0.621 15" rotation="0 70 0"></a-entity>
+                                <!-- <a-entity class="cattle dairy" gltf-model="#mdl-cow-black" scale="0.007 0.007 0.007" position="-10.90 0.621 19.93055" rotation="0 50 0"></a-entity> -->
+                                <a-entity class="cattle beef" gltf-model="#mdl-cow-brown" scale="0.007 0.007 0.007" position="-7.4 0.529 20" rotation="0 210 0"></a-entity>
+                                <a-entity class="cattle beef" gltf-model="#mdl-cow-brown" scale="0.007 0.007 0.007" position="-20.57755 0.529 11.93905" rotation="0 45 0"></a-entity>
+                                <a-entity class="cattle beef" gltf-model="#mdl-cow-brown" scale="0.007 0.007 0.007" position="-14.88002 0.529 16.40593" rotation="0 110 0"></a-entity>
+                                <!-- <a-entity class="cattle beef" gltf-model="#mdl-cow-brown" scale="0.007 0.007 0.007" position="-6.79452 0.529 24.81085"></a-entity> -->
                                 <a-entity class="chicken poulty" gltf-model="#mdl-chicken" scale="0.003 0.003 0.003" position="-4.35576 0 18.18069" rotation="0 600"></a-entity>
                                 <a-entity class="chicken poulty" gltf-model="#mdl-chicken" scale="0.003 0.003 0.003" position="-5.38415 0 16.86776" rotation="0 30 0"></a-entity>   
                                 <a-entity class="chicken poulty" gltf-model="#mdl-chicken" scale="0.003 0.003 0.003" position="-3.91531 0 19.56556" rotation="0 150 0"></a-entity>                             
@@ -5498,12 +5481,7 @@
 
                 </a-entity><!-- End of zone groups-->
 
-
-
             </a-entity>
-
-
-
         </a-scene>
     </body>
 </html>
