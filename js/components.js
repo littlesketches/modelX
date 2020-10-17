@@ -25,10 +25,12 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
             }
             // Camera elements
             sceneEls.cam = {
-                fly:  document.getElementById('flycam')
+                fly:  document.getElementById('flycam'),
+                vr:  document.getElementById('vrcam')
             }
             sceneEls.camRig = {
-                fly:  document.getElementById('flycam-rig')
+                fly:  document.getElementById('flycam-rig'),
+                vr:  document.getElementById('vrcam-rig')
             }
 
             // Misc
@@ -120,6 +122,9 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
                                 externalEvents.changeHour('back')
                             break
                         case 'Space':
+                                externalEvents.toggleCamera()
+
+                        case 'ShiftRight':
                                 externalEvents.changeEnvironment()
                             break
                         case 'Enter':
@@ -150,6 +155,16 @@ const externalEvents = {
         document.getElementById('scene').toggleAttribute('stats')
     },
 
+    toggleCamera: function(){
+        if(sceneEls.cam.fly.getAttribute('camera').active ){
+            sceneEls.cam.fly.setAttribute('camera', {active: false  })
+            sceneEls.cam.vr.setAttribute('camera', {active: true   })
+        } else {
+            sceneEls.cam.fly.setAttribute('camera',   {active: true   })
+            sceneEls.cam.vr.setAttribute('camera',    {active: false   })
+        }
+    
+    },
 
     resetFly: function(duration = 2000){
         state.enableKeyEvents = false
