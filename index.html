@@ -30,8 +30,8 @@
     </head>
 
     <body>
-        <a-scene id="scene" 
-                setup add-external-listeners position-sun vr-mode-ui="enabled: false"
+        <a-scene id="scene" antialias = "true"
+                setup stats add-external-listeners position-sun vr-mode-ui="enabled: false"
                 fog="type: linear; color: #000; density: 0.025"> <!-- animation-timeline__1="timeline: #ambientLight-cycle; loop: true; direction: alternate;">  -->
             <!-- ASSETS: MIXINS, MODELS AND TEMPLATES-->
             <a-assets timeout="5000">
@@ -1691,11 +1691,11 @@
 
             <!-- CAMERAS-->
             <a-entity id="camera-group">
-                <!-- <a-entity id="vrcam-rig" rotation="0 0 0" wasd-controls="acceleration:150; fly: false"  position="0 8.6 5" >
-                    <a-entity id="vrcam" camera="active: false; fov: 100" look-controls ></a-entity>
-                </a-entity> -->
-                <a-entity id="flycam-rig" position="180 60 0" rotation="-10 90 0"  >
-                    <a-entity id="flycam" camera="active: true; fov: 45; zoom: 0.9; near: 0.1" orbit-controls look-controls ></a-entity>
+                <a-entity id="vrcam-rig" rotation="0 90 0" wasd-controls="acceleration:150; fly: false"  position="0 10.6 0" >
+                    <a-entity id="vrcam" camera="active: false; fov: 100" orbit-controls  ></a-entity>
+                </a-entity>
+                <a-entity id="flycam-rig" position="180 60 0" rotation="-10 90 0"  wasd-controls="acceleration: 150">
+                    <a-entity id="flycam" camera="active: true; fov: 45; zoom: 0.9; near: 0.1" look-controls ></a-entity>
                 </a-entity> 
 
             </a-entity>
@@ -4140,7 +4140,7 @@
                 <!---WATERFRONT ZONE -->
                 <a-entity id="waterfront-zone" class="zone-group" position="44.8 0 26.2" rotation="0 90 0" visible="true">
                     <!-- Models-->
-                    <a-entity id="lighthouse" gltf-model="#mdl-lighthouse"  visible = "true" position="-21.96 1.09 -16.34"rotation="0 -62 0" scale="0.8 0.8 0.8"></a-entity>
+                    <a-entity id="lighthouse" gltf-model="#mdl-lighthouse"  position="-21.96 1.09 -16.34"rotation="0 -62 0" scale="0.8 0.8 0.8"></a-entity>
                 </a-entity><!-- End of waterfront -->
 
                 <!---SUBURBAN / RESIDENTIAL ZONE -->
@@ -5211,22 +5211,17 @@
 
                     <!-- Vehicles-->	
                     <a-entity id="agricultural-transport" class="vehicles-group" visible="false">                    
-                        <a-entity class="vehicle offRoad diesel" gltf-model="#mdl-tractor" scale="0.125 0.125 0.125" rotation="0 30 0" position="-2.45289 0 -14.0677"></a-entity>
-                        <a-entity class="vehicle offRoad diesel" gltf-model="#mdl-tractor"  scale="0.125 0.125 0.125" rotation="0 90 0" position="-19.44178 0 -14.0664"></a-entity>         
+                        <!-- <a-entity class="vehicle offRoad diesel" gltf-model="#mdl-tractor" scale="0.125 0.125 0.125" rotation="0 30 0" position="-2.45289 0 -14.0677"></a-entity>
+                        <a-entity class="vehicle offRoad diesel" gltf-model="#mdl-tractor"  scale="0.125 0.125 0.125" rotation="0 90 0" position="-19.44178 0 -14.0664"></a-entity>          -->
                     </a-entity>
                     
                     <!-- Livestock -->	
-                    <a-entity id="ag-livestock-group" class="livestock-group animals-group" visible="true">
+                    <a-entity id="ag-livestock-group" class="livestock-group animals-group" visible="false">
                         <a-entity id="livestock-farm-01" class="farm-livestock-group">                            
                             <a-entity class="pig piggery livestock" gltf-model="#mdl-pig" scale="0.005 0.005 0.005" position="-14.28 0.076 8.334" rotation="0 600"></a-entity>
                             <a-entity class="pig piggery livestock" gltf-model="#mdl-pig" scale="0.005 0.005 0.005" position="-14.47748 0.3 9.92796" rotation="0 90 0"></a-entity>                   
-                            <a-entity class="sheep livestock" gltf-model="#mdl-sheep" scale="0.5 0.5 0.5" position="-21.95367 0.40531 -5.21607" rotation="0 10 0"></a-entity>                   
-                            <a-entity class="chicken poultry livestock" gltf-model="#mdl-chicken" scale="0.003 0.003 0.003" position="-13.49778 0 -11.16972" rotation="0 10 0"></a-entity>				
- 			<a-entity class="cattle dairy" gltf-model="#mdl-cow-black" scale="0.007 0.007 0.007" position="-10.89619 0.45 19.93055" rotation="0 50 0"></a-entity>
-                            <a-entity class="cattle beef" gltf-model="#mdl-cow-brown" scale="0.007 0.007 0.007" position="-7.4 0.65 20" rotation="0 210 0"></a-entity>
-			    
-			    </a-entity>        
-                        <a-entity id="livestock-farm-02" class="farm-livestock-group" visible="false">   
+                        </a-entity>        
+                        <a-entity id="livestock-farm-02" class="farm-livestock-group">   
                             <a-entity class="sheep livestock" gltf-model="#mdl-sheep" scale="0.5 0.5 0.5" position="-21.95367 0.40531 -5.21607" rotation="0 10 0"></a-entity>
                             <a-entity class="sheep livestock" gltf-model="#mdl-sheep" scale="0.5 0.5 0.5" position="-13.41441 0.40531 -2.7282" rotation="0 50 0"></a-entity>
                             <a-entity class="sheep livestock" gltf-model="#mdl-sheep" scale="0.5 0.5 0.5" position="-20.15429 0.40531 -5.03987" rotation="0 300 0"></a-entity>
@@ -5237,7 +5232,7 @@
                             <a-entity class="chicken poultry livestock" gltf-model="#mdl-chicken" scale="0.003 0.003 0.003" position="-13.49778 0 -11.16972" rotation="0 10 0"></a-entity>   
                             <a-entity class="pig piggery livestock" gltf-model="#mdl-pig" scale="0.005 0.005 0.005" position="-12.84601 0.3 -9.19923" rotation="0 45 0"></a-entity>                   
                         </a-entity>
-                        <a-entity id="livestock-farm-03" class="farm-livestock-group" visible="false">
+                        <a-entity id="livestock-farm-03" class="farm-livestock-group">
                             <a-entity class="cattle dairy" gltf-model="#mdl-cow-black" scale="0.007 0.007 0.007" position="-18.24393 0.45 14.63073" rotation="0 10 0"></a-entity>
                             <a-entity class="cattle dairy" gltf-model="#mdl-cow-black" scale="0.007 0.007 0.007" position="-20.34912 0.45 15.76713" rotation="0 150 0"></a-entity>
                             <a-entity class="cattle dairy" gltf-model="#mdl-cow-black" scale="0.007 0.007 0.007" position="-8 0.45 15" rotation="0 70 0"></a-entity>
