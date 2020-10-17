@@ -48,7 +48,7 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
 
     AFRAME.registerComponent("position-sun", {        
         init: function() {
-            console.log('Setting the sun path..')
+            console.log('Setting the sun position for ')
             sceneEls.enviro.sun.setAttribute('position', document.getElementById(sceneEls.misc.sunPos[state.modelTime.hour]).getAttribute('position'))
             sceneEls.lights.sun.setAttribute('position', document.getElementById(sceneEls.misc.sunPos[state.modelTime.hour]).getAttribute('position'))
 
@@ -123,7 +123,7 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
                             break
                         case 'Space':
                                 externalEvents.toggleCamera()
-
+                            break
                         case 'ShiftRight':
                                 externalEvents.changeEnvironment()
                             break
