@@ -1852,8 +1852,8 @@
                     </a-entity>
 
                     <a-entity id="ocean-group" class="topography-group" position="0 -1 0" >   
-                        <a-ocean position="40.64402 0 -9" ocean="width: 10.8; amplitude: 0.25; amplitudeVariance: 0.25; density: 20; color: #00fdff" scale="12 19 2"></a-ocean>
-                        <!--<a-entity id="bay-ocean"  class="surface" mixin="ocean-zone"  position="44.8  0  25.9" ></a-entity>
+                        <!-- <a-ocean position="40.64402 0 -9" ocean="width: 10.8; amplitude: 0.25; amplitudeVariance: 0.25; density: 20; color: #00fdff" scale="12 19 2"></a-ocean> -->
+                        <a-entity id="bay-ocean"  class="surface" mixin="ocean-zone"  position="44.8  0  25.9" ></a-entity>
                         <a-entity id="coast1-ocean" class="surface" mixin="coastal-zone" position="74.5  0  0"></a-entity>
                         <a-entity id="coast2-ocean" class="surface" mixin="coastal-zone" position="74.5  0 -51.8"></a-entity>
                         <a-entity id="coast3-ocean" class="surface" mixin="coastal-zone" position="74.5  0 -25.9"></a-entity>
@@ -1862,7 +1862,7 @@
                         <a-entity id="coast6-ocean" class="surface" mixin="coastal-zone" position="29.6  0 -77.7"></a-entity>
                         <a-entity id="coast7-ocean" class="surface" mixin="coastal-zone" position="-14.8 0 -77.7"></a-entity>
                         <a-entity id="coast8-ocean" class="surface" mixin="coastal-zone" position="51.8  0 -64.7"></a-entity>
-                    </a-entity> -->
+                    </a-entity>
 
                     <a-entity id="seaBed-seabed" class="topography" position="0 -7.5 0">                  
                         <a-entity id="coast1-seabed" mixin="seabed-zone" position="74.5 0 0"></a-entity>
@@ -1949,7 +1949,6 @@
                         <a-dodecahedron mixin="col-rocks"  position="12.01 -5.42 1.49"  geometry="radius: 12.94"    rotation="28.3 3.8 8.5"></a-dodecahedron>
                         <a-icosahedron  mixin="col-rocks"  position="9.19 1.12 11.03"   geometry="radius: 7.72"     rotation="-45.1 -8.5 -0.88" ></a-icosahedron>
                         <a-entity       mixin="col-ground"  position="0 5 0"            geometry="primitive: cylinder; segmentsRadial: 6; height: 0.1; radius: 15" rotation="0 90 0"></a-entity>
-                    </a-entity>
                     </a-entity>
                 </a-entity>
 
@@ -2396,7 +2395,7 @@
                     </a-entity><!-- End of industrial zone -->
 
                     <!---URBAN CITY ZONE -->
-                    <a-entity id="urban-zone" class="zone-group" position="44.8 3 -26.2" rotation="0 90 0" visible="false">
+                    <a-entity id="urban-zone" class="zone-group" position="44.8 3 -26.2" rotation="0 90 0" visible="false   ">
                         <!-- Roads -->
                         <a-entity id="urbanZone-roads">
                             <a-entity class="pavement" mixin="col-pavement" buffer-geometry-merger>
@@ -4140,13 +4139,13 @@
                     </a-entity><!-- End of urban zone -->
 
                     <!---WATERFRONT ZONE -->
-                    <a-entity id="waterfront-zone" class="zone-group" position="44.8 0 26.2" rotation="0 90 0" visible="true">
+                    <a-entity id="waterfront-zone" class="zone-group" position="44.8 0 26.2" rotation="0 90 0" visible="false">
                         <!-- Models-->
                         <a-entity id="lighthouse" gltf-model="#mdl-lighthouse"  position="-21.96 1.09 -16.34"rotation="0 -62 0" scale="0.8 0.8 0.8"></a-entity>
                     </a-entity><!-- End of waterfront -->
 
                     <!---SUBURBAN / RESIDENTIAL ZONE -->
-                    <a-entity id="suburban-zone" class="zone-group" position="0 3 52" rotation="0 90 0" visible = "true">
+                    <a-entity id="suburban-zone" class="zone-group" position="0 3 52" rotation="0 90 0" visible = "false">
                         <!-- Native vegetation -->
                         <a-entity id="suburban-vegetation" class="vegetation-group">
                             <a-entity class="nativeTrees-group">    
@@ -4876,7 +4875,7 @@
                     </a-entity><!-- end of suburban-->
 
                     <!-- PERI-URBAN ZONE -->
-                    <a-entity id="periUrban-zone" class="zone-group" position="-44.8 3 26.2" visible="true">	
+                    <a-entity id="periUrban-zone" class="zone-group" position="-44.8 3 26.2" visible="false">	
                         <!-- Native vegetation -->
                         <a-entity class="nativeTrees-group">    
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="2.56546 0 20.83635" scale="2.5 2.5 2.5"></a-entity>
@@ -5184,7 +5183,7 @@
                     </a-entity> <!--End of PeriUrban -->
 
                     <!-- AGRICULTURAL ZONE -->
-                    <a-entity id="agricultural-zone" class="zone-group" position="-44.8 3 -26.2" rotation="0 90 0" visible="true">
+                    <a-entity id="agricultural-zone" class="zone-group" position="-44.8 3 -26.2" rotation="0 90 0" visible="false">
                         <!-- Native vegetation -->
                         <a-entity id="agricultural-vegetation" class="vegetation-group">
                             <a-entity class="nativeTrees-group" visible="">                    
@@ -5224,11 +5223,11 @@
                                 <a-entity class="pig piggery livestock" gltf-model="#mdl-pig" scale="0.005 0.005 0.005" position="-14.47748 0.3 9.92796" rotation="0 90 0"></a-entity>                   
                             </a-entity>        
                             <a-entity id="livestock-farm-02" class="farm-livestock-group">   
-                                <a-entity class="sheep livestock" gltf-model="#mdl-sheep" scale="0.5 0.5 0.5" position="-21.95367 0.40531 -5.21607" rotation="0 10 0"></a-entity>
+                                <!-- <a-entity class="sheep livestock" gltf-model="#mdl-sheep" scale="0.5 0.5 0.5" position="-21.95367 0.40531 -5.21607" rotation="0 10 0"></a-entity>
                                 <a-entity class="sheep livestock" gltf-model="#mdl-sheep" scale="0.5 0.5 0.5" position="-13.41441 0.40531 -2.7282" rotation="0 50 0"></a-entity>
                                 <a-entity class="sheep livestock" gltf-model="#mdl-sheep" scale="0.5 0.5 0.5" position="-20.15429 0.40531 -5.03987" rotation="0 300 0"></a-entity>
                                 <a-entity class="sheep livestock" gltf-model="#mdl-sheep" scale="0.5 0.5 0.5" position="-18.60867 0.40531 -1.54481" rotation="0 230 0"></a-entity>
-                                <a-entity class="sheep livestock" gltf-model="#mdl-sheep" scale="0.5 0.5 0.5" position="-16.06976 0.40531 -3.59518" rotation="0 130 0"></a-entity>
+                                <a-entity class="sheep livestock" gltf-model="#mdl-sheep" scale="0.5 0.5 0.5" position="-16.06976 0.40531 -3.59518" rotation="0 130 0"></a-entity> -->
                                 <a-entity class="chicken poultry livestock" gltf-model="#mdl-chicken" scale="0.003 0.003 0.003" position="-13.33345 0 -6.92865" rotation="0 59 0"></a-entity>                         
                                 <a-entity class="chicken poultry livestock" gltf-model="#mdl-chicken" scale="0.003 0.003 0.003" position="-12.11237 0 -7.85723" rotation="0 210 0"></a-entity>                         
                                 <a-entity class="chicken poultry livestock" gltf-model="#mdl-chicken" scale="0.003 0.003 0.003" position="-13.49778 0 -11.16972" rotation="0 10 0"></a-entity>   
@@ -5398,7 +5397,7 @@
                     </a-entity><!-- End AG ZONE-->
 
                     <!-- THE OUTER ZONE -->
-                    <a-entity id="outer-zone" class="zone-group" position="-44.8 3 -78.0" visible="true">
+                    <a-entity id="outer-zone" class="zone-group" position="-44.8 3 -78.0" visible="false">
                         <!-- Roads-->
                         <a-entity id="outer-roads" class="roads-group">
                             <a-entity class="tarmac" mixin="col-road" buffer-geometry-merger>  
