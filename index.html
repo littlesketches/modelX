@@ -211,49 +211,61 @@
                         <a-mixin id="col-vehicle-purple" 	material='color: #663366; metalness: 0.5'></a-mixin>
                         <a-mixin id="col-vehicle-orange" 	material='color: #FF7B08; metalness: 0.5'></a-mixin>
                         <a-mixin id="col-vehicle-green" 	    material='color: #39ff14; metalness: 0.5'></a-mixin>
-                        <a-mixin id="col-vehicle-aquaGreen" 	    material='color: #03bb85; metalness: 0.5'></a-mixin>
+                        <a-mixin id="col-vehicle-aquaGreen" 	material='color: #03bb85; metalness: 0.5'></a-mixin>
                         <a-mixin id="col-vehicle-white" 	    material='color: #fff; metalness: 0.5'></a-mixin>
-                        <a-mixin id="col-vehicle-red" 	    material='color: #ff2800; metalness: 0.5'></a-mixin>
+                        <a-mixin id="col-vehicle-red" 	        material='color: #ff2800; metalness: 0.5'></a-mixin>
                         <a-mixin id="col-vehicle-yellow" 	    material='color: #FFF500; metalness: 0.5'></a-mixin>
                         <a-mixin id="col-vehicle-trimDark"   	material='color: #181818; metalness: 0.5'></a-mixin>
-
                         <a-mixin id="col-cybertruck-headlights"   	material='color: #fff'></a-mixin>
                         <a-mixin id="col-cybertruck-brakelights"   	material='color: red'></a-mixin>
                         <a-mixin id="col-cybertruck-window"   	material='color: #000; opacity: 0.7'></a-mixin>
                         <a-mixin id="col-cybertruck-rims"   	material='color: #181818; metalness: 0.25'></a-mixin>
 
-                    <!--Materials -->
-                    <a-mixin id="road" 			material ="color: #525a60; flatShading: true"  geometry= "width: 3; height: 0.2"></a-mixin>
-                    <a-mixin id="pavement" 		material ="color: gray; flatShading: true"     geometry= "height: 0.3"></a-mixin>
-                    <a-mixin id="tarmac" 		material ="color: #525a60; flatShading: true"  geometry= "height: 0.1"></a-mixin>
-                    <a-mixin id="runway" 		material ="color: #525a60; flatShading: true"  geometry= "height: 0.1"></a-mixin>
-                    <a-mixin id="rail-sleeper"  material='color: #443b35' geometry="width: 0.3; depth: 1.4; height: 0.05;"></a-mixin>
-                    <a-mixin id="road-line" 	material ="color: #fff; flatShading: true"     geometry= "width: 0.15; height: 0.21"></a-mixin>
-                    <a-mixin id="road-stopline" material ="color: #fff; flatShading: true"     geometry= "width: 1.5; height: 0.21; depth:  0.3 "></a-mixin>
-                    <a-mixin id="dirtRoad" 		material ="color: #A6734D; flatShading: true"   geometry= "width: 2; height: 0.1"></a-mixin>
+                    <!-- Animals-->
+                        <a-mixin id="col-chicken-body"   	    material='color: #fff'></a-mixin>
+                        <a-mixin id="col-chicken-feet"   	    material='color: orange'></a-mixin>
+                        <a-mixin id="col-chicken-feathers"      material='color: red'></a-mixin>
+                        <a-mixin id="col-chicken-eyes"          material='color: #000'></a-mixin>
+                        <a-mixin id="col-sheep-body"        	material='color: #fff'></a-mixin>
+                        <a-mixin id="col-sheep-features"   	    material='color: #8b7979'></a-mixin>
+                        <a-mixin id="col-sheep-features-dark"   material='color: #000'></a-mixin>
+                        <a-mixin id="col-cow-body"     	material='color: #fff'></a-mixin>
+                        <a-mixin id="col-cow-udder"   	material='color: pink'></a-mixin>
+                        <a-mixin id="col-cow-brown"   	material='color: brown'></a-mixin>
+                        <a-mixin id="col-cow-black"   	material='color: #000'></a-mixin>
+                        <a-mixin id="col-cow-hooves"   	material='color: #8b7979'></a-mixin>
+                        <a-mixin id="col-pig-body"     	material='color: pink'></a-mixin>
+                        <a-mixin id="col-pig-darker"    material='color: #e75480'></a-mixin>
+                        <a-mixin id="col-pig-features"  material='color: #000'></a-mixin>
+                        <a-mixin id="col-pig-eyes"      material='color: #fff'></a-mixin>
+                        <a-mixin id="col-pig-hooves"   	material='color: #8b7979'></a-mixin>
 
-                    <a-mixin id="ground-zone"   material='color: #658C52'   geometry="primitive: cylinder; segmentsRadial: 6; height: 0.3; radius: 30" rotation="0 90 0"></a-mixin>
-                    <a-mixin id="topSoil-zone"  material='color: #A6734D'   geometry="primitive: cylinder; segmentsRadial: 6; height: 1; radius: 30" rotation="0 90 0"></a-mixin>
-                    <a-mixin id="subSoil-zone" 	material='color: #6F3C18'   geometry="primitive: cylinder; segmentsRadial: 6; height: 2; radius: 30" rotation="0 90 0"></a-mixin>
-                    <a-mixin id="rock-zone"     material='color: #6f6b62'   geometry="primitive: cylinder; segmentsRadial: 6; height: 4; radius: 30" rotation="0 90 0"></a-mixin>
-                    <a-mixin id="bedrock-zone"  material='color: #514E47'   geometry="primitive: cylinder; segmentsRadial: 6; height: 6; radius: 30" rotation="0 90 0"></a-mixin>
-                    <a-mixin id="seabed-zone"   material='color: #514E47'   geometry="primitive: cylinder; segmentsRadial: 6; height: 6; radius: 15" rotation="0 90 0"></a-mixin>
-                    <a-mixin id="ocean-zone"    material='color: #82B6DD; opacity: 0.9'   geometry="primitive: cylinder; segmentsRadial: 6; height: 5; radius: 30" rotation="0 90 0"></a-mixin>
-                    <a-mixin id="coastal-zone"  material='color: #82B6DD; opacity: 0.9'   geometry="primitive: cylinder; segmentsRadial: 6; height: 5; radius: 15" rotation="0 90 0"></a-mixin>
-                    <a-mixin id="lake-zone"     material='color: #3BB3D0'   geometry="primitive: cylinder; segmentsRadial: 6; height: 6; radius: 15" rotation="0 90 0"></a-mixin>
-                    <a-mixin id="subzone"       geometry="radius:7.5"></a-mixin>
+                    <!--Materials -->
+                        <a-mixin id="road" 			material ="color: #525a60; flatShading: true"  geometry= "width: 3; height: 0.2"></a-mixin>
+                        <a-mixin id="pavement" 		material ="color: gray; flatShading: true"     geometry= "height: 0.3"></a-mixin>
+                        <a-mixin id="tarmac" 		material ="color: #525a60; flatShading: true"  geometry= "height: 0.1"></a-mixin>
+                        <a-mixin id="runway" 		material ="color: #525a60; flatShading: true"  geometry= "height: 0.1"></a-mixin>
+                        <a-mixin id="rail-sleeper"  material='color: #443b35' geometry="width: 0.3; depth: 1.4; height: 0.05;"></a-mixin>
+                        <a-mixin id="road-line" 	material ="color: #fff; flatShading: true"     geometry= "width: 0.15; height: 0.21"></a-mixin>
+                        <a-mixin id="road-stopline" material ="color: #fff; flatShading: true"     geometry= "width: 1.5; height: 0.21; depth:  0.3 "></a-mixin>
+                        <a-mixin id="dirtRoad" 		material ="color: #A6734D; flatShading: true"   geometry= "width: 2; height: 0.1"></a-mixin>
+
+                        <a-mixin id="ground-zone"   material='color: #658C52'   geometry="primitive: cylinder; segmentsRadial: 6; height: 0.3; radius: 30" rotation="0 90 0"></a-mixin>
+                        <a-mixin id="topSoil-zone"  material='color: #A6734D'   geometry="primitive: cylinder; segmentsRadial: 6; height: 1; radius: 30" rotation="0 90 0"></a-mixin>
+                        <a-mixin id="subSoil-zone" 	material='color: #6F3C18'   geometry="primitive: cylinder; segmentsRadial: 6; height: 2; radius: 30" rotation="0 90 0"></a-mixin>
+                        <a-mixin id="rock-zone"     material='color: #6f6b62'   geometry="primitive: cylinder; segmentsRadial: 6; height: 4; radius: 30" rotation="0 90 0"></a-mixin>
+                        <a-mixin id="bedrock-zone"  material='color: #514E47'   geometry="primitive: cylinder; segmentsRadial: 6; height: 6; radius: 30" rotation="0 90 0"></a-mixin>
+                        <a-mixin id="seabed-zone"   material='color: #514E47'   geometry="primitive: cylinder; segmentsRadial: 6; height: 6; radius: 15" rotation="0 90 0"></a-mixin>
+                        <a-mixin id="ocean-zone"    material='color: #82B6DD; opacity: 0.9'   geometry="primitive: cylinder; segmentsRadial: 6; height: 5; radius: 30" rotation="0 90 0"></a-mixin>
+                        <a-mixin id="coastal-zone"  material='color: #82B6DD; opacity: 0.9'   geometry="primitive: cylinder; segmentsRadial: 6; height: 5; radius: 15" rotation="0 90 0"></a-mixin>
+                        <a-mixin id="lake-zone"     material='color: #3BB3D0'   geometry="primitive: cylinder; segmentsRadial: 6; height: 6; radius: 15" rotation="0 90 0"></a-mixin>
+                        <a-mixin id="subzone"       geometry="radius:7.5"></a-mixin>
                 </a-entity>
 
                 <!-- EXTERNAL MODELS -->
                 <a-entity id = "external-models">
                     <!-- ENVIRONMENT & NATURE -->
                     <a-asset-item id="mdl-alps" 				src="models/nature-alps.glb"></a-asset-item>
-                    <!-- LIVESTOCK -->
-                    <a-asset-item id="mdl-cow-brown" 			src="models/animal-cow-holstein.glb"></a-asset-item>
-                    <a-asset-item id="mdl-cow-black" 			src="models/animal-cow-jersey.glb"></a-asset-item>
-                    <a-asset-item id="mdl-chicken" 			    src="models/animal-chicken.glb"></a-asset-item>
-                    <a-asset-item id="mdl-sheep" 			    src="models/animal-sheep-01.glb"></a-asset-item>
-                    <a-asset-item id="mdl-pig" 			        src="models/animal-pig.glb"></a-asset-item>
                     <!-- BUILT ENVIRONMENT-->
                     <a-asset-item id="mdl-lighthouse" 			src="models/builtEnv-lighthouse-01.glb"></a-asset-item>
                     <!-- <a-asset-item id="mdl-bar-corner" 			src="models/builtEnv-bar-corner.glb"></a-asset-item> -->
@@ -899,16 +911,16 @@
                                 <a-box position="-1.5 1.5 1.5" scale="2 2 2"></a-box>
                             </a-entity>
                             <a-entity position="0 3.9 0">
-                                <a-box position="1.3 1 1.3" scale="1.6 2 1.6" material="" geometry=""></a-box>
-                                <a-box position="1.3 1 -1.3" scale="1.6 2 1.6" material="" geometry=""></a-box>
-                                <a-box position="-1.3 1 -1.3" scale="1.6 2 1.6" material="" geometry=""></a-box>
-                                <a-box position="-1.3 1 1.3" scale="1.6 2 1.6" material="" geometry=""></a-box>
+                                <a-box position="1.3 1 1.3" scale="1.6 2 1.6"></a-box>
+                                <a-box position="1.3 1 -1.3" scale="1.6 2 1.6"></a-box>
+                                <a-box position="-1.3 1 -1.3" scale="1.6 2 1.6"></a-box>
+                                <a-box position="-1.3 1 1.3" scale="1.6 2 1.6"></a-box>
                             </a-entity>
                             <a-entity position="0 5.4 0">
-                                <a-box position="1.1 1 1.1" scale="1.2 2 1.2" material="" geometry=""></a-box>
-                                <a-box position="1.1 1 -1.1" scale="1.2 2 1.2" material="" geometry=""></a-box>
-                                <a-box position="-1.1 1 -1.1" scale="1.2 2 1.2" material="" geometry=""></a-box>
-                                <a-box  position="-1.1 1 1.1" scale="1.2 2 1.2" material="" geometry=""></a-box>
+                                <a-box position="1.1 1 1.1" scale="1.2 2 1.2"></a-box>
+                                <a-box position="1.1 1 -1.1" scale="1.2 2 1.2"></a-box>
+                                <a-box position="-1.1 1 -1.1" scale="1.2 2 1.2"></a-box>
+                                <a-box  position="-1.1 1 1.1" scale="1.2 2 1.2"></a-box>
                             </a-entity>
                         </a-entity>
                         <a-entity class ="door-group"  mixin="${doorcol}"  buffer-geometry-merger>
@@ -951,76 +963,76 @@
                                 <a-box position="0 0 -2.45" scale="6.32 0.5 0.5"></a-box>
                             </a-entity>
                             <a-entity position="0 3 0">
-                                <a-box position="1.5 0 1.5" scale="2.02 0.4 2.02" material="" geometry=""></a-box>
-                                <a-box position="-1.5 0 1.5" scale="2.02 0.4 2.02" material="" geometry=""></a-box>
-                                <a-box position="1.5 0 -1.5" scale="2.02 0.4 2.02" material="" geometry=""></a-box>
-                                <a-box position="-1.5 0 -1.5" scale="2.02 0.4 2.02" material="" geometry=""></a-box>
+                                <a-box position="1.5 0 1.5" scale="2.02 0.4 2.02"></a-box>
+                                <a-box position="-1.5 0 1.5" scale="2.02 0.4 2.02"></a-box>
+                                <a-box position="1.5 0 -1.5" scale="2.02 0.4 2.02"></a-box>
+                                <a-box position="-1.5 0 -1.5" scale="2.02 0.4 2.02"></a-box>
                             </a-entity>
                             <a-entity position="0 3.8 0">
-                                <a-box position="1.5 0 1.5" scale="2.02 0.4 2.02" material="" geometry=""></a-box>
-                                <a-box position="-1.5 0 1.5" scale="2.02 0.4 2.02" material="" geometry=""></a-box>
-                                <a-box position="1.5 0 -1.5" scale="2.02 0.4 2.02" material="" geometry=""></a-box>
-                                <a-box position="-1.5 0 -1.5" scale="2.02 0.4 2.02" material="" geometry=""></a-box>
+                                <a-box position="1.5 0 1.5" scale="2.02 0.4 2.02"></a-box>
+                                <a-box position="-1.5 0 1.5" scale="2.02 0.4 2.02"></a-box>
+                                <a-box position="1.5 0 -1.5" scale="2.02 0.4 2.02"></a-box>
+                                <a-box position="-1.5 0 -1.5" scale="2.02 0.4 2.02"></a-box>
                             </a-entity>
                             <a-entity position="0 4.6 0">
-                                <a-box position="1.3 0 1.3" scale="1.62 0.4 1.62" material="" geometry=""></a-box>                        
-                                <a-box position="-1.3 0 1.3" scale="1.62 0.4 1.62" material="" geometry=""></a-box>                        
-                                <a-box position="1.3 0 -1.3" scale="1.62 0.4 1.62" material="" geometry=""></a-box> 
-                                <a-box position="-1.3 0 -1.3" scale="1.62 0.4 1.62" material="" geometry=""></a-box>               
+                                <a-box position="1.3 0 1.3" scale="1.62 0.4 1.62"></a-box>                        
+                                <a-box position="-1.3 0 1.3" scale="1.62 0.4 1.62"></a-box>                        
+                                <a-box position="1.3 0 -1.3" scale="1.62 0.4 1.62"></a-box> 
+                                <a-box position="-1.3 0 -1.3" scale="1.62 0.4 1.62"></a-box>               
                             </a-entity>
                             <a-entity position="0 5.4 0">
-                                <a-box position="1.3 0 1.3" scale="1.62 0.4 1.62" material="" geometry=""></a-box>                           
-                                <a-box position="-1.3 0 1.3" scale="1.62 0.4 1.62" material="" geometry=""></a-box>   
-                                <a-box position="1.3 0 -1.3" scale="1.62 0.4 1.62" material="" geometry=""></a-box> 
-                                <a-box position="-1.3 0 -1.3" scale="1.62 0.4 1.62" material="" geometry=""></a-box> 
+                                <a-box position="1.3 0 1.3" scale="1.62 0.4 1.62"></a-box>                           
+                                <a-box position="-1.3 0 1.3" scale="1.62 0.4 1.62"></a-box>   
+                                <a-box position="1.3 0 -1.3" scale="1.62 0.4 1.62"></a-box> 
+                                <a-box position="-1.3 0 -1.3" scale="1.62 0.4 1.62"></a-box> 
                             </a-entity>
                             <a-entity position="0 6.2 0">
-                                <a-box position="1.1 0 1.1" scale="1.22 0.4 1.22" material="" geometry=""></a-box>                           
-                                <a-box position="-1.1 0 1.1" scale="1.22 0.4 1.22" material="" geometry=""></a-box>   
-                                <a-box position="1.1 0 -1.1" scale="1.22 0.4 1.22" material="" geometry=""></a-box> 
-                                <a-box position="-1.1 0 -1.1" scale="1.22 0.4 1.22" material="" geometry=""></a-box> 
+                                <a-box position="1.1 0 1.1" scale="1.22 0.4 1.22"></a-box>                           
+                                <a-box position="-1.1 0 1.1" scale="1.22 0.4 1.22"></a-box>   
+                                <a-box position="1.1 0 -1.1" scale="1.22 0.4 1.22"></a-box> 
+                                <a-box position="-1.1 0 -1.1" scale="1.22 0.4 1.22"></a-box> 
                             </a-entity>
                             <a-entity position="0 7.0 0">
-                                <a-box position="1.1 0 1.1" scale="1.22 0.4 1.22" material="" geometry=""></a-box>                           
-                                <a-box position="-1.1 0 1.1" scale="1.22 0.4 1.22" material="" geometry=""></a-box>   
-                                <a-box position="1.1 0 -1.1" scale="1.22 0.4 1.22" material="" geometry=""></a-box> 
-                                <a-box position="-1.1 0 -1.1" scale="1.22 0.4 1.22" material="" geometry=""></a-box> 
+                                <a-box position="1.1 0 1.1" scale="1.22 0.4 1.22"></a-box>                           
+                                <a-box position="-1.1 0 1.1" scale="1.22 0.4 1.22"></a-box>   
+                                <a-box position="1.1 0 -1.1" scale="1.22 0.4 1.22"></a-box> 
+                                <a-box position="-1.1 0 -1.1" scale="1.22 0.4 1.22"></a-box> 
                             </a-entity>
                             <a-entity position="0 7.8 0">
-                                <a-box position="1.0 0 1.0" scale="1.02 0.4 1.02" material="" geometry=""></a-box>                           
-                                <a-box position="-1.0 0 1.0" scale="1.02 0.4 1.02" material="" geometry=""></a-box>   
-                                <a-box position="1.0 0 -1.0" scale="1.02 0.4 1.02" material="" geometry=""></a-box> 
-                                <a-box position="-1.0 0 -1.0" scale="1.02 0.4 1.02" material="" geometry=""></a-box> 
+                                <a-box position="1.0 0 1.0" scale="1.02 0.4 1.02"></a-box>                           
+                                <a-box position="-1.0 0 1.0" scale="1.02 0.4 1.02"></a-box>   
+                                <a-box position="1.0 0 -1.0" scale="1.02 0.4 1.02"></a-box> 
+                                <a-box position="-1.0 0 -1.0" scale="1.02 0.4 1.02"></a-box> 
                             </a-entity>
                             <a-entity position="0 8.6 0">
-                                <a-box position="1.0 0 1.0" scale="1.02 0.4 1.02" material="" geometry=""></a-box>                           
-                                <a-box position="-1.0 0 1.0" scale="1.02 0.4 1.02" material="" geometry=""></a-box>   
-                                <a-box position="1.0 0 -1.0" scale="1.02 0.4 1.02" material="" geometry=""></a-box> 
-                                <a-box position="-1.0 0 -1.0" scale="1.02 0.4 1.02" material="" geometry=""></a-box> 
+                                <a-box position="1.0 0 1.0" scale="1.02 0.4 1.02"></a-box>                           
+                                <a-box position="-1.0 0 1.0" scale="1.02 0.4 1.02"></a-box>   
+                                <a-box position="1.0 0 -1.0" scale="1.02 0.4 1.02"></a-box> 
+                                <a-box position="-1.0 0 -1.0" scale="1.02 0.4 1.02"></a-box> 
                             </a-entity>
                             <a-entity position="0 9.4 0">
-                                <a-box position="1.0 0 1.0" scale="1.02 0.4 1.02" material="" geometry=""></a-box>                           
-                                <a-box position="-1.0 0 1.0" scale="1.02 0.4 1.02" material="" geometry=""></a-box>   
-                                <a-box position="1.0 0 -1.0" scale="1.02 0.4 1.02" material="" geometry=""></a-box> 
-                                <a-box position="-1.0 0 -1.0" scale="1.02 0.4 1.02" material="" geometry=""></a-box> 
+                                <a-box position="1.0 0 1.0" scale="1.02 0.4 1.02"></a-box>                           
+                                <a-box position="-1.0 0 1.0" scale="1.02 0.4 1.02"></a-box>   
+                                <a-box position="1.0 0 -1.0" scale="1.02 0.4 1.02"></a-box> 
+                                <a-box position="-1.0 0 -1.0" scale="1.02 0.4 1.02"></a-box> 
                             </a-entity>
                             <a-entity position="0 10.2 0">
-                                <a-box position="1.0 0 1.0" scale="1.02 0.4 1.02" material="" geometry=""></a-box>                           
-                                <a-box position="-1.0 0 1.0" scale="1.02 0.4 1.02" material="" geometry=""></a-box>   
-                                <a-box position="1.0 0 -1.0" scale="1.02 0.4 1.02" material="" geometry=""></a-box> 
-                                <a-box position="-1.0 0 -1.0" scale="1.02 0.4 1.02" material="" geometry=""></a-box> 
+                                <a-box position="1.0 0 1.0" scale="1.02 0.4 1.02"></a-box>                           
+                                <a-box position="-1.0 0 1.0" scale="1.02 0.4 1.02"></a-box>   
+                                <a-box position="1.0 0 -1.0" scale="1.02 0.4 1.02"></a-box> 
+                                <a-box position="-1.0 0 -1.0" scale="1.02 0.4 1.02"></a-box> 
                             </a-entity>
                             <a-entity position="0 11.0 0">
-                                <a-box position="1.0 0 1.0" scale="1.02 0.4 1.02" material="" geometry=""></a-box>                           
-                                <a-box position="-1.0 0 1.0" scale="1.02 0.4 1.02" material="" geometry=""></a-box>   
-                                <a-box position="1.0 0 -1.0" scale="1.02 0.4 1.02" material="" geometry=""></a-box> 
-                                <a-box position="-1.0 0 -1.0" scale="1.02 0.4 1.02" material="" geometry=""></a-box> 
+                                <a-box position="1.0 0 1.0" scale="1.02 0.4 1.02"></a-box>                           
+                                <a-box position="-1.0 0 1.0" scale="1.02 0.4 1.02"></a-box>   
+                                <a-box position="1.0 0 -1.0" scale="1.02 0.4 1.02"></a-box> 
+                                <a-box position="-1.0 0 -1.0" scale="1.02 0.4 1.02"></a-box> 
                             </a-entity>
                             <a-entity position="0 11.8 0">
-                                <a-box position="1.0 0 1.0" scale="1.02 0.4 1.02" material="" geometry=""></a-box>                           
-                                <a-box position="-1.0 0 1.0" scale="1.02 0.4 1.02" material="" geometry=""></a-box>   
-                                <a-box position="1.0 0 -1.0" scale="1.02 0.4 1.02" material="" geometry=""></a-box> 
-                                <a-box position="-1.0 0 -1.0" scale="1.02 0.4 1.02" material="" geometry=""></a-box> 
+                                <a-box position="1.0 0 1.0" scale="1.02 0.4 1.02"></a-box>                           
+                                <a-box position="-1.0 0 1.0" scale="1.02 0.4 1.02"></a-box>   
+                                <a-box position="1.0 0 -1.0" scale="1.02 0.4 1.02"></a-box> 
+                                <a-box position="-1.0 0 -1.0" scale="1.02 0.4 1.02"></a-box> 
                             </a-entity>
                         </a-entity>
                     </script>
@@ -1189,21 +1201,21 @@
                                 </a-entity>
                             </a-entity>
                         </a-entity>
-                        <a-entity class="pen" position="-1.25 0 0" mixin="${pencol}" buffer-geometry-merger>
-                                <a-box position="0 0.25 1.5" scale="0.05 0.5 0.05"> </a-box>
-                                <a-box position="-0.5 0.25 1.5" scale="0.05 0.5 0.05"> </a-box>
-                                <a-box position="-1.5 0.25 1.5" scale="0.05 0.5 0.05"> </a-box>
-                                <a-box position="-1.5 0.25 0.5" scale="0.05 0.5 0.05"> </a-box>
-                                <a-box position="-1.5 0.25 -0.5" scale="0.05 0.5 0.05"> </a-box>
-                                <a-box position="-1.5 0.25 -1.5" scale="0.05 0.5 0.05"> </a-box>
-                                <a-box position="-0.5 0.25 -1.5" scale="0.05 0.5 0.05"> </a-box>
-                                <a-box position="0 0.25 -1.5" scale="0.05 0.5 0.05"> </a-box>
-                                <a-box position="-0.75 0.2 1.5" scale="1.5 0.1 0.05"> </a-box>
-                                <a-box position="-0.75 0.4 1.5" scale="1.5 0.1 0.05"> </a-box>
-                                <a-box position="-1.5 0.2 0" scale="0.05 0.1 3"> </a-box>
-                                <a-box position="-1.5 0.4 0" scale="0.05 0.1 3"> </a-box>
-                                <a-box position="-0.75 0.2 -1.5" scale="1.5 0.1 0.05"> </a-box>
-                                <a-box position="-0.75 0.4 -1.5" scale="1.5 0.1 0.05"> </a-box>
+                        <a-entity class="pen" position="-0.625 0 0" mixin="${pencol}" buffer-geometry-merger>
+                            <a-box position="0 0.25 1.5" scale="0.05 0.5 0.05"> </a-box>
+                            <a-box position="-0.5 0.25 1.5" scale="0.05 0.5 0.05"> </a-box>
+                            <a-box position="-1.5 0.25 1.5" scale="0.05 0.5 0.05"> </a-box>
+                            <a-box position="-1.5 0.25 0.5" scale="0.05 0.5 0.05"> </a-box>
+                            <a-box position="-1.5 0.25 -0.5" scale="0.05 0.5 0.05"> </a-box>
+                            <a-box position="-1.5 0.25 -1.5" scale="0.05 0.5 0.05"> </a-box>
+                            <a-box position="-0.5 0.25 -1.5" scale="0.05 0.5 0.05"> </a-box>
+                            <a-box position="0 0.25 -1.5" scale="0.05 0.5 0.05"> </a-box>
+                            <a-box position="-0.75 0.2 1.5" scale="1.5 0.1 0.05"> </a-box>
+                            <a-box position="-0.75 0.4 1.5" scale="1.5 0.1 0.05"> </a-box>
+                            <a-box position="-1.5 0.2 0" scale="0.05 0.1 3"> </a-box>
+                            <a-box position="-1.5 0.4 0" scale="0.05 0.1 3"> </a-box>
+                            <a-box position="-0.75 0.2 -1.5" scale="1.5 0.1 0.05"> </a-box>
+                            <a-box position="-0.75 0.4 -1.5" scale="1.5 0.1 0.05"> </a-box>
                         </a-entity>
                         <a-entity class="silo" position="-2.5 0 -2.25">
                             <a-cylinder mixin="${silocol}" position="0 1 0" geometry="height: 2; radius: 0.65; segmentsRadial: 12" material="flatShading: true"></a-cylinder>
@@ -1599,6 +1611,7 @@
                         <a-dodecahedron mixin="col-treeBottom" position="1.20 0.43 0" radius="0.5" rotation="0 0 33.77"></a-dodecahedron>
                         <a-dodecahedron mixin="col-treeTop" position="0.11 0.35 0" radius="0.5"></a-dodecahedron>
                     </script>
+
                     <!-- Street furniture-->
                     <script id="tmp-sign-stop" type="text/html">
                         <a-cylinder mixin="col-streetSign-pole" position="0 0.5 0" rotation="0 90 0" geometry="height: 1; radius: 0.01"></a-cylinder>
@@ -1622,7 +1635,152 @@
                         </a-entity>                    
                     </script>              
 
-                </a-entity>
+                    <!-- Animals-->
+                    <script id="tmp-chicken" type="text/html">
+                        <a-entity class="features"  mixin="col-chicken-feathers" buffer-geometry-merger> 
+                            <a-cylinder position="-0.184 0.486 0" rotation="81.11 -90 -90" geometry="radius: 0.05; height: 0.025; segmentsRadial: 5; thetaLength: 210; thetaStart: 90" scale="0.78 1 1"></a-cylinder>
+                            <a-cylinder position="-0.198 0.475 0" rotation="51.76 90 90" geometry="radius: 0.06; height: 0.025; segmentsRadial: 5; thetaLength: 280; thetaStart: 100" scale="0.43 1 1"></a-cylinder>
+                            <a-cylinder position="-0.221 0.45 0.021" rotation="60 0 0" geometry="radius: 0.025; height: 0.015; segmentsRadial: 8" scale="0.6 1 1"></a-cylinder>
+                            <a-cylinder position="-0.221 0.445 -0.014" rotation="-60 0 0" geometry="radius: 0.025; height: 0.015; segmentsRadial: 8" scale="0.6 1 1"></a-cylinder>
+                        </a-entity>
+                        <a-entity class="head" mixin="col-chicken-eyes" buffer-geometry-merger>
+                            <a-sphere position="-0.2 0.48 0.04" rotation="" geometry="radius: 0.008; segmentsWidth: 6"></a-sphere>
+                            <a-sphere position="-0.2 0.48 -0.04" rotation="" geometry="radius: 0.008; segmentsWidth: 6"></a-sphere>
+                        </a-entity>
+                        <a-entity class="body" mixin="col-chicken-body" buffer-geometry-merger>
+                            <a-cylinder position="-0.2 0.465 0" scale="0.17904 0.24 0.10761" geometry="height: 0.3; radius: 0.2; segmentsRadial: 3; thetaLength: 180; thetaStart: 180" rotation="90 0 0"></a-cylinder>
+                            <a-cylinder position="-0.188 0.47 0" scale="0.25 0.24 0.19" geometry="height: 0.3; radius: 0.2; segmentsRadial: 3; thetaLength: 180; thetaStart: 120" rotation="90 0 0"></a-cylinder>
+                            <a-cone position="-0.136 0.361 0" rotation="0 0 20" geometry="radiusTop: 0.05; radiusBottom: 0.1; height: 0.18; segmentsRadial: 4; thetaStart: 45" scale="0.97936 1.4151 1"></a-cone>
+                            <a-cone position="-0.073 0.158 0.084" rotation="10 180 -15" geometry="radiusTop: 0.05; radiusBottom: 0.01; height: 0.2; segmentsRadial: 3; thetaLength: 180; thetaStart: 90" scale="1.56 0.96 2.74"></a-cone>
+                            <a-cone position="-0.073 0.158 -0.084" rotation="-10 180 -15" geometry="radiusTop: 0.05; radiusBottom: 0.01; height: 0.2; segmentsRadial: 3; thetaLength: 180; thetaStart: 270" scale="1.56 0.96 2.74"></a-cone>
+                            <a-box position="-0.006 0.227 0" scale="0.22 0.16 0.2" geometry="primitive: icosahedron; radius: 0.9"></a-box>
+                            <a-cone position="0.128 0.307 0" rotation="60 90 0" geometry="radiusTop: 0.04; radiusBottom: 0.14; height: 0.26; segmentsRadial: 3"></a-cone>
+                        </a-entity>
+                        <a-entity class="legs" mixin="col-chicken-feet" buffer-geometry-merger>
+                            <a-cylinder position="-0.059 0.041 0.12" rotation="0 60 -20" geometry="radius: 0.01; height: 0.075; segmentsHeight: 1; segmentsRadial: 4"></a-cylinder>
+                            <a-cylinder position="-0.059 0.041 -0.12" rotation="0 -60 -20" geometry="radius: 0.01; height: 0.075"></a-cylinder>
+                            <a-cylinder position="-0.077 0.005 0.139" rotation="90 -50 0" geometry="radius: 0.01; height: 0.1; segmentsHeight: 1; segmentsRadial: 3"></a-cylinder>
+                            <a-cylinder position="-0.095 0.005 0.12" rotation="90 60 0" geometry="radius: 0.01; height: 0.06; segmentsHeight: 1; segmentsRadial: 3"></a-cylinder>
+                            <a-cylinder position="-0.077 0.005 -0.139" rotation="90 50 0" geometry="radius: 0.01; height: 0.1; segmentsHeight: 1; segmentsRadial: 3"></a-cylinder>
+                            <a-cylinder position="-0.095 0.005 -0.12" rotation="90 -60 0" geometry="radius: 0.01; height: 0.06; segmentsHeight: 1; segmentsRadial: 3"></a-cylinder>
+                            <a-cone position="-0.24 0.46 0" rotation="90 270 0" geometry="radiusTop: 0; height: 0.08; segmentsHeight: 1; segmentsRadial: 5; radiusBottom: 0.04"></a-cone>
+                        </a-entity>
+                    </script>
+
+                    <script id="tmp-sheep" type="text/html">
+                        <a-entity class="body" mixin="col-sheep-body" buffer-geometry-merger>
+                            <a-dodecahedron position="0 0.45 0" scale="1.4 1 1" geometry="radius: 0.25; segmentsHeight: 8; segmentsWidth: 10" rotation=""></a-dodecahedron>
+                            <a-dodecahedron position="-0.34849 0.67314 0" scale="1 0.44 1" geometry="radius: 0.15" rotation="0 0 -6.15"></a-dodecahedron>
+                            <a-dodecahedron position="0.33395 0.51938 0" scale="0.86 0.94 1" geometry="radius: 0.1" rotation="0 0 -45"></a-dodecahedron>
+                            <a-dodecahedron position="0.14 0.28 0.13" scale="1 1.59 1" geometry="radius: 0.1" rotation="0 -8 0"></a-dodecahedron>
+                            <a-dodecahedron position="0.14 0.28 -0.13" scale="1 1.59 1" geometry="radius: 0.1" rotation="0 8 0"></a-dodecahedron>
+                            <a-dodecahedron position="-0.15 0.28 0.13" scale="1 1.59 1" geometry="radius: 0.1" rotation=""></a-dodecahedron>
+                            <a-dodecahedron position="-0.15 0.28 -0.13" scale="1 1.59 1" geometry="radius: 0.1" rotation=""></a-dodecahedron>
+                            <a-sphere position="-0.47 0.55 0.065" rotation="" geometry="radius: 0.025; segmentsWidth: 4; segmentsHeight: 4"></a-sphere>
+                            <a-sphere position="-0.47 0.55 -0.065" rotation="" geometry="radius: 0.025; segmentsWidth: 4; segmentsHeight: 4"></a-sphere>
+                        </a-entity>
+                        <a-entity class="light-features" mixin="col-sheep-features" buffer-geometry-merger> 
+                            <a-cone position="-0.42 0.49256 0" rotation="20 90 0" geometry="primitive: dodecahedron; radius: 0.15" scale="1 1.3 0.72"></a-cone>
+                            <a-cone position="-0.15 0.025 0.13502" rotation="0 90 0" geometry="radiusBottom: 0.05; radiusTop: 0.025; height: 0.05; segmentsRadial: 4; thetaStart: 45"></a-cone>
+                            <a-cone position="-0.15 0.025 -0.13502" rotation="0 90 0" geometry="radiusBottom: 0.05; radiusTop: 0.025; height: 0.05; segmentsRadial: 4; thetaStart: 45"></a-cone>
+                            <a-cone position="0.105 0.025 0.13502" rotation="0 90 0" geometry="radiusBottom: 0.05; radiusTop: 0.025; height: 0.05; segmentsRadial: 4; thetaStart: 45"></a-cone>
+                            <a-cone position="0.12 0.025 -0.13502" rotation="0 90 0" geometry="radiusBottom: 0.05; radiusTop: 0.025; height: 0.05; segmentsRadial: 4; thetaStart: 45"></a-cone>
+                        </a-entity>
+                        <a-entity class="dark-features" mixin="col-sheep-features-dark" buffer-geometry-merger> 
+                            <a-cone position="0.126 0.15 0.136" rotation="8 90 0" geometry="radiusTop: 0.06; radiusBottom: 0.03; height: 0.3; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45"></a-cone>
+                            <a-cone position="0.126 0.15 -0.136" rotation="8 90 0" geometry="radiusTop: 0.06; radiusBottom: 0.03; height: 0.3; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45"></a-cone>
+                            <a-cone position="-0.135 0.15 0.136" rotation="4 90 0" geometry="radiusTop: 0.06; radiusBottom: 0.03; height: 0.3; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45"></a-cone>
+                            <a-cone position="-0.135 0.15 -0.136" rotation="4 90 0" geometry="radiusTop: 0.06; radiusBottom: 0.03; height: 0.3; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45"></a-cone>
+                            <a-cone position="-0.38 0.595 0" rotation="20 90 0" geometry="primitive: dodecahedron; radius: 0.15" scale="1.09 0.65 0.71"></a-cone>
+                            <a-sphere position="-0.49 0.555 -0.075" rotation="" geometry="radius: 0.005; segmentsWidth: 4; segmentsHeight: 4"></a-sphere>
+                            <a-sphere position="-0.49 0.555 0.075" rotation="" geometry="radius: 0.005; segmentsWidth: 4; segmentsHeight: 4"></a-sphere>
+                        </a-entity>
+                    </script>
+
+                    <script id="tmp-cow" type="text/html">
+                        <a-entity class="body" mixin="col-cow-body" buffer-geometry-merger>
+                            <a-dodecahedron position="-0.037 0.713 0" scale="2.37 0.95 1.08"geometry="radius: 0.25" rotation="0 0 -10"></a-dodecahedron>
+                            <a-dodecahedron position="0.374 0.675 0" scale="1.88 1.22 1.08"geometry="radius: 0.25" rotation="0 0 10"></a-dodecahedron>
+                            <a-dodecahedron position="0.579 0.69 0" scale="1.48 1.16 1"geometry="radius: 0.25" rotation="0 0 30"></a-dodecahedron>
+                            <a-dodecahedron position="-0.08 0.633 0" scale="1.57 1.07 1"geometry="radius: 0.25" rotation=""></a-dodecahedron>
+                            <a-dodecahedron position="-0.519 0.81 0" scale="2.02 1.15 1"geometry="radius: 0.15" rotation="0 0 -20"></a-dodecahedron>
+                            <a-dodecahedron position="0.73 0.5 -0.126" scale="0.8 2.22 1"geometry="radius: 0.1" rotation="0 8 15"></a-dodecahedron>
+                            <a-dodecahedron position="0.73 0.5 0.126" scale="0.8 2.22 1"geometry="radius: 0.1" rotation="0 0 15"></a-dodecahedron>
+                            <a-dodecahedron position="-0.11 0.419 0.13" scale="1 2 1"geometry="radius: 0.1" rotation=""></a-dodecahedron>
+                            <a-dodecahedron position="-0.11 0.419 -0.13" scale="1 2 1"geometry="radius: 0.1" rotation=""></a-dodecahedron>
+                            <a-cone position="-0.913 0.7095 0" rotation="110 -90 0" material="flatShading: true" geometry="radiusTop: 0.05; height: 0.12; radiusBottom: 0.08; segmentsHeight: 1; segmentsRadial: 6; thetaStart: 30" scale="0.74 0.71 0.94"></a-cone>
+                            <a-cone position="-0.803 0.75971 0" rotation="120 -90 0" material="flatShading: true" geometry="radiusTop: 0.05; height: 0.18; radiusBottom: 0.1; segmentsHeight: 1; segmentsRadial: 6; thetaStart: 30" scale="1.04 1.04 1.38"></a-cone>
+                            <a-cone position="0.76 0.21 0.136" rotation="0 90 0" geometry="radiusTop: 0.06; radiusBottom: 0.03; height: 0.35; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45"></a-cone>
+                            <a-cone position="0.76 0.21 -0.136" rotation="0 90 0" geometry="radiusTop: 0.06; radiusBottom: 0.03; height: 0.35; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45"></a-cone>
+                            <a-cone position="-0.115 0.15 0.136" rotation="4 90 0" geometry="radiusTop: 0.06; radiusBottom: 0.03; height: 0.3; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45"></a-cone>
+                            <a-cone position="-0.115 0.15 -0.136" rotation="4 90 0" geometry="radiusTop: 0.06; radiusBottom: 0.03; height: 0.3; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45"></a-cone>
+                            <a-sphere position="-0.7789 0.912 0.0464" rotation="" geometry="radius: 0.025; segmentsWidth: 4; segmentsHeight: 4"></a-sphere>
+                            <a-sphere position="-0.7789 0.912 -0.0464" rotation="" geometry="radius: 0.025; segmentsWidth: 4; segmentsHeight: 4"></a-sphere>
+                        </a-entity>
+                        <a-entity mixin="${col}" buffer-geometry-merger> 
+                            <a-cylinder position="0.915 0.71553 0" rotation="0 90 0" geometry="radius: 0.01; height: 0.4; segmentsHeight: 1; segmentsRadial: 4"scale=""></a-cylinder>
+                            <a-cone position="0.915 0.56 0" rotation="0 90 0" geometry="height: 0.2; segmentsHeight: 1; segmentsRadial: 4; radiusBottom: 0.03"scale=""></a-cone>
+                            <a-cylinder position="0.85683 0.88853 0" rotation="0 0 110" geometry="radius: 0.01; height: 0.14; segmentsHeight: 1; segmentsRadial: 4"scale=""></a-cylinder>
+                            <a-dodecahedron position="-0.597 0.95 0.12" rotation="50 0 0" geometry="radius: 0.05"scale="0.49 1.04 0.63"></a-dodecahedron>
+                            <a-dodecahedron position="-0.597 0.95 -0.12" rotation="-50 0 0" geometry="radius: 0.05"scale="0.49 1.04 0.63"></a-dodecahedron>
+                            <a-sphere position="-0.803 0.92 0.0491" rotation="" geometry="radius: 0.005; segmentsWidth: 4; segmentsHeight: 4"></a-sphere>
+                            <a-sphere position="-0.803 0.92 -0.0491" rotation="" geometry="radius: 0.005; segmentsWidth: 4; segmentsHeight: 4"></a-sphere>
+                             <a-dodecahedron position="-0.037 0.713 0.05" scale="2.37 0.95 1.08"geometry="radius: 0.24" rotation="0 0 -10"></a-dodecahedron>
+                            <a-dodecahedron position="0.384 0.665 0" scale="1.88 1.22 1.08"geometry="radius: 0.25" rotation="0 0 10"></a-dodecahedron>
+                            <a-dodecahedron position="0.579 0.69332 -0.01" scale="1.48 1.16 1"geometry="radius: 0.25" rotation="0 0 30"></a-dodecahedron>
+                            <a-dodecahedron position="-0.08 0.633 0" scale="1.57 1.07 1"geometry="radius: 0.25" rotation=""></a-dodecahedron>
+                            <a-dodecahedron position="-0.5 0.8 -0.01" scale="2.02 1.15 1"geometry="radius: 0.15" rotation="0 0 -20"></a-dodecahedron>
+                        </a-entity>
+                        <a-entity mixin="col-cow-hooves" buffer-geometry-merger> 
+                           <a-cone position="-0.13 0.025 0.135" rotation="0 90 0" geometry="radiusBottom: 0.05; radiusTop: 0.025; height: 0.05; segmentsRadial: 4; thetaStart: 45"></a-cone>
+                            <a-cone position="-0.13 0.025 -0.135" rotation="0 90 0" geometry="radiusBottom: 0.05; radiusTop: 0.025; height: 0.05; segmentsRadial: 4; thetaStart: 45"></a-cone>
+                            <a-cone position="0.75 0.035 0.135" rotation="0 90 0" geometry="radiusBottom: 0.05; radiusTop: 0.025; height: 0.05; segmentsRadial: 4; thetaStart: 45"></a-cone>
+                            <a-cone position="0.75 0.035 -0.135" rotation="0 90 0" geometry="radiusBottom: 0.05; radiusTop: 0.025; height: 0.05; segmentsRadial: 4; thetaStart: 45"></a-cone>
+                            <a-cylinder position="-0.951 0.702 0" rotation="0 90 0" geometry="radius: 0.025; height: 0.02; segmentsRadial: 6; thetaStart: 90; thetaLength: 180"></a-cylinder>                 
+                        </a-entity>
+                        <a-entity mixin="col-cow-udder" buffer-geometry-merger> 
+                            <a-dodecahedron position="0.513 0.458 0" scale="1.75 0.94 1"geometry="radius: 0.1" rotation=""></a-dodecahedron>
+                            <a-cone position="0.48 0.416 0" rotation="0 60 0" geometry="height: 0.2; segmentsHeight: 1; segmentsRadial: 4; radiusBottom: 0.01; radiusTop: 0.02"scale=""></a-cone>
+                            <a-cone position="0.55 0.42 0" rotation="0 90 0" geometry="height: 0.2; segmentsHeight: 11; segmentsRadial: 4; radiusBottom: 0.01; radiusTop: 0.02"scale=""></a-cone>
+                        </a-entity>
+                    </script>
+
+                    <script id="tmp-pig"  type="text/html">
+                        <a-entity class="body" mixin="col-pig-body" buffer-geometry-merger>
+                            <a-dodecahedron position="0.24594 0.28246 0" scale="1.88 1.05 1.08" geometry="radius: 0.15" rotation="0 0 -5"></a-dodecahedron>
+                            <a-dodecahedron position="0.3752 0.29949 0" scale="1.43 1.14 1.09" geometry="radius: 0.13" rotation="0 0 10"></a-dodecahedron>
+                            <a-dodecahedron position="0.05845 0.35987 0" scale="1.61 1.02 0.97" geometry="radius: 0.1" rotation="0 0 -20"></a-dodecahedron>
+                            <a-dodecahedron position="0.44394 0.2 0.1" scale="0.5 1.25 0.5" geometry="radius: 0.1" rotation="0 0 5"></a-dodecahedron>
+                            <a-dodecahedron position="0.44394 0.2 -0.1" scale="0.5 1.25 0.5" geometry="radius: 0.1" rotation="0 0 5"></a-dodecahedron>
+                            <a-dodecahedron position="0.15 0.2 0.1" scale="0.5 1.25 0.5" geometry="radius: 0.1" rotation=""></a-dodecahedron>
+                            <a-dodecahedron position="0.15 0.2 -0.1" scale="0.5 1.25 0.5" geometry="radius: 0.1" rotation=""></a-dodecahedron>
+                            <a-cone position="-0.105 0.38268 0" rotation="70 -90 0" material="flatShading: true" geometry="radiusTop: 0.03; height: 0.19; radiusBottom: 0.07; segmentsHeight: 1; segmentsRadial: 6; thetaStart: 30" scale="1.03 0.82 0.94"></a-cone>
+                            <a-cone position="0.439 0.075 0.1" rotation="15 90 0" geometry="radiusTop: 0.03; radiusBottom: 0.02; height: 0.15; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45"></a-cone>
+                            <a-cone position="0.439 0.075 -0.1" rotation="15 90 0" geometry="radiusTop: 0.03; radiusBottom: 0.02; height: 0.15; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45"></a-cone>
+                            <a-cone position="0.144 0.075 0.1" rotation="0 0 -8" geometry="radiusTop: 0.03; radiusBottom: 0.02; height: 0.15; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45"></a-cone>
+                            <a-cone position="0.144 0.075 -0.1" rotation="0 0 -8" geometry="radiusTop: 0.03; radiusBottom: 0.02; height: 0.15; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45"></a-cone>
+                        </a-entity>
+                        <a-entity class="body"  mixin="col-pig-eyes" buffer-geometry-merger>
+                            <a-sphere position="-0.08 0.421 0.036" rotation="" geometry="radius: 0.015; segmentsWidth: 4; segmentsHeight: 4"></a-sphere>
+                            <a-sphere position="-0.08 0.421 -0.036" rotation="" geometry="radius: 0.015; segmentsWidth: 4; segmentsHeight: 4"></a-sphere>
+                        </a-entity>
+                        <a-entity  mixin="col-pig-darker" buffer-geometry-merger>                             
+                            <a-torus-knot position="0.54 0.41 0" rotation="0 0 -155.5" geometry="radius: 0.1; segmentsRadial: 3; radiusTubular: 0.01; segmentsTubular: 10; p: 1.5; q: 1" scale="0.5 0.5 0.56"></a-torus-knot>
+                            <a-dodecahedron position="-0.015 0.47 0.0592" rotation="70 150 60" geometry="primitive: cylinder; radius: 0.06; height: 0.005; segmentsRadial: 6" scale="0.49 1.94 1.08"></a-dodecahedron>
+                            <a-dodecahedron position="-0.015 0.47 -0.0592" rotation="-70 -150 60" geometry="primitive: cylinder; radius: 0.06; height: 0.005; segmentsRadial: 6" scale="0.49 1.94 1.08"></a-dodecahedron>
+                            <a-cylinder position="-0.00111 0.31793 0" rotation="-35 90 0" geometry="radius: 0.065; height: 0.01; segmentsRadial: 6; thetaStart: 90; thetaLength: 180" scale="0.64 0.71 1.06"></a-cylinder>                 
+                        </a-entity>
+                        <a-entity mixin="col-pig-hooves" buffer-geometry-merger> 
+                           <a-cone position="0.134 0.01 0.1" rotation="0 90 0" geometry="radiusBottom: 0.03; height: 0.03; segmentsRadial: 4; thetaStart: 45"></a-cone>
+                           <a-cone position="0.134 0.01 -0.1" rotation="0 90 0" geometry="radiusBottom: 0.03; height: 0.03; segmentsRadial: 4; thetaStart: 45"></a-cone>                            
+                            <a-cone position="0.42 0.01 0.1" rotation="0 90 0" geometry="radiusBottom: 0.03; height: 0.02; segmentsRadial: 4; thetaStart: 45"></a-cone>
+                            <a-cone position="0.42 0.01 -0.1" rotation="0 90 0" geometry="radiusBottom: 0.03; height: 0.02; segmentsRadial: 4; thetaStart: 45"></a-cone>                            
+                        </a-entity>
+                        <a-entity mixin="col-pig-features" buffer-geometry-merger> 
+                            <a-sphere position="-0.089 0.427 0.039" rotation="" geometry="radius: 0.005; segmentsWidth: 4; segmentsHeight: 4"></a-sphere>
+                            <a-sphere position="-0.089 0.427 -0.039" rotation="" geometry="radius: 0.005; segmentsWidth: 4; segmentsHeight: 4"></a-sphere>
+                        </a-entity>
+                    </script>
 
                 <!-- ANIMATION TIMELINES -->
                 <a-timeline id="ambientLight-cycle">
@@ -1851,9 +2009,9 @@
                         <a-entity id="bay-bedrock" class="subSurface"   mixin="bedrock-zone" position="44.8 0 26.2" ></a-entity>
                     </a-entity>
 
-                    <a-entity id="ocean-group" class="topography-group" position="0 -1 0" >   
-                        <a-ocean position="40.64402 0 -9" ocean="width: 10.8; amplitude: 0.25; amplitudeVariance: 0.25; density: 20; color: #00fdff" scale="12 19 2"></a-ocean>
-                        <!--<a-entity id="bay-ocean"  class="surface" mixin="ocean-zone"  position="44.8  0  25.9" ></a-entity>
+                    <a-entity id="ocean-group" class="topography-group" position="0 -3 0" >   
+                        <!-- <a-ocean position="40.64 2 -9" ocean="width: 10.8; amplitude: 0.25; amplitudeVariance: 0.25; density: 20; color: #00fdff" scale="12 19 2"></a-ocean> -->
+                        <a-entity id="bay-ocean"  class="surface" mixin="ocean-zone"  position="44.8  0  25.9" ></a-entity>
                         <a-entity id="coast1-ocean" class="surface" mixin="coastal-zone" position="74.5  0  0"></a-entity>
                         <a-entity id="coast2-ocean" class="surface" mixin="coastal-zone" position="74.5  0 -51.8"></a-entity>
                         <a-entity id="coast3-ocean" class="surface" mixin="coastal-zone" position="74.5  0 -25.9"></a-entity>
@@ -1862,7 +2020,7 @@
                         <a-entity id="coast6-ocean" class="surface" mixin="coastal-zone" position="29.6  0 -77.7"></a-entity>
                         <a-entity id="coast7-ocean" class="surface" mixin="coastal-zone" position="-14.8 0 -77.7"></a-entity>
                         <a-entity id="coast8-ocean" class="surface" mixin="coastal-zone" position="51.8  0 -64.7"></a-entity>
-                    </a-entity> -->
+                    </a-entity> 
 
                     <a-entity id="seaBed-seabed" class="topography" position="0 -7.5 0">                  
                         <a-entity id="coast1-seabed" mixin="seabed-zone" position="74.5 0 0"></a-entity>
@@ -1882,14 +2040,14 @@
                     
                     <a-entity id="rockline-group">
                         <a-entity id="rockline-urban-01" mixin="col-rocks" position="-5.464 8.275 2.05" rotation="0 35.3 0" >
-                            <a-dodecahedron position="-1.83366 -7.2119 61.33553" mixin="col-rocks" geometry="radius: 2.92" rotation="-0.33 61.82 -5.650000000000001" material=""></a-dodecahedron>
-                            <a-icosahedron position="-7.26297 -6.46876 64.12613" mixin="col-rocks" geometry="radius: 2.71" rotation="0 0 -18.6" material=""></a-icosahedron>
-                            <a-dodecahedron position="-3.59211 -6.23128 64.42808" mixin="col-rocks" geometry="radius: 2.82" rotation="-10.600000000000001 7.5600000000000005 40.8" material=""></a-dodecahedron>
-                            <a-icosahedron position="-21.22591 -4.68822 75.42596" mixin="col-rocks" geometry="radius: 3.13" rotation="2.92 -49.13 -27.851" material=""></a-icosahedron>
-                            <a-dodecahedron position="-10.57069 -7.91224 66.79535" mixin="col-rocks" geometry="radius: 4.42" rotation="-29.190000000000005 -24.06 -3.18" material=""></a-dodecahedron>
-                            <a-icosahedron position="-12.68732 -6.44757 69.07898" mixin="col-rocks" geometry="radius: 3.77" rotation="52.53 16.36 23.06" material=""></a-icosahedron>
-                            <a-dodecahedron position="-16.40375 -6.01143 71.08667" mixin="col-rocks" geometry="radius: 3.31" rotation="1.16 31.28 -1.016" material=""> </a-dodecahedron>
-                            <a-icosahedron position="-18.00334 -5.00382 73.8973" mixin="col-rocks" geometry="radius: 2.61" rotation="10.51 0 -9.34" material=""></a-icosahedron>
+                            <a-dodecahedron position="-1.83366 -7.2119 61.33553" mixin="col-rocks" geometry="radius: 2.92" rotation="-0.33 61.82 -5.650000000000001"></a-dodecahedron>
+                            <a-icosahedron position="-7.26297 -6.46876 64.12613" mixin="col-rocks" geometry="radius: 2.71" rotation="0 0 -18.6"></a-icosahedron>
+                            <a-dodecahedron position="-3.59211 -6.23128 64.42808" mixin="col-rocks" geometry="radius: 2.82" rotation="-10.600000000000001 7.5600000000000005 40.8"></a-dodecahedron>
+                            <a-icosahedron position="-21.22591 -4.68822 75.42596" mixin="col-rocks" geometry="radius: 3.13" rotation="2.92 -49.13 -27.851"></a-icosahedron>
+                            <a-dodecahedron position="-10.57069 -7.91224 66.79535" mixin="col-rocks" geometry="radius: 4.42" rotation="-29.190000000000005 -24.06 -3.18"></a-dodecahedron>
+                            <a-icosahedron position="-12.68732 -6.44757 69.07898" mixin="col-rocks" geometry="radius: 3.77" rotation="52.53 16.36 23.06"></a-icosahedron>
+                            <a-dodecahedron position="-16.40375 -6.01143 71.08667" mixin="col-rocks" geometry="radius: 3.31" rotation="1.16 31.28 -1.016"> </a-dodecahedron>
+                            <a-icosahedron position="-18.00334 -5.00382 73.8973" mixin="col-rocks" geometry="radius: 2.61" rotation="10.51 0 -9.34"></a-icosahedron>
                         </a-entity>
                         <a-entity id="rockline-urban-02" position="29.66862 4.31232 42.99228"  rotation="-7.6 0 8.3" scale="0.6 0.6 0.6">
                             <a-dodecahedron position="-14.91883 -4.25172 -11.75183" mixin="col-rocks" geometry="radius: 7.4" rotation="-0.33 61.82 -5.65" ></a-dodecahedron>
@@ -1950,9 +2108,7 @@
                         <a-icosahedron  mixin="col-rocks"  position="9.19 1.12 11.03"   geometry="radius: 7.72"     rotation="-45.1 -8.5 -0.88" ></a-icosahedron>
                         <a-entity       mixin="col-ground"  position="0 5 0"            geometry="primitive: cylinder; segmentsRadial: 6; height: 0.1; radius: 15" rotation="0 90 0"></a-entity>
                     </a-entity>
-                    </a-entity>
                 </a-entity>
-
 
                 <!--- SHARED ELEMENTS -->
                 <a-entity id="shared-features-group" visible="true">
@@ -2123,8 +2279,8 @@
                         <a-entity id="electricity-transmission" position="0 3 0">
                             <a-entity class="transmission-tower" template="src: #tmp-elecTrans-tower" position="-51.6 -0.25 47.8"></a-entity>   
                             <a-entity class="transmission-tower" template="src: #tmp-elecTrans-tower" position="-54.3 -0.25 4.8" ></a-entity>   
-                            <a-entity class="transmission-tower" template="src: #tmp-elecTrans-tower" position="-42 -0.25 -21" rotation="0 -30 0" ></a-entity>   
-                            <a-entity class="transmission-tower" template="src: #tmp-elecTrans-tower" position="-48 -0.25 -45" ></a-entity>   
+                            <!-- <a-entity class="transmission-tower" template="src: #tmp-elecTrans-tower" position="-42 -0.25 -21" rotation="0 -30 0" ></a-entity>    -->
+                            <a-entity class="transmission-tower" template="src: #tmp-elecTrans-tower" position="-48 -0.25 -48" ></a-entity>   
                             <a-entity class="transmission-tower" template="src: #tmp-elecTrans-tower" position="-27 -0.25 -84" rotation="0 0 0" ></a-entity>   
                         </a-entity>
 
@@ -2220,7 +2376,6 @@
                     </a-entity>
 
                 </a-entity><!-- End of shared feautures -->
-
 
                 <!---SCENES BY ZONE -->
                 <a-entity id = "featuresByzone-group" visible="true">
@@ -2454,29 +2609,29 @@
                             <a-entity class="tree-round" template="src:#tmp-tree-round" position="-22.623 0.3 -1.68259" scale=""></a-entity>
                             <a-entity class="tree-round" template="src:#tmp-tree-round" position="-22.76725 0.3 3.95325" scale=""></a-entity>
                             <a-entity class="tree-round" template="src:#tmp-tree-round" position="-22.41959 0.3 9.05005" scale=""></a-entity>
-                            <a-entity class="tree-round" template="src:#tmp-tree-round" position="-22.50862 0.3 13.81054" scale=""></a-entity>
+                            <!-- <a-entity class="tree-round" template="src:#tmp-tree-round" position="-22.50862 0.3 13.81054" scale=""></a-entity> -->
                             <a-entity class="tree-round" template="src:#tmp-tree-round" position="-10.26939 0 -24.07192" scale=""></a-entity>
                             <a-entity class="tree-round" template="src:#tmp-tree-round" position="-7.42664 0 -15.88383" scale=""></a-entity>
                             <a-entity class="tree-round" template="src:#tmp-tree-round" position="-4.10336 0 -15.8762" scale=""></a-entity>
                             <a-entity class="tree-round" template="src:#tmp-tree-round" position="-0.3619 0 -16.13021" scale=""></a-entity>
-                            <a-entity class="tree-round" template="src:#tmp-tree-round" position="14.88314 0 13.05711" scale=""></a-entity>
+                            <!-- <a-entity class="tree-round" template="src:#tmp-tree-round" position="14.88314 0 13.05711" scale=""></a-entity> -->
                             <a-entity class="tree-round" template="src:#tmp-tree-round" position="17.90832 0 -16.76569" scale=""></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-12.48409 0 19.46941" scale="2.5 2.5 2.5"></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-16.06589 0 19.08377" scale="1.5 1.5 1.5"></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="11.13594 0 19.11991" scale="2.5 2.5 2.5"></a-entity>
-                            <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="1.16558 0 13.12583" scale="2 2 2"></a-entity>
+                            <!-- <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="1.16558 0 13.12583" scale="2 2 2"></a-entity> -->
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="13.9735 0 19.09466" scale="1.5 1.5 1.5"></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-21.25399 0 -18.96371" scale="2 2 2.05"></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-9.54958 0 -21.07997" scale="1.5 1.5 1.5"></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="0.49533 0 -21.95663" scale=""></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="22.46062 0 13.43536" scale="2.5 2.5 2.5"></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-25.84183 0 -16.54463" scale="1.5 1.5 1.5"></a-entity>
-                            <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="8.32131 0 13.02088" scale="2.5 2.5 2.5"></a-entity>
-                            <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-2.21066 0 13.32708" scale="2 2 2"></a-entity>
-                            <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="4.66001 0 13.26545" scale="1.5 1.5 1.5"></a-entity>
+                            <!-- <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="8.32131 0 13.02088" scale="2.5 2.5 2.5"></a-entity> -->
+                            <!-- <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-2.21066 0 13.32708" scale="2 2 2"></a-entity> -->
+                            <!-- <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="4.66001 0 13.26545" scale="1.5 1.5 1.5"></a-entity> -->
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="17.51843 0 18.49305" scale="1.5 1.5 1.5"></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="7.91328 0 -22.0374" scale="2.5 2.5 2.5"></a-entity>
-                            <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-7.18278 0 13.26863" scale="1.5 1.5 1.5"></a-entity>
+                            <!-- <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-7.18278 0 13.26863" scale="1.5 1.5 1.5"></a-entity> -->
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="22.87854 0 -11.97559" scale="2.5 2.5 2.5"></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="22.51259 0 3.84197" scale="2 2 2"></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="7.9249 0 17.75547" scale="1.5 1.5 1.5"></a-entity>
@@ -2484,7 +2639,7 @@
                         </a-entity>
 
                         <!-- Built environment-->
-                        <a-entity id = "grand-hotel" class="hotel" position="0 0 18" rotation="0 0 0">
+                        <a-entity id = "grand-hotel" class="hotel" position="0 0 16" rotation="0 0 0">
                             <a-entity class="main-building" >
                                 <!-- Central Block-->
                                 <a-entity position="0 0 0">    
@@ -4140,9 +4295,9 @@
                     </a-entity><!-- End of urban zone -->
 
                     <!---WATERFRONT ZONE -->
-                    <a-entity id="waterfront-zone" class="zone-group" position="44.8 0 26.2" rotation="0 90 0" visible="true">
+                    <a-entity id="waterfront-zone" class="zone-group" position="44.8 3 26.2" rotation="0 90 0" visible="true">
                         <!-- Models-->
-                        <a-entity id="lighthouse" gltf-model="#mdl-lighthouse"  position="-21.96 1.09 -16.34"rotation="0 -62 0" scale="0.8 0.8 0.8"></a-entity>
+                        <a-entity id="lighthouse" gltf-model="#mdl-lighthouse"  position="-21.96 02 -16.34"rotation="0 -62 0" scale="0.8 0.8 0.8"></a-entity>
                     </a-entity><!-- End of waterfront -->
 
                     <!---SUBURBAN / RESIDENTIAL ZONE -->
@@ -4914,7 +5069,7 @@
                         </a-entity>
                         <!-- Apple Orchard -->
                         <a-entity id="farm-05" class="farm">
-                            <a-entity id="apple-orchid" position="8.04831 0 -21.36797">
+                            <a-entity id="apple-orchid" position="10 0 -21">
                                 <a-entity class="tree-apple" template="src:#tmp-tree-apple" position="" rotation="0 30 0"></a-entity>
                                 <a-entity class="tree-apple" template="src:#tmp-tree-apple"  position="0 0 2" rotation="0 30 0"> </a-entity>
                                 <a-entity class="tree-apple" template="src:#tmp-tree-apple"  position="0 0 4" rotation="0 30 0"> </a-entity>
@@ -4931,12 +5086,6 @@
                                 <a-entity class="tree-apple" template="src:#tmp-tree-apple"  position="9 0 2" rotation="0 30 0"> </a-entity>
                                 <a-entity class="tree-apple" template="src:#tmp-tree-apple"  position="9 0 4" rotation="0 30 0"> </a-entity>
                                 <a-entity class="tree-apple" template="src:#tmp-tree-apple"  position="9 0 6" rotation="0 30 0"> </a-entity>
-                                <a-entity class="tree-apple" template="src:#tmp-tree-apple"  position="12 0 2" rotation="0 30 0"> </a-entity>
-                                <a-entity class="tree-apple" template="src:#tmp-tree-apple"  position="12 0 4" rotation="0 30 0"> </a-entity>
-                                <a-entity class="tree-apple" template="src:#tmp-tree-apple"  position="12 0 6" rotation="0 30 0"> </a-entity>
-                                <a-entity class="tree-apple" template="src:#tmp-tree-apple"  position="12 0 8" rotation="0 30 0"> </a-entity>
-                                <a-entity class="tree-apple" template="src:#tmp-tree-apple"  position="12 0 10" rotation="0 30 0"> </a-entity>
-                                <a-entity class="tree-apple" template="src:#tmp-tree-apple"  position="12 0 12" rotation="0 30 0"> </a-entity>
                                 <a-entity class="tree-apple" template="src:#tmp-tree-apple"  position="-3 0 0" rotation="0 30 0"> </a-entity>
                                 <a-entity class="tree-apple" template="src:#tmp-tree-apple"  position="-3 0 2" rotation="0 30 0"> </a-entity>
                                 <a-entity class="tree-apple" template="src:#tmp-tree-apple"  position="-3 0 4" rotation="0 30 0"> </a-entity>
@@ -4944,7 +5093,7 @@
                                 <a-entity class="tree-apple" template="src:#tmp-tree-apple"  position="-6 0 0" rotation="0 30 0"> </a-entity>
                                 <a-entity class="tree-apple" template="src:#tmp-tree-apple"  position="-6 0 2" rotation="0 30 0"> </a-entity>
                             </a-entity>
-                            <a-entity id="barn-05" class="barn"  position="13.1 0 -10.9" rotation="0 270 0"
+                            <a-entity id="barn-05" class="barn"  position="15 0 -11" rotation="0 270 0"
                                 template="src:#tmp-barn-large" 
                                 data-basecol="col-barn-A-base"
                                 data-trimcol="col-barn-A-trim"
@@ -5218,34 +5367,27 @@
                         </a-entity>
                         
                         <!-- Livestock -->	
-                        <a-entity id="ag-livestock-group" class="livestock-group animals-group" visible="false">
+                        <a-entity id="ag-livestock-group" class="livestock-group animals-group" visible="">
                             <a-entity id="livestock-farm-01" class="farm-livestock-group">                            
-                                <a-entity class="pig piggery livestock" gltf-model="#mdl-pig" scale="0.005 0.005 0.005" position="-14.28 0.076 8.334" rotation="0 600"></a-entity>
-                                <a-entity class="pig piggery livestock" gltf-model="#mdl-pig" scale="0.005 0.005 0.005" position="-14.47748 0.3 9.92796" rotation="0 90 0"></a-entity>                   
+                                <a-entity class="pig piggery livestock" template="src: #tmp-pig" position="-13 0.282 -10" rotation="0 600"></a-entity>
+                                <a-entity class="pig piggery livestock" template="src: #tmp-pig" position="-3 0.282 -8" rotation="0 90 0"></a-entity>                   
                             </a-entity>        
                             <a-entity id="livestock-farm-02" class="farm-livestock-group">   
-                                <a-entity class="sheep livestock" gltf-model="#mdl-sheep" scale="0.5 0.5 0.5" position="-21.95367 0.40531 -5.21607" rotation="0 10 0"></a-entity>
-                                <a-entity class="sheep livestock" gltf-model="#mdl-sheep" scale="0.5 0.5 0.5" position="-13.41441 0.40531 -2.7282" rotation="0 50 0"></a-entity>
-                                <a-entity class="sheep livestock" gltf-model="#mdl-sheep" scale="0.5 0.5 0.5" position="-20.15429 0.40531 -5.03987" rotation="0 300 0"></a-entity>
-                                <a-entity class="sheep livestock" gltf-model="#mdl-sheep" scale="0.5 0.5 0.5" position="-18.60867 0.40531 -1.54481" rotation="0 230 0"></a-entity>
-                                <a-entity class="sheep livestock" gltf-model="#mdl-sheep" scale="0.5 0.5 0.5" position="-16.06976 0.40531 -3.59518" rotation="0 130 0"></a-entity>
-                                <a-entity class="chicken poultry livestock" gltf-model="#mdl-chicken" scale="0.003 0.003 0.003" position="-13.33345 0 -6.92865" rotation="0 59 0"></a-entity>                         
-                                <a-entity class="chicken poultry livestock" gltf-model="#mdl-chicken" scale="0.003 0.003 0.003" position="-12.11237 0 -7.85723" rotation="0 210 0"></a-entity>                         
-                                <a-entity class="chicken poultry livestock" gltf-model="#mdl-chicken" scale="0.003 0.003 0.003" position="-13.49778 0 -11.16972" rotation="0 10 0"></a-entity>   
-                                <a-entity class="pig piggery livestock" gltf-model="#mdl-pig" scale="0.005 0.005 0.005" position="-12.84601 0.3 -9.19923" rotation="0 45 0"></a-entity>                   
+                                <a-entity class="sheep livestock" template="src: #tmp-sheep" position="-21.95 0 -5.2" rotation="0 10 0"></a-entity>
+                                <a-entity class="sheep livestock" template="src: #tmp-sheep" position="-13.41 0 -2.7" rotation="0 50 0"></a-entity>
+                                <a-entity class="sheep livestock" template="src: #tmp-sheep" position="-18.61 0 -1.5" rotation="0 230 0"></a-entity>
+                                <a-entity class="sheep livestock" template="src: #tmp-sheep" position="-16.1 0 -3.6" rotation="0 130 0"></a-entity>
+                                <a-entity class="chicken poultry livestock" template="src: #tmp-chicken" position="-13.3 0 -6.9" rotation="0 59 0"></a-entity>                         
+                                <a-entity class="chicken poultry livestock" template="src: #tmp-chicken" position="-12.1 0 -7.6" rotation="0 210 0"></a-entity>                         
+                                <a-entity class="chicken poultry livestock" template="src: #tmp-chicken" position="-13.5 0 -11.2" rotation="0 10 0"></a-entity>   
                             </a-entity>
                             <a-entity id="livestock-farm-03" class="farm-livestock-group">
-                                <a-entity class="cattle dairy" gltf-model="#mdl-cow-black" scale="0.007 0.007 0.007" position="-18.24393 0.45 14.63073" rotation="0 10 0"></a-entity>
-                                <a-entity class="cattle dairy" gltf-model="#mdl-cow-black" scale="0.007 0.007 0.007" position="-20.34912 0.45 15.76713" rotation="0 150 0"></a-entity>
-                                <a-entity class="cattle dairy" gltf-model="#mdl-cow-black" scale="0.007 0.007 0.007" position="-8 0.45 15" rotation="0 70 0"></a-entity>
-                                <a-entity class="cattle dairy" gltf-model="#mdl-cow-black" scale="0.007 0.007 0.007" position="-10.89619 0.45 19.93055" rotation="0 50 0"></a-entity>
-                                <a-entity class="cattle beef" gltf-model="#mdl-cow-brown" scale="0.007 0.007 0.007" position="-7.4 0.65 20" rotation="0 210 0"></a-entity>
-                                <a-entity class="cattle beef" gltf-model="#mdl-cow-brown" scale="0.007 0.007 0.007" position="-20.57755 0.65 11.93905" rotation="0 45 0"></a-entity>
-                                <a-entity class="cattle beef" gltf-model="#mdl-cow-brown" scale="0.007 0.007 0.007" position="-14.88002 0.65 16.40593" rotation="0 110 0"></a-entity>
-                                <a-entity class="cattle beef" gltf-model="#mdl-cow-brown" scale="0.007 0.007 0.007" position="-6.79452 0.65 24.81085"></a-entity>
-                                <a-entity class="chicken poulty" gltf-model="#mdl-chicken" scale="0.003 0.003 0.003" position="-4.35576 0 18.18069" rotation="0 600"></a-entity>
-                                <a-entity class="chicken poulty" gltf-model="#mdl-chicken" scale="0.003 0.003 0.003" position="-5.38415 0 16.86776" rotation="0 30 0"></a-entity>   
-                                <a-entity class="chicken poulty" gltf-model="#mdl-chicken" scale="0.003 0.003 0.003" position="-3.91531 0 19.56556" rotation="0 150 0"></a-entity>                             
+                                <a-entity class="cattle dairy" template="src: #tmp-cow" data-col="col-cow-black" position="-18.2 0 14.6" rotation="0 10 0"></a-entity>
+                                <a-entity class="cattle dairy" template="src: #tmp-cow" data-col="col-cow-black" position="-20.3 0 15.7" rotation="0 150 0"></a-entity>
+                                <a-entity class="cattle dairy" template="src: #tmp-cow" data-col="col-cow-black" position="-8 0 15" rotation="0 70 0"></a-entity>
+                                <a-entity class="cattle beef" template="src: #tmp-cow" data-col="col-cow-brown" position="-7.4 0 20" rotation="0 210 0"></a-entity>
+                                <a-entity class="cattle beef" template="src: #tmp-cow" data-col="col-cow-brown" position="-20.5 0 11.9" rotation="0 45 0"></a-entity>
+                                <a-entity class="cattle beef" template="src: #tmp-cow" data-col="col-cow-brown" position="-14.8 0 16.4" rotation="0 110 0"></a-entity>
                             </a-entity>
                         </a-entity>
 
@@ -5403,17 +5545,17 @@
                         <a-entity id="outer-roads" class="roads-group">
                             <a-entity class="tarmac" mixin="col-road" buffer-geometry-merger>  
                                 <a-torus class="road" position="5.47301 0 13.26408" geometry="radius: 13; radiusTubular: 0.74; segmentsRadial: 16; segmentsTubular: 27; arc: 90" rotation="90.00021045914971 -60 0" scale="1 1 0.05" mixin="col-road"></a-torus>
-                                <a-box class="road" mixin="road" position="7.25522 0 13.42285" geometry="depth: 30" material="" rotation="0 30 0"></a-box>
-                                <a-box class="road" mixin="road" position="-10.735 0 11.153" rotation="0 30 0" geometry="depth: 20" material=""></a-box>
-                                <a-box class="road" mixin="road" position="14.49 0 4.82" rotation="0 -60 0" geometry="depth: 18" material=""></a-box>
+                                <a-box class="road" mixin="road" position="7.25522 0 13.42285" geometry="depth: 30" rotation="0 30 0"></a-box>
+                                <a-box class="road" mixin="road" position="-10.735 0 11.153" rotation="0 30 0" geometry="depth: 20"></a-box>
+                                <a-box class="road" mixin="road" position="14.49 0 4.82" rotation="0 -60 0" geometry="depth: 18"></a-box>
                             </a-entity>
                             <a-entity class="road-lines" mixin="col-line" buffer-geometry-merger>
-                                <a-torus class="road-line" position="5.47708 0.1 13.38354" geometry="radius: 13; radiusTubular: 0.04; segmentsRadial: 16; segmentsTubular: 27; arc: 90" rotation="90 -60 0" scale="1 1 0.05" material=""></a-torus>
-                                <a-box class="road-line" mixin="road-line" position="7.28582 0 13.52442" geometry="depth: 30" material="" rotation="0 30 0"></a-box>
-                                <a-box class="road-line" mixin="road-stopline" position="7.10842 0 9.86912" rotation="0 -60 0" material="" geometry=""></a-box>
-                                <a-box class="road-line" mixin="road-stopline" position="11.4423 0 24.0221" rotation="0 -60 0" material="" geometry=""></a-box>                                                       
-                                <a-box class="road-line" mixin="road-line" position="-10.735 0 11.153" rotation="0 30 0" geometry="depth: 20" material=""></a-box>
-                                <a-box class="road-line" mixin="road-line" position="14.49 0 4.82" rotation="0 120 0" geometry="depth: 18" material=""></a-box>
+                                <a-torus class="road-line" position="5.47708 0.1 13.38354" geometry="radius: 13; radiusTubular: 0.04; segmentsRadial: 16; segmentsTubular: 27; arc: 90" rotation="90 -60 0" scale="1 1 0.05"></a-torus>
+                                <a-box class="road-line" mixin="road-line" position="7.28582 0 13.52442" geometry="depth: 30" rotation="0 30 0"></a-box>
+                                <a-box class="road-line" mixin="road-stopline" position="7.10842 0 9.86912" rotation="0 -60 0"></a-box>
+                                <a-box class="road-line" mixin="road-stopline" position="11.4423 0 24.0221" rotation="0 -60 0"></a-box>                                                       
+                                <a-box class="road-line" mixin="road-line" position="-10.735 0 11.153" rotation="0 30 0" geometry="depth: 20"></a-box>
+                                <a-box class="road-line" mixin="road-line" position="14.49 0 4.82" rotation="0 120 0" geometry="depth: 18"></a-box>
                             </a-entity>
                         </a-entity>
 
@@ -5452,36 +5594,36 @@
 
                             <a-entity class="rubbish-group" position="-19.85608 -0.5 11.36838">
                                 <a-entity mixin="col-waste-01" geometry-buffer-merger>
-                                    <a-dodecahedron mixin="col-waste-01" position="0.01613 -0.2665 -0.91014" scale="2 1.2 1.5" radius="1" rotation="0 45 0" material="" geometry=""></a-dodecahedron>
-                                    <a-dodecahedron mixin="col-waste-01" position="-4.55871 0 -4.17565" scale="1.5 2 1" radius="1" rotation="" material="" geometry=""></a-dodecahedron>
-                                    <a-dodecahedron mixin="col-waste-01" position="1.48677 0 6.63053" scale="1 2 1" radius="1" rotation="" material="" geometry=""></a-dodecahedron>
-                                    <a-dodecahedron mixin="col-waste-01" position="0.93545 0 4.40902" scale="2 2 1" radius="1" rotation="300 0" material="" geometry=""></a-dodecahedron>
-                                    <a-dodecahedron mixin="col-waste-01" position="3.42073 0 0.6706" scale="1 2 1" radius="1" rotation="" material="" geometry=""></a-dodecahedron>
-                                    <a-dodecahedron mixin="col-waste-01" position="-3.79169 -1.05519 -2.22842" scale="1 2 2" radius="1" rotation="50 0 0" material="" geometry=""></a-dodecahedron>
+                                    <a-dodecahedron mixin="col-waste-01" position="0.01613 -0.2665 -0.91014" scale="2 1.2 1.5" radius="1" rotation="0 45 0"></a-dodecahedron>
+                                    <a-dodecahedron mixin="col-waste-01" position="-4.55871 0 -4.17565" scale="1.5 2 1" radius="1" rotation=""></a-dodecahedron>
+                                    <a-dodecahedron mixin="col-waste-01" position="1.48677 0 6.63053" scale="1 2 1" radius="1" rotation=""></a-dodecahedron>
+                                    <a-dodecahedron mixin="col-waste-01" position="0.93545 0 4.40902" scale="2 2 1" radius="1" rotation="300 0"></a-dodecahedron>
+                                    <a-dodecahedron mixin="col-waste-01" position="3.42073 0 0.6706" scale="1 2 1" radius="1" rotation=""></a-dodecahedron>
+                                    <a-dodecahedron mixin="col-waste-01" position="-3.79169 -1.05519 -2.22842" scale="1 2 2" radius="1" rotation="50 0 0"></a-dodecahedron>
                                 </a-entity> 
                                 <a-entity mixin="col-waste-02" geometry-buffer-merger>
-                                    <a-dodecahedron mixin="col-waste-02" position="1.82348 -0.05045 -1.96605" scale="2 1 1" radius="1" rotation="" material="" geometry=""></a-dodecahedron>
-                                    <a-dodecahedron mixin="col-waste-02" position="0.17334 0 2.21" scale="1.5 1.2 2" radius="1" rotation="" material="" geometry=""></a-dodecahedron>
-                                    <a-dodecahedron mixin="col-waste-02" position="2.78906 -2.02202 5.55599" scale="1.3 1.3 1.7" radius="1" rotation="" material="" geometry=""></a-dodecahedron>
-                                    <a-dodecahedron mixin="col-waste-02" position="3.84544 0.5216 2.47345" scale="1.3 1.3 1.7" radius="1" rotation="" material="" geometry=""></a-dodecahedron>
-                                    <a-dodecahedron mixin="col-waste-02" position="-2.4075 -1.144 -1.30785" scale="1.3 1.3 3" radius="1" rotation="20 0 0" material="" geometry=""></a-dodecahedron>
-                                    <a-dodecahedron mixin="col-waste-02" position="2.10337 -3.62115 -0.39454" scale="1.3 3 1.7" radius="1" rotation="" material="" geometry=""></a-dodecahedron>
+                                    <a-dodecahedron mixin="col-waste-02" position="1.82348 -0.05045 -1.96605" scale="2 1 1" radius="1" rotation=""></a-dodecahedron>
+                                    <a-dodecahedron mixin="col-waste-02" position="0.17334 0 2.21" scale="1.5 1.2 2" radius="1" rotation=""></a-dodecahedron>
+                                    <a-dodecahedron mixin="col-waste-02" position="2.78906 -2.02202 5.55599" scale="1.3 1.3 1.7" radius="1" rotation=""></a-dodecahedron>
+                                    <a-dodecahedron mixin="col-waste-02" position="3.84544 0.5216 2.47345" scale="1.3 1.3 1.7" radius="1" rotation=""></a-dodecahedron>
+                                    <a-dodecahedron mixin="col-waste-02" position="-2.4075 -1.144 -1.30785" scale="1.3 1.3 3" radius="1" rotation="20 0 0"></a-dodecahedron>
+                                    <a-dodecahedron mixin="col-waste-02" position="2.10337 -3.62115 -0.39454" scale="1.3 3 1.7" radius="1" rotation=""></a-dodecahedron>
                                 </a-entity> 
                                 <a-entity mixin="col-waste-03" geometry-buffer-merger>
-                                    <a-dodecahedron mixin="col-waste-03" position="0.92736 0 -3.47037" scale="1.2 1.3 1.5" radius="1" rotation="0 300" material="" geometry=""></a-dodecahedron>
-                                    <a-dodecahedron mixin="col-waste-03" position="2.94687 -0.42396 4.30917" scale="1.5 1.5 2" radius="1" rotation="0 40 0" material="" geometry=""></a-dodecahedron>
-                                    <a-dodecahedron mixin="col-waste-03" position="2.31353 -0.0261 0.00026" scale="1.4 1 2" radius="1" rotation="" material="" geometry=""></a-dodecahedron>
-                                    <a-dodecahedron mixin="col-waste-03" position="-1.42203 -0.40125 0.13771" scale="1.4 1 2" radius="1" rotation="" material="" geometry=""></a-dodecahedron>
-                                    <a-dodecahedron mixin="col-waste-03" position="-0.69687 -2.76754 -1.59762" scale="1.4 2 2" radius="1" rotation="60 0 0" material="" geometry=""></a-dodecahedron>
-                                    <a-dodecahedron mixin="col-waste-03" position="1.49633 -2.84184 3.19343" scale="1.4 1.5 2.5" radius="1" rotation="" material="" geometry=""></a-dodecahedron>
+                                    <a-dodecahedron mixin="col-waste-03" position="0.92736 0 -3.47037" scale="1.2 1.3 1.5" radius="1" rotation="0 300"></a-dodecahedron>
+                                    <a-dodecahedron mixin="col-waste-03" position="2.94687 -0.42396 4.30917" scale="1.5 1.5 2" radius="1" rotation="0 40 0"></a-dodecahedron>
+                                    <a-dodecahedron mixin="col-waste-03" position="2.31353 -0.0261 0.00026" scale="1.4 1 2" radius="1" rotation=""></a-dodecahedron>
+                                    <a-dodecahedron mixin="col-waste-03" position="-1.42203 -0.40125 0.13771" scale="1.4 1 2" radius="1" rotation=""></a-dodecahedron>
+                                    <a-dodecahedron mixin="col-waste-03" position="-0.69687 -2.76754 -1.59762" scale="1.4 2 2" radius="1" rotation="60 0 0"></a-dodecahedron>
+                                    <a-dodecahedron mixin="col-waste-03" position="1.49633 -2.84184 3.19343" scale="1.4 1.5 2.5" radius="1" rotation=""></a-dodecahedron>
                                 </a-entity>
                                 <a-entity mixin="col-waste-03" geometry-buffer-merger>
-                                    <a-dodecahedron mixin="col-waste-04" position="1.58094 0 2.16833" scale="1.8 1.2 1.5" radius="1" rotation="0 5 0" material="" geometry=""></a-dodecahedron>
-                                    <a-dodecahedron mixin="col-waste-04" position="-1.34128 -0.24142 -3.79491" scale="2 1 2" radius="1" rotation="" material="" geometry=""></a-dodecahedron>
-                                    <a-dodecahedron mixin="col-waste-04" position="3.22268 -5.56948 3.22145" scale="1.5 3 2" radius="1" rotation="0 20 0" material="" geometry=""></a-dodecahedron>
-                                    <a-dodecahedron mixin="col-waste-04" position="-0.36659 -3.34749 -3.08453" scale="1.5 2 3" radius="1" rotation="45 300" material="" geometry=""></a-dodecahedron>
-                                    <a-dodecahedron mixin="col-waste-04" position="3.22268 -3.85283 -1.58689" scale="1.5 1 2" radius="1" rotation="0 300" material="" geometry=""></a-dodecahedron>
-                                    <a-dodecahedron mixin="col-waste-04" position="3.22268 -2.41208 0.4651" scale="1.5 1 2" radius="1" rotation="-30-300" material="" geometry=""></a-dodecahedron>
+                                    <a-dodecahedron mixin="col-waste-04" position="1.58094 0 2.16833" scale="1.8 1.2 1.5" radius="1" rotation="0 5 0"></a-dodecahedron>
+                                    <a-dodecahedron mixin="col-waste-04" position="-1.34128 -0.24142 -3.79491" scale="2 1 2" radius="1" rotation=""></a-dodecahedron>
+                                    <a-dodecahedron mixin="col-waste-04" position="3.22268 -5.56948 3.22145" scale="1.5 3 2" radius="1" rotation="0 20 0"></a-dodecahedron>
+                                    <a-dodecahedron mixin="col-waste-04" position="-0.36659 -3.34749 -3.08453" scale="1.5 2 3" radius="1" rotation="45 300"></a-dodecahedron>
+                                    <a-dodecahedron mixin="col-waste-04" position="3.22268 -3.85283 -1.58689" scale="1.5 1 2" radius="1" rotation="0 300"></a-dodecahedron>
+                                    <a-dodecahedron mixin="col-waste-04" position="3.22268 -2.41208 0.4651" scale="1.5 1 2" radius="1" rotation="-30-300"></a-dodecahedron>
                                 </a-entity>
                             </a-entity>
                         </a-entity>
@@ -5490,12 +5632,7 @@
 
                 </a-entity><!-- End of zone groups-->
 
-
-
             </a-entity>
-
-
-
         </a-scene>
     </body>
 </html>
