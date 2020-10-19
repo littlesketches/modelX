@@ -31,7 +31,7 @@
 
     <body>
         <a-scene id="scene" antialias = "true"
-                setup stats add-external-listeners position-sun vr-mode-ui="enabled: false"
+                setup add-external-listeners position-sun vr-mode-ui="enabled: false"
                 fog="type: linear; color: #000; density: 0.025"> <!-- animation-timeline__1="timeline: #ambientLight-cycle; loop: true; direction: alternate;">  -->
             <!-- ASSETS: MIXINS, MODELS AND TEMPLATES-->
             <a-assets timeout="5000">
@@ -40,7 +40,9 @@
                     <a-mixin id="palette-A-01" 	    material = 'color: #FFA8CB'></a-mixin>
                     <a-mixin id="palette-A-02" 	    material = 'color: #784283'></a-mixin>
                     <a-mixin id="palette-A-03"	    material = 'color: #C7CEF6'></a-mixin>
-                    <a-mixin id="palette-A-04" 	    material = 'color: #fff'></a-mixin>
+
+                    <a-mixin id="col-home-windows"	material = 'color: #C7CEF6; emissive: #C7CEF6'></a-mixin>
+
                     <a-mixin id="col-ch-01" 	    material ='color: #658C52'></a-mixin>
                     <a-mixin id="col-ch-02" 	    material ='color: #A4A395'></a-mixin>
 
@@ -60,8 +62,8 @@
                     <!-- Built environment-->
                     <a-mixin id="col-hospital-base"     material='color: #fff'></a-mixin>
                     <a-mixin id="col-hospital-trim"     material='color: #c8a2c8'></a-mixin>
-                    <a-mixin id="col-hospital-door"     material='color: aqua'></a-mixin>
-                    <a-mixin id="col-hospital-window"   material='color: aqua'></a-mixin>
+                    <a-mixin id="col-hospital-door"     material='color: aqua; emissive: #C7CEF6'></a-mixin>
+                    <a-mixin id="col-hospital-window"   material='color: aqua; emissive: #C7CEF6'></a-mixin>
                     <a-mixin id="col-hospital-cross"    material='color: #ff007f'></a-mixin>
                     <a-mixin id="col-hospital-equip"    material='color: #ff007f'></a-mixin>
 
@@ -74,23 +76,24 @@
                     <a-mixin id="col-townhouse-A-brickLower"    material='color: gray'></a-mixin>
                     <a-mixin id="col-townhouse-A-trim"          material='color: #DDB784'></a-mixin>
                     <a-mixin id="col-townhouse-A-trimLower"     material='color: #9C735D'></a-mixin>
-                    <a-mixin id="col-townhouse-A-window"        material='color: aqua'></a-mixin>
+                    <a-mixin id="col-townhouse-A-window"        material='color: aqua; emissive: #C7CEF6'></a-mixin>
                     <a-mixin id="col-townhouse-A-windowFrame"   material='color: #000'></a-mixin>
-                    <a-mixin id="col-townhouse-A-roof"      material='color: #4E3E23;'></a-mixin>
-                    <a-mixin id="col-townhouse-A-door"      material='color: #b11226;'></a-mixin>
+                    <a-mixin id="col-townhouse-A-roof"          material='color: #4E3E23;'></a-mixin>
+                    <a-mixin id="col-townhouse-A-door"          material='color: #b11226;'></a-mixin>
 
                     <a-mixin id="col-waterTank"         material='color: #848789; metalness:0.5'></a-mixin>
                     <a-mixin id="col-windTurbine"       material='color: #fff; metalness: 0.2'></a-mixin>
                     <a-mixin id="col-solarFrame"        material='color: gray; metalness:0.2'></a-mixin>
                     <a-mixin id="col-solarPV-01"        material='color: #2b2d2f'></a-mixin>
                     <a-mixin id="col-solarPV-02"        material='color: #a9a9a9'></a-mixin>
+                    <a-mixin id="col-damWall"           material="color: gray"></a-mixin>
 
                     <a-mixin id="col-battery-base"      material='color: #fff'></a-mixin>
                     <a-mixin id="col-battery-trim"      material='color: gray'></a-mixin>
+
                     <a-mixin id="col-powerStn-cooling"  material="color: #e8e4c9"></a-mixin>
                     <a-mixin id="col-powerStn-top"      material="color: #525a60"></a-mixin>
                     <a-mixin id="col-powerStn-trim"     material="color: red"></a-mixin>
-                    <a-mixin id="col-damWall"           material="color: gray"></a-mixin>
 
                     <a-mixin id="col-hydro-base"        material="color: gray"></a-mixin>
                     <a-mixin id="col-hydro-window"      material="color: #fff"></a-mixin>
@@ -119,29 +122,29 @@
                     <a-mixin id="col-office-A-base"      material='color: #F0EAD6'></a-mixin>
                     <a-mixin id="col-office-A-trim"      material='color: #0c0f12'></a-mixin>
                     <a-mixin id="col-office-A-door"      material='color: gray'></a-mixin>
-                    <a-mixin id="col-office-A-window"    material='color: aqua'></a-mixin>
+                    <a-mixin id="col-office-A-window"    material='color: aqua;  emissive: #C7CEF6'></a-mixin>
                     <a-mixin id="col-office-A-equip"     material='color: #FFA8CB'></a-mixin>
 
-                    <a-mixin id="col-tower-base"      material='color: #4b0082'></a-mixin>
-                    <a-mixin id="col-tower-trim"      material='color: #c8a2c8'></a-mixin>
-                    <a-mixin id="col-tower-door"      material='color: gray'></a-mixin>
-                    <a-mixin id="col-tower-window"    material='color: aqua'></a-mixin>
-                    <a-mixin id="col-tower-equip"     material='color: #FFA8CB'></a-mixin>
+                    <a-mixin id="col-tower-base"        material='color: #4b0082'></a-mixin>
+                    <a-mixin id="col-tower-trim"        material='color: #c8a2c8'></a-mixin>
+                    <a-mixin id="col-tower-door"        material='color: gray'></a-mixin>
+                    <a-mixin id="col-tower-window"      material='color: aqua; emissive: #C7CEF6'></a-mixin>
+                    <a-mixin id="col-tower-equip"       material='color: #FFA8CB'></a-mixin>
 
-                    <a-mixin id="col-govBuild-base"      material='color: #f5f5dc'></a-mixin>
-                    <a-mixin id="col-govBuild-foundation" material='color: #f0ead6'></a-mixin>
-                    <a-mixin id="col-govBuild-trim"      material='color: #0c0f12'></a-mixin>
-                    <a-mixin id="col-govBuild-door"      material='color: gray'></a-mixin>
-                    <a-mixin id="col-govBuild-roof"      material='color: gray'></a-mixin>
-                    <a-mixin id="col-govBuild-window"    material='color: aqua'></a-mixin>
-                    <a-mixin id="col-govBuild-equip"     material='color: #FFA8CB'></a-mixin>
+                    <a-mixin id="col-govBuild-base"         material='color: #f5f5dc'></a-mixin>
+                    <a-mixin id="col-govBuild-foundation"   material='color: #f0ead6'></a-mixin>
+                    <a-mixin id="col-govBuild-trim"         material='color: #0c0f12'></a-mixin>
+                    <a-mixin id="col-govBuild-door"         material='color: gray'></a-mixin>
+                    <a-mixin id="col-govBuild-roof"         material='color: gray'></a-mixin>
+                    <a-mixin id="col-govBuild-window"       material='color: aqua'></a-mixin>
+                    <a-mixin id="col-govBuild-equip"        material='color: #FFA8CB'></a-mixin>
 
                     <a-mixin id="col-hotel-base-1"      material='color: #e75480'></a-mixin>
                     <a-mixin id="col-hotel-base-2"      material='color: #F0EAD6'></a-mixin>
                     <a-mixin id="col-hotel-roof"        material='color: #4f4f4f'></a-mixin>
                     <a-mixin id="col-hotel-trim"        material='color: #FFB6C1'></a-mixin>
                     <a-mixin id="col-hotel-door"        material='color: gray'></a-mixin>
-                    <a-mixin id="col-hotel-window"      material='color: aqua'></a-mixin>
+                    <a-mixin id="col-hotel-window"      material='color: aqua; emissive: #C7CEF6'></a-mixin>
                     <a-mixin id="col-hotel-equip"       material='color: #FFA8CB'></a-mixin>
 
                     <a-mixin id="col-barn-A-base"       material='color: #e75480'></a-mixin>
@@ -152,31 +155,32 @@
                     <a-mixin id="col-barn-A-window"     material='color: aqua'></a-mixin>
                     <a-mixin id="col-barn-A-pen"        material='color: brown'></a-mixin>
 
-                    <a-mixin id="col-silo-A-base"      material='color: #e75480'></a-mixin>
-                    <a-mixin id="col-silo-A-trim"      material='color: #fff'></a-mixin>
-                    <a-mixin id="col-silo-A-roof"      material='color: #4f4f4f'></a-mixin>
+                    <a-mixin id="col-silo-A-base"       material='color: #e75480'></a-mixin>
+                    <a-mixin id="col-silo-A-trim"       material='color: #fff'></a-mixin>
+                    <a-mixin id="col-silo-A-roof"       material='color: #4f4f4f'></a-mixin>
 
                     <a-mixin id="col-warehouse-A-base"      material='color: #F0EAD6'></a-mixin>
                     <a-mixin id="col-warehouse-A-trim"      material='color: #0c0f12'></a-mixin>
                     <a-mixin id="col-warehouse-A-door"      material='color: gray'></a-mixin>
-                    <a-mixin id="col-warehouse-A-rollerDoor"    material='color: gray'></a-mixin>
+                    <a-mixin id="col-warehouse-A-rollerDoor"material='color: gray'></a-mixin>
                     <a-mixin id="col-warehouse-A-window"    material='color: aqua'></a-mixin>
                     <a-mixin id="col-warehouse-A-roof"      material='color: #FFA8CB'></a-mixin>
 
                     <a-mixin id="col-airport-base"          material='color: #F0EAD6'></a-mixin>
                     <a-mixin id="col-airport-trim"          material='color: #FFA8CB'></a-mixin>
-                    <a-mixin id="col-airport-window"        material='color: aqua'></a-mixin>
+                    <a-mixin id="col-airport-window"        material='color: aqua; emissive: #C7CEF6'></a-mixin>
 
+                    <a-mixin id = "col-lighthouse-lamp"  material="color: #fff; emissive: #fff"></a-mixin>
                     <!-- Street furniture-->
-                        <a-mixin id="col-streetSign-pole"        material='color: gray'></a-mixin>
-                        <a-mixin id="col-stopSign-base"        material='color: red'></a-mixin>
-                        <a-mixin id="col-stopSign-trim"        material='color: #fff'></a-mixin>
-                        <a-mixin id="col-giveWay-trim"        material='color: red'></a-mixin>
-                        <a-mixin id="col-giveWay-base"        material='color: #fff'></a-mixin>
-                        <a-mixin id="col-lampPole-base"        material='color: #2a3439'></a-mixin>
-                        <a-mixin id="col-lampPole-light"        material='color: #fff'></a-mixin>
-                        <a-mixin id="col-fountain"              material='color: #f5f5dc'></a-mixin>
-                        <a-mixin id="col-fountain-water"        material='color: aqua'></a-mixin>
+                        <a-mixin id="col-streetSign-pole"   material='color: gray'></a-mixin>
+                        <a-mixin id="col-stopSign-base"     material='color: red'></a-mixin>
+                        <a-mixin id="col-stopSign-trim"     material='color: #fff'></a-mixin>
+                        <a-mixin id="col-giveWay-trim"      material='color: red'></a-mixin>
+                        <a-mixin id="col-giveWay-base"      material='color: #fff'></a-mixin>
+                        <a-mixin id="col-lampPole-base"     material='color: #2a3439'></a-mixin>
+                        <a-mixin id="col-lampPole-light"    material='color: #fff; emissive: #fff'></a-mixin>
+                        <a-mixin id="col-fountain"          material='color: #f5f5dc'></a-mixin>
+                        <a-mixin id="col-fountain-water"    material='color: aqua'></a-mixin>
 
                     <!-- Topography -->
                         <a-mixin id="col-ground" 	material='color: #658C52'></a-mixin>
@@ -188,17 +192,17 @@
                         <a-mixin id="col-ocean" 	material='color: #82B6DD'></a-mixin>
                         <a-mixin id="col-road" 	    material='color: #525a60'></a-mixin>
                         <a-mixin id="col-river" 	material ="color: #3BB3D0"></a-mixin>
-                        <a-mixin id="col-rocks" 	    material='color: #a9a9a9'></a-mixin>
-                        <a-mixin id="col-sand" 		    material='color: #e4e585'></a-mixin>
+                        <a-mixin id="col-rocks"     material='color: #a9a9a9'></a-mixin>
+                        <a-mixin id="col-sand" 		material='color: #e4e585'></a-mixin>
                     <!-- Surface features -->
-                        <a-mixin id="col-field" 	material='color: #989a51'></a-mixin>
-                        <a-mixin id="col-pavement" 	material='color: gray'></a-mixin>
-                        <a-mixin id="col-road" 		material ="color: #525a60" ></a-mixin>
-                        <a-mixin id="col-line" 		material ="color: #FFF" ></a-mixin>
-                        <a-mixin id="col-water-filtered-01" 		material ="color: #82B6DD" ></a-mixin>
-                        <a-mixin id="col-water-filtered-02" 		material ="color: #dae3cd" ></a-mixin>
-                        <a-mixin id="col-water-filtered-03" 		material ="color: #CBFFE2" ></a-mixin>
-                        <a-mixin id="col-water-filtered-04" 		material ="color: #A9844F" ></a-mixin>
+                        <a-mixin id="col-field" 	        material='color: #989a51'></a-mixin>
+                        <a-mixin id="col-pavement" 	        material='color: gray'></a-mixin>
+                        <a-mixin id="col-road" 		        material ="color: #525a60" ></a-mixin>
+                        <a-mixin id="col-line" 		        material ="color: #FFF" ></a-mixin>
+                        <a-mixin id="col-water-filtered-01" material ="color: #82B6DD" ></a-mixin>
+                        <a-mixin id="col-water-filtered-02" material ="color: #dae3cd" ></a-mixin>
+                        <a-mixin id="col-water-filtered-03" material ="color: #CBFFE2" ></a-mixin>
+                        <a-mixin id="col-water-filtered-04" material ="color: #A9844F" ></a-mixin>
                         <a-mixin id="col-pondBank" 		    material ="color: gray" ></a-mixin>
                         <a-mixin id="col-waste-01" 		    material ="color: #A98E72" ></a-mixin>
                         <a-mixin id="col-waste-02" 		    material ="color: #847e08" ></a-mixin>
@@ -207,19 +211,19 @@
 
                     <!-- Vehicles -->
                         <a-mixin id="col-tire" 	                material='color: #2B2B2B'></a-mixin>
-                        <a-mixin id="col-vehicle-silver" 	material='color: #C0C0C0; metalness: 0.5'></a-mixin>
-                        <a-mixin id="col-vehicle-purple" 	material='color: #663366; metalness: 0.5'></a-mixin>
-                        <a-mixin id="col-vehicle-orange" 	material='color: #FF7B08; metalness: 0.5'></a-mixin>
+                        <a-mixin id="col-vehicle-silver" 	    material='color: #C0C0C0; metalness: 0.5'></a-mixin>
+                        <a-mixin id="col-vehicle-purple" 	    material='color: #663366; metalness: 0.5'></a-mixin>
+                        <a-mixin id="col-vehicle-orange" 	    material='color: #FF7B08; metalness: 0.5'></a-mixin>
                         <a-mixin id="col-vehicle-green" 	    material='color: #39ff14; metalness: 0.5'></a-mixin>
                         <a-mixin id="col-vehicle-aquaGreen" 	material='color: #03bb85; metalness: 0.5'></a-mixin>
                         <a-mixin id="col-vehicle-white" 	    material='color: #fff; metalness: 0.5'></a-mixin>
                         <a-mixin id="col-vehicle-red" 	        material='color: #ff2800; metalness: 0.5'></a-mixin>
                         <a-mixin id="col-vehicle-yellow" 	    material='color: #FFF500; metalness: 0.5'></a-mixin>
                         <a-mixin id="col-vehicle-trimDark"   	material='color: #181818; metalness: 0.5'></a-mixin>
-                        <a-mixin id="col-cybertruck-headlights"   	material='color: #fff'></a-mixin>
-                        <a-mixin id="col-cybertruck-brakelights"   	material='color: red'></a-mixin>
-                        <a-mixin id="col-cybertruck-window"   	material='color: #000; opacity: 0.7'></a-mixin>
-                        <a-mixin id="col-cybertruck-rims"   	material='color: #181818; metalness: 0.25'></a-mixin>
+                        <a-mixin id="col-cybertruck-headlights"   	material='color: #fff; emissive: #fff'></a-mixin>
+                        <a-mixin id="col-cybertruck-brakelights"   	material='color: red; emissive: red'></a-mixin>
+                        <a-mixin id="col-cybertruck-window"   	    material='color: #000; opacity: 0.7'></a-mixin>
+                        <a-mixin id="col-cybertruck-rims"   	    material='color: #181818; metalness: 0.25'></a-mixin>
 
                     <!-- Animals-->
                         <a-mixin id="col-chicken-body"   	    material='color: #fff'></a-mixin>
@@ -229,16 +233,16 @@
                         <a-mixin id="col-sheep-body"        	material='color: #fff'></a-mixin>
                         <a-mixin id="col-sheep-features"   	    material='color: #8b7979'></a-mixin>
                         <a-mixin id="col-sheep-features-dark"   material='color: #000'></a-mixin>
-                        <a-mixin id="col-cow-body"     	material='color: #fff'></a-mixin>
-                        <a-mixin id="col-cow-udder"   	material='color: pink'></a-mixin>
-                        <a-mixin id="col-cow-brown"   	material='color: brown'></a-mixin>
-                        <a-mixin id="col-cow-black"   	material='color: #000'></a-mixin>
-                        <a-mixin id="col-cow-hooves"   	material='color: #8b7979'></a-mixin>
-                        <a-mixin id="col-pig-body"     	material='color: pink'></a-mixin>
-                        <a-mixin id="col-pig-darker"    material='color: #e75480'></a-mixin>
-                        <a-mixin id="col-pig-features"  material='color: #000'></a-mixin>
-                        <a-mixin id="col-pig-eyes"      material='color: #fff'></a-mixin>
-                        <a-mixin id="col-pig-hooves"   	material='color: #8b7979'></a-mixin>
+                        <a-mixin id="col-cow-body"     	        material='color: #fff'></a-mixin>
+                        <a-mixin id="col-cow-udder"   	        material='color: pink'></a-mixin>
+                        <a-mixin id="col-cow-brown"   	        material='color: brown'></a-mixin>
+                        <a-mixin id="col-cow-black"   	        material='color: #000'></a-mixin>
+                        <a-mixin id="col-cow-hooves"   	        material='color: #8b7979'></a-mixin>
+                        <a-mixin id="col-pig-body"     	        material='color: pink'></a-mixin>
+                        <a-mixin id="col-pig-darker"            material='color: #e75480'></a-mixin>
+                        <a-mixin id="col-pig-features"          material='color: #000'></a-mixin>
+                        <a-mixin id="col-pig-eyes"              material='color: #fff'></a-mixin>
+                        <a-mixin id="col-pig-hooves"   	        material='color: #8b7979'></a-mixin>
 
                     <!--Materials -->
                         <a-mixin id="road" 			material ="color: #525a60; flatShading: true"  geometry= "width: 3; height: 0.2"></a-mixin>
@@ -298,7 +302,7 @@
                                 <a-box class="door front"   position="0 0.375 1.5"      scale="0.4 0.75 0.025"></a-box>
                                 <a-box class="door back"    position="0.4 0.375 -1.5"   scale="0.4 0.75 0.025"  rotation="0 180 0"></a-box>
                             </a-entity>
-                            <a-entity class="windows-group" mixin="${windowcol}"  buffer-geometry-merger>
+                            <a-entity class="glass-group" mixin="${windowcol}"  buffer-geometry-merger>
                                 <a-box class="window front" position="-0.475 0.6 1.5"   scale="0.3 0.3 0.025"></a-box>
                                 <a-box class="window front" position="0.475 0.6 1.5"    scale="0.3 0.3 0.025"></a-box>
                                 <a-box class="window side"  position="0 0.6 0"          scale="0.6 0.3 1.55"   rotation="0 90 0"></a-box>
@@ -324,7 +328,7 @@
                                 <a-box class="door front" position="0 0.375 0" scale="0.4 0.75 4.05" ></a-box>
                                 <a-box class="door back" position="0.4 0.375 -1.5" scale="0.4 0.75 0.025" rotation="0 180 0" ></a-box>
                             </a-entity>
-                            <a-entity class= "window-group" mixin="${windowcol}" buffer-geometry-merger>
+                            <a-entity class= "glass-group" mixin="${windowcol}" buffer-geometry-merger>
                                 <a-box class="window front" position="-0.6 0.55 2" scale="0.4 0.4 0.025" ></a-box>
                                 <a-box class="window front" position="-1.1 0.55 2" scale="0.4 0.4 0.025" ></a-box>
                                 <a-box class="window front" position="0.6 0.55 2" scale="0.4 0.4 0.025" ></a-box>
@@ -413,7 +417,7 @@
                             </a-entity>
                             <!-- Glass for Windows and skylight-->
                             <a-entity class="glass-group" mixin="${windowcol}" buffer-geometry-merger>
-                                <a-entity class="windows-group" position="0 0 2.95">
+                                <a-entity position="0 0 2.95">
                                     <a-entity position="-1 1 0" >
                                         <a-box scale="0.35 0.625 0.1225" ></a-box>
                                     </a-entity>
@@ -473,7 +477,7 @@
 
                             <!-- Frames for windows and skylight-->
                             <a-entity class="frames-group" mixin="${framecol}" buffer-geometry-merger>
-                                <a-entity class="windows-group" position="0 0 2.95">
+                                <a-entity position="0 0 2.95">
                                     <a-entity position="-1 1 0" >
                                         <a-box position="0 -0.315 0"    scale="0.35 0.02 0.125" ></a-box>
                                         <a-box position="0 0.315 0"     scale="0.35 0.02 0.125" ></a-box>
@@ -663,7 +667,7 @@
 
                             <!-- Glass for Windows and skylight-->
                             <a-entity class="glass-group" mixin="${windowcol}"  buffer-geometry-merger>
-                                <a-entity class="windows-group" position="0 0 2.95">
+                                <a-entity  position="0 0 2.95">
                                     <a-entity position="-0.75 1 0" >
                                         <a-box scale="0.35 0.625 0.1225" ></a-box>
                                     </a-entity>
@@ -812,7 +816,7 @@
                             <a-box position="0.225 0.475 0" scale="0.4 0.75 5.02"></a-box>
                             <a-box position="-0.225 0.475 0" scale="0.4 0.75 5.02"></a-box>
                         </a-entity>
-                        <a-entity class="window-group"  mixin="${windowcol}"buffer-geometry-merger>
+                        <a-entity class="glass-group"  mixin="${windowcol}"buffer-geometry-merger>
                             <a-box position="1.55 0.5 0" scale="1.5 0.5 5.02"></a-box>
                             <a-box position="-1.55 0.5 0" scale="1.5 0.5 5.02"></a-box>
                             <a-box position="0 1.5 0" scale="0.85 0.5 5.02"></a-box>
@@ -858,7 +862,7 @@
                             <a-box mixin="col-office-A-door" position="0.225 0.475 0" scale="0.4 0.75 5.02"></a-box>
                             <a-box mixin="col-office-A-door" position="-0.225 0.475 0" scale="0.4 0.75 5.02"></a-box>
                         </a-entity>
-                        <a-entity class="window-group"  mixin="${windowcol}"buffer-geometry-merger>
+                        <a-entity class="glass-group"  mixin="${windowcol}"buffer-geometry-merger>
                             <a-box position="1.55 0.45 0" scale="1.5 0.6 5.02"></a-box>
                             <a-box position="-1.55 0.45 0" scale="1.5 0.6 5.02"></a-box>
                             <a-box position="0 1.45 0" scale="0.85 0.6 5.02"></a-box>
@@ -929,7 +933,7 @@
                             <a-box position="0 0.375 0.225" scale="6.02 0.75 0.4"></a-box>
                             <a-box position="0 0.375 -0.225" scale="6.02 0.75 0.4"></a-box>
                         </a-entity>
-                        <a-entity class ="window-group" mixin="${windowcol}" buffer-geometry-merger>
+                        <a-entity class ="glass-group" mixin="${windowcol}" buffer-geometry-merger>
                             <a-entity position="0 0 0">
                                 <a-box position="1 0.5 0" scale="0.5 0.5 6.02"></a-box>
                                 <a-box position="1.75 0.5 0" scale="0.5 0.5 6.02"></a-box>
@@ -1285,7 +1289,7 @@
                                         <a-box position="0 0.375 0" scale="0.4 0.75 4.05" ></a-box>
                                         <a-box position="0.4 0.375 -1.5" scale="0.4 0.75 0.025" rotation="0 180 0" ></a-box>
                                     </a-entity>
-                                    <a-entity class = "window-group" mixin="${windowcol}"  buffer-geometry-merger>
+                                    <a-entity class = "glass-group" mixin="${windowcol}"  buffer-geometry-merger>
                                         <a-box position="-0.6 0.55 0" scale="0.4 0.4 4.05" ></a-box>
                                         <a-box position="-1.1 0.55 0" scale="0.4 0.4 4.05" ></a-box>
                                         <a-box position="0.6 0.55 0" scale="0.4 0.4 4.05" ></a-box>
@@ -1622,7 +1626,7 @@
                     <script id="tmp-sign-giveWay" type="text/html"></script>
 
                     <script id="tmp-lamp-pole" type="text/html">
-                        <a-sphere mixin="col-lampPole-light" position="0 1.32 0" radius="0.075" scale="1 1.5 1" geometry="radius: 0.06"></a-sphere>
+                        <a-sphere class = "glass" mixin="col-lampPole-light" position="0 1.32 0" radius="0.075" scale="1 1.5 1" geometry="radius: 0.06"></a-sphere>
                         <a-entity class='lampPole-base' mixin="col-lampPole-base" buffer-geometry-merger>
                             <a-cone position="0 0.15 0" rotation="0 90 0" geometry="height: 0.275; radiusTop: 0.04; radiusBottom: 0.075; segmentsRadial: 8"></a-cone>
                             <a-cone position="0 0.53 0" rotation="0 90 0" geometry="height: 0.5; radiusTop: 0.025; radiusBottom: 0.05"></a-cone>
@@ -1793,13 +1797,13 @@
 
             <!-- ANIMATION PATHS / CURVEs-->
             <a-entity id='animationPath-group'>
-                <a-curve id="sun-path-points">
-                    <a-curve-point id="sun-0000" position="0  -100  0"></a-curve-point>
-                    <a-curve-point id="sun-0100" position="0  -100  -33.33"></a-curve-point>
-                    <a-curve-point id="sun-0200" position="0  -100  -66.67"></a-curve-point>
-                    <a-curve-point id="sun-0300" position="0  -100  -100"></a-curve-point>
-                    <a-curve-point id="sun-0400" position="0  -90  -140"></a-curve-point>
-                    <a-curve-point id="sun-0500" position="0  -60  -170"></a-curve-point>                         
+                <a-curve id="sun-path-points" closed="true">
+                    <a-curve-point id="sun-0000" position="0  -180  0"></a-curve-point>
+                    <a-curve-point id="sun-0100" position="0  -180  -33.33"></a-curve-point>
+                    <a-curve-point id="sun-0200" position="0  -180  -66.67"></a-curve-point>
+                    <a-curve-point id="sun-0300" position="0  -180  -100"></a-curve-point>
+                    <a-curve-point id="sun-0400" position="0  -120  -170"></a-curve-point>
+                    <a-curve-point id="sun-0500" position="0  -60  -200"></a-curve-point>                         
                     <a-curve-point id="sun-0600" position="0  0    -180"></a-curve-point>
                     <a-curve-point id="sun-0700" position="0  45   -160"></a-curve-point>
                     <a-curve-point id="sun-0800" position="0  70   -130"></a-curve-point>
@@ -1813,23 +1817,86 @@
                     <a-curve-point id="sun-1600" position="0  70    130"></a-curve-point>
                     <a-curve-point id="sun-1700" position="0  45    160"></a-curve-point>
                     <a-curve-point id="sun-1800" position="0  0     180"></a-curve-point>
-                    <a-curve-point id="sun-1900" position="0  -60   170"></a-curve-point>
-                    <a-curve-point id="sun-2000" position="0  -90   140"></a-curve-point>
-                    <a-curve-point id="sun-2100" position="0  -100  100"></a-curve-point>
-                    <a-curve-point id="sun-2200" position="0  -100  50"></a-curve-point>
-                    <a-curve-point id="sun-2300" position="0  -100  0"></a-curve-point>
+                    <a-curve-point id="sun-1900" position="0  -60   200"></a-curve-point>
+                    <a-curve-point id="sun-2000" position="0  -120  170"></a-curve-point>
+                    <a-curve-point id="sun-2100" position="0  -180  100"></a-curve-point>
+                    <a-curve-point id="sun-2200" position="0  -180  66.67"></a-curve-point>
+                    <a-curve-point id="sun-2300" position="0  -180  33.33"></a-curve-point>
                 </a-curve>
-                <a-curve id="duck-path-points">
-                    <a-curve-point id="duck-001" position="-3.05 0.7 6.5"></a-curve-point>
-                    <a-curve-point id="duck-002" position="-9.05 0.7 9.5"></a-curve-point>
-                    <a-curve-point id="duck-003" position="-6.05 0.7 2.5"></a-curve-point>
-                    <a-curve-point id="duck-004" position="-3.05 0.7 6.5"></a-curve-point>
+                <a-curve id="moon-path-points" closed="true">
+                    <a-curve-point id="moon-0000" position="0  95  0"></a-curve-point>
+                    <a-curve-point id="moon-0100" position="0  97.5  -33.33"></a-curve-point>
+                    <a-curve-point id="moon-0200" position="0  100  -66.67"></a-curve-point>
+                    <a-curve-point id="moon-0300" position="0  105  -100"></a-curve-point>
+                    <a-curve-point id="moon-0400" position="0  110  -140"></a-curve-point>
+                    <a-curve-point id="moon-0500" position="0  140  -170"></a-curve-point>                         
+                    <a-curve-point id="moon-0600" position="0  200    -180"></a-curve-point>
+                    <a-curve-point id="moon-0700" position="0  245   -160"></a-curve-point>
+                    <a-curve-point id="moon-0800" position="0  270   -130"></a-curve-point>
+                    <a-curve-point id="moon-0900" position="0  285   -100"></a-curve-point>
+                    <a-curve-point id="moon-1000" position="0  292.5 -70"></a-curve-point>
+                    <a-curve-point id="moon-1100" position="0  297.5 -40"></a-curve-point>
+                    <a-curve-point id="moon-1200" position="0  300    0"></a-curve-point>
+                    <a-curve-point id="moon-1300" position="0  297.5  40"></a-curve-point>
+                    <a-curve-point id="moon-1400" position="0  292.5  70"></a-curve-point>
+                    <a-curve-point id="moon-1500" position="0  285    100"></a-curve-point>
+                    <a-curve-point id="moon-1600" position="0  270    130"></a-curve-point>
+                    <a-curve-point id="moon-1700" position="0  245    160"></a-curve-point>
+                    <a-curve-point id="moon-1800" position="0  200     180"></a-curve-point>
+                    <a-curve-point id="moon-1900" position="0  140   170"></a-curve-point>
+                    <a-curve-point id="moon-2000" position="0  110   140"></a-curve-point>
+                    <a-curve-point id="moon-2100" position="0  105  100"></a-curve-point>
+                    <a-curve-point id="moon-2200" position="0  100  66.67"></a-curve-point>
+                    <a-curve-point id="moon-2300" position="0  97.5  33.33"></a-curve-point>
                 </a-curve>
 
+
+               <a-curve id="duck-path-points" curve="closed: true">
+                    <a-curve-point position="44.20029 -4 49.17066" curve-point=""></a-curve-point>
+                    <a-curve-point position="59.25091 -4 42.16214" curve-point=""></a-curve-point>
+                    <a-curve-point position="63.90534 -4 17.83288" curve-point=""></a-curve-point>
+                    <a-curve-point position="76.01143 -4 8.39313" curve-point=""></a-curve-point>
+                    <a-curve-point position="80.37552 -4 -9.11185" curve-point=""></a-curve-point>
+                    <a-curve-point position="82.97661 -4 -25.46591" curve-point=""></a-curve-point>
+                    <a-curve-point position="79.44372 -4 -47.4651" curve-point=""></a-curve-point>
+                    <a-curve-point position="49.41004 -4 -71.70495" curve-point=""></a-curve-point>
+                    <a-curve-point position="42.19465 -4 -60.5077" curve-point=""></a-curve-point>
+                    <a-curve-point position="74.02973 -4 -55.94726" curve-point=""></a-curve-point>
+                    <a-curve-point position="82.35734 -4 -23.4595" curve-point=""></a-curve-point>
+                    <a-curve-point position="61.94721 -4 11.23928" curve-point=""></a-curve-point>
+                    <a-curve-point position="54.85139 -4 18.57802" curve-point=""></a-curve-point>
+                    <a-curve-point position="45.17089 -4 11.43647" curve-point=""></a-curve-point>
+                </a-curve>
+               <a-curve id="airplane-path-points" curve="closed: true" rotation="">
+                    <a-curve-point position="-12.6 1 -55.1" curve-point=""></a-curve-point>
+                    <a-curve-point position="-19.5 1 -55.51" curve-point=""></a-curve-point>
+                    <a-curve-point position="-18.15 1 -51.82" curve-point=""></a-curve-point>
+                    <a-curve-point position="-13.51 1 -54.16" curve-point=""></a-curve-point>
+                    <a-curve-point position="0.71 1 -62.17" curve-point=""></a-curve-point>
+                    <a-curve-point position="24.1 1 -76.05" curve-point=""></a-curve-point>
+                    <a-curve-point position="48.25 5 -88.84" curve-point=""></a-curve-point>
+                    <a-curve-point position="70.95 15 -68.5" curve-point=""></a-curve-point>
+                    <a-curve-point position="85.45 25 -25.2" curve-point=""></a-curve-point>
+                    <a-curve-point position="71.56 30 32.1" curve-point=""></a-curve-point>
+                    <a-curve-point position="27.45 35 77.4" curve-point=""></a-curve-point>
+                    <a-curve-point position="-34.97 40 97.26" curve-point=""></a-curve-point>
+                    <a-curve-point position="-91.3 45 118.6" curve-point=""></a-curve-point>
+                    <a-curve-point position="-137.5 45 65.2" curve-point=""></a-curve-point>
+                    <a-curve-point position="-147.6 45 -23" curve-point=""></a-curve-point>
+                    <a-curve-point position="-102.5 40 -86.2" curve-point=""></a-curve-point>
+                    <a-curve-point position="-4.5 35 -119.2" curve-point=""></a-curve-point>
+                    <a-curve-point position="66.1 30 -127.8" curve-point=""></a-curve-point>
+                    <a-curve-point position="88.6 25 -98.9" curve-point=""></a-curve-point>
+                    <a-curve-point position="53.3 15 -89.2" curve-point=""></a-curve-point>
+                    <a-curve-point position="32.1 5 -80.9" curve-point=""></a-curve-point>
+                    <a-curve-point position="16.3 1 -71.7" curve-point=""></a-curve-point>
+                </a-curve>
                 <!-- <a-curve id="sun-path-pointsToNow"></a-curve> -->
                 <!-- <a-draw-curve id="sun-pathToNow" curveref="#sun-path-pointsToNow" material="shader: line; color: none"></a-draw-curve> -->
-                <a-draw-curve id="sun-path" curveref="#sun-path-points" material="opacity: 0"></a-draw-curve>
-                <a-draw-curve id="duck-path" curveref="#duck-path-points" material="opacity: 1" material="shader: line; color: red"></a-draw-curve>
+                <a-draw-curve id="sun-path" curveref="#sun-path-points" material="opacity: 0" visible="false"></a-draw-curve>
+                <a-draw-curve id="moon-path" curveref="#moon-path-points" material="opacity: 0" visible="false"></a-draw-curve>
+                <a-draw-curve id="duck-path" curveref="#duck-path-points" material="opacity: 0; shader: line; color: red" visible="false"></a-draw-curve>
+                <a-draw-curve id="plane-path" curveref="#airplane-path-points" material="opacity: 0;" visible="false"></a-draw-curve>
             </a-entity>
 
             <!-- LIGHTS -->
@@ -1841,7 +1908,11 @@
                     light="type: ambient; intensity: 0; shadowCameraLeft: -10; shadowCameraBottom: -10; shadowCameraRight: 10; shadowCameraTop: 10"
                     animation__sunrise = "property: light.intensity; from: 0; to: 1.2; dur: 30000; autoplay: false"></a-entity>
 
-                <a-entity id="sun-light" class="light"  position="-20 30 0" light="type: directional; intensity: 0.3; color: #DDD"></a-entity>
+                <a-entity id="lighthouse-light" class="light" position="30 9.7 49.5" 
+                    light="angle: 30; intensity: 1; penumbra: 1; type: spot" rotation="-10 -50 0" 
+                    animate-lighthouse></a-entity>
+
+                <a-entity id="sun-light" class="light"  position="-20 30 0" light="type: directional; intensity: 0.5; color: #DDD"></a-entity>
                 <a-entity id='spotlight-group'>
                     <a-entity id="spotlight-above" 	 class="light"  position="0 10 0" 	light="type: spot; intensity: 0; angle: 180; color: #fff700; distance: 20"></a-entity>
                 </a-entity>
@@ -1870,15 +1941,15 @@
 
                     <!--- OUTER BODIES: SUN BODY AND PATH -->		
                     <a-entity id='sun-group'>
-                        <a-sphere id = "sun-body" radius="10" material="color: #e9ea8f; emissive: #fcff61" ></a-sphere>
+                        <a-sphere id = "sun-body" radius="8" material="color: #e9ea8f; emissive: #fcff61" ></a-sphere>
                     </a-entity> 	
                     <a-entity id='moon-group'>
+                        <a-sphere id = "moon-body" radius="5" material="color: #fff; emissive: #d7d1b2" ></a-sphere>
                     </a-entity> 	
 
                     <!-- PARTICLE SYSTEM-->
                     <a-entity id="global-particles" position="0 0 0" 
                         particle-system="enabled: false; preset: rain ; size: 0.5; max-age: 6; particleCount: 10000; type: 3; velocityValue: 0 50 0; color: aqua,#fff; rotationAngle: 10"></a-entity>
-
                 </a-entity>
                     
                 <!--- WORLD TOPOGRAPHY -->
@@ -2010,8 +2081,8 @@
                     </a-entity>
 
                     <a-entity id="ocean-group" class="topography-group" position="0 -3 0" >   
-                        <!-- <a-ocean position="40.64 2 -9" ocean="width: 10.8; amplitude: 0.25; amplitudeVariance: 0.25; density: 20; color: #00fdff" scale="12 19 2"></a-ocean> -->
-                        <a-entity id="bay-ocean"  class="surface" mixin="ocean-zone"  position="44.8  0  25.9" ></a-entity>
+                        <a-ocean position="40.64 2 -9" ocean="width: 10.8; amplitude: 0.25; amplitudeVariance: 0.25; density: 20; color: #00fdff" scale="12 19 2"></a-ocean>
+                        <!-- <a-entity id="bay-ocean"  class="surface" mixin="ocean-zone"  position="44.8  0  25.9" ></a-entity>
                         <a-entity id="coast1-ocean" class="surface" mixin="coastal-zone" position="74.5  0  0"></a-entity>
                         <a-entity id="coast2-ocean" class="surface" mixin="coastal-zone" position="74.5  0 -51.8"></a-entity>
                         <a-entity id="coast3-ocean" class="surface" mixin="coastal-zone" position="74.5  0 -25.9"></a-entity>
@@ -2019,7 +2090,7 @@
                         <a-entity id="coast5-ocean" class="surface" mixin="coastal-zone" position="29.6  0 -51.8"></a-entity>
                         <a-entity id="coast6-ocean" class="surface" mixin="coastal-zone" position="29.6  0 -77.7"></a-entity>
                         <a-entity id="coast7-ocean" class="surface" mixin="coastal-zone" position="-14.8 0 -77.7"></a-entity>
-                        <a-entity id="coast8-ocean" class="surface" mixin="coastal-zone" position="51.8  0 -64.7"></a-entity>
+                        <a-entity id="coast8-ocean" class="surface" mixin="coastal-zone" position="51.8  0 -64.7"></a-entity> -->
                     </a-entity> 
 
                     <a-entity id="seaBed-seabed" class="topography" position="0 -7.5 0">                  
@@ -2086,15 +2157,22 @@
 
                     <a-entity id="laked-dam" class="surface" mixin="lake-zone" position="-52.2 2 65.2"></a-entity>
 
-                    <a-entity id="river" position="0 1.5 0" mixin="col-river" buffer-geometry-merger >
+                    <a-entity id="river" position="0 0 0" mixin="col-river" buffer-geometry-merger >
                         <a-box position="-23.23772 0 66.47795" geometry="width: 3; depth: 30.98; height: 3" rotation="0 30 0"></a-box>
                         <a-box position="-39.65996 0 53.75406" geometry="width: 3; depth: 20; height: 3" rotation="0 90 0"></a-box>
                         <a-box position="-0.48342 -0.49407 79.17602" geometry="width: 3; depth: 32.69; height: 3" rotation="2 90 0"></a-box>
                         <a-box position="-43.87256 1.26095 54.47024" geometry="width: 3.4; depth: 3; height: 3" rotation="20 -60 0"></a-box>	                        
                     </a-entity> 
 
-                    <a-entity id="central-hill" position="0 3 0" scale="0.6 0.6 0.6" visible = "false">
-                        <a-dodecahedron mixin="col-rocks"  position="-0.30 -3.65 13.0"  geometry="radius: 11.8"     rotation="-0.335 61.82 -5.65"></a-dodecahedron>
+                    <a-entity id="central-hill" position="0 3 0" scale="0.6 0.6 0.6" visible="">
+                        <a-sphere mixin="col-ground" position="-5.32455 -6.64216 10.86345" geometry="radius: 11.8; thetaLength: 90; segmentsHeight: 6; segmentsWidth: 12" rotation="-0.335 61.82 -5.650000000000001" material="flatShading: true" scale="1.37 1.11 1.36"></a-sphere>
+                        <a-sphere mixin="col-ground" position="2.43222 -4.77716 10.13433" geometry="radius: 11.8; thetaLength: 90; segmentsWidth: 8" rotation="-0.335 61.82 -5.650000000000001" material="flatShading: true" scale="1.35 0.86 1.42"></a-sphere>
+                        <a-sphere mixin="col-ground" position="4.76453 -3.65 -8.61876" geometry="radius: 11.8; thetaLength: 90; segmentsWidth: 12" rotation="-0.335 61.82 -5.650000000000001" material="flatShading: true" scale="0.95 0.83 1.43"></a-sphere>
+                        <a-sphere mixin="col-ground" position="15.18654 -6.51547 -2.25806" geometry="radius: 11.8; thetaLength: 90; segmentsHeight: 6; segmentsWidth: 12" rotation="-0.335 61.82 -5.650000000000001" material="flatShading: true" scale="1.37 0.84 1.36"></a-sphere>
+                        <a-sphere mixin="col-ground" position="-7.55415 -4.77716 -6.3051" geometry="radius: 11.8; thetaLength: 90; segmentsWidth: 8" rotation="-0.335 61.82 -5.650000000000001" material="flatShading: true" scale="1.15 1 0.99"></a-sphere>
+                        <a-sphere mixin="col-ground" position="-12.75381 -3.65 6.58266" geometry="radius: 11.8; thetaLength: 90; segmentsWidth: 12" rotation="-0.335 61.82 -5.650000000000001" material="flatShading: true" scale="1.08 0.64 1.17"></a-sphere>
+
+                        <!-- <a-dodecahedron mixin="col-rocks"  position="-0.30 -3.65 13.0"  geometry="radius: 11.8"     rotation="-0.335 61.82 -5.65"></a-dodecahedron>
                         <a-icosahedron  mixin="col-rocks"  position="-6.46 0.03 14.9"   geometry="radius: 8.18"     rotation="0 0 -18.60"></a-icosahedron>
                         <a-dodecahedron mixin="col-rocks"  position="-11.9 -3.3 9.09"   geometry="radius: 11.59"    rotation="-10.60 27.56 40.85"></a-dodecahedron>
                         <a-icosahedron  mixin="col-rocks"  position="-15.4 -3.78 3.20"  geometry="radius: 11.82"    rotation="2.90 -51.01 -27.20"></a-icosahedron>
@@ -2105,8 +2183,8 @@
                         <a-dodecahedron mixin="col-rocks"  position="9.48 -3.18 -10.8"  geometry="radius: 10.77"    rotation="-12.27 -20.4 4.5"></a-dodecahedron>
                         <a-icosahedron  mixin="col-rocks"  position="13.95 3.4 -5.5"    geometry="radius: 5.92"     rotation="-5.514 -5.9 -6.3"></a-icosahedron>
                         <a-dodecahedron mixin="col-rocks"  position="12.01 -5.42 1.49"  geometry="radius: 12.94"    rotation="28.3 3.8 8.5"></a-dodecahedron>
-                        <a-icosahedron  mixin="col-rocks"  position="9.19 1.12 11.03"   geometry="radius: 7.72"     rotation="-45.1 -8.5 -0.88" ></a-icosahedron>
-                        <a-entity       mixin="col-ground"  position="0 5 0"            geometry="primitive: cylinder; segmentsRadial: 6; height: 0.1; radius: 15" rotation="0 90 0"></a-entity>
+                        <a-icosahedron  mixin="col-rocks"  position="9.19 1.12 11.03"   geometry="radius: 7.72"     rotation="-45.1 -8.5 -0.88" ></a-icosahedron> -->
+                        <a-entity mixin="col-ground" position="0 5 0" geometry="primitive: cylinder; segmentsRadial: 6; height: 0.1; radius: 15" rotation="0 90 0" material=""></a-entity>
                     </a-entity>
                 </a-entity>
 
@@ -2116,13 +2194,13 @@
                     <a-entity id="shared-infrastructure-group" >
                         <!--- Main roads -->  
                         <a-entity id="arterial-roads" position="0 3 0">
-                            <a-entity class="road-group tarmac">
+                            <a-entity class="road-group tarmac" mixin="col-road" buffer-geometry-merger>
                                 <a-torus  id="ring-road" mixin="col-road" position="0 0.1 0" geometry="radius: 22.5; radiusTubular: 0.94; segmentsRadial: 16; segmentsTubular: 27"  rotation="90 0 0" scale="1 1 0.05" material=" flatShading: true"></a-torus>
                                 <a-box class="road" mixin="road" position="-21.05 0 -36.04" rotation="0 30 0" geometry="depth: 36" ></a-box>
                                 <a-box class="road" mixin="road" position="20.37 0 -36.65" rotation="0 -30 0" geometry="depth: 36" ></a-box>
                                 <a-box class="road" mixin="road" position="-42.12 0 0.07" rotation="0 90 0" geometry="depth: 36" ></a-box>                            
                             </a-entity>		
-                            <a-entity class="road-lines">
+                            <a-entity class="road-lines" mixin="col-line" buffer-geometry-merger>
                                 <a-torus class="road-line" mixin="col-line"    position="0 0.2 0"           geometry="radius: 22.5; radiusTubular: 0.05; segmentsRadial: 16; segmentsTubular: 27" rotation="90 0 0" scale="1 1 0.05" material=" flatShading: true"></a-torus>
                                 <a-box class="road-line" mixin="road-line"     position="-16.28 0 -27.79"   rotation="0 30 0" geometry="depth: 16" ></a-box>
                                 <a-box class="road-line" mixin="road-stopline" position="-11.70 0 -21.35"   rotation="0 30 0" ></a-box>
@@ -2349,41 +2427,49 @@
                     <a-entity id="vehicles-group" position="0 3 0"  visible="true">
                         <!-- <a-entity id="train" gltf-model="#mdl-train" position="0 0.2 -38.696" rotation="0 -90 0" scale="0.05 0.05 0.05"></a-entity>        -->
                         <a-entity class="ev-group" visible="">
-                            <a-entity class="ev cybertruck"   position="34.8 0 -8" rotation="0 0 0" 
+                            <a-entity class="ev cybertruck"   position="34.8 0.1 -8" rotation="0 0 0" 
                                 template="src: #tmp-cybertruck" data-basecol="col-vehicle-silver" data-trimcol="col-vehicle-trimDark"></a-entity>
-                            <a-entity class="ev lcv cybertruck" position="34.8 0 -8" rotation="0 0 0"
+                            <a-entity class="ev lcv cybertruck" position="34.8 0.1 -8" rotation="0 0 0"
                                 template="src: #tmp-cybertruck" data-basecol="col-vehicle-silver" data-trimcol="col-vehicle-trimDark"></a-entity>
                             <a-entity class="ev lcv cybertruck" position="27.6 0 -39.8" rotation="0 180 0"
                                 template="src: #tmp-cybertruck" data-basecol="col-vehicle-orange" data-trimcol="col-vehicle-trimDark"></a-entity>
-                            <a-entity position="-1.8 0 23.2" rotation="0 0 0"
+                            <a-entity class="ev lcv cybertruck" position="-1.8 0 23.2" rotation="0 0 0"
                                 template="src: #tmp-cybertruck" data-basecol="col-vehicle-green" data-trimcol="col-vehicle-trimDark"></a-entity>
-                            <a-entity  position="13.7 0 -23.7" rotation="0 60 0"
+                            <a-entity class="ev lcv cybertruck"  position="13.7 0.1 -23.7" rotation="0 60 0"
                                 template="src: #tmp-cybertruck" data-basecol="col-vehicle-silver" data-trimcol="col-vehicle-trimDark"></a-entity>
-                            <a-entity position="29.7 0 -1" rotation="0 0 0"
+                            <a-entity class="ev lcv cybertruck" position="-29.7 0.1 0.9" rotation="0 0 0"
                                 template="src: #tmp-cybertruck" data-basecol="col-vehicle-aquaGreen" data-trimcol="col-vehicle-trimDark"></a-entity>
-                            <a-entity position="23.3 0 0.5" rotation="0 90 0"
+                            <a-entity class="ev lcv cybertruck" position="23.3 0.1 0.5" rotation="0 90 0"
                                 template="src: #tmp-cybertruck" data-basecol="col-vehicle-red"    data-trimcol="col-vehicle-trimDark"></a-entity>
-                            <a-entity position="54.4 0 -8" rotation="0 0 0"
+                            <a-entity class="ev lcv cybertruck" position="54.4 0.1 -8" rotation="0 0 0"
                                 template="src: #tmp-cybertruck" data-basecol="col-vehicle-white"  data-trimcol="col-vehicle-trimDark"></a-entity>
-                            <a-entity position="44.5 0 -26.6" rotation="0 90 0"
+                            <a-entity class="ev lcv cybertruck" position="44.5 0.1 -26.6" rotation="0 90 0"
                                 template="src: #tmp-cybertruck" data-basecol="col-vehicle-purple" data-trimcol="col-vehicle-trimDark"></a-entity>
                         </a-entity>
+
+                        <!-- Airplanes-->	
+                        <a-entity id = "airplane-group">
+                            <a-entity class="plane" gltf-model="#mdl-planeRed" position="-23 1 -62" rotation="0 -90 0" scale="0.25 0.25 0.25"></a-entity>
+                            <a-entity id="plane-animation" position="-12.6 1 -55.1" rotation="0 120 0">
+                                <a-entity class="plane" gltf-model="#mdl-planeRed" scale="0.25 0.25 0.25" rotation="0 -90 0"></a-entity>
+                            </a-entity>
+                        </a-entity>
+
                     </a-entity><!-- End of vehicles -->
 
                     <!-- Characters-->
                     <a-entity id="character-group" position = "0 3 0">
-                        <a-entity id="rubberDuck" gltf-model="#mdl-rubberDuck" position="45 -4.3 35" rotation="0 180 0"></a-entity>
+                        <a-entity id="rubberDuck" position="44.20029 -4 49.17066" gltf-model="#mdl-rubberDuck" rotation="0 180 0"></a-entity>
                     </a-entity>
 
                 </a-entity><!-- End of shared feautures -->
 
                 <!---SCENES BY ZONE -->
                 <a-entity id = "featuresByzone-group" visible="true">
-
                     <!--- CENTRAL ZONE -->
                     <a-entity id="central-zone" class="zone-group" position="0 3 0" visible="true">
 
-                        <a-entity class="house-small" position="8 0 0" >
+                        <a-entity class="house-small" position="8 0 0" visible = "false">
                             <a-entity class="home-small" position="-0.5 0 0">
                                 <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="palette-A-03"></a-entity>
                                 <a-entity class="home-emissions-features">
@@ -2427,7 +2513,7 @@
                                     <a-box position="0.325 0.5 0.5" scale="0.6 1 0.05"></a-box>
                                     <a-box position="-0.325 0.5 0.5" scale="0.6 1 0.05"></a-box>
                                 </a-entity>
-                                <a-entity class="windows-group" mixin="col-hospital-window"  buffer-geometry-merger>
+                                <a-entity class="glass-group" mixin="col-hospital-window"  buffer-geometry-merger>
                                     <a-box class = "window front"  position="-1.5 0.75 0.5" scale="1 0.5 0.05"></a-box>
                                     <a-box class = "window front"  position="1.5 0.75 0.5" scale="1 0.5 0.05"></a-box>
                                     <a-cylinder class = "window front"  position="0 2.25 -0.75" rotation="90 0 0" geometry="height: 2.55; radius: 0.25"></a-cylinder>
@@ -2525,7 +2611,7 @@
                                     <a-box class="airport terminal" position="0 2.5 0" geometry="width: 8.1; depth: 18; height: 5" material="metalness: 0.2"></a-box>
                                     <a-box class="airport terminal" position="3.3 3.5 -4.2979" geometry="width: 8; depth: 5; height: 7" material="metalness: 0.2"></a-box>                            
                                 </a-entity>
-                                <a-entity class="window-group" mixin="col-airport-window"  buffer-geometry-merger>
+                                <a-entity class="glass-group" mixin="col-airport-window"  buffer-geometry-merger>
                                     <a-box class="airport terminal" position="0 1 -5" geometry="width: 8.1; depth: 6; height: 1" ></a-box>
                                     <a-box class="airport terminal" position="0 1 5" geometry="width: 8.1; depth: 6; height: 1" ></a-box>
                                     <a-box class="airport terminal" position="0 3 -5" geometry="width: 8.1; depth: 6; height: 1" ></a-box>
@@ -2538,15 +2624,12 @@
                                         <a-cone geometry="height: 1.5; segmentsRadial: 10; radiusBottom: 2.5; radiusTop: 3" position="0 15 0" ></a-cone>
                                         <a-cylinder geometry="height: 1.5; segmentsRadial: 10; radius: 2" position="0 16.5 0" ></a-cylinder>
                                     </a-entity>        
-                                    <a-entity class="window-group" mixin="col-airport-window"  buffer-geometry-merger>
+                                    <a-entity class="glass-group" mixin="col-airport-window"  buffer-geometry-merger>
                                         <a-cone mixin="col-airport-window" geometry="height: 0.8; segmentsRadial: 10; radiusBottom: 2.65; radiusTop: 2.9" position="0 14.95324 0" ></a-cone>
                                         <a-cylinder mixin="col-airport-window" geometry="height: 0.9; segmentsRadial: 10; radius: 2.05" position="0 16.5 0" ></a-cylinder>
                                     </a-entity>                
                                 </a-entity>
                             </a-entity>
-                            <!-- Airplanes-->	
-                            <a-entity class="plane" gltf-model="#mdl-planeRed" position="26.5 4 27.7" rotation="0 -60 20" scale="0.25 0.25 0.25"></a-entity>
-                            <a-entity class="plane" gltf-model="#mdl-planeRed" position="4.8 1 -15.7" scale="0.25 0.25 0.25"></a-entity>
                         </a-entity>
                     </a-entity><!-- End of industrial zone -->
 
@@ -2642,7 +2725,7 @@
                         <a-entity id = "grand-hotel" class="hotel" position="0 0 16" rotation="0 0 0">
                             <a-entity class="main-building" >
                                 <!-- Central Block-->
-                                <a-entity position="0 0 0">    
+                                <a-entity class = "center-block" position="0 0 0">    
                                     <!--Base building-lower -->
                                     <a-box class="hotel-base lower" mixin="col-hotel-base-1" position="0 1.25 0.5" scale="6 2.5 7"></a-box>                                
                                     <!--Light trim -->
@@ -2933,7 +3016,7 @@
                                 </a-entity>
 
                                 <!-- Left Block-->
-                                <a-entity position="-6 0 0">
+                                <a-entity class = "left-block" position="-6 0 0">
                                     <a-box class="hotel-base lower" mixin="col-hotel-base-1" position="0 1.25 0" scale="6 2.5 6"></a-box>
                                     <a-entity class ="facade-details-group" mixin="col-hotel-base-2" buffer-geometry-merger>
                                         <a-box  position="0 4.25 0" scale="6 3.5 6"></a-box>                                
@@ -3100,7 +3183,7 @@
                                 </a-entity>
 
                                 <!-- Right Block-->
-                                <a-entity position="6 0 0">
+                                <a-entity class = "right-block" position="6 0 0">
                                     <a-box class="hotel-base lower" mixin="col-hotel-base-1" position="0 1.25 0" scale="6 2.5 6"></a-box>
                                     <a-entity class ="facade-details-group" mixin="col-hotel-base-2" buffer-geometry-merger>
                                         <a-box  position="0 4.25 0" scale="6 3.5 6"></a-box>                                
@@ -3166,11 +3249,11 @@
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 0.1"></a-box>
                                                 <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 0.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
                                             </a-entity>   
-                                                <a-entity position="1.5 -1.15 3.525" >
+                                            <a-entity position="1.5 -1.15 3.525" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 0.1"></a-box>
                                                 <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 0.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
                                             </a-entity>   
-                                                <a-entity position="1.5 1.15 3.525" >
+                                            <a-entity position="1.5 1.15 3.525" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 0.1"></a-box>
                                                 <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 0.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
                                             </a-entity>   
@@ -3287,7 +3370,7 @@
                                         </a-entity>
                                         <a-entity position="3 0 1.5">
                                             <a-entity class='windows-group-spire'>
-                                                <a-entity class="glass" mixin="col-townhouse-A-window"  buffer-geometry-merger>
+                                                <a-entity class="glass-group" mixin="col-townhouse-A-window"  buffer-geometry-merger>
                                                     <a-entity position="0 1 0">
                                                         <a-entity position="0.52297 0 -0.49854" rotation="0 -45 0">
                                                             <a-box scale="0.35 0.625 0.075" ></a-box>
@@ -3366,7 +3449,7 @@
                                             </a-entity> 
                                         </a-entity>
                                         <a-entity class='windows-group-side' position="2.95 0 0" rotation="0 -90 0">
-                                            <a-entity class="glass" mixin="col-townhouse-A-window"  buffer-geometry-merger>
+                                            <a-entity class="glass-group" mixin="col-townhouse-A-window"  buffer-geometry-merger>
                                                 <a-entity position="0 1 0">
                                                     <a-entity position="0 0 0" >
                                                         <a-box scale="0.35 0.625 0.1225" ></a-box>
@@ -3596,8 +3679,8 @@
                                                     <a-box position="-0.7 1.275 0" scale="0.85 0.05 0.1225" ></a-box>
                                                 </a-entity>
                                             </a-entity>
-                                            <a-entity class="window-group">
-                                                <a-entity class="glass" mixin="col-townhouse-A-window" buffer-geometry-merger>
+                                            <a-entity class="glass-group">
+                                                <a-entity class="glass-group" mixin="col-townhouse-A-window" buffer-geometry-merger>
                                                     <a-entity position="-0.71 1.4 0">
                                                         <a-box scale="0.8 0.15 0.1225" ></a-box>
                                                     </a-entity>
@@ -4216,7 +4299,7 @@
                                 </a-entity>
                                 <a-entity class="group-roof" position="0 3.25 0">
                                     <a-box mixin="col-govBuild-foundation" scale="4.6 0.2 6" position="0 0.1 -0.5"></a-box>
-                                    <a-cylinder mixin="col-govBuild-roof" position="0 0.7 -0.5" rotation="-90 0 -180" geometry="height: 5.98; segmentsRadial: 3" material="flatShading: true" scale="2.65 1 1"></a-cylinder>
+                                    <a-cylinder mixin="col-govBuild-roof" position="0 0.72 -0.5" rotation="-90 0 -180" geometry="height: 5.98; segmentsRadial: 3" material="flatShading: true" scale="2.65 1 1"></a-cylinder>
                                     <a-cylinder mixin="col-govBuild-base" position="0 0.68 -0.5" rotation="-90 0 -180" geometry="height: 6; segmentsRadial: 3" material="flatShading: true" scale="2.65 1 1"></a-cylinder>
                                 </a-entity>
                                 <a-entity class="group-features" position="0 0.8 -0.5">
@@ -4224,7 +4307,7 @@
                                         <a-box position="-0.275 0.475 2.5" scale="0.5 0.95 0.025"></a-box>
                                         <a-box position="0.275 0.475 2.5" scale="0.5 0.95 0.025"></a-box>
                                     </a-entity>
-                                    <a-entity class="window-group" mixin="col-govBuild-window" buffer-geometry-merger>
+                                    <a-entity class="glass-group" mixin="col-govBuild-window" buffer-geometry-merger>
                                         <a-entity position = "0 0.875 0" >
                                             <a-box position="0 0 0" scale="3.05 0.3 0.7"></a-box>
                                             <a-box position="0 0 0.9" scale="3.05 0.3 0.7"></a-box>
@@ -4246,22 +4329,22 @@
 
                         <a-entity class="fountain" position="-5 0 -27.5">
                             <a-entity mixin="col-fountain" buffer-geomtery-merger>
-                                <a-cylinder position="0 0.15 0" rotation="0 90 0" geometry="radius: 2; height: 0.1"></a-cylinder>                            
-                                <a-torus position="0 0.204 0" rotation="90 0 0" geometry="radius: 1.53; radiusTubular: 0.09; segmentsRadial: 6; segmentsTubular: 16" material="flatShading: true" scale="1 1 1.5"></a-torus>
-                                <a-cylinder position="0 1.15 0" rotation="0 90 0" geometry="radius: 0.8; height: 0.2"></a-cylinder>
-                                <a-torus position="0 1.25 0" rotation="90 0 0" geometry="radius: 0.7; radiusTubular: 0.05; segmentsRadial: 6" material="flatShading: true" scale="1 1 1.52"></a-torus>
-                                <a-cylinder position="0 1.99 0" rotation="0 90 0" geometry="radius: 0.34; height: 0.1"></a-cylinder>
-                                <a-torus position="0 2 0" rotation="90 0 0" geometry="radius: 0.245; radiusTubular: 0.02; segmentsRadial: 6" material="flatShading: true" scale="1.5 1.5 3.23"></a-torus>
-                                <a-cylinder position="0.6 0.6 0" rotation="0 90 0" geometry="radius: 0.075; height: 1.2"></a-cylinder>
-                                <a-cylinder position="-0.6 0.6 0" rotation="0 90 0" geometry="radius: 0.075; height: 1.2"></a-cylinder>
-                                <a-cylinder position="0 0.6 0.6" rotation="0 90 0" geometry="radius: 0.075; height: 1.2"></a-cylinder>
-                                <a-cylinder position="0 0.6 -0.6" rotation="0 90 0" geometry="radius: 0.075; height: 1.2"></a-cylinder>
-                                <a-cone position="0 1.8 0" rotation="0 90 0" geometry="radiusBottom: 0.05; radiusTop: 0.15 height: 1.5"></a-cone>
+                                <a-cylinder mixin="col-fountain"  position="0 0.15 0" rotation="0 90 0" geometry="radius: 2; height: 0.1"></a-cylinder>                            
+                                <a-torus mixin="col-fountain"  position="0 0.204 0" rotation="90 0 0" geometry="radius: 1.53; radiusTubular: 0.09; segmentsRadial: 6; segmentsTubular: 16" material="flatShading: true" scale="1 1 1.5"></a-torus>
+                                <a-cylinder mixin="col-fountain"  position="0 1.15 0" rotation="0 90 0" geometry="radius: 0.8; height: 0.2"></a-cylinder>
+                                <a-torus mixin="col-fountain"  position="0 1.25 0" rotation="90 0 0" geometry="radius: 0.7; radiusTubular: 0.05; segmentsRadial: 6" material="flatShading: true" scale="1 1 1.52"></a-torus>
+                                <a-cylinder mixin="col-fountain"  position="0 1.99 0" rotation="0 90 0" geometry="radius: 0.34; height: 0.1"></a-cylinder>
+                                <a-torus mixin="col-fountain"  position="0 2 0" rotation="90 0 0" geometry="radius: 0.245; radiusTubular: 0.02; segmentsRadial: 6" material="flatShading: true" scale="1.5 1.5 3.23"></a-torus>
+                                <a-cylinder mixin="col-fountain"  position="0.6 0.6 0" rotation="0 90 0" geometry="radius: 0.075; height: 1.2"></a-cylinder>
+                                <a-cylinder mixin="col-fountain" position="-0.6 0.6 0" rotation="0 90 0" geometry="radius: 0.075; height: 1.2"></a-cylinder>
+                                <a-cylinder mixin="col-fountain"  position="0 0.6 0.6" rotation="0 90 0" geometry="radius: 0.075; height: 1.2"></a-cylinder>
+                                <a-cylinder mixin="col-fountain" position="0 0.6 -0.6" rotation="0 90 0" geometry="radius: 0.075; height: 1.2"></a-cylinder>
+                                <a-cone mixin="col-fountain" position="0 1.8 0" rotation="0 90 0" geometry="radiusBottom: 0.05; radiusTop: 0.15 height: 1.5"></a-cone>
                             </a-entity>
                             <a-entity mixin="col-fountain-water" buffer-geomtery-merger>
-                                <a-cylinder position="0 0.32 0" rotation="0 90 0" geometry="radius: 1.6; height: 0.1"></a-cylinder>
-                                <a-cylinder position="0 1.27 0" rotation="0 90 0" geometry="radius: 0.75; height: 0.1"></a-cylinder>
-                                <a-cylinder position="0 2 0" rotation="0 90 0" geometry="radius: 0.33; height: 0.1"></a-cylinder>
+                                <a-cylinder mixin="col-fountain-water"  position="0 0.32 0" rotation="0 90 0" geometry="radius: 1.6; height: 0.1"></a-cylinder>
+                                <a-cylinder mixin="col-fountain-water"  position="0 1.27 0" rotation="0 90 0" geometry="radius: 0.75; height: 0.1"></a-cylinder>
+                                <a-cylinder mixin="col-fountain-water"  position="0 2 0" rotation="0 90 0" geometry="radius: 0.33; height: 0.1"></a-cylinder>
                             </a-entity>
                         </a-entity>
 
@@ -4297,7 +4380,10 @@
                     <!---WATERFRONT ZONE -->
                     <a-entity id="waterfront-zone" class="zone-group" position="44.8 3 26.2" rotation="0 90 0" visible="true">
                         <!-- Models-->
-                        <a-entity id="lighthouse" gltf-model="#mdl-lighthouse"  position="-21.96 02 -16.34"rotation="0 -62 0" scale="0.8 0.8 0.8"></a-entity>
+                        <a-entity id="lighthouse" gltf-model="#mdl-lighthouse"  position="-21.96 -2 -16.34"rotation="0 -62 0" scale="0.8 0.8 0.8">
+                            <a-cylinder id="lighthouse-lamp" class = "glass-group" mixin="col-lighthouse-lamp" position="0 13.57 0" material="" geometry="radius: 1.3; segmentsHeight: 4; height: 1.2"></a-cylinder>
+                        </a-entity>
+
                     </a-entity><!-- End of waterfront -->
 
                     <!---SUBURBAN / RESIDENTIAL ZONE -->
@@ -4487,7 +4573,8 @@
                                         <a-box class="fence" mixin="col-fence" position="-2 0.25 1.75" scale="0.05 0.5 1.5"></a-box>
                                     </a-entity>
                                     <a-entity class="home-group" position="-0.5 0 0">
-                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="palette-A-03"></a-entity>
+                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" 
+                                            data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="col-home-windows"></a-entity>
                                         <a-entity class="home-emissions-features" mixin="col-solarPV-01" buffer-geometry-merger>
                                             <a-box class="rooftop solarPanel"  position="0.495 1.34 -0.85"   scale="0.1 1 1.5" rotation="0 0 45"></a-box>
                                             <a-box class="rooftop solarPanel"  position="0.495 1.34 0.85"    scale="0.1 1 1.5" rotation="0 0 45"></a-box>
@@ -4502,7 +4589,8 @@
                                         <a-box class="fence" mixin="col-fence" position="-2 0.25 1.75" scale="0.05 0.5 1.5"></a-box>
                                     </a-entity>
                                     <a-entity class="home-group" position="-0.5 0 0">
-                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="palette-A-03"></a-entity>
+                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" 
+                                            data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="col-home-windows"></a-entity>
                                         <a-entity class="home-emissions-features" mixin="col-solarPV-01" buffer-geometry-merger>
                                             <a-box class="rooftop solarPanel"   position="0.495 1.34 -0.85"   scale="0.1 1 1.5" rotation="0 0 45"></a-box>
                                             <a-box class="rooftop solarPanel"   position="0.495 1.34 0.85"    scale="0.1 1 1.5" rotation="0 0 45"></a-box>
@@ -4517,7 +4605,8 @@
                                         <a-box class="fence" mixin="col-fence" position="-2 0.25 1.75" scale="0.05 0.5 1.5"></a-box>
                                     </a-entity>
                                     <a-entity class="home-group" position="-0.5 0 0">
-                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="palette-A-03"></a-entity>
+                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" 
+                                            data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="col-home-windows"></a-entity>
                                         <a-entity class="home-emissions-features" mixin="col-solarPV-01" buffer-geometry-merger>
                                             <a-box class="rooftop solarPanel"   position="0.495 1.34 -0.85"   scale="0.1 1 1.5" rotation="0 0 45"></a-box>
                                             <a-box class="rooftop solarPanel"   position="0.495 1.34 0.85"    scale="0.1 1 1.5" rotation="0 0 45"></a-box>
@@ -4532,7 +4621,8 @@
                                         <a-box class="fence" mixin="col-fence" position="2 0.25 1.75" scale="0.05 0.5 1.5"></a-box>
                                     </a-entity>
                                     <a-entity class="home-group" position="0.5 0 0">
-                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="palette-A-03"></a-entity>
+                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" 
+                                            data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="col-home-windows"></a-entity>
                                         <a-entity class="home-emissions-features" mixin="col-solarPV-01" buffer-geometry-merger>
                                             <a-box class="rooftop solarPanel"   position="0.495 1.34 -0.85"   scale="0.1 1 1.5" rotation="0 0 45"></a-box>
                                             <a-box class="rooftop solarPanel"   position="0.495 1.34 0.85"    scale="0.1 1 1.5" rotation="0 0 45"></a-box>
@@ -4547,7 +4637,8 @@
                                         <a-box class="fence" mixin="col-fence" position="2 0.25 1.75" scale="0.05 0.5 1.5"></a-box>
                                     </a-entity>
                                     <a-entity class="home-group" position="0.5 0 0">
-                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="palette-A-03"></a-entity>
+                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" 
+                                            data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="col-home-windows"></a-entity>
                                         <a-entity class="home-emissions-features" mixin="col-solarPV-01" buffer-geometry-merger>
                                             <a-box class="rooftop solarPanel"   position="0.495 1.34 -0.85"   scale="0.1 1 1.5" rotation="0 0 45"></a-box>
                                             <a-box class="rooftop solarPanel"   position="0.495 1.34 0.85"    scale="0.1 1 1.5" rotation="0 0 45"></a-box>
@@ -4562,7 +4653,8 @@
                                         <a-box class="fence" mixin="col-fence" position="2 0.25 1.75" scale="0.05 0.5 1.5"></a-box>
                                     </a-entity>
                                     <a-entity class="home-group" position="0.5 0 0">
-                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="palette-A-03"></a-entity>
+                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" 
+                                            data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="col-home-windows"></a-entity>
                                         <a-entity class="home-emissions-features" mixin="col-solarPV-01" buffer-geometry-merger>
                                             <a-box class="rooftop solarPanel"   position="0.495 1.34 -0.85"   scale="0.1 1 1.5" rotation="0 0 45"></a-box>
                                             <a-box class="rooftop solarPanel"   position="0.495 1.34 0.85"    scale="0.1 1 1.5" rotation="0 0 45"></a-box>
@@ -4577,7 +4669,8 @@
                                         <a-box class="fence" mixin="col-fence" position="2 0.25 1.75" scale="0.05 0.5 1.5"></a-box>
                                     </a-entity>
                                     <a-entity class="home-group" position="0.5 0 0">
-                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="palette-A-03"></a-entity>
+                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" 
+                                            data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="col-home-windows"></a-entity>
                                         <a-entity class="home-emissions-features" mixin="col-solarPV-01" buffer-geometry-merger>
                                             <a-box class="rooftop solarPanel"   position="0.495 1.34 -0.85"   scale="0.1 1 1.5" rotation="0 0 45"></a-box>
                                             <a-box class="rooftop solarPanel"   position="0.495 1.34 0.85"    scale="0.1 1 1.5" rotation="0 0 45"></a-box>
@@ -4592,7 +4685,8 @@
                                             <a-box class="fence" mixin="col-fence" position="2 0.25 1.18477" scale="0.05 0.5 1.5"></a-box>
                                     </a-entity>
                                     <a-entity class="home-group" position="-0.5 0 0">
-                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="palette-A-03"></a-entity>
+                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" 
+                                            data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="col-home-windows"></a-entity>
                                         <a-entity class="home-emissions-features" mixin="col-solarPV-01" buffer-geometry-merger>
                                             <a-box class="rooftop solarPanel"   position="0.495 1.34 -0.85"   scale="0.1 1 1.5" rotation="0 0 45"></a-box>
                                             <a-box class="rooftop solarPanel"   position="0.495 1.34 0.85"    scale="0.1 1 1.5" rotation="0 0 45"></a-box>
@@ -4612,7 +4706,8 @@
                                         <a-box class="fence" mixin="col-fence" position="2 0.25 1.75" scale="0.05 0.5 1.5"></a-box>
                                     </a-entity>
                                     <a-entity class="home-group" position="-0.5 0 0">
-                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="palette-A-03"></a-entity>
+                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" 
+                                            data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="col-home-windows"></a-entity>
                                         <a-entity class="home-emissions-features" mixin="col-solarPV-01" buffer-geometry-merger>
                                             <a-box class="rooftop solarPanel"   position="0.495 1.34 -0.85"   scale="0.1 1 1.5" rotation="0 0 45"></a-box>
                                             <a-box class="rooftop solarPanel"   position="0.495 1.34 0.85"    scale="0.1 1 1.5" rotation="0 0 45"></a-box>
@@ -4625,7 +4720,8 @@
                                     <a-entity class="block">
                                     </a-entity>
                                     <a-entity class="home-group" position="-0.5 0 0">
-                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="palette-A-03"></a-entity>
+                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" 
+                                            data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="col-home-windows"></a-entity>
                                         <a-entity class="home-emissions-features" mixin="col-solarPV-01" buffer-geometry-merger>
                                             <a-box class="rooftop solarPanel"   position="0.495 1.34 -0.85"   scale="0.1 1 1.5" rotation="0 0 45"></a-box>
                                             <a-box class="rooftop solarPanel"   position="0.495 1.34 0.85"    scale="0.1 1 1.5" rotation="0 0 45"></a-box>
@@ -4645,7 +4741,8 @@
                                         <a-box class="fence" mixin="col-fence" position="2 0.25 1.75" scale="0.05 0.5 1.5"></a-box>
                                     </a-entity>
                                     <a-entity class="home-group" position="-0.5 0 0">
-                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="palette-A-03"></a-entity>
+                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" 
+                                            data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="col-home-windows"></a-entity>
                                         <a-entity class="home-emissions-features">
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-0.495 1.34 -0.85" scale="0.1 1 1.5" rotation="0 0 -45"></a-box>
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-0.495 1.34 0.85" scale="0.1 1 1.5" rotation="0 0 -45"></a-box>
@@ -4660,7 +4757,8 @@
                                         <a-box class="fence" mixin="col-fence" position="2 0.25 1.75" scale="0.05 0.5 1.5"></a-box>
                                     </a-entity>
                                     <a-entity class="home-group" position="-0.5 0 0">
-                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="palette-A-03"></a-entity>
+                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" 
+                                            data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="col-home-windows"></a-entity>
                                         <a-entity class="home-emissions-features">
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-0.495 1.34 -0.85" scale="0.1 1 1.5" rotation="0 0 -45"></a-box>
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-0.495 1.34 0.85" scale="0.1 1 1.5" rotation="0 0 -45"></a-box>
@@ -4675,7 +4773,8 @@
                                         <a-box class="fence" mixin="col-fence" position="2 0.25 1.75" scale="0.05 0.5 1.5"></a-box>
                                     </a-entity>
                                     <a-entity class="home-group" position="-0.5 0 0">
-                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="palette-A-03"></a-entity>
+                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" 
+                                            data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="col-home-windows"></a-entity>
                                         <a-entity class="home-emissions-features">
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-0.495 1.34 -0.85" scale="0.1 1 1.5" rotation="0 0 -45"></a-box>
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-0.495 1.34 0.85" scale="0.1 1 1.5" rotation="0 0 -45"></a-box>
@@ -4690,7 +4789,8 @@
                                         <a-box class="fence" mixin="col-fence" position="2 0.25 1.75" scale="0.05 0.5 1.5"></a-box>
                                     </a-entity>
                                     <a-entity class="home-group" position="-0.5 0 0">
-                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="palette-A-03"></a-entity>
+                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" 
+                                            data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="col-home-windows"></a-entity>
                                         <a-entity class="home-emissions-features">
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-0.495 1.34 -0.85" scale="0.1 1 1.5" rotation="0 0 -45"></a-box>
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-0.495 1.34 0.85" scale="0.1 1 1.5" rotation="0 0 -45"></a-box>
@@ -4705,7 +4805,8 @@
                                         <a-box class="fence" mixin="col-fence" position="2 0.25 1.75" scale="0.05 0.5 1.5"></a-box>
                                     </a-entity>
                                     <a-entity class="home-group" position="-0.5 0 0">
-                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="palette-A-03"></a-entity>
+                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" 
+                                            data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="col-home-windows"></a-entity>
                                         <a-entity class="home-emissions-features">
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-0.495 1.34 -0.85" scale="0.1 1 1.5" rotation="0 0 -45"></a-box>
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-0.495 1.34 0.85" scale="0.1 1 1.5" rotation="0 0 -45"></a-box>
@@ -4718,7 +4819,8 @@
                                     <a-entity class="block">
                                     </a-entity>
                                     <a-entity class="home-group" position="-0.5 0 0">
-                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="palette-A-03"></a-entity>
+                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" 
+                                            data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="col-home-windows"></a-entity>
                                         <a-entity class="home-emissions-features">
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-0.495 1.34 -0.85" scale="0.1 1 1.5" rotation="0 0 -45"></a-box>
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-0.495 1.34 0.85" scale="0.1 1 1.5" rotation="0 0 -45"></a-box>
@@ -4739,7 +4841,8 @@
                                         <a-box class="fence" mixin="col-fence" position="2 0.25 1.75" scale="0.05 0.5 1.5"></a-box>
                                     </a-entity>
                                     <a-entity class="home-group" position="0.5 0 0">
-                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="palette-A-03"></a-entity>
+                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" 
+                                            data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="col-home-windows"></a-entity>
                                         <a-entity class="home-emissions-features">
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-0.495 1.34 -0.85" scale="0.1 1 1.5" rotation="0 0 -45"></a-box>
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-0.495 1.34 0.85" scale="0.1 1 1.5" rotation="0 0 -45"></a-box>
@@ -4754,7 +4857,8 @@
                                         <a-box class="fence" mixin="col-fence" position="2 0.25 1.75" scale="0.05 0.5 1.5"></a-box>
                                     </a-entity>
                                     <a-entity class="home-group" position="0.5 0 0">
-                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="palette-A-03"></a-entity>
+                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" 
+                                            data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="col-home-windows"></a-entity>
                                         <a-entity class="home-emissions-features">
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-0.495 1.34 -0.85" scale="0.1 1 1.5" rotation="0 0 -45"></a-box>
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-0.495 1.34 0.85" scale="0.1 1 1.5" rotation="0 0 -45"></a-box>
@@ -4769,7 +4873,8 @@
                                         <a-box class="fence" mixin="col-fence" position="2 0.25 1.75" scale="0.05 0.5 1.5"></a-box>
                                     </a-entity>
                                     <a-entity class="home-group" position="0.5 0 0">
-                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="palette-A-03"></a-entity>
+                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" 
+                                            data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="col-home-windows"></a-entity>
                                         <a-entity class="home-emissions-features">
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-0.495 1.34 -0.85" scale="0.1 1 1.5" rotation="0 0 -45"></a-box>
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-0.495 1.34 0.85" scale="0.1 1 1.5" rotation="0 0 -45"></a-box>
@@ -4796,7 +4901,8 @@
                                         <a-box class="fence" mixin="col-fence" position="2.26351 0.25 1.70055" scale="0.05 0.5 1.5" rotation="0 10 0"></a-box>
                                     </a-entity>
                                     <a-entity class="home-group" position="0.5 0 0">
-                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="palette-A-03"></a-entity>
+                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" 
+                                            data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="col-home-windows"></a-entity>
                                         <a-entity class="home-emissions-features">
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-0.495 1.34 -0.85" scale="0.1 1 1.5" rotation="0 0 -45"></a-box>
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-0.495 1.34 0.85" scale="0.1 1 1.5" rotation="0 0 -45"></a-box>
@@ -4811,7 +4917,8 @@
                                         <a-box class="fence" mixin="col-fence" position="2.16702 0.25 1.69517" scale="0.05 0.5 1.5" rotation="0 10 0"></a-box>
                                     </a-entity>
                                     <a-entity class="home-group" position="-0.5 0 0">
-                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="palette-A-03"></a-entity>
+                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" 
+                                            data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="col-home-windows"></a-entity>
                                         <a-entity class="home-emissions-features">
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-0.495 1.34 -0.85" scale="0.1 1 1.5" rotation="0 0 -45"></a-box>
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-0.495 1.34 0.85" scale="0.1 1 1.5" rotation="0 0 -45"></a-box>
@@ -4826,7 +4933,8 @@
                                         <a-box class="fence" mixin="col-fence" position="2.32664 0.25 1.73865" scale="0.05 0.5 1.5" rotation="0 10 0"></a-box>
                                     </a-entity>
                                     <a-entity class="home-group" position="-0.5 0 0">
-                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="palette-A-03"></a-entity>
+                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" 
+                                            data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="col-home-windows"></a-entity>
                                         <a-entity class="home-emissions-features">
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-0.495 1.34 -0.85" scale="0.1 1 1.5" rotation="0 0 -45"></a-box>
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-0.495 1.34 0.85" scale="0.1 1 1.5" rotation="0 0 -45"></a-box>
@@ -4841,7 +4949,8 @@
                                         <a-box class="fence" mixin="col-fence" position="2.39547 0.25 1.70559" scale="0.05 0.5 1.5" rotation="0 10 0"></a-box>
                                     </a-entity>
                                     <a-entity class="home-group" position="-0.5 0 0">
-                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="palette-A-03"></a-entity>
+                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" 
+                                            data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="col-home-windows"></a-entity>
                                         <a-entity class="home-emissions-features">
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-0.495 1.34 -0.85" scale="0.1 1 1.5" rotation="0 0 -45"></a-box>
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-0.495 1.34 0.85" scale="0.1 1 1.5" rotation="0 0 -45"></a-box>
@@ -4854,7 +4963,8 @@
                                     <a-entity class="block">
                                     </a-entity>
                                     <a-entity class="home-group" position="-0.5 0 0">
-                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="palette-A-03"></a-entity>
+                                        <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" 
+                                            data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="col-home-windows"></a-entity>
                                         <a-entity class="home-emissions-features">
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-0.495 1.34 -0.85" scale="0.1 1 1.5" rotation="0 0 -45"></a-box>
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-0.495 1.34 0.85" scale="0.1 1 1.5" rotation="0 0 -45"></a-box>
@@ -4872,7 +4982,8 @@
                                         <a-box class="fence" mixin="col-fence" position="-3 0.4 -1" scale="0.05 0.8 11.5" ></a-box>
                                     </a-entity>
                                     <a-entity class="home-group" position="-1 0 1">
-                                        <a-entity class="home-baseBuilding home-large" template="src:#tmp-house-large" data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="palette-A-03"></a-entity>
+                                        <a-entity class="home-baseBuilding home-large" template="src:#tmp-house-large" 
+                                            data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="col-home-windows"></a-entity>
                                         <a-entity class="home-emissions-features">
                                             <a-entity class="solar-group" position="0.93882 2.03975 0" rotation="-50 90 0">
                                                 <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-0.8 0.55 0" scale="1.5 1 0.1" ></a-box> 
@@ -4892,7 +5003,8 @@
                                         <a-box class="fence" mixin="col-fence" position="-3 0.4 -1" scale="0.05 0.8 11.5" ></a-box>
                                     </a-entity>
                                     <a-entity class="home-group" position="-1 0 1">
-                                        <a-entity class="home-baseBuilding home-large" template="src:#tmp-house-large" data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="palette-A-03"></a-entity>
+                                        <a-entity class="home-baseBuilding home-large" template="src:#tmp-house-large" 
+                                            data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="col-home-windows"></a-entity>
                                         <a-entity class="home-emissions-features">
                                             <a-entity class="solar-group" position="0.93882 2.03975 0" rotation="-50 90 0">
                                                 <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-0.8 0.55 0" scale="1.5 1 0.1" ></a-box> 
@@ -4912,7 +5024,8 @@
                                         <a-box class="fence" mixin="col-fence" position="-3 0.4 -1" scale="0.05 0.8 11.5" ></a-box>
                                     </a-entity>
                                     <a-entity class="home-group" position="-1 0 1">
-                                        <a-entity class="home-baseBuilding home-large" template="src:#tmp-house-large" data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="palette-A-03"></a-entity>
+                                        <a-entity class="home-baseBuilding home-large" template="src:#tmp-house-large" 
+                                            data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="col-home-windows"></a-entity>
                                         <a-entity class="home-emissions-features">
                                             <a-entity class="solar-group" position="0.93882 2.03975 0" rotation="-50 90 0">
                                                 <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-0.8 0.55 0" scale="1.5 1 0.1" ></a-box> 
@@ -4932,7 +5045,8 @@
                                         <a-box class="fence" mixin="col-fence" position="-3 0.4 -1.2" scale="0.05 0.8 12" ></a-box>
                                     </a-entity>
                                     <a-entity class="home-group" position="-1 0 1">
-                                        <a-entity class="home-baseBuilding home-large" template="src:#tmp-house-large" data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="palette-A-03"></a-entity>
+                                        <a-entity class="home-baseBuilding home-large" template="src:#tmp-house-large" 
+                                            data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="col-home-windows"></a-entity>
                                         <a-entity class="home-emissions-features">
                                             <a-entity class="solar-group" position="0.93882 2.03975 0" rotation="-50 90 0">
                                                 <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-0.8 0.55 0" scale="1.5 1 0.1" ></a-box> 
@@ -4952,7 +5066,8 @@
                                         <a-box class="fence" mixin="col-fence" position="-3 0.4 -1.8" scale="0.05 0.8 12" ></a-box>
                                     </a-entity>
                                     <a-entity class="home-group" position="-1 0 1">
-                                        <a-entity class="home-baseBuilding home-large" template="src:#tmp-house-large" data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="palette-A-03"></a-entity>
+                                        <a-entity class="home-baseBuilding home-large" template="src:#tmp-house-large" 
+                                            data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="col-home-windows"></a-entity>
                                         <a-entity class="home-emissions-features">
                                             <a-entity class="solar-group" position="0.93882 2.03975 0" rotation="-50 90 0">
                                                 <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-0.8 0.55 0" scale="1.5 1 0.1" ></a-box> 
@@ -4972,7 +5087,8 @@
                                         <a-box class="fence" mixin="col-fence" position="-3 0.4 0" scale="0.05 0.8 7" ></a-box>
                                     </a-entity>
                                     <a-entity class="home-group" position="-1 0 1">
-                                        <a-entity class="home-baseBuilding home-large" template="src:#tmp-house-large" data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="palette-A-03"></a-entity>
+                                        <a-entity class="home-baseBuilding home-large" template="src:#tmp-house-large" 
+                                            data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="col-home-windows"></a-entity>
                                         <a-entity class="home-emissions-features">
                                             <a-entity class="solar-group" position="0.93882 2.03975 0" rotation="-50 90 0">
                                                 <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-0.8 0.55 0" scale="1.5 1 0.1" ></a-box> 
@@ -4992,7 +5108,8 @@
                                         <a-box class="fence" mixin="col-fence" position="-3 0.4 0.5" scale="0.05 0.8 5.5" ></a-box>
                                     </a-entity>
                                     <a-entity class="home-group" position="-1 0 1">
-                                        <a-entity class="home-baseBuilding home-large" template="src:#tmp-house-large" data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="palette-A-03"></a-entity>
+                                        <a-entity class="home-baseBuilding home-large" template="src:#tmp-house-large" 
+                                            data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="col-home-windows"></a-entity>
                                         <a-entity class="home-emissions-features">
                                             <a-entity class="solar-group" position="0.93882 2.03975 0" rotation="-50 90 0">
                                                 <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-0.8 0.55 0" scale="1.5 1 0.1" ></a-box> 
@@ -5012,7 +5129,8 @@
                                         <a-box class="fence" mixin="col-fence" position="-3.01 0.4 0.5" scale="0.05 0.8 5.5" ></a-box>
                                     </a-entity>
                                     <a-entity class="home-group" position="-1 0 1">
-                                        <a-entity class="home-baseBuilding home-large" template="src:#tmp-house-large" data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="palette-A-03"></a-entity>
+                                        <a-entity class="home-baseBuilding home-large" template="src:#tmp-house-large" 
+                                            data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="col-home-windows"></a-entity>
                                         <a-entity class="home-emissions-features">
                                             <a-entity class="solar-group" position="0.93882 2.03975 0" rotation="-50 90 0">
                                                 <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-0.8 0.55 0" scale="1.5 1 0.1" ></a-box> 
@@ -5369,25 +5487,33 @@
                         <!-- Livestock -->	
                         <a-entity id="ag-livestock-group" class="livestock-group animals-group" visible="">
                             <a-entity id="livestock-farm-01" class="farm-livestock-group">                            
-                                <a-entity class="pig piggery livestock" template="src: #tmp-pig" position="-13 0.282 -10" rotation="0 600"></a-entity>
-                                <a-entity class="pig piggery livestock" template="src: #tmp-pig" position="-3 0.282 -8" rotation="0 90 0"></a-entity>                   
+                                <a-entity class="pig piggery livestock" template="src: #tmp-pig" position="-4.9 0 15.9" rotation="0 60 0"></a-entity>
+                                <a-entity class="pig piggery livestock" template="src: #tmp-pig" position="-3.6 0 19.6" rotation="0 90 0"></a-entity>                   
+                                <a-entity class="pig piggery livestock" template="src: #tmp-pig" position="-4.5 0 18.4" rotation="0 20 0"></a-entity>                   
+                                <a-entity class="pig piggery livestock" template="src: #tmp-pig" position="-3.4 0 19.8" rotation="0 130 0"></a-entity>                   
                             </a-entity>        
                             <a-entity id="livestock-farm-02" class="farm-livestock-group">   
                                 <a-entity class="sheep livestock" template="src: #tmp-sheep" position="-21.95 0 -5.2" rotation="0 10 0"></a-entity>
                                 <a-entity class="sheep livestock" template="src: #tmp-sheep" position="-13.41 0 -2.7" rotation="0 50 0"></a-entity>
                                 <a-entity class="sheep livestock" template="src: #tmp-sheep" position="-18.61 0 -1.5" rotation="0 230 0"></a-entity>
                                 <a-entity class="sheep livestock" template="src: #tmp-sheep" position="-16.1 0 -3.6" rotation="0 130 0"></a-entity>
+                                <a-entity class="sheep livestock" template="src: #tmp-sheep" position="-18.1 0 -2.6" rotation="0 170 0"></a-entity>
+                                <a-entity class="sheep livestock" template="src: #tmp-sheep" position="-20.1 0 -3.2" rotation="0 270 0"></a-entity>
                                 <a-entity class="chicken poultry livestock" template="src: #tmp-chicken" position="-13.3 0 -6.9" rotation="0 59 0"></a-entity>                         
-                                <a-entity class="chicken poultry livestock" template="src: #tmp-chicken" position="-12.1 0 -7.6" rotation="0 210 0"></a-entity>                         
-                                <a-entity class="chicken poultry livestock" template="src: #tmp-chicken" position="-13.5 0 -11.2" rotation="0 10 0"></a-entity>   
+                                <a-entity class="chicken poultry livestock" template="src: #tmp-chicken" position="-11.9 0 -7.7" rotation="0 210 0"></a-entity>                         
+                                <a-entity class="chicken poultry livestock" template="src: #tmp-chicken" position="-13.8 0 -11.0" rotation="0 10 0"></a-entity>   
+                                <a-entity class="chicken poultry livestock" template="src: #tmp-chicken" position="-12.9 0 -9.9" rotation="0 130 0"></a-entity>   
+                                <a-entity class="chicken poultry livestock" template="src: #tmp-chicken" position="-14.5 0 -8.2" rotation="0 30 0"></a-entity>   
                             </a-entity>
                             <a-entity id="livestock-farm-03" class="farm-livestock-group">
                                 <a-entity class="cattle dairy" template="src: #tmp-cow" data-col="col-cow-black" position="-18.2 0 14.6" rotation="0 10 0"></a-entity>
                                 <a-entity class="cattle dairy" template="src: #tmp-cow" data-col="col-cow-black" position="-20.3 0 15.7" rotation="0 150 0"></a-entity>
                                 <a-entity class="cattle dairy" template="src: #tmp-cow" data-col="col-cow-black" position="-8 0 15" rotation="0 70 0"></a-entity>
+                                <a-entity class="cattle dairy" template="src: #tmp-cow" data-col="col-cow-black" position="-10.7 0 15.3" rotation="0 170 0"></a-entity>
                                 <a-entity class="cattle beef" template="src: #tmp-cow" data-col="col-cow-brown" position="-7.4 0 20" rotation="0 210 0"></a-entity>
                                 <a-entity class="cattle beef" template="src: #tmp-cow" data-col="col-cow-brown" position="-20.5 0 11.9" rotation="0 45 0"></a-entity>
                                 <a-entity class="cattle beef" template="src: #tmp-cow" data-col="col-cow-brown" position="-14.8 0 16.4" rotation="0 110 0"></a-entity>
+                                <a-entity class="cattle beef" template="src: #tmp-cow" data-col="col-cow-brown" position="-10.8 0 18.4" rotation="0 10 0"></a-entity>
                             </a-entity>
                         </a-entity>
 
@@ -5630,9 +5756,58 @@
 
                     </a-entity><!-- End of Other Zone-->
 
-                </a-entity><!-- End of zone groups-->
-
-            </a-entity>
+                </a-entity><!-- End of features by zone groups-->
+            </a-entity><!-- End of planet group-->
         </a-scene>
+
+
+        <div id = "flat-ui">
+            <div id = "shortcuts">
+                <div id ="shortcuts-header">Magic keyboard shortcuts</div>
+
+                <div id = "key-shortcuts-left">
+                    <div class = "key-shortcut-container">
+                        <div class = "key-shortcut">&#8592; &#8594;</div>
+                        <div class = "shortcut-description">Move camera left and right</div>
+                    </div>
+                    <div class = "key-shortcut-container">
+                        <div class = "key-shortcut"> &#8593; &#8595;</div>
+                        <div class = "shortcut-description">Move camera forward and back</div>
+                    </div>
+                    <div class = "key-shortcut-container">
+                        <div class = "key-shortcut">Space</div>
+                        <div class = "shortcut-description">Toggle between far and on the ground camera</div>
+                    </div>
+                    <div class = "key-shortcut-container">
+                        <div class = "key-shortcut"> [  ]</div>
+                        <div class = "shortcut-description"> Rotate high level camera around scene</div>
+                    </div>
+                    <div class = "key-shortcut-container">
+                        <div class = "key-shortcut"><</div>
+                        <div class = "shortcut-description"> Move time back by 1 hour</div>
+                    </div>
+                    <div class = "key-shortcut-container">
+                        <div class = "key-shortcut">></div>
+                        <div class = "shortcut-description"> Move time forward by 1 hour</div>
+                    </div>
+                </div>
+
+                <div id = "key-shortcuts-right">
+                    <div class = "key-shortcut-container">
+                        <div class = "key-shortcut">`</div>
+                        <div class = "shortcut-description">Toggle scene statistics</div>
+                    </div>
+                    <div class = "key-shortcut-container">
+                        <div class = "key-shortcut">Return</div>
+                        <div class = "shortcut-description">Load scene inspector</div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+
     </body>
 </html>
