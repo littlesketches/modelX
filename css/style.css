@@ -1,0 +1,87 @@
+body{
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   font-weight: 300;
+}
+#scene{
+    z-index: 0;
+}
+
+#flat-ui{
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    pointer-events: none;
+}
+
+#shortcuts{
+    justify-self: center;
+    align-self: center;
+    display: grid;
+    color: #404040;
+    width: 50vw;
+    height: 50vh;
+    border-radius: 2vw;
+    grid-template-columns: 50% 50% ;
+    grid-template-rows: 10% 90%;
+    pointer-events: none;
+    opacity: 0;    
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);   
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.8);
+    overflow: hidden;
+}
+
+#shortcuts.visible{
+    animation-name: showElement;
+    animation-duration: 500ms;
+    opacity: 1;
+}
+    #shortcuts-header{
+        grid-area: 1 / 1 / 2 / 3;
+        font-size: 1.25rem;
+        font-weight: bold;
+        align-self: center;
+        justify-self: center;
+        padding: 0.5rem;
+    }
+
+    #key-shortcuts-left{
+        grid-area: 2 / 1 / 3 / 2;
+        margin: 1rem 0rem;
+    }
+    #key-shortcuts-right{
+        grid-area: 2 / 2 / 3 / 3;
+        margin: 1rem 0rem;
+        border-left: 0.5px solid #404040;
+    }
+    .key-shortcut-container{
+        display: grid;
+        grid-template-columns: 1fr 4fr ;
+        margin: 0.5rem;
+    }
+    .key-shortcut{
+        font-size: 1rem;
+        text-align: center;
+        align-self: center;
+        width: 3rem;
+        border: 1px solid;
+        border-radius: 0.5rem;
+        padding: 0.25rem;
+    
+    }
+    .shortcut-description{
+        font-size: 0.8rem;
+        margin-left: 1.5rem;
+        align-self: center;
+    }
+
+@keyframes showElement {
+  0%   {opacity: 0}
+  100% {opacity: 1;}
+}
+
