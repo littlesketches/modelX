@@ -6,7 +6,6 @@
 
 console.log('BUILDING APP...')
 
-
     const settings = {
         time:       {
             baselineYear: 2020,
@@ -26,8 +25,7 @@ console.log('BUILDING APP...')
                 11: 'summer',
             }
         },
-        activityBoundary: {
-        
+        activityBoundary: {        
         },
         environment: {
             sunX: {
@@ -48,7 +46,7 @@ console.log('BUILDING APP...')
                     7: 'morning', 
                     8: 'morning',   
                     9: 'morning', 
-                    10: 'morning', 
+                    10: 'day', 
                     11: 'day',  
                     12: 'day',  
                     13: 'day',  
@@ -149,11 +147,14 @@ console.log('BUILDING APP...')
         timeLoaded:         new Date(),
         time:               {},
         modelTime:          {
-            hour:           10,
+            hour:           6,
             season:        'spring',
             timeOfDay:      () => settings.environment.timeOfDay[state.modelTime.season][state.modelTime.hour],
         },
         environment: {
+            name:           'default'
+        },
+        weather: {
             windSpeed:      10, 
             windDirection:  0,
             temperature:    25
@@ -162,7 +163,8 @@ console.log('BUILDING APP...')
             activeID:       'flycam',
             flyIndex:       0
         },
-        enableKeyEvents: true
+        enableKeyEvents: true,
+        keydown:            ''
     }
 
     const simulation = {
@@ -171,7 +173,6 @@ console.log('BUILDING APP...')
 
     const sceneEls = {}
         
-
     const view = {
         cam: {
             fly: [ // Clockwise from north-south
@@ -217,7 +218,6 @@ console.log('BUILDING APP...')
     }
 
 
-
 // Set current time to now
     state.time.year = state.timeLoaded.getFullYear()
     state.time.month = state.timeLoaded.getMonth()
@@ -228,11 +228,9 @@ console.log('BUILDING APP...')
 
 // Set Sun "x" position (based on season)
 
-
-const modelSchema = {
-    modelYears: [... Array(settings.time.horizonYear - settings.time.baselineYear).keys()].map(d => d + settings.time.baselineYear)
-}
-
+    const modelSchema = {
+        modelYears: [... Array(settings.time.horizonYear - settings.time.baselineYear).keys()].map(d => d + settings.time.baselineYear)
+    }
 
     const modelData = {
 
@@ -244,7 +242,6 @@ const modelSchema = {
 
         }
     }
-
 
     const activitySchema = {
 
@@ -279,7 +276,6 @@ const modelSchema = {
 
     }
 
-
     const palette = {
         A: {
             '01': 	'#FFA8CB',
@@ -312,19 +308,19 @@ const modelSchema = {
             maxIntensity:   1.0,    
             intProp: {
                 summer: [ 0.0, 0.0, 0.0, 0.05, 0.1, 0.15,           // MIDNIGHT TO 5AM
-                            0.15, 0.3, 0.5, 0.75, 0.9, 1.0,         // 6 AM TO MIDDAY
+                            0.2, 0.3, 0.5, 0.75, 0.9, 1.0,         // 6 AM TO MIDDAY
                             1.0, 0.9, 0.75, 0.9, 0.8, 0.6,          // MIDDAY TO 5PM
                             0.5, 0.2, 0.15, 0.1, 0.05, 0.0],       // 6PM TO 11PM
                 autumn: [ 0.0, 0.0, 0.0, 0.05, 0.1, 0.15,           // MIDNIGHT TO 5AM
-                            0.15, 0.3, 0.5, 0.75, 0.9, 1.0,         // 6 AM TO MIDDAY
+                            0.2, 0.3, 0.5, 0.75, 0.9, 1.0,         // 6 AM TO MIDDAY
                             1.0, 0.9, 0.75, 0.9, 0.8, 0.6,          // MIDDAY TO 5PM
                             0.5, 0.2, 0.15, 0.1, 0.05, 0.0],       // 6PM TO 11PM
                 winter: [ 0.0, 0.0, 0.0, 0.05, 0.1, 0.15,           // MIDNIGHT TO 5AM
-                            0.15, 0.3, 0.5, 0.75, 0.9, 1.0,         // 6 AM TO MIDDAY
+                            0.2, 0.3, 0.5, 0.75, 0.9, 1.0,         // 6 AM TO MIDDAY
                             1.0, 0.9, 0.75, 0.9, 0.8, 0.6,          // MIDDAY TO 5PM
                             0.5, 0.2, 0.15, 0.1, 0.05, 0.0],       // 6PM TO 11PM
                 spring: [ 0.0, 0.0, 0.0, 0.05, 0.1, 0.15,           // MIDNIGHT TO 5AM
-                            0.15, 0.3, 0.5, 0.75, 0.9, 1.0,         // 6 AM TO MIDDAY
+                            0.2, 0.3, 0.5, 0.75, 0.9, 1.0,         // 6 AM TO MIDDAY
                             1.0, 0.9, 0.75, 0.9, 0.8, 0.6,          // MIDDAY TO 5PM
                             0.5, 0.2, 0.15, 0.1, 0.05, 0.0],       // 6PM TO 11PM
             }
@@ -333,50 +329,145 @@ const modelSchema = {
         hemi: {
             maxIntensity:   1.0,    
             intProp: {
-                summer: [ 0.0, 0.0, 0.0, 0.05, 0.1, 0.15,           // MIDNIGHT TO 5AM
-                            0.15, 0.3, 0.5, 0.75, 0.9, 1.0,         // 6 AM TO MIDDAY
+                summer: [ 0.15, 0.15, 0.15, 0.15, 0.2, 0.2,           // MIDNIGHT TO 5AM
+                            0.25, 0.3, 0.5, 0.75, 0.9, 1.0,         // 6 AM TO MIDDAY
                             1.0, 0.9, 0.75, 0.9, 0.8, 0.6,          // MIDDAY TO 5PM
-                            0.5, 0.2, 0.15, 0.1, 0.05, 0.0],       // 6PM TO 11PM
-                autumn: [ 0.0, 0.0, 0.0, 0.05, 0.1, 0.15,           // MIDNIGHT TO 5AM
-                            0.15, 0.3, 0.5, 0.75, 0.9, 1.0,         // 6 AM TO MIDDAY
+                            0.5, 0.2, 0.2, 0.15, 0.15, 0.15],       // 6PM TO 11PM
+                autumn: [ 0.15, 0.15, 0.15, 0.15, 0.2, 0.2,           // MIDNIGHT TO 5AM
+                            0.25, 0.3, 0.5, 0.75, 0.9, 1.0,         // 6 AM TO MIDDAY
                             1.0, 0.9, 0.75, 0.9, 0.8, 0.6,          // MIDDAY TO 5PM
-                            0.5, 0.2, 0.15, 0.1, 0.05, 0.0],       // 6PM TO 11PM
-                winter: [ 0.0, 0.0, 0.0, 0.05, 0.1, 0.15,           // MIDNIGHT TO 5AM
-                            0.15, 0.3, 0.5, 0.75, 0.9, 1.0,         // 6 AM TO MIDDAY
+                            0.5, 0.2, 0.2, 0.15, 0.15, 0.15],       // 6PM TO 11PM
+                winter: [ 0.15, 0.15, 0.15, 0.15, 0.2, 0.2,           // MIDNIGHT TO 5AM
+                            0.25, 0.3, 0.5, 0.75, 0.9, 1.0,         // 6 AM TO MIDDAY
                             1.0, 0.9, 0.75, 0.9, 0.8, 0.6,          // MIDDAY TO 5PM
-                            0.5, 0.2, 0.15, 0.1, 0.05, 0.0],       // 6PM TO 11PM
-                spring: [ 0.0, 0.0, 0.0, 0.05, 0.1, 0.15,           // MIDNIGHT TO 5AM
-                            0.15, 0.3, 0.5, 0.75, 0.9, 1.0,         // 6 AM TO MIDDAY
+                            0.5, 0.2, 0.2, 0.15, 0.15, 0.15],       // 6PM TO 11PM
+                spring: [ 0.15, 0.15, 0.15, 0.15, 0.2, 0.2,           // MIDNIGHT TO 5AM
+                            0.25, 0.3, 0.5, 0.75, 0.9, 1.0,         // 6 AM TO MIDDAY
                             1.0, 0.9, 0.75, 0.9, 0.8, 0.6,          // MIDDAY TO 5PM
-                            0.5, 0.2, 0.15, 0.1, 0.05, 0.0],       // 6PM TO 11PM
-            }
-        },
-
-        byHour: {
-            sunIntensity: [ 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 
-                            0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 
-                            0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 
-                            0.8, 0.8, 0.8, 0.8, 0.8, 0.8],
-
-            ambientIntensityPct: [ 0.0, 0.0, 0.0, 0.05, 0.1, 0.15,  // MIDNIGHT TO 5AM
-                            0.15, 0.3, 0.5, 0.75, 0.9, 1.0,         // 6 AM TO MIDDAY
-                            1.0, 0.9, 0.75, 0.9, 0.8, 0.6,          // MIDDAY TO 5PM
-                            0.5, 0.2, 0.15, 0.1, 0.05, 0.0],       // 6PM TO 11PM
-
-            color:        [ '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', 
+                            0.5, 0.2, 0.2, 0.15, 0.15, 0.15],       // 6PM TO 11PM
+            },
+            colour: {
+                summer: {
+                    color:  [ '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', 
                             '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', 
                             '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', 
                             '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa'],  
 
-            groundColor: [ '#454545', '#454545', '#454545', '#454545', '#454545', '#454545', 
+                    groundColor: [ '#454545', '#454545', '#454545', '#454545', '#454545', '#454545', 
                             '#454545', '#454545', '#454545', '#454545', '#454545', '#454545', 
                             '#454545', '#454545', '#454545', '#454545', '#454545', '#454545', 
                             '#454545', '#454545', '#454545', '#454545', '#454545', '#454545']
-        }
+                }, 
+                autumn: {
+                    color:  [ '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', 
+                            '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', 
+                            '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', 
+                            '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa'],  
+
+                    groundColor: [ '#454545', '#454545', '#454545', '#454545', '#454545', '#454545', 
+                            '#454545', '#454545', '#454545', '#454545', '#454545', '#454545', 
+                            '#454545', '#454545', '#454545', '#454545', '#454545', '#454545', 
+                            '#454545', '#454545', '#454545', '#454545', '#454545', '#454545']
+                },
+                winter: {
+                    color:  [ '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', 
+                            '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', 
+                            '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', 
+                            '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa'],  
+
+                    groundColor: [ '#454545', '#454545', '#454545', '#454545', '#454545', '#454545', 
+                            '#454545', '#454545', '#454545', '#454545', '#454545', '#454545', 
+                            '#454545', '#454545', '#454545', '#454545', '#454545', '#454545', 
+                            '#454545', '#454545', '#454545', '#454545', '#454545', '#454545']
+                },
+                spring: {
+                    color:  [ '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', 
+                            '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', 
+                            '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', 
+                            '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa', '#f6e3fa'],  
+
+                    groundColor: [ '#454545', '#454545', '#454545', '#454545', '#454545', '#454545', 
+                            '#454545', '#454545', '#454545', '#454545', '#454545', '#454545', 
+                            '#454545', '#454545', '#454545', '#454545', '#454545', '#454545', 
+                            '#454545', '#454545', '#454545', '#454545', '#454545', '#454545']
+                }
+
+            }
+        },
+
+
     }
 
     settings.evironment = {
+        default: {
+            morning: {          // 
+                'sky-top':      '#74f6f6', 
+                'sky-bottom':   '#f9f4ae', 
+                hemilight: {
+                    sky:        '#f6e3fa',
+                    ground:     '#454545'
+                }
+            }, 
+            day: {
+                'sky-top':      '#07f2ee', 
+                'sky-bottom':   '#e0faf9',
+                hemilight: {
+                    sky:        '#f6e3fa',
+                    ground:     '#454545'
+                }
+            }, 
+            evening: {
+                'sky-top':      '#ae84bd', 
+                'sky-bottom':   '#dbd8b3', 
+                hemilight: {
+                    sky:        '#f6e3fa',
+                    ground:     '#454545'
+                }
+            }, 
+            night: {
+                'sky-top':      '#010e0e', 
+                'sky-bottom':   '#00444d', 
+                hemilight: {
+                    sky:        '#000',
+                    ground:     '#fff'
+                }
+            }
+        },
+        
+        heatwave: {
+            morning: {          // 
+                'sky-top':      '#f8f0e2', 
+                'sky-bottom':   '#fffab3', 
+            }, 
+            day: {
+                'sky-top':      '#01c7f9', 
+                'sky-bottom':   '#cff7f6', 
+                hemilight: {
+                    sky:        '#fff',
+                    ground:     '#f3ffd1'
+                }
+            }, 
+            evening: {
+                'sky-top':      '#3e0146', 
+                'sky-bottom':   '#fba46a', 
+            }, 
+            night: {
+                'sky-top':      '#2b0330', 
+                'sky-bottom':   '#00285c', 
+            }
+        },
+
         morning: {
+            everyday: {          // 
+                'sky-top':      '#5bc2c2', 
+                'sky-bottom':   '#d5e4b9', 
+                'fog-type':     'exponetial', 
+                'fog-density':  0.01, 
+                'fog-col':      '#8c4a0d',
+                'fog-far':      200,
+                'fog-near':     0,
+            }, 
+
             everyday: {          // 
                 'sky-top':      '#fff', 
                 'sky-bottom':   '#d78d37', 
@@ -409,8 +500,8 @@ const modelSchema = {
 
         daytime: {
             everyday: {
-                'sky-top':      '#fff', 
-                'sky-bottom':   '#d78d37', 
+                'sky-top':      '#32e7e7', 
+                'sky-bottom':   '#5bc2c2', 
                 'fog-type':     'exponetial', 
                 'fog-density':  0.01, 
                 'fog-col':      '#8c4a0d',
@@ -523,5 +614,4 @@ const modelSchema = {
             }
         }
     }
-
 

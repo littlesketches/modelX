@@ -20,17 +20,18 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
 
             // Environment elements
             sceneEls.enviro = {
-                sun:  document.getElementById('sun-body'),
-                sky:  document.getElementById('sky')
+                sun:            document.getElementById('sun-body'),
+                moon:           document.getElementById('moon-body'),
+                sky:            document.getElementById('sky')
             }
             // Camera elements
             sceneEls.cam = {
-                fly:  document.getElementById('flycam'),
-                vr:  document.getElementById('vrcam')
+                fly:    document.getElementById('flycam'),
+                vr:     document.getElementById('vrcam')
             }
             sceneEls.camRig = {
-                fly:  document.getElementById('flycam-rig'),
-                vr:  document.getElementById('vrcam-rig')
+                fly:    document.getElementById('flycam-rig'),
+                vr:     document.getElementById('vrcam-rig')
             }
 
             // Misc
@@ -39,7 +40,12 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
                     "sun-0000", "sun-0100", "sun-0200", "sun-0300", "sun-0400", "sun-0500", 
                     "sun-0600", "sun-0700", "sun-0800", "sun-0900", "sun-1000", "sun-1100", 
                     "sun-1200", "sun-1300", "sun-1400", "sun-1500", "sun-1600", "sun-1700", 
-                    "sun-1800", "sun-1900", "sun-2000", "sun-2100", "sun-2200", "sun-2300" ]
+                    "sun-1800", "sun-1900", "sun-2000", "sun-2100", "sun-2200", "sun-2300" ],
+                moonPos: [
+                    "moon-0000", "moon-0100", "moon-0200", "moon-0300", "moon-0400", "moon-0500", 
+                    "moon-0600", "moon-0700", "moon-0800", "moon-0900", "moon-1000", "moon-1100", 
+                    "moon-1200", "moon-1300", "moon-1400", "moon-1500", "moon-1600", "moon-1700", 
+                    "moon-1800", "moon-1900", "moon-2000", "moon-2100", "moon-2200", "moon-2300" ]
             }
             
         }
@@ -48,14 +54,19 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
 
     AFRAME.registerComponent("position-sun", {        
         init: function() {
-            console.log('Setting the sun position for ')
+            console.log('Setting the sun and moon position for hour '+state.modelTime.hour)
             sceneEls.enviro.sun.setAttribute('position', document.getElementById(sceneEls.misc.sunPos[state.modelTime.hour]).getAttribute('position'))
             sceneEls.lights.sun.setAttribute('position', document.getElementById(sceneEls.misc.sunPos[state.modelTime.hour]).getAttribute('position'))
 
+            sceneEls.enviro.moon.setAttribute('position', document.getElementById(sceneEls.misc.moonPos[state.modelTime.hour]).getAttribute('position'))
+
             // Change the hemi ambient light
             sceneEls.lights.hemi.setAttribute('light', { 
-                intensity: settings.lights.byHour.ambientIntensityPct[state.modelTime.hour] * settings.lights.ambient.maxIntensity
+                intensity: settings.lights.hemi.intProp[state.modelTime.season][state.modelTime.hour] * settings.lights.hemi.maxIntensity
             })  
+
+            // Set the environment
+            externalEvents.changeEnvironment()
       }
     })
 
@@ -96,24 +107,60 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
     })
 
 
+    AFRAME.registerComponent("fly-plane", {
+        play: function () {
+            document.getElementById("plaine-animation").setAttribute('alongpath', {
+                curve:          "#airplane-path-points",
+                dur:            90000, 
+                resetonplay:    true, 
+                rotate:         true
+            })
+        }
+    })
+
+
+    AFRAME.registerComponent("sail-duck", {
+        play: function () {
+            document.getElementById("rubberDuck").setAttribute('alongpath', {
+                curve:          "#duck-path-points",
+                dur:            60000, 
+                loop:           true, 
+                resetonplay:    true, 
+                rotate:         true
+            })
+        }
+    })
+
+    AFRAME.registerComponent("animate-lighthouse", {
+        play: function() {
+            document.getElementById("lighthouse-light").setAttribute('animation__lighthouse', {
+                property:       'rotation',
+                dur:            30000,
+                from:           '-10 -50 0',
+                to:             '-10 -180 0',
+                loop:           true,
+                dir:      'alternate'
+            })
+
+        }
+
+    })
+
     AFRAME.registerComponent("add-external-listeners", { 
         init: function(){
             // KEYBOARD EVENTS
             window.addEventListener("keydown", function(key){
-                console.log(`Pressed ${key.code}`)
+                // console.log(`Pressed ${key.code}`)
                 if(state.enableKeyEvents){
                     switch(key.code){
                         case 'Backquote': 
                                 externalEvents.toggleStats()
                             break
-                        case 'Backslash': 
-                                externalEvents.resetFly()
-                            break
                         case 'BracketLeft':
-                                externalEvents.rotateFly('left')
+                                externalEvents.rotateFlyCam('left')
                             break
                         case 'BracketRight':
-                                externalEvents.rotateFly('right')
+                                externalEvents.rotateFlyCam('right')
                             break
                         case 'Period':
                                 externalEvents.changeHour('forward')
@@ -131,19 +178,43 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
                                 document.getElementById('scene').components.inspector.openInspector()
                             break
 
+                        case 'MetaLeft':
+                                state.keydown = setTimeout( () => {
+                                    document.getElementById('shortcuts').classList.add('visible') 
+                                }, 2000)
+                            break
 
                         default:
                             console.log(`No event for ${key.code}`)
+                            clearTimeout(state.keydown)  
+                            document.getElementById('shortcuts').classList.remove('visible')
                     }
                 }
             })
 
+            window.addEventListener("keyup", function(key){
+                if(state.enableKeyEvents){
+                    switch(key.code){
+                        case 'MetaLeft':
+                                clearTimeout(state.keydown)  
+                                document.getElementById('shortcuts').classList.remove('visible')
+                            break
+                        default:
+                            clearTimeout(state.keydown)  
+                            document.getElementById('shortcuts').classList.remove('visible')
+                    }
+                }
+            })
 
             // VOICE CONTROLLED EVENTS
 
         }
      })
 
+    window.onblur = () => { 
+        clearTimeout(state.keydown)  
+        document.getElementById('shortcuts').classList.remove('visible')
+    }
 ////////////////////////////////////////////////////////////
 /// METHODS ABLE TO BE CALLED EXTERNAL FROM THE SCENE   ////
 ////////////////////////////////////////////////////////////
@@ -163,33 +234,9 @@ const externalEvents = {
             sceneEls.cam.fly.setAttribute('camera',   {active: true   })
             sceneEls.cam.vr.setAttribute('camera',    {active: false   })
         }
-    
     },
 
-    resetFly: function(duration = 2000){
-        state.enableKeyEvents = false
-        sceneEls.camRig.fly.removeAttribute('animation__position')
-        sceneEls.camRig.fly.setAttribute('animation__position', {
-            property: 'position',
-            dur: duration,
-            to: `${view.cam.fly[0].pos.x}  ${view.cam.fly[0].pos.y}  ${view.cam.fly[0].pos.z}`
-        })  
-        sceneEls.cam.fly.removeAttribute('animation__rotation')
-        sceneEls.cam.fly.setAttribute('animation__rotation', {
-            property: 'rotation',
-            dur: duration,
-            to: `${view.cam.fly[0].rotation.x}  90  ${view.cam.fly[0].rotation.z}`
-        })
-     
-        setTimeout( ()=> {
-            externalEvents.resetLookControls()         // Bind new instance of look-controls after after animation
-            state.enableKeyEvents = true     
-        }, duration)
-
-        state.camera.flyIndex = 0
-    },
-
-    rotateFly: function(direction, duration = 2000){
+    rotateFlyCam: function(direction, duration = 2000){
         state.enableKeyEvents = false
         sceneEls.camRig.fly.removeAttribute('animation__position')
         sceneEls.camRig.fly.removeAttribute('animation__rotation')     
@@ -232,32 +279,44 @@ const externalEvents = {
     },
 
     changeHour: function(direction, duration = 2000){
+        console.log('Moving hour '+direction+' to '+sceneEls.misc.sunPos[state.modelTime.hour])
+
         if(direction === 'forward'){
             state.modelTime.hour = state.modelTime.hour !== (sceneEls.misc.sunPos.length - 1) ? state.modelTime.hour + 1 : 0
         } else if(direction === 'back'){
             state.modelTime.hour = state.modelTime.hour !== 0 ? state.modelTime.hour  - 1 :  sceneEls.misc.sunPos.length - 1 
         }
-        console.log('Moving hour '+direction+' to '+sceneEls.misc.sunPos[state.modelTime.hour])
-
         // Resposition sun an sun light
-        const newPos = document.getElementById(sceneEls.misc.sunPos[state.modelTime.hour]).getAttribute('position')
+        const newSunPos = document.getElementById(sceneEls.misc.sunPos[state.modelTime.hour]).getAttribute('position')
         sceneEls.enviro.sun.setAttribute('animation__position', {
             property: 'position',
             dur: duration,
-            to: `${newPos.x}  ${newPos.y}  ${newPos.z}`
+            to: `${newSunPos.x}  ${newSunPos.y}  ${newSunPos.z}`
         })  
         sceneEls.lights.sun.setAttribute('animation__position', {
             property: 'position',
             dur: duration,
-            to: `${newPos.x}  ${newPos.y}  ${newPos.z}`
+            to: `${newSunPos.x}  ${newSunPos.y}  ${newSunPos.z}`
+        })  
+
+        // Resposition moon body
+        const newMoonPos = document.getElementById(sceneEls.misc.moonPos[state.modelTime.hour]).getAttribute('position')
+        sceneEls.enviro.moon.setAttribute('animation__position', {
+            property: 'position',
+            dur: duration,
+            to: `${newMoonPos.x}  ${newMoonPos.y}  ${newMoonPos.z}`
         })  
 
         // Change the hemi ambient light
         sceneEls.lights.hemi.setAttribute('animation__light', {
             property: 'light.intensity',
             dur: duration,
-            to: settings.lights.byHour.ambientIntensityPct[state.modelTime.hour] * settings.lights.ambient.maxIntensity
+            to: settings.lights.hemi.intProp[state.modelTime.season][state.modelTime.hour] * settings.lights.hemi.maxIntensity
         })  
+
+
+        // Change the environment
+        externalEvents.changeEnvironment()
 
 
         // Control key events
@@ -267,21 +326,69 @@ const externalEvents = {
     },
 
 
-    changeEnvironment: function(name = 'everyday', duration = 2000){
-        console.log('Changing environment to '+name, state.modelTime.timeOfDay())
-        // Change the hemisphere sky colour
+    changeEnvironment: function(name = state.environment.name, timeOfDay = state.modelTime.timeOfDay(), duration = 2000){
+        console.log('Changing environment to '+name, timeOfDay)
+        // Change the sky colour for time of day and "conditions"
         sceneEls.enviro.sky.setAttribute('animation__topColour', {
-            property: 'material.topColor',
-            dur: duration,
-            to: settings.evironment[state.modelTime.timeOfDay()][name]['sky-top']
+            property:   'material.topColor',
+            dur:        duration,
+            to:         settings.evironment[name][timeOfDay]['sky-top']
         })  
        sceneEls.enviro.sky.setAttribute('animation__bottomColour', {
-            property: 'material.bottomColor',
-            dur: duration,
-            to: settings.evironment[state.modelTime.timeOfDay()][name]['sky-bottom']
+            property:   'material.bottomColor',
+            dur:        duration,
+            to:         settings.evironment[name][timeOfDay]['sky-bottom']
         })  
 
+        // Change the hemisphere light colours
+        if(settings.evironment[name][timeOfDay].hemilight){
+            console.log('Changing hemi light colours...')
+            sceneEls.lights.hemi.setAttribute('animation__skyColour', {
+                property: 'light.color',
+                dur: duration,
+                to: settings.evironment[name][timeOfDay].hemilight.sky
+            })  
+            sceneEls.lights.hemi.setAttribute('animation__groundColour', {
+                property: 'light.groundColor',
+                dur: duration,
+                to: settings.evironment[name][timeOfDay].hemilight.ground
+            })  
+
+        } else {
+            sceneEls.lights.hemi.setAttribute('animation__skyColour', {
+                property: 'light.color',
+                dur: duration,
+                to: settings.evironment.default[timeOfDay].hemilight.sky
+            })  
+            sceneEls.lights.hemi.setAttribute('animation__groundColour', {
+                property: 'light.groundColor',
+                dur: duration,
+                to: settings.evironment.default[timeOfDay].hemilight.ground
+            })  
+
+        }
+
+
+
+    },
+
+    turnNightLightsOn:  function(){
+        const glassEls =  document.getElementsByClassName('glass-group')
+        state.environment.state = true
+        for(const el of glassEls){
+            el.setAttribute('material', {'emissive': '#C7CEF6'})
+        }
+    },
+
+    turnNightLightsOff:  function(){
+        const glassEls =  document.getElementsByClassName('glass-group')
+        state.environment.state = false
+        for(const el of glassEls){
+            el.setAttribute('material', {'emissive': '#000'})
+        }
     }
+
+
 }
 
 
