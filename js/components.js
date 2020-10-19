@@ -211,10 +211,7 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
         }
      })
 
-    window.onblur = () => { 
-        clearTimeout(state.keydown)  
-        document.getElementById('shortcuts').classList.remove('visible')
-    }
+
 ////////////////////////////////////////////////////////////
 /// METHODS ABLE TO BE CALLED EXTERNAL FROM THE SCENE   ////
 ////////////////////////////////////////////////////////////
