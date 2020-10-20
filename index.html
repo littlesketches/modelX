@@ -6,7 +6,7 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 	    <!-- <link rel="icon" href="img/favicon.ico" type="image/x-icon"> -->
 		<meta name="description" content="Emissiosns toy world">
-		<meta name="keywords" content="Human representations, Emisions reduction, Zero Net, Net Zero Speculative design, Design fiction, Futures">	
+		<meta name="keywords" content="Human representations, Emissions reduction, Zero Net, Net Zero Speculative design, Design fiction, Futures">	
 		<meta name="author" content="little sketches">
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
 
@@ -251,6 +251,7 @@
                         <a-mixin id ="col-bin-lid-yellow"   material="color: yellow"></a-mixin>
                         <a-mixin id ="col-bin-lid-purple"   material="color: purple"></a-mixin>
                         <a-mixin id ="col-bin-lid-green"    material="color: green"></a-mixin>
+                        <a-mixin id ="col-bin-lid-black"    material="color: #000"></a-mixin>
                         <a-mixin id ="col-bin-axle"         material="color: gray"></a-mixin>
                         <a-mixin id ="col-bin-pane"         material="color: gray"></a-mixin>
 
@@ -370,10 +371,10 @@
                             </a-entity> 
                             <a-entity class="steps" mixin="${bricklowcol}" buffer-geometry-merger>
                                 <a-cylinder position="0 0.45 2.75" geometry="radius: 0.77; height: 0.1; segmentsRadial: 8" rotation="0 22.5 0"></a-cylinder>
-                                <a-cylinder position="0 0.35 2.75"" geometry="radius: 0.87; height: 0.1; segmentsRadial: 8" rotation="0 22.5 0"></a-cylinder>
-                                <a-cylinder position="0 0.25 2.75"" geometry="radius: 0.97; height: 0.1; segmentsRadial: 8" rotation="0 22.5 0"></a-cylinder>
-                                <a-cylinder position="0 0.15 2.75"" geometry="radius: 1.07; height: 0.1; segmentsRadial: 8" rotation="0 22.5 0"></a-cylinder>
-                                <a-cylinder position="0 0.05 2.75"" geometry="radius: 1.17; height: 0.1; segmentsRadial: 8" rotation="0 22.5 0"></a-cylinder>
+                                <a-cylinder position="0 0.35 2.75" geometry="radius: 0.87; height: 0.1; segmentsRadial: 8" rotation="0 22.5 0"></a-cylinder>
+                                <a-cylinder position="0 0.25 2.75" geometry="radius: 0.97; height: 0.1; segmentsRadial: 8" rotation="0 22.5 0"></a-cylinder>
+                                <a-cylinder position="0 0.15 2.75" geometry="radius: 1.07; height: 0.1; segmentsRadial: 8" rotation="0 22.5 0"></a-cylinder>
+                                <a-cylinder position="0 0.05 2.75" geometry="radius: 1.17; height: 0.1; segmentsRadial: 8" rotation="0 22.5 0"></a-cylinder>
                             </a-entity>
                             <a-entity mixin="${trimcol}" buffer-geometry-merger>
                                 <a-box class="base" position="0 1.55 0" scale="3.05 0.1 6.05" ></a-box>
@@ -600,7 +601,7 @@
                                         <a-box position="-0.2 0 0"      scale="0.02 0.445 0.125" ></a-box>
                                         <a-box position="0 0 0"         scale="0.02 0.445 0.125" ></a-box>
                                         <a-box position="0.2 0 0"       scale="0.02 0.445 0.125" ></a-box>
-                                        <a-torus position="0 0.2 0.055" geometry="radius: 0.2; arc: 180; radiusTubular: 0.005; segmentsTubular: 8" scale=""></a-torus>                
+                                        <a-torus position="0 0.2 0.055" geometry="radius: 0.2; arc: 180; radiusTubular: 0.005; segmentsTubular: 8" ></a-torus>                
                                     </a-entity>
                                 </a-entity>
                                 <a-entity class="skylight-group" position="0 4.55 -0.55" rotation="0 90 0">
@@ -784,7 +785,7 @@
                                         <a-box position="-0.2 0 0"      scale="0.02 0.445 0.125" ></a-box>
                                         <a-box position="0 0 0"         scale="0.02 0.445 0.125" ></a-box>
                                         <a-box position="0.2 0 0"       scale="0.02 0.445 0.125" ></a-box>
-                                        <a-torus position="0 0.2 0.055" geometry="radius: 0.2; arc: 180; radiusTubular: 0.005; segmentsTubular: 8" scale=""></a-torus>                
+                                        <a-torus position="0 0.2 0.055" geometry="radius: 0.2; arc: 180; radiusTubular: 0.005; segmentsTubular: 8" ></a-torus>                
                                     </a-entity>
                                     <a-entity position="-0.75 4.25 0">
                                         <a-box position="0 -0.215 0"    scale="0.4 0.02 0.125" ></a-box>
@@ -792,7 +793,7 @@
                                         <a-box position="-0.2 0 0"      scale="0.02 0.445 0.125" ></a-box>
                                         <a-box position="0 0 0"         scale="0.02 0.445 0.125" ></a-box>
                                         <a-box position="0.2 0 0"       scale="0.02 0.445 0.125" ></a-box>
-                                        <a-torus position="0 0.2 0.055" geometry="radius: 0.2; arc: 180; radiusTubular: 0.005; segmentsTubular: 8" scale=""></a-torus>                
+                                        <a-torus position="0 0.2 0.055" geometry="radius: 0.2; arc: 180; radiusTubular: 0.005; segmentsTubular: 8" ></a-torus>                
                                     </a-entity>
                                 </a-entity>
                                 <a-entity class="skylight-group" position="0 4.55 -0.55" rotation="0 90 0">
@@ -1065,12 +1066,12 @@
                         <a-box mixin="${doorcol} position="0 0.6 0" scale="0.8 1.2 6.05"> </a-box>
                         <a-entity mixin="${windowcol}" buffer-geometry-merger>
                             <a-entity position="-1.1 0.925 0">
-                                <a-box position="" scale="0.6 0.6 6.05"> </a-box> 
+                                <a-box  scale="0.6 0.6 6.05"> </a-box> 
                             </a-entity>
                             <a-entity position="1.1 0.925 0">
-                                <a-box position="" scale="0.6 0.6 6.05"> </a-box>  
+                                <a-box  scale="0.6 0.6 6.05"> </a-box>  
                             </a-entity>
-                            <a-entity position="">
+                            <a-entity >
                                 <a-box position="0 0.925 0" scale="3.55 0.6 0.6"> </a-box>
                             </a-entity>
                             <a-entity position="0 0 1.5">
@@ -1089,21 +1090,21 @@
                             <a-box position="0 0.6 0" scale="1.4 0.05 6.1" rotation="0 0 59"> </a-box>
                             <a-entity position="-1.1 0.925 0">
                                 <a-box position="-0.3 0 0" scale="0.05 0.6 6.1"> </a-box>
-                                <a-box position="" scale="0.05 0.6 6.1"> </a-box>
+                                <a-box  scale="0.05 0.6 6.1"> </a-box>
                                 <a-box position="0.3 0 0" scale="0.05 0.6 6.1"> </a-box>
                                 <a-box position="0 0.3 0" scale="0.65 0.05 6.1"> </a-box>
-                                <a-box position="" scale="0.65 0.05 6.1"> </a-box>
+                                <a-box  scale="0.65 0.05 6.1"> </a-box>
                                 <a-box position="0 -0.3 0" scale="0.65 0.05 6.1"> </a-box>    
                             </a-entity>
                             <a-entity position="1.1 0.925 0">
                                 <a-box position="-0.3 0 0" scale="0.05 0.6 6.1"> </a-box>
-                                <a-box position="" scale="0.05 0.6 6.1"> </a-box>
+                                <a-box  scale="0.05 0.6 6.1"> </a-box>
                                 <a-box position="0.3 0 0" scale="0.05 0.6 6.1"> </a-box>
                                 <a-box position="0 0.3 0" scale="0.65 0.05 6.1"> </a-box>
-                                <a-box position="" scale="0.65 0.05 6.1"> </a-box>
+                                <a-box  scale="0.65 0.05 6.1"> </a-box>
                                 <a-box position="0 -0.3 0" scale="0.65 0.05 6.1"> </a-box>    
                             </a-entity>
-                            <a-entity position="">
+                            <a-entity >
                                 <a-box position="0 0.925 -0.3" scale="3.6 0.6 0.05"> </a-box>
                                 <a-box position="0 0.925 0" scale="3.6 0.6 0.05"> </a-box>
                                 <a-box position="0 0.925 0.3" scale="3.6 0.6 0.05"> </a-box>
@@ -1157,7 +1158,7 @@
                     </script>
     
                     <script id="tmp-barn-small" type="text/html">
-                        <a-entity class="barn" position="">
+                        <a-entity class="barn" >
                             <a-entity mixin="${basecol}"  buffer-geometry-merger>
                                 <a-box position="0 0.75 0" scale="2.5 1.3 4"></a-box>
                                 <a-triangle position="0 1.875 2" scale="2.5 1 2.5" geometry="vertexA: 0 0.25 0" > </a-triangle>
@@ -1244,7 +1245,7 @@
                     </script>
 
                     <script id="tmp-factory" type="text/html">
-                        <a-entity class="warehouse-building" position="">
+                        <a-entity class="warehouse-building" >
                             <a-entity class="base-building" mixin="${basecol}" buffer-geometry-merger>
                                 <a-box class="warehouse-base" position="0 1.15 0" scale="7 2.3 5" material="flatShading: true" ></a-box>
                                 <a-cylinder class="warehouse-sawtooth" position="-1.85103 1.56206 0" material="flatShading: true" geometry="height: 5; segmentsRadial: 3" rotation="70 90 90" scale="1.5 1 2.5"></a-cylinder>
@@ -1323,7 +1324,7 @@
                     <script id="tmp-windTurbine" type="text/html">
                         <a-cone class="tower" mixin="col-windTurbine" position="0 12 0" geometry="height: 24; radiusBottom: 1.2; radiusTop: 0.9" ></a-cone>
                         <a-entity class="turbine" scale="1 0.8 1" position="0 24 0" mixin="col-windTurbine">
-                            <a-box mixin="col-windTurbine" scale="2.5 2.5 4"  position=""></a-box>  
+                            <a-box mixin="col-windTurbine" scale="2.5 2.5 4"  ></a-box>  
                             <a-cone mixin="col-windTurbine" position="0 0 2.1" rotation="-45 90 -90" geometry="height: 0.2; radiusBottom: 1.6; radiusTop: 1.775; segmentsRadial: 4" material="flatShading: true">  </a-cone>
                             <a-cone mixin="col-windTurbine" position="0 0 -3" rotation="-45 90 -90" geometry="height: 2; radiusBottom: 1.775; radiusTop: 0.8; segmentsRadial: 4" material="flatShading: true">  </a-cone>  
                         </a-entity>
@@ -1368,7 +1369,7 @@
                         </a-entity>
                         <a-entity class="solarRotateable" position="0 1 0" rotation="30 0 0">
                             <a-entity class="rotated-frame" mixin="col-solarFrame" buffer-geometry-merger>
-                                <a-cylinder position="" rotation="0 0 90" geometry="height: 8.2; radius: 0.025" ></a-cylinder>
+                                <a-cylinder  rotation="0 0 90" geometry="height: 8.2; radius: 0.025" ></a-cylinder>
                                 <a-torus position="4.1 0 0" rotation="0 90 0" geometry="radius: 0.2; radiusTubular: 0.01; segmentsTubular: 12" ></a-torus>
                                 <a-torus position="-4.1 0 0" rotation="0 90 0" geometry="radius: 0.2; radiusTubular: 0.01; segmentsTubular: 12" ></a-torus>
                                 <a-cylinder position="4.1 0 0" rotation="0 90 0" geometry="height: 0.4; radius: 0.01" ></a-cylinder>
@@ -1491,8 +1492,8 @@
                                 <a-box scale="0.16 0.15 0.95" position="1.33 -0.146 0" rotation="0 0 -80"></a-box>                                
                                 <a-box scale="0.11 0.11 0.95" position="1.39 -0.137 0" rotation="0 0 -25"></a-box>
                                 <a-box scale="0.23 0.07 0.95" position="1.349 -0.075 0" ></a-box>
-                                <a-cone scale="0.55 0.98 0.01" position="0.644 0.411 0" rotation="82 -90 0" geometry="height: 1.69; radiusTop: 0.71; segmentsRadial: 3" visible=""></a-cone>
-                                <a-cone scale="0.53 0.17 0.01" position="-0.9755 0.27414 0" rotation="72 90 0" geometry="height: 1.09; radiusTop: 0.84; segmentsRadial: 3; radiusBottom: 0.9" visible=""></a-cone>
+                                <a-cone scale="0.55 0.98 0.01" position="0.644 0.411 0" rotation="82 -90 0" geometry="height: 1.69; radiusTop: 0.71; segmentsRadial: 3" ></a-cone>
+                                <a-cone scale="0.53 0.17 0.01" position="-0.9755 0.27414 0" rotation="72 90 0" geometry="height: 1.09; radiusTop: 0.84; segmentsRadial: 3; radiusBottom: 0.9" ></a-cone>
                                 <a-cone scale="0.45 0.33 0.74" position="-1.25 -0.102 -0.128" rotation="180 180 10" geometry="height: 0.29; radiusTop: 0.51; segmentsRadial: 3; radiusBottom: 0.51; thetaLength: 180"></a-cone>
                                 <a-cone scale="0.45 0.35 0.74" position="-1.25 -0.102 0.128" rotation="180 180 10" geometry="height: 0.29; radiusTop: 0.51; segmentsRadial: 3; radiusBottom: 0.51; thetaLength: 180"></a-cone>
                                 <!-- Right-side-->
@@ -1525,7 +1526,7 @@
                                 <!-- <a-box mixin="col-cybertruck-silver" scale="1.65 0.04 0.1" position="0.625 0.395 0.34877" rotation="0 -5 -8" ></a-box> -->
                                 <a-box scale="1.18 0.04 0.05" position="-0.73144 0.33 -0.37927" rotation="0 -6.25 17.6" ></a-box>
                                 <a-triangle scale="0.98 0.2 0.2" side:="double" geometry="vertexA: -0.18 0.24 0.35; vertexC: 0.67 -0.29 0; vertexB: -0.18 -0.49 0.01" position="0.78293 0.34448 -0.48797" material="side: double"></a-triangle>                    
-                                <a-triangle scale="" side:="double" geometry="vertexA: -0.02 0 0; vertexC: 0.22 0 0; vertexB: 0.24 0.09 0.03" position="-1.28803 0.17005 -0.46652" material="side: double"></a-triangle>                    
+                                <a-triangle  side:="double" geometry="vertexA: -0.02 0 0; vertexC: 0.22 0 0; vertexB: 0.24 0.09 0.03" position="-1.28803 0.17005 -0.46652" material="side: double"></a-triangle>                    
                                 <!-- Left-side-->
                                 <a-cone scale="0.24 0.18 0.01" position="-1.367 0.01048 0.36409" rotation="-7 125 0" geometry="radiusTop: 0.56; segmentsRadial: 3; radiusBottom: 0.53"></a-cone>
                                 <a-box scale="1.35 0.2 0.03" position="-0.01698 -0.14984 0.41736" rotation="6 0 2.5" ></a-box>
@@ -1535,7 +1536,7 @@
                                 <!-- <a-box mixin="col-cybertruck-silver" scale="1.65 0.04 0.1" position="0.625 0.395 0.34877" rotation="0 -5 -8" ></a-box> -->
                                 <a-box scale="1.18 0.04 0.05" position="-0.73144 0.33 0.37927" rotation="0 6.25 17.6" ></a-box>
                                 <a-triangle scale="0.98 0.2 0.2" side:="double" geometry="vertexA: -0.18 0.24 -0.35; vertexC: 0.67 -0.29 0; vertexB: -0.18 -0.49 -0.01" position="0.78293 0.34448 0.48797" material="side: double"></a-triangle>                    
-                                <a-triangle scale="" side:="double" geometry="vertexA: -0.02 0 0; vertexC: 0.22 0 0; vertexB: 0.24 0.09 -0.03" position="-1.28803 0.16338 0.47035" material="side: double"></a-triangle>                    
+                                <a-triangle  side:="double" geometry="vertexA: -0.02 0 0; vertexC: 0.22 0 0; vertexB: 0.24 0.09 -0.03" position="-1.28803 0.16338 0.47035" material="side: double"></a-triangle>                    
                             </a-entity> 
                        </a-entity>                  
                         <a-entity class="lights-group">
@@ -1586,7 +1587,7 @@
                     <script id="tmp-tree-apple" type="text/html">
                         <a-cylinder mixin="col-treeTrunk" height="2.0" position="0 1 0" radius="0.1" geometry="segmentsHeight: 1; segmentsRadial: 4"></a-cylinder>
                         <a-entity mixin="col-treeTop" buffer-geometry-merger>
-                            <a-dodecahedron position="-0.3 1.25 0" radius="0.65" position=""></a-dodecahedron>
+                            <a-dodecahedron position="-0.3 1.25 0" radius="0.65" ></a-dodecahedron>
                             <a-dodecahedron position="0 1.85 0" radius="0.5"></a-dodecahedron>   
                             <a-dodecahedron position="0.3 1.25 0" mixin="col-treeBottom" radius="0.75"></a-dodecahedron>
                         </a-entity>                        
@@ -1659,8 +1660,8 @@
                             <a-cylinder position="-0.221 0.445 -0.014" rotation="-60 0 0" geometry="radius: 0.025; height: 0.015; segmentsRadial: 8" scale="0.6 1 1"></a-cylinder>
                         </a-entity>
                         <a-entity class="head" mixin="col-chicken-eyes" buffer-geometry-merger>
-                            <a-sphere position="-0.2 0.48 0.04" rotation="" geometry="radius: 0.008; segmentsWidth: 6"></a-sphere>
-                            <a-sphere position="-0.2 0.48 -0.04" rotation="" geometry="radius: 0.008; segmentsWidth: 6"></a-sphere>
+                            <a-sphere position="-0.2 0.48 0.04"  geometry="radius: 0.008; segmentsWidth: 6"></a-sphere>
+                            <a-sphere position="-0.2 0.48 -0.04"  geometry="radius: 0.008; segmentsWidth: 6"></a-sphere>
                         </a-entity>
                         <a-entity class="body" mixin="col-chicken-body" buffer-geometry-merger>
                             <a-cylinder position="-0.2 0.465 0" scale="0.17904 0.24 0.10761" geometry="height: 0.3; radius: 0.2; segmentsRadial: 3; thetaLength: 180; thetaStart: 180" rotation="90 0 0"></a-cylinder>
@@ -1684,15 +1685,15 @@
 
                     <script id="tmp-sheep" type="text/html">
                         <a-entity class="body" mixin="col-sheep-body" buffer-geometry-merger>
-                            <a-dodecahedron position="0 0.45 0" scale="1.4 1 1" geometry="radius: 0.25; segmentsHeight: 8; segmentsWidth: 10" rotation=""></a-dodecahedron>
+                            <a-dodecahedron position="0 0.45 0" scale="1.4 1 1" geometry="radius: 0.25; segmentsHeight: 8; segmentsWidth: 10" ></a-dodecahedron>
                             <a-dodecahedron position="-0.34849 0.67314 0" scale="1 0.44 1" geometry="radius: 0.15" rotation="0 0 -6.15"></a-dodecahedron>
                             <a-dodecahedron position="0.33395 0.51938 0" scale="0.86 0.94 1" geometry="radius: 0.1" rotation="0 0 -45"></a-dodecahedron>
                             <a-dodecahedron position="0.14 0.28 0.13" scale="1 1.59 1" geometry="radius: 0.1" rotation="0 -8 0"></a-dodecahedron>
                             <a-dodecahedron position="0.14 0.28 -0.13" scale="1 1.59 1" geometry="radius: 0.1" rotation="0 8 0"></a-dodecahedron>
-                            <a-dodecahedron position="-0.15 0.28 0.13" scale="1 1.59 1" geometry="radius: 0.1" rotation=""></a-dodecahedron>
-                            <a-dodecahedron position="-0.15 0.28 -0.13" scale="1 1.59 1" geometry="radius: 0.1" rotation=""></a-dodecahedron>
-                            <a-sphere position="-0.47 0.55 0.065" rotation="" geometry="radius: 0.025; segmentsWidth: 4; segmentsHeight: 4"></a-sphere>
-                            <a-sphere position="-0.47 0.55 -0.065" rotation="" geometry="radius: 0.025; segmentsWidth: 4; segmentsHeight: 4"></a-sphere>
+                            <a-dodecahedron position="-0.15 0.28 0.13" scale="1 1.59 1" geometry="radius: 0.1" ></a-dodecahedron>
+                            <a-dodecahedron position="-0.15 0.28 -0.13" scale="1 1.59 1" geometry="radius: 0.1" ></a-dodecahedron>
+                            <a-sphere position="-0.47 0.55 0.065"  geometry="radius: 0.025; segmentsWidth: 4; segmentsHeight: 4"></a-sphere>
+                            <a-sphere position="-0.47 0.55 -0.065"  geometry="radius: 0.025; segmentsWidth: 4; segmentsHeight: 4"></a-sphere>
                         </a-entity>
                         <a-entity class="light-features" mixin="col-sheep-features" buffer-geometry-merger> 
                             <a-cone position="-0.42 0.49256 0" rotation="20 90 0" geometry="primitive: dodecahedron; radius: 0.15" scale="1 1.3 0.72"></a-cone>
@@ -1707,8 +1708,8 @@
                             <a-cone position="-0.135 0.15 0.136" rotation="4 90 0" geometry="radiusTop: 0.06; radiusBottom: 0.03; height: 0.3; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45"></a-cone>
                             <a-cone position="-0.135 0.15 -0.136" rotation="4 90 0" geometry="radiusTop: 0.06; radiusBottom: 0.03; height: 0.3; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45"></a-cone>
                             <a-cone position="-0.38 0.595 0" rotation="20 90 0" geometry="primitive: dodecahedron; radius: 0.15" scale="1.09 0.65 0.71"></a-cone>
-                            <a-sphere position="-0.49 0.555 -0.075" rotation="" geometry="radius: 0.005; segmentsWidth: 4; segmentsHeight: 4"></a-sphere>
-                            <a-sphere position="-0.49 0.555 0.075" rotation="" geometry="radius: 0.005; segmentsWidth: 4; segmentsHeight: 4"></a-sphere>
+                            <a-sphere position="-0.49 0.555 -0.075"  geometry="radius: 0.005; segmentsWidth: 4; segmentsHeight: 4"></a-sphere>
+                            <a-sphere position="-0.49 0.555 0.075"  geometry="radius: 0.005; segmentsWidth: 4; segmentsHeight: 4"></a-sphere>
                         </a-entity>
                     </script>
 
@@ -1717,33 +1718,33 @@
                             <a-dodecahedron position="-0.037 0.713 0" scale="2.37 0.95 1.08"geometry="radius: 0.25" rotation="0 0 -10"></a-dodecahedron>
                             <a-dodecahedron position="0.374 0.675 0" scale="1.88 1.22 1.08"geometry="radius: 0.25" rotation="0 0 10"></a-dodecahedron>
                             <a-dodecahedron position="0.579 0.69 0" scale="1.48 1.16 1"geometry="radius: 0.25" rotation="0 0 30"></a-dodecahedron>
-                            <a-dodecahedron position="-0.08 0.633 0" scale="1.57 1.07 1"geometry="radius: 0.25" rotation=""></a-dodecahedron>
+                            <a-dodecahedron position="-0.08 0.633 0" scale="1.57 1.07 1"geometry="radius: 0.25" ></a-dodecahedron>
                             <a-dodecahedron position="-0.519 0.81 0" scale="2.02 1.15 1"geometry="radius: 0.15" rotation="0 0 -20"></a-dodecahedron>
                             <a-dodecahedron position="0.73 0.5 -0.126" scale="0.8 2.22 1"geometry="radius: 0.1" rotation="0 8 15"></a-dodecahedron>
                             <a-dodecahedron position="0.73 0.5 0.126" scale="0.8 2.22 1"geometry="radius: 0.1" rotation="0 0 15"></a-dodecahedron>
-                            <a-dodecahedron position="-0.11 0.419 0.13" scale="1 2 1"geometry="radius: 0.1" rotation=""></a-dodecahedron>
-                            <a-dodecahedron position="-0.11 0.419 -0.13" scale="1 2 1"geometry="radius: 0.1" rotation=""></a-dodecahedron>
+                            <a-dodecahedron position="-0.11 0.419 0.13" scale="1 2 1"geometry="radius: 0.1" ></a-dodecahedron>
+                            <a-dodecahedron position="-0.11 0.419 -0.13" scale="1 2 1"geometry="radius: 0.1" ></a-dodecahedron>
                             <a-cone position="-0.913 0.7095 0" rotation="110 -90 0" material="flatShading: true" geometry="radiusTop: 0.05; height: 0.12; radiusBottom: 0.08; segmentsHeight: 1; segmentsRadial: 6; thetaStart: 30" scale="0.74 0.71 0.94"></a-cone>
                             <a-cone position="-0.803 0.75971 0" rotation="120 -90 0" material="flatShading: true" geometry="radiusTop: 0.05; height: 0.18; radiusBottom: 0.1; segmentsHeight: 1; segmentsRadial: 6; thetaStart: 30" scale="1.04 1.04 1.38"></a-cone>
                             <a-cone position="0.76 0.21 0.136" rotation="0 90 0" geometry="radiusTop: 0.06; radiusBottom: 0.03; height: 0.35; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45"></a-cone>
                             <a-cone position="0.76 0.21 -0.136" rotation="0 90 0" geometry="radiusTop: 0.06; radiusBottom: 0.03; height: 0.35; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45"></a-cone>
                             <a-cone position="-0.115 0.15 0.136" rotation="4 90 0" geometry="radiusTop: 0.06; radiusBottom: 0.03; height: 0.3; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45"></a-cone>
                             <a-cone position="-0.115 0.15 -0.136" rotation="4 90 0" geometry="radiusTop: 0.06; radiusBottom: 0.03; height: 0.3; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45"></a-cone>
-                            <a-sphere position="-0.7789 0.912 0.0464" rotation="" geometry="radius: 0.025; segmentsWidth: 4; segmentsHeight: 4"></a-sphere>
-                            <a-sphere position="-0.7789 0.912 -0.0464" rotation="" geometry="radius: 0.025; segmentsWidth: 4; segmentsHeight: 4"></a-sphere>
+                            <a-sphere position="-0.7789 0.912 0.0464"  geometry="radius: 0.025; segmentsWidth: 4; segmentsHeight: 4"></a-sphere>
+                            <a-sphere position="-0.7789 0.912 -0.0464"  geometry="radius: 0.025; segmentsWidth: 4; segmentsHeight: 4"></a-sphere>
                         </a-entity>
                         <a-entity mixin="${col}" buffer-geometry-merger> 
-                            <a-cylinder position="0.915 0.71553 0" rotation="0 90 0" geometry="radius: 0.01; height: 0.4; segmentsHeight: 1; segmentsRadial: 4"scale=""></a-cylinder>
-                            <a-cone position="0.915 0.56 0" rotation="0 90 0" geometry="height: 0.2; segmentsHeight: 1; segmentsRadial: 4; radiusBottom: 0.03"scale=""></a-cone>
-                            <a-cylinder position="0.85683 0.88853 0" rotation="0 0 110" geometry="radius: 0.01; height: 0.14; segmentsHeight: 1; segmentsRadial: 4"scale=""></a-cylinder>
+                            <a-cylinder position="0.915 0.71553 0" rotation="0 90 0" geometry="radius: 0.01; height: 0.4; segmentsHeight: 1; segmentsRadial: 4"></a-cylinder>
+                            <a-cone position="0.915 0.56 0" rotation="0 90 0" geometry="height: 0.2; segmentsHeight: 1; segmentsRadial: 4; radiusBottom: 0.03"></a-cone>
+                            <a-cylinder position="0.85683 0.88853 0" rotation="0 0 110" geometry="radius: 0.01; height: 0.14; segmentsHeight: 1; segmentsRadial: 4"></a-cylinder>
                             <a-dodecahedron position="-0.597 0.95 0.12" rotation="50 0 0" geometry="radius: 0.05"scale="0.49 1.04 0.63"></a-dodecahedron>
                             <a-dodecahedron position="-0.597 0.95 -0.12" rotation="-50 0 0" geometry="radius: 0.05"scale="0.49 1.04 0.63"></a-dodecahedron>
-                            <a-sphere position="-0.803 0.92 0.0491" rotation="" geometry="radius: 0.005; segmentsWidth: 4; segmentsHeight: 4"></a-sphere>
-                            <a-sphere position="-0.803 0.92 -0.0491" rotation="" geometry="radius: 0.005; segmentsWidth: 4; segmentsHeight: 4"></a-sphere>
+                            <a-sphere position="-0.803 0.92 0.0491"  geometry="radius: 0.005; segmentsWidth: 4; segmentsHeight: 4"></a-sphere>
+                            <a-sphere position="-0.803 0.92 -0.0491"  geometry="radius: 0.005; segmentsWidth: 4; segmentsHeight: 4"></a-sphere>
                              <a-dodecahedron position="-0.037 0.713 0.05" scale="2.37 0.95 1.08"geometry="radius: 0.24" rotation="0 0 -10"></a-dodecahedron>
                             <a-dodecahedron position="0.384 0.665 0" scale="1.88 1.22 1.08"geometry="radius: 0.25" rotation="0 0 10"></a-dodecahedron>
                             <a-dodecahedron position="0.579 0.69332 -0.01" scale="1.48 1.16 1"geometry="radius: 0.25" rotation="0 0 30"></a-dodecahedron>
-                            <a-dodecahedron position="-0.08 0.633 0" scale="1.57 1.07 1"geometry="radius: 0.25" rotation=""></a-dodecahedron>
+                            <a-dodecahedron position="-0.08 0.633 0" scale="1.57 1.07 1"geometry="radius: 0.25" ></a-dodecahedron>
                             <a-dodecahedron position="-0.5 0.8 -0.01" scale="2.02 1.15 1"geometry="radius: 0.15" rotation="0 0 -20"></a-dodecahedron>
                         </a-entity>
                         <a-entity mixin="col-cow-hooves" buffer-geometry-merger> 
@@ -1754,9 +1755,9 @@
                             <a-cylinder position="-0.951 0.702 0" rotation="0 90 0" geometry="radius: 0.025; height: 0.02; segmentsRadial: 6; thetaStart: 90; thetaLength: 180"></a-cylinder>                 
                         </a-entity>
                         <a-entity mixin="col-cow-udder" buffer-geometry-merger> 
-                            <a-dodecahedron position="0.513 0.458 0" scale="1.75 0.94 1"geometry="radius: 0.1" rotation=""></a-dodecahedron>
-                            <a-cone position="0.48 0.416 0" rotation="0 60 0" geometry="height: 0.2; segmentsHeight: 1; segmentsRadial: 4; radiusBottom: 0.01; radiusTop: 0.02"scale=""></a-cone>
-                            <a-cone position="0.55 0.42 0" rotation="0 90 0" geometry="height: 0.2; segmentsHeight: 11; segmentsRadial: 4; radiusBottom: 0.01; radiusTop: 0.02"scale=""></a-cone>
+                            <a-dodecahedron position="0.513 0.458 0" scale="1.75 0.94 1"geometry="radius: 0.1" ></a-dodecahedron>
+                            <a-cone position="0.48 0.416 0" rotation="0 60 0" geometry="height: 0.2; segmentsHeight: 1; segmentsRadial: 4; radiusBottom: 0.01; radiusTop: 0.02"></a-cone>
+                            <a-cone position="0.55 0.42 0" rotation="0 90 0" geometry="height: 0.2; segmentsHeight: 11; segmentsRadial: 4; radiusBottom: 0.01; radiusTop: 0.02"></a-cone>
                         </a-entity>
                     </script>
 
@@ -1767,8 +1768,8 @@
                             <a-dodecahedron position="0.05845 0.35987 0" scale="1.61 1.02 0.97" geometry="radius: 0.1" rotation="0 0 -20"></a-dodecahedron>
                             <a-dodecahedron position="0.44394 0.2 0.1" scale="0.5 1.25 0.5" geometry="radius: 0.1" rotation="0 0 5"></a-dodecahedron>
                             <a-dodecahedron position="0.44394 0.2 -0.1" scale="0.5 1.25 0.5" geometry="radius: 0.1" rotation="0 0 5"></a-dodecahedron>
-                            <a-dodecahedron position="0.15 0.2 0.1" scale="0.5 1.25 0.5" geometry="radius: 0.1" rotation=""></a-dodecahedron>
-                            <a-dodecahedron position="0.15 0.2 -0.1" scale="0.5 1.25 0.5" geometry="radius: 0.1" rotation=""></a-dodecahedron>
+                            <a-dodecahedron position="0.15 0.2 0.1" scale="0.5 1.25 0.5" geometry="radius: 0.1" ></a-dodecahedron>
+                            <a-dodecahedron position="0.15 0.2 -0.1" scale="0.5 1.25 0.5" geometry="radius: 0.1" ></a-dodecahedron>
                             <a-cone position="-0.105 0.38268 0" rotation="70 -90 0" material="flatShading: true" geometry="radiusTop: 0.03; height: 0.19; radiusBottom: 0.07; segmentsHeight: 1; segmentsRadial: 6; thetaStart: 30" scale="1.03 0.82 0.94"></a-cone>
                             <a-cone position="0.439 0.075 0.1" rotation="15 90 0" geometry="radiusTop: 0.03; radiusBottom: 0.02; height: 0.15; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45"></a-cone>
                             <a-cone position="0.439 0.075 -0.1" rotation="15 90 0" geometry="radiusTop: 0.03; radiusBottom: 0.02; height: 0.15; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45"></a-cone>
@@ -1776,8 +1777,8 @@
                             <a-cone position="0.144 0.075 -0.1" rotation="0 0 -8" geometry="radiusTop: 0.03; radiusBottom: 0.02; height: 0.15; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45"></a-cone>
                         </a-entity>
                         <a-entity class="body"  mixin="col-pig-eyes" buffer-geometry-merger>
-                            <a-sphere position="-0.08 0.421 0.036" rotation="" geometry="radius: 0.015; segmentsWidth: 4; segmentsHeight: 4"></a-sphere>
-                            <a-sphere position="-0.08 0.421 -0.036" rotation="" geometry="radius: 0.015; segmentsWidth: 4; segmentsHeight: 4"></a-sphere>
+                            <a-sphere position="-0.08 0.421 0.036"  geometry="radius: 0.015; segmentsWidth: 4; segmentsHeight: 4"></a-sphere>
+                            <a-sphere position="-0.08 0.421 -0.036"  geometry="radius: 0.015; segmentsWidth: 4; segmentsHeight: 4"></a-sphere>
                         </a-entity>
                         <a-entity  mixin="col-pig-darker" buffer-geometry-merger>                             
                             <a-torus-knot position="0.54 0.41 0" rotation="0 0 -155.5" geometry="radius: 0.1; segmentsRadial: 3; radiusTubular: 0.01; segmentsTubular: 10; p: 1.5; q: 1" scale="0.5 0.5 0.56"></a-torus-knot>
@@ -1792,8 +1793,8 @@
                             <a-cone position="0.42 0.01 -0.1" rotation="0 90 0" geometry="radiusBottom: 0.03; height: 0.02; segmentsRadial: 4; thetaStart: 45"></a-cone>                            
                         </a-entity>
                         <a-entity mixin="col-pig-features" buffer-geometry-merger> 
-                            <a-sphere position="-0.089 0.427 0.039" rotation="" geometry="radius: 0.005; segmentsWidth: 4; segmentsHeight: 4"></a-sphere>
-                            <a-sphere position="-0.089 0.427 -0.039" rotation="" geometry="radius: 0.005; segmentsWidth: 4; segmentsHeight: 4"></a-sphere>
+                            <a-sphere position="-0.089 0.427 0.039"  geometry="radius: 0.005; segmentsWidth: 4; segmentsHeight: 4"></a-sphere>
+                            <a-sphere position="-0.089 0.427 -0.039"  geometry="radius: 0.005; segmentsWidth: 4; segmentsHeight: 4"></a-sphere>
                         </a-entity>
                     </script>
 
@@ -1823,12 +1824,12 @@
                         </a-entity>
                     </script>
 
-                    <script id="tmp-dumpster" type="text/html">
+                    <script id="tmp-skip" type="text/html">
                         <a-entity mixin="${bincol}" buffer-geometry-merger>
-                            <a-cone position="0 0.3 0" rotation="" geometry="height: 0.6; radiusBottom: 0.95; radiusTop: 1; segmentsRadial: 4; thetaStart: 45" scale="1 1 0.7"></a-cone>
+                            <a-cone position="0 0.3 0"  geometry="height: 0.6; radiusBottom: 0.95; radiusTop: 1; segmentsRadial: 4; thetaStart: 45" scale="1 1 0.7"></a-cone>
                             <a-cylinder position="0 0.6 -0.5" rotation="90 90 0" geometry="radius: 0.5; height: 1.42; segmentsHeight: 1; segmentsRadial: 3; thetaLength: 90; thetaStart: 180" scale="2 1 0.2"></a-cylinder>
                             <a-cone position="0 0.35 -0.48129" rotation="-3 0 0" geometry="height: 0.7; radiusBottom: 0.95; radiusTop: 1.01; segmentsRadial: 4; thetaStart: 45" scale="1 1 0.01"></a-cone>
-                            <a-cone position="0 0.35 0" rotation="" geometry="height: 0.31; radiusBottom: 0.49; radiusTop: 0.5; segmentsRadial: 4; thetaStart: 45" scale="2.1 1 0.5"></a-cone>
+                            <a-cone position="0 0.35 0"  geometry="height: 0.31; radiusBottom: 0.49; radiusTop: 0.5; segmentsRadial: 4; thetaStart: 45" scale="2.1 1 0.5"></a-cone>
                             <a-cylinder position="0 0.6 -0.21716" rotation="90 90 0" geometry="radius: 0.01; height: 0.3"></a-cylinder>
                         </a-entity>
                         <a-cylinder mixin="${panecol}" position="0 0.3 0.49" rotation="2 0 0" geometry="primitive: box; height: 0.38" scale="0.6 0.7 0.01"></a-cylinder>
@@ -1905,44 +1906,44 @@
 
 
                <a-curve id="duck-path-points" curve="closed: true">
-                    <a-curve-point position="44.20029 -4 49.17066" curve-point=""></a-curve-point>
-                    <a-curve-point position="59.25091 -4 42.16214" curve-point=""></a-curve-point>
-                    <a-curve-point position="63.90534 -4 17.83288" curve-point=""></a-curve-point>
-                    <a-curve-point position="76.01143 -4 8.39313" curve-point=""></a-curve-point>
-                    <a-curve-point position="80.37552 -4 -9.11185" curve-point=""></a-curve-point>
-                    <a-curve-point position="82.97661 -4 -25.46591" curve-point=""></a-curve-point>
-                    <a-curve-point position="79.44372 -4 -47.4651" curve-point=""></a-curve-point>
-                    <a-curve-point position="49.41004 -4 -71.70495" curve-point=""></a-curve-point>
-                    <a-curve-point position="42.19465 -4 -60.5077" curve-point=""></a-curve-point>
-                    <a-curve-point position="74.02973 -4 -55.94726" curve-point=""></a-curve-point>
-                    <a-curve-point position="82.35734 -4 -23.4595" curve-point=""></a-curve-point>
-                    <a-curve-point position="61.94721 -4 11.23928" curve-point=""></a-curve-point>
-                    <a-curve-point position="54.85139 -4 18.57802" curve-point=""></a-curve-point>
-                    <a-curve-point position="45.17089 -4 11.43647" curve-point=""></a-curve-point>
+                    <a-curve-point position="44.20029 -4 49.17066" ></a-curve-point>
+                    <a-curve-point position="59.25091 -4 42.16214" ></a-curve-point>
+                    <a-curve-point position="63.90534 -4 17.83288" ></a-curve-point>
+                    <a-curve-point position="76.01143 -4 8.39313" ></a-curve-point>
+                    <a-curve-point position="80.37552 -4 -9.11185" ></a-curve-point>
+                    <a-curve-point position="82.97661 -4 -25.46591" ></a-curve-point>
+                    <a-curve-point position="79.44372 -4 -47.4651" ></a-curve-point>
+                    <a-curve-point position="49.41004 -4 -71.70495" ></a-curve-point>
+                    <a-curve-point position="42.19465 -4 -60.5077" ></a-curve-point>
+                    <a-curve-point position="74.02973 -4 -55.94726" ></a-curve-point>
+                    <a-curve-point position="82.35734 -4 -23.4595" ></a-curve-point>
+                    <a-curve-point position="61.94721 -4 11.23928" ></a-curve-point>
+                    <a-curve-point position="54.85139 -4 18.57802" ></a-curve-point>
+                    <a-curve-point position="45.17089 -4 11.43647" ></a-curve-point>
                 </a-curve>
-               <a-curve id="airplane-path-points" curve="closed: true" rotation="">
-                    <a-curve-point position="-12.6 1 -55.1" curve-point=""></a-curve-point>
-                    <a-curve-point position="-19.5 1 -55.51" curve-point=""></a-curve-point>
-                    <a-curve-point position="-18.15 1 -51.82" curve-point=""></a-curve-point>
-                    <a-curve-point position="-13.51 1 -54.16" curve-point=""></a-curve-point>
-                    <a-curve-point position="0.71 1 -62.17" curve-point=""></a-curve-point>
-                    <a-curve-point position="24.1 1 -76.05" curve-point=""></a-curve-point>
-                    <a-curve-point position="48.25 5 -88.84" curve-point=""></a-curve-point>
-                    <a-curve-point position="70.95 15 -68.5" curve-point=""></a-curve-point>
-                    <a-curve-point position="85.45 25 -25.2" curve-point=""></a-curve-point>
-                    <a-curve-point position="71.56 30 32.1" curve-point=""></a-curve-point>
-                    <a-curve-point position="27.45 35 77.4" curve-point=""></a-curve-point>
-                    <a-curve-point position="-34.97 40 97.26" curve-point=""></a-curve-point>
-                    <a-curve-point position="-91.3 45 118.6" curve-point=""></a-curve-point>
-                    <a-curve-point position="-137.5 45 65.2" curve-point=""></a-curve-point>
-                    <a-curve-point position="-147.6 45 -23" curve-point=""></a-curve-point>
-                    <a-curve-point position="-102.5 40 -86.2" curve-point=""></a-curve-point>
-                    <a-curve-point position="-4.5 35 -119.2" curve-point=""></a-curve-point>
-                    <a-curve-point position="66.1 30 -127.8" curve-point=""></a-curve-point>
-                    <a-curve-point position="88.6 25 -98.9" curve-point=""></a-curve-point>
-                    <a-curve-point position="53.3 15 -89.2" curve-point=""></a-curve-point>
-                    <a-curve-point position="32.1 5 -80.9" curve-point=""></a-curve-point>
-                    <a-curve-point position="16.3 1 -71.7" curve-point=""></a-curve-point>
+               <a-curve id="airplane-path-points" curve="closed: true" >
+                    <a-curve-point position="-12.6 1 -55.1" ></a-curve-point>
+                    <a-curve-point position="-19.5 1 -55.51" ></a-curve-point>
+                    <a-curve-point position="-18.15 1 -51.82" ></a-curve-point>
+                    <a-curve-point position="-13.51 1 -54.16" ></a-curve-point>
+                    <a-curve-point position="0.71 1 -62.17" ></a-curve-point>
+                    <a-curve-point position="24.1 1 -76.05" ></a-curve-point>
+                    <a-curve-point position="48.25 5 -88.84" ></a-curve-point>
+                    <a-curve-point position="70.95 15 -68.5" ></a-curve-point>
+                    <a-curve-point position="85.45 25 -25.2" ></a-curve-point>
+                    <a-curve-point position="71.56 30 32.1" ></a-curve-point>
+                    <a-curve-point position="27.45 35 77.4" ></a-curve-point>
+                    <a-curve-point position="-34.97 40 97.26" ></a-curve-point>
+                    <a-curve-point position="-91.3 45 118.6" ></a-curve-point>
+                    <a-curve-point position="-137.5 45 65.2" ></a-curve-point>
+                    <a-curve-point position="-147.6 45 -23" ></a-curve-point>
+                    <a-curve-point position="-102.5 40 -86.2" ></a-curve-point>
+                    <a-curve-point position="-4.5 35 -119.2" ></a-curve-point>
+                    <a-curve-point position="66.1 30 -127.8" ></a-curve-point>
+                    <a-curve-point position="88.6 25 -98.9" ></a-curve-point>
+                    <a-curve-point position="53.3 15 -89.2" ></a-curve-point>
+                    <a-curve-point position="32.1 5 -80.9" ></a-curve-point>
+                    <a-curve-point position="16.3 1 -71.7" ></a-curve-point>
                 </a-curve>
                 <!-- <a-curve id="sun-path-pointsToNow"></a-curve> -->
                 <!-- <a-draw-curve id="sun-pathToNow" curveref="#sun-path-pointsToNow" material="shader: line; color: none"></a-draw-curve> -->
@@ -1987,7 +1988,7 @@
                 <!-- ENVIRONMENT-->
                 <a-entity id = "environment-group"  class="environment" >
                     <!-- SKY -->
-                    <a-sky id="sky" radius="200" theta-length="200" material="shader: gradientshader; topColor: #edc7f5; bottomColor: #ddd" visible="" ></a-sky>
+                    <a-sky id="sky" radius="200" theta-length="200" material="shader: gradientshader; topColor: #edc7f5; bottomColor: #ddd"  ></a-sky>
                     <a-entity id = "cloud-group">
                     </a-entity>
 
@@ -2012,7 +2013,7 @@
                     </a-entity>
                 
                     <a-entity id="ground-group" class="topography-group" position="0 2.85 0">
-                        <a-entity id="central-ground"  class="surface"  mixin="ground-zone" position=""></a-entity>
+                        <a-entity id="central-ground"  class="surface"  mixin="ground-zone" ></a-entity>
                         <a-entity id="industrial-ground" class="surface"  mixin="ground-zone" position="0 0 -51.8"></a-entity>
                         <a-entity id="urban-ground"  class="surface"  mixin="ground-zone" position="44.8 0 -25.9"></a-entity>
                         <a-entity id="suburban-ground" class="surface"  mixin="ground-zone" position="0 0 51.8"></a-entity>
@@ -2268,7 +2269,7 @@
 
                         <a-entity id="outOfBoundary-roads" position="0 3 0">
                             <a-entity class="road-group tarmac"  mixin="col-road"  buffer-geometry-merger>
-                                <a-torus class="road"  mixin="col-road"  position="-72 0 -37.5" geometry="radius: 37.6; radiusTubular: 0.74; segmentsRadial: 16; segmentsTubular: 27; arc: 180" rotation="90 270 0" scale="1 1 0.05""></a-torus>
+                                <a-torus class="road"  mixin="col-road"  position="-72 0 -37.5" geometry="radius: 37.6; radiusTubular: 0.74; segmentsRadial: 16; segmentsTubular: 27; arc: 180" rotation="90 270 0" scale="1 1 0.05"></a-torus>
                                 <a-box class="road" mixin="road" position="-65.932 0 0" rotation="0 90 0" geometry="depth: 12.1" ></a-box>                            
                             </a-entity>		
                             <a-entity class="road-lines" mixin="col-line" buffer-geometry-merger>
@@ -2489,7 +2490,7 @@
                     <!-- Vehicles -->
                     <a-entity id="vehicles-group" position="0 3 0"  visible="true">
                         <!-- <a-entity id="train" gltf-model="#mdl-train" position="0 0.2 -38.696" rotation="0 -90 0" scale="0.05 0.05 0.05"></a-entity>        -->
-                        <a-entity class="ev-group" visible="">
+                        <a-entity class="ev-group" >
                             <a-entity class="ev cybertruck"   position="34.8 0.15 -8" rotation="0 0 0" 
                                 template="src: #tmp-cybertruck" data-basecol="col-vehicle-electricBlue" data-trimcol="col-vehicle-trimDark"></a-entity>
                             <a-entity class="ev lcv cybertruck" position="34.8 0.15 -8" rotation="0 0 0"
@@ -2531,13 +2532,7 @@
                 <a-entity id = "featuresByzone-group" visible="true">
                     <!--- CENTRAL ZONE -->
                     <a-entity id="central-zone" class="zone-group" position="0 3 0" visible="true">
-                        
-                        <a-entity position= "-0.4 0 0" template="src: #tmp-bin" data-lidcol="col-bin-green" ></a-entity>
-                        <a-entity position= "0 0 0" template="src: #tmp-bin" data-lidcol="col-bin-lid-yellow" ></a-entity>
-                        <a-entity position= "0.4 0 0" template="src: #tmp-bin" data-lidcol="col-bin-lid-purple" ></a-entity>
-                        <a-entity position= "4 0 0" template="src: #tmp-dumpster" 
-                            data-bincol="col-bin-green"  data-lidcol="col-bin-lid-purple" data-panecol="col-bin-pane" ></a-entity>
-                        
+
                         <a-entity class="house-small" position="8 0 0" visible = "false">
                             <a-entity class="home-small" position="-0.5 0 0">
                                 <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="palette-A-03"></a-entity>
@@ -2736,7 +2731,7 @@
                         <!-- Street furniture -->
                         <a-entity class = "street-furniture">
                             <a-entity class = "lighting-foreshore" position="-19.6 0.3 16.7" rotation="0 90 0">
-                                <a-entity  class="lamp-pole" template="src: #tmp-lamp-pole"  position=""></a-entity>
+                                <a-entity  class="lamp-pole" template="src: #tmp-lamp-pole"  ></a-entity>
                                 <a-entity  class="lamp-pole" template="src: #tmp-lamp-pole"  position="3 0 0"></a-entity>
                                 <a-entity  class="lamp-pole" template="src: #tmp-lamp-pole"  position="6 0 0"></a-entity>
                                 <a-entity  class="lamp-pole" template="src: #tmp-lamp-pole"  position="9 0 0"></a-entity>
@@ -2752,22 +2747,22 @@
 
                         <!--Green infrastructure-->
                         <a-entity class="native-vegetation">
-                            <a-entity class="tree-round" template="src:#tmp-tree-round" position="-4.39496 0.3 -1.47384" scale=""></a-entity>
-                            <a-entity class="tree-round" template="src:#tmp-tree-round" position="6.05702 0.3 -1.72856" rotation="0 45 0" scale=""></a-entity>
-                            <a-entity class="tree-round" template="src:#tmp-tree-round" position="-12.33964 0.3 -1.41644" rotation="0 -30 0" scale=""></a-entity>
-                            <a-entity class="tree-round" template="src:#tmp-tree-round" position="3.75517 0 -22.51554" scale=""></a-entity>
-                            <a-entity class="tree-round" template="src:#tmp-tree-round" position="-22.18445 0.3 -14.73538" scale=""></a-entity>
-                            <a-entity class="tree-round" template="src:#tmp-tree-round" position="-22.17561 0.3 -8.203" scale=""></a-entity>
-                            <a-entity class="tree-round" template="src:#tmp-tree-round" position="-22.623 0.3 -1.68259" scale=""></a-entity>
-                            <a-entity class="tree-round" template="src:#tmp-tree-round" position="-22.76725 0.3 3.95325" scale=""></a-entity>
-                            <a-entity class="tree-round" template="src:#tmp-tree-round" position="-22.41959 0.3 9.05005" scale=""></a-entity>
-                            <!-- <a-entity class="tree-round" template="src:#tmp-tree-round" position="-22.50862 0.3 13.81054" scale=""></a-entity> -->
-                            <a-entity class="tree-round" template="src:#tmp-tree-round" position="-10.26939 0 -24.07192" scale=""></a-entity>
-                            <a-entity class="tree-round" template="src:#tmp-tree-round" position="-7.42664 0 -15.88383" scale=""></a-entity>
-                            <a-entity class="tree-round" template="src:#tmp-tree-round" position="-4.10336 0 -15.8762" scale=""></a-entity>
-                            <a-entity class="tree-round" template="src:#tmp-tree-round" position="-0.3619 0 -16.13021" scale=""></a-entity>
-                            <!-- <a-entity class="tree-round" template="src:#tmp-tree-round" position="14.88314 0 13.05711" scale=""></a-entity> -->
-                            <a-entity class="tree-round" template="src:#tmp-tree-round" position="17.90832 0 -16.76569" scale=""></a-entity>
+                            <a-entity class="tree-round" template="src:#tmp-tree-round" position="-4.39496 0.3 -1.47384" ></a-entity>
+                            <a-entity class="tree-round" template="src:#tmp-tree-round" position="6.05702 0.3 -1.72856" rotation="0 45 0" ></a-entity>
+                            <a-entity class="tree-round" template="src:#tmp-tree-round" position="-12.33964 0.3 -1.41644" rotation="0 -30 0" ></a-entity>
+                            <a-entity class="tree-round" template="src:#tmp-tree-round" position="3.75517 0 -22.51554" ></a-entity>
+                            <a-entity class="tree-round" template="src:#tmp-tree-round" position="-22.18445 0.3 -14.73538" ></a-entity>
+                            <a-entity class="tree-round" template="src:#tmp-tree-round" position="-22.17561 0.3 -8.203" ></a-entity>
+                            <a-entity class="tree-round" template="src:#tmp-tree-round" position="-22.623 0.3 -1.68259" ></a-entity>
+                            <a-entity class="tree-round" template="src:#tmp-tree-round" position="-22.76725 0.3 3.95325" ></a-entity>
+                            <a-entity class="tree-round" template="src:#tmp-tree-round" position="-22.41959 0.3 9.05005" ></a-entity>
+                            <!-- <a-entity class="tree-round" template="src:#tmp-tree-round" position="-22.50862 0.3 13.81054" ></a-entity> -->
+                            <a-entity class="tree-round" template="src:#tmp-tree-round" position="-10.26939 0 -24.07192" ></a-entity>
+                            <a-entity class="tree-round" template="src:#tmp-tree-round" position="-7.42664 0 -15.88383" ></a-entity>
+                            <a-entity class="tree-round" template="src:#tmp-tree-round" position="-4.10336 0 -15.8762" ></a-entity>
+                            <a-entity class="tree-round" template="src:#tmp-tree-round" position="-0.3619 0 -16.13021" ></a-entity>
+                            <!-- <a-entity class="tree-round" template="src:#tmp-tree-round" position="14.88314 0 13.05711" ></a-entity> -->
+                            <a-entity class="tree-round" template="src:#tmp-tree-round" position="17.90832 0 -16.76569" ></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-12.48409 0 19.46941" scale="2.5 2.5 2.5"></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-16.06589 0 19.08377" scale="1.5 1.5 1.5"></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="11.13594 0 19.11991" scale="2.5 2.5 2.5"></a-entity>
@@ -2775,7 +2770,7 @@
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="13.9735 0 19.09466" scale="1.5 1.5 1.5"></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-21.25399 0 -18.96371" scale="2 2 2.05"></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-9.54958 0 -21.07997" scale="1.5 1.5 1.5"></a-entity>
-                            <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="0.49533 0 -21.95663" scale=""></a-entity>
+                            <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="0.49533 0 -21.95663" ></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="22.46062 0 13.43536" scale="2.5 2.5 2.5"></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-25.84183 0 -16.54463" scale="1.5 1.5 1.5"></a-entity>
                             <!-- <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="8.32131 0 13.02088" scale="2.5 2.5 2.5"></a-entity> -->
@@ -2790,6 +2785,39 @@
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-21.20158 0 15.53591" scale="2 2 2.05"></a-entity>
                         </a-entity>
 
+                        <!-- Waste -->
+                        <a-entity class="waste-skips" position = "0 0.3 0">
+                            <a-entity position ="2.1 0 -6.8" rotation="0 90 0">
+                                <a-entity position= "-1.5 0 0" template="src: #tmp-skip" 
+                                    data-bincol="col-bin-green"  data-lidcol="col-bin-lid-black" data-panecol="col-bin-pane" ></a-entity>
+                                <a-entity position= "0 0 0" template="src: #tmp-skip" 
+                                    data-bincol="col-bin-green"  data-lidcol="col-bin-lid-black" data-panecol="col-bin-pane" ></a-entity>
+                                <a-entity position= "1.5 0 0" template="src: #tmp-skip" 
+                                    data-bincol="col-bin-green"  data-lidcol="col-bin-lid-yellow" data-panecol="col-bin-pane" ></a-entity>
+                            </a-entity>
+                            <a-entity position ="-1.7 0 6.8" rotation="0 90 0">
+                                <a-entity position= "-1.5 0 0" template="src: #tmp-skip" 
+                                    data-bincol="col-bin-green"  data-lidcol="col-bin-lid-black" data-panecol="col-bin-pane" ></a-entity>
+                                <a-entity position= "0 0 0" template="src: #tmp-skip" 
+                                    data-bincol="col-bin-green"  data-lidcol="col-bin-lid-black" data-panecol="col-bin-pane" ></a-entity>
+                                <a-entity position= "1.5 0 0" template="src: #tmp-skip" 
+                                    data-bincol="col-bin-green"  data-lidcol="col-bin-lid-yellow" data-panecol="col-bin-pane" ></a-entity>
+                            </a-entity>
+                            <a-entity position ="-5 0 -9.7" rotation="0 180 0">
+                                <a-entity position= "-3 0 0" template="src: #tmp-skip" 
+                                    data-bincol="col-bin-green"  data-lidcol="col-bin-lid-black" data-panecol="col-bin-pane" ></a-entity>
+                                <a-entity position= "-1.5 0 0" template="src: #tmp-skip" 
+                                    data-bincol="col-bin-green"  data-lidcol="col-bin-lid-black" data-panecol="col-bin-pane" ></a-entity>
+                                <a-entity position= "0 0 0" template="src: #tmp-skip" 
+                                    data-bincol="col-bin-green"  data-lidcol="col-bin-lid-black" data-panecol="col-bin-pane" ></a-entity>
+                                <a-entity position= "1.5 0 0" template="src: #tmp-skip" 
+                                    data-bincol="col-bin-green"  data-lidcol="col-bin-lid-yellow" data-panecol="col-bin-pane" ></a-entity>
+                                <a-entity position= "3 0 0" template="src: #tmp-skip" 
+                                    data-bincol="col-bin-green"  data-lidcol="col-bin-lid-yellow" data-panecol="col-bin-pane" ></a-entity>
+                            </a-entity>
+
+                        </a-entity>
+
                         <!-- Built environment-->
                         <a-entity id = "grand-hotel" class="hotel" position="0 0 16" rotation="0 0 0">
                             <a-entity class="main-building" >
@@ -2800,9 +2828,9 @@
                                     <!--Light trim -->
                                     <a-entity class ="trim-group" mixin="col-hotel-trim" buffer-geometry-merger>
                                         <!--Entrance -->
-                                        <a-cylinder class="hotel-base lower" rotation="0 90 90" position="0 2.7 4.2" geometry="radius: 0.65; height: 0.2; segmentsRadial: 8; thetaLength: 180"  scale=""></a-cylinder>
-                                        <a-cylinder class="hotel-base lower" rotation="0 90 90" position="-0.65 2.5 4.2" geometry="radius: 0.55; height: 0.2; segmentsRadial: 8; thetaLength: 180"  scale=""></a-cylinder>
-                                        <a-cylinder class="hotel-base lower" rotation="0 90 90" position="0.65 2.5 4.2" geometry="radius: 0.55; height: 0.2; segmentsRadial: 8; thetaLength: 180"  scale=""></a-cylinder>
+                                        <a-cylinder class="hotel-base lower" rotation="0 90 90" position="0 2.7 4.2" geometry="radius: 0.65; height: 0.2; segmentsRadial: 8; thetaLength: 180"  ></a-cylinder>
+                                        <a-cylinder class="hotel-base lower" rotation="0 90 90" position="-0.65 2.5 4.2" geometry="radius: 0.55; height: 0.2; segmentsRadial: 8; thetaLength: 180"  ></a-cylinder>
+                                        <a-cylinder class="hotel-base lower" rotation="0 90 90" position="0.65 2.5 4.2" geometry="radius: 0.55; height: 0.2; segmentsRadial: 8; thetaLength: 180"  ></a-cylinder>
                                     </a-entity>
                                     <!--Doors-->
                                     <a-entity class ="doors-group" mixin="col-hotel-door" buffer-geometry-merger>
@@ -2855,212 +2883,212 @@
                                         <a-entity position="0 -1.15 0.5" >
                                             <a-entity position="1.5 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 7.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="2.25 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 7.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="-1.5 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 7.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="-2.25 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 7.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                         </a-entity>
                                         <a-entity position="0 0 0.5" >
                                             <a-entity position="0 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 7.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="0.75 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 7.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="1.5 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 7.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="2.25 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 7.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="-0.75 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 7.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="-1.5 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 7.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="-2.25 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 7.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                         </a-entity>
                                         <a-entity position="0 1.15 0.5" >
                                             <a-entity position="0 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 7.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="0.75 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 7.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="1.5 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 7.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="2.25 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 7.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="-0.75 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 7.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="-1.5 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 7.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="-2.25 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 7.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                         </a-entity>
                                         <a-entity position="0 2.30 0.5" >
                                             <a-entity position="0 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 7.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="0.75 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 7.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="1.5 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 7.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="2.25 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 7.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="-0.75 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 7.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="-1.5 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 7.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="-2.25 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 7.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                         </a-entity>
                                         <!-- Windows: sides  -->
                                         <a-entity position="0 0 0.375" rotation="0 90 0" >
                                             <a-entity position="0 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 18.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="0.75 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 18.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="1.5 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 18.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="2.25 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 18.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="3.0 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 18.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="-0.75 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 18.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="-1.5 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 18.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="-2.25 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 18.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                         </a-entity>
                                         <a-entity position="0 -1.15 0.375" rotation="0 90 0" >
                                             <a-entity position="0 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 18.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="0.75 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 18.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="1.5 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 18.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="2.25 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 18.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="3.0 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 18.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="-0.75 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 18.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="-1.5 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 18.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="-2.25 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 18.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                         </a-entity>
                                         <a-entity position="0 1.15 0.375" rotation="0 90 0" >
                                             <a-entity position="0 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 18.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="0.75 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 18.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="1.5 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 18.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="2.25 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 18.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="3.0 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 18.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="-0.75 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 18.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="-1.5 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 18.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="-2.25 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 18.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 18.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                         </a-entity>
                                     </a-entity>
@@ -3101,8 +3129,8 @@
                                     </a-entity>
                                     <!-- Roof -->
                                     <a-entity class ="roof-group" mixin="col-hotel-roof" buffer-geometry-merger>
-                                        <a-cone class="hotel-roof"  position="0 6.8 0"  geometry="radiusTop: 2; radiusBottom: 4; segmentsRadial: 4" rotation="0 45 0" scale=""></a-cone>
-                                        <a-cone class="hotel-roof"  position="2 6.8 0"  geometry="radiusTop: 2; radiusBottom: 4; segmentsRadial: 4" rotation="0 45 0" scale=""></a-cone>  
+                                        <a-cone class="hotel-roof"  position="0 6.8 0"  geometry="radiusTop: 2; radiusBottom: 4; segmentsRadial: 4" rotation="0 45 0" ></a-cone>
+                                        <a-cone class="hotel-roof"  position="2 6.8 0"  geometry="radiusTop: 2; radiusBottom: 4; segmentsRadial: 4" rotation="0 45 0" ></a-cone>  
                                         <a-cone position="0 6.8 3.05" geometry="height: 0.3; radiusTop: 0; radiusBottom: 0.02" material="flatShading: true"> </a-cone>
                                         <a-cone position="1 6.8 3.05" geometry="height: 0.3; radiusTop: 0; radiusBottom: 0.02" material="flatShading: true"> </a-cone>
                                         <a-cone position="2 6.8 3.05" geometry="height: 0.3; radiusTop: 0; radiusBottom: 0.02" material="flatShading: true"> </a-cone>
@@ -3147,105 +3175,105 @@
                                             <a-box  position="-1.5 2 3.525" scale="0.4 0.6 0.1"></a-box>
                                             <a-entity position="-1.5 0 3.525" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 0.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 0.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 0.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>   
                                                 <a-entity position="-1.5 -1.15 3.525" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 0.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 0.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 0.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>   
                                                 <a-entity position="-1.5 1.15 3.525" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 0.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 0.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 0.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>   
                                         </a-entity> 
                                         <a-entity position="0.25 -1.15 0" >
                                             <a-entity position="0 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="0.75 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="1.5 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="2.25 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="-0.75 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="-1.5 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="-2.75 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                         </a-entity>
                                         <a-entity position="0.25 0 0" >
                                             <a-entity position="0 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="0.75 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="1.5 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="2.25 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="-0.75 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="-1.5 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="-2.75 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                         </a-entity>
                                         <a-entity position="0.25 1.15 0" >
                                             <a-entity position="0 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="0.75 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="1.5 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="2.25 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="-0.75 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="-1.5 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="-2.75 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                         </a-entity>
                                     </a-entity>
@@ -3268,8 +3296,8 @@
                                     </a-entity>
                                     <!-- Roof -->
                                     <a-entity class ="roof-group" mixin="col-hotel-roof" buffer-geometry-merger>
-                                        <a-cone class="hotel-roof" position="0 6.8 0"  geometry="radiusTop: 2; radiusBottom: 4; segmentsRadial: 4" rotation="0 45 0" scale=""></a-cone>
-                                        <a-cone class="hotel-roof" position="-2 6.8 0"  geometry="radiusTop: 2; radiusBottom: 4; segmentsRadial: 4" rotation="0 45 0" scale=""></a-cone>  
+                                        <a-cone class="hotel-roof" position="0 6.8 0"  geometry="radiusTop: 2; radiusBottom: 4; segmentsRadial: 4" rotation="0 45 0" ></a-cone>
+                                        <a-cone class="hotel-roof" position="-2 6.8 0"  geometry="radiusTop: 2; radiusBottom: 4; segmentsRadial: 4" rotation="0 45 0" ></a-cone>  
                                         <a-cone position="0 6.8 3.05" geometry="height: 0.3; radiusTop: 0; radiusBottom: 0.02" material="flatShading: true"> </a-cone>
                                         <a-cone position="-1 6.8 3.05" geometry="height: 0.3; radiusTop: 0; radiusBottom: 0.02" material="flatShading: true"> </a-cone>
                                         <a-cone position="-2 6.8 3.05" geometry="height: 0.3; radiusTop: 0; radiusBottom: 0.02" material="flatShading: true"> </a-cone>
@@ -3316,105 +3344,105 @@
                                             <a-box  position="1.5 2 3.525" scale="0.4 0.6 0.1"></a-box>
                                             <a-entity position="1.5 0 3.525" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 0.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 0.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 0.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>   
                                             <a-entity position="1.5 -1.15 3.525" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 0.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 0.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 0.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>   
                                             <a-entity position="1.5 1.15 3.525" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 0.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 0.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 0.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>   
                                         </a-entity> 
                                         <a-entity position="-0.25 -1.15 0" >
                                             <a-entity position="0 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="-0.75 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="-1.5 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="-2.25 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="0.75 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="1.5 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="2.75 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                         </a-entity>
                                         <a-entity position="-0.25 0 0" >
                                             <a-entity position="0 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="-0.75 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="-1.5 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="-2.25 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="0.75 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="1.5 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="2.75 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                         </a-entity>
                                         <a-entity position="-0.25 1.15 0" >
                                             <a-entity position="0 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="-0.75 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="-1.5 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="-2.25 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="0.75 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="1.5 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                             <a-entity position="2.75 0 0" >
                                                 <a-box position="0 4.05 0" scale="0.3 0.5 6.1"></a-box>
-                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  scale=""></a-cylinder>
+                                                <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 6.1; segmentsRadial: 12; thetaLength: 180"  ></a-cylinder>
                                             </a-entity>
                                         </a-entity>
                                     </a-entity>
@@ -3732,9 +3760,9 @@
                                     <a-entity class="fontFacade-group" position="3 0 0">
                                         <a-entity class="frontWall-group" mixin="col-townhouse-A-brick" buffer-geometry-merger>
                                             <a-box position="0.225 2 -0.05" scale="3.1 4 0.1" ></a-box>
-                                            <a-box position="2 1.375 -0.05" scale="0.5 2.75 0.1"  visible=""></a-box>
-                                            <a-box position="-2.7 2 -0.05" scale="0.6 4 0.1"  visible=""></a-box>
-                                            <a-box position="-1.875 3.85 -0.05" scale="1.2 0.3 0.1"  visible=""></a-box>
+                                            <a-box position="2 1.375 -0.05" scale="0.5 2.75 0.1"  ></a-box>
+                                            <a-box position="-2.7 2 -0.05" scale="0.6 4 0.1"  ></a-box>
+                                            <a-box position="-1.875 3.85 -0.05" scale="1.2 0.3 0.1"  ></a-box>
                                         </a-entity>  
                                         <a-entity class="facade-features" position="0 0 -0.05">
                                             <a-entity class="door-group">
@@ -3850,16 +3878,16 @@
                                                         <a-box position="-0.2 0 0"      scale="0.02 0.445 0.125" ></a-box>
                                                         <a-box position="0 0 0"         scale="0.02 0.445 0.125" ></a-box>
                                                         <a-box position="0.2 0 0"       scale="0.02 0.445 0.125" ></a-box>
-                                                        <a-torus position="0 0.2 0.055" geometry="radius: 0.2; arc: 180; radiusTubular: 0.005; segmentsTubular: 8" scale=""></a-torus>                
+                                                        <a-torus position="0 0.2 0.055" geometry="radius: 0.2; arc: 180; radiusTubular: 0.005; segmentsTubular: 8" ></a-torus>                
                                                     </a-entity>
                                                 </a-entity>
 
                                             </a-entity>
                                             <a-entity class="chimney-group" position="2 0 0">
-                                                <a-box mixin="col-townhouse-A-brick" position="0 3.7 0" scale="0.5 1.75 0.2"  visible=""></a-box>
-                                                <a-box mixin="col-townhouse-A-brickLower" position="0 4.53 0" scale="0.5 0.1 0.2"  visible=""></a-box>
-                                                <a-box mixin="col-townhouse-A-trim" position="0 4.52 0" scale="0.55 0.1 0.25"  visible=""></a-box>
-                                                <a-box mixin="col-townhouse-A-trim" position="0 3.95 0" scale="0.55 0.1 0.25"  visible=""></a-box>
+                                                <a-box mixin="col-townhouse-A-brick" position="0 3.7 0" scale="0.5 1.75 0.2"  ></a-box>
+                                                <a-box mixin="col-townhouse-A-brickLower" position="0 4.53 0" scale="0.5 0.1 0.2"  ></a-box>
+                                                <a-box mixin="col-townhouse-A-trim" position="0 4.52 0" scale="0.55 0.1 0.25"  ></a-box>
+                                                <a-box mixin="col-townhouse-A-trim" position="0 3.95 0" scale="0.55 0.1 0.25"  ></a-box>
                                             </a-entity>
                                             <a-entity class="wallDecor-group" mixin="col-townhouse-A-trim" buffer-geometry-merger>
                                                 <a-box position="1.85 2.55 0" scale="0.05 0.3 0.1225" ></a-box>
@@ -4436,13 +4464,13 @@
                         <a-entity id="bar-city-02" gltf-model="models/builtEnv-bar-corner.glb" position="-13.3 0.6 -12.9" rotation="0 180 0" mixin="scale-0-008"></a-entity> -->
                         <!--<a-entity id="cinema" gltf-model="models/builtEnv-cinema.glb" position="-12.62895 0 -12.86802" rotation="0 270 0" mixin="scale-0-333"></a-entity>
 
-                        <a-entity id="warehouse-01" gltf-model="models/builtEnv-factoryWithStacks.glb" position="-12.61189 0 17.83376" rotation="0 90 0" mixin="" scale="-0.003 0.003 0.003"></a-entity>
+                        <a-entity id="warehouse-01" gltf-model="models/builtEnv-factoryWithStacks.glb" position="-12.61189 0 17.83376" rotation="0 90 0"  scale="-0.003 0.003 0.003"></a-entity>
                         <a-entity id="diner-city" gltf-model="models/builtEnv-diner.glb" position="19.94905 0 -7.39076" rotation="0 270 0" scale="0.5 0.5 0.5"></a-entity>
                         <a-entity id="ferrisWheel" gltf-model="models/misc-ferrisWheel.glb" position="-22.33878 0 6.76616" mixin="scale-0-150"></a-entity> -->
 
                         <!-- Infrastructure-->
-                        <!--<a-entity class="trafficLight" gltf-model="models/infrastructure-trafficLight.glb" position="" mixin="scale-0-001"></a-entity>
-                        <a-entity class="trafficLightOver" gltf-model="models/infrastructure-trafficLight-overhanging.glb" position="" mixin="scale-0-025"></a-entity> -->
+                        <!--<a-entity class="trafficLight" gltf-model="models/infrastructure-trafficLight.glb"  mixin="scale-0-001"></a-entity>
+                        <a-entity class="trafficLightOver" gltf-model="models/infrastructure-trafficLight-overhanging.glb"  mixin="scale-0-025"></a-entity> -->
 
                     </a-entity><!-- End of urban zone -->
 
@@ -4462,46 +4490,46 @@
                             <a-entity class="nativeTrees-group">    
                                 <!-- At school-->
                                 <a-entity id = "schoolGrounds-vegetation">
-                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="15.249 0 3.0415" scale=""></a-entity>
-                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="21.01205 0 12.7403" scale=""></a-entity>
-                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="19.16279 0 12.82142" scale=""></a-entity>
-                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="20.41248 0 3.1366" scale=""></a-entity>
-                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="24.87363 0 3.07362" scale=""></a-entity>
-                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="26.59662 0 2.94929" scale=""></a-entity>
-                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="18.88964 0 3.02876" scale=""></a-entity>
-                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="27.66227 0 4.84129" scale=""></a-entity>
-                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="27.97623 0 7.38506" scale=""></a-entity>
-                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="28.41612 0 9.86967" scale=""></a-entity>
+                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="15.249 0 3.0415" ></a-entity>
+                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="21.01205 0 12.7403" ></a-entity>
+                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="19.16279 0 12.82142" ></a-entity>
+                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="20.41248 0 3.1366" ></a-entity>
+                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="24.87363 0 3.07362" ></a-entity>
+                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="26.59662 0 2.94929" ></a-entity>
+                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="18.88964 0 3.02876" ></a-entity>
+                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="27.66227 0 4.84129" ></a-entity>
+                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="27.97623 0 7.38506" ></a-entity>
+                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="28.41612 0 9.86967" ></a-entity>
                                 </a-entity>
                                 <!-- At church -->   
                                 <a-entity id = "churchGrounds-vegetation">
-                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="20.44286 0 -2.15684" scale=""></a-entity>
-                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="20.44287 0 -3.89428" scale=""></a-entity>
-                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="20.38291 0 -5.75156" scale=""></a-entity>
-                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="20.44286 0 -7.78858" scale=""></a-entity>
-                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="20.44286 0 -9.58594" scale=""></a-entity>
-                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="20.38291 0 -11.62295" scale=""></a-entity>
-                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="20.38291 0 -13.30049" scale=""></a-entity>
-                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="20.50281 0 -15.03794" scale=""></a-entity>
-                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="28.23633 0 -9.04673" scale=""></a-entity>
-                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="29.31804 0 -11.7378" scale=""></a-entity>                           
-                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="26.71734 0 -11.6918" scale=""></a-entity>
-                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="29.70929 0 -14.24487" scale=""></a-entity>
+                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="20.44286 0 -2.15684" ></a-entity>
+                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="20.44287 0 -3.89428" ></a-entity>
+                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="20.38291 0 -5.75156" ></a-entity>
+                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="20.44286 0 -7.78858" ></a-entity>
+                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="20.44286 0 -9.58594" ></a-entity>
+                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="20.38291 0 -11.62295" ></a-entity>
+                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="20.38291 0 -13.30049" ></a-entity>
+                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="20.50281 0 -15.03794" ></a-entity>
+                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="28.23633 0 -9.04673" ></a-entity>
+                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="29.31804 0 -11.7378" ></a-entity>                           
+                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="26.71734 0 -11.6918" ></a-entity>
+                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="29.70929 0 -14.24487" ></a-entity>
                                 </a-entity> 
                                 <!-- In parks-->   
                                 <a-entity id="suburbanParks-vegetation">
-                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="3.73331 0 -2.80629" scale=""></a-entity>
-                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="2.91193 0 -5.1071" scale=""></a-entity>
-                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="2.96001 0 -11.0769" scale=""></a-entity>
-                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="0.07484 0 -8.6971" scale=""></a-entity>
-                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-2.42219 0 -4.66835" scale=""></a-entity>
-                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="6.98912 0 16.64955" scale=""></a-entity>
-                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="2.5685 0 13.86994" scale=""></a-entity>
-                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-6.90157 0 15.586" scale=""></a-entity>
-                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-13.79896 0 15.2863" scale=""></a-entity>
-                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="10.6815 0 16.45238" scale=""></a-entity>                           
-                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-10.12661 0 17.18207" scale=""></a-entity>
-                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="4.94375 0 20.26686" scale=""></a-entity>
+                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="3.73331 0 -2.80629" ></a-entity>
+                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="2.91193 0 -5.1071" ></a-entity>
+                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="2.96001 0 -11.0769" ></a-entity>
+                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="0.07484 0 -8.6971" ></a-entity>
+                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-2.42219 0 -4.66835" ></a-entity>
+                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="6.98912 0 16.64955" ></a-entity>
+                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="2.5685 0 13.86994" ></a-entity>
+                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-6.90157 0 15.586" ></a-entity>
+                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-13.79896 0 15.2863" ></a-entity>
+                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="10.6815 0 16.45238" ></a-entity>                           
+                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-10.12661 0 17.18207" ></a-entity>
+                                    <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="4.94375 0 20.26686" ></a-entity>
                                 </a-entity>
                             </a-entity>
                         </a-entity>
@@ -4533,14 +4561,14 @@
 
                         <!-- Built environment -->
                         <a-entity id="church-grounds" position="25.66 0 -5.167">
-                            <a-box class="carpark" mixin="tarmac" position="-3.79609 0 -1.74264" geometry="depth: 11; width: 2" width:="" 8="" ></a-box>
-                            <a-box class="carpark" mixin="tarmac" position="-0.77707 0 -9.1454" geometry="depth: 4; width: 8" width:="" 8="" ></a-box>
+                            <a-box class="carpark" mixin="tarmac" position="-3.79609 0 -1.74264" geometry="depth: 11; width: 2" ></a-box>
+                            <a-box class="carpark" mixin="tarmac" position="-0.77707 0 -9.1454" geometry="depth: 4; width: 8" ></a-box>
                             <a-entity id="church-building" gltf-model="#mdl-church" position="-0.4 0 -2.1" scale="0.3 0.3 0.3"></a-entity> 
                         </a-entity>
 
                         <a-entity id="school-grounds" position="23.0 0 5.7">
-                            <a-box class="carpark" mixin="tarmac" position="-0.49925 0 -1.19992" geometry="depth: 6; width: 3" width:="" 8="" ></a-box>
-                            <a-box class="carpark" mixin="tarmac" position="-0.84509 0 2.48346" geometry="depth: 8; width: 10" width:="" 8="" ></a-box>
+                            <a-box class="carpark" mixin="tarmac" position="-0.49925 0 -1.19992" geometry="depth: 6; width: 3" ></a-box>
+                            <a-box class="carpark" mixin="tarmac" position="-0.84509 0 2.48346" geometry="depth: 8; width: 10" ></a-box>
                             <a-entity id="schoolhouse" gltf-model="#mdl-schoolHouse" rotation="0 180 0" scale="0.2 0.2 0.2" position="-0.48849 0.1 0.34592"></a-entity>
                             <a-entity class="school-building" position="-3.08035 0.1 -0.14068" >
                                 <a-entity class="classroom-group" position="-1 0 1">
@@ -4573,7 +4601,7 @@
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="0 1.15 0" scale="1.5 1 0.1"></a-box>
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="1.6 1.15 0" scale="1.5 1 0.1"></a-box>
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-1.6 0 0" scale="1.5 1 0.1"></a-box>
-                                            <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="" scale="1.5 1 0.1"></a-box>
+                                            <a-box class="rooftop solarPanel" mixin="col-solarPV-01"  scale="1.5 1 0.1"></a-box>
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="1.6 0 0" scale="1.5 1 0.1"></a-box>
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-1.6 -1.15 0" scale="1.5 1 0.1"></a-box>
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="0 -1.15 0" scale="1.5 1 0.1"></a-box>
@@ -4614,7 +4642,7 @@
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="0 1.15 0" scale="1.5 1 0.1"></a-box>
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="1.6 1.15 0" scale="1.5 1 0.1"></a-box>
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-1.6 0 0" scale="1.5 1 0.1"></a-box>
-                                            <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="" scale="1.5 1 0.1"></a-box>
+                                            <a-box class="rooftop solarPanel" mixin="col-solarPV-01"  scale="1.5 1 0.1"></a-box>
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="1.6 0 0" scale="1.5 1 0.1"></a-box>
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="-1.6 -1.15 0" scale="1.5 1 0.1"></a-box>
                                             <a-box class="rooftop solarPanel" mixin="col-solarPV-01" position="0 -1.15 0" scale="1.5 1 0.1"></a-box>
@@ -4640,7 +4668,7 @@
                                     <a-entity class="block">
                                         <a-box class="fence" mixin="col-fence" position="-2 0.4 -1" scale="0.05 0.8 4"></a-box>
                                         <a-box class="fence" mixin="col-fence" position="-2 0.25 1.75" scale="0.05 0.5 1.5"></a-box>
-                                        <a-box class="driveway" mixin="driveway" position="1.2 -0.05 0.8" rotation="" geometry="depth: 5"></a-box>
+                                        <a-box class="driveway" mixin="driveway" position="1.2 -0.05 0.8"  geometry="depth: 5"></a-box>
                                     </a-entity>
                                     <a-entity class = "bins-group" position = "1.7 0.05 -1.1" rotation="0 -90 0">
                                         <a-entity class = "waste landfill" position= "-0.4 0 0" template="src: #tmp-bin" data-lidcol="col-bin-green" ></a-entity>
@@ -4662,7 +4690,7 @@
                                     <a-entity class="block">
                                         <a-box class="fence" mixin="col-fence" position="-2 0.4 -1" scale="0.05 0.8 4"></a-box>
                                         <a-box class="fence" mixin="col-fence" position="-2 0.25 1.75" scale="0.05 0.5 1.5"></a-box>
-                                        <a-box class="driveway" mixin="driveway" position="1.2 -0.05 0.8" rotation="" geometry="width: 1.35; depth: 5"></a-box>
+                                        <a-box class="driveway" mixin="driveway" position="1.2 -0.05 0.8"  geometry="width: 1.35; depth: 5"></a-box>
                                     </a-entity>
                                     <a-entity class = "bins-group" position = "1.7 0.05 -1.1" rotation="0 -90 0">
                                         <a-entity class = "waste landfill" position= "-0.4 0 0" template="src: #tmp-bin" data-lidcol="col-bin-green" ></a-entity>
@@ -4729,7 +4757,7 @@
                                     <a-entity class="block">
                                         <a-box class="fence" mixin="col-fence" position="2 0.4 -1" scale="0.05 0.8 4"></a-box>
                                         <a-box class="fence" mixin="col-fence" position="2 0.25 1.75" scale="0.05 0.5 1.5"></a-box>
-                                        <a-box class="driveway" mixin="driveway" position="-1.2 -0.05 0.8" rotation="" geometry="depth: 5"></a-box>
+                                        <a-box class="driveway" mixin="driveway" position="-1.2 -0.05 0.8"  geometry="depth: 5"></a-box>
                                     </a-entity>
                                     <a-entity class = "bins-group" position = "-1.7 0.05 -1.1" rotation="0 -90 0">
                                         <a-entity class = "waste landfill" position= "-0.4 0 0" template="src: #tmp-bin" data-lidcol="col-bin-green" ></a-entity>
@@ -4751,7 +4779,7 @@
                                     <a-entity class="block">
                                         <a-box class="fence" mixin="col-fence" position="2 0.4 -1" scale="0.05 0.8 4"></a-box>
                                         <a-box class="fence" mixin="col-fence" position="2 0.25 1.75" scale="0.05 0.5 1.5"></a-box>
-                                        <a-box class="driveway" mixin="driveway" position="-1.2 -0.05 0.8" rotation="" geometry="depth: 5"></a-box>
+                                        <a-box class="driveway" mixin="driveway" position="-1.2 -0.05 0.8"  geometry="depth: 5"></a-box>
                                     </a-entity>
                                     <a-entity class = "bins-group" position = "-1.7 0.05 -1.1" rotation="0 -90 0">
                                         <a-entity class = "waste landfill" position= "-0.4 0 0" template="src: #tmp-bin" data-lidcol="col-bin-green" ></a-entity>
@@ -4773,7 +4801,7 @@
                                     <a-entity class="block">
                                         <a-box class="fence" mixin="col-fence" position="2 0.4 -1" scale="0.05 0.8 4"></a-box>
                                         <a-box class="fence" mixin="col-fence" position="2 0.25 1.75" scale="0.05 0.5 1.5"></a-box>
-                                        <a-box class="driveway" mixin="driveway" position="-1.2 -0.05 0.8" rotation="" geometry="depth: 5"></a-box>
+                                        <a-box class="driveway" mixin="driveway" position="-1.2 -0.05 0.8"  geometry="depth: 5"></a-box>
                                     </a-entity>
                                     <a-entity class = "bins-group" position = "-1.7 0.05 -1.1" rotation="0 -90 0">
                                         <a-entity class = "waste landfill" position= "-0.4 0 0" template="src: #tmp-bin" data-lidcol="col-bin-green" ></a-entity>
@@ -4795,7 +4823,7 @@
                                     <a-entity class="block">
                                         <a-box class="fence" mixin="col-fence" position="1.016 0.4 -1.290" rotation="0 30 0" scale="0.05 0.8 4"></a-box>
                                         <a-box class="fence" mixin="col-fence" position="2 0.25 1.18477" scale="0.05 0.5 1.5"></a-box>
-                                        <a-box class="driveway" mixin="driveway" position="1.1 -0.05 1.8" rotation="" geometry="depth: 3"></a-box>
+                                        <a-box class="driveway" mixin="driveway" position="1.1 -0.05 1.8"  geometry="depth: 3"></a-box>
                                     </a-entity>
                                     <a-entity class = "bins-group" position = "-1.7 0 -1.1" rotation="0 90 0">
                                         <a-entity class = "waste landfill" position= "-0.4 0 0" template="src: #tmp-bin" data-lidcol="col-bin-green" ></a-entity>
@@ -4818,11 +4846,11 @@
                                 <!-- Additional fences-->
                                 <a-box class="fence" mixin="col-fence" position="2 0.4 -3" rotation="0 90 0" scale="0.05 0.8 8"></a-box>
                                 <!--Small Box house: PV right -->
-                                <a-entity class="house-small" position="" >
+                                <a-entity class="house-small"  >
                                     <a-entity class="block">
                                         <a-box class="fence" mixin="col-fence" position="2 0.4 -1" scale="0.05 0.8 4"></a-box>
                                         <a-box class="fence" mixin="col-fence" position="2 0.25 1.75" scale="0.05 0.5 1.5"></a-box>
-                                        <a-box class="driveway" mixin="driveway" position="1.2 -0.05 1.3" rotation="" geometry="depth: 6"></a-box>
+                                        <a-box class="driveway" mixin="driveway" position="1.2 -0.05 1.3"  geometry="depth: 6"></a-box>
                                     </a-entity>
                                     <a-entity class = "bins-group" position = "1.7 0.05 -1.1" rotation="0 -90 0">
                                         <a-entity class = "waste landfill" position= "-0.4 0 0" template="src: #tmp-bin" data-lidcol="col-bin-green" ></a-entity>
@@ -4842,7 +4870,7 @@
                                 <!--Small Box house: PV right -->
                                 <a-entity class="house-small" position="4 0 0" >
                                     <a-entity class="block">
-                                        <a-box class="driveway" mixin="driveway" position="1.2 -0.05 1.3" rotation="" geometry="depth: 6"></a-box>
+                                        <a-box class="driveway" mixin="driveway" position="1.2 -0.05 1.3"  geometry="depth: 6"></a-box>
                                     </a-entity>
                                     <a-entity class = "bins-group" position = "1.7 0.05 -1.1" rotation="0 -90 0">
                                         <a-entity class = "waste landfill" position= "-0.4 0 0" template="src: #tmp-bin" data-lidcol="col-bin-green" ></a-entity>
@@ -4865,11 +4893,11 @@
                                 <!-- Additional fences-->
                                 <a-box class="fence" mixin="col-fence" position="9.5 0.4 -3" rotation="0 90 0" scale="0.05 0.8 23"></a-box>
                                 <!--Small Box house: building left | PV left -->
-                                <a-entity class="house-small" position="" >
+                                <a-entity class="house-small"  >
                                     <a-entity class="block">
                                         <a-box class="fence" mixin="col-fence" position="2 0.4 -1" scale="0.05 0.8 4"></a-box>
                                         <a-box class="fence" mixin="col-fence" position="2 0.25 1.75" scale="0.05 0.5 1.5"></a-box>
-                                        <a-box class="driveway" mixin="driveway" position="1.2 -0.05 0.8" rotation="" geometry="depth: 5"></a-box>
+                                        <a-box class="driveway" mixin="driveway" position="1.2 -0.05 0.8"  geometry="depth: 5"></a-box>
                                     </a-entity>
                                     <a-entity class = "bins-group" position = "1.7 0.05 -1.1" rotation="0 -90 0">
                                         <a-entity class = "waste landfill" position= "-0.4 0 0" template="src: #tmp-bin" data-lidcol="col-bin-green" ></a-entity>
@@ -4891,7 +4919,7 @@
                                     <a-entity class="block">
                                         <a-box class="fence" mixin="col-fence" position="2 0.4 -1" scale="0.05 0.8 4"></a-box>
                                         <a-box class="fence" mixin="col-fence" position="2 0.25 1.75" scale="0.05 0.5 1.5"></a-box>
-                                        <a-box class="driveway" mixin="driveway" position="1.2 -0.05 0.8" rotation="" geometry="depth: 5"></a-box>
+                                        <a-box class="driveway" mixin="driveway" position="1.2 -0.05 0.8"  geometry="depth: 5"></a-box>
                                     </a-entity>
                                     <a-entity class = "bins-group" position = "1.7 0.05 -1.1" rotation="0 -90 0">
                                         <a-entity class = "waste landfill" position= "-0.4 0 0" template="src: #tmp-bin" data-lidcol="col-bin-green" ></a-entity>
@@ -4913,7 +4941,7 @@
                                     <a-entity class="block">
                                         <a-box class="fence" mixin="col-fence" position="2 0.4 -1" scale="0.05 0.8 4"></a-box>
                                         <a-box class="fence" mixin="col-fence" position="2 0.25 1.75" scale="0.05 0.5 1.5"></a-box>
-                                        <a-box class="driveway" mixin="driveway" position="1.2 -0.05 0.8" rotation="" geometry="depth: 5"></a-box>
+                                        <a-box class="driveway" mixin="driveway" position="1.2 -0.05 0.8"  geometry="depth: 5"></a-box>
                                     </a-entity>
                                     <a-entity class = "bins-group" position = "1.7 0.05 -1.1" rotation="0 -90 0">
                                         <a-entity class = "waste landfill" position= "-0.4 0 0" template="src: #tmp-bin" data-lidcol="col-bin-green" ></a-entity>
@@ -4935,7 +4963,7 @@
                                     <a-entity class="block">
                                         <a-box class="fence" mixin="col-fence" position="2 0.4 -1" scale="0.05 0.8 4"></a-box>
                                         <a-box class="fence" mixin="col-fence" position="2 0.25 1.75" scale="0.05 0.5 1.5"></a-box>
-                                        <a-box class="driveway" mixin="driveway" position="1.2 -0.05 0.8" rotation="" geometry="depth: 5"></a-box>
+                                        <a-box class="driveway" mixin="driveway" position="1.2 -0.05 0.8"  geometry="depth: 5"></a-box>
                                     </a-entity>
                                     <a-entity class = "bins-group" position = "1.7 0.05 -1.1" rotation="0 -90 0">
                                         <a-entity class = "waste landfill" position= "-0.4 0 0" template="src: #tmp-bin" data-lidcol="col-bin-green" ></a-entity>
@@ -4957,7 +4985,7 @@
                                     <a-entity class="block">
                                         <a-box class="fence" mixin="col-fence" position="2 0.4 -1" scale="0.05 0.8 4"></a-box>
                                         <a-box class="fence" mixin="col-fence" position="2 0.25 1.75" scale="0.05 0.5 1.5"></a-box>
-                                        <a-box class="driveway" mixin="driveway" position="1.2 -0.05 0.8" rotation="" geometry="depth: 5"></a-box>
+                                        <a-box class="driveway" mixin="driveway" position="1.2 -0.05 0.8"  geometry="depth: 5"></a-box>
                                     </a-entity>
                                     <a-entity class = "bins-group" position = "1.7 0.05 -1.1" rotation="0 -90 0">
                                         <a-entity class = "waste landfill" position= "-0.4 0 0" template="src: #tmp-bin" data-lidcol="col-bin-green" ></a-entity>
@@ -5027,7 +5055,7 @@
                                     <a-entity class="block">
                                         <a-box class="fence" mixin="col-fence" position="2 0.4 -1" scale="0.05 0.8 4"></a-box>
                                         <a-box class="fence" mixin="col-fence" position="2 0.25 1.75" scale="0.05 0.5 1.5"></a-box>
-                                        <a-box class="driveway" mixin="driveway" position="-1.2 -0.05 0.8" rotation="" geometry="depth: 5"></a-box>
+                                        <a-box class="driveway" mixin="driveway" position="-1.2 -0.05 0.8"  geometry="depth: 5"></a-box>
                                     </a-entity>
                                     <a-entity class = "bins-group" position = "-1.7 0.05 -1.1" rotation="0 90 0">
                                         <a-entity class = "waste landfill" position= "-0.4 0 0" template="src: #tmp-bin" data-lidcol="col-bin-green" ></a-entity>
@@ -5049,7 +5077,7 @@
                                     <a-entity class="block">
                                         <a-box class="fence" mixin="col-fence" position="2 0.4 -1" scale="0.05 0.8 4"></a-box>
                                         <a-box class="fence" mixin="col-fence" position="2 0.25 1.75" scale="0.05 0.5 1.5"></a-box>
-                                        <a-box class="driveway" mixin="driveway" position="-1.2 -0.05 0.8" rotation="" geometry="depth: 5"></a-box>
+                                        <a-box class="driveway" mixin="driveway" position="-1.2 -0.05 0.8"  geometry="depth: 5"></a-box>
                                     </a-entity>
                                     <a-entity class = "bins-group" position = "-1.7 0.05 -1.1" rotation="0 90 0">
                                         <a-entity class = "waste landfill" position= "-0.4 0 0" template="src: #tmp-bin" data-lidcol="col-bin-green" ></a-entity>
@@ -5079,7 +5107,7 @@
                                 </a-entity>
 
                                 <!--Small Box house: building left| PV left -->
-                                <a-entity class="house-small" position="" rotation="0 -60 0">
+                                <a-entity class="house-small"  rotation="0 -60 0">
                                     <a-entity class="block">
                                         <a-box class="fence" mixin="col-fence" position="1.79 0.4 -0.986" scale="0.05 0.8 4" rotation="0 10 0"></a-box>
                                         <a-box class="fence" mixin="col-fence" position="2.264 0.25 1.701" scale="0.05 0.5 1.5" rotation="0 10 0"></a-box>
@@ -5194,7 +5222,7 @@
                                 <a-entity class="house-large" position="0 0 -1" >
                                     <a-entity class="block">
                                         <a-box class="fence" mixin="col-fence" position="-3 0.4 -1" scale="0.05 0.8 11.5" ></a-box>
-                                        <a-box class="driveway" mixin="driveway" position="1.8 -0.05 2.4" rotation="" geometry="depth: 7.3"></a-box>
+                                        <a-box class="driveway" mixin="driveway" position="1.8 -0.05 2.4"  geometry="depth: 7.3"></a-box>
                                     </a-entity>
                                     <a-entity class = "bins-group" position = "2.65 0.05 -0.6" rotation="0 -90 0">
                                         <a-entity class = "waste landfill" position= "-0.4 0 0" template="src: #tmp-bin" data-lidcol="col-bin-green" ></a-entity>
@@ -5221,7 +5249,7 @@
                                 <a-entity class="house-large" position="5.90469 0 -1" >
                                     <a-entity class="block">
                                         <a-box class="fence" mixin="col-fence" position="-3 0.4 -1" scale="0.05 0.8 11.5" ></a-box>
-                                        <a-box class="driveway" mixin="driveway" position="1.8 -0.05 2.4" rotation="" geometry="depth: 7.3"></a-box>
+                                        <a-box class="driveway" mixin="driveway" position="1.8 -0.05 2.4"  geometry="depth: 7.3"></a-box>
                                     </a-entity>
                                     <a-entity class = "bins-group" position = "2.65 0.05 -0.6" rotation="0 -90 0">
                                         <a-entity class = "waste landfill" position= "-0.4 0 0" template="src: #tmp-bin" data-lidcol="col-bin-green" ></a-entity>
@@ -5248,7 +5276,7 @@
                                 <a-entity class="house-large" position="12 0 -1" >
                                     <a-entity class="block">
                                         <a-box class="fence" mixin="col-fence" position="-3 0.4 -1" scale="0.05 0.8 11.5" ></a-box>
-                                        <a-box class="driveway" mixin="driveway" position="1.5 -0.05 2.5" rotation="" geometry="depth: 7.5"></a-box>
+                                        <a-box class="driveway" mixin="driveway" position="1.5 -0.05 2.5"  geometry="depth: 7.5"></a-box>
                                     </a-entity>
                                     <a-entity class = "bins-group" position = "1.5 0.05 -0.9" rotation="0 0 0">
                                         <a-entity class = "waste landfill" position= "-0.4 0 0" template="src: #tmp-bin" data-lidcol="col-bin-green" ></a-entity>
@@ -5275,7 +5303,7 @@
                                 <a-entity class="house-large" position="18.81892 0 -0.04784" rotation="0 -15 0" >
                                     <a-entity class="block">
                                         <a-box class="fence" mixin="col-fence" position="-3 0.4 -1.2" scale="0.05 0.8 12" ></a-box>
-                                        <a-box class="driveway" mixin="driveway" position="1.5 -0.05 2.5" rotation="" geometry="depth: 7.5"></a-box>
+                                        <a-box class="driveway" mixin="driveway" position="1.5 -0.05 2.5"  geometry="depth: 7.5"></a-box>
                                     </a-entity>
                                     <a-entity class = "bins-group" position = "1.5 0.05 -0.9" rotation="0 0 0">
                                         <a-entity class = "waste landfill" position= "-0.4 0 0" template="src: #tmp-bin" data-lidcol="col-bin-green" ></a-entity>
@@ -5302,7 +5330,7 @@
                                 <a-entity class="house-large" position="25.52613 0 2.58194" rotation="0 -30 0" >
                                     <a-entity class="block">
                                         <a-box class="fence" mixin="col-fence" position="-3 0.4 -1.8" scale="0.05 0.8 12" ></a-box>
-                                        <a-box class="driveway" mixin="driveway" position="1.5 -0.05 2.5" rotation="" geometry="depth: 7.5"></a-box>
+                                        <a-box class="driveway" mixin="driveway" position="1.5 -0.05 2.5"  geometry="depth: 7.5"></a-box>
                                     </a-entity>
                                     <a-entity class = "bins-group" position = "1.5 0.05 -0.9" rotation="0 0 0">
                                         <a-entity class = "waste landfill" position= "-0.4 0 0" template="src: #tmp-bin" data-lidcol="col-bin-green" ></a-entity>
@@ -5329,7 +5357,7 @@
                                 <a-entity class="house-large" position="31.31861 0 7.44506" rotation="0 -45 0" >
                                     <a-entity class="block">
                                         <a-box class="fence" mixin="col-fence" position="-3 0.4 0" scale="0.05 0.8 7" ></a-box>
-                                        <a-box class="driveway" mixin="driveway" position="1.5 -0.05 2.5" rotation="" geometry="depth: 7.5"></a-box>
+                                        <a-box class="driveway" mixin="driveway" position="1.5 -0.05 2.5"  geometry="depth: 7.5"></a-box>
                                     </a-entity>
                                     <a-entity class = "bins-group" position = "1.5 0.05 -0.9" rotation="0 0 0">
                                         <a-entity class = "waste landfill" position= "-0.4 0 0" template="src: #tmp-bin" data-lidcol="col-bin-green" ></a-entity>
@@ -5356,7 +5384,7 @@
                                 <a-entity class="house-large" position="35.21 0 13.4" rotation="0 -60 0" >
                                     <a-entity class="block">
                                         <a-box class="fence" mixin="col-fence" position="-3 0.4 0.5" scale="0.05 0.8 5.5" ></a-box>
-                                        <a-box class="driveway" mixin="driveway" position="1.5 -0.05 2.5" rotation="" geometry="depth: 7.5"></a-box>
+                                        <a-box class="driveway" mixin="driveway" position="1.5 -0.05 2.5"  geometry="depth: 7.5"></a-box>
                                     </a-entity>
                                     <a-entity class = "bins-group" position = "1.5 0.05 -0.9" rotation="0 0 0">
                                         <a-entity class = "waste landfill" position= "-0.4 0 0" template="src: #tmp-bin" data-lidcol="col-bin-green" ></a-entity>
@@ -5383,7 +5411,7 @@
                                 <a-entity class="house-large" position="38.75 0 19.41" rotation="0 -60 0" >
                                     <a-entity class="block">
                                         <a-box class="fence" mixin="col-fence" position="-3.01 0.4 0.5" scale="0.05 0.8 5.5" ></a-box>
-                                        <a-box class="driveway" mixin="driveway" position="1.5 -0.05 2.5" rotation="" geometry="depth: 7.5"></a-box>
+                                        <a-box class="driveway" mixin="driveway" position="1.5 -0.05 2.5"  geometry="depth: 7.5"></a-box>
                                     </a-entity>
                                     <a-entity class = "bins-group" position = "1.5 0.05 -0.9" rotation="0 0 0">
                                         <a-entity class = "waste landfill" position= "-0.4 0 0" template="src: #tmp-bin" data-lidcol="col-bin-green" ></a-entity>
@@ -5421,7 +5449,7 @@
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="3.67346 0 14.85596" scale="1.5 1.5 1.5"></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="4.31206 0 5.0197" scale="2 2 2.05"></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="10.65779 0 19.38888" scale="1.5 1.5 1.5"></a-entity>
-                            <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="7.32165 0 15.63479" scale=""></a-entity>
+                            <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="7.32165 0 15.63479" ></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="6.44835 0 13.60863" scale="2.5 2.5 2.5"></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="4.92491 0 9.28201" scale="1.5 1.5 1.5"></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="11.91829 0 16.05299" scale="2.5 2.5 2.5"></a-entity>
@@ -5435,7 +5463,7 @@
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="7.9249 0 17.75547" scale="1.5 1.5 1.5"></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-12.70964 0 10.88728" scale="2 2 2.05"></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="9.19693 0 10.8265" scale="1.5 1.5 1.5"></a-entity>
-                            <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="14.27027 0 17.66964" scale=""></a-entity>
+                            <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="14.27027 0 17.66964" ></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="7.97418 0 6.18887" scale="2.5 2.5 2.5"></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="3.37338 0 12.02017" scale="1.5 1.5 1.5"></a-entity>
                             <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="11.69412 0 12.43117" scale="2.5 2.5 2.5"></a-entity>
@@ -5450,7 +5478,7 @@
                         <!-- Apple Orchard -->
                         <a-entity id="farm-05" class="farm">
                             <a-entity id="apple-orchid" position="10 0 -21">
-                                <a-entity class="tree-apple" template="src:#tmp-tree-apple" position="" rotation="0 30 0"></a-entity>
+                                <a-entity class="tree-apple" template="src:#tmp-tree-apple"  rotation="0 30 0"></a-entity>
                                 <a-entity class="tree-apple" template="src:#tmp-tree-apple"  position="0 0 2" rotation="0 30 0"> </a-entity>
                                 <a-entity class="tree-apple" template="src:#tmp-tree-apple"  position="0 0 4" rotation="0 30 0"> </a-entity>
                                 <a-entity class="tree-apple" template="src:#tmp-tree-apple"  position="0 0 6" rotation="0 30 0"> </a-entity>
@@ -5495,7 +5523,7 @@
                         <!-- Built infrastructure -->
                         <a-entity  id="periUrban-infrastructure"  class="builtEnv-group utilites-group">                    
                             <!-- Wind farm -->
-                            <a-entity class="windFarm" position="">
+                            <a-entity class="windFarm" >
                                 <a-entity class="windTurbine" template="src:#tmp-windTurbine" data-anim="property: rotation; to: 0 0 360; loop: true; dur: 3000; easing: linear; delay: 0"   position="-17.1 0 -18.4" rotation="0 40 0"></a-entity>
                                 <a-entity class="windTurbine" template="src:#tmp-windTurbine" data-anim="property: rotation; to: 0 0 360; loop: true; dur: 3000; easing: linear; delay: 333" position="-24.2 0 -1.6" rotation="0 40 0"></a-entity>
                                 <a-entity class="windTurbine" template="src:#tmp-windTurbine" data-anim="property: rotation; to: 0 0 360; loop: true; dur: 3500; easing: linear; delay: 6673" position="-16.7 0 14.5" rotation="0 40 0"></a-entity>
@@ -5716,7 +5744,7 @@
                     <a-entity id="agricultural-zone" class="zone-group" position="-44.8 3 -26.2" rotation="0 90 0" visible="true">
                         <!-- Native vegetation -->
                         <a-entity id="agricultural-vegetation" class="vegetation-group">
-                            <a-entity class="nativeTrees-group" visible="">                    
+                            <a-entity class="nativeTrees-group" >                    
                                 <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="7.89637 0 -20.55526" scale="2.5 2.5 2.5"></a-entity>
                                 <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="0.00982 0 -5.06666" scale="1.5 1.5 1.5"></a-entity>
                                 <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-17.58769 0 -17.16432" scale="2.5 2.5 2.5"></a-entity>
@@ -5724,7 +5752,7 @@
                                 <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="8.82939 0 -9.91493" scale="1.5 1.5 1.5"></a-entity>
                                 <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-22.07781 0 -9.06769" scale="2 2 2.05"></a-entity>
                                 <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="14.89422 0 -1.35738" scale="1.5 1.5 1.5"></a-entity>
-                                <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-8.5041 0 12.82627" scale=""></a-entity>
+                                <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-8.5041 0 12.82627" ></a-entity>
                                 <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-11.30322 0 -5.44152" scale="2.5 2.5 2.5"></a-entity>
                                 <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-22.98773 0 4.95044" scale="1.5 1.5 1.5"></a-entity>
                                 <a-entity class="tree-cone" template="src:#tmp-tree-cone"  position="-14.05977 0 19.3802" scale="2.5 2.5 2.5"></a-entity>
@@ -5747,7 +5775,7 @@
                         </a-entity>
                         
                         <!-- Livestock -->	
-                        <a-entity id="ag-livestock-group" class="livestock-group animals-group" visible="">
+                        <a-entity id="ag-livestock-group" class="livestock-group animals-group" >
                             <a-entity id="livestock-farm-01" class="farm-livestock-group">                            
                                 <a-entity class="pig piggery livestock" template="src: #tmp-pig" position="-4.9 0 15.9" rotation="0 60 0"></a-entity>
                                 <a-entity class="pig piggery livestock" template="src: #tmp-pig" position="-3.6 0 19.6" rotation="0 90 0"></a-entity>                   
@@ -5791,7 +5819,7 @@
                                         <!-- <a-entity class="wheat" gltf-model="models/ag-wheat-group.glb" position="0 0 -10"></a-entity>
                                         <a-entity class="wheat" gltf-model="models/ag-wheat-group.glb" position="-13 0 -10"></a-entity>
                                         <a-entity class="wheat" gltf-model="models/ag-wheat-group.glb" position="13 0 -10"></a-entity>
-                                        <a-entity class="wheat" gltf-model="models/ag-wheat-group.glb" position=""></a-entity>
+                                        <a-entity class="wheat" gltf-model="models/ag-wheat-group.glb" ></a-entity>
                                         <a-entity class="wheat" gltf-model="models/ag-wheat-group.glb" position="-13 0 0"></a-entity>
                                         <a-entity class="wheat" gltf-model="models/ag-wheat-group.glb" position="13 0 0"></a-entity>
                                         <a-entity class="wheat" gltf-model="models/ag-wheat-group.glb" position="0 0 10"></a-entity>
@@ -5803,7 +5831,7 @@
                         </a-entity>
 
                         <!-- Built environment -->
-                        <a-entity id="ag-builtEnv-group" class="builtEnv-group" visible="">
+                        <a-entity id="ag-builtEnv-group" class="builtEnv-group" >
                             <!-- Farms-->
                             <a-entity id="farm-group">
                                 <a-entity id="farm-01" class="farm">
@@ -5948,7 +5976,7 @@
                                 <a-box class="road-line" mixin="road-line" position="-10.223 0 12.157" rotation="0 30 0" geometry="depth: 18" ></a-box>
                                 <a-box class="road-line" mixin="road-line" position="14.538 0 5.206" rotation="0 120 0" geometry="depth: 18" ></a-box>
                                 <a-box class="road-line" mixin="road-line" position="-16.994 0 2.873" rotation="0 90 0" geometry="depth: 21.5" ></a-box>
-                                <a-box class="road-line" mixin="road-stopline" position="-15.388 0 4.546" rotation=""  geometry="width: 1.7"></a-box>     
+                                <a-box class="road-line" mixin="road-stopline" position="-15.388 0 4.546"   geometry="width: 1.7"></a-box>     
                             </a-entity>
                         </a-entity>
                         <!-- Centralised power station -->
@@ -5987,31 +6015,31 @@
                             <a-entity class="rubbish-group" position="-19.85608 -0.5 11.36838">
                                 <a-entity mixin="col-waste-01" geometry-buffer-merger>
                                     <a-dodecahedron mixin="col-waste-01" position="0.01613 -0.2665 -0.91014" scale="2 1.2 1.5" radius="1" rotation="0 45 0"></a-dodecahedron>
-                                    <a-dodecahedron mixin="col-waste-01" position="-4.55871 0 -4.17565" scale="1.5 2 1" radius="1" rotation=""></a-dodecahedron>
-                                    <a-dodecahedron mixin="col-waste-01" position="1.48677 0 6.63053" scale="1 2 1" radius="1" rotation=""></a-dodecahedron>
+                                    <a-dodecahedron mixin="col-waste-01" position="-4.55871 0 -4.17565" scale="1.5 2 1" radius="1" ></a-dodecahedron>
+                                    <a-dodecahedron mixin="col-waste-01" position="1.48677 0 6.63053" scale="1 2 1" radius="1" ></a-dodecahedron>
                                     <a-dodecahedron mixin="col-waste-01" position="0.93545 0 4.40902" scale="2 2 1" radius="1" rotation="300 0"></a-dodecahedron>
-                                    <a-dodecahedron mixin="col-waste-01" position="3.42073 0 0.6706" scale="1 2 1" radius="1" rotation=""></a-dodecahedron>
+                                    <a-dodecahedron mixin="col-waste-01" position="3.42073 0 0.6706" scale="1 2 1" radius="1" ></a-dodecahedron>
                                     <a-dodecahedron mixin="col-waste-01" position="-3.79169 -1.05519 -2.22842" scale="1 2 2" radius="1" rotation="50 0 0"></a-dodecahedron>
                                 </a-entity> 
                                 <a-entity mixin="col-waste-02" geometry-buffer-merger>
-                                    <a-dodecahedron mixin="col-waste-02" position="1.82348 -0.05045 -1.96605" scale="2 1 1" radius="1" rotation=""></a-dodecahedron>
-                                    <a-dodecahedron mixin="col-waste-02" position="0.17334 0 2.21" scale="1.5 1.2 2" radius="1" rotation=""></a-dodecahedron>
-                                    <a-dodecahedron mixin="col-waste-02" position="2.78906 -2.02202 5.55599" scale="1.3 1.3 1.7" radius="1" rotation=""></a-dodecahedron>
-                                    <a-dodecahedron mixin="col-waste-02" position="3.84544 0.5216 2.47345" scale="1.3 1.3 1.7" radius="1" rotation=""></a-dodecahedron>
+                                    <a-dodecahedron mixin="col-waste-02" position="1.82348 -0.05045 -1.96605" scale="2 1 1" radius="1" ></a-dodecahedron>
+                                    <a-dodecahedron mixin="col-waste-02" position="0.17334 0 2.21" scale="1.5 1.2 2" radius="1" ></a-dodecahedron>
+                                    <a-dodecahedron mixin="col-waste-02" position="2.78906 -2.02202 5.55599" scale="1.3 1.3 1.7" radius="1" ></a-dodecahedron>
+                                    <a-dodecahedron mixin="col-waste-02" position="3.84544 0.5216 2.47345" scale="1.3 1.3 1.7" radius="1" ></a-dodecahedron>
                                     <a-dodecahedron mixin="col-waste-02" position="-2.4075 -1.144 -1.30785" scale="1.3 1.3 3" radius="1" rotation="20 0 0"></a-dodecahedron>
-                                    <a-dodecahedron mixin="col-waste-02" position="2.10337 -3.62115 -0.39454" scale="1.3 3 1.7" radius="1" rotation=""></a-dodecahedron>
+                                    <a-dodecahedron mixin="col-waste-02" position="2.10337 -3.62115 -0.39454" scale="1.3 3 1.7" radius="1" ></a-dodecahedron>
                                 </a-entity> 
                                 <a-entity mixin="col-waste-03" geometry-buffer-merger>
                                     <a-dodecahedron mixin="col-waste-03" position="0.92736 0 -3.47037" scale="1.2 1.3 1.5" radius="1" rotation="0 300"></a-dodecahedron>
                                     <a-dodecahedron mixin="col-waste-03" position="2.94687 -0.42396 4.30917" scale="1.5 1.5 2" radius="1" rotation="0 40 0"></a-dodecahedron>
-                                    <a-dodecahedron mixin="col-waste-03" position="2.31353 -0.0261 0.00026" scale="1.4 1 2" radius="1" rotation=""></a-dodecahedron>
-                                    <a-dodecahedron mixin="col-waste-03" position="-1.42203 -0.40125 0.13771" scale="1.4 1 2" radius="1" rotation=""></a-dodecahedron>
+                                    <a-dodecahedron mixin="col-waste-03" position="2.31353 -0.0261 0.00026" scale="1.4 1 2" radius="1" ></a-dodecahedron>
+                                    <a-dodecahedron mixin="col-waste-03" position="-1.42203 -0.40125 0.13771" scale="1.4 1 2" radius="1" ></a-dodecahedron>
                                     <a-dodecahedron mixin="col-waste-03" position="-0.69687 -2.76754 -1.59762" scale="1.4 2 2" radius="1" rotation="60 0 0"></a-dodecahedron>
-                                    <a-dodecahedron mixin="col-waste-03" position="1.49633 -2.84184 3.19343" scale="1.4 1.5 2.5" radius="1" rotation=""></a-dodecahedron>
+                                    <a-dodecahedron mixin="col-waste-03" position="1.49633 -2.84184 3.19343" scale="1.4 1.5 2.5" radius="1" ></a-dodecahedron>
                                 </a-entity>
                                 <a-entity mixin="col-waste-03" geometry-buffer-merger>
                                     <a-dodecahedron mixin="col-waste-04" position="1.58094 0 2.16833" scale="1.8 1.2 1.5" radius="1" rotation="0 5 0"></a-dodecahedron>
-                                    <a-dodecahedron mixin="col-waste-04" position="-1.34128 -0.24142 -3.79491" scale="2 1 2" radius="1" rotation=""></a-dodecahedron>
+                                    <a-dodecahedron mixin="col-waste-04" position="-1.34128 -0.24142 -3.79491" scale="2 1 2" radius="1" ></a-dodecahedron>
                                     <a-dodecahedron mixin="col-waste-04" position="3.22268 -5.56948 3.22145" scale="1.5 3 2" radius="1" rotation="0 20 0"></a-dodecahedron>
                                     <a-dodecahedron mixin="col-waste-04" position="-0.36659 -3.34749 -3.08453" scale="1.5 2 3" radius="1" rotation="45 300"></a-dodecahedron>
                                     <a-dodecahedron mixin="col-waste-04" position="3.22268 -3.85283 -1.58689" scale="1.5 1 2" radius="1" rotation="0 300"></a-dodecahedron>
@@ -6026,7 +6054,7 @@
             </a-entity><!-- End of planet group-->
         </a-scene>
 
-
+        <!-- USER INTERFACE-->
         <div id = "flat-ui">
             <div id = "shortcuts">
                 <div id ="shortcuts-header">Magic keyboard shortcuts</div>
@@ -6070,8 +6098,6 @@
                 </div>
             </div>
         </div>
-
-
 
     </body>
 </html>
