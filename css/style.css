@@ -6,7 +6,7 @@ body{
     z-index: 0;
 }
 
-#flat-ui{
+#flat-ui-container{
     z-index: 1;
     position: absolute;
     top: 0;
@@ -17,68 +17,138 @@ body{
     pointer-events: none;
 }
 
-#shortcuts{
-    justify-self: center;
-    align-self: center;
-    display: grid;
-    color: #404040;
-    width: 50vw;
-    height: 50vh;
-    border-radius: 2vw;
-    grid-template-columns: 50% 50% ;
-    grid-template-rows: 10% 90%;
-    pointer-events: none;
-    opacity: 0;    
-    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);   
-    position: relative;
-    z-index: 1;
-    background: rgba(255, 255, 255, 0.8);
-    overflow: hidden;
-}
-
-#shortcuts.visible{
-    animation-name: showElement;
-    animation-duration: 500ms;
-    opacity: 1;
-}
-    #shortcuts-header{
-        grid-area: 1 / 1 / 2 / 3;
-        font-size: 1.25rem;
-        font-weight: bold;
-        align-self: center;
+/* INTERACTION SHORTUT MENU */
+    #shortcuts{
         justify-self: center;
-        padding: 0.5rem;
+        align-self: center;
+        display: grid;
+        color: #404040;
+        width: 50vw;
+        height: 50vh;
+        border-radius: 2vw;
+        grid-template-columns: 50% 50% ;
+        grid-template-rows: 10% 90%;
+        pointer-events: none;
+        opacity: 0;    
+        box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);   
+        position: relative;
+        z-index: 1;
+        background: rgba(255, 255, 255, 0.8);
+        overflow: hidden;
     }
 
-    #key-shortcuts-left{
-        grid-area: 2 / 1 / 3 / 2;
-        margin: 1rem 0rem;
+    #shortcuts.visible{
+        animation-name: showElement;
+        animation-duration: 500ms;
+        opacity: 1;
     }
-    #key-shortcuts-right{
-        grid-area: 2 / 2 / 3 / 3;
-        margin: 1rem 0rem;
-        border-left: 0.5px solid #404040;
-    }
-    .key-shortcut-container{
-        display: grid;
-        grid-template-columns: 1fr 4fr ;
-        margin: 0.5rem;
-    }
-    .key-shortcut{
-        font-size: 1rem;
-        text-align: center;
-        align-self: center;
-        width: 3rem;
-        border: 1px solid;
-        border-radius: 0.5rem;
-        padding: 0.25rem;
-    
-    }
-    .shortcut-description{
-        font-size: 0.8rem;
-        margin-left: 1.5rem;
-        align-self: center;
-    }
+        #shortcuts-header{
+            grid-area: 1 / 1 / 2 / 3;
+            font-size: 1.25rem;
+            font-weight: bold;
+            align-self: center;
+            justify-self: center;
+            padding: 0.5rem;
+        }
+
+        .shortcuts-subHeader{
+            grid-area: 1 / 1 / 2 / 3;
+            font-size: 1.25rem;
+            font-weight: bold;
+            align-self: center;
+            justify-self: center;
+            padding: 0.5rem;
+        }
+
+        #key-shortcuts-left{
+            grid-area: 2 / 1 / 3 / 2;
+            margin: 1rem 0rem;
+        }
+
+        #key-shortcuts-right{
+            grid-area: 2 / 2 / 3 / 3;
+            margin: 1rem 0rem;
+            border-left: 0.5px solid #404040;
+        }
+
+        .key-shortcut-container{
+            display: grid;
+            grid-template-columns: 1fr 4fr ;
+            margin: 0.5rem;
+        }
+            .key-shortcut{
+                font-size: 1rem;
+                text-align: center;
+                align-self: center;
+                width: 3rem;
+                border: 1px solid;
+                border-radius: 0.5rem;
+                padding: 0.25rem;
+            
+            }
+            .shortcut-description{
+                font-size: 0.8rem;
+                margin-left: 1.5rem;
+                align-self: center;
+            }
+
+            /* TOOLTIP PANE*/
+            #tooltip-pane{
+                justify-self: center;
+                color: #404040;
+                width: 100vw;
+                height: 20vh;
+                opacity: 0;    
+                box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);   
+                position: relative;
+                z-index: 1;
+                background: rgba(255, 255, 255, 0.8);
+                overflow: hidden;
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr ;
+            }
+                /* THREE SUBPANES:  Header |  Summary  | Stats */
+                #tooltip-header-container{
+                    grid-area: 1 / 1 / 2 / 2;
+                    padding: 1rem;
+                }
+                    #tooltip-header{
+                        font-size: 4rem;
+                        font-weight: bold;
+                        align-self: center;
+                        justify-self: center;
+                        padding: 0.5rem;
+                    }
+                .tooltip-subheader{
+                    font-size: 1.75rem;
+                    padding: 0.5rem 0rem;
+                }
+                #tooltip-summary-container{
+                    font-size: 0.8rem;
+                    grid-area: 1 / 2 / 2 / 3;
+                    padding: 1rem;
+                }
+
+                #tooltip-stats-container{
+                    font-size: 0.8rem;
+                    grid-area: 1 / 3 / 2 / 4;
+                    padding: 1rem;
+                }
+                    .tooltip-stat-container{
+                        display: grid;
+                        grid-template-columns: 3fr 2fr 1fr;            
+                    }
+                        .tooltip-stat-label{
+                            grid-area: 1 / 1 / 2 / 2;
+                        }
+                        .tooltip-stat-data{
+                            grid-area: 1 / 2 / 2 / 3;
+                        }
+                        .tooltip-stat-unit{
+                            grid-area: 1 / 3 / 2 / 4;
+                        }
+
+
 
 @keyframes showElement {
   0%   {opacity: 0}
