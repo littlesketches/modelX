@@ -23,6 +23,8 @@
         <script src="js/aframe-alongpath-component.min.js"></script>
         <script src="js/aframe-geometry-merger-component.js"></script> 
         <script src="js/aframe-orbit-controls.min.js"></script>
+        <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+        <script src="https://unpkg.com/aframe-tooltip-component/dist/aframe-tooltip-component.min.js"></script>
         <!-- <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script> -->
         <!-- <script src="https://github.com/ngokevin/aframe-physics-components/blob/master/dist/aframe-physics-components.min.js"></script>  -->
         <!-- <script src="https://unpkg.com/aframe-toggle-controls-component/dist/aframe-toggle-controls-component.min.js"></script>  -->
@@ -30,18 +32,23 @@
     </head>
 
     <body>
-        <a-scene id="scene" antialias = "true"
+        <a-scene id="scene" renderer = "antialias: true"
                 setup add-external-listeners position-sun vr-mode-ui="enabled: false"
+                sail-duck
                 fog="type: linear; color: #000; density: 0.025"> <!-- animation-timeline__1="timeline: #ambientLight-cycle; loop: true; direction: alternate;">  -->
             <!-- ASSETS: MIXINS, MODELS AND TEMPLATES-->
             <a-assets timeout="5000">
                 <!-- PALETTES AND MATERIALS -->
                 <a-entity id = "mixins">
+
+                    <a-mixin id="mobile-string" material="color: $fff" geometry="radius: 0.25, segmentsHeight: 1, segmentsRadial: 3"></a-mixin>
+                    <a-mixin id="mobile-bar"    material="color: $fff" geometry="radius: 1, segmentsHeight: 1, segmentsRadial: 3"></a-mixin>
+                    
                     <a-mixin id="palette-A-01" 	    material = 'color: #FFA8CB'></a-mixin>
                     <a-mixin id="palette-A-02" 	    material = 'color: #784283'></a-mixin>
                     <a-mixin id="palette-A-03"	    material = 'color: #C7CEF6'></a-mixin>
 
-                    <a-mixin id="col-home-windows"	material = 'color: #C7CEF6; emissive: #C7CEF6'></a-mixin>
+                    <a-mixin id="col-home-windows"	material = 'color: #C7CEF6'></a-mixin>
 
                     <a-mixin id="col-ch-01" 	    material ='color: #658C52'></a-mixin>
                     <a-mixin id="col-ch-02" 	    material ='color: #A4A395'></a-mixin>
@@ -62,8 +69,8 @@
                     <!-- Built environment-->
                     <a-mixin id="col-hospital-base"     material='color: #fff'></a-mixin>
                     <a-mixin id="col-hospital-trim"     material='color: #c8a2c8'></a-mixin>
-                    <a-mixin id="col-hospital-door"     material='color: aqua; emissive: #C7CEF6'></a-mixin>
-                    <a-mixin id="col-hospital-window"   material='color: aqua; emissive: #C7CEF6'></a-mixin>
+                    <a-mixin id="col-hospital-door"     material='color: aqua'></a-mixin>
+                    <a-mixin id="col-hospital-window"   material='color: aqua'></a-mixin>
                     <a-mixin id="col-hospital-cross"    material='color: #ff007f'></a-mixin>
                     <a-mixin id="col-hospital-equip"    material='color: #ff007f'></a-mixin>
 
@@ -76,7 +83,7 @@
                     <a-mixin id="col-townhouse-A-brickLower"    material='color: gray'></a-mixin>
                     <a-mixin id="col-townhouse-A-trim"          material='color: #DDB784'></a-mixin>
                     <a-mixin id="col-townhouse-A-trimLower"     material='color: #9C735D'></a-mixin>
-                    <a-mixin id="col-townhouse-A-window"        material='color: aqua; emissive: #C7CEF6'></a-mixin>
+                    <a-mixin id="col-townhouse-A-window"        material='color: aqua'></a-mixin>
                     <a-mixin id="col-townhouse-A-windowFrame"   material='color: #000'></a-mixin>
                     <a-mixin id="col-townhouse-A-roof"          material='color: #4E3E23;'></a-mixin>
                     <a-mixin id="col-townhouse-A-door"          material='color: #b11226;'></a-mixin>
@@ -122,13 +129,13 @@
                     <a-mixin id="col-office-A-base"         material='color: #F0EAD6'></a-mixin>
                     <a-mixin id="col-office-A-trim"         material='color: #0c0f12'></a-mixin>
                     <a-mixin id="col-office-A-door"         material='color: gray'></a-mixin>
-                    <a-mixin id="col-office-A-window"       material='color: aqua;  emissive: #C7CEF6'></a-mixin>
+                    <a-mixin id="col-office-A-window"       material='color: aqua'></a-mixin>
                     <a-mixin id="col-office-A-equip"        material='color: #FFA8CB'></a-mixin>
 
                     <a-mixin id="col-tower-base"            material='color: #4b0082'></a-mixin>
                     <a-mixin id="col-tower-trim"            material='color: #c8a2c8'></a-mixin>
                     <a-mixin id="col-tower-door"            material='color: gray'></a-mixin>
-                    <a-mixin id="col-tower-window"          material='color: aqua; emissive: #C7CEF6'></a-mixin>
+                    <a-mixin id="col-tower-window"          material='color: aqua'></a-mixin>
                     <a-mixin id="col-tower-equip"           material='color: #FFA8CB'></a-mixin>
 
                     <a-mixin id="col-govBuild-base"         material='color: #f5f5dc'></a-mixin>
@@ -144,7 +151,7 @@
                     <a-mixin id="col-hotel-roof"            material='color: #4f4f4f'></a-mixin>
                     <a-mixin id="col-hotel-trim"            material='color: #FFB6C1'></a-mixin>
                     <a-mixin id="col-hotel-door"            material='color: gray'></a-mixin>
-                    <a-mixin id="col-hotel-window"          material='color: aqua; emissive: #C7CEF6'></a-mixin>
+                    <a-mixin id="col-hotel-window"          material='color: aqua'></a-mixin>
                     <a-mixin id="col-hotel-equip"           material='color: #FFA8CB'></a-mixin>
 
                     <a-mixin id="col-barn-A-base"           material='color: #e75480'></a-mixin>
@@ -168,7 +175,7 @@
 
                     <a-mixin id="col-airport-base"          material='color: #F0EAD6'></a-mixin>
                     <a-mixin id="col-airport-trim"          material='color: #FFA8CB'></a-mixin>
-                    <a-mixin id="col-airport-window"        material='color: aqua; emissive: #C7CEF6'></a-mixin>
+                    <a-mixin id="col-airport-window"        material='color: aqua'></a-mixin>
 
                     <a-mixin id = "col-lighthouse-lamp"     material="color: #fff; emissive: #fff"></a-mixin>
                     <!-- Street furniture-->
@@ -179,8 +186,10 @@
                         <a-mixin id="col-giveWay-base"      material='color: #fff'></a-mixin>
                         <a-mixin id="col-lampPole-base"     material='color: #2a3439'></a-mixin>
                         <a-mixin id="col-lampPole-light"    material='color: #fff; emissive: #fff'></a-mixin>
+                        <a-mixin id="col-streetlight-base"        material='color: gray'></a-mixin>
+                        <a-mixin id="col-streetlight-light"        material='color: #fff; emissive: #fff'></a-mixin>
                         <a-mixin id="col-fountain"          material='color: #f5f5dc'></a-mixin>
-                        <a-mixin id="col-fountain-water"    material='color: aqua'></a-mixin>
+                         <a-mixin id="col-fountain-water"    material='color: aqua'></a-mixin>
 
                     <!-- Topography -->
                         <a-mixin id="col-ground" 	        material='color: #658C52'></a-mixin>
@@ -261,6 +270,7 @@
                         <a-mixin id="pavement" 		material ="color: gray;     flatShading: true"     geometry= "height: 0.3"></a-mixin>
                         <a-mixin id="tarmac" 		material ="color: #525a60; flatShading: true"  geometry= "height: 0.1"></a-mixin>
                         <a-mixin id="runway" 		material ="color: #525a60; flatShading: true"  geometry= "height: 0.1"></a-mixin>
+                        <a-mixin id="runway-light" 	material ="color: #fff; emissive: #fff"></a-mixin>
                         <a-mixin id="rail-sleeper"  material='color: #443b35' geometry="width: 0.3; depth: 1.4; height: 0.05;"></a-mixin>
                         <a-mixin id="road-line" 	material ="color: #fff; flatShading: true"     geometry= "width: 0.15; height: 0.21"></a-mixin>
                         <a-mixin id="road-stopline" material ="color: #fff; flatShading: true"     geometry= "width: 1.5; height: 0.21; depth:  0.3 "></a-mixin>
@@ -1651,6 +1661,16 @@
                         </a-entity>                    
                     </script>              
 
+                    <script id="tmp-streetlight" type="text/html">
+                        <a-sphere class="glass" mixin="col-streetlight-light" rotation="" position="1 2.51 0" radius="0.075" scale="2 0.5 1" geometry="radius: 0.06" material=""></a-sphere>
+                        <a-entity class="streetling-base" mixin="col-streetlight-base" buffer-geometry-merger>
+                            <a-cone mixin="col-streetlight-base" position="0 0.15 0" rotation="0 90 0" geometry="height: 0.275; radiusTop: 0.04; radiusBottom: 0.075; segmentsRadial: 8" material=""></a-cone>
+                            <a-cone mixin="col-streetlight-base" position="1 2.53 0" rotation="" geometry="height: 0.11; radiusBottom: 0.1; segmentsRadial: 8; radiusTop: 0.08" material="" scale="1.3 0.25 0.7"></a-cone>
+                            <a-cylinder mixin="col-streetlight-base" position="0 1.25 0" rotation="0 90 0" geometry="height: 2.5; radius: 0.025; segmentsRadial: 8" material=""></a-cylinder>
+                            <a-torus mixin="col-streetlight-base" position="1 2.225 0" rotation="0 180 0" geometry="segmentsRadial: 8; arc: 90; radiusTubular: 0.01" material="" scale="1 0.3 1"></a-torus>
+                        </a-entity>     
+                    </script>
+
                     <!-- Animals-->
                     <script id="tmp-chicken" type="text/html">
                         <a-entity class="features"  mixin="col-chicken-feathers" buffer-geometry-merger> 
@@ -1979,7 +1999,14 @@
                 <a-entity id="flycam-rig" position="180 60 0" rotation="-10 90 0"  wasd-controls="acceleration: 150">
                     <a-entity id="flycam" camera="active: true; fov: 45; zoom: 0.9; near: 0.1" look-controls ></a-entity>
                 </a-entity> 
+            </a-entity>
 
+
+            <!-- ANNOTATION-->
+            <a-entity id = "annotation-group">
+                <a-entity id = "message-blocks-container" look-at="#flycam">
+                    <a-entity id = "message-blocks-group" position="0 100 0" rotation="0 -90 -20"></a-entity>
+                </a-entity>
             </a-entity>
 
             <!-- PLANET: Groupingfor globale positioning and scaling-->
@@ -1989,7 +2016,7 @@
                 <a-entity id = "environment-group"  class="environment" >
                     <!-- SKY -->
                     <a-sky id="sky" radius="200" theta-length="200" material="shader: gradientshader; topColor: #edc7f5; bottomColor: #ddd"  ></a-sky>
-                    <a-entity id = "cloud-group">
+                    <a-entity id x= "cloud-group">
                     </a-entity>
 
                     <!--- OUTER BODIES: SUN BODY AND PATH -->		
@@ -2134,7 +2161,7 @@
                     </a-entity>
 
                     <a-entity id="ocean-group" class="topography-group" position="0 -3 0" >   
-                        <a-ocean position="40.64 2 -9" ocean="width: 10.8; amplitude: 0.25; amplitudeVariance: 0.25; density: 20; color: #00fdff" scale="12 19 2"></a-ocean>
+                        <a-ocean position="40.64 2 0" ocean="width: 10.8; amplitude: 0.25; amplitudeVariance: 0.25; density: 20; color: #00fdff" scale="12 20 2"></a-ocean>
                         <!-- <a-entity id="bay-ocean"  class="surface" mixin="ocean-zone"  position="44.8  0  25.9" ></a-entity>
                         <a-entity id="coast1-ocean" class="surface" mixin="coastal-zone" position="74.5  0  0"></a-entity>
                         <a-entity id="coast2-ocean" class="surface" mixin="coastal-zone" position="74.5  0 -51.8"></a-entity>
@@ -2276,6 +2303,17 @@
                                 <a-torus id="ring-line" mixin="col-line" position="-72 0.1 -37.5" geometry="radius: 37.6; radiusTubular: 0.05; segmentsRadial: 16; segmentsTubular: 27; arc: 180" rotation="90 270 0" scale="1 1 0.05" ></a-torus>
                                 <a-box class="road-line" mixin="road-line" position="-65.932 0 0" rotation="0 90 0" geometry="depth: 12.1" ></a-box>                            
                             </a-entity>	                        
+                        </a-entity>
+
+                        <a-entity id ="streetlight-group" position="0 3 0">
+                            <a-entity class="streetlight" template="src: #tmp-streetlight" position="20 0 0" rotation="0 0 0"></a-entity>                               
+                            <a-entity class="streetlight" template="src: #tmp-streetlight" position="14 0 14" rotation="0 -45 0"></a-entity>                               
+                            <a-entity class="streetlight" template="src: #tmp-streetlight" position="0 0 20" rotation="0 -90 0"></a-entity>                               
+                            <a-entity class="streetlight" template="src: #tmp-streetlight" position="-14 0 14" rotation="0 -135 0"></a-entity>                               
+                            <a-entity class="streetlight" template="src: #tmp-streetlight" position="-20 0 0" rotation="0 -180 0"></a-entity>                               
+                            <a-entity class="streetlight" template="src: #tmp-streetlight" position="-14 0 -14" rotation="0 135 0"></a-entity>                               
+                            <a-entity class="streetlight" template="src: #tmp-streetlight" position="0 0 -20" rotation="0 90 0"></a-entity>                               
+                            <a-entity class="streetlight" template="src: #tmp-streetlight" position="14 0 -14" rotation="0 45 0"></a-entity>                               
                         </a-entity>
 
                         <!-- Railway line -->
@@ -2610,7 +2648,7 @@
                                     <a-box scale="7.1 0.1 6.1" position="0 3.0 0"></a-box>
                                     <a-cylinder mixin="col-hospital-trim" position="1.5 5 -0.6" geometry="height: 0.2; radius: 1.25; segmentsHeight: 6; segmentsRadial: 10" ></a-cylinder>
                                 </a-entity>
-                                <a-entity class="windows-group" mixin="col-hospital-window"  buffer-geometry-merger>
+                                <a-entity class="windows-group glass-group" mixin="col-hospital-window"  buffer-geometry-merger>
                                     <a-cylinder class = "window front"  position="0 1 0" rotation="90 0 0" geometry="height: 6.05; radius: 0.5"></a-cylinder>
                                     <a-cylinder class = "window front"  position="-1.5 1 0" rotation="90 0 0" geometry="height: 6.05; radius: 0.25"></a-cylinder>
                                     <a-cylinder class = "window front"  position="-2.5 1 0" rotation="90 0 0" geometry="height: 6.05; radius: 0.25"></a-cylinder>
@@ -2668,19 +2706,141 @@
 
                         <!-- Airport -->
                         <a-entity id="airport-group">
-                            <a-box class="airport tarmac" mixin="runway" position="10.97 0.05 -9.3" rotation="0 30 0" geometry="width: 18; depth: 20" ></a-box>
+                            <a-box class="airport tarmac" mixin="runway" position="13.2 0.05 -18.7" rotation="0 30 0" geometry="width: 14; depth: 25"></a-box>
                             <a-box class="airport runway" mixin="runway" position="11.6 0.05 2.4" rotation="0 30 0" geometry="width: 11; depth: 60" ></a-box>
+                            <a-entity id ="runway-lights" position="11.6 0.05 2.4"  rotation = "0 -60 0">
+                                <a-entity mixin="runway-light"  buffer-geometry-merger>
+                                    <a-entity position = "0 0 -3.5">
+                                        <a-box mixin="runway-light" position="0 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="2 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="4 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="6 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="8 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="10 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="12 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="14 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="16 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="18 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="20 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="22 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="24 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="26 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="28 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="-2 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="-4 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="-6 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="-8 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="-10 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="-12 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="-14 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="-16 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="-18 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="-20 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="-22 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="-24 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="-26 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                    </a-entity>
+                                    <a-entity position = "0 0 3.5">
+                                        <a-box mixin="runway-light" position="0 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="2 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="4 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="6 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="8 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="10 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="12 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="14 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="16 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="18 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="20 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="22 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="24 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="26 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="28 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="-2 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="-4 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="-6 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="-8 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="-10 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="-12 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="-14 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="-16 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="-18 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="-20 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="-22 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="-24 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                        <a-box mixin="runway-light" position="-26 0 0" scale ="0.25 0.2 0.25"></a-box>
+                                    </a-entity>
+                                    <a-entity position = "29.5 0 0">
+                                        <a-box mixin="runway-light" position="0 0 0" scale ="1 0.2 0.5"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 -1" scale ="1 0.2 0.5"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 -2" scale ="1 0.2 0.5"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 -3" scale ="1 0.2 0.5"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 -4" scale ="1 0.2 0.5"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 -5" scale ="1 0.2 0.5"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 1" scale ="1 0.2 0.5"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 2" scale ="1 0.2 0.5"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 3" scale ="1 0.2 0.5"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 4" scale ="1 0.2 0.5"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 5" scale ="1 0.2 0.5"></a-box>
+                                    </a-entity>
+                                    <a-entity position = "20 0 0">
+                                        <a-box mixin="runway-light" position="0 0 0" scale ="0.3 0.2 0.3"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 0.5" scale ="0.3 0.2 0.3"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 1" scale ="0.3 0.2 0.3"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 1.5" scale ="0.3 0.2 0.3"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 -0.5" scale ="0.3 0.2 0.3"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 -1" scale ="0.3 0.2 0.3"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 -1.5" scale ="0.3 0.2 0.3"></a-box>
+                                    </a-entity>
+                                    <a-entity position = "10 0 0">
+                                        <a-box mixin="runway-light" position="0 0 0" scale ="0.3 0.2 0.3"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 0.5" scale ="0.3 0.2 0.3"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 1" scale ="0.3 0.2 0.3"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 1.5" scale ="0.3 0.2 0.3"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 -0.5" scale ="0.3 0.2 0.3"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 -1" scale ="0.3 0.2 0.3"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 -1.5" scale ="0.3 0.2 0.3"></a-box>
+                                    </a-entity>
+                                    <a-entity position = "0 0 0">
+                                        <a-box mixin="runway-light" position="0 0 0" scale ="0.3 0.2 0.3"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 0.5" scale ="0.3 0.2 0.3"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 1" scale ="0.3 0.2 0.3"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 1.5" scale ="0.3 0.2 0.3"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 -0.5" scale ="0.3 0.2 0.3"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 -1" scale ="0.3 0.2 0.3"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 -1.5" scale ="0.3 0.2 0.3"></a-box>
+                                    </a-entity>
+                                    <a-entity position = "-10 0 0">
+                                        <a-box mixin="runway-light" position="0 0 0" scale ="0.3 0.2 0.3"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 0.5" scale ="0.3 0.2 0.3"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 1" scale ="0.3 0.2 0.3"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 1.5" scale ="0.3 0.2 0.3"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 -0.5" scale ="0.3 0.2 0.3"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 -1" scale ="0.3 0.2 0.3"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 -1.5" scale ="0.3 0.2 0.3"></a-box>
+                                    </a-entity>
+                                    <a-entity position = "-20 0 0">
+                                        <a-box mixin="runway-light" position="0 0 0" scale ="0.3 0.2 0.3"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 0.5" scale ="0.3 0.2 0.3"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 1" scale ="0.3 0.2 0.3"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 1.5" scale ="0.3 0.2 0.3"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 -0.5" scale ="0.3 0.2 0.3"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 -1" scale ="0.3 0.2 0.3"></a-box>
+                                        <a-box mixin="runway-light" position="0 0 -1.5" scale ="0.3 0.2 0.3"></a-box>
+                                    </a-entity>
+                                </a-entity>
+                            </a-entity>
                             <a-entity id="airport-building" position="17.69 0 -7.92" rotation="0 30 0">
                                 <a-entity class="base-group" mixin="col-airport-base"  buffer-geometry-merger>
                                     <a-box class="airport terminal" position="0 2.5 0" geometry="width: 8.1; depth: 18; height: 5" material="metalness: 0.2"></a-box>
                                     <a-box class="airport terminal" position="3.3 3.5 -4.2979" geometry="width: 8; depth: 5; height: 7" material="metalness: 0.2"></a-box>                            
                                 </a-entity>
                                 <a-entity class="glass-group" mixin="col-airport-window"  buffer-geometry-merger>
-                                    <a-box class="airport terminal" position="0 1 -5" geometry="width: 8.1; depth: 6; height: 1" ></a-box>
-                                    <a-box class="airport terminal" position="0 1 5" geometry="width: 8.1; depth: 6; height: 1" ></a-box>
-                                    <a-box class="airport terminal" position="0 3 -5" geometry="width: 8.1; depth: 6; height: 1" ></a-box>
-                                    <a-box class="airport terminal" position="0 3 5" geometry="width: 8.1; depth: 6; height: 1" ></a-box>
-                                    <a-box class="airport terminal" position="0 1 0" geometry="width: 8.1; depth: 2; height: 2" ></a-box>   
+                                    <a-box class="airport terminal" position="0 1 -5" geometry="width: 8.2; depth: 6; height: 1" ></a-box>
+                                    <a-box class="airport terminal" position="0 1 5" geometry="width: 8.2; depth: 6; height: 1" ></a-box>
+                                    <a-box class="airport terminal" position="0 3 -5" geometry="width: 8.2; depth: 6; height: 1" ></a-box>
+                                    <a-box class="airport terminal" position="0 3 5" geometry="width: 8.2; depth: 6; height: 1" ></a-box>
+                                    <a-box class="airport terminal" position="0 1 0" geometry="width: 8.2; depth: 2; height: 2" ></a-box>   
                                 </a-entity>                  
                                 <a-entity class="airport-tower" position="-0.64339 0 10.45858">    
                                     <a-entity class="base-group" mixin="col-airport-base"  buffer-geometry-merger>
@@ -2689,7 +2849,7 @@
                                         <a-cylinder geometry="height: 1.5; segmentsRadial: 10; radius: 2" position="0 16.5 0" ></a-cylinder>
                                     </a-entity>        
                                     <a-entity class="glass-group" mixin="col-airport-window"  buffer-geometry-merger>
-                                        <a-cone mixin="col-airport-window" geometry="height: 0.8; segmentsRadial: 10; radiusBottom: 2.65; radiusTop: 2.9" position="0 14.95324 0" ></a-cone>
+                                        <a-cone mixin="col-airport-window" geometry="height: 0.8; segmentsRadial: 10; radiusBottom: 2.65; radiusTop: 2.9" position="0 14.95 0" ></a-cone>
                                         <a-cylinder mixin="col-airport-window" geometry="height: 0.9; segmentsRadial: 10; radius: 2.05" position="0 16.5 0" ></a-cylinder>
                                     </a-entity>                
                                 </a-entity>
@@ -2867,7 +3027,7 @@
                                         <a-cylinder position="-2.25 7.3 3.725" rotation="-90 90 90" material="flatShading: true" geometry="height: 1.4; segmentsRadial: 3" scale="0.5 0.5 0.375"></a-cylinder>                               
                                     </a-entity>
                                     <!--Windows-->
-                                    <a-entity class ="windows-group" mixin="col-hotel-window" buffer-geometry-merger>
+                                    <a-entity class ="windows-group glass-group" mixin="col-hotel-window" buffer-geometry-merger>
                                         <!-- Windows: front / back -->
                                         <a-entity position="0 0 0.5">
                                             <a-box position="0 2 0" scale="0.4 0.6 7.1"></a-box>
@@ -3160,7 +3320,7 @@
                                         </a-entity>
                                     </a-entity>
                                     <!-- Windows -->
-                                    <a-entity class ="windows-group" mixin="col-hotel-window" buffer-geometry-merger>
+                                    <a-entity class ="windows-group glass-group" mixin="col-hotel-window" buffer-geometry-merger>
                                         <a-entity position="0 0 0" class ="windows-group">
                                             <a-box  position="0 1 0" scale="0.6 0.6 6.1"></a-box>
                                             <a-box  position="0 2 0" scale="0.6 0.6 6.1"></a-box>
@@ -3329,7 +3489,7 @@
                                     </a-entity>
 
                                     <!-- Windows -->
-                                    <a-entity class ="windows-group" mixin="col-hotel-window" buffer-geometry-merger>
+                                    <a-entity class ="windows-group glass-group" mixin="col-hotel-window" buffer-geometry-merger>
                                         <a-entity position="0 0 0" class ="windows-group">
                                             <a-box  position="0 1 0" scale="0.6 0.6 6.1"></a-box>
                                             <a-box  position="0 2 0" scale="0.6 0.6 6.1"></a-box>
@@ -6055,23 +6215,85 @@
         </a-scene>
 
         <!-- USER INTERFACE-->
-        <div id = "flat-ui">
+        <div id = "flat-ui-container">
+            <!-- Main tooltip and infor pane-->
+            <div id = "tooltip-pane">
+                <div id = "tooltip-header-container">
+                        <div id = "tooltip-header">Toy name</div> 
+                </div> 
+                <div id = "tooltip-stats-container">
+                    <div class = "tooltip-subheader">Measuring activity</div> 
+                    <div class = "tooltip-stat-container">
+                        <div class = "tooltip-stat-label">No. toys: </div>
+                        <div class = "tooltip-stat-data">xx</div>
+                        <div class = "tooltip-stat-unit"></div>
+                    </div>
+                    <div class = "tooltip-stat-container">
+                        <div class = "tooltip-stat-label">Annual consumption: </div>
+                        <div class = "tooltip-stat-data">xx</div>
+                        <div class = "tooltip-stat-unit">units per toy</div>
+                    </div>
+                    <div class = "tooltip-stat-container">
+                        <div class = "tooltip-stat-label">Annual emissions: </div>
+                        <div class = "tooltip-stat-data">xx</div>
+                        <div class = "tooltip-stat-unit">tCO2-e per toy</div>
+                    </div>
+
+                    <div class = "tooltip-stat-container">
+                        <div class = "tooltip-stat-label">Total annual consumption each year: </div>
+                        <div class = "tooltip-stat-data">xx</div>
+                        <div class = "tooltip-stat-unit">units.</div>
+                    </div>
+
+                    <div class = "tooltip-stat-container">
+                        <div class = "tooltip-stat-label">Total annual consumption each year: </div>
+                        <div class = "tooltip-stat-data">xx</div>
+                        <div class = "tooltip-stat-unit">units</div>
+                    </div>
+
+                    <div class = "tooltip-stat-container">
+                        <div class = "tooltip-stat-label">Contribution: </div>
+                        <div class = "tooltip-stat-data">xx</div>
+                        <div class = "tooltip-stat-unit">%</div>
+                    </div>
+
+                    <div class = "tooltip-stat-container">
+                        <div class = "tooltip-stat-label">Rank: </div>
+                        <div class = "tooltip-stat-data">xx</div>
+                        <div class = "tooltip-stat-unit"></div>
+                    </div>
+                </div>
+                <div id = "tooltip-summary-container">
+                    <div class = "tooltip-subheader">About activity</div> 
+                    There's a starman waiting in the sky
+                    He'd like to come and meet us
+                    But he thinks he'd blow our minds
+                    There's a starman waiting in the sky
+                    He's told us not to blow it
+                    Cause he knows it's all worthwhile
+                    He told me:
+                </div> 
+            </div>
+
             <div id = "shortcuts">
-                <div id ="shortcuts-header">Magic keyboard shortcuts</div>
+                <div id ="shortcuts-header">Interaction options</div>
 
                 <div id = "key-shortcuts-left">
+                    <div class ="shortcuts-subHeader">Keyboard shortcuts</div>
+                    <div class = "key-shortcut-container">
+                        <div class = "key-shortcut">Space</div>
+                        <div class = "shortcut-description">Toggle between far and lowground camera</div>
+                    </div>
+                    <div class ="shortcuts-subHeader">shortcuts</div>
                     <div class = "key-shortcut-container">
                         <div class = "key-shortcut">&#8592; &#8594;</div>
-                        <div class = "shortcut-description">Move camera left and right</div>
+                        <div class = "shortcut-description">Move camera left and right (far camera only)</div>
                     </div>
                     <div class = "key-shortcut-container">
                         <div class = "key-shortcut"> &#8593; &#8595;</div>
-                        <div class = "shortcut-description">Move camera forward and back</div>
+                        <div class = "shortcut-description">Move camera forward and back (high camera only)</div>
                     </div>
-                    <div class = "key-shortcut-container">
-                        <div class = "key-shortcut">Space</div>
-                        <div class = "shortcut-description">Toggle between far and on the ground camera</div>
-                    </div>
+
                     <div class = "key-shortcut-container">
                         <div class = "key-shortcut"> [  ]</div>
                         <div class = "shortcut-description"> Rotate high level camera around scene</div>
@@ -6084,9 +6306,6 @@
                         <div class = "key-shortcut">></div>
                         <div class = "shortcut-description"> Move time forward by 1 hour</div>
                     </div>
-                </div>
-
-                <div id = "key-shortcuts-right">
                     <div class = "key-shortcut-container">
                         <div class = "key-shortcut">`</div>
                         <div class = "shortcut-description">Toggle scene statistics</div>
@@ -6095,6 +6314,19 @@
                         <div class = "key-shortcut">Return</div>
                         <div class = "shortcut-description">Load scene inspector</div>
                     </div>
+                </div>
+
+                <div id = "key-shortcuts-right">
+                    <div class ="shortcuts-subHeader">Touchscreen and mouse</div>
+                    <div class = "key-shortcut-container">
+                        <div class = "key-shortcut">Click & drag</div>
+                        <div class = "shortcut-description">Rotate view</div>
+                    </div>
+                    <div class = "key-shortcut-container">
+                        <div class = "key-shortcut">Orbit controls </div>
+                        <div class = "shortcut-description">Pinch to zoom Lower camera only</div>
+                    </div>
+                    <div class ="shortcuts-subHeader">VR controls</div>
                 </div>
             </div>
         </div>
