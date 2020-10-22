@@ -123,13 +123,14 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
         play: function () {
             document.getElementById("rubberDuck").setAttribute('alongpath', {
                 curve:          "#duck-path-points",
-                dur:            60000, 
+                dur:            120000, 
                 loop:           true, 
                 resetonplay:    true, 
                 rotate:         true
             })
         }
     })
+
 
     AFRAME.registerComponent("animate-lighthouse", {
         play: function() {
@@ -139,18 +140,137 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
                 from:           '-10 -50 0',
                 to:             '-10 -180 0',
                 loop:           true,
-                dir:      'alternate'
+                dir:            'alternate'
             })
-
         }
-
     })
+
+
+    AFRAME.registerComponent("show-block-title", {
+        schema: {
+            text:        {type: 'string',   default: "Hello world"},
+            tilt:        {type: 'array',    default: [10, -10]},
+            rotate:      {type: 'array',    default: [0, 0]},   
+            posZ:        {type: 'array',    default: [50, -50]},            
+            posX:        {type: 'array',    default: [0, 0]},            
+            posY:        {type: 'array',    default: [0, 0]},
+            letterSpace: {type: 'number',   default: 17.5},                     
+        },
+
+        init: function() {
+            const words = this.data.text.split(" "),
+                container = document.getElementById("message-blocks-group"),
+                noWords = words.length
+
+            container.innerHTML = ""            // Clear previous
+            let letterCount = 0;
+
+            words.forEach((word, i) => {
+                const noLetters = word.length,
+                    width = (noLetters - 1) * this.data.letterSpace,
+                    startPos = width/2,
+                    tilt = +this.data.tilt[i],
+                    rotate = +this.data.rotate[i]
+
+                const wordContainer =  document.createElement('a-entity')
+                wordContainer.setAttribute('id', 'message-block-word-'+i)
+                wordContainer.setAttribute('class', 'block-title')
+                wordContainer.setAttribute('position', { x: this.data.posX[i],   y:  this.data.posY[i],  z: this.data.posZ[i] })
+
+                const topString = document.createElement('a-cylinder')
+                topString.setAttribute('mixin', 'mobile-string')
+                topString.setAttribute('position', { x: 0,   y: 105,  z: 0 })
+                topString.setAttribute('rotation', { x: 0,   y: 90,   z: 0 })
+                topString.setAttribute('geometry', { radius: 0.25, height: 50 })
+
+                const mobile = document.createElement('a-cylinder')
+                mobile.setAttribute('mixin', 'mobile-bar')
+                mobile.setAttribute('position', { x: 0,   y: 80,  z: 0 })
+                mobile.setAttribute('rotation', { x: (90 + tilt), y: rotate,   z: 0 })
+                mobile.setAttribute('geometry', { height: (width + 5) })
+
+                const mobileGroup= document.createElement('a-entity')
+                mobileGroup.setAttribute('class', 'mobile-group')
+                mobileGroup.setAttribute('position', { x: 0,   y: Math.atan(tilt * Math.PI / 180) * 10,  z: 0 })                
+                mobileGroup.setAttribute('animation__mobile1', { property: 'rotation.y' ,  from: -5, to: 5, dur: 5000, delay: (2500* i), dir: 'alternate', loop: 'true' })                
+
+                word.split('').forEach((letter, j) => {
+                    const letterString= document.createElement('a-entity')
+                    letterString.setAttribute('mixin', 'mobile-string')
+                    letterString.setAttribute('position', { x: 0,   y: (startPos - this.data.letterSpace * j) ,  z: 10 })
+                    letterString.setAttribute('rotation', { x: (-90  -tilt), y: 0,   z: 0 })
+                    letterString.setAttribute('geometry', {primitive: 'cylinder', height: 20})
+
+                    const letterBox = document.createElement('a-box')
+                    letterBox.setAttribute('position',  { x: 0,   y: -12.5,  z: 0 })
+                    letterBox.setAttribute('rotation',  { x: 0,     y: 90,   z: 0 })
+                    letterBox.setAttribute('scale',     { x: 10,    y: 10,   z: 10 })
+                    letterBox.setAttribute('material', { color: palette.letterBlock[letterCount % palette.letterBlock.length].trim() })
+
+                    const letterFrontText = document.createElement('a-entity')
+                    letterFrontText.setAttribute('position', { x: 0,   y: 0,  z: 0.5 })
+                    letterFrontText.setAttribute('scale', { x: 20, y: 20,   z: 20 })
+                    letterFrontText.setAttribute('text', { value: letter.toUpperCase(), align: 'center' })
+
+                    const letterBackText = document.createElement('a-entity')
+                    letterBackText.setAttribute('position', { x: 0,   y: 0,   z: -0.5 })
+                    letterBackText.setAttribute('rotation', { x: 0,   y: 180,  z: 0 })
+                    letterBackText.setAttribute('scale', { x: 20, y: 20,   z: 20 })
+                    letterBackText.setAttribute('text', { value: letter.toUpperCase(), align: 'center' })
+
+                    const letterSideA = document.createElement('a-entity')
+                    letterSideA.setAttribute('position', { x: 0.525,   y: 0,   z: 0 })
+                    letterSideA.setAttribute('rotation', { x: 0,   y: 90,  z: 0 })
+                    letterSideA.setAttribute('scale', { x: 20, y: 20,   z: 20 })
+                    letterSideA.setAttribute('material', { side: 'back' })
+                    letterSideA.setAttribute('text', { value: letter.toUpperCase(), align: 'center' })
+
+                    const letterSideB = document.createElement('a-entity')
+                    letterSideB.setAttribute('position', { x: -0.525,   y: 0,   z: 0 })
+                    letterSideB.setAttribute('rotation', { x: 0,   y: -90,  z: 0 })
+                    letterSideB.setAttribute('scale', { x: 20,  y: 20,   z: 20 })
+                    letterSideA.setAttribute('material', { side: 'back' })
+                    letterSideB.setAttribute('text', { value: letter.toUpperCase(), align: 'center' })
+
+                    const letterBottom = document.createElement('a-entity')
+                    letterBottom.setAttribute('position', { x: 0,   y: -0.525,   z: 0 })
+                    letterBottom.setAttribute('rotation', { x: -90,   y: 0,  z: 0 })
+                    letterBottom.setAttribute('scale', { x: 20,  y: 20,   z: 20 })
+                    letterBottom.setAttribute('text', { value: letter.toUpperCase(), align: 'center', side: 'back' })
+
+                    const letterTop= document.createElement('a-entity')
+                    letterTop.setAttribute('position', { x: 0,   y: 0.525,   z: 0 })
+                    letterTop.setAttribute('rotation', { x: 90,   y: 0,  z: 0 })
+                    letterTop.setAttribute('scale', { x: 20,  y: 20,   z: 20 })
+                    letterTop.setAttribute('text', { value: letter.toUpperCase(), align: 'center', side: 'back' })
+
+                    letterBox.appendChild(letterBottom)
+                    letterBox.appendChild(letterTop)
+                    letterBox.appendChild(letterSideA)
+                    letterBox.appendChild(letterSideB)
+                    letterBox.appendChild(letterBackText)
+                    letterBox.appendChild(letterFrontText)
+                    letterString.appendChild(letterBox)
+                    mobileGroup.appendChild(letterString)
+                    letterCount++
+                })
+
+                // Append all containers
+                mobile.appendChild(mobileGroup)
+                wordContainer.appendChild(topString)
+                wordContainer.appendChild(mobile)
+                container.appendChild(wordContainer)
+
+            })
+        }
+    })
+
 
     AFRAME.registerComponent("add-external-listeners", { 
         init: function(){
             // KEYBOARD EVENTS
             window.addEventListener("keydown", function(key){
-                // console.log(`Pressed ${key.code}`)
+                console.log(`Pressed ${key.code}`)
                 if(state.enableKeyEvents){
                     switch(key.code){
                         case 'Backquote': 
@@ -177,15 +297,21 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
                         case 'Enter':
                                 document.getElementById('scene').components.inspector.openInspector()
                             break
-
                         case 'MetaLeft':
                                 state.keydown = setTimeout( () => {
                                     document.getElementById('shortcuts').classList.add('visible') 
                                 }, 2000)
                             break
-
+                        case 'Digit1':
+                                console.log('Showing message...')
+                                const blockGroup =  document.getElementById('message-blocks-group')
+                                blockGroup.setAttribute('show-block-title', "text: Hello World;  posZ: 35, -35;   posY: 5,  -10; posX: 0, 0; tilt: 10, -10; rotate: 0, 0; letterSpace: 15")
+                                blockGroup.setAttribute('animation', {
+                                    property: 'position.y', from: 100, to: 0, dur: 3500, delay: 500
+                                })
+                            break
                         default:
-                            console.log(`No event for ${key.code}`)
+
                             clearTimeout(state.keydown)  
                             document.getElementById('shortcuts').classList.remove('visible')
                     }
@@ -310,18 +436,21 @@ const externalEvents = {
             dur: duration,
             to: settings.lights.hemi.intProp[state.modelTime.season][state.modelTime.hour] * settings.lights.hemi.maxIntensity
         })  
-
-
         // Change the environment
         externalEvents.changeEnvironment()
 
+        // Turn lights on/off
+        if (state.modelTime.timeOfDay() === "day" || state.modelTime.timeOfDay() === "morning"){
+            externalEvents.turnNightLightsOff()
+        } else {
+            externalEvents.turnNightLightsOn()
+        }
 
         // Control key events
         state.enableKeyEvents = false
         setTimeout( ()=> {  state.enableKeyEvents = true    }, duration)
 
     },
-
 
     changeEnvironment: function(name = state.environment.name, timeOfDay = state.modelTime.timeOfDay(), duration = 2000){
         console.log('Changing environment to '+name, timeOfDay)
@@ -375,6 +504,20 @@ const externalEvents = {
         for(const el of glassEls){
             el.setAttribute('material', {'emissive': '#C7CEF6'})
         }
+
+        document.getElementById('lighthouse-light').setAttribute('animation__rotation', {
+                property:       'rotation',
+                dur:            30000,
+                from:           '-10 -50 0',
+                to:             '-10 -180 0',
+                loop:           true,
+                dir:            'alternate'
+            })
+        document.getElementById('lighthouse-light').setAttribute('animation__intensity', {
+            property:       'light.intensity',
+            dur:            1000,
+            to:             1
+        })
     },
 
     turnNightLightsOff:  function(){
@@ -383,11 +526,15 @@ const externalEvents = {
         for(const el of glassEls){
             el.setAttribute('material', {'emissive': '#000'})
         }
+        document.getElementById('lighthouse-light').removeAttribute('animation__rotation')
+        document.getElementById('lighthouse-light').setAttribute('animation__intensity', {
+            property:       'light.intensity',
+            dur:            1000,
+            to:             0
+        })
     }
 
-
 }
-
 
 
 

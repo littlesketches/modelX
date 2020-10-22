@@ -147,12 +147,13 @@ console.log('BUILDING APP...')
         timeLoaded:         new Date(),
         time:               {},
         modelTime:          {
-            hour:           6,
+            hour:           11,
             season:        'spring',
             timeOfDay:      () => settings.environment.timeOfDay[state.modelTime.season][state.modelTime.hour],
         },
         environment: {
-            name:           'default'
+            name:           'default',
+            nightLights:       false
         },
         weather: {
             windSpeed:      10, 
@@ -277,6 +278,7 @@ console.log('BUILDING APP...')
     }
 
     const palette = {
+        letterBlock:   ['#ff598f', '#fd8a5e', '#784283', '#01dddd', '#00bfaf', '#91aaff', '#ff9e9e', '#ff80c5', '#7afbff', '#8aff9c' ],
         A: {
             '01': 	'#FFA8CB',
             '02': 	'#784283',
@@ -295,6 +297,11 @@ console.log('BUILDING APP...')
 
         }
     }
+
+
+
+
+
 
 
 //////////////////////////////////////////
