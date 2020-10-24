@@ -36,7 +36,7 @@
                 setup add-external-listeners 
                 position-sun sail-duck
                 vr-mode-ui="enabled: false"
-                fog="type: linear; color: #000; density: 0.025"> <!-- animation-timeline__1="timeline: #ambientLight-cycle; loop: true; direction: alternate;">  -->
+                fog="type: linear"> <!-- animation-timeline__1="timeline: #ambientLight-cycle; loop: true; direction: alternate;">  -->
             <!-- ASSETS: MIXINS, MODELS AND TEMPLATES-->
             <a-assets timeout="5000">
                 <!-- PALETTES AND MATERIALS -->
@@ -1927,20 +1927,20 @@
 
 
                <a-curve id="duck-path-points" curve="closed: true">
-                    <a-curve-point position="44.20029 -4 49.17066" ></a-curve-point>
-                    <a-curve-point position="59.25091 -4 42.16214" ></a-curve-point>
-                    <a-curve-point position="63.90534 -4 17.83288" ></a-curve-point>
-                    <a-curve-point position="76.01143 -4 8.39313" ></a-curve-point>
-                    <a-curve-point position="80.37552 -4 -9.11185" ></a-curve-point>
-                    <a-curve-point position="82.97661 -4 -25.46591" ></a-curve-point>
-                    <a-curve-point position="79.44372 -4 -47.4651" ></a-curve-point>
-                    <a-curve-point position="49.41004 -4 -71.70495" ></a-curve-point>
-                    <a-curve-point position="42.19465 -4 -60.5077" ></a-curve-point>
-                    <a-curve-point position="74.02973 -4 -55.94726" ></a-curve-point>
-                    <a-curve-point position="82.35734 -4 -23.4595" ></a-curve-point>
-                    <a-curve-point position="61.94721 -4 11.23928" ></a-curve-point>
-                    <a-curve-point position="54.85139 -4 18.57802" ></a-curve-point>
-                    <a-curve-point position="45.17089 -4 11.43647" ></a-curve-point>
+                    <a-curve-point class = "duckPathPoint" position="44.20029 -4 49.17066" ></a-curve-point>
+                    <a-curve-point class = "duckPathPoint" position="59.25091 -4 42.16214" ></a-curve-point>
+                    <a-curve-point class = "duckPathPoint" position="63.90534 -4 17.83288" ></a-curve-point>
+                    <a-curve-point class = "duckPathPoint" position="76.01143 -4 8.39313" ></a-curve-point>
+                    <a-curve-point class = "duckPathPoint" position="80.37552 -4 -9.11185" ></a-curve-point>
+                    <a-curve-point class = "duckPathPoint" position="82.97661 -4 -25.46591" ></a-curve-point>
+                    <a-curve-point class = "duckPathPoint" position="79.44372 -4 -47.4651" ></a-curve-point>
+                    <a-curve-point class = "duckPathPoint" position="49.41004 -4 -71.70495" ></a-curve-point>
+                    <a-curve-point class = "duckPathPoint" position="42.19465 -4 -60.5077" ></a-curve-point>
+                    <a-curve-point class = "duckPathPoint" position="74.02973 -4 -55.94726" ></a-curve-point>
+                    <a-curve-point class = "duckPathPoint" position="82.35734 -4 -23.4595" ></a-curve-point>
+                    <a-curve-point class = "duckPathPoint" position="61.94721 -4 11.23928" ></a-curve-point>
+                    <a-curve-point class = "duckPathPoint" position="54.85139 -4 18.57802" ></a-curve-point>
+                    <a-curve-point class = "duckPathPoint" position="45.17089 -4 11.43647" ></a-curve-point>
                 </a-curve>
                <a-curve id="airplane-path-points" curve="closed: true" >
                     <a-curve-point position="-12.6 1 -55.1" ></a-curve-point>
@@ -6330,7 +6330,7 @@
                 <div id = "key-shortcuts-left">
                     <div class ="shortcuts-subHeader">Keyboard shortcuts</div>
                     <div class = "key-shortcut-container">
-                        <div class = "key-shortcut">Space</div>
+                        <div class = "key-shortcut small">Space</div>
                         <div class = "shortcut-description">Toggle between far and lowground camera</div>
                     </div>
                     <div class ="shortcuts-subHeader">shortcuts</div>
@@ -6348,12 +6348,12 @@
                         <div class = "shortcut-description"> Rotate high level camera around scene</div>
                     </div>
                     <div class = "key-shortcut-container">
-                        <div class = "key-shortcut">< </div>
-                        <div class = "shortcut-description"> Move time back by 1 hour</div>
+                        <div class = "key-shortcut">< ></div>
+                        <div class = "shortcut-description"> Move time back and forward by 1 hour</div>
                     </div>
                     <div class = "key-shortcut-container">
-                        <div class = "key-shortcut">></div>
-                        <div class = "shortcut-description"> Move time forward by 1 hour</div>
+                        <div class = "key-shortcut">- +</div>
+                        <div class = "shortcut-description">Lower or raise the sea level</div>
                     </div>
                     <div class = "key-shortcut-container">
                         <div class = "key-shortcut">`</div>
@@ -6368,11 +6368,11 @@
                 <div id = "key-shortcuts-right">
                     <div class ="shortcuts-subHeader">Touchscreen and mouse</div>
                     <div class = "key-shortcut-container">
-                        <div class = "key-shortcut">Click & drag</div>
+                        <div class = "key-shortcut small">Click & drag</div>
                         <div class = "shortcut-description">Rotate view</div>
                     </div>
                     <div class = "key-shortcut-container">
-                        <div class = "key-shortcut">Orbit controls </div>
+                        <div class = "key-shortcut small">Orbit controls </div>
                         <div class = "shortcut-description">Pinch to zoom Lower camera only</div>
                     </div>
                     <div class ="shortcuts-subHeader">VR controls</div>
