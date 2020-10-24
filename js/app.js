@@ -72,7 +72,7 @@ console.log('BUILDING APP...')
                     7: 'morning', 
                     8: 'morning',   
                     9: 'morning', 
-                    10: 'morning', 
+                    10: 'day', 
                     11: 'day',  
                     12: 'day',  
                     13: 'day',  
@@ -98,7 +98,7 @@ console.log('BUILDING APP...')
                     7: 'morning', 
                     8: 'morning',   
                     9: 'morning', 
-                    10: 'morning', 
+                    10: 'day', 
                     11: 'day',  
                     12: 'day',  
                     13: 'day',  
@@ -152,8 +152,8 @@ console.log('BUILDING APP...')
             timeOfDay:      () => settings.environment.timeOfDay[state.modelTime.season][state.modelTime.hour],
         },
         environment: {
-            name:           'default',
-            nightLights:       false
+            name:           'grandBudapest',
+            nightLights:     false
         },
         hazard: {
             storm:          false,
@@ -313,9 +313,6 @@ console.log('BUILDING APP...')
 
 
 
-
-
-
 //////////////////////////////////////////
 /// LIGHTING AND ENVIRONMENT SETTINGS  ///
 //////////////////////////////////////////
@@ -417,7 +414,7 @@ console.log('BUILDING APP...')
 
     }
 
-    settings.evironment = {
+    settings.days = {
         default: {
             morning: {          // 
                 'sky-top':      '#74f6f6', 
@@ -477,26 +474,34 @@ console.log('BUILDING APP...')
             morning: {          // 
                 'sky-top':      '#f8f0e2', 
                 'sky-bottom':   '#fffab3', 
-            }, 
-            day: {
-                'sky-top':      '#01c7f9', 
-                'sky-bottom':   '#cff7f6', 
                 hemilight: {
                     sky:        '#fff',
-                    ground:     '#f3ffd1'
+                    ground:     '#faf56b'
+                }
+            }, 
+            day: {
+                'sky-top':      '#02d2ed', 
+                'sky-bottom':   '#a9f8f9', 
+                hemilight: {
+                    sky:        '#fff',
+                    ground:     '#faf56b'
                 }
             }, 
             evening: {
                 'sky-top':      '#3e0146', 
                 'sky-bottom':   '#fba46a', 
+                hemilight: {
+                    sky:        '#fff',
+                    ground:     '#faf56b'
+                }
             }, 
             night: {
-                'sky-top':      '#2b0330', 
-                'sky-bottom':   '#00285c', 
+                'sky-top':      '#012037', 
+                'sky-bottom':   '#004e75', 
             }
         },
 
-        storm: {
+        stormFlood: {
             morning: {          // 
                 'sky-top':      '#323434', 
                 'sky-bottom':   '#9c94a8', 
@@ -538,6 +543,116 @@ console.log('BUILDING APP...')
             }, 
             night: {
                 'sky-top':      '#323434', 
+                'sky-bottom':   '#41515d', 
+                'water':        '#377b7b',                
+                hemilight: {
+                    sky:        '#949494',
+                    ground:     '#383838'
+                },
+                fog: {
+                    color:      '#656d72',
+                    far:        400,
+                }
+            }
+        },
+
+        bushfire: {
+            morning: {          
+                'sky-top':      '#ff2600', 
+                'sky-bottom':   '#ff9500', 
+                'water':        '#373f3f',
+                hemilight: {
+                    sky:        '#b25906',
+                    ground:     '#ff6f00'
+                },
+                fog:{
+                    far:        300,
+                    color:        '#853f0a'
+                }
+            }, 
+            day: {
+                'sky-top':      '#0a0400', 
+                'sky-bottom':   '#ff9500', 
+                'water':        '#373f3f',
+                hemilight: {
+                    sky:        '#b25906',
+                    ground:     '#ff6f00'
+                },
+                fog:{
+                    far:        300,
+                    color:        '#853f0a'
+                }
+            }, 
+            evening: {
+                'sky-top':      '#0a0400', 
+                'sky-bottom':   '#ff6600', 
+                'water':        '#373f3f',
+                hemilight: {
+                    sky:        '#b25906',
+                    ground:     '#ff6f00'
+                },
+                fog:{
+                    far:          300,
+                    color:        '#853f0a'
+                }
+            }, 
+            night: {
+                'sky-top':      '#0a0400', 
+                'sky-bottom':   '#a30000',
+                'water':        '#373f3f',
+                hemilight: {
+                    sky:        '#b25906',
+                    ground:     '#ff6f00'
+                },
+                fog:{
+                    far:        400,
+                    color:       '#853f0a'
+                }
+            }
+        },
+
+        grandBudapest: {
+            morning: {          // 
+                'sky-top':      '#323434', 
+                'sky-bottom':   '#9c94a8', 
+                'water':        '#377b7b',
+                hemilight: {
+                    sky:        '#949494',
+                    ground:     '#383838'
+                },
+                fog: {
+                    color:      '#656d72',
+                    far:        400,
+                }
+            }, 
+            day: {
+                'sky-top':      '#f082f2', 
+                'sky-bottom':   '#f2f0c0', 
+                'water':        '#377b7b',
+                hemilight: {
+                    sky:        '#b2d2d0',
+                    ground:     '#ffa8fc'
+                },
+                fog: {
+                    color:      '#9cb0af',
+                    far:        400,
+                }
+            }, 
+            evening: {
+                'sky-top':      '#323434', 
+                'sky-bottom':   '#9c94a8',
+                'water':        '#377b7b',
+                hemilight: {
+                    sky:        '#949494',
+                    ground:     '#383838'
+                },
+                fog: {
+                    color:      '#656d72',
+                    far:        400,
+                }
+            }, 
+            night: {
+                'sky-top':      '#323434', 
                 'sky-bottom':   '#9c94a8', 
                 'water':        '#377b7b',                
                 hemilight: {
@@ -551,133 +666,8 @@ console.log('BUILDING APP...')
             }
         },
 
-
-
-
-        morning: {
-            everyday: {          // 
-                'sky-top':      '#5bc2c2', 
-                'sky-bottom':   '#d5e4b9', 
-                'fog-type':     'exponetial', 
-                'fog-density':  0.01, 
-                'fog-col':      '#8c4a0d',
-                'fog-far':      200,
-                'fog-near':     0,
-            }, 
-
-            everyday: {          // 
-                'sky-top':      '#fff', 
-                'sky-bottom':   '#d78d37', 
-                'fog-type':     'exponetial', 
-                'fog-density':  0.01, 
-                'fog-col':      '#8c4a0d',
-                'fog-far':      200,
-                'fog-near':     0,
-            }, 
-
-           cold: {
-                'sky-top':      '#fff', 
-                'sky-bottom':   '#d78d37', 
-                'fog-type':     'exponetial', 
-                'fog-density':  0.01, 
-                'fog-col':      '#8c4a0d',
-                'fog-far':      200,
-                'fog-near':     0,
-            },
-            foggy: {
-                'sky-top':      '#fff', 
-                'sky-bottom':   '#d78d37', 
-                'fog-type':     'exponetial', 
-                'fog-density':  0.01, 
-                'fog-col':      '#8c4a0d',
-                'fog-far':      200,
-                'fog-near':     0,
-            },
-        },
-
-        daytime: {
-            everyday: {
-                'sky-top':      '#32e7e7', 
-                'sky-bottom':   '#5bc2c2', 
-                'fog-type':     'exponetial', 
-                'fog-density':  0.01, 
-                'fog-col':      '#8c4a0d',
-                'fog-far':      200,
-                'fog-near':     0,
-            }, 
-
-            apocalyptic: {
-                'sky-top':      '#fff', 
-                'sky-bottom':   '#d78d37', 
-                'fog-type':     'exponetial', 
-                'fog-density':  0.01, 
-                'fog-col':      '#8c4a0d',
-                'fog-far':      200,
-                'fog-near':     0,
-            },
-            bright: {
-                'sky-top':      '#fff', 
-                'sky-bottom':   '#d78d37', 
-                'fog-type':     'exponetial', 
-                'fog-density':  0.01, 
-                'fog-col':      '#8c4a0d',
-                'fog-far':      200,
-                'fog-near':     0,
-            },
-            grandBudapest: {
-                'sky-top':      '#fff', 
-                'sky-bottom':   '#d78d37', 
-                'fog-type':     'exponetial', 
-                'fog-density':  0.01, 
-                'fog-col':      '#8c4a0d',
-                'fog-far':      200,
-                'fog-near':     0,
-            },
-        },
-
-        evening: {
-            everyday: {
-                'sky-top':      '#000', 
-                'sky-bottom':   '#d78d37', 
-                'fog-type':     'exponetial', 
-                'fog-density':  0.01, 
-                'fog-col':      '#8c4a0d',
-                'fog-far':      200,
-                'fog-near':     0,
-            }, 
-            hot: {
-                'sky-top': '#f99058', 
-                'sky-bottom': '#f4fdaf',
-                'fog-type':'linear', 
-                'fog-density': 0, 
-                'fog-col': '#fff',
-                'water-col': 'aqua',
-            },
-        },
-
-        night: {
-            everyday: {
-                'sky-top':      '#666699', 
-                'sky-bottom':   '#d78d37', 
-                'fog-type':     'exponetial', 
-                'fog-density':  0.01, 
-                'fog-col':      '#8c4a0d',
-                'fog-far':      200,
-                'fog-near':     0,
-            },
-
-            balmyBlue: {
-                'sky-top':      '#000', 
-                'sky-bottom':   '#d78d37', 
-                'fog-type':     'exponetial', 
-                'fog-density':  0.01, 
-                'fog-col':      '#8c4a0d',
-                'fog-far':      200,
-                'fog-near':     0,
-            },
-
-        }
     }
+
 
 
     settings.climate = {

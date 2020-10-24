@@ -93,7 +93,7 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
             // Create sun curve path from midnight
             sceneEls.misc.sunPos.forEach((id, i) => {
                 const pos = document.getElementById(id).getAttribute('position')
-                pos.x = settings.environment.sunX[state.time.season]
+                pos.x = settings.days.sunX[state.time.season]
                 document.getElementById(id).setAttribute('position', pos)
             })
             // Add animation along path for sun body and sun direcitonal light, starting at midnight
@@ -336,7 +336,7 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
             },
 
             init: function(){
-                externalEvents.changeEnvironment('storm', this.data.dur)
+                externalEvents.changeEnvironment('stormFlood', this.data.dur)
                 // Move clouds in
                 document.getElementById('cloud-group-left').setAttribute('animation__pos', {
                     property:   'position',
@@ -434,7 +434,9 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
         })
 
         AFRAME.registerComponent('hazard-heatwave', {
-
+            init: function(){
+                externalEvents.changeEnvironment('heatwave', this.data.dur)
+            }
         })
 
         AFRAME.registerComponent('hazard-ocean-acidification', {
@@ -502,40 +504,50 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
                                 }
                             break
 
+
+                        case 'ShiftLeft':   
+                            const environments = Object.keys(settings.days),
+                                currentIndex = environments.indexOf(state.environment.name),
+                                newEnvironment = environments[(currentIndex+1) % environments.length]  
+                            state.environment.name = newEnvironment
+                            externalEvents.changeEnvironment(newEnvironment)
+                            console.log('Changing environment to '+newEnvironment)
+                            break
+
                         case 'KeyK':
-                                if(!state.animation.blockTitleShowing){
-                                    state.animation.blockTitleShowing = true
-                                    sceneEls.items.blockGroup.setAttribute('show-block-title', "text: Kieran World;  posZ: 35, -35;   posY: 5,  -10; posX: 0, 0; tilt: 10, -10; rotate: 0, 0; letterSpace: 15")
-                                    sceneEls.items.blockGroup.setAttribute('animation', {
-                                        property: 'position.y', from: 100, to: 0, dur: 3500, delay: 500
-                                    })
-                                } else {
-                                    state.animation.blockTitleShowing = false
-                                    sceneEls.items.blockGroup.setAttribute('animation', {
-                                        property: 'position.y', from: 0, to: 100, dur: 3500, delay: 500
-                                    })
-                                    setTimeout( () => {
-                                        sceneEls.items.blockGroup.removeAttribute('show-block-title')
-                                    }, 3500)                                    
-                                }
+                            if(!state.animation.blockTitleShowing){
+                                state.animation.blockTitleShowing = true
+                                sceneEls.items.blockGroup.setAttribute('show-block-title', "text: Kieran World;  posZ: 35, -35;   posY: 5,  -10; posX: 0, 0; tilt: 10, -10; rotate: 0, 0; letterSpace: 15")
+                                sceneEls.items.blockGroup.setAttribute('animation', {
+                                    property: 'position.y', from: 100, to: 0, dur: 3500, delay: 500
+                                })
+                            } else {
+                                state.animation.blockTitleShowing = false
+                                sceneEls.items.blockGroup.setAttribute('animation', {
+                                    property: 'position.y', from: 0, to: 100, dur: 3500, delay: 500
+                                })
+                                setTimeout( () => {
+                                    sceneEls.items.blockGroup.removeAttribute('show-block-title')
+                                }, 3500)                                    
+                            }
                             break
 
                         case 'KeyM':
-                                if(!state.animation.blockTitleShowing){
-                                    state.animation.blockTitleShowing = true
-                                    sceneEls.items.blockGroup.setAttribute('show-block-title', "text: Matthew World;  posZ: 35, -35;   posY: 5,  -10; posX: 0, 0; tilt: 10, -10; rotate: 0, 0; letterSpace: 15")
-                                    sceneEls.items.blockGroup.setAttribute('animation', {
-                                        property: 'position.y', from: 100, to: 0, dur: 3500, delay: 500
-                                    })
-                                } else {
-                                    state.animation.blockTitleShowing = false
-                                    sceneEls.items.blockGroup.setAttribute('animation', {
-                                        property: 'position.y', from: 0, to: 100, dur: 3500, delay: 500
-                                    })
-                                    setTimeout( () => {
-                                        sceneEls.items.blockGroup.removeAttribute('show-block-title')
-                                    }, 3500)                                    
-                                }
+                            if(!state.animation.blockTitleShowing){
+                                state.animation.blockTitleShowing = true
+                                sceneEls.items.blockGroup.setAttribute('show-block-title', "text: Matthew World;  posZ: 35, -35;   posY: 5,  -10; posX: 0, 0; tilt: 10, -10; rotate: 0, 0; letterSpace: 15")
+                                sceneEls.items.blockGroup.setAttribute('animation', {
+                                    property: 'position.y', from: 100, to: 0, dur: 3500, delay: 500
+                                })
+                            } else {
+                                state.animation.blockTitleShowing = false
+                                sceneEls.items.blockGroup.setAttribute('animation', {
+                                    property: 'position.y', from: 0, to: 100, dur: 3500, delay: 500
+                                })
+                                setTimeout( () => {
+                                    sceneEls.items.blockGroup.removeAttribute('show-block-title')
+                                }, 3500)                                    
+                            }
                             break
 
                         case 'Digit2':
@@ -710,47 +722,47 @@ const externalEvents = {
         sceneEls.enviro.sky.setAttribute('animation__topColour', {
             property:   'material.topColor',
             dur:        duration,
-            to:         settings.evironment[name][timeOfDay]['sky-top']
+            to:         settings.days[name][timeOfDay]['sky-top']
         })  
        sceneEls.enviro.sky.setAttribute('animation__bottomColour', {
             property:   'material.bottomColor',
             dur:        duration,
-            to:         settings.evironment[name][timeOfDay]['sky-bottom']
+            to:         settings.days[name][timeOfDay]['sky-bottom']
         })  
 
         // Change the hemisphere light colours and ocean colour
-        if(settings.evironment[name][timeOfDay].hemilight){
+        if(settings.days[name][timeOfDay].hemilight){
             console.log('Changing hemi light colours...')
             sceneEls.lights.hemi.setAttribute('animation__skyCol', {
                 property: 'light.color',
                 dur: duration,
-                to: settings.evironment[name][timeOfDay].hemilight.sky
+                to: settings.days[name][timeOfDay].hemilight.sky
             })  
             sceneEls.lights.hemi.setAttribute('animation__groundCol', {
                 property: 'light.groundColor',
                 dur: duration,
-                to: settings.evironment[name][timeOfDay].hemilight.ground
+                to: settings.days[name][timeOfDay].hemilight.ground
             })  
 
         } else {
             sceneEls.lights.hemi.setAttribute('animation__skyCol', {
                 property: 'light.color',
                 dur: duration,
-                to: settings.evironment.default[timeOfDay].hemilight.sky
+                to: settings.days.default[timeOfDay].hemilight.sky
             })  
             sceneEls.lights.hemi.setAttribute('animation__groundCol', {
                 property: 'light.groundColor',
                 dur: duration,
-                to: settings.evironment.default[timeOfDay].hemilight.ground
+                to: settings.days.default[timeOfDay].hemilight.ground
             })  
         }
 
 
         // Change the water colour
-        if(settings.evironment[name][timeOfDay].water){
+        if(settings.days[name][timeOfDay].water){
             sceneEls.enviro.sea.removeAttribute('ocean')
             sceneEls.enviro.sea.setAttribute('ocean', {
-                color:              settings.evironment[name][timeOfDay].water,
+                color:              settings.days[name][timeOfDay].water,
                 width:              10.8,
                 amplitude:          0.25,
                 amplitudeVariance:  0.25,
@@ -759,7 +771,7 @@ const externalEvents = {
         } else {
             sceneEls.enviro.sea.removeAttribute('ocean')
             sceneEls.enviro.sea.setAttribute('ocean', {
-                color:              settings.evironment.default[timeOfDay].water,
+                color:              settings.days.default[timeOfDay].water,
                 width:              10.8,
                 amplitude:          0.25,
                 amplitudeVariance:  0.25,
@@ -768,27 +780,23 @@ const externalEvents = {
         }
 
         // Change the fog settings
-        if(settings.evironment[name][timeOfDay].fog){
-            sceneEls.scene.setAttribute('animation__fogCol', {
-                property: 'fog.color',
-                dur: duration,
-                to: settings.evironment[name][timeOfDay].fog.color
+        if(settings.days[name][timeOfDay].fog){
+            sceneEls.scene.setAttribute('fog', {
+                color: settings.days[name][timeOfDay].fog.color,
+                far: settings.days[name][timeOfDay].fog.far
             })  
-            sceneEls.scene.setAttribute('animation__fogFar', {
+            sceneEls.scene.setAttribute('animation__far', {
                 property: 'fog.far',
                 dur: duration,
-                to: settings.evironment[name][timeOfDay].fog.far
+                from: 1000,
+                to: settings.days[name][timeOfDay].fog.far
             })  
+
+
         } else {
-            sceneEls.scene.setAttribute('animation__fogCol', {
-                property: 'fog.color',
-                dur: duration,
-                to: settings.evironment.default[timeOfDay].fog.color
-            })  
-            sceneEls.scene.setAttribute('animation__fogFar', {
-                property: 'fog.far',
-                dur: duration,
-                to: settings.evironment.default[timeOfDay].fog.far
+            sceneEls.scene.setAttribute('fog', {
+                color: settings.days.default[timeOfDay].fog.color,
+                far: settings.days.default[timeOfDay].fog.far
             })  
         }
 
