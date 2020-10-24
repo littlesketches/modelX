@@ -33,8 +33,9 @@
 
     <body>
         <a-scene id="scene" renderer = "antialias: true"
-                setup add-external-listeners position-sun vr-mode-ui="enabled: false"
-                sail-duck
+                setup add-external-listeners 
+                position-sun sail-duck
+                vr-mode-ui="enabled: false"
                 fog="type: linear; color: #000; density: 0.025"> <!-- animation-timeline__1="timeline: #ambientLight-cycle; loop: true; direction: alternate;">  -->
             <!-- ASSETS: MIXINS, MODELS AND TEMPLATES-->
             <a-assets timeout="5000">
@@ -2001,7 +2002,6 @@
                 </a-entity> 
             </a-entity>
 
-
             <!-- ANNOTATION-->
             <a-entity id = "annotation-group">
                 <a-entity id = "message-blocks-container" look-at="#flycam">
@@ -2016,9 +2016,6 @@
                 <a-entity id = "environment-group"  class="environment" >
                     <!-- SKY -->
                     <a-sky id="sky" radius="200" theta-length="200" material="shader: gradientshader; topColor: #edc7f5; bottomColor: #ddd"  ></a-sky>
-                    <a-entity id x= "cloud-group">
-                    </a-entity>
-
                     <!--- OUTER BODIES: SUN BODY AND PATH -->		
                     <a-entity id='sun-group'>
                         <a-sphere id = "sun-body" radius="8" material="color: #e9ea8f; emissive: #fcff61" ></a-sphere>
@@ -2026,17 +2023,66 @@
                     <a-entity id='moon-group'>
                         <a-sphere id = "moon-body" radius="5" material="color: #fff; emissive: #d7d1b2" ></a-sphere>
                     </a-entity> 	
+                    <a-entity id='cloud-group' position = "0 80 0"  look-at="#flycam">
+                        <a-entity id="cloud-group-right" position="200 0 0" material="color: #fff; opacity: 0.8" buffer-geometry-merger>
+                            <a-entity class="cloud" position = "5 10 15"> 
+                                <a-dodecahedron position="11.7 0 0" radius="3" scale="4.5 1.5 4"></a-dodecahedron>
+                                <a-dodecahedron position="-1.7 1.8 0" radius="3" scale="4 1.5 2.5"></a-dodecahedron>
+                                <a-dodecahedron position="5.46 3.7 0" radius="3" scale="3 2 2"></a-dodecahedron>
+                            </a-entity>
+                            <a-entity class="cloud" position = "-30 2 0"> 
+                                <a-dodecahedron position="11.7 0 0" radius="3" scale="4.5 1.5 4"></a-dodecahedron>
+                                <a-dodecahedron position="-1.7 1.8 0" radius="3" scale="4 1.5 2.5"></a-dodecahedron>
+                                <a-dodecahedron position="5.46 3.7 0" radius="3" scale="3 2 2"></a-dodecahedron>
+                            </a-entity>
+                            <a-entity class="cloud" position = "-40 10 -25"> 
+                                <a-dodecahedron position="11.7 0 0" radius="3" scale="4.5 1.5 4"></a-dodecahedron>
+                                <a-dodecahedron position="-1.7 1.8 0" radius="3" scale="4 1.5 2.5"></a-dodecahedron>
+                                <a-dodecahedron position="5.46 3.7 0" radius="3" scale="3 2 2"></a-dodecahedron>
+                            </a-entity>
+                            <a-entity class="cloud" position = "-65 -10 15"> 
+                                <a-dodecahedron position="11.7 0 0" radius="3" scale="4.5 1.5 4"></a-dodecahedron>
+                                <a-dodecahedron position="-1.7 1.8 0" radius="3" scale="4 1.5 2.5"></a-dodecahedron>
+                                <a-dodecahedron position="5.46 3.7 0" radius="3" scale="3 2 2"></a-dodecahedron>
+                            </a-entity>
+                        </a-entity>
+                        <a-entity id="cloud-group-left" position="-200 0 0" material="color: #fff; opacity: 0.8" buffer-geometry-merger>
+                            <a-entity class="cloud" position = "15 -10 -20"> 
+                                <a-dodecahedron position="11.7 0 0" radius="3" scale="4.5 1.5 4"></a-dodecahedron>
+                                <a-dodecahedron position="-1.7 1.8 0" radius="3" scale="4 1.5 2.5"></a-dodecahedron>
+                                <a-dodecahedron position="5.46 3.7 0" radius="3" scale="3 2 2"></a-dodecahedron>
+                            </a-entity>
+                            <a-entity class="cloud" position = "45 -15 35"> 
+                                <a-dodecahedron position="11.7 0 0" radius="3" scale="4.5 1.5 4"></a-dodecahedron>
+                                <a-dodecahedron position="-1.7 1.8 0" radius="3" scale="4 1.5 2.5"></a-dodecahedron>
+                                <a-dodecahedron position="5.46 3.7 0" radius="3" scale="3 2 2"></a-dodecahedron>
+                            </a-entity>
+                            <a-entity class="cloud" position = "55 5 -25"> 
+                                <a-dodecahedron position="11.7 0 0" radius="3" scale="4.5 1.5 4"></a-dodecahedron>
+                                <a-dodecahedron position="-1.7 1.8 0" radius="3" scale="4 1.5 2.5"></a-dodecahedron>
+                                <a-dodecahedron position="5.46 3.7 0" radius="3" scale="3 2 2"></a-dodecahedron>
+                            </a-entity>
+                            <a-entity class="cloud" position = "60 15 15"> 
+                                <a-dodecahedron position="11.7 0 0" radius="3" scale="4.5 1.5 4"></a-dodecahedron>
+                                <a-dodecahedron position="-1.7 1.8 0" radius="3" scale="4 1.5 2.5"></a-dodecahedron>
+                                <a-dodecahedron position="5.46 3.7 0" radius="3" scale="3 2 2"></a-dodecahedron>
+                            </a-entity>
+                        </a-entity>
+                    </a-entity> 
 
                     <!-- PARTICLE SYSTEM-->
-                    <a-entity id="global-particles" position="0 0 0" 
-                        particle-system="enabled: false; preset: rain ; size: 0.5; max-age: 6; particleCount: 10000; type: 3; velocityValue: 0 50 0; color: aqua,#fff; rotationAngle: 10"></a-entity>
+                    <a-entity id="rain" position="0 30 0" scale="1.5 1 1.5"></a-entity>
                 </a-entity>
                     
                 <!--- WORLD TOPOGRAPHY -->
                 <a-entity id="topography-group">
                     <!-- Environment and topography-->
                     <a-entity id="mountains-group">
-                        <a-entity id="alps" class="topography surface model" gltf-model="#mdl-alps" position="-40 1.16 47.33" rotation="0 138 0" scale="0.8 0.8 0.8" visibility = "false"></a-entity>                
+                        <a-entity id="alps" class="topography surface model" gltf-model="#mdl-alps" position="-40 1.16 47.33" rotation="0 138 0" scale="0.8 0.8 0.8" visibility = "false">
+                            <a-cone position="-7.8 41.5 -52" rotation="" geometry="radiusTop: 0.2; height: 3; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45" material="flatShading: true" scale="23.8 10 10.5"> </a-cone>
+                            <a-cone position="24.25 33.66 -56.3" rotation="0.0 -37.8 -118.6" geometry="radiusTop: 0.42; height: 2.51; radiusBottom: 0.86; segmentsHeight: 1; segmentsRadial: 6; thetaStart: 45" material="flatShading: true" scale="58.85224 8.56309 14.05652"> </a-cone>
+                            <a-cone position="69.16 55.39 -53.29" rotation="0 -3 -10" geometry="radiusTop: 0.1; height: 3; radiusBottom: 0.47; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45" material="flatShading: true" scale="31.5 12.1 23.7"> </a-cone>
+                        </a-entity>  
                     </a-entity>
                 
                     <a-entity id="ground-group" class="topography-group" position="0 2.85 0">
@@ -2160,18 +2206,21 @@
                         <a-entity id="bay-bedrock" class="subSurface"   mixin="bedrock-zone" position="44.8 0 26.2" ></a-entity>
                     </a-entity>
 
-                    <a-entity id="ocean-group" class="topography-group" position="0 -3 0" >   
-                        <a-ocean position="40.64 2 0" ocean="width: 10.8; amplitude: 0.25; amplitudeVariance: 0.25; density: 20; color: #00fdff" scale="12 20 2"></a-ocean>
-                        <!-- <a-entity id="bay-ocean"  class="surface" mixin="ocean-zone"  position="44.8  0  25.9" ></a-entity>
-                        <a-entity id="coast1-ocean" class="surface" mixin="coastal-zone" position="74.5  0  0"></a-entity>
-                        <a-entity id="coast2-ocean" class="surface" mixin="coastal-zone" position="74.5  0 -51.8"></a-entity>
-                        <a-entity id="coast3-ocean" class="surface" mixin="coastal-zone" position="74.5  0 -25.9"></a-entity>
-                        <a-entity id="coast4-ocean" class= surface" mixin="coastal-zone" position="7.2   0 -90.4"></a-entity>
-                        <a-entity id="coast5-ocean" class="surface" mixin="coastal-zone" position="29.6  0 -51.8"></a-entity>
-                        <a-entity id="coast6-ocean" class="surface" mixin="coastal-zone" position="29.6  0 -77.7"></a-entity>
-                        <a-entity id="coast7-ocean" class="surface" mixin="coastal-zone" position="-14.8 0 -77.7"></a-entity>
-                        <a-entity id="coast8-ocean" class="surface" mixin="coastal-zone" position="51.8  0 -64.7"></a-entity> -->
-                    </a-entity> 
+                    <a-entity id="floodplain-group" class="topography-group" position="0 2.75 0">  
+                        <a-entity id = "nuisance-flood-group" position ="0 -2 0">
+                            <a-entity id="central-floodplain" class="floodplain" position="0 0 0" scale="50 50 2" rotation="-90 0 0"></a-entity>    
+                            <a-entity id="industrial-floodplain" class="floodplain" position="0 0 -46.8" scale="60 50 2" rotation="-90 0 0"></a-entity>    
+                            <a-entity id="urban-floodplain" class="floodplain" position="45.8 0.125 -25.9" scale="45 60 2" rotation="-90 0 0"></a-entity>             
+                            <a-entity id="suburban-floodplain" class="floodplain" position="0 0 48.88" scale="45 75 2" rotation="-90 0 0"></a-entity>    
+                            <a-entity id="periurban-floodplain" class="floodplain" position="-39.8 0 25.9" scale="60 65 2" rotation="-90 0 0"></a-entity>    
+                            <a-entity id="agriculture-floodplain" class="floodplain" position="-39.8 0 -25.9" scale="60 60 2" rotation="-90 0 0"></a-entity>    
+                            <a-entity id="outer-floodplain" class="floodplain" position="-44.8 0 -78" scale="45 60 2" rotation="-90 0 0"></a-entity>    
+                        </a-entity>
+                    </a-entity>
+
+                    <a-entity id="ocean-group" class="topography-group" position="35 -3 0" rotation="0 0 0">   
+                        <a-ocean id="sea" position="0 2 0" ocean="width: 10.8; amplitude: 0.25; amplitudeVariance: 0.25; density: 20; color: #00fdff" scale="18 20 2"></a-ocean>
+                    </a-entity>
 
                     <a-entity id="seaBed-seabed" class="topography" position="0 -7.5 0">                  
                         <a-entity id="coast1-seabed" mixin="seabed-zone" position="74.5 0 0"></a-entity>
