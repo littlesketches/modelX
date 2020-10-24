@@ -155,6 +155,11 @@ console.log('BUILDING APP...')
             name:           'default',
             nightLights:       false
         },
+        hazard: {
+            storm:          false,
+            seaLevel:       0,
+            drought:        false
+        },
         weather: {
             windSpeed:      10, 
             windDirection:  0,
@@ -165,7 +170,14 @@ console.log('BUILDING APP...')
             flyIndex:       0
         },
         enableKeyEvents: true,
-        keydown:            ''
+        keydown:            '',
+        animation: {
+            planeFlight:        false,
+            duckSail:           true,
+            windTurbine:        true,
+            blockTitleShowing:  false,
+
+        }
     }
 
     const simulation = {
@@ -410,33 +422,53 @@ console.log('BUILDING APP...')
             morning: {          // 
                 'sky-top':      '#74f6f6', 
                 'sky-bottom':   '#f9f4ae', 
+                'water':        '#00fdff',
                 hemilight: {
                     sky:        '#f6e3fa',
                     ground:     '#454545'
+                },
+                fog: {
+                    color:      '#000',
+                    far:        1000,
                 }
             }, 
             day: {
                 'sky-top':      '#07f2ee', 
                 'sky-bottom':   '#e0faf9',
+                'water':        '#00fdff',
                 hemilight: {
                     sky:        '#f6e3fa',
                     ground:     '#454545'
+                },
+                fog: {
+                    color:      '#000',
+                    far:        1000,
                 }
             }, 
             evening: {
                 'sky-top':      '#ae84bd', 
                 'sky-bottom':   '#dbd8b3', 
+                'water':        '#00fdff',
                 hemilight: {
                     sky:        '#f6e3fa',
                     ground:     '#454545'
+                },
+                fog: {
+                    color:      '#000',
+                    far:        1000,
                 }
             }, 
             night: {
                 'sky-top':      '#010e0e', 
                 'sky-bottom':   '#00444d', 
+                'water':        '#00fdff',
                 hemilight: {
                     sky:        '#000',
                     ground:     '#fff'
+                },
+                fog: {
+                    color:      '#000',
+                    far:        1000,
                 }
             }
         },
@@ -463,6 +495,64 @@ console.log('BUILDING APP...')
                 'sky-bottom':   '#00285c', 
             }
         },
+
+        storm: {
+            morning: {          // 
+                'sky-top':      '#323434', 
+                'sky-bottom':   '#9c94a8', 
+                'water':        '#377b7b',
+                hemilight: {
+                    sky:        '#949494',
+                    ground:     '#383838'
+                },
+                fog: {
+                    color:      '#656d72',
+                    far:        400,
+                }
+            }, 
+            day: {
+                'sky-top':      '#323434', 
+                'sky-bottom':   '#9c94a8', 
+                'water':        '#377b7b',
+                hemilight: {
+                    sky:        '#949494',
+                    ground:     '#383838'
+                },
+                fog: {
+                    color:      '#656d72',
+                    far:        400,
+                }
+            }, 
+            evening: {
+                'sky-top':      '#323434', 
+                'sky-bottom':   '#9c94a8',
+                'water':        '#377b7b',
+                hemilight: {
+                    sky:        '#949494',
+                    ground:     '#383838'
+                },
+                fog: {
+                    color:      '#656d72',
+                    far:        400,
+                }
+            }, 
+            night: {
+                'sky-top':      '#323434', 
+                'sky-bottom':   '#9c94a8', 
+                'water':        '#377b7b',                
+                hemilight: {
+                    sky:        '#949494',
+                    ground:     '#383838'
+                },
+                fog: {
+                    color:      '#656d72',
+                    far:        400,
+                }
+            }
+        },
+
+
+
 
         morning: {
             everyday: {          // 

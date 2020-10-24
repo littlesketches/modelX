@@ -10,6 +10,8 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
             console.log('**** SETTING DOM ELEMENTS UP...****')
 
             // Setup element references on initation for referencing in othercomponent code
+            sceneEls.scene = document.getElementById('scene')
+
             // Lights
             sceneEls.lights = {
                 hemi:          document.getElementById('ambient-hemiLight'),
@@ -22,7 +24,10 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
             sceneEls.enviro = {
                 sun:            document.getElementById('sun-body'),
                 moon:           document.getElementById('moon-body'),
-                sky:            document.getElementById('sky')
+                sky:            document.getElementById('sky'),
+                sea:            document.getElementById('sea'),
+                oceanGroup:     document.getElementById('ocean-group'),
+                rain:           document.getElementById('rain')
             }
             // Camera elements
             sceneEls.cam = {
@@ -32,6 +37,12 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
             sceneEls.camRig = {
                 fly:    document.getElementById('flycam-rig'),
                 vr:     document.getElementById('vrcam-rig')
+            }
+
+            // Environment elements
+            sceneEls.items = {
+                duckPath:            document.getElementById('duck-path-points'),
+                blockGroup:             document.getElementById('message-blocks-group')
             }
 
             // Misc
@@ -46,8 +57,7 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
                     "moon-0600", "moon-0700", "moon-0800", "moon-0900", "moon-1000", "moon-1100", 
                     "moon-1200", "moon-1300", "moon-1400", "moon-1500", "moon-1600", "moon-1700", 
                     "moon-1800", "moon-1900", "moon-2000", "moon-2100", "moon-2200", "moon-2300" ]
-            }
-            
+            }            
         }
     })
 
@@ -108,13 +118,16 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
 
 
     AFRAME.registerComponent("fly-plane", {
-        play: function () {
-            document.getElementById("plaine-animation").setAttribute('alongpath', {
+        init: function () {
+            document.getElementById("plane-animation").setAttribute('alongpath', {
                 curve:          "#airplane-path-points",
                 dur:            90000, 
-                resetonplay:    true, 
                 rotate:         true
             })
+            setTimeout( () => {
+                state.animation.planeFlight = false
+                sceneEls.scene.removeAttribute('fly-plane') 
+            }, 90000)
         }
     })
 
@@ -125,7 +138,6 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
                 curve:          "#duck-path-points",
                 dur:            120000, 
                 loop:           true, 
-                resetonplay:    true, 
                 rotate:         true
             })
         }
@@ -260,12 +272,177 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
                 wordContainer.appendChild(topString)
                 wordContainer.appendChild(mobile)
                 container.appendChild(wordContainer)
-
             })
-        }
+        },
     })
 
 
+    // CLIMATE RISK EVENT VISUALISATIONS
+        AFRAME.registerComponent('hazard-sea-level', {
+            schema: {
+                slchange:        {type: 'number',  default: 0 },  
+                dur:             {type: 'number',   default: 1000 },              
+            },
+
+            update: function(){
+                // Change sea level
+                const currentSea = sceneEls.enviro.sea.getAttribute('position')
+                sceneEls.enviro.sea.setAttribute('animation__seaLevel', {
+                    property:       'position',
+                    dur:            this.data.dur,
+                    to:             {x: currentSea.x,   y: 2 + this.data.slchange, z: currentSea.z}
+                })
+                // Change angle to show 'creeping inundation'
+                if(this.data.slchange > 2){
+                    sceneEls.enviro.oceanGroup.setAttribute('animation__seaAngle', {
+                        property:       'rotation',
+                        dur:            this.data.dur,
+                        to:             {x: 0,   y: 0,  z: 1}
+                    })
+                } else {
+                    sceneEls.enviro.oceanGroup.setAttribute('animation__seaAngle', {
+                        property:       'rotation',
+                        dur:            this.data.dur,
+                        to:             {x: 0,   y: 0,  z: 0}
+                    })
+                }
+                // Move the bloody duck!
+                const duckPoints = document.getElementsByClassName('duckPathPoint')
+                setTimeout( () => {
+                    for(let i = 0; i < duckPoints.length; i++){
+                        const duckPoint = duckPoints[i].getAttribute('position')
+                        duckPoints[i].setAttribute('position', {
+                            x: duckPoint.x,  
+                            y: (-4 + this.data.slchange), 
+                            z: duckPoint.z 
+                        })
+                    }
+                }, this.data.dur)
+                console.log('Changing sea level from '+currentSea.y+' to '+(currentSea.y + this.data.slchange))
+            }
+        })
+
+
+        AFRAME.registerComponent('hazard-storm-flood', {
+            schema: {   
+                dur:                    {type: 'number',   default: 1000 },  
+                floodLvl:               {type: 'number',   default: 0 },         
+                centralFloodLvl:        {type: 'number',   default: 0 },         
+                urbanFloodLvl:          {type: 'number',   default: 0.5 },         
+                industrialFloodLvl:     {type: 'number',   default: 0 },         
+                suburbanFloodLvl:       {type: 'number',   default: 0 },         
+                periurbanFloodLvl:      {type: 'number',   default: 0 },         
+                agriculturalFloodLvl:   {type: 'number',   default: 0 }
+            },
+
+            init: function(){
+                externalEvents.changeEnvironment('storm', this.data.dur)
+                // Move clouds in
+                document.getElementById('cloud-group-left').setAttribute('animation__pos', {
+                    property:   'position',
+                    dur:        this.data.dur,
+                    to:         {x: 100, y: 0, z: 0}
+                })
+                document.getElementById('cloud-group-right').setAttribute('animation__pos', {
+                    property:   'position',
+                    dur:        this.data.dur,
+                    to:         {x: -140, y: 0, z: 0}
+                })
+                // Start rain particles after the clourdss
+                setTimeout(() => {
+                    sceneEls.enviro.rain.setAttribute('particle-system', {
+                        enabled:             true,
+                        scale:               '2 2 2',
+                        preset:              'rain',
+                        blending:            1,
+                        size:                2,
+                        'max-age':           6,
+                        particleCount:       5000,
+                        type:                3,
+                        velocityValue:       '0 50 0',
+                        color:               '#fff, #377b7b',
+                        rotationAngle:       0,
+                        rotationAngleSpread: 0.5
+                    })
+                }, this.data.dur * 1.5)
+
+                // Build up of puddles
+                const floodplains = document.getElementsByClassName('floodplain'),
+                    floodGroup = document.getElementById('nuisance-flood-group')
+                for(let i = 0; i < floodplains.length; i++){
+                    floodplains[i].setAttribute('ocean', {
+                        width:              0.75,
+                        amplitude:          0.2,
+                        amplitudeVariance:  0,
+                        density:            20,
+                        color:              '#377b7b',
+                        depth:              0.75,
+                        speed:              0.01
+                    })
+                }
+                // Show puddles after x5 duration
+                setTimeout(() => {
+                    floodGroup.setAttribute('animation__puddles', {
+                        property:   'position',
+                        from:       {x: 0, y: -2, z: 0},
+                        to:         {x: 0, y: this.data.floodLvl, z: 0},
+                        dur:        this.data.dur * 4
+                    })
+                }, this.data.dur * 4 )
+            },
+
+            remove: function(){
+                // Move clouds out
+                document.getElementById('cloud-group-left').setAttribute('animation__pos', {
+                    property:   'position',
+                    dur:        this.data.dur,
+                    to:         {x: -200, y: 0, z: 0}
+                })
+                document.getElementById('cloud-group-right').setAttribute('animation__pos', {
+                    property:   'position',
+                    dur:        this.data.dur,
+                    to:         {x: 200, y: 0, z: 0}
+                })
+                // Stop the rain
+                sceneEls.enviro.rain.removeAttribute('particle-system')
+
+                // Remove the puddles and reset the flood group height
+                const floodplains = document.getElementsByClassName('floodplain'),
+                    floodGroup = document.getElementById('nuisance-flood-group')
+                floodGroup.setAttribute('animation__puddles', {
+                    property:   'position',
+                    to:       {x: 0, y: -2, z: 0},
+                    from:         {x: 0, y: this.data.floodLvl, z: 0},
+                    dur:        this.data.dur * 2
+                })
+                setTimeout(() => {
+                    for(let i = 0; i < floodplains.length; i++){
+                        floodplains[i].removeAttribute('ocean')
+                    }
+                    floodGroup.removeAttribute('animation__puddles')  
+                }, this.data.dur * 2);
+            }
+        })
+
+
+        AFRAME.registerComponent('hazard-drought', {
+
+        })
+
+        AFRAME.registerComponent('hazard-dustStorm', {
+
+        })
+
+        AFRAME.registerComponent('hazard-heatwave', {
+
+        })
+
+        AFRAME.registerComponent('hazard-ocean-acidification', {
+
+        })
+
+
+    // EXTERNAL EVENT CONTROLS : FOR UI AND TESTING
     AFRAME.registerComponent("add-external-listeners", { 
         init: function(){
             // KEYBOARD EVENTS
@@ -302,14 +479,89 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
                                     document.getElementById('shortcuts').classList.add('visible') 
                                 }, 2000)
                             break
-                        case 'Digit1':
-                                console.log('Showing message...')
-                                const blockGroup =  document.getElementById('message-blocks-group')
-                                blockGroup.setAttribute('show-block-title', "text: Hello World;  posZ: 35, -35;   posY: 5,  -10; posX: 0, 0; tilt: 10, -10; rotate: 0, 0; letterSpace: 15")
-                                blockGroup.setAttribute('animation', {
-                                    property: 'position.y', from: 100, to: 0, dur: 3500, delay: 500
-                                })
+                        case 'Digit0':
+                            if(!state.animation.planeFlight){                                
+                                sceneEls.scene.setAttribute('fly-plane', null)
+                            }
                             break
+                        case 'Digit1':
+                                if(!state.animation.blockTitleShowing){
+                                    state.animation.blockTitleShowing = true
+                                    sceneEls.items.blockGroup.setAttribute('show-block-title', "text: Hello World;  posZ: 35, -35;   posY: 5,  -10; posX: 0, 0; tilt: 10, -10; rotate: 0, 0; letterSpace: 15")
+                                    sceneEls.items.blockGroup.setAttribute('animation', {
+                                        property: 'position.y', from: 100, to: 0, dur: 3500, delay: 500
+                                    })
+                                } else {
+                                    state.animation.blockTitleShowing = false
+                                    sceneEls.items.blockGroup.setAttribute('animation', {
+                                        property: 'position.y', from: 0, to: 100, dur: 3500, delay: 500
+                                    })
+                                    setTimeout( () => {
+                                        sceneEls.items.blockGroup.removeAttribute('show-block-title')
+                                    }, 3500)                                    
+                                }
+                            break
+
+                        case 'KeyK':
+                                if(!state.animation.blockTitleShowing){
+                                    state.animation.blockTitleShowing = true
+                                    sceneEls.items.blockGroup.setAttribute('show-block-title', "text: Kieran's World;  posZ: 35, -35;   posY: 5,  -10; posX: 0, 0; tilt: 10, -10; rotate: 0, 0; letterSpace: 15")
+                                    sceneEls.items.blockGroup.setAttribute('animation', {
+                                        property: 'position.y', from: 100, to: 0, dur: 3500, delay: 500
+                                    })
+                                } else {
+                                    state.animation.blockTitleShowing = false
+                                    sceneEls.items.blockGroup.setAttribute('animation', {
+                                        property: 'position.y', from: 0, to: 100, dur: 3500, delay: 500
+                                    })
+                                    setTimeout( () => {
+                                        sceneEls.items.blockGroup.removeAttribute('show-block-title')
+                                    }, 3500)                                    
+                                }
+                            break
+
+                        case 'KeyM':
+                                if(!state.animation.blockTitleShowing){
+                                    state.animation.blockTitleShowing = true
+                                    sceneEls.items.blockGroup.setAttribute('show-block-title', "text: Matthew's World;  posZ: 35, -35;   posY: 5,  -10; posX: 0, 0; tilt: 10, -10; rotate: 0, 0; letterSpace: 15")
+                                    sceneEls.items.blockGroup.setAttribute('animation', {
+                                        property: 'position.y', from: 100, to: 0, dur: 3500, delay: 500
+                                    })
+                                } else {
+                                    state.animation.blockTitleShowing = false
+                                    sceneEls.items.blockGroup.setAttribute('animation', {
+                                        property: 'position.y', from: 0, to: 100, dur: 3500, delay: 500
+                                    })
+                                    setTimeout( () => {
+                                        sceneEls.items.blockGroup.removeAttribute('show-block-title')
+                                    }, 3500)                                    
+                                }
+                            break
+
+                        case 'Digit2':
+                            if(!state.hazard.storm) {
+                                state.hazard.storm = true
+                                sceneEls.scene.setAttribute('hazard-storm-flood', null)
+                            } else {
+                                state.hazard.storm = false
+                                sceneEls.scene.removeAttribute('hazard-storm-flood')
+                                externalEvents.changeEnvironment('default')
+                            }
+                            break
+                        case 'Equal':
+                        case 'NumpadAdd':
+                            state.hazard.seaLevel = state.hazard.seaLevel + 0.1 
+                            sceneEls.scene.setAttribute('hazard-sea-level', 'slchange: '+state.hazard.seaLevel )
+                            console.log('Raising Sea level to '+state.hazard.seaLevel)
+                            break
+
+                        case 'Minus':
+                        case 'NumpadSubtract':
+                            state.hazard.seaLevel = state.hazard.seaLevel - 0.1 
+                            sceneEls.scene.setAttribute('hazard-sea-level', 'slchange: '+state.hazard.seaLevel )
+                            console.log('Lowering sea level to '+state.hazard.seaLevel)
+                            break
+
                         default:
 
                             clearTimeout(state.keydown)  
@@ -452,7 +704,7 @@ const externalEvents = {
 
     },
 
-    changeEnvironment: function(name = state.environment.name, timeOfDay = state.modelTime.timeOfDay(), duration = 2000){
+    changeEnvironment: function(name = state.environment.name, duration = 2000, timeOfDay = state.modelTime.timeOfDay()){
         console.log('Changing environment to '+name, timeOfDay)
         // Change the sky colour for time of day and "conditions"
         sceneEls.enviro.sky.setAttribute('animation__topColour', {
@@ -466,41 +718,86 @@ const externalEvents = {
             to:         settings.evironment[name][timeOfDay]['sky-bottom']
         })  
 
-        // Change the hemisphere light colours
+        // Change the hemisphere light colours and ocean colour
         if(settings.evironment[name][timeOfDay].hemilight){
             console.log('Changing hemi light colours...')
-            sceneEls.lights.hemi.setAttribute('animation__skyColour', {
+            sceneEls.lights.hemi.setAttribute('animation__skyCol', {
                 property: 'light.color',
                 dur: duration,
                 to: settings.evironment[name][timeOfDay].hemilight.sky
             })  
-            sceneEls.lights.hemi.setAttribute('animation__groundColour', {
+            sceneEls.lights.hemi.setAttribute('animation__groundCol', {
                 property: 'light.groundColor',
                 dur: duration,
                 to: settings.evironment[name][timeOfDay].hemilight.ground
             })  
 
         } else {
-            sceneEls.lights.hemi.setAttribute('animation__skyColour', {
+            sceneEls.lights.hemi.setAttribute('animation__skyCol', {
                 property: 'light.color',
                 dur: duration,
                 to: settings.evironment.default[timeOfDay].hemilight.sky
             })  
-            sceneEls.lights.hemi.setAttribute('animation__groundColour', {
+            sceneEls.lights.hemi.setAttribute('animation__groundCol', {
                 property: 'light.groundColor',
                 dur: duration,
                 to: settings.evironment.default[timeOfDay].hemilight.ground
             })  
-
         }
 
+
+        // Change the water colour
+        if(settings.evironment[name][timeOfDay].water){
+            sceneEls.enviro.sea.removeAttribute('ocean')
+            sceneEls.enviro.sea.setAttribute('ocean', {
+                color:              settings.evironment[name][timeOfDay].water,
+                width:              10.8,
+                amplitude:          0.25,
+                amplitudeVariance:  0.25,
+                density:            20
+            })  
+        } else {
+            sceneEls.enviro.sea.removeAttribute('ocean')
+            sceneEls.enviro.sea.setAttribute('ocean', {
+                color:              settings.evironment.default[timeOfDay].water,
+                width:              10.8,
+                amplitude:          0.25,
+                amplitudeVariance:  0.25,
+                density:            20
+            })  
+        }
+
+        // Change the fog settings
+        if(settings.evironment[name][timeOfDay].fog){
+            sceneEls.scene.setAttribute('animation__fogCol', {
+                property: 'fog.color',
+                dur: duration,
+                to: settings.evironment[name][timeOfDay].fog.color
+            })  
+            sceneEls.scene.setAttribute('animation__fogFar', {
+                property: 'fog.far',
+                dur: duration,
+                to: settings.evironment[name][timeOfDay].fog.far
+            })  
+        } else {
+            sceneEls.scene.setAttribute('animation__fogCol', {
+                property: 'fog.color',
+                dur: duration,
+                to: settings.evironment.default[timeOfDay].fog.color
+            })  
+            sceneEls.scene.setAttribute('animation__fogFar', {
+                property: 'fog.far',
+                dur: duration,
+                to: settings.evironment.default[timeOfDay].fog.far
+            })  
+        }
 
 
     },
 
     turnNightLightsOn:  function(){
         const glassEls =  document.getElementsByClassName('glass-group')
-        state.environment.state = true
+        state.environment.nightLights = true
         for(const el of glassEls){
             el.setAttribute('material', {'emissive': '#C7CEF6'})
         }
@@ -522,7 +819,7 @@ const externalEvents = {
 
     turnNightLightsOff:  function(){
         const glassEls =  document.getElementsByClassName('glass-group')
-        state.environment.state = false
+        state.environment.nightLights = false
         for(const el of glassEls){
             el.setAttribute('material', {'emissive': '#000'})
         }
