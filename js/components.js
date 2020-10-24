@@ -505,7 +505,7 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
                         case 'KeyK':
                                 if(!state.animation.blockTitleShowing){
                                     state.animation.blockTitleShowing = true
-                                    sceneEls.items.blockGroup.setAttribute('show-block-title', "text: Kieran's World;  posZ: 35, -35;   posY: 5,  -10; posX: 0, 0; tilt: 10, -10; rotate: 0, 0; letterSpace: 15")
+                                    sceneEls.items.blockGroup.setAttribute('show-block-title', "text: Kieran World;  posZ: 35, -35;   posY: 5,  -10; posX: 0, 0; tilt: 10, -10; rotate: 0, 0; letterSpace: 15")
                                     sceneEls.items.blockGroup.setAttribute('animation', {
                                         property: 'position.y', from: 100, to: 0, dur: 3500, delay: 500
                                     })
@@ -523,7 +523,7 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
                         case 'KeyM':
                                 if(!state.animation.blockTitleShowing){
                                     state.animation.blockTitleShowing = true
-                                    sceneEls.items.blockGroup.setAttribute('show-block-title', "text: Matthew's World;  posZ: 35, -35;   posY: 5,  -10; posX: 0, 0; tilt: 10, -10; rotate: 0, 0; letterSpace: 15")
+                                    sceneEls.items.blockGroup.setAttribute('show-block-title', "text: Matthew World;  posZ: 35, -35;   posY: 5,  -10; posX: 0, 0; tilt: 10, -10; rotate: 0, 0; letterSpace: 15")
                                     sceneEls.items.blockGroup.setAttribute('animation', {
                                         property: 'position.y', from: 100, to: 0, dur: 3500, delay: 500
                                     })
