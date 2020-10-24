@@ -24,7 +24,7 @@ body{
         display: grid;
         color: #404040;
         width: 50vw;
-        height: 50vh;
+        height: 80vh;
         border-radius: 2vw;
         grid-template-columns: 50% 50% ;
         grid-template-rows: 10% 90%;
@@ -83,8 +83,10 @@ body{
                 width: 3rem;
                 border: 1px solid;
                 border-radius: 0.5rem;
-                padding: 0.25rem;
-            
+                padding: 0.25rem;            
+            }
+            .key-shortcut.small{
+                font-size: 0.75rem;         
             }
             .shortcut-description{
                 font-size: 0.8rem;
