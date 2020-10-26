@@ -41,24 +41,15 @@
             <a-assets timeout="5000">
                 <!-- PALETTES AND MATERIALS -->
                 <a-entity id = "mixins">
-
                     <a-mixin id="mobile-string" material="color: $fff" geometry="radius: 0.25, segmentsHeight: 1, segmentsRadial: 3"></a-mixin>
                     <a-mixin id="mobile-bar"    material="color: $fff" geometry="radius: 1, segmentsHeight: 1, segmentsRadial: 3"></a-mixin>
                     
                     <a-mixin id="palette-A-01" 	    material = 'color: #FFA8CB'></a-mixin>
                     <a-mixin id="palette-A-02" 	    material = 'color: #784283'></a-mixin>
                     <a-mixin id="palette-A-03"	    material = 'color: #C7CEF6'></a-mixin>
-
                     <a-mixin id="col-home-windows"	material = 'color: #C7CEF6'></a-mixin>
-
                     <a-mixin id="col-ch-01" 	    material ='color: #658C52'></a-mixin>
                     <a-mixin id="col-ch-02" 	    material ='color: #A4A395'></a-mixin>
-
-                    <a-mixin id="col-treeTop" 	    material='color: green'></a-mixin>
-                    <a-mixin id="col-treeBottom"    material='color: green'></a-mixin>
-                    <a-mixin id="col-treeTrunk"     material='color: brown'></a-mixin>
-                    <a-mixin id="col-apple"         material='color: red'></a-mixin>
-                    <a-mixin id="col-orange"        material='color: orange'></a-mixin>
 
                     <a-mixin id="col-fence" 	    material='color: #DEB886'></a-mixin>
                     <a-mixin id="col-powerPole"     material='color: brown'></a-mixin>
@@ -66,7 +57,19 @@
                     <a-mixin id="col-powerFixture"  material='color: gray'></a-mixin>
                     <a-mixin id="col-railTrack"     material='color: gray; metalness: 0.5'></a-mixin>
                     <a-mixin id="col-railSleeper"   material='color: #443b35'></a-mixin>
-                    
+
+                    <!-- Vegetation and Agricultural crops-->
+                    <a-mixin id ="col-stem-corn"    material="color: #93ec6a; flatShading: true"></a-mixin>
+                    <a-mixin id ="col-crop-corn"    material="color: #d4d416; flatShading: true"></a-mixin>
+                    <a-mixin id ="col-stem-wheat"   material="color: #cacd4c; flatShading: true"></a-mixin>
+                    <a-mixin id ="col-crop-wheat"   material="color: #d4d416; flatShading: true"></a-mixin>
+                    <a-mixin id ="col-crop-generic" material="color: green; flatShading: true"></a-mixin>
+                    <a-mixin id="col-treeTop" 	    material='color: #42af20'></a-mixin>
+                    <a-mixin id="col-treeBottom"    material='color: green'></a-mixin>
+                    <a-mixin id="col-treeTrunk"     material='color: brown'></a-mixin>
+                    <a-mixin id="col-apple"         material='color: red'></a-mixin>
+                    <a-mixin id="col-orange"        material='color: orange'></a-mixin>
+
                     <!-- Built environment-->
                     <a-mixin id="col-hospital-base"     material='color: #fff'></a-mixin>
                     <a-mixin id="col-hospital-trim"     material='color: #c8a2c8'></a-mixin>
@@ -177,33 +180,33 @@
                     <a-mixin id="col-airport-base"          material='color: #F0EAD6'></a-mixin>
                     <a-mixin id="col-airport-trim"          material='color: #FFA8CB'></a-mixin>
                     <a-mixin id="col-airport-window"        material='color: aqua'></a-mixin>
-
                     <a-mixin id = "col-lighthouse-lamp"     material="color: #fff; emissive: #fff"></a-mixin>
+                    
                     <!-- Street furniture-->
-                        <a-mixin id="col-streetSign-pole"   material='color: gray'></a-mixin>
-                        <a-mixin id="col-stopSign-base"     material='color: red'></a-mixin>
-                        <a-mixin id="col-stopSign-trim"     material='color: #fff'></a-mixin>
-                        <a-mixin id="col-giveWay-trim"      material='color: red'></a-mixin>
-                        <a-mixin id="col-giveWay-base"      material='color: #fff'></a-mixin>
-                        <a-mixin id="col-lampPole-base"     material='color: #2a3439'></a-mixin>
-                        <a-mixin id="col-lampPole-light"    material='color: #fff; emissive: #fff'></a-mixin>
-                        <a-mixin id="col-streetlight-base"        material='color: gray'></a-mixin>
-                        <a-mixin id="col-streetlight-light"        material='color: #fff; emissive: #fff'></a-mixin>
-                        <a-mixin id="col-fountain"          material='color: #f5f5dc'></a-mixin>
-                         <a-mixin id="col-fountain-water"    material='color: aqua'></a-mixin>
-
+                        <a-mixin id="col-streetSign-pole"       material='color: gray'></a-mixin>
+                        <a-mixin id="col-stopSign-base"         material='color: red'></a-mixin>
+                        <a-mixin id="col-stopSign-trim"         material='color: #fff'></a-mixin>
+                        <a-mixin id="col-giveWay-trim"          material='color: red'></a-mixin>
+                        <a-mixin id="col-giveWay-base"          material='color: #fff'></a-mixin>
+                        <a-mixin id="col-lampPole-base"         material='color: #2a3439'></a-mixin>
+                        <a-mixin id="col-lampPole-light"        material='color: #fff; emissive: #fff'></a-mixin>
+                        <a-mixin id="col-streetlight-base"      material='color: gray'></a-mixin>
+                        <a-mixin id="col-streetlight-light"     material='color: #fff; emissive: #fff'></a-mixin>
+                        <a-mixin id="col-fountain"              material='color: #f5f5dc'></a-mixin>
+                        <a-mixin id="col-fountain-water"        material='color: aqua'></a-mixin>
                     <!-- Topography -->
-                        <a-mixin id="col-ground" 	        material='color: #658C52'></a-mixin>
-                        <a-mixin id="col-topSoil" 	        material='color: #A6734D'></a-mixin>
-                        <a-mixin id="col-subSoil" 	        material='color: #6F3C18'></a-mixin>
-                        <a-mixin id="col-rock" 	            material='color: #B9B4A9'></a-mixin>
-                        <a-mixin id="col-bedrock" 	        material='color: #514E47'></a-mixin>
-                        <a-mixin id="col-seabed" 	        material='color: #514E47'></a-mixin>
-                        <a-mixin id="col-ocean" 	        material='color: #82B6DD'></a-mixin>
-                        <a-mixin id="col-road" 	            material='color: #525a60'></a-mixin>
-                        <a-mixin id="col-river" 	        material ="color: #3BB3D0"></a-mixin>
-                        <a-mixin id="col-rocks"             material='color: #a9a9a9'></a-mixin>
-                        <a-mixin id="col-sand" 		        material='color: #e4e585'></a-mixin>
+                        <a-mixin id="col-ground" 	            material='color: #658C52'></a-mixin>
+                        <a-mixin id="col-topSoil" 	            material='color: #A6734D'></a-mixin>
+                        <a-mixin id="col-subSoil" 	            material='color: #6F3C18'></a-mixin>
+                        <a-mixin id="col-rock" 	                material='color: #B9B4A9'></a-mixin>
+                        <a-mixin id="col-bedrock" 	            material='color: #514E47'></a-mixin>
+                        <a-mixin id="col-seabed" 	            material='color: #514E47'></a-mixin>
+                        <a-mixin id="col-ocean" 	            material='color: #82B6DD'></a-mixin>
+                        <a-mixin id="col-road" 	                material='color: #525a60'></a-mixin>
+                        <a-mixin id="col-river" 	            material="color: #3BB3D0"></a-mixin>
+                        <a-mixin id="col-rocks"                 material='color: #a9a9a9'></a-mixin>
+                        <a-mixin id="col-sand" 		            material='color: #e4e585'></a-mixin>
+                        <a-mixin id="col-lightning" 		    material='color: yellow; emissive: yellow'></a-mixin>
                     <!-- Surface features -->
                         <a-mixin id="col-field" 	            material='color: #989a51'></a-mixin>
                         <a-mixin id="col-pavement" 	            material='color: gray'></a-mixin>
@@ -229,7 +232,7 @@
                         <a-mixin id="col-vehicle-white" 	        material='color: #fff; metalness: 0.5'></a-mixin>
                         <a-mixin id="col-vehicle-red" 	            material='color: #ff2800; metalness: 0.5'></a-mixin>
                         <a-mixin id="col-vehicle-yellow" 	        material='color: #FFF500; metalness: 0.5'></a-mixin>
-                        <a-mixin id="col-vehicle-electricBlue" 	        material='color: #7df9ff; metalness: 0.5'></a-mixin>
+                        <a-mixin id="col-vehicle-electricBlue" 	    material='color: #7df9ff; metalness: 0.5'></a-mixin>
                         <a-mixin id="col-vehicle-trimDark"   	    material='color: #181818; metalness: 0.5'></a-mixin>
                         <a-mixin id="col-cybertruck-headlights"   	material='color: #fff; emissive: #fff'></a-mixin>
                         <a-mixin id="col-cybertruck-brakelights"   	material='color: red; emissive: red'></a-mixin>
@@ -255,29 +258,39 @@
                         <a-mixin id="col-pig-eyes"              material='color: #fff'></a-mixin>
                         <a-mixin id="col-pig-hooves"   	        material='color: #8b7979'></a-mixin>
 
+                    <!-- Agriculture -->
+                        <a-mixin id="field-rows"    rotation="90 90 0" geometry="height: 9; segmentsRadial: 3; segmentsHeight: 1; thetaLength: 180; thetaStart: 90" material="flatShading: true" scale="0.15 1 0.15"></a-mixin>
+                        <a-mixin id="corn-leaves"   position="0 0.25 0" rotation="90 0 0" scale="1 1 3.5" geometry="radius: 0.2; radiusTubular: 0.005; segmentsRadial: 3; segmentsTubular: 16; p: 5; q: 1"></a-mixin>
+                        <a-mixin id="corn-stem"     geometry="height: 1.15; radius: 0.025; segmentsRadial: 3"></a-mixin>
+                        <a-mixin id="corn-cob-a"    position="-0.05 0.5 0" geometry="height: 0.25; radiusBottom: 0.03; radiusTop: 0.05; segmentsHeight: 1; segmentsRadial: 4" rotation="0 0 30"></a-mixin>
+                        <a-mixin id="corn-cob-b"    position="0 0.95 0.05" geometry="height: 0.25; radiusBottom: 0.03; radiusTop: 0.05; segmentsHeight: 1; segmentsRadial: 4" rotation="30 0 0"></a-mixin>
+                        <a-mixin id="wheat-leaves"  position="0 0.25 0" rotation="90 0 0" scale="1 1 3.5" geometry="radius: 0.2; radiusTubular: 0.005; segmentsRadial: 3; segmentsTubular: 16; p: 5; q: 1"></a-mixin>
+                        <a-mixin id="wheat-stem"    geometry="height: 1.15; radius: 0.025; segmentsRadial: 3"></a-mixin>
+                        <a-mixin id="wheat-crop"    geometry="height: 0.3; radiusBottom: 0.03; radiusTop: 0.05; segmentsHeight: 1; segmentsRadial: 4;"></a-mixin>
+                        <a-mixin id="generic-crop"  scale="1 1 3.5" geometry="radius: 0.25; radiusTubular: 0.01; segmentsRadial: 3; segmentsTubular: 15; p: 20; q: 1"></a-mixin>
                     <!-- Waste -->
-                        <a-mixin id ="col-bin-green"        material="color: #4C6144"></a-mixin>
-                        <a-mixin id ="col-bin-wheels"       material="color: #000"></a-mixin>
-                        <a-mixin id ="col-bin-lid-yellow"   material="color: yellow"></a-mixin>
-                        <a-mixin id ="col-bin-lid-purple"   material="color: purple"></a-mixin>
-                        <a-mixin id ="col-bin-lid-green"    material="color: green"></a-mixin>
-                        <a-mixin id ="col-bin-lid-black"    material="color: #000"></a-mixin>
-                        <a-mixin id ="col-bin-axle"         material="color: gray"></a-mixin>
-                        <a-mixin id ="col-bin-pane"         material="color: gray"></a-mixin>
+                        <a-mixin id ="col-bin-green"            material="color: #4C6144"></a-mixin>
+                        <a-mixin id ="col-bin-wheels"           material="color: #000"></a-mixin>
+                        <a-mixin id ="col-bin-lid-yellow"       material="color: yellow"></a-mixin>
+                        <a-mixin id ="col-bin-lid-purple"       material="color: purple"></a-mixin>
+                        <a-mixin id ="col-bin-lid-green"        material="color: green"></a-mixin>
+                        <a-mixin id ="col-bin-lid-black"        material="color: #000"></a-mixin>
+                        <a-mixin id ="col-bin-axle"             material="color: gray"></a-mixin>
+                        <a-mixin id ="col-bin-pane"             material="color: gray"></a-mixin>
 
                     <!--Materials -->
-                        <a-mixin id="road" 			material ="color: #525a60; flatShading: true"  geometry= "width: 3; height: 0.2"></a-mixin>
-                        <a-mixin id="driveway" 		material ="color: gray;     flatShading: true"  geometry= "width: 1.35; height: 0.15"></a-mixin>
-                        <a-mixin id="pavement" 		material ="color: gray;     flatShading: true"     geometry= "height: 0.3"></a-mixin>
-                        <a-mixin id="tarmac" 		material ="color: #525a60; flatShading: true"  geometry= "height: 0.1"></a-mixin>
-                        <a-mixin id="runway" 		material ="color: #525a60; flatShading: true"  geometry= "height: 0.1"></a-mixin>
-                        <a-mixin id="runway-light" 	material ="color: #fff; emissive: #fff"></a-mixin>
+                        <a-mixin id="road" 			material="color: #525a60; flatShading: true"  geometry= "width: 3; height: 0.2"></a-mixin>
+                        <a-mixin id="driveway" 		material="color: gray;    flatShading: true"  geometry= "width: 1.35; height: 0.15"></a-mixin>
+                        <a-mixin id="pavement" 		material="color: gray;    flatShading: true"     geometry= "height: 0.3"></a-mixin>
+                        <a-mixin id="tarmac" 		material="color: #525a60; flatShading: true"  geometry= "height: 0.1"></a-mixin>
+                        <a-mixin id="runway" 		material="color: #525a60; flatShading: true"  geometry= "height: 0.1"></a-mixin>
+                        <a-mixin id="runway-light" 	material="color: #fff; emissive: #fff"></a-mixin>
                         <a-mixin id="rail-sleeper"  material='color: #443b35' geometry="width: 0.3; depth: 1.4; height: 0.05;"></a-mixin>
-                        <a-mixin id="road-line" 	material ="color: #fff; flatShading: true"     geometry= "width: 0.15; height: 0.21"></a-mixin>
-                        <a-mixin id="road-stopline" material ="color: #fff; flatShading: true"     geometry= "width: 1.5; height: 0.21; depth:  0.3 "></a-mixin>
-                        <a-mixin id="dirtRoad" 		material ="color: #A6734D; flatShading: true"   geometry= "width: 2; height: 0.1"></a-mixin>
+                        <a-mixin id="road-line" 	material="color: #fff; flatShading: true"     geometry= "width: 0.15; height: 0.21"></a-mixin>
+                        <a-mixin id="road-stopline" material="color: #fff; flatShading: true"     geometry= "width: 1.5; height: 0.21; depth:  0.3 "></a-mixin>
+                        <a-mixin id="dirtRoad" 		material="color: #A6734D; flatShading: true"   geometry= "width: 2; height: 0.1"></a-mixin>
 
-                        <a-mixin id="ground-zone"   material='color: #658C52'   geometry="primitive: cylinder; segmentsRadial: 6; height: 0.3; radius: 30" rotation="0 90 0"></a-mixin>
+                        <a-mixin id="ground-zone"   material='color: #658C52'  geometry="primitive: cylinder; segmentsRadial: 6; height: 0.3; radius: 30" rotation="0 90 0"></a-mixin>
                         <a-mixin id="topSoil-zone"  material='color: #A6734D'   geometry="primitive: cylinder; segmentsRadial: 6; height: 1; radius: 30" rotation="0 90 0"></a-mixin>
                         <a-mixin id="subSoil-zone" 	material='color: #6F3C18'   geometry="primitive: cylinder; segmentsRadial: 6; height: 2; radius: 30" rotation="0 90 0"></a-mixin>
                         <a-mixin id="rock-zone"     material='color: #6f6b62'   geometry="primitive: cylinder; segmentsRadial: 6; height: 4; radius: 30" rotation="0 90 0"></a-mixin>
@@ -1378,7 +1391,7 @@
                             <a-box position="2 0.5 0" scale="0.05 1 0.05"></a-box>
                             <a-box position="4 0.5 0" scale="0.05 1 0.05"></a-box>
                         </a-entity>
-                        <a-entity class="solarRotateable" position="0 1 0" rotation="30 0 0">
+                        <a-entity class="solarRotatable" position="0 1 0" rotation="30 0 0">
                             <a-entity class="rotated-frame" mixin="col-solarFrame" buffer-geometry-merger>
                                 <a-cylinder  rotation="0 0 90" geometry="height: 8.2; radius: 0.025" ></a-cylinder>
                                 <a-torus position="4.1 0 0" rotation="0 90 0" geometry="radius: 0.2; radiusTubular: 0.01; segmentsTubular: 12" ></a-torus>
@@ -1588,48 +1601,54 @@
 
                     <!-- Natural vegetation-->
                     <script id="tmp-tree-cone" type="text/html">
-                        <a-entity class = "greening vegetation" mixin="col-treeTop" buffer-geometry-merger>
-                            <a-cone height="1.5" position="0 1.15 0" radius-bottom="0.5" radius-top="0" geometry="segmentsHeight: 1; segmentsRadial: 5"></a-cone>
-                            <a-cone height="1.5" position="0 1.45 0" radius-bottom="0.5" radius-top="0" geometry="segmentsHeight: 1; segmentsRadial: 6"></a-cone>
+                        <a-entity class = "tree">
+                            <a-entity class = "foliage vegetation" mixin="col-treeTop" buffer-geometry-merger>
+                                <a-cone height="1.5" position="0 1.15 0" radius-bottom="0.5" radius-top="0" geometry="segmentsHeight: 1; segmentsRadial: 5"></a-cone>
+                                <a-cone height="1.5" position="0 1.45 0" radius-bottom="0.5" radius-top="0" geometry="segmentsHeight: 1; segmentsRadial: 6"></a-cone>
+                            </a-entity>
+                            <a-cylinder mixin="col-treeTrunk" height="1.0" position="0 0.25 0" radius="0.1" geometry="segmentsHeight: 1; segmentsRadial: 5"></a-cylinder>
                         </a-entity>
-                        <a-cylinder mixin="col-treeTrunk" height="1.0" position="0 0.25 0" radius="0.1" geometry="segmentsHeight: 1; segmentsRadial: 5"></a-cylinder>
                     </script>
 
                     <script id="tmp-tree-apple" type="text/html">
-                        <a-cylinder mixin="col-treeTrunk" height="2.0" position="0 1 0" radius="0.1" geometry="segmentsHeight: 1; segmentsRadial: 4"></a-cylinder>
-                        <a-entity mixin="col-treeTop" buffer-geometry-merger>
-                            <a-dodecahedron position="-0.3 1.25 0" radius="0.65" ></a-dodecahedron>
-                            <a-dodecahedron position="0 1.85 0" radius="0.5"></a-dodecahedron>   
-                            <a-dodecahedron position="0.3 1.25 0" mixin="col-treeBottom" radius="0.75"></a-dodecahedron>
-                        </a-entity>                        
-                        <a-entity mixin="col-apple" buffer-geometry-merger>
-                            <a-entity position="-0.3 1.25 0">
-                                <a-dodecahedron position="-0.625 0 0" radius="0.05"></a-dodecahedron>
-                                <a-dodecahedron position="0.161 0.08 -0.52" radius="0.05"></a-dodecahedron>
-                                <a-dodecahedron position="-0.308 -0.3 0.446" radius="0.05"></a-dodecahedron>
-                                <a-dodecahedron position="0.038 0.274 0.552" radius="0.05"></a-dodecahedron>
-                                <a-dodecahedron position="-0.324 -0.278 -0.487" radius="0.05"></a-dodecahedron>
+                        <a-entity class = "tree">
+                            <a-cylinder mixin="col-treeTrunk" height="2.0" position="0 1 0" radius="0.1" geometry="segmentsHeight: 1; segmentsRadial: 4"></a-cylinder>
+                            <a-entity class = "foliage" mixin="col-treeTop" buffer-geometry-merger>
+                                <a-dodecahedron position="-0.3 1.25 0" radius="0.65" ></a-dodecahedron>
+                                <a-dodecahedron position="0 1.85 0" radius="0.5"></a-dodecahedron>   
+                                <a-dodecahedron position="0.3 1.25 0" mixin="col-treeBottom" radius="0.75"></a-dodecahedron>
+                            </a-entity>                        
+                            <a-entity mixin="col-apple" buffer-geometry-merger>
+                                <a-entity position="-0.3 1.25 0">
+                                    <a-dodecahedron position="-0.625 0 0" radius="0.05"></a-dodecahedron>
+                                    <a-dodecahedron position="0.161 0.08 -0.52" radius="0.05"></a-dodecahedron>
+                                    <a-dodecahedron position="-0.308 -0.3 0.446" radius="0.05"></a-dodecahedron>
+                                    <a-dodecahedron position="0.038 0.274 0.552" radius="0.05"></a-dodecahedron>
+                                    <a-dodecahedron position="-0.324 -0.278 -0.487" radius="0.05"></a-dodecahedron>
+                                </a-entity>
+                                <a-entity position="0.3 1.25 0">
+                                    <a-dodecahedron position="-0.07 -0.01 0.672" radius="0.05"></a-dodecahedron>
+                                    <a-dodecahedron position="0.363 0.577 0.057" radius="0.05"></a-dodecahedron>
+                                    <a-dodecahedron position="0.456 0.038 0.406" radius="0.05"></a-dodecahedron>                            
+                                    <a-dodecahedron position="0.41 -0.159 -0.449" radius="0.05"></a-dodecahedron>
+                                </a-entity>
+                                <a-entity position="0 1.85 0">
+                                    <a-dodecahedron position="-0.171 0.301 -0.29" radius="0.05"></a-dodecahedron>
+                                    <a-dodecahedron position="0.007 0.05 0.45" radius="0.05"></a-dodecahedron>
+                                </a-entity>
                             </a-entity>
-                            <a-entity position="0.3 1.25 0">
-                                <a-dodecahedron position="-0.07 -0.01 0.672" radius="0.05"></a-dodecahedron>
-                                <a-dodecahedron position="0.363 0.577 0.057" radius="0.05"></a-dodecahedron>
-                                <a-dodecahedron position="0.456 0.038 0.406" radius="0.05"></a-dodecahedron>                            
-                                <a-dodecahedron position="0.41 -0.159 -0.449" radius="0.05"></a-dodecahedron>
-                            </a-entity>
-                            <a-entity position="0 1.85 0">
-                                <a-dodecahedron position="-0.171 0.301 -0.29" radius="0.05"></a-dodecahedron>
-                                <a-dodecahedron position="0.007 0.05 0.45" radius="0.05"></a-dodecahedron>
-                            </a-entity>
-                        </a-entity>
+                         </a-entity>
                     </script>
 
                     <script id="tmp-tree-round" type="text/html">
-                        <a-entity class = "greening vegetation" mixin="col-treeTop" buffer-geometry-merger>
-                            <a-dodecahedron position="-0.3 1.25 0" radius="0.65" rotation="28.29 -18.56 -9.045"></a-dodecahedron>
-                            <a-dodecahedron position="0.3 1.25 0" radius="0.75" rotation="18.3 0 -15.66"></a-dodecahedron>
-                            <a-dodecahedron position="0 1.85 0" radius="0.5" rotation="-8.15 0 -14.92"></a-dodecahedron>
+                        <a-entity class = "tree">
+                         <a-entity class = "foliage vegetation" mixin="col-treeTop" buffer-geometry-merger>
+                                <a-dodecahedron position="-0.3 1.25 0" radius="0.65" rotation="28.29 -18.56 -9.045"></a-dodecahedron>
+                                <a-dodecahedron position="0.3 1.25 0" radius="0.75" rotation="18.3 0 -15.66"></a-dodecahedron>
+                                <a-dodecahedron position="0 1.85 0" radius="0.5" rotation="-8.15 0 -14.92"></a-dodecahedron>
+                            </a-entity>
+                            <a-cylinder mixin="col-treeTrunk" height="2.0" position="0 1 0" radius="0.1" geometry="segmentsHeight: 1; segmentsRadial: 4"></a-cylinder>
                         </a-entity>
-                        <a-cylinder mixin="col-treeTrunk" height="2.0" position="0 1 0" radius="0.1" geometry="segmentsHeight: 1; segmentsRadial: 4"></a-cylinder>
                     </script>
 
                     <script id="tmp-hedge" type="text/html">
@@ -1861,6 +1880,480 @@
                         </a-entity>
                     </script>
 
+                    <!-- Agricultural fields -->
+                    <script id = "tmp-field-soil"  type="text/html">        
+                        <a-entity class = "topSoil" mixin="col-topSoil" buffer-geometry-merger>
+                            <a-cylinder position="0 0 0" mixin="field-rows"></a-cylinder>
+                            <a-cylinder position="0 0 1" mixin="field-rows"></a-cylinder>
+                            <a-cylinder position="0 0 2" mixin="field-rows"></a-cylinder>
+                            <a-cylinder position="0 0 3" mixin="field-rows"></a-cylinder>
+                            <a-cylinder position="0 0 -1" mixin="field-rows"></a-cylinder>
+                            <a-cylinder position="0 0 -2" mixin="field-rows"></a-cylinder>
+                            <a-cylinder position="0 0 -3" mixin="field-rows"></a-cylinder>
+                        </a-entity>
+                    </script>
+
+                    <script id = "tmp-field-corn"  type="text/html">      
+                        <a-entity class ="stem-corn" mixin="col-stem-corn" buffer-geometry-merger>
+                            <a-entity position = "0 0 0">
+                                <a-cylinder position = "0 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "0.75 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "1.5 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "2.25 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "3 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "3.75 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-0.75 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-1.5 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-2.25 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-3 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-3.75 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                            </a-entity>
+                            <a-entity position = "0 0 1">
+                                <a-cylinder position = "0 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "0.75 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "1.5 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "2.25 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "3 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "3.75 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-0.75 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-1.5 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-2.25 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-3 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-3.75 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                            </a-entity>
+                            <a-entity position = "0 0 2">
+                                <a-cylinder position = "0 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "0.75 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "1.5 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "2.25 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "3 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "3.75 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-0.75 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-1.5 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-2.25 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-3 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-3.75 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                            </a-entity>
+                            <a-entity position = "0 0 3">
+                                <a-cylinder position = "0 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "0.75 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "1.5 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "2.25 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "3 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "3.75 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-0.75 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-1.5 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-2.25 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-3 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-3.75 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                            </a-entity>
+                            <a-entity position = "0 0 -1">
+                                <a-cylinder position = "0 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "0.75 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "1.5 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "2.25 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "3 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "3.75 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-0.75 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-1.5 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-2.25 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-3 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-3.75 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                            </a-entity>
+                            <a-entity position = "0 0 -2">
+                                <a-cylinder position = "0 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "0.75 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "1.5 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "2.25 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "3 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "3.75 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-0.75 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-1.5 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-2.25 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-3 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-3.75 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                            </a-entity>
+                            <a-entity position = "0 0 -3">
+                                <a-cylinder position = "0 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "0.75 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "1.5 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "2.25 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "3 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "3.75 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-0.75 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-1.5 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-2.25 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-3 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-3.75 0.5 0" mixin="corn-stem"><a-torus-knot mixin="corn-leaves" ></a-torus-knot></a-cylinder>
+                            </a-entity>
+                        </a-entity>
+                        <a-entity class ="crop-corn" mixin="col-crop-corn" buffer-geometry-merger>
+                            <a-entity position = "0 0 0">
+                                <a-entity  position = "0 0 0" rotation ="0 30 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "0.75 0 0" rotation ="0 10 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "1.5 0 0" rotation ="0 100 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "2.25 0 0" rotation ="0 140 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "3 0 0" rotation ="0 240 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "3.75 0 0"  rotation ="0 340 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "-0.75 0 0" rotation ="0 300 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "-1.5 0 0"  rotation ="0 0 0"> <a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "-2.25 0 0" rotation ="0 70 0"> <a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "-3 0 0" rotation ="0 90 0"> <a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "-3.75 0 0" rotation ="0 200 0"> <a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                            </a-entity>
+                            <a-entity position = "0 0 1">
+                                <a-entity  position = "0 0 0" rotation ="0 -30 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "0.75 0 0" rotation ="0 -10 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "1.5 0 0" rotation ="0 -100 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "2.25 0 0" rotation ="0 -140 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "3 0 0" rotation ="0 -240 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "3.75 0 0"  rotation ="0 -340 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "-0.75 0 0" rotation ="0 -300 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "-1.5 0 0"  rotation ="0 20 0"> <a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "-2.25 0 0" rotation ="0 -70 0"> <a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "-3 0 0" rotation ="0 -90 0"> <a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "-3.75 0 0" rotation ="0 -200 0"> <a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                            </a-entity>
+                            <a-entity position = "0 0 2">
+                                <a-entity  position = "0 0 0" rotation ="0 30 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "0.75 0 0" rotation ="0 10 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "1.5 0 0" rotation ="0 100 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "2.25 0 0" rotation ="0 140 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "3 0 0" rotation ="0 240 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "3.75 0 0"  rotation ="0 340 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "-0.75 0 0" rotation ="0 300 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "-1.5 0 0"  rotation ="0 0 0"> <a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "-2.25 0 0" rotation ="0 70 0"> <a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "-3 0 0" rotation ="0 90 0"> <a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "-3.75 0 0" rotation ="0 200 0"> <a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                            </a-entity>
+                            <a-entity position = "0 0 3">
+                                <a-entity  position = "0 0 0" rotation ="0 -30 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "0.75 0 0" rotation ="0 -10 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "1.5 0 0" rotation ="0 -100 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "2.25 0 0" rotation ="0 -140 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "3 0 0" rotation ="0 -240 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "3.75 0 0"  rotation ="0 -340 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "-0.75 0 0" rotation ="0 -300 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "-1.5 0 0"  rotation ="0 20 0"> <a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "-2.25 0 0" rotation ="0 -70 0"> <a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "-3 0 0" rotation ="0 -90 0"> <a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "-3.75 0 0" rotation ="0 -200 0"> <a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                            </a-entity>
+                            <a-entity position = "0 0 -1">
+                                <a-entity  position = "0 0 0" rotation ="0 -30 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "0.75 0 0" rotation ="0 -10 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "1.5 0 0" rotation ="0 -100 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "2.25 0 0" rotation ="0 -140 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "3 0 0" rotation ="0 -240 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "3.75 0 0"  rotation ="0 -340 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "-0.75 0 0" rotation ="0 -300 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "-1.5 0 0"  rotation ="0 20 0"> <a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "-2.25 0 0" rotation ="0 -70 0"> <a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "-3 0 0" rotation ="0 -90 0"> <a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "-3.75 0 0" rotation ="0 -200 0"> <a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                            </a-entity>
+                            <a-entity position = "0 0 -2">
+                                <a-entity  position = "0 0 0" rotation ="0 30 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "0.75 0 0" rotation ="0 10 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "1.5 0 0" rotation ="0 100 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "2.25 0 0" rotation ="0 140 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "3 0 0" rotation ="0 240 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "3.75 0 0"  rotation ="0 340 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "-0.75 0 0" rotation ="0 300 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "-1.5 0 0"  rotation ="0 0 0"> <a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "-2.25 0 0" rotation ="0 70 0"> <a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "-3 0 0" rotation ="0 90 0"> <a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "-3.75 0 0" rotation ="0 200 0"> <a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                            </a-entity>
+                            <a-entity position = "0 0 -3">
+                                <a-entity  position = "0 0 0" rotation ="0 -30 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "0.75 0 0" rotation ="0 -10 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "1.5 0 0" rotation ="0 -100 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "2.25 0 0" rotation ="0 -140 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "3 0 0" rotation ="0 -240 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "3.75 0 0"  rotation ="0 -340 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "-0.75 0 0" rotation ="0 -300 0"><a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "-1.5 0 0"  rotation ="0 20 0"> <a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "-2.25 0 0" rotation ="0 -70 0"> <a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "-3 0 0" rotation ="0 -90 0"> <a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                                <a-entity  position = "-3.75 0 0" rotation ="0 -200 0"> <a-cone mixin="corn-cob-a"></a-cone><a-cone mixin="corn-cob-b"></a-cone></a-entity>
+                            </a-entity>
+                        </a-entity>
+                    </script>
+
+                    <script id = "tmp-field-wheat"  type="text/html"> 
+                        <a-entity class ="stem-wheat" mixin="col-stem-wheat" buffer-geometry-merger>
+                            <a-entity position = "0 0 0">
+                                <a-cylinder position = "0 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "0.75 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "1.5 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "2.25 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "3 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "3.75 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-0.75 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-1.5 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-2.25 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-3 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-3.75 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                            </a-entity>
+                            <a-entity position = "0 0 1">
+                                <a-cylinder position = "0 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "0.75 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "1.5 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "2.25 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "3 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "3.75 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-0.75 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-1.5 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-2.25 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-3 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-3.75 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                            </a-entity>
+                            <a-entity position = "0 0 2">
+                                <a-cylinder position = "0 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "0.75 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "1.5 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "2.25 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "3 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "3.75 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-0.75 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-1.5 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-2.25 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-3 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-3.75 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                            </a-entity>
+                            <a-entity position = "0 0 3">
+                                <a-cylinder position = "0 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "0.75 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "1.5 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "2.25 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "3 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "3.75 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-0.75 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-1.5 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-2.25 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-3 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-3.75 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                            </a-entity>
+                            <a-entity position = "0 0 -1">
+                                <a-cylinder position = "0 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "0.75 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "1.5 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "2.25 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "3 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "3.75 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-0.75 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-1.5 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-2.25 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-3 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-3.75 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                            </a-entity>
+                            <a-entity position = "0 0 -2">
+                                <a-cylinder position = "0 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "0.75 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "1.5 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "2.25 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "3 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "3.75 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-0.75 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-1.5 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-2.25 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-3 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-3.75 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                            </a-entity>
+                            <a-entity position = "0 0 -3">
+                                <a-cylinder position = "0 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "0.75 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "1.5 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "2.25 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "3 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "3.75 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-0.75 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-1.5 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-2.25 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-3 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                                <a-cylinder position = "-3.75 0.5 0" mixin="wheat-stem"><a-torus-knot mixin="wheat-leaves"></a-torus-knot></a-cylinder>
+                            </a-entity>
+                        </a-entity>
+                        <a-entity class ="crop-wheat" mixin="col-crop-wheat" buffer-geometry-merger>
+                            <a-entity position = "0 0 0">
+                                <a-cone position="0 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="0.75 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="1.5 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="2.25 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="3 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="3.75 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="-0.75 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="-1.5 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="-2.25 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="-3 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="-3.75 1.1 0" mixin="wheat-crop"></a-cone>
+                            </a-entity>
+                            <a-entity position = "0 0 1">
+                                <a-cone position="0  1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="0.75 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="1.5 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="2.25 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="3 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="3.75 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="-0.75 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="-1.5 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="-2.25 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="-3 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="-3.75 1.1 0" mixin="wheat-crop"></a-cone>
+                            </a-entity>
+                            <a-entity position = "0 0 2">
+                                <a-cone position="0  1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="0.75 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="1.5 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="2.25 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="3 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="3.75 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="-0.75 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="-1.5 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="-2.25 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="-3 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="-3.75 1.1 0" mixin="wheat-crop"></a-cone>
+                            </a-entity>
+                            <a-entity position = "0 0 3">
+                                <a-cone position="0  1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="0.75 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="1.5 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="2.25 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="3 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="3.75 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="-0.75 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="-1.5 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="-2.25 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="-3 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="-3.75 1.1 0" mixin="wheat-crop"></a-cone>
+                            </a-entity>
+                            <a-entity position = "0 0 -1">
+                                <a-cone position="0  1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="0.75 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="1.5 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="2.25 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="3 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="3.75 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="-0.75 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="-1.5 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="-2.25 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="-3 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="-3.75 1.1 0" mixin="wheat-crop"></a-cone>
+                            </a-entity>
+                            <a-entity position = "0 0 -2">
+                                <a-cone position="0  1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="0.75 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="1.5 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="2.25 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="3 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="3.75 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="-0.75 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="-1.5 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="-2.25 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="-3 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="-3.75 1.1 0" mixin="wheat-crop"></a-cone>
+                            </a-entity>
+                            <a-entity position = "0 0 -3">
+                                <a-cone position="0  1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="0.75 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="1.5 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="2.25 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="3 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="3.75 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="-0.75 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="-1.5 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="-2.25 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="-3 1.1 0" mixin="wheat-crop"></a-cone>
+                                <a-cone position="-3.75 1.1 0" mixin="wheat-crop"></a-cone>
+                            </a-entity>
+                        </a-entity>
+                    </script>
+
+                    <script id = "tmp-field-generic"  type="text/html">   
+                        <a-entity class = "crop-generic"  mixin="col-crop-generic" buffer-geometry-merger>
+                            <a-entity position ="0 0 0">
+                                <a-torus-knot position="0 0.15 0" rotation="0 90 20" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="1 0.15 0" rotation="0 90 30" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="2 0.15 0" rotation="0 90 40" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="3 0.15 0" rotation="0 90 -10" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="4 0.15 0" rotation="0 90 -60" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="-1 0.15 0" rotation="0 90 -30" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="-2 0.15 0" rotation="0 90 30" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="-3 0.15 0" rotation="0 90 -20" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="-4 0.15 0" rotation="0 90 20" mixin="generic-crop"></a-torus-knot>
+                            </a-entity>
+                            <a-entity position ="0 0 1">
+                                <a-torus-knot position="0 0.15 0" rotation="0 90 -10" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="1 0.15 0" rotation="0 90 60" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="2 0.15 0" rotation="0 90 -50" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="3 0.15 0" rotation="0 90 40" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="4 0.15 0" rotation="0 90 80" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="-1 0.15 0" rotation="0 90 -70" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="-2 0.15 0" rotation="0 90 20" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="-3 0.15 0" rotation="0 90 -20" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="-4 0.15 0" rotation="0 90 20" mixin="generic-crop"></a-torus-knot>
+                            </a-entity>
+                            <a-entity position ="0 0 2">
+                                <a-torus-knot position="0 0.15 0" rotation="0 90 10" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="1 0.15 0" rotation="0 90 -60" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="2 0.15 0" rotation="0 90 50" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="3 0.15 0" rotation="0 90 -40" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="4 0.15 0" rotation="0 90 -80" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="-1 0.15 0" rotation="0 90 70" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="-2 0.15 0" rotation="0 90 -20" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="-3 0.15 0" rotation="0 90 20" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="-4 0.15 0" rotation="0 90 50" mixin="generic-crop"></a-torus-knot>
+                            </a-entity>
+                            <a-entity position ="0 0 3">
+                                <a-torus-knot position="0 0.15 0" rotation="0 90 -20" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="1 0.15 0" rotation="0 90 70" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="2 0.15 0" rotation="0 90 -50" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="3 0.15 0" rotation="0 90 10" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="4 0.15 0" rotation="0 90 60" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="-1 0.15 0" rotation="0 90 -60" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="-2 0.15 0" rotation="0 90 -40" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="-3 0.15 0" rotation="0 90 20" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="-4 0.15 0" rotation="0 90 70" mixin="generic-crop"></a-torus-knot>
+                            </a-entity>
+                            <a-entity position ="0 0 -1">
+                                <a-torus-knot position="0 0.15 0" rotation="0 90 10" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="1 0.15 0" rotation="0 90 -60" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="2 0.15 0" rotation="0 90 50" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="3 0.15 0" rotation="0 90 40" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="4 0.15 0" rotation="0 90 -80" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="-1 0.15 0" rotation="0 90 -70" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="-2 0.15 0" rotation="0 90 -20" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="-3 0.15 0" rotation="0 90 -20" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="-4 0.15 0" rotation="0 90 70" mixin="generic-crop"></a-torus-knot>
+                            </a-entity>
+                            <a-entity position ="0 0 -2">
+                                <a-torus-knot position="0 0.15 0" rotation="0 90 -20" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="1 0.15 0" rotation="0 90 70" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="2 0.15 0" rotation="0 90 -50" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="3 0.15 0" rotation="0 90 10" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="4 0.15 0" rotation="0 90 60" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="-1 0.15 0" rotation="0 90 -60" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="-2 0.15 0" rotation="0 90 -40" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="-3 0.15 0" rotation="0 90 20" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="-4 0.15 0" rotation="0 90 70" mixin="generic-crop"></a-torus-knot>
+                            </a-entity>
+                            <a-entity position ="0 0 -3">
+                                <a-torus-knot position="0 0.15 0" rotation="0 90 -10" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="1 0.15 0" rotation="0 90 60" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="2 0.15 0" rotation="0 90 -50" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="3 0.15 0" rotation="0 90 40" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="4 0.15 0" rotation="0 90 80" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="-1 0.15 0" rotation="0 90 -70" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="-2 0.15 0" rotation="0 90 20" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="-3 0.15 0" rotation="0 90 -20" mixin="generic-crop"></a-torus-knot>
+                                <a-torus-knot position="-4 0.15 0" rotation="0 90 20" mixin="generic-crop"></a-torus-knot>
+                            </a-entity>
+                        </a-entity>
+                    </script>
+                </a-entity>
+
                 <!-- ANIMATION TIMELINES -->
                 <a-timeline id="ambientLight-cycle">
                     <a-timeline-animation select="#ambient-light" name="sunrise"></a-timeline-animation>
@@ -2069,9 +2562,20 @@
                             </a-entity>
                         </a-entity>
                     </a-entity> 
+                    <a-entity id='lightning-group' position = "-100 80 0"  look-at="#flycam" visible="false">
+                        <a-entity class="bolt" position="">
+                            <a-cone mixin="col-lightning" position="0 40 0" rotation="20 90 0" geometry="height: 60; radiusTop: 12; radiusBottom: 8; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45" material=""></a-cone>
+                            <a-cone mixin="col-lightning" position="-8.59595 -18.15807 -0.16907" rotation="20 90 0" geometry="height: 80; radiusTop: 10; radiusBottom: 2; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45" material=""></a-cone>                  
+                        </a-entity>
+                    </a-entity>
+                    <a-entity id="fire-group" position = "0 0 0 " visible="false">
+                        <a-ocean id="fire-orange" position="-100 1.8 -30" ocean="color: orange; amplitude: 1; amplitudeVariance: 1; speed: 0.5; speedVariance: 1" scale="5 10 9"></a-ocean>               
+                        <a-ocean id="fire-yellow" position="-100 1.8 -30" ocean="color: yellow; amplitude: 0.75; amplitudeVariance: 1; opacity: 0.5; speed: 0.5; speedVariance: 1" scale="5 10 6"></a-ocean>               
+                        <a-ocean id="fire-white" position="-100 1.8 -30" ocean="color: #fff; amplitude: 0.5; amplitudeVariance: 1; opacity: 1; speed: 0.5; speedVariance: 1" scale="5 10 3"></a-ocean>                    
+                    </a-entity>
 
                     <!-- PARTICLE SYSTEM-->
-                    <a-entity id="rain" position="0 30 0" scale="1.5 1 1.5"></a-entity>
+                    <a-entity id="rain" position="0 30 0" scale="1 1 1.5"></a-entity>
                 </a-entity>
                     
                 <!--- WORLD TOPOGRAPHY -->
@@ -2082,35 +2586,36 @@
                             <a-cone position="-7.8 41.5 -52" rotation="" geometry="radiusTop: 0.2; height: 3; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45" material="flatShading: true" scale="23.8 10 10.5"> </a-cone>
                             <a-cone position="24.25 33.66 -56.3" rotation="0.0 -37.8 -118.6" geometry="radiusTop: 0.42; height: 2.51; radiusBottom: 0.86; segmentsHeight: 1; segmentsRadial: 6; thetaStart: 45" material="flatShading: true" scale="58.85224 8.56309 14.05652"> </a-cone>
                             <a-cone position="69.16 55.39 -53.29" rotation="0 -3 -10" geometry="radiusTop: 0.1; height: 3; radiusBottom: 0.47; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45" material="flatShading: true" scale="31.5 12.1 23.7"> </a-cone>
+                            <a-cylinder material="color: #0b2400" scale="95 0.5 95" geometry="segmentsHeight: 1; segmentsRadial: 8; thetaLength: 180; thetaStart: 105" rotation="0 -15 0" position="22 0 -9.6"></a-cylinder>
                         </a-entity>  
                     </a-entity>
                 
                     <a-entity id="ground-group" class="topography-group" position="0 2.85 0">
-                        <a-entity id="central-ground"  class="surface"  mixin="ground-zone" ></a-entity>
-                        <a-entity id="industrial-ground" class="surface"  mixin="ground-zone" position="0 0 -51.8"></a-entity>
-                        <a-entity id="urban-ground"  class="surface"  mixin="ground-zone" position="44.8 0 -25.9"></a-entity>
-                        <a-entity id="suburban-ground" class="surface"  mixin="ground-zone" position="0 0 51.8"></a-entity>
-                        <a-entity id="perUrban-ground" class="surface"  mixin="ground-zone" position="-44.8 0 25.9"></a-entity>
-                        <a-entity id="agriculture-ground"  class="surface"  mixin="ground-zone" position="-44.8 0 -25.9"></a-entity>
-                        <a-entity id="outerGroup-ground"  class="surface-group" mixin="col-ground" >
-                            <a-entity id="outer-ground-01" mixin="ground-zone subzone" position="-44.8  0 -77.8"></a-entity>
-                            <!-- <a-entity id="outer-ground-02" mixin="ground-zone subzone" position="-44.8  0 -90.7" visible="false"></a-entity> -->
-                            <a-entity id="outer-ground-03" mixin="ground-zone subzone" position="-33.55 0 -84.3"></a-entity>
-                            <a-entity id="outer-ground-04" mixin="ground-zone subzone" position="-33.55 0 -71.3"></a-entity>
-                            <a-entity id="outer-ground-05" mixin="ground-zone subzone" position="-56    0 -71.3"></a-entity>
-                            <a-entity id="outer-ground-06" mixin="ground-zone subzone" position="-44.8  0 -64.9"></a-entity>
-                            <!-- <a-entity id="outer-ground-07" mixin="ground-zone subzone" position="-56    0 -84.3" visible="false"></a-entity> -->
-                            <a-entity id="outer-ground-08" mixin="ground-zone subzone" position="-33.55 0 -97.3"></a-entity>
-                            <a-entity id="outer-ground-09" mixin="ground-zone subzone" position="-22.32 0 -90.7"></a-entity>
-                            <a-entity id="outer-ground-10" mixin="ground-zone subzone" position="-22.32 0 -77.8"></a-entity>
-                            <a-entity id="outer-ground-11" mixin="ground-zone subzone" position="-22.32 0 -64.9"></a-entity>
-                            <a-entity id="outer-ground-12" mixin="ground-zone subzone" position="-33.55 0 -58.4"></a-entity>
-                            <a-entity id="outer-ground-13" mixin="ground-zone subzone" position="-44.8  0 -51.9"></a-entity>
-                            <a-entity id="outer-ground-14" mixin="ground-zone subzone" position="-56    0 -58.4"></a-entity>
-                            <a-entity id="outer-ground-15" mixin="ground-zone subzone" position="-67.2  0 -77.8"></a-entity>
-                            <a-entity id="outer-ground-16" mixin="ground-zone subzone" position="-56    0 -97.3"></a-entity>
+                        <a-entity id="central-ground"      class="grass surface" mixin="ground-zone" ></a-entity>
+                        <a-entity id="industrial-ground"   class="grass surface"  mixin="ground-zone" position="0 0 -51.8"></a-entity>
+                        <a-entity id="urban-ground"        class="grass surface"  mixin="ground-zone" position="44.8 0 -25.9"></a-entity>
+                        <a-entity id="suburban-ground"     class="grass surface"  mixin="ground-zone" position="0 0 51.8"></a-entity>
+                        <a-entity id="perUrban-ground"     class="grass surface"  mixin="ground-zone" position="-44.8 0 25.9"></a-entity>
+                        <a-entity id="agriculture-ground"  class="grass surface"  mixin="ground-zone" position="-44.8 0 -25.9"></a-entity>
+                        <a-entity id="outerGroup-ground"   class="surface-group" mixin="col-ground" >
+                            <a-entity id="outer-ground-01" class="grass" mixin="ground-zone subzone" position="-44.8  0 -77.8"></a-entity>
+                            <!-- <a-entity id="outer-ground-02" class="grass" mixin="ground-zone subzone" position="-44.8  0 -90.7" visible="false"></a-entity> -->
+                            <a-entity id="outer-ground-03" class="grass" mixin="ground-zone subzone" position="-33.55 0 -84.3"></a-entity>
+                            <a-entity id="outer-ground-04" class="grass" mixin="ground-zone subzone" position="-33.55 0 -71.3"></a-entity>
+                            <a-entity id="outer-ground-05" class="grass" mixin="ground-zone subzone" position="-56    0 -71.3"></a-entity>
+                            <a-entity id="outer-ground-06" class="grass" mixin="ground-zone subzone" position="-44.8  0 -64.9"></a-entity>
+                            <!-- <a-entity id="outer-ground-07" class="grass" mixin="ground-zone subzone" position="-56    0 -84.3" visible="false"></a-entity> -->
+                            <a-entity id="outer-ground-08" class="grass" mixin="ground-zone subzone" position="-33.55 0 -97.3"></a-entity>
+                            <a-entity id="outer-ground-09" class="grass" mixin="ground-zone subzone" position="-22.32 0 -90.7"></a-entity>
+                            <a-entity id="outer-ground-10" class="grass" mixin="ground-zone subzone" position="-22.32 0 -77.8"></a-entity>
+                            <a-entity id="outer-ground-11" class="grass" mixin="ground-zone subzone" position="-22.32 0 -64.9"></a-entity>
+                            <a-entity id="outer-ground-12" class="grass" mixin="ground-zone subzone" position="-33.55 0 -58.4"></a-entity>
+                            <a-entity id="outer-ground-13" class="grass" mixin="ground-zone subzone" position="-44.8  0 -51.9"></a-entity>
+                            <a-entity id="outer-ground-14" class="grass" mixin="ground-zone subzone" position="-56    0 -58.4"></a-entity>
+                            <a-entity id="outer-ground-15" class="grass" mixin="ground-zone subzone" position="-67.2  0 -77.8"></a-entity>
+                            <a-entity id="outer-ground-16" class="grass" mixin="ground-zone subzone" position="-56    0 -97.3"></a-entity>
                         </a-entity>           
-                        <a-box id="waterfront-ground" class="surface" mixin="col-ground" position="24.74 0 12" geometry="height: 0.3; depth: 36; width: 3" rotation="0 -30 0" ></a-box>
+                        <a-box id="waterfront-ground" class="grass surface" mixin="col-ground" position="24.74 0 12" geometry="height: 0.3; depth: 36; width: 3" rotation="0 -30 0" ></a-box>
                     </a-entity>
 
                     <a-entity id="topSoil-group"  class="topography-group" position="0 2.25 0">
@@ -2300,7 +2805,6 @@
                         <a-sphere mixin="col-ground" position="15.18654 -6.51547 -2.25806" geometry="radius: 11.8; thetaLength: 90; segmentsHeight: 6; segmentsWidth: 12" rotation="-0.335 61.82 -5.650000000000001" material="flatShading: true" scale="1.37 0.84 1.36"></a-sphere>
                         <a-sphere mixin="col-ground" position="-7.55415 -4.77716 -6.3051" geometry="radius: 11.8; thetaLength: 90; segmentsWidth: 8" rotation="-0.335 61.82 -5.650000000000001" material="flatShading: true" scale="1.15 1 0.99"></a-sphere>
                         <a-sphere mixin="col-ground" position="-12.75381 -3.65 6.58266" geometry="radius: 11.8; thetaLength: 90; segmentsWidth: 12" rotation="-0.335 61.82 -5.650000000000001" material="flatShading: true" scale="1.08 0.64 1.17"></a-sphere>
-
                         <!-- <a-dodecahedron mixin="col-rocks"  position="-0.30 -3.65 13.0"  geometry="radius: 11.8"     rotation="-0.335 61.82 -5.65"></a-dodecahedron>
                         <a-icosahedron  mixin="col-rocks"  position="-6.46 0.03 14.9"   geometry="radius: 8.18"     rotation="0 0 -18.60"></a-icosahedron>
                         <a-dodecahedron mixin="col-rocks"  position="-11.9 -3.3 9.09"   geometry="radius: 11.59"    rotation="-10.60 27.56 40.85"></a-dodecahedron>
@@ -2619,7 +3123,6 @@
                 <a-entity id = "featuresByzone-group" visible="true">
                     <!--- CENTRAL ZONE -->
                     <a-entity id="central-zone" class="zone-group" position="0 3 0" visible="true">
-
                         <a-entity class="house-small" position="8 0 0" visible = "false">
                             <a-entity class="home-small" position="-0.5 0 0">
                                 <a-entity class="home-baseBuilding home-small" template="src:#tmp-house-small" data-basecol="palette-A-01" data-roofcol="palette-A-02" data-doorcol="palette-A-03" data-windowcol="palette-A-03"></a-entity>
@@ -3669,8 +4172,8 @@
                                             <a-box position="2.95 2 -0.35" scale="0.1 4 2.3" ></a-box>
                                             <a-box position="0 2 -1.4" scale="6 4 0.2" ></a-box>
                                             <a-entity position="3 0 1.5">
-                                                <a-box position="0.73238 1.9 0" scale="0.6 4.1 0.05" rotation="0 -90 0" ></a-box>
-                                                <a-box position="0.52297 1.9 -0.49854" scale="0.61 4.1 0.05" rotation="0 -45 0" ></a-box>
+                                                <a-box position="0.732 1.9 0" scale="0.6 4.1 0.05" rotation="0 -90 0" ></a-box>
+                                                <a-box position="0.523 1.9 -0.499" scale="0.61 4.1 0.05" rotation="0 -45 0" ></a-box>
                                                 <a-box position="0.1625 1.9 -0.71" scale="0.325 4.1 0.05" ></a-box>
                                             </a-entity>
                                         </a-entity>
@@ -4669,17 +5172,6 @@
                         <a-entity id="office-05" class="office-block five-level" position="7.5 0.3 -5.5" rotation="0 90 0"
                             template="src: #tmp-officeFiveLvl"  data-basecol="col-office-A-base"  data-trimcol="col-office-A-trim"  data-doorcol="col-office-A-door"  data-windowcol="col-office-A-window" data-equipcol="col-office-A-equip" >
                         </a-entity>
-                        <!-- <a-entity id="bar-city-01" gltf-model="models/builtEnv-bar-corner.glb" position="-13.3 0.6 -16.3" rotation="0 90 0" mixin="scale-0-008"></a-entity>
-                        <a-entity id="bar-city-02" gltf-model="models/builtEnv-bar-corner.glb" position="-13.3 0.6 -12.9" rotation="0 180 0" mixin="scale-0-008"></a-entity> -->
-                        <!--<a-entity id="cinema" gltf-model="models/builtEnv-cinema.glb" position="-12.62895 0 -12.86802" rotation="0 270 0" mixin="scale-0-333"></a-entity>
-
-                        <a-entity id="warehouse-01" gltf-model="models/builtEnv-factoryWithStacks.glb" position="-12.61189 0 17.83376" rotation="0 90 0"  scale="-0.003 0.003 0.003"></a-entity>
-                        <a-entity id="diner-city" gltf-model="models/builtEnv-diner.glb" position="19.94905 0 -7.39076" rotation="0 270 0" scale="0.5 0.5 0.5"></a-entity>
-                        <a-entity id="ferrisWheel" gltf-model="models/misc-ferrisWheel.glb" position="-22.33878 0 6.76616" mixin="scale-0-150"></a-entity> -->
-
-                        <!-- Infrastructure-->
-                        <!--<a-entity class="trafficLight" gltf-model="models/infrastructure-trafficLight.glb"  mixin="scale-0-001"></a-entity>
-                        <a-entity class="trafficLightOver" gltf-model="models/infrastructure-trafficLight-overhanging.glb"  mixin="scale-0-025"></a-entity> -->
 
                     </a-entity><!-- End of urban zone -->
 
@@ -6020,21 +6512,26 @@
                         <a-entity id="ag-produce-group" class="produce-group">
                             <a-entity id="ag-produce-group" class="cropping-group">
                                 <a-entity id="crops-farm-04">
-                                    <a-box class="field" mixin="col-field" height="0.1" width="7" depth="9" position="5.73 0 2.96" rotation="0 30 0"></a-box>	
-                                    <a-box class="field" mixin="col-field" height="0.1" width="7" depth="9" position="-2.39 0 -10.67" rotation="0 30 0"></a-box>	
-                                    <a-box class="field" mixin="col-field" height="0.1" width="7" depth="9" position="4.90 0 -14.94" rotation="0 30 0"></a-box>	
-
-                                    <a-entity id="wheatfields-01" position="5.40926 0 2.97425" scale="0.15 0.15 0.3" rotation="0 30 0" visible="false">
-                                        <!-- <a-entity class="wheat" gltf-model="models/ag-wheat-group.glb" position="0 0 -10"></a-entity>
-                                        <a-entity class="wheat" gltf-model="models/ag-wheat-group.glb" position="-13 0 -10"></a-entity>
-                                        <a-entity class="wheat" gltf-model="models/ag-wheat-group.glb" position="13 0 -10"></a-entity>
-                                        <a-entity class="wheat" gltf-model="models/ag-wheat-group.glb" ></a-entity>
-                                        <a-entity class="wheat" gltf-model="models/ag-wheat-group.glb" position="-13 0 0"></a-entity>
-                                        <a-entity class="wheat" gltf-model="models/ag-wheat-group.glb" position="13 0 0"></a-entity>
-                                        <a-entity class="wheat" gltf-model="models/ag-wheat-group.glb" position="0 0 10"></a-entity>
-                                        <a-entity class="wheat" gltf-model="models/ag-wheat-group.glb" position="-13 0 10"></a-entity>
-                                        <a-entity class="wheat" gltf-model="models/ag-wheat-group.glb" position="13 0 10"></a-entity> -->
-                                    </a-entity>                  
+                                    <a-box class="field" mixin="col-field" height="0.1" width="7" depth="9" position="5.25 0 3.0" rotation="0 30 0">
+                                        <a-entity class = "crop-group" rotation ="0 90 0" template="src:#tmp-field-corn"></a-entity>
+                                        <a-entity rotation ="0 90 0" template="src:#tmp-field-soil"></a-entity>
+                                    </a-box>	
+                                    <a-box class="field" mixin="col-field" height="0.1" width="7" depth="9" position="-2.5 0 -10.7" rotation="0 30 0">
+                                        <a-entity class = "crop-group" rotation ="0 90 0" template="src:#tmp-field-wheat"></a-entity>
+                                        <a-entity rotation ="0 90 0" template="src:#tmp-field-soil"></a-entity>
+                                    </a-box>	
+                                    <a-box class="field" mixin="col-field" height="0.1" width="7" depth="9" position="-7.5 0 -19.40" rotation="0 30 0">
+                                        <a-entity class = "crop-group" rotation ="0 90 0" template="src:#tmp-field-corn"></a-entity>
+                                        <a-entity rotation ="0 90 0" template="src:#tmp-field-soil"></a-entity>
+                                    </a-box>	
+                                    <a-box class="field" mixin="col-field" height="0.1" width="7" depth="9" position="-0.45 0 -23.5" rotation="0 30 0">
+                                        <a-entity class = "crop-group" rotation ="0 90 0" template="src:#tmp-field-generic"></a-entity>
+                                        <a-entity template="src:#tmp-field-soil"></a-entity>
+                                    </a-box>	
+                                    <a-box class="field" mixin="col-field" height="0.1" width="7" depth="9" position="4.60 0 -14.75" rotation="0 30 0">
+                                        <a-entity class = "crop-group" rotation ="0 90 0" template="src:#tmp-field-generic"></a-entity>
+                                        <a-entity template="src:#tmp-field-soil"></a-entity>
+                                    </a-box>	
                                 </a-entity>   
                             </a-entity>         
                         </a-entity>
@@ -6098,10 +6595,10 @@
                         <!-- Water treatment facility -->
                         <a-entity id="waterTreatment-group" position ="0 0 7" class="builtEnv-group utilities-group">
                             <a-entity id="filtration-ponds">
-                                <a-box class="water treatment" mixin="col-water-filtered-01" position="18 0.1 -7" geometry="width: 4; depth: 3; height: 0.2" ></a-box>
-                                <a-box class="water treatment" mixin="col-water-filtered-02"  position="18 0.1 -11" geometry="width: 4; depth: 3; height: 0.2" ></a-box>
-                                <a-box class="water treatment" mixin="col-water-filtered-03"  position="18 0.1 -15" geometry="width: 4; depth: 3; height: 0.2" ></a-box>
-                                <a-box class="water treatment" mixin="col-water-filtered-04" position="18 0.1 -19" geometry="width: 4; depth: 3; height: 0.2" ></a-box>
+                                <a-box class="water-treatment" mixin="col-water-filtered-04" position="18 0.1 -19" geometry="width: 4; depth: 3; height: 0.4" ></a-box>
+                                <a-box class="water-treatment" mixin="col-water-filtered-03"  position="18 0.1 -15" geometry="width: 4; depth: 3; height: 0.4" ></a-box>
+                                <a-box class="water-treatment" mixin="col-water-filtered-02"  position="18 0.1 -11" geometry="width: 4; depth: 3; height: 0.4" ></a-box>
+                                <a-box class="water-treatment" mixin="col-water-filtered-01" position="18 0.1 -7" geometry="width: 4; depth: 3; height: 0.4" ></a-box>
                                 <a-entity class = 'pondBanks' mixin="col-pondBank" buffer-geometry-merger>
                                     <a-box position="20 0.2 -7" scale="0.25 0.4 3.25" ></a-box>
                                     <a-box position="16 0.2 -7" scale="0.25 0.4 3.25" ></a-box>
