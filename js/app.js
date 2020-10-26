@@ -152,15 +152,16 @@ console.log('BUILDING APP...')
             timeOfDay:      () => settings.environment.timeOfDay[state.modelTime.season][state.modelTime.hour],
         },
         environment: {
-            name:           'dry',
+            name:           'default',
             nightLights:     false
         },
         hazard: {
             flood:          false,
-            wind:          false,
+            wind:           false,
             seaLevel:       0,
             drought:        false,
             lighting:       '',
+            treeSway:       ''
         },
         weather: {
             windSpeed:      10, 
