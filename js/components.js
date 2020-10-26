@@ -27,7 +27,10 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
                 sky:            document.getElementById('sky'),
                 sea:            document.getElementById('sea'),
                 oceanGroup:     document.getElementById('ocean-group'),
-                rain:           document.getElementById('rain')
+                rain:           document.getElementById('rain'),
+                lightningGroup: document.getElementById('lightning-group'),
+                grassGroup:     document.getElementById('ground-group'),
+                fire:           document.getElementById('fire-group')
             }
             // Camera elements
             sceneEls.cam = {
@@ -39,10 +42,10 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
                 vr:     document.getElementById('vrcam-rig')
             }
 
-            // Environment elements
+            // elements elements
             sceneEls.items = {
                 duckPath:            document.getElementById('duck-path-points'),
-                blockGroup:             document.getElementById('message-blocks-group')
+                blockGroup:          document.getElementById('message-blocks-group')
             }
 
             // Misc
@@ -74,6 +77,15 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
             sceneEls.lights.hemi.setAttribute('light', { 
                 intensity: settings.lights.hemi.intProp[state.modelTime.season][state.modelTime.hour] * settings.lights.hemi.maxIntensity
             })  
+            // Set solar farm axis
+            const solarFarmEls = document.getElementsByClassName('solarRotatable')
+            for(let i = 0; i < solarFarmEls.length; i++){
+                solarFarmEls[i].setAttribute('animation__rotate', {
+                    property:   'rotation',
+                    dur:        1000,
+                    to:         {x: settings.solarFarm.rotationByHour[state.modelTime.hour] , y: 0, z: 0}
+                })            
+            }
 
             // Set the environment
             externalEvents.changeEnvironment()
@@ -326,7 +338,7 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
         AFRAME.registerComponent('hazard-storm-flood', {
             schema: {   
                 dur:                    {type: 'number',   default: 1000 },  
-                floodLvl:               {type: 'number',   default: 0 },         
+                floodLvl:               {type: 'number',   default: 0.25 },         
                 centralFloodLvl:        {type: 'number',   default: 0 },         
                 urbanFloodLvl:          {type: 'number',   default: 0.5 },         
                 industrialFloodLvl:     {type: 'number',   default: 0 },         
@@ -348,23 +360,41 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
                     dur:        this.data.dur,
                     to:         {x: -140, y: 0, z: 0}
                 })
-                // Start rain particles after the clourdss
+                // Start rain particles after the clouds
                 setTimeout(() => {
                     sceneEls.enviro.rain.setAttribute('particle-system', {
                         enabled:             true,
                         scale:               '2 2 2',
                         preset:              'rain',
                         blending:            1,
-                        size:                2,
+                        size:                1.5,
                         'max-age':           6,
                         particleCount:       5000,
                         type:                3,
                         velocityValue:       '0 50 0',
                         color:               '#fff, #377b7b',
                         rotationAngle:       0,
-                        rotationAngleSpread: 0.5
+                        rotationAngleSpread: 0.5,
                     })
                 }, this.data.dur * 1.5)
+
+                // Lightning effects
+                const currentEnviro = settings.days.stormFlood[state.modelTime.timeOfDay()]
+                state.hazard.lightning = setInterval(strike, 5000 + Math.random()* 10000 );
+                function strike(){
+                    sceneEls.enviro.sky.setAttribute('material', { topColor:   '#fff' })
+                    sceneEls.enviro.lightningGroup.setAttribute('visible', 'true')
+                    setTimeout(() => {
+                       sceneEls.enviro.sky.setAttribute('material', {  topColor:  currentEnviro['sky-top']  })
+                       setTimeout(() => {
+                            sceneEls.enviro.sky.setAttribute('material', { topColor:   '#fff' })               
+                            setTimeout( ()=> {
+                                sceneEls.enviro.sky.setAttribute('material', {  topColor:  currentEnviro['sky-top']  })
+                                sceneEls.enviro.lightningGroup.setAttribute('visible', 'false')
+                            }, 50)
+                        }, 30);
+                    }, 30);
+                };
 
                 // Build up of puddles
                 const floodplains = document.getElementsByClassName('floodplain'),
@@ -405,7 +435,8 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
                 })
                 // Stop the rain
                 sceneEls.enviro.rain.removeAttribute('particle-system')
-
+                // Stop the lightning
+                clearInterval(state.hazard.lightning)
                 // Remove the puddles and reset the flood group height
                 const floodplains = document.getElementsByClassName('floodplain'),
                     floodGroup = document.getElementById('nuisance-flood-group')
@@ -425,9 +456,243 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
         })
 
 
+        AFRAME.registerComponent('hazard-storm-wind', {
+            schema: {   
+                dur:                    {type: 'number',   default: 1000 },  
+            },
+
+            init: function(){
+                externalEvents.changeEnvironment('stormFlood', this.data.dur)
+                // Move clouds in
+                document.getElementById('cloud-group-left').setAttribute('animation__pos', {
+                    property:   'position',
+                    dur:        this.data.dur,
+                    to:         {x: 100, y: 0, z: 0}
+                })
+                document.getElementById('cloud-group-right').setAttribute('animation__pos', {
+                    property:   'position',
+                    dur:        this.data.dur,
+                    to:         {x: -140, y: 0, z: 0}
+                })
+                // Start rain particles after the clouds
+                setTimeout(() => {
+                    sceneEls.enviro.rain.setAttribute('particle-system', {
+                        enabled:             true,
+                        scale:               '2 2 2',
+                        preset:              'dust',
+                        blending:            1,
+                        size:                3,
+                        'max-age':           6,
+                        particleCount:       10000,
+                        type:                3,
+                        velocityValue:       '5 40 0',
+                        velocitySpread:      '2 1 0.5',
+                        color:               '#fff, #377b7b',
+                        rotationAngle:       0,
+                        rotationAngleSpread: 0.5,
+                    })
+                }, this.data.dur * 1.5)
+
+                // Lightning effects
+                // const currentEnviro = settings.days.stormFlood[state.modelTime.timeOfDay()]
+                // state.hazard.lightning = setInterval(strike, 5000 + Math.random()* 10000 );
+                // function strike(){
+                //     sceneEls.enviro.sky.setAttribute('material', { topColor:   '#fff' })
+                //     sceneEls.enviro.lightningGroup.setAttribute('visible', 'true')
+                //     setTimeout(() => {
+                //        sceneEls.enviro.sky.setAttribute('material', {  topColor:  currentEnviro['sky-top']  })
+                //        setTimeout(() => {
+                //             sceneEls.enviro.sky.setAttribute('material', { topColor:   '#fff' })               
+                //             setTimeout( ()=> {
+                //                 sceneEls.enviro.sky.setAttribute('material', {  topColor:  currentEnviro['sky-top']  })
+                //                 sceneEls.enviro.lightningGroup.setAttribute('visible', 'false')
+                //             }, 50)
+                //         }, 30);
+                //     }, 30);
+                // };
+                // Sway trees
+                const treeEls = document.getElementsByClassName('tree')
+                state.hazard.treeSway = setInterval(() => {
+                    sway()
+                    setTimeout(returnTrees, 3000);
+                }, 4500);
+                function sway(){
+                    for(let i = 0; i < treeEls.length; i++){
+                        treeEls[i].setAttribute('animation__sway', {
+                            property:       'rotation',
+                            dur:            3000,
+                            to:             {x: (5 + Math.random()* 20), y: 0, z: (-5 + Math.random()* 20)},
+                        })
+                    }
+                }
+                function returnTrees(){
+                    for(let i = 0; i < treeEls.length; i++){
+                        treeEls[i].setAttribute('animation__sway', {
+                            property:       'rotation',
+                            dur:            1500,
+                            to:             {x: 0, y: 0, z: 0},
+                        })
+                    }
+                }
+
+            },
+
+            remove: function(){
+                // Move clouds out
+                document.getElementById('cloud-group-left').setAttribute('animation__pos', {
+                    property:   'position',
+                    dur:        this.data.dur,
+                    to:         {x: -200, y: 0, z: 0}
+                })
+                document.getElementById('cloud-group-right').setAttribute('animation__pos', {
+                    property:   'position',
+                    dur:        this.data.dur,
+                    to:         {x: 200, y: 0, z: 0}
+                })
+                // Stop the wind
+                sceneEls.enviro.rain.removeAttribute('particle-system')
+
+                // Stop the trees swaying
+                clearInterval(state.hazard.treeSway)
+                const treeEls = document.getElementsByClassName('tree')
+                for(let i = 0; i < treeEls.length; i++){
+                    treeEls[i].setAttribute('animation__sway', {
+                        property:       'rotation',
+                        dur:            1500,
+                        to:             {x: 0, y: 0, z: 0},
+                    })
+                    setTimeout(() => {
+                        treeEls[i].removeAttribute('animation__sway')
+                    }, 1500);
+                }
+            }
+        })
+
+
+
         AFRAME.registerComponent('hazard-drought', {
+            schema: {   
+                dur:                    {type: 'number',   default: 2000 },  
+            },
+            init: function(){
+                externalEvents.changeEnvironment('dry', this.data.dur)
+                // Change grass/ground conditions
+                const groundEls = document.getElementsByClassName('grass'),
+                    fieldEls = document.getElementsByClassName('field')
+                for (let i = 0; i < groundEls.length; i++){
+                    groundEls[i].setAttribute('animation__grassCol', {
+                        property:   'material.color',
+                        dur:        this.data.dur,
+                        to:         '#9ba550'
+                    })
+                }
+                for (let i = 0; i < fieldEls.length; i++){
+                    fieldEls[i].setAttribute('animation__col', {
+                        property:   'material.color',
+                        dur:        this.data.dur,
+                        to:         '#d9b759'
+                    })
+                }
+                // Change tree foliage
+                const foliageEls = document.getElementsByClassName('foliage')
+                for (let i = 0; i < foliageEls.length; i++){
+                    foliageEls[i].setAttribute('animation__foliageCol', {
+                        property:   'material.color',
+                        dur:        this.data.dur,
+                        to:         '#9a881c'
+                    })
+                }
+                // Lower the dam
+                document.getElementById('laked-dam').setAttribute('animation__damLevel', {
+                        property:   'geometry.height',
+                        dur:        this.data.dur,
+                        to:         2
+                })
+                // Lower the water treatment/supply
+                const ponds = document.getElementsByClassName('water-treatment')
+                for(let i = 0; i < ponds.length; i++){
+                    ponds[i].setAttribute('animation__height', {
+                        property:   'geometry.height',
+                        dur:        this.data.dur,
+                        to:         0.05
+                    })
+                }
+            },
+
+            remove: function(){
+                externalEvents.changeEnvironment(state.environment.name, this.data.dur)
+                // Change grass/ground conditions
+                const groundEls = document.getElementsByClassName('grass'),
+                    fieldEls = document.getElementsByClassName('field')
+                for (let i = 0; i < groundEls.length; i++){
+                    groundEls[i].setAttribute('animation__grassCol', {
+                        property:   'material.color',
+                        dur:        this.data.dur,
+                        to:         document.getElementById('ground-zone').getAttribute('material').color
+                    })
+                }
+                for (let i = 0; i < fieldEls.length; i++){
+                    fieldEls[i].setAttribute('animation__col', {
+                        property:   'material.color',
+                        dur:        this.data.dur,
+                        to:          document.getElementById('col-field').getAttribute('material').color
+                    })
+                }
+                // Change tree foliage
+                const foliageEls = document.getElementsByClassName('foliage')
+                for (let i = 0; i < foliageEls.length; i++){
+                    foliageEls[i].setAttribute('animation__foliageCol', {
+                        property:   'material.color',
+                        dur:        this.data.dur,
+                        to:         document.getElementById('col-treeTop').getAttribute('material').color
+                    })
+                }
+                // Raise the dam
+                document.getElementById('laked-dam').setAttribute('animation__damLevel', {
+                        property:   'geometry.height',
+                        dur:        this.data.dur,
+                        to:         6
+                })
+                // Lower the water treatment/supply
+                const ponds = document.getElementsByClassName('water-treatment')
+                for(let i = 0; i < ponds.length; i++){
+                    ponds[i].setAttribute('animation__height', {
+                        property:   'geometry.height',
+                        dur:        this.data.dur,
+                        to:         0.4
+                    })
+                }
+            }
 
         })
+
+
+        AFRAME.registerComponent('hazard-bushfire', {
+            schema: {   
+                dur:                    {type: 'number',   default: 2000 },  
+            },
+            init: function(){
+                setTimeout(()=> externalEvents.changeEnvironment('bushfire', this.data.dur), this.data.dur)
+                sceneEls.enviro.fire.setAttribute('visible', true) 
+                sceneEls.enviro.fire.setAttribute('animation__posiiton', {
+                    property:       'position',
+                    dur:            this.data.dur / 2,
+                    from:           {x:0 , y: -50, z: 0},  
+                    to:             {x:0 , y: 0, z: 0}
+                })
+            },
+            remove: function(){
+                externalEvents.changeEnvironment(state.environment.name, this.data.dur)
+                sceneEls.enviro.fire.setAttribute('animation__posiiton', {
+                    property:       'position',
+                    dur:            this.data.dur,
+                    to:             {x:0 , y: -50, z: 0},  
+                    from:           {x:0 , y: 0, z: 0}
+                })
+                setTimeout(() => sceneEls.enviro.fire.setAttribute('visible', false),  this.data.dur)
+            },
+        })
+
 
         AFRAME.registerComponent('hazard-dustStorm', {
 
@@ -504,7 +769,6 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
                                 }
                             break
 
-
                         case 'ShiftLeft':   
                             const environments = Object.keys(settings.days),
                                 currentIndex = environments.indexOf(state.environment.name),
@@ -551,15 +815,48 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
                             break
 
                         case 'Digit2':
-                            if(!state.hazard.storm) {
-                                state.hazard.storm = true
+                            if(!state.hazard.flood) {
+                                state.hazard.flood = true
                                 sceneEls.scene.setAttribute('hazard-storm-flood', null)
                             } else {
-                                state.hazard.storm = false
+                                state.hazard.flood = false
                                 sceneEls.scene.removeAttribute('hazard-storm-flood')
                                 externalEvents.changeEnvironment('default')
                             }
                             break
+
+                        case 'Digit3':
+                            if(!state.hazard.wind) {
+                                state.hazard.wind = true
+                                sceneEls.scene.setAttribute('hazard-storm-wind', null)
+                            } else {
+                                state.hazard.wind = false
+                                sceneEls.scene.removeAttribute('hazard-storm-wind')
+                                externalEvents.changeEnvironment('default')
+                            }
+                            break
+
+                        case 'Digit4':
+                            if(!state.hazard.drought) {
+                                state.hazard.drought = true
+                                sceneEls.scene.setAttribute('hazard-drought', null)
+                            } else {
+                                state.hazard.drought = false
+                                sceneEls.scene.removeAttribute('hazard-drought')
+                                externalEvents.changeEnvironment('default')
+                            }
+                            break
+                        case 'Digit5':
+                            if(!state.hazard.bushfire) {
+                                state.hazard.bushfire = true
+                                sceneEls.scene.setAttribute('hazard-bushfire', null)
+                            } else {
+                                state.hazard.bushfire = false
+                                sceneEls.scene.removeAttribute('hazard-bushfire')
+                                externalEvents.changeEnvironment('default')
+                            }
+                            break
+
                         case 'Equal':
                         case 'NumpadAdd':
                             state.hazard.seaLevel = state.hazard.seaLevel + 0.1 
@@ -575,7 +872,6 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
                             break
 
                         default:
-
                             clearTimeout(state.keydown)  
                             document.getElementById('shortcuts').classList.remove('visible')
                     }
@@ -659,7 +955,7 @@ const externalEvents = {
         }, duration)
     },
 
-    // Helper to attache new instance of look-controls after after animation
+    // Helper to attach new instance of look-controls after after animation
     resetLookControls: function() {
         sceneEls.cam.fly.removeAttribute('look-controls')
         sceneEls.cam.fly.setAttribute('look-controls', {})
@@ -708,6 +1004,15 @@ const externalEvents = {
             externalEvents.turnNightLightsOff()
         } else {
             externalEvents.turnNightLightsOn()
+        }
+        // Track the solar  
+        const solarFarmEls = document.getElementsByClassName('solarRotatable')
+        for(let i = 0; i < solarFarmEls.length; i++){
+            solarFarmEls[i].setAttribute('animation__rotate', {
+                property:   'rotation',
+                dur:        duration,
+                to:         {x: settings.solarFarm.rotationByHour[state.modelTime.hour] , y: 0, z: 0}
+            })            
         }
 
         // Control key events

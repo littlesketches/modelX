@@ -152,13 +152,15 @@ console.log('BUILDING APP...')
             timeOfDay:      () => settings.environment.timeOfDay[state.modelTime.season][state.modelTime.hour],
         },
         environment: {
-            name:           'grandBudapest',
+            name:           'dry',
             nightLights:     false
         },
         hazard: {
-            storm:          false,
+            flood:          false,
+            wind:          false,
             seaLevel:       0,
-            drought:        false
+            drought:        false,
+            lighting:       '',
         },
         weather: {
             windSpeed:      10, 
@@ -185,7 +187,8 @@ console.log('BUILDING APP...')
     }
 
     const sceneEls = {}
-        
+
+
     const view = {
         cam: {
             fly: [ // Clockwise from north-south
@@ -414,6 +417,7 @@ console.log('BUILDING APP...')
 
     }
 
+
     settings.days = {
         default: {
             morning: {          // 
@@ -493,6 +497,37 @@ console.log('BUILDING APP...')
                 hemilight: {
                     sky:        '#fff',
                     ground:     '#faf56b'
+                }
+            }, 
+            night: {
+                'sky-top':      '#012037', 
+                'sky-bottom':   '#004e75', 
+            }
+        },
+
+        dry: {
+            morning: {          // 
+                'sky-top':      '#f8f0e2', 
+                'sky-bottom':   '#fffab3', 
+                hemilight: {
+                    sky:        '#f6e3fa',
+                    ground:     '#454545'
+                }
+            }, 
+            day: {
+                'sky-top':      '#02d2ed', 
+                'sky-bottom':   '#a9f8f9', 
+                hemilight: {
+                    sky:        '#f6e3fa',
+                    ground:     '#454545'
+                }
+            }, 
+            evening: {
+                'sky-top':      '#3e0146', 
+                'sky-bottom':   '#fba46a', 
+                hemilight: {
+                    sky:        '#f6e3fa',
+                    ground:     '#454545'
                 }
             }, 
             night: {
@@ -702,3 +737,9 @@ console.log('BUILDING APP...')
         }
     }
 
+settings.solarFarm = {
+    rotationByHour: [   0, 0, 0, 0, 0, 0,        // MIDNIGHT TO 5AM
+                        -40, -32.5, -25, -17.5, -10 , -2.5,         // 6 AM TO MIDDAY
+                        2.5, 10 ,17.5, 25, 32.5, 40,        // MIDDAY TO 5PM
+                        40, 40, 40, 0, 0, 0],       // 6PM TO 11PM
+}
