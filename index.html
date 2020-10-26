@@ -1683,11 +1683,11 @@
                     </script>              
 
                     <script id="tmp-streetlight" type="text/html">
-                        <a-sphere class="glass" mixin="col-streetlight-light" rotation="" position="1 2.51 0" radius="0.075" scale="2 0.5 1" geometry="radius: 0.06" material=""></a-sphere>
+                        <a-sphere class="glass" mixin="col-streetlight-light"position="1 2.51 0" radius="0.075" scale="2 0.5 1" geometry="radius: 0.06"></a-sphere>
                         <a-entity class="streetling-base" mixin="col-streetlight-base" buffer-geometry-merger>
-                            <a-cone mixin="col-streetlight-base" position="0 0.15 0" rotation="0 90 0" geometry="height: 0.275; radiusTop: 0.04; radiusBottom: 0.075; segmentsRadial: 8" material=""></a-cone>
-                            <a-cone mixin="col-streetlight-base" position="1 2.53 0" rotation="" geometry="height: 0.11; radiusBottom: 0.1; segmentsRadial: 8; radiusTop: 0.08" material="" scale="1.3 0.25 0.7"></a-cone>
-                            <a-cylinder mixin="col-streetlight-base" position="0 1.25 0" rotation="0 90 0" geometry="height: 2.5; radius: 0.025; segmentsRadial: 8" material=""></a-cylinder>
+                            <a-cone mixin="col-streetlight-base" position="0 0.15 0" rotation="0 90 0" geometry="height: 0.275; radiusTop: 0.04; radiusBottom: 0.075; segmentsRadial: 8"></a-cone>
+                            <a-cone mixin="col-streetlight-base" position="1 2.53 0"geometry="height: 0.11; radiusBottom: 0.1; segmentsRadial: 8; radiusTop: 0.08" material="" scale="1.3 0.25 0.7"></a-cone>
+                            <a-cylinder mixin="col-streetlight-base" position="0 1.25 0" rotation="0 90 0" geometry="height: 2.5; radius: 0.025; segmentsRadial: 8"></a-cylinder>
                             <a-torus mixin="col-streetlight-base" position="1 2.225 0" rotation="0 180 0" geometry="segmentsRadial: 8; arc: 90; radiusTubular: 0.01" material="" scale="1 0.3 1"></a-torus>
                         </a-entity>     
                     </script>
@@ -2565,8 +2565,8 @@
                     </a-entity> 
                     <a-entity id='lightning-group' position = "-100 80 0"  look-at="#flycam" visible="false">
                         <a-entity class="bolt" position="">
-                            <a-cone mixin="col-lightning" position="0 40 0" rotation="20 90 0" geometry="height: 60; radiusTop: 12; radiusBottom: 8; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45" material=""></a-cone>
-                            <a-cone mixin="col-lightning" position="-8.59595 -18.15807 -0.16907" rotation="20 90 0" geometry="height: 80; radiusTop: 10; radiusBottom: 2; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45" material=""></a-cone>                  
+                            <a-cone mixin="col-lightning" position="0 40 0" rotation="20 90 0" geometry="height: 60; radiusTop: 12; radiusBottom: 8; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45"></a-cone>
+                            <a-cone mixin="col-lightning" position="-8.59595 -18.15807 -0.16907" rotation="20 90 0" geometry="height: 80; radiusTop: 10; radiusBottom: 2; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45"></a-cone>                  
                         </a-entity>
                     </a-entity>
                     <a-entity id="fire-group" position = "0 0 0 " visible="false">
@@ -2584,7 +2584,7 @@
                     <!-- Environment and topography-->
                     <a-entity id="mountains-group">
                         <a-entity id="alps" class="topography surface model" gltf-model="#mdl-alps" position="-40 1.16 47.33" rotation="0 138 0" scale="0.8 0.8 0.8" visibility = "false">
-                            <a-cone position="-7.8 41.5 -52" rotation="" geometry="radiusTop: 0.2; height: 3; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45" material="flatShading: true" scale="23.8 10 10.5"> </a-cone>
+                            <a-cone position="-7.8 41.5 -52"geometry="radiusTop: 0.2; height: 3; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45" material="flatShading: true" scale="23.8 10 10.5"> </a-cone>
                             <a-cone position="24.25 33.66 -56.3" rotation="0.0 -37.8 -118.6" geometry="radiusTop: 0.42; height: 2.51; radiusBottom: 0.86; segmentsHeight: 1; segmentsRadial: 6; thetaStart: 45" material="flatShading: true" scale="58.85224 8.56309 14.05652"> </a-cone>
                             <a-cone position="69.16 55.39 -53.29" rotation="0 -3 -10" geometry="radiusTop: 0.1; height: 3; radiusBottom: 0.47; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45" material="flatShading: true" scale="31.5 12.1 23.7"> </a-cone>
                             <a-cylinder material="color: #0b2400" scale="95 0.5 95" geometry="segmentsHeight: 1; segmentsRadial: 8; thetaLength: 180; thetaStart: 105" rotation="0 -15 0" position="22 0 -9.6"></a-cylinder>
@@ -2799,26 +2799,14 @@
                         <a-box  mixin="col-river" position="-43.87256 1.26095 54.47024" geometry="width: 3.4; depth: 3; height: 3" rotation="20 -60 0"></a-box>	                        
                     </a-entity> 
 
-                    <a-entity id="central-hill" position="0 3 0" scale="0.6 0.6 0.6" visible="false">
-                        <a-sphere mixin="col-ground" position="-5.32455 -6.64216 10.86345" geometry="radius: 11.8; thetaLength: 90; segmentsHeight: 6; segmentsWidth: 12" rotation="-0.335 61.82 -5.650000000000001" material="flatShading: true" scale="1.37 1.11 1.36"></a-sphere>
-                        <a-sphere mixin="col-ground" position="2.43222 -4.77716 10.13433" geometry="radius: 11.8; thetaLength: 90; segmentsWidth: 8" rotation="-0.335 61.82 -5.650000000000001" material="flatShading: true" scale="1.35 0.86 1.42"></a-sphere>
-                        <a-sphere mixin="col-ground" position="4.76453 -3.65 -8.61876" geometry="radius: 11.8; thetaLength: 90; segmentsWidth: 12" rotation="-0.335 61.82 -5.650000000000001" material="flatShading: true" scale="0.95 0.83 1.43"></a-sphere>
-                        <a-sphere mixin="col-ground" position="15.18654 -6.51547 -2.25806" geometry="radius: 11.8; thetaLength: 90; segmentsHeight: 6; segmentsWidth: 12" rotation="-0.335 61.82 -5.650000000000001" material="flatShading: true" scale="1.37 0.84 1.36"></a-sphere>
-                        <a-sphere mixin="col-ground" position="-7.55415 -4.77716 -6.3051" geometry="radius: 11.8; thetaLength: 90; segmentsWidth: 8" rotation="-0.335 61.82 -5.650000000000001" material="flatShading: true" scale="1.15 1 0.99"></a-sphere>
-                        <a-sphere mixin="col-ground" position="-12.75381 -3.65 6.58266" geometry="radius: 11.8; thetaLength: 90; segmentsWidth: 12" rotation="-0.335 61.82 -5.650000000000001" material="flatShading: true" scale="1.08 0.64 1.17"></a-sphere>
-                        <!-- <a-dodecahedron mixin="col-rocks"  position="-0.30 -3.65 13.0"  geometry="radius: 11.8"     rotation="-0.335 61.82 -5.65"></a-dodecahedron>
-                        <a-icosahedron  mixin="col-rocks"  position="-6.46 0.03 14.9"   geometry="radius: 8.18"     rotation="0 0 -18.60"></a-icosahedron>
-                        <a-dodecahedron mixin="col-rocks"  position="-11.9 -3.3 9.09"   geometry="radius: 11.59"    rotation="-10.60 27.56 40.85"></a-dodecahedron>
-                        <a-icosahedron  mixin="col-rocks"  position="-15.4 -3.78 3.20"  geometry="radius: 11.82"    rotation="2.90 -51.01 -27.20"></a-icosahedron>
-                        <a-dodecahedron mixin="col-rocks"  position="-13.7 -3.6 -4.74"  geometry="radius: 11.17"    rotation="-29.19 -24.06 -3.18"></a-dodecahedron>
-                        <a-icosahedron  mixin="col-rocks"  position="-10.6 0.99 -9.85"  geometry="radius: 7.34"     rotation="52.53 16.36 23.06"></a-icosahedron>
-                        <a-dodecahedron mixin="col-rocks"  position="-4.67 -3.5 -11.5"  geometry="radius: 11.08"    rotation="1.16 31.27 -1.01"></a-dodecahedron>
-                        <a-icosahedron  mixin="col-rocks"  position="1.4 2.3 -15.42"    geometry="radius: 6.35"     rotation="10.51 0 -9.3"></a-icosahedron>
-                        <a-dodecahedron mixin="col-rocks"  position="9.48 -3.18 -10.8"  geometry="radius: 10.77"    rotation="-12.27 -20.4 4.5"></a-dodecahedron>
-                        <a-icosahedron  mixin="col-rocks"  position="13.95 3.4 -5.5"    geometry="radius: 5.92"     rotation="-5.514 -5.9 -6.3"></a-icosahedron>
-                        <a-dodecahedron mixin="col-rocks"  position="12.01 -5.42 1.49"  geometry="radius: 12.94"    rotation="28.3 3.8 8.5"></a-dodecahedron>
-                        <a-icosahedron  mixin="col-rocks"  position="9.19 1.12 11.03"   geometry="radius: 7.72"     rotation="-45.1 -8.5 -0.88" ></a-icosahedron> -->
-                        <a-entity mixin="col-ground" position="0 5 0" geometry="primitive: cylinder; segmentsRadial: 6; height: 0.1; radius: 15" rotation="0 90 0" ></a-entity>
+                    <a-entity id="central-hill" position="0 3 0" >
+                        <a-entity mixin="col-ground" buffer-geometry-merger>
+                            <a-cylinder position="0 0.4 0" geometry="radius: 18; segmentsHeight: 0.8; segmentsRadial: 16"></a-cylinder>                
+                            <a-cylinder position="0 1.2 0" geometry="radius: 15; segmentsHeight: 0.8; segmentsRadial: 16"></a-cylinder>      
+                            <a-cylinder position="0 2.0 0" geometry="radius: 12; segmentsHeight: 0.8; segmentsRadial: 16"></a-cylinder>      
+                            <a-cylinder position="0 2.8 0" geometry="radius: 9; segmentsHeight: 0.8; segmentsRadial: 16"></a-cylinder>       
+                            <a-cylinder position="0 3.6 0" geometry="radius: 6; segmentsHeight: 0.8; segmentsRadial: 16"></a-cylinder>  
+                        </a-entity>
                     </a-entity>
                 </a-entity>
 
