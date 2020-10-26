@@ -1314,6 +1314,7 @@
                     <script id = "tmp-industrialBuilding" type="text/html">
                         <a-entity class="industrial-building" position="-1 0 1">
                             <a-entity  mixin="${basecol}" buffer-geometry-merger>
+                                <a-box position="-2 0.76 1.25" scale="1.5 1.52 1.5" ></a-box>
                                 <a-box position="0 0.76 0" scale="3 1.5 4" ></a-box>
                                 <a-triangle position="-1.49678 2.5 2" scale="3 2 4" geometry="vertexA: 0 -0.245 0; vertexB: 0 -0.5 0; vertexC: 1 -0.5 0" material="side: double"> </a-triangle>
                                 <a-triangle position="-1.49678 2.5 -2" scale="3 2 4" geometry="vertexA: 0 -0.245 0; vertexB: 0 -0.5 0; vertexC: 1 -0.5 0" material="side: double"> </a-triangle>
@@ -6432,8 +6433,6 @@
                             </a-entity>
                             <a-entity class="hydro-station" position="-2.55 0 22" rotation="0 90 0" >
                                 <a-box class="hydro-station-connector" mixin="col-hydro-base" position="-2.49 1.75 1" scale="0.02 0.5 4"></a-box>
-                                <a-box class="hydro-station-connector"  mixin="col-hydro-base"  position="-2 0.76 1.25" scale="1.5 1.52 1.5" ></a-box>
-
                                 <a-entity class="power-station" template="src:#tmp-industrialBuilding" 
                                     data-basecol="col-hydro-base" data-roofcol="col-hydro-roof" data-doorcol="col-hydro-door" data-windowcol="col-hydro-window">
                                 </a-entity>
@@ -6514,23 +6513,23 @@
                                 <a-entity id="crops-farm-04">
                                     <a-box class="field" mixin="col-field" height="0.1" width="7" depth="9" position="5.25 0 3.0" rotation="0 30 0">
                                         <a-entity class = "crop-group" rotation ="0 90 0" template="src:#tmp-field-corn"></a-entity>
-                                        <a-entity rotation ="0 90 0" template="src:#tmp-field-soil"></a-entity>
+                                        <a-entity rotation ="0 90 0" template="src:#tmp-field-soil" visible ="false"></a-entity>
                                     </a-box>	
                                     <a-box class="field" mixin="col-field" height="0.1" width="7" depth="9" position="-2.5 0 -10.7" rotation="0 30 0">
                                         <a-entity class = "crop-group" rotation ="0 90 0" template="src:#tmp-field-wheat"></a-entity>
-                                        <a-entity rotation ="0 90 0" template="src:#tmp-field-soil"></a-entity>
+                                        <a-entity rotation ="0 90 0" template="src:#tmp-field-soil"  visible ="false"></a-entity>
                                     </a-box>	
                                     <a-box class="field" mixin="col-field" height="0.1" width="7" depth="9" position="-7.5 0 -19.40" rotation="0 30 0">
                                         <a-entity class = "crop-group" rotation ="0 90 0" template="src:#tmp-field-corn"></a-entity>
-                                        <a-entity rotation ="0 90 0" template="src:#tmp-field-soil"></a-entity>
+                                        <a-entity rotation ="0 90 0" template="src:#tmp-field-soil"  visible ="false"></a-entity>
                                     </a-box>	
                                     <a-box class="field" mixin="col-field" height="0.1" width="7" depth="9" position="-0.45 0 -23.5" rotation="0 30 0">
                                         <a-entity class = "crop-group" rotation ="0 90 0" template="src:#tmp-field-generic"></a-entity>
-                                        <a-entity template="src:#tmp-field-soil"></a-entity>
+                                        <a-entity rotation ="0 90 0" template="src:#tmp-field-soil"></a-entity>
                                     </a-box>	
                                     <a-box class="field" mixin="col-field" height="0.1" width="7" depth="9" position="4.60 0 -14.75" rotation="0 30 0">
                                         <a-entity class = "crop-group" rotation ="0 90 0" template="src:#tmp-field-generic"></a-entity>
-                                        <a-entity template="src:#tmp-field-soil"></a-entity>
+                                        <a-entity rotation ="0 90 0"  template="src:#tmp-field-soil"></a-entity>
                                     </a-box>	
                                 </a-entity>   
                             </a-entity>         
