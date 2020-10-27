@@ -29,6 +29,8 @@
         <!-- <script src="https://github.com/ngokevin/aframe-physics-components/blob/master/dist/aframe-physics-components.min.js"></script>  -->
         <!-- <script src="https://unpkg.com/aframe-toggle-controls-component/dist/aframe-toggle-controls-component.min.js"></script>  -->
         <!-- <script src="https://unpkg.com/aframe-lines@^1.0.0/lines.js"></script> -->
+
+        <script src="https://unpkg.com/aframe-lensflare-component/dist/aframe-lensflare-component.min.js"></script>
     </head>
 
     <body>
@@ -36,14 +38,16 @@
                 setup add-external-listeners 
                 position-sun sail-duck
                 vr-mode-ui="enabled: false"
-                fog="type: linear"> <!-- animation-timeline__1="timeline: #ambientLight-cycle; loop: true; direction: alternate;">  -->
+                fog="type: linear"> 
+
             <!-- ASSETS: MIXINS, MODELS AND TEMPLATES-->
             <a-assets timeout="5000">
                 <!-- PALETTES AND MATERIALS -->
                 <a-entity id = "mixins">
+                    <!-- Hanging "mobile" annotation-->
                     <a-mixin id="mobile-string" material="color: $fff" geometry="radius: 0.25, segmentsHeight: 1, segmentsRadial: 3"></a-mixin>
                     <a-mixin id="mobile-bar"    material="color: $fff" geometry="radius: 1, segmentsHeight: 1, segmentsRadial: 3"></a-mixin>
-                    
+                    <!-- Built environment: residential -->                    
                     <a-mixin id="palette-A-01" 	    material = 'color: #FFA8CB'></a-mixin>
                     <a-mixin id="palette-A-02" 	    material = 'color: #784283'></a-mixin>
                     <a-mixin id="palette-A-03"	    material = 'color: #C7CEF6'></a-mixin>
@@ -59,30 +63,19 @@
                     <a-mixin id="col-railSleeper"   material='color: #443b35'></a-mixin>
 
                     <!-- Vegetation and Agricultural crops-->
+                    <a-mixin id="col-treeTop" 	    material='color: #42af20'></a-mixin>
+                    <a-mixin id="col-treeTrunk"     material='color: brown'></a-mixin>
+                    <a-mixin id="col-treeBottom"    material='color: green'></a-mixin>
+                    <a-mixin id="col-apple"         material='color: red'></a-mixin>
+                    <a-mixin id="col-orange"        material='color: orange'></a-mixin>
+                    <a-mixin id="col-lemon"         material='color: yellow'></a-mixin>
                     <a-mixin id ="col-stem-corn"    material="color: #93ec6a; flatShading: true"></a-mixin>
                     <a-mixin id ="col-crop-corn"    material="color: #d4d416; flatShading: true"></a-mixin>
                     <a-mixin id ="col-stem-wheat"   material="color: #cacd4c; flatShading: true"></a-mixin>
                     <a-mixin id ="col-crop-wheat"   material="color: #d4d416; flatShading: true"></a-mixin>
                     <a-mixin id ="col-crop-generic" material="color: green; flatShading: true"></a-mixin>
-                    <a-mixin id="col-treeTop" 	    material='color: #42af20'></a-mixin>
-                    <a-mixin id="col-treeBottom"    material='color: green'></a-mixin>
-                    <a-mixin id="col-treeTrunk"     material='color: brown'></a-mixin>
-                    <a-mixin id="col-apple"         material='color: red'></a-mixin>
-                    <a-mixin id="col-orange"        material='color: orange'></a-mixin>
 
-                    <!-- Built environment-->
-                    <a-mixin id="col-hospital-base"     material='color: #fff'></a-mixin>
-                    <a-mixin id="col-hospital-trim"     material='color: #c8a2c8'></a-mixin>
-                    <a-mixin id="col-hospital-door"     material='color: aqua'></a-mixin>
-                    <a-mixin id="col-hospital-window"   material='color: aqua'></a-mixin>
-                    <a-mixin id="col-hospital-cross"    material='color: #ff007f'></a-mixin>
-                    <a-mixin id="col-hospital-equip"    material='color: #ff007f'></a-mixin>
-
-                    <a-mixin id="col-station-base"      material='color: gray'></a-mixin>
-                    <a-mixin id="col-station-trim"      material='color: #fff'></a-mixin>
-                    <a-mixin id="col-station-platform"  material='color: gray'></a-mixin>
-                    <a-mixin id="col-station-roof"      material='color: gray'></a-mixin>
-
+                    <!-- Built environment: urban  buildings-->
                     <a-mixin id="col-townhouse-A-brick"         material='color: #C8694F'></a-mixin>
                     <a-mixin id="col-townhouse-A-brickLower"    material='color: gray'></a-mixin>
                     <a-mixin id="col-townhouse-A-trim"          material='color: #DDB784'></a-mixin>
@@ -91,44 +84,6 @@
                     <a-mixin id="col-townhouse-A-windowFrame"   material='color: #000'></a-mixin>
                     <a-mixin id="col-townhouse-A-roof"          material='color: #4E3E23;'></a-mixin>
                     <a-mixin id="col-townhouse-A-door"          material='color: #b11226;'></a-mixin>
-
-                    <a-mixin id="col-waterTank"         material='color: #848789; metalness:0.5'></a-mixin>
-                    <a-mixin id="col-windTurbine"       material='color: #fff; metalness: 0.2'></a-mixin>
-                    <a-mixin id="col-solarFrame"        material='color: gray; metalness:0.2'></a-mixin>
-                    <a-mixin id="col-solarPV-01"        material='color: #2b2d2f'></a-mixin>
-                    <a-mixin id="col-solarPV-02"        material='color: #a9a9a9'></a-mixin>
-                    <a-mixin id="col-damWall"           material="color: gray"></a-mixin>
-
-                    <a-mixin id="col-battery-base"      material='color: #fff'></a-mixin>
-                    <a-mixin id="col-battery-trim"      material='color: gray'></a-mixin>
-
-                    <a-mixin id="col-powerStn-cooling"  material="color: #e8e4c9"></a-mixin>
-                    <a-mixin id="col-powerStn-top"      material="color: #525a60"></a-mixin>
-                    <a-mixin id="col-powerStn-trim"     material="color: red"></a-mixin>
-
-                    <a-mixin id="col-hydro-base"        material="color: gray"></a-mixin>
-                    <a-mixin id="col-hydro-window"      material="color: #fff"></a-mixin>
-                    <a-mixin id="col-hydro-roof"        material="color: #fff"></a-mixin>
-                    <a-mixin id="col-hydro-door"        material="color: gray"></a-mixin>
-                    <a-mixin id="col-hydro-equip"       material="color: #fff"></a-mixin>
-
-                    <a-mixin id="col-powerStn-base"     material="color: gray"></a-mixin>
-                    <a-mixin id="col-powerStn-window"   material="color: #fff"></a-mixin>
-                    <a-mixin id="col-powerStn-roof"     material="color: #fff"></a-mixin>
-                    <a-mixin id="col-powerStn-door"     material="color: gray"></a-mixin>
-                    <a-mixin id="col-powerStn-equip"    material="color: #fff"></a-mixin>
-
-                    <a-mixin id="col-wasteToEnergy-base"   material="color: gray"></a-mixin>
-                    <a-mixin id="col-wasteToEnergy-window" material="color: #fff"></a-mixin>
-                    <a-mixin id="col-wasteToEnergy-roof"   material="color: #fff"></a-mixin>
-                    <a-mixin id="col-wasteToEnergy-door"   material="color: gray"></a-mixin>
-                    <a-mixin id="col-wasteToEnergy-equip"  material="color: #fff"></a-mixin>
-
-                    <a-mixin id="col-recycling-base"       material="color: yellow"></a-mixin>
-                    <a-mixin id="col-recycling-window"     material="color: #fff"></a-mixin>
-                    <a-mixin id="col-recycling-roof"       material="color: green"></a-mixin>
-                    <a-mixin id="col-recycling-door"       material="color: green"></a-mixin>
-                    <a-mixin id="col-recycling-equip"      material="color: #fff"></a-mixin>
 
                     <a-mixin id="col-office-A-base"         material='color: #F0EAD6'></a-mixin>
                     <a-mixin id="col-office-A-trim"         material='color: #0c0f12'></a-mixin>
@@ -158,6 +113,43 @@
                     <a-mixin id="col-hotel-window"          material='color: aqua'></a-mixin>
                     <a-mixin id="col-hotel-equip"           material='color: #FFA8CB'></a-mixin>
 
+                    <!-- Built environment: Industrial buildings-->
+                    <a-mixin id="col-warehouse-A-base"      material='color: #F0EAD6'></a-mixin>
+                    <a-mixin id="col-warehouse-A-trim"      material='color: #0c0f12'></a-mixin>
+                    <a-mixin id="col-warehouse-A-door"      material='color: gray'></a-mixin>
+                    <a-mixin id="col-warehouse-A-rollerDoor"material='color: gray'></a-mixin>
+                    <a-mixin id="col-warehouse-A-window"    material='color: aqua'></a-mixin>
+                    <a-mixin id="col-warehouse-A-roof"      material='color: #FFA8CB'></a-mixin>
+
+                    <a-mixin id="col-hydro-base"        material="color: gray"></a-mixin>
+                    <a-mixin id="col-hydro-window"      material="color: #fff"></a-mixin>
+                    <a-mixin id="col-hydro-roof"        material="color: #fff"></a-mixin>
+                    <a-mixin id="col-hydro-door"        material="color: gray"></a-mixin>
+                    <a-mixin id="col-hydro-equip"       material="color: #fff"></a-mixin>
+
+                    <a-mixin id="col-powerStn-base"     material="color: gray"></a-mixin>
+                    <a-mixin id="col-powerStn-window"   material="color: #fff"></a-mixin>
+                    <a-mixin id="col-powerStn-roof"     material="color: #fff"></a-mixin>
+                    <a-mixin id="col-powerStn-door"     material="color: gray"></a-mixin>
+                    <a-mixin id="col-powerStn-equip"    material="color: #fff"></a-mixin>
+
+                    <a-mixin id="col-wasteToEnergy-base"   material="color: gray"></a-mixin>
+                    <a-mixin id="col-wasteToEnergy-window" material="color: #fff"></a-mixin>
+                    <a-mixin id="col-wasteToEnergy-roof"   material="color: #fff"></a-mixin>
+                    <a-mixin id="col-wasteToEnergy-door"   material="color: gray"></a-mixin>
+                    <a-mixin id="col-wasteToEnergy-equip"  material="color: #fff"></a-mixin>
+
+                    <a-mixin id="col-recycling-base"       material="color: yellow"></a-mixin>
+                    <a-mixin id="col-recycling-window"     material="color: #fff"></a-mixin>
+                    <a-mixin id="col-recycling-roof"       material="color: green"></a-mixin>
+                    <a-mixin id="col-recycling-door"       material="color: green"></a-mixin>
+                    <a-mixin id="col-recycling-equip"      material="color: #fff"></a-mixin>
+
+                    <a-mixin id="col-powerStn-cooling"  material="color: #e8e4c9"></a-mixin>
+                    <a-mixin id="col-powerStn-top"      material="color: #525a60"></a-mixin>
+                    <a-mixin id="col-powerStn-trim"     material="color: red"></a-mixin>
+
+                    <!-- Built environment: Agricultural buildings-->
                     <a-mixin id="col-barn-A-base"           material='color: #e75480'></a-mixin>
                     <a-mixin id="col-barn-A-trim"           material='color: #fff'></a-mixin>
                     <a-mixin id="col-barn-A-roof"           material='color: #4f4f4f'></a-mixin>
@@ -170,17 +162,35 @@
                     <a-mixin id="col-silo-A-trim"           material='color: #fff'></a-mixin>
                     <a-mixin id="col-silo-A-roof"           material='color: #4f4f4f'></a-mixin>
 
-                    <a-mixin id="col-warehouse-A-base"      material='color: #F0EAD6'></a-mixin>
-                    <a-mixin id="col-warehouse-A-trim"      material='color: #0c0f12'></a-mixin>
-                    <a-mixin id="col-warehouse-A-door"      material='color: gray'></a-mixin>
-                    <a-mixin id="col-warehouse-A-rollerDoor"material='color: gray'></a-mixin>
-                    <a-mixin id="col-warehouse-A-window"    material='color: aqua'></a-mixin>
-                    <a-mixin id="col-warehouse-A-roof"      material='color: #FFA8CB'></a-mixin>
+                    <!-- Built environment: Other buildings-->
+                    <a-mixin id="col-hospital-base"     material='color: #fff'></a-mixin>
+                    <a-mixin id="col-hospital-trim"     material='color: #c8a2c8'></a-mixin>
+                    <a-mixin id="col-hospital-door"     material='color: aqua'></a-mixin>
+                    <a-mixin id="col-hospital-window"   material='color: aqua'></a-mixin>
+                    <a-mixin id="col-hospital-cross"    material='color: #ff007f'></a-mixin>
+                    <a-mixin id="col-hospital-equip"    material='color: #ff007f'></a-mixin>
 
                     <a-mixin id="col-airport-base"          material='color: #F0EAD6'></a-mixin>
                     <a-mixin id="col-airport-trim"          material='color: #FFA8CB'></a-mixin>
                     <a-mixin id="col-airport-window"        material='color: aqua'></a-mixin>
+
+                    <a-mixin id="col-station-base"      material='color: gray'></a-mixin>
+                    <a-mixin id="col-station-trim"      material='color: #fff'></a-mixin>
+                    <a-mixin id="col-station-platform"  material='color: gray'></a-mixin>
+                    <a-mixin id="col-station-roof"      material='color: gray'></a-mixin>
+
                     <a-mixin id = "col-lighthouse-lamp"     material="color: #fff; emissive: #fff"></a-mixin>
+
+                    <!-- Built environment: infrastructure -->
+                    <a-mixin id="col-waterTank"         material='color: #848789; metalness:0.5'></a-mixin>
+                    <a-mixin id="col-windTurbine"       material='color: #fff; metalness: 0.2'></a-mixin>
+                    <a-mixin id="col-solarFrame"        material='color: gray; metalness:0.2'></a-mixin>
+                    <a-mixin id="col-solarPV-01"        material='color: #2b2d2f'></a-mixin>
+                    <a-mixin id="col-solarPV-02"        material='color: #a9a9a9'></a-mixin>
+                    <a-mixin id="col-damWall"           material="color: gray"></a-mixin>
+
+                    <a-mixin id="col-battery-base"      material='color: #fff'></a-mixin>
+                    <a-mixin id="col-battery-trim"      material='color: gray'></a-mixin>
                     
                     <!-- Street furniture-->
                         <a-mixin id="col-streetSign-pole"       material='color: gray'></a-mixin>
@@ -1617,7 +1627,7 @@
                             <a-entity class = "foliage" mixin="col-treeTop" buffer-geometry-merger>
                                 <a-dodecahedron position="-0.3 1.25 0" radius="0.65" ></a-dodecahedron>
                                 <a-dodecahedron position="0 1.85 0" radius="0.5"></a-dodecahedron>   
-                                <a-dodecahedron position="0.3 1.25 0" mixin="col-treeBottom" radius="0.75"></a-dodecahedron>
+                                <a-dodecahedron position="0.3 1.25 0" radius="0.75"></a-dodecahedron>
                             </a-entity>                        
                             <a-entity mixin="col-apple" buffer-geometry-merger>
                                 <a-entity position="-0.3 1.25 0">
@@ -2472,14 +2482,11 @@
             <a-entity id='lighting-group'>
                 <a-entity id="ambient-hemiLight" class="light" position="0 0 0" 
                     light="type: hemisphere; color: #f6e3fa; intensity: 0; groundColor: #454545"   ></a-entity>
-
                 <a-entity id="ambient-light" class="light"  position="-0.11 1 0.33" 
                     light="type: ambient; intensity: 0; shadowCameraLeft: -10; shadowCameraBottom: -10; shadowCameraRight: 10; shadowCameraTop: 10"
                     animation__sunrise = "property: light.intensity; from: 0; to: 1.2; dur: 30000; autoplay: false"></a-entity>
-
                 <a-entity id="lighthouse-light" class="light" position="30 9.7 49.5" 
                     light="angle: 30; intensity: 0; penumbra: 1; type: spot" rotation="-10 -50 0"></a-entity>
-
                 <a-entity id="sun-light" class="light"  position="-20 30 0" light="type: directional; intensity: 0.5; color: #DDD"></a-entity>
                 <a-entity id='spotlight-group'>
                     <a-entity id="spotlight-above" 	 class="light"  position="0 10 0" 	light="type: spot; intensity: 0; angle: 180; color: #fff700; distance: 20"></a-entity>
@@ -2577,7 +2584,7 @@
 
                     <!-- PARTICLE SYSTEM-->
                     <a-entity id="rain" position="0 30 0" scale="1 1 1.5"></a-entity>
-                </a-entity>
+                </a-entity><!-- End of world environment elements -->
                     
                 <!--- WORLD TOPOGRAPHY -->
                 <a-entity id="topography-group">
@@ -2792,11 +2799,13 @@
 
                     <a-entity id="laked-dam" class="surface" mixin="lake-zone" position="-52.2 2 65.2"></a-entity>
 
-                    <a-entity id="river" position="0 1.5 0" mixin="col-river" >
-                        <a-box  mixin="col-river" position="-23.23772 0 66.47795" geometry="width: 3; depth: 30.98; height: 3" rotation="0 30 0"></a-box>
-                        <a-box  mixin="col-river" position="-39.65996 0 53.75406" geometry="width: 3; depth: 20; height: 3" rotation="0 90 0"></a-box>
-                        <a-box  mixin="col-river" position="-0.48342 -0.49407 79.17602" geometry="width: 3; depth: 32.69; height: 3" rotation="2 90 0"></a-box>
-                        <a-box  mixin="col-river" position="-43.87256 1.26095 54.47024" geometry="width: 3.4; depth: 3; height: 3" rotation="20 -60 0"></a-box>	                        
+                    <a-entity id="river" position="0 1.5 0">
+                        <a-entity mixin="col-river"  buffer-geometry-merger>
+                            <a-box position="-23.24 0 66.48" geometry="width: 3; depth: 30.98; height: 3" rotation="0 30 0"></a-box>
+                            <a-box position="-39.66 0 53.75" geometry="width: 3; depth: 20; height: 3" rotation="0 90 0"></a-box>
+                            <a-box position="-0.48 -0.49 79.18" geometry="width: 3; depth: 32.69; height: 3" rotation="2 90 0"></a-box>
+                            <a-box position="-43.87 1.26 54.47" geometry="width: 3.4; depth: 3; height: 3" rotation="20 -60 0"></a-box>	                        
+                        </a-entity>
                     </a-entity> 
 
                     <a-entity id="central-hill" position="0 3 0" >
@@ -2808,7 +2817,7 @@
                             <a-cylinder position="0 3.6 0" geometry="radius: 6; segmentsHeight: 0.8; segmentsRadial: 16"></a-cylinder>  
                         </a-entity>
                     </a-entity>
-                </a-entity>
+                </a-entity><!-- End of topography elements -->
 
                 <!--- SHARED ELEMENTS -->
                 <a-entity id="shared-features-group" visible="true">
@@ -3123,7 +3132,6 @@
                                 </a-entity>
                             </a-entity>
                         </a-entity>
-
                         <!-- <a-entity id="bar-city-01" gltf-model="models/builtEnv-bar-corner.glb" position="-11.30708 0.6 -19.68846" rotation="0 90 0" scale = "0.008 0.008 0.008"></a-entity> -->
                     </a-entity><!-- End of central zone -->
 
@@ -6653,7 +6661,7 @@
                         <!-- Roads-->
                         <a-entity id="outer-roads" class="roads-group">
                             <a-entity class="tarmac" mixin="col-road" >  
-                                <a-torus class="road" position="5.47301 0 13.26408" geometry="radius: 13; radiusTubular: 0.74; segmentsRadial: 16; segmentsTubular: 27; arc: 90" rotation="90 -59.99999999999999 0" scale="1 1 0.05" mixin="col-road" ></a-torus>
+                                <a-torus class="road" position="5.47301 0 13.26408" geometry="radius: 13; radiusTubular: 0.74; segmentsRadial: 16; segmentsTubular: 27; arc: 90" rotation="90 -60 0" scale="1 1 0.05" mixin="col-road" ></a-torus>
                                 <a-torus class="road" position="-6.31015 0 15.8479" geometry="radius: 13; radiusTubular: 0.74; segmentsRadial: 16; segmentsTubular: 27; arc: 60" rotation="90 90 0" scale="1 1 0.05" mixin="col-road" ></a-torus>
                                 <a-box class="road" mixin="road" position="9.791 0 17.778" geometry="depth: 20" rotation="0 30 0" ></a-box>
                                 <a-box class="road" mixin="road" position="-10.743 0 11.102" rotation="0 30 0" geometry="depth: 20" ></a-box>
@@ -6661,7 +6669,7 @@
                                 <a-box class="road" mixin="road" position="-16.994 0 2.873" rotation="0 90 0" geometry="depth: 21.5" ></a-box>
                             </a-entity>
                             <a-entity class="road-lines" mixin="col-line" >
-                                <a-torus class="road-line" position="5.47708 0.1 13.38354" geometry="radius: 13; radiusTubular: 0.05; segmentsRadial: 16; segmentsTubular: 27; arc: 90" rotation="90 -59.99999999999999 0" scale="1 1 0.05" ></a-torus>
+                                <a-torus class="road-line" position="5.47708 0.1 13.38354" geometry="radius: 13; radiusTubular: 0.05; segmentsRadial: 16; segmentsTubular: 27; arc: 90" rotation="90 -60 0" scale="1 1 0.05" ></a-torus>
                                 <a-torus class="road-line" position="-6.31015 0.1 15.8479" geometry="radius: 13; radiusTubular: 0.05; segmentsRadial: 16; segmentsTubular: 27; arc: 60" rotation="90 90 0" scale="1 1 0.05" ></a-torus>
                                 <a-box class="road-line" mixin="road-line" position="9.791 0 17.778" geometry="depth: 20" rotation="0 30 0" ></a-box>
                                 <a-box class="road-line" mixin="road-stopline" position="7.28898 0 10.18075" rotation="0 -60 0" ></a-box>
@@ -6679,6 +6687,7 @@
                                     data-basecol="col-powerStn-base" data-roofcol="col-powerStn-roof" data-doorcol="col-powerStn-door" data-windowcol="col-powerStn-window">
                                 </a-entity>
                                 <a-entity class="cooling-tower" position="-7.33 0 -4.28">
+                                    <a-sphere class="smoke emissions" position="0 11 0" material="shader: displacement; blending: additive" scale="20 20 20" radius="40" segments-height="128" segments-width="128" geometry="radius: 0.2; segmentsHeight: 64; segmentsWidth: 64"></a-sphere>                                    
                                     <a-entity class="energy fossil" mixin="col-powerStn-cooling" buffer-geometry-merger>
                                         <a-cone position="0 1 0" geometry="height: 2; radiusBottom: 6; radiusTop: 5.2"></a-cone>
                                         <a-cone position="0 3 0" geometry="height: 2; radiusBottom: 5.2; radiusTop: 4.7"></a-cone>
@@ -6689,6 +6698,7 @@
                                     <a-cylinder mixin="col-powerStn-top" position="0 10 0" geometry="height: 0.1; radius: 4"></a-cylinder>
                                 </a-entity>
                                 <a-entity class="cooling-tower" position="4.01 0 1.92">
+                                    <a-sphere class="smoke emissions" position="0 11 0" material="shader: displacement; blending: additive" scale="20 20 20" radius="40" segments-height="128" segments-width="128" geometry="radius: 0.2; segmentsHeight: 64; segmentsWidth: 64"></a-sphere>                                    
                                     <a-entity class="energy fossil" mixin="col-powerStn-cooling" buffer-geometry-merger>
                                         <a-cone position="0 1 0" geometry="height: 2; radiusBottom: 6; radiusTop: 5.2"></a-cone>
                                         <a-cone position="0 3 0" geometry="height: 2; radiusBottom: 5.2; radiusTop: 4.7"></a-cone>
@@ -6700,6 +6710,7 @@
                                 </a-entity>
                             </a-entity>
                         </a-entity>
+
 
                         <!-- Landfill facility -->
                         <a-entity id="waste-landfill" class="services-group">
