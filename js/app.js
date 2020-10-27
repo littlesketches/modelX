@@ -1,8 +1,17 @@
+/**************************************************************************/
+/**************************************************************************/
+/****              Project: Kingdom of Dreams and Madness              ****/
+/****                                                                  ****/
+/****  An exploration of building 'dynamic models' in a humane form     ****/
+/****  By Little Sketches | Version 0.01 | Copyright applies until a    ****/
+/****  a completed protoype is released  under a Creative Commons       ****/
+/***   4.0 license                                                      ****/
+/**************************************************************************/
+/****  This app.js file is used to develop configuration logic and     ****/
+/****  features outside of the A-Frame canvas, which has script logic  ****/
+/****  written as as cusotm A-Frame components (see comopnent.js)      ****/
+/**************************************************************************/
 
-/***********************************/
-/****
-/****
-/***********************************/
 
 console.log('BUILDING APP...')
 
@@ -147,7 +156,7 @@ console.log('BUILDING APP...')
         timeLoaded:         new Date(),
         time:               {},
         modelTime:          {
-            hour:           11,
+            hour:           8,
             season:        'spring',
             timeOfDay:      () => settings.environment.timeOfDay[state.modelTime.season][state.modelTime.hour],
         },
