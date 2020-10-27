@@ -169,6 +169,7 @@ console.log('BUILDING APP...')
             wind:           false,
             seaLevel:       0,
             drought:        false,
+            oceanAcidification: false,
             lighting:       '',
             treeSway:       ''
         },
