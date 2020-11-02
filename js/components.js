@@ -174,6 +174,9 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
                 loop:           true, 
                 rotate:         true
             })
+        },
+        remove: function(){
+            document.getElementById("rubberDuck").removeAttribute('alongpath')
         }
     })
 
@@ -1421,14 +1424,14 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
                 setTimeout(() => {shakeOut(this.data.intensity)}, 200 )
                 setTimeout(() => {shakeOut(this.data.intensity)}, 300 )
                 setTimeout(() => {shakeOut(this.data.intensity)}, 400 )
-                setTimeout(() => {shakeReturn(this.data.intensity)}, 500 )
+                setTimeout(() => {shakeOut(this.data.intensity)}, 500 )
+                setTimeout(() => {shakeOut(this.data.intensity)}, 600 )
+                setTimeout(() => {shakeReturn(this.data.intensity)}, 700 )
                 setTimeout(() => {
                     state.visual.hazard.earthquake = null
                     sceneEls.scene.removeAttribute('hazard-earthquake')
                     sceneEls.zones.planet.removeAttribute('animation__pos')
-                    sceneEls.zones.planet.removeAttribute('animation__pos')
-                    document.getElementById('rubberDuck').setAttribute('rotation', {x:0, y: 180, z: 0})
-                }, 1100 )
+                }, 1200 )
 
                 function shakeOut(intensity){
                     const toObj = {
@@ -1446,15 +1449,11 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
                 function shakeReturn(intensity){
                     sceneEls.zones.planet.setAttribute('animation__pos', {
                         property:       'position',
-                        to:             { x: 0, y: 0,   z: 0},
+                        to:             { x: 0, y: -3,   z: 0},
                         dur:            500
                     })
                 }
             },
-
-            remove: function(){
-
-            }
         })
 
 
