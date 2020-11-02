@@ -39,7 +39,8 @@
                 setup add-external-listeners 
                 position-sun sail-duck
                 vr-mode-ui="enabled: false"
-                fog="type: linear"> 
+                fog="type: linear"
+            > 
 
             <!-- ASSETS: MIXINS, MODELS AND TEMPLATES-->
             <a-assets timeout="5000">
@@ -184,6 +185,7 @@
                         <a-mixin id="col-fountain"              material='color: #f5f5dc'></a-mixin>
                         <a-mixin id="col-fountain-water"        material='color: aqua; opacity: 0.9'></a-mixin>
                     <!-- Topography -->
+                        <a-mixin id="col-snow" 	                material='color: #fff'></a-mixin>
                         <a-mixin id="col-ground" 	            material='color: #658C52'></a-mixin>
                         <a-mixin id="col-topSoil" 	            material='color: #A6734D'></a-mixin>
                         <a-mixin id="col-subSoil" 	            material='color: #6F3C18'></a-mixin>
@@ -198,6 +200,7 @@
                         <a-mixin id="col-lightning" 		    material='color: yellow; emissive: yellow'></a-mixin>
                         <a-mixin id="col-snow" 		            material ="color: #fff; flatShading: true" ></a-mixin>
                         <a-mixin id="col-mountain" 		        material ="color: #949494; flatShading: true" ></a-mixin>
+                        <a-mixin id="col-vortex" 		        material ="color: #fff; opacity: 0.6" ></a-mixin>
                     <!-- Surface features -->
                         <a-mixin id="col-field" 	            material='color: #989a51'></a-mixin>
                         <a-mixin id="col-pavement" 	            material='color: gray'></a-mixin>
@@ -277,6 +280,7 @@
                         <a-mixin id="road-stopline" material="color: #fff; flatShading: true"     geometry= "width: 1.5; height: 0.21; depth:  0.3 "></a-mixin>
                         <a-mixin id="dirtRoad" 		material="color: #A6734D; flatShading: true"  geometry= "width: 2; height: 0.1"></a-mixin>
                     <!--Materials: topography-->
+                        <a-mixin id="snow-zone"     material='color: #FFF' geometry="primitive: cylinder; segmentsRadial: 6; height: 0.8; radius: 30" rotation="0 90 0"></a-mixin>
                         <a-mixin id="ground-zone"   material='color: #658C52' geometry="primitive: cylinder; segmentsRadial: 6; height: 0.3; radius: 30" rotation="0 90 0"></a-mixin>
                         <a-mixin id="topSoil-zone"  material='color: #A6734D' geometry="primitive: cylinder; segmentsRadial: 6; height: 1; radius: 30" rotation="0 90 0"></a-mixin>
                         <a-mixin id="subSoil-zone" 	material='color: #6F3C18' geometry="primitive: cylinder; segmentsRadial: 6; height: 2; radius: 30" rotation="0 90 0"></a-mixin>
@@ -317,7 +321,7 @@
                             <a-triangle class="wall home"  position="0 1.5 1.5"       scale="1.5 1.0 3.0"  geometry="vertexA: 0 0.25 0"> </a-triangle>
                             <a-triangle class="wall home"  position="0 1.5 -1.5"      scale="1.5 1.0 3.0"  rotation="0 180 0" geometry="vertexA: 0 0.25 0"></a-triangle>
                         </a-entity>
-                        <a-entity class="roof-group" mixin="${roofcol}" buffer-geometry-merger>
+                        <a-entity class="roof-group home-roof" mixin="${roofcol}" buffer-geometry-merger>
                             <a-box class="roof home"       position="-0.495 1.32 0"   scale="0.1 1.5 3.5"  rotation="0 0 -45"></a-box>
                             <a-box class="roof home"       position="0.495 1.32 0"    scale="0.1 1.5 3.5"  rotation="0 0 45"> </a-box>
                         </a-entity>
@@ -343,7 +347,7 @@
                             <a-triangle class="wall home" position="0 2.5 2" scale="3 2 4" geometry="vertexA: 0 0.125 0"> </a-triangle>
                             <a-triangle class="wall home" position="0 2.5 -2" scale="3 2 4" rotation="0 180 0" geometry="vertexA: 0 0.125 0"></a-triangle>
                         </a-entity>
-                        <a-entity  mixin="${roofcol}" buffer-geometry-merger>
+                        <a-entity class="roof-group home-roof" mixin="${roofcol}" buffer-geometry-merger>
                             <a-box class="roof home" position="-0.876 2.07 0" scale="0.1 2.37 4.2" rotation="0 0 -50" ></a-box>
                             <a-box class="roof home" position="0.876 2.07 0" scale="0.1 2.37 4.2" rotation="0 0 50" ></a-box>                                
                         </a-entity>
@@ -398,7 +402,7 @@
                             </a-entity>
                         </a-entity>
                         <a-entity class= "roof-group" position="0 4.5 0">
-                            <a-entity mixin="${roofcol}" buffer-geometry-merger>
+                            <a-entity class = "townhouse-roof" mixin="${roofcol}" buffer-geometry-merger>
                                 <a-cone position="0 0 0" geometry="radiusBottom: 2.15; radiusTop: 1.4; segmentsRadial: 4" material="flatShading: true" rotation="0 45 0"></a-cone>
                                 <a-cone position="0 0 -1.475" geometry="radiusBottom: 2.15; radiusTop: 1.4; segmentsRadial: 4"  material="flatShading: true" rotation="0 45 0"> </a-cone>
                                 <a-cone position="0 0 1.475" geometry="radiusBottom: 2.15; radiusTop: 1.4; segmentsRadial: 4" material="flatShading: true" rotation="0 45 0"> </a-cone>
@@ -652,7 +656,7 @@
                             </a-entity>
                         </a-entity>
                         <a-entity class= "roof-group" position="0 4.5 0">
-                            <a-entity mixin="${roofcol}" buffer-geometry-merger>
+                            <a-entity class = "townhouse-roof" mixin="${roofcol}" buffer-geometry-merger>
                                 <a-cone position="0 0 0" geometry="radiusBottom: 2.15; radiusTop: 1.4; segmentsRadial: 4" material="flatShading: true" rotation="0 45 0"></a-cone>
                                 <a-cone position="0 0 -1.475" geometry="radiusBottom: 2.15; radiusTop: 1.4; segmentsRadial: 4"  material="flatShading: true" rotation="0 45 0"> </a-cone>
                                 <a-cone position="0 0 1.475" geometry="radiusBottom: 2.15; radiusTop: 1.4; segmentsRadial: 4" material="flatShading: true" rotation="0 45 0"> </a-cone>
@@ -1071,7 +1075,7 @@
                             <a-triangle position="0 1.875 3" scale="3.5 1 6" geometry="vertexA: 0 0.25 0" > </a-triangle>
                             <a-triangle position="0 1.875 -3" scale="3.5 1 6" rotation="0 180 0" geometry="vertexA: 0 0.25 0" ></a-triangle>
                         </a-entity>
-                        <a-entity mixin="${roofcol}" buffer-geometry-merger>
+                        <a-entity class = "barn-roof" mixin="${roofcol}" buffer-geometry-merger>
                             <a-box position="1.1 1.7 0" scale="0.1 2.44 7" rotation="0 0 66.75"> </a-box>
                             <a-box position="-1.1 1.7 0" scale="0.1 2.44 7" rotation="0 0 -66.75"> </a-box>
                         </a-entity>
@@ -1178,7 +1182,7 @@
                             </a-entity>
                             <a-box mixin="${sidedoorcol}" position="-1.25 0.4 0" scale="0.05 0.8 0.35"> </a-box>
                             <a-box  mixin="${doorcol}"  position="0 0.6 0" scale="1.5 1.2 4.05"> </a-box>
-                            <a-entity  mixin="${roofcol}"  buffer-geometry-merger>
+                            <a-entity class = "barn-roof" mixin="${roofcol}"  buffer-geometry-merger>
                                 <a-box position="-0.678 1.774 0" scale="0.1 1.64 4.2" rotation="0 0 -59"> </a-box>
                                 <a-box position="0.678 1.774 0" scale="0.1 1.64 4.2" rotation="0 0 59"> </a-box>
                             </a-entity>
@@ -1307,7 +1311,7 @@
                                 <a-triangle position="-1.49678 2.5 2" scale="3 2 4" geometry="vertexA: 0 -0.245 0; vertexB: 0 -0.5 0; vertexC: 1 -0.5 0" material="side: double"> </a-triangle>
                                 <a-triangle position="-1.49678 2.5 -2" scale="3 2 4" geometry="vertexA: 0 -0.245 0; vertexB: 0 -0.5 0; vertexC: 1 -0.5 0" material="side: double"> </a-triangle>
                             </a-entity>
-                            <a-box mixin="${roofcol}" position="0 1.78613 0" scale="0.1 3.5 5" rotation="0 0 80" ></a-box>
+                            <a-box class ="industrial-roof" mixin="${roofcol}" position="0 1.78613 0" scale="0.1 3.5 5" rotation="0 0 80" ></a-box>
                             <a-entity class="details">
                                 <a-entity class="building-features">
                                     <a-entity class = "door-group" mixin="${doorcol}"  buffer-geometry-merger>
@@ -1871,7 +1875,7 @@
 
                     <!-- Agricultural fields -->
                     <script id = "tmp-field-soil"  type="text/html">        
-                        <a-entity class = "topSoil" mixin="col-topSoil" buffer-geometry-merger>
+                        <a-entity class = "cropTopSoil" mixin="col-topSoil" buffer-geometry-merger>
                             <a-cylinder position="0 0 0" mixin="field-rows"></a-cylinder>
                             <a-cylinder position="0 0 1" mixin="field-rows"></a-cylinder>
                             <a-cylinder position="0 0 2" mixin="field-rows"></a-cylinder>
@@ -2407,7 +2411,6 @@
                     <a-curve-point id="moon-2300" position="0  97.5  33.33"></a-curve-point>
                 </a-curve>
 
-
                <a-curve id="duck-path-points" curve="closed: true">
                     <a-curve-point class = "duckPathPoint" position="44.20029 -4 49.17066" ></a-curve-point>
                     <a-curve-point class = "duckPathPoint" position="59.25091 -4 42.16214" ></a-curve-point>
@@ -2424,6 +2427,23 @@
                     <a-curve-point class = "duckPathPoint" position="54.85139 -4 18.57802" ></a-curve-point>
                     <a-curve-point class = "duckPathPoint" position="45.17089 -4 11.43647" ></a-curve-point>
                 </a-curve>
+               <a-curve id="cyclone-path-points" curve="closed: true">
+                    <a-curve-point class = "cyclonePathPoint" position="44.20029 -4 49.17066" ></a-curve-point>
+                    <a-curve-point class = "cyclonePathPoint" position="59.25091 -4 42.16214" ></a-curve-point>
+                    <a-curve-point class = "cyclonePathPoint" position="63.90534 -4 17.83288" ></a-curve-point>
+                    <a-curve-point class = "cyclonePathPoint" position="76.01143 -4 8.39313" ></a-curve-point>
+                    <a-curve-point class = "cyclonePathPoint" position="80.37552 -4 -9.11185" ></a-curve-point>
+                    <a-curve-point class = "cyclonePathPoint" position="82.97661 -4 -25.46591" ></a-curve-point>
+                    <a-curve-point class = "cyclonePathPoint" position="79.44372 -4 -47.4651" ></a-curve-point>
+                    <a-curve-point class = "cyclonePathPoint" position="49.41004 -4 -71.70495" ></a-curve-point>
+                    <a-curve-point class = "cyclonePathPoint" position="42.19465 -4 -60.5077" ></a-curve-point>
+                    <a-curve-point class = "cyclonePathPoint" position="74.02973 -4 -55.94726" ></a-curve-point>
+                    <a-curve-point class = "cyclonePathPoint" position="82.35734 -4 -23.4595" ></a-curve-point>
+                    <a-curve-point class = "cyclonePathPoint" position="61.94721 -4 11.23928" ></a-curve-point>
+                    <a-curve-point class = "cyclonePathPoint" position="54.85139 -4 18.57802" ></a-curve-point>
+                    <a-curve-point class = "cyclonePathPoint" position="45.17089 -4 11.43647" ></a-curve-point>
+                </a-curve>
+
                <a-curve id="airplane-path-points" curve="closed: true" >
                     <a-curve-point position="-12.6 1 -55.1" ></a-curve-point>
                     <a-curve-point position="-19.5 1 -55.51" ></a-curve-point>
@@ -2453,6 +2473,7 @@
                 <a-draw-curve id="sun-path" curveref="#sun-path-points" material="opacity: 0" visible="false"></a-draw-curve>
                 <a-draw-curve id="moon-path" curveref="#moon-path-points" material="opacity: 0" visible="false"></a-draw-curve>
                 <a-draw-curve id="duck-path" curveref="#duck-path-points" material="opacity: 0; shader: line; color: red" visible="false"></a-draw-curve>
+                <a-draw-curve id="cyclone-path" curveref="#cyclone-path-points" material="opacity: 0; shader: line; color: red" visible="false"></a-draw-curve>
                 <a-draw-curve id="plane-path" curveref="#airplane-path-points" material="opacity: 0;" visible="false"></a-draw-curve>
             </a-entity>
 
@@ -2474,7 +2495,7 @@
             <!-- CAMERAS-->
             <a-entity id="camera-group">
                 <a-entity id="vrcam-rig" rotation="0 90 0" wasd-controls="acceleration:150; fly: false"  position="0 10.6 0" >
-                    <a-entity id="vrcam" camera="active: false; fov: 100" orbit-controls =" minAzimuthAngle : 0"></a-entity>
+                    <a-entity id="vrcam" camera="active: false; fov: 50" orbit-controls =" minAzimuthAngle : 0"></a-entity>
                 </a-entity>
                 <a-entity id="flycam-rig" position="180 60 0" rotation="-10 90 0"  wasd-controls="acceleration: 150">
                     <a-entity id="flycam" camera="active: true; fov: 45; zoom: 0.9; near: 0.1" look-controls ></a-entity>
@@ -2488,8 +2509,8 @@
                 </a-entity>
             </a-entity>
 
-            <!-- PLANET: Groupingfor globale positioning and scaling-->
-            <a-entity id=planet position = "0 -3 0">
+            <!-- PLANET: Grouping for global positioning and scaling to/from toy and human (VR) scale -->
+            <a-entity id=planet position = "0 -3 0" scale="1 1 1">
 
                 <!-- ENVIRONMENT-->
                 <a-entity id = "environment-group"  class="environment" >
@@ -2557,9 +2578,27 @@
                     <a-entity id="fire-group" position = "0 0 0 " visible="false">
                         <a-sphere class="fire emissions" position="-150 -5 0" material="shader: steam; blending: additive" scale="150 150 250" radius="40" segments-height="128" segments-width="128" geometry="radius: 0.25; segmentsHeight: 64; segmentsWidth: 64"></a-sphere>      
                     </a-entity>
+                        <a-entity id = "vortex-group" visible="false">
+                        <a-entity id ="vortex-debris">
+                            <a-entity id="vortex-duck" position="0 10 0" gltf-model="#mdl-rubberDuck"></a-entity>
+                        </a-entity>
+                        <a-entity id = "vortex">
+                            <a-cylinder id="vortex-01" mixin="col-vortex" position= "0 0.5 0"   rotation ="5 0 0"   radius="1"      geometry = "height: 1.25"></a-cylinder>
+                            <a-cylinder id="vortex-02" mixin="col-vortex" position= "0 1.5 0"   rotation ="-5 0 0"  radius="1.25"   geometry = "height: 1.25"></a-cylinder>
+                            <a-cylinder id="vortex-03" mixin="col-vortex" position= "0 2.5 0"   rotation ="10 0 0"  radius="1.5"    geometry = "height: 1.25"></a-cylinder>
+                            <a-cylinder id="vortex-04" mixin="col-vortex" position= "0 3.5 0"   rotation ="-3 0 0"  radius="1.75"   geometry = "height: 1.25"></a-cylinder>
+                            <a-cylinder id="vortex-05" mixin="col-vortex" position= "0 4.5 0"   rotation ="0 0 0"   radius="2.0"    geometry = "height: 1.25"></a-cylinder>
+                            <a-cylinder id="vortex-06" mixin="col-vortex" position= "0 5.5 0"   rotation ="-6 0 0"  radius="2.25"   geometry = "height: 1.25"></a-cylinder>
+                            <a-cylinder id="vortex-07" mixin="col-vortex" position= "0 6.5 0"   rotation ="8 0 0"   radius="2.5"    geometry = "height: 1.25"></a-cylinder>
+                            <a-cylinder id="vortex-08" mixin="col-vortex" position= "0 7.5 0"   rotation ="0 0 0"   radius="2.75"   geometry = "height: 1.25"></a-cylinder>
+                            <a-cylinder id="vortex-09" mixin="col-vortex" position= "0 8.5 0"   rotation ="-3 0 0"  radius="3"      geometry = "height: 1.25"></a-cylinder>
+                            <a-cylinder id="vortex-10" mixin="col-vortex" position= "0 9.5 0"   rotation ="3 0 0"   radius="3.25"   geometry = "height: 1.25"></a-cylinder>
+                            <a-cylinder id="vortex-11" mixin="col-vortex" position= "0 10.5 0"  rotation ="-8 0 0"  radius="3.5"    geometry = "height: 1.25"></a-cylinder>
+                        </a-entity>
+                    </a-entity>
 
                     <!-- PARTICLE SYSTEM-->
-                    <a-entity id="rain" position="0 30 0" scale="1 1 1.5"></a-entity>
+                    <a-entity id="particles" position="0 30 0" scale="1 1 1.5"></a-entity>
                 </a-entity><!-- End of world environment elements -->
                     
                 <!--- WORLD TOPOGRAPHY -->
@@ -2579,14 +2618,41 @@
                         </a-entity>  
                     </a-entity>      
 
+                    <a-entity id="snow-group" class="topography-group" position="0 2.5 0" visible = "false">
+                        <a-entity id="central-snow"      class="central-zone snow surface" mixin="snow-zone" ></a-entity>
+                        <a-entity id="industrial-snow"   class="industrial-zone snow surface"  mixin="snow-zone" position="0 0 -51.8"></a-entity>
+                        <a-entity id="urban-snow"        class="urban-zone snow surface"  mixin="snow-zone" position="44.8 0 -25.9"></a-entity>
+                        <a-entity id="suburban-snow"     class="suburban-zone snow surface"  mixin="snow-zone" position="0 0 51.8"></a-entity>
+                        <a-entity id="periUrban-snow"    class="periUrban-zone snow surface"  mixin="snow-zone" position="-44.8 0 25.9"></a-entity>
+                        <a-entity id="agriculture-snow"  class="agriculture-zone snow surface"  mixin="snow-zone" position="-44.8 0 -25.9"></a-entity>
+                        <a-entity id="outerGroup-snow"   class="outer-zone snow-group" mixin="col-snow" >
+                            <a-entity id="outer-snow-01" class="snow" mixin="snow-zone subzone" position="-44.8  0 -77.8"></a-entity>
+                            <a-entity id="outer-snow-03" class="snow" mixin="snow-zone subzone" position="-33.55 0 -84.3"></a-entity>
+                            <a-entity id="outer-snow-04" class="snow" mixin="snow-zone subzone" position="-33.55 0 -71.3"></a-entity>
+                            <a-entity id="outer-snow-05" class="snow" mixin="snow-zone subzone" position="-56    0 -71.3"></a-entity>
+                            <a-entity id="outer-snow-06" class="snow" mixin="snow-zone subzone" position="-44.8  0 -64.9"></a-entity>
+                            <a-entity id="outer-snow-08" class="snow" mixin="snow-zone subzone" position="-33.55 0 -97.3"></a-entity>
+                            <a-entity id="outer-snow-09" class="snow" mixin="snow-zone subzone" position="-22.32 0 -90.7"></a-entity>
+                            <a-entity id="outer-snow-10" class="snow" mixin="snow-zone subzone" position="-22.32 0 -77.8"></a-entity>
+                            <a-entity id="outer-snow-11" class="snow" mixin="snow-zone subzone" position="-22.32 0 -64.9"></a-entity>
+                            <a-entity id="outer-snow-12" class="snow" mixin="snow-zone subzone" position="-33.55 0 -58.4"></a-entity>
+                            <a-entity id="outer-snow-13" class="snow" mixin="snow-zone subzone" position="-44.8  0 -51.9"></a-entity>
+                            <a-entity id="outer-snow-14" class="snow" mixin="snow-zone subzone" position="-56    0 -58.4"></a-entity>
+                            <a-entity id="outer-snow-15" class="snow" mixin="snow-zone subzone" position="-67.2  0 -77.8"></a-entity>
+                            <a-entity id="outer-snow-16" class="snow" mixin="snow-zone subzone" position="-56    0 -97.3"></a-entity>
+                        </a-entity>           
+                        <a-box id="waterfront-snow" class="waterfront-zone snow surface" mixin="col-snow" position="24.74 0 12" geometry="height: 0.8; depth: 36; width: 3" rotation="0 -30 0" ></a-box>
+                        <a-box id="runway-snow" class="snow surface" mixin="col-snow" position="23.3 0 -75.8" geometry="height: 0.8; depth: 12; width: 12" rotation="0 30 0"></a-box>         
+                    </a-entity>
+
                     <a-entity id="ground-group" class="topography-group" position="0 2.85 0">
-                        <a-entity id="central-ground"      class="grass surface" mixin="ground-zone" ></a-entity>
-                        <a-entity id="industrial-ground"   class="grass surface"  mixin="ground-zone" position="0 0 -51.8"></a-entity>
-                        <a-entity id="urban-ground"        class="grass surface"  mixin="ground-zone" position="44.8 0 -25.9"></a-entity>
-                        <a-entity id="suburban-ground"     class="grass surface"  mixin="ground-zone" position="0 0 51.8"></a-entity>
-                        <a-entity id="perUrban-ground"     class="grass surface"  mixin="ground-zone" position="-44.8 0 25.9"></a-entity>
-                        <a-entity id="agriculture-ground"  class="grass surface"  mixin="ground-zone" position="-44.8 0 -25.9"></a-entity>
-                        <a-entity id="outerGroup-ground"   class="surface-group" mixin="col-ground" >
+                        <a-entity id="central-ground"      class="central-zone grass surface" mixin="ground-zone" ></a-entity>
+                        <a-entity id="industrial-ground"   class="industrial-zone grass surface"  mixin="ground-zone" position="0 0 -51.8"></a-entity>
+                        <a-entity id="urban-ground"        class="urban-zone grass surface"  mixin="ground-zone" position="44.8 0 -25.9"></a-entity>
+                        <a-entity id="suburban-ground"     class="suburban-zone grass surface"  mixin="ground-zone" position="0 0 51.8"></a-entity>
+                        <a-entity id="periUrban-ground"    class="periUrban-zone grass surface"  mixin="ground-zone" position="-44.8 0 25.9"></a-entity>
+                        <a-entity id="agriculture-ground"  class="agriculture-zone grass surface"  mixin="ground-zone" position="-44.8 0 -25.9"></a-entity>
+                        <a-entity id="outerGroup-ground"   class="outer-zone surface-group" mixin="col-ground" >
                             <a-entity id="outer-ground-01" class="grass" mixin="ground-zone subzone" position="-44.8  0 -77.8"></a-entity>
                             <!-- <a-entity id="outer-ground-02" class="grass" mixin="ground-zone subzone" position="-44.8  0 -90.7" visible="false"></a-entity> -->
                             <a-entity id="outer-ground-03" class="grass" mixin="ground-zone subzone" position="-33.55 0 -84.3"></a-entity>
@@ -2604,17 +2670,17 @@
                             <a-entity id="outer-ground-15" class="grass" mixin="ground-zone subzone" position="-67.2  0 -77.8"></a-entity>
                             <a-entity id="outer-ground-16" class="grass" mixin="ground-zone subzone" position="-56    0 -97.3"></a-entity>
                         </a-entity>           
-                        <a-box id="waterfront-ground" class="grass surface" mixin="col-ground" position="24.74 0 12" geometry="height: 0.3; depth: 36; width: 3" rotation="0 -30 0" ></a-box>
+                        <a-box id="waterfront-ground" class="waterfront-zone grass surface" mixin="col-ground" position="24.74 0 12" geometry="height: 0.3; depth: 36; width: 3" rotation="0 -30 0" ></a-box>
                     </a-entity>
 
                     <a-entity id="topSoil-group"  class="topography-group" position="0 2.25 0">
-                        <a-entity id="central-topSoil"  class="subSurface"  mixin="topSoil-zone" position="0 0 0" ></a-entity>
-                        <a-entity id="industrial-topSoil" class="subSurface"  mixin="topSoil-zone" position="0 0 -51.8" ></a-entity>
-                        <a-entity id="urban-topSoil"  class="subSurface"  mixin="topSoil-zone" position="44.8 0 -25.9" ></a-entity>
-                        <a-entity id="suburban-topSoil" class="subSurface"  mixin="topSoil-zone" position="0 0 51.8" ></a-entity>
-                        <a-entity id="perUrban-topSoil" class="subSurface"  mixin="topSoil-zone" position="-44.8 0 25.9" ></a-entity>
-                        <a-entity id="agriculture-topSoil"  class="subSurface"  mixin="topSoil-zone" position="-44.8 0 -25.9" ></a-entity>
-                        <a-entity id="outerGroup-topSoil" class="subSurface-group" mixin="col-topSoil" buffer-geometry-merger>
+                        <a-entity id="central-topSoil"      class="central-zone subSurface"  mixin="topSoil-zone" position="0 0 0" ></a-entity>
+                        <a-entity id="industrial-topSoil"   class="industrial-zone subSurface"  mixin="topSoil-zone" position="0 0 -51.8" ></a-entity>
+                        <a-entity id="urban-topSoil"        class="urban-zone subSurface"  mixin="topSoil-zone" position="44.8 0 -25.9" ></a-entity>
+                        <a-entity id="suburban-topSoil"     class="suburban-zone subSurface"  mixin="topSoil-zone" position="0 0 51.8" ></a-entity>
+                        <a-entity id="periUrban-topSoil"    class="periUrban-zone subSurface"  mixin="topSoil-zone" position="-44.8 0 25.9" ></a-entity>
+                        <a-entity id="agriculture-topSoil"  class="agriculture-zone subSurface"  mixin="topSoil-zone" position="-44.8 0 -25.9" ></a-entity>
+                        <a-entity id="outerGroup-topSoil"   class="outer-zone subSurface-group" mixin="col-topSoil" buffer-geometry-merger>
                             <a-entity id="outer-topSoil-01" mixin="topSoil-zone subzone" position="-44.8  0 -77.8"></a-entity>
                             <!-- <a-entity id="outer-topSoil-02" mixin="topSoil-zone subzone" position="-44.8  0 -90.7" visible="false"></a-entity> -->
                             <a-entity id="outer-topSoil-03" mixin="topSoil-zone subzone" position="-33.55 0 -84.3"></a-entity>
@@ -2632,17 +2698,17 @@
                             <a-entity id="outer-topSoil-15" mixin="topSoil-zone subzone" position="-67.2  0 -77.8"></a-entity>
                             <a-entity id="outer-topSoil-16" mixin="topSoil-zone subzone" position="-56    0 -97.3"></a-entity>
                         </a-entity> 
-                        <a-box id="waterfront-topSoil" class="surface"    mixin="col-topSoil"  position="24.7 0 12" geometry="height: 1; depth: 36; width: 3.5" rotation="0 -30 0"></a-box>                    
+                        <a-box id="waterfront-topSoil" class="waterferont-zone subSurface"    mixin="col-topSoil"  position="24.7 0 12" geometry="height: 1; depth: 36; width: 3.5" rotation="0 -30 0"></a-box>                    
                     </a-entity>
 
                     <a-entity id="subSoil-group" class="topography-group" position="0 0.75 0">
-                        <a-entity id="central-subSoil"  class="subSurface"  mixin="subSoil-zone" position="0 0 0" ></a-entity>
-                        <a-entity id="industrial-subSoil" class="subSurface"  mixin="subSoil-zone" position="0 0 -51.8" ></a-entity>
-                        <a-entity id="urban-subSoil"  class="subSurface"  mixin="subSoil-zone" position="44.8 0 -25.9" ></a-entity>
-                        <a-entity id="suburban-subSoil" class="subSurface"  mixin="subSoil-zone" position="0 0 51.8"></a-entity>
-                        <a-entity id="perUrban-subSoil" class="subSurface"  mixin="subSoil-zone" position="-44.8 0 25.9" ></a-entity>
-                        <a-entity id="agriculture-subSoil"  class="subSurface"  mixin="subSoil-zone" position="-44.8 0 -25.9" ></a-entity>
-                        <a-entity id="outerGroup-subSoil" class="subSurface-group"  mixin="col-subSoil" buffer-geometry-merger>
+                        <a-entity id="central-subSoil"      class="central-zeon subSurface"  mixin="subSoil-zone" position="0 0 0" ></a-entity>
+                        <a-entity id="industrial-subSoil"   class="industrial-zone subSurface"  mixin="subSoil-zone" position="0 0 -51.8" ></a-entity>
+                        <a-entity id="urban-subSoil"        class="urban-zone subSurface"  mixin="subSoil-zone" position="44.8 0 -25.9" ></a-entity>
+                        <a-entity id="suburban-subSoil"     class="suburban-zone subSurface"  mixin="subSoil-zone" position="0 0 51.8"></a-entity>
+                        <a-entity id="periUrban-subSoil"    class="periUrban-zone subSurface"  mixin="subSoil-zone" position="-44.8 0 25.9" ></a-entity>
+                        <a-entity id="agriculture-subSoil"  class="agriculture-zone subSurface"  mixin="subSoil-zone" position="-44.8 0 -25.9" ></a-entity>
+                        <a-entity id="outerGroup-subSoil"   class="outer-zone subSurface-group"  mixin="col-subSoil" buffer-geometry-merger>
                             <a-entity id="outer-subSoil-01" mixin="subSoil-zone subzone" position="-44.8  0 -77.8"></a-entity>
                             <a-entity id="outer-subSoil-02" mixin="subSoil-zone subzone" position="-44.8  0 -90.7"></a-entity>
                             <a-entity id="outer-subSoil-03" mixin="subSoil-zone subzone" position="-33.55 0 -84.3"></a-entity>
@@ -2663,13 +2729,13 @@
                     </a-entity>
 
                     <a-entity id="rock-group" class="topography-group"  position="0 -2.25 0">
-                        <a-entity id="central-rock" class="subSurface" mixin="rock-zone" position="0 0 0"></a-entity>
-                        <a-entity id="industrial-rock"  class="subSurface" mixin="rock-zone" position="0 0 -51.8" ></a-entity>
-                        <a-entity id="urban-rock" class="subSurface" mixin="rock-zone" position="44.8 0 -25.9"></a-entity>
-                        <a-entity id="suburban-rock"  class="subSurface" mixin="rock-zone" position="0 0 51.8"></a-entity>
-                        <a-entity id="perUrban-rock"  class="subSurface" mixin="rock-zone" position="-44.8 0 25.9" ></a-entity>
-                        <a-entity id="agriculture-rock" class="subSurface" mixin="rock-zone" position="-44.8 0 -25.9" ></a-entity>
-                        <a-entity id="outerGroup-rock"  class="subSurface-group" mixin="col-rock" buffer-geometry-merger>
+                        <a-entity id="central-rock"         class="central-zone subSurface" mixin="rock-zone" position="0 0 0"></a-entity>
+                        <a-entity id="industrial-rock"      class="industrial-zone subSurface" mixin="rock-zone" position="0 0 -51.8" ></a-entity>
+                        <a-entity id="urban-rock"           class="urban-zone subSurface" mixin="rock-zone" position="44.8 0 -25.9"></a-entity>
+                        <a-entity id="suburban-rock"        class="suburban-zone subSurface" mixin="rock-zone" position="0 0 51.8"></a-entity>
+                        <a-entity id="periUrban-rock"       class="perUrban-zone subSurface" mixin="rock-zone" position="-44.8 0 25.9" ></a-entity>
+                        <a-entity id="agriculture-rock"     class="agriculture-zone subSurface" mixin="rock-zone" position="-44.8 0 -25.9" ></a-entity>
+                        <a-entity id="outerGroup-rock"      class="outer-zone subSurface-group" mixin="col-rock" buffer-geometry-merger>
                             <a-entity id="outer-rock-01"    mixin="rock-zone subzone" position="-44.8  0 -77.8"></a-entity>
                             <a-entity id="outer-rock-02"    mixin="rock-zone subzone" position="-44.8  0 -90.7" ></a-entity>
                             <a-entity id="outer-rock-03"    mixin="rock-zone subzone" position="-33.55 0 -84.3"></a-entity>
@@ -2690,14 +2756,14 @@
                     </a-entity>
 
                     <a-entity id="bedrock-group" class="topography-group"  position="0 -7.5 0" >  
-                        <a-entity id="central-bedrock" class="subSurface"   mixin="bedrock-zone" position="0 0 0" ></a-entity>
-                        <a-entity id="industrial-bedrock"  class="subSurface"   mixin="bedrock-zone" position="0 0 -51.8" ></a-entity>
-                        <a-entity id="urban-bedrock" class="subSurface"   mixin="bedrock-zone" position="44.8 0 -25.9"></a-entity>
-                        <a-entity id="suburban-bedrock"  class="subSurface"   mixin="bedrock-zone" position="0 0 51.8"></a-entity>
-                        <a-entity id="perUrban-bedrock"  class="subSurface"   mixin="bedrock-zone" position="-44.8 0 25.9" ></a-entity>
-                        <a-entity id="agriculture-bedrock" class="subSurface"   mixin="bedrock-zone" position="-44.8 0 -25.9" ></a-entity>
-                        <a-entity id="outer-bedrock" class="subSurface"   mixin="bedrock-zone" position="-44.8 0 -78.0" ></a-entity>
-                        <a-entity id="bay-bedrock" class="subSurface"   mixin="bedrock-zone" position="44.8 0 26.2" ></a-entity>
+                        <a-entity id="central-bedrock"      class="central-zone subSurface"   mixin="bedrock-zone" position="0 0 0" ></a-entity>
+                        <a-entity id="industrial-bedrock"   class="industrial-zone subSurface"   mixin="bedrock-zone" position="0 0 -51.8" ></a-entity>
+                        <a-entity id="urban-bedrock"        class="urban-zone subSurface"   mixin="bedrock-zone" position="44.8 0 -25.9"></a-entity>
+                        <a-entity id="suburban-bedrock"     class="suburban-zone subSurface"   mixin="bedrock-zone" position="0 0 51.8"></a-entity>
+                        <a-entity id="periUrban-bedrock"    class="periUrban-zone subSurface"   mixin="bedrock-zone" position="-44.8 0 25.9" ></a-entity>
+                        <a-entity id="agriculture-bedrock"  class="agriculture-zone subSurface"   mixin="bedrock-zone" position="-44.8 0 -25.9" ></a-entity>
+                        <a-entity id="outer-bedrock"        class="outer-zone subSurface"   mixin="bedrock-zone" position="-44.8 0 -78.0" ></a-entity>
+                        <a-entity id="bay-bedrock"          class="waterfront-zone subSurface"   mixin="bedrock-zone" position="44.8 0 26.2" ></a-entity>
                     </a-entity>
 
                     <a-entity id="floodplain-group" class="topography-group" position="0 2.75 0">  
@@ -2717,19 +2783,19 @@
                     </a-entity>
 
                     <a-entity id="seaBed-seabed" class="topography" position="0 -7.5 0">                  
-                        <a-entity id="coast1-seabed" mixin="seabed-zone" position="74.5 0 0"></a-entity>
-                        <a-entity id="coast2-seabed" mixin="seabed-zone" position="74.5 0 -51.8"></a-entity>
-                        <a-entity id="coast3-seabed" mixin="seabed-zone" position="74.5 0 -25.9"></a-entity>
-                        <a-entity id="coast4-seabed" mixin="seabed-zone" position="7.2 0 -90.4"></a-entity>
-                        <a-entity id="coast5-seabed" mixin="seabed-zone" position="29.6 0 -51.8"></a-entity>
-                        <a-entity id="coast6-seabed" mixin="seabed-zone" position="29.6 0 -77.7"></a-entity>
-                        <a-entity id="coast7-seabed" mixin="seabed-zone" position="-14.8 0 -77.7"></a-entity>
-                        <a-entity id="coast8-seabed" mixin="seabed-zone" position="51.8 0 -64.7"></a-entity>    
+                        <a-entity id="coast1-seabed" class = "seabed-zone" mixin="seabed-zone" position="74.5 0 0"></a-entity>
+                        <a-entity id="coast2-seabed" class = "seabed-zone" mixin="seabed-zone" position="74.5 0 -51.8"></a-entity>
+                        <a-entity id="coast3-seabed" class = "seabed-zone" mixin="seabed-zone" position="74.5 0 -25.9"></a-entity>
+                        <a-entity id="coast4-seabed" class = "seabed-zone" mixin="seabed-zone" position="7.2 0 -90.4"></a-entity>
+                        <a-entity id="coast5-seabed" class = "seabed-zone" mixin="seabed-zone" position="29.6 0 -51.8"></a-entity>
+                        <a-entity id="coast6-seabed" class = "seabed-zone" mixin="seabed-zone" position="29.6 0 -77.7"></a-entity>
+                        <a-entity id="coast7-seabed" class = "seabed-zone" mixin="seabed-zone" position="-14.8 0 -77.7"></a-entity>
+                        <a-entity id="coast8-seabed" class = "seabed-zone" mixin="seabed-zone" position="51.8 0 -64.7"></a-entity>    
                     </a-entity>
 
                     <a-entity id="beach-group" position="0 0 0">
-                        <a-entity id="beach-center" position="3.5 0 0" mixin="col-sand" rotation="0 30 0" geometry="primitive: cone; height: 2.5; segmentsRadial: 6; radiusBottom: 40; radiusTop: 30"></a-entity>
-                        <a-entity id="beach-urban" position="44.8 0 -26" mixin="col-sand" rotation="0 30 0" geometry="primitive: cone; height: 2.5; segmentsRadial: 6; radiusBottom: 40; radiusTop: 30"></a-entity>
+                        <a-entity id="beach-center" class = "beach" position="3.5 0 0" mixin="col-sand" rotation="0 30 0" geometry="primitive: cone; height: 2.5; segmentsRadial: 6; radiusBottom: 40; radiusTop: 30"></a-entity>
+                        <a-entity id="beach-urban" class = "beach" position="44.8 0 -26" mixin="col-sand" rotation="0 30 0" geometry="primitive: cone; height: 2.5; segmentsRadial: 6; radiusBottom: 40; radiusTop: 30"></a-entity>
                     </a-entity>
                     
                     <a-entity id="rockline-group">
@@ -2778,10 +2844,10 @@
                         </a-entity>
                     </a-entity>
 
-                    <a-entity id="laked-dam" class="surface" mixin="lake-zone" position="-52.2 2 65.2"></a-entity>
+                    <a-entity id="laked-dam" class="surface river" mixin="lake-zone" position="-52.2 2 65.2"></a-entity>
 
                     <a-entity id="river" position="0 1.5 0">
-                        <a-entity mixin="col-river"  buffer-geometry-merger>
+                        <a-entity mixin="col-river" class = "river" buffer-geometry-merger>
                             <a-box position="-23.24 0 66.48" geometry="width: 3; depth: 30.98; height: 3" rotation="0 30 0"></a-box>
                             <a-box position="-39.66 0 53.75" geometry="width: 3; depth: 20; height: 3" rotation="0 90 0"></a-box>
                             <a-box position="-0.48 -0.49 79.18" geometry="width: 3; depth: 32.69; height: 3" rotation="2 90 0"></a-box>
@@ -2790,7 +2856,7 @@
                     </a-entity> 
 
                     <a-entity id="central-hill" position="0 3 0" >
-                        <a-entity class = "grass" mixin="col-ground" buffer-geometry-merger>
+                        <a-entity id = "hill" class = "hill grass" mixin="col-ground" buffer-geometry-merger>
                             <a-cylinder position="0 0.4 0" geometry="radius: 18; segmentsHeight: 0.8; segmentsRadial: 16"></a-cylinder>                
                             <a-cylinder position="0 1.2 0" geometry="radius: 15; segmentsHeight: 0.8; segmentsRadial: 16"></a-cylinder>      
                             <a-cylinder position="0 2.0 0" geometry="radius: 12; segmentsHeight: 0.8; segmentsRadial: 16"></a-cylinder>      
@@ -3088,16 +3154,31 @@
                                 <a-entity class="plane" gltf-model="#mdl-planeRed" scale="0.25 0.25 0.25" rotation="0 -90 0"></a-entity>
                             </a-entity>
                         </a-entity>
-
                     </a-entity><!-- End of vehicles -->
 
                     <!-- Characters-->
                     <a-entity id="character-group" position = "0 3 0">
-                        <a-entity id="rubberDuck" position="44.20029 -4 49.17066" gltf-model="#mdl-rubberDuck" rotation="0 180 0">
-                            <a-entity id="duckMask" visible="false" position="1.45 -2.78 8.65" gltf-model="#mdl-mask" rotation="-25 0 0" scale="5 5 5"></a-entity>
+                        <a-entity id="duck-group">
+                            <a-entity id="rubberDuck" position="44.20029 -4 49.17066" gltf-model="#mdl-rubberDuck" rotation="0 180 0" >
+                                <a-entity id="duckMask" visible="false" position="1.45 -2.78 8.65" gltf-model="#mdl-mask" rotation="-25 0 0" scale="5 5 5"></a-entity>
+                                <a-entity id="duckSantaHat" visible="false" position="0 5 1.25">
+                                    <a-cone position="-0.16902 2 -0.92607" geometry="height: 3; radiusTop: 0.3; segmentsHeight: 5; segmentsRadial: 12" material="color: #FF0000; flatShading: true" rotation="-20 0 0"></a-cone>
+                                    <a-cone position="-0.16908 2.25406 -1.95467" geometry="height: 2.5; radiusBottom: 0.35; radiusTop: 0.1; segmentsHeight: 5; segmentsRadial: 6" material="color: #FF0000" rotation="-150 0 0"></a-cone>
+                                    <a-torus position="-0.06687 0.26273 -0.3664" geometry="radius: 1.25; segmentsRadial: 6; segmentsTubular: 8" material="color: #fff" rotation="-110 0 0"></a-torus>
+                                    <a-sphere position="-0.24218 1.11305 -2.63093" geometry="radius: 0.5" material="color: #fff"></a-sphere>
+                                </a-entity>
+                                <a-entity id="duckFiremanHat" visible="false" position="0 5 1.25">
+                                    <a-sphere position="0 0.2 0.273" geometry="radius: 1.5; segmentsHeight: 5; phiLength: 180; segmentsWidth: 4" material="color: red; flatShading: true" rotation="-100 0 0" scale="0.7 1 1.4"></a-sphere>
+                                    <a-cylinder position="0 0.1 0" geometry="radius: 2.5; segmentsRadial: 12; segmentsHeight: 1; thetaLength: 180" material="color: #FF0000" rotation="-10 0 10" scale="0.7 0.1 1"></a-cylinder>
+                                    <a-cylinder position="0 0.1 0" geometry="radius: 2.5; segmentsRadial: 12; segmentsHeight: 1; thetaLength: 180" material="color: #FF0000" rotation="10 180 10" scale="0.7 0.1 1"></a-cylinder>
+                                    <a-cylinder position="0 1.5 1.5" geometry="radius: 0.5; segmentsRadial: 5; segmentsHeight: 1; height: 0.1; thetaStart: 30" material="color: #FFFF00" rotation="90 0 0" scale=""></a-cylinder>
+                                    <a-torus position="0 0.45 0.2" geometry="radius: 1.5; segmentsRadial: 6; arc: 180; radiusTubular: 0.05; segmentsTubular: 6" material="color: #000" rotation="160 0 0" scale="1 1.7 1"></a-torus>
+                                </a-entity>
+                                <a-entity id="duckFirehose" position="0 4.25 3.25"></a-entity>
+
+                            </a-entity>
                         </a-entity>
                     </a-entity>
-
                 </a-entity><!-- End of shared feautures -->
 
                 <!---SCENES BY ZONE -->
@@ -3785,7 +3866,7 @@
                                         </a-entity>
                                     </a-entity>
                                     <!--Roof-->
-                                    <a-entity class ="roof-group" mixin="col-hotel-roof" buffer-geometry-merger>
+                                    <a-entity class ="hotel-roof roof-group" mixin="col-hotel-roof" buffer-geometry-merger>
                                         <!--Steps-->
                                         <a-cylinder class="hotel-base lower"  position="0 0.1 4" geometry="height: 0.2; radius: 1.5; segmentsRadial: 8"  rotation="0 22.5 0"></a-cylinder>
                                         <a-cylinder class="hotel-base lower"  position="0 0.3 4" geometry="height: 0.2; radius: 1.3; segmentsRadial: 8"  rotation="0 22.5 0"></a-cylinder>
@@ -3820,7 +3901,7 @@
                                         <a-cylinder  position="2 6.3 2.675" rotation="-90 90 90" material="flatShading: true" geometry="height: 1.6; segmentsRadial: 3" scale="0.5 0.5 0.375"></a-cylinder>
                                     </a-entity>
                                     <!-- Roof -->
-                                    <a-entity class ="roof-group" mixin="col-hotel-roof" buffer-geometry-merger>
+                                    <a-entity class ="hotel-roof roof-group" mixin="col-hotel-roof" buffer-geometry-merger>
                                         <a-cone class="hotel-roof"  position="0 6.8 0"  geometry="radiusTop: 2; radiusBottom: 4; segmentsRadial: 4" rotation="0 45 0" ></a-cone>
                                         <a-cone class="hotel-roof"  position="2 6.8 0"  geometry="radiusTop: 2; radiusBottom: 4; segmentsRadial: 4" rotation="0 45 0" ></a-cone>  
                                         <a-cone position="0 6.8 3.05" geometry="height: 0.3; radiusTop: 0; radiusBottom: 0.02" material="flatShading: true"> </a-cone>
@@ -3987,7 +4068,7 @@
                                         <a-cylinder  position="-2 6.3 2.675" rotation="-90 90 90" material="flatShading: true" geometry="height: 1.6; segmentsRadial: 3" scale="0.5 0.5 0.375"></a-cylinder>
                                     </a-entity>
                                     <!-- Roof -->
-                                    <a-entity class ="roof-group" mixin="col-hotel-roof" buffer-geometry-merger>
+                                    <a-entity class ="hotel-roof roof-group" mixin="col-hotel-roof" buffer-geometry-merger>
                                         <a-cone class="hotel-roof" position="0 6.8 0"  geometry="radiusTop: 2; radiusBottom: 4; segmentsRadial: 4" rotation="0 45 0" ></a-cone>
                                         <a-cone class="hotel-roof" position="-2 6.8 0"  geometry="radiusTop: 2; radiusBottom: 4; segmentsRadial: 4" rotation="0 45 0" ></a-cone>  
                                         <a-cone position="0 6.8 3.05" geometry="height: 0.3; radiusTop: 0; radiusBottom: 0.02" material="flatShading: true"> </a-cone>
@@ -4396,7 +4477,7 @@
                                         </a-entity>
                                     </a-entity>
                                     <a-entity class="roof-structure" position="0 4.5 0">
-                                        <a-entity mixin="col-townhouse-A-roof" buffer-geometry-merger>
+                                        <a-entity class = "townhouse-roof" mixin="col-townhouse-A-roof" buffer-geometry-merger>
                                             <a-cone position="-2.4 0 -0.9" geometry="radiusBottom: 2.1; radiusTop: 0; segmentsRadial: 4" rotation="0 45 0" scale="0.4 1 0.4"></a-cone>
                                             <a-cone position="2.4 0 -0.9" geometry="radiusBottom: 2.1; radiusTop: 0; segmentsRadial: 4" rotation="0 45 0" scale="0.4 1 0.4"></a-cone>
                                             <a-box position="0 -0.04257 -1.16281" rotation="30.58 0 0" scale="4.8 1.2 0.1" ></a-box>                
@@ -6190,15 +6271,6 @@
                                 data-windowcol="col-barn-A-window"
                                 data-pencol="col-barn-A-pen"></a-entity>          
                         </a-entity>
-                        <!-- Misc Actiivty-->
-                        <a-entity  id="periUrban-miscActivity">
-                            <a-entity  id="camping" visible="false">
-                                <!-- <a-entity class="tent camping" gltf-model="models/misc-tent.glb" position="4.59072 0 17.15171" rotation="0 1209 0" mixin="scale-0-000005"></a-entity> 
-                                <a-entity class="tent camping" gltf-model="models/misc-tent.glb" position="0 0 20" rotation="0 61 0" mixin="scale-0-000005"></a-entity> 
-                                <a-entity class="tent camping" gltf-model="models/misc-tent.glb" position="-2.95606 0 12.71812" rotation="0 -90 0" mixin="scale-0-000005"></a-entity> 
-                                <a-entity class="fire camping" gltf-model="models/misc-campfire-01.glb" position="0.17054 0 16.17024" rotation="0 61 0" mixin="scale-1-000"></a-entity>  -->
-                            </a-entity>
-                        </a-entity>
 
                         <!-- Built infrastructure -->
                         <a-entity  id="periUrban-infrastructure"  class="builtEnv-group utilites-group">                    
@@ -6638,7 +6710,7 @@
 
                     </a-entity><!-- End AG ZONE-->
 
-                    <!-- THE HEAVY INDSUTRY ZONE -->
+                    <!-- THE HEAVY INDUSTRY ZONE -->
                     <a-entity id="outer-zone" class="zone-group" position="-44.8 3 -78.0" visible="true">
                         <!-- Roads-->
                         <a-entity id="outer-roads" class="roads-group">
@@ -6805,7 +6877,6 @@
                         <div class = "key-shortcut small">Space</div>
                         <div class = "shortcut-description">Toggle between far and lowground camera</div>
                     </div>
-                    <div class ="shortcuts-subHeader">shortcuts</div>
                     <div class = "key-shortcut-container">
                         <div class = "key-shortcut">&#8592; &#8594;</div>
                         <div class = "shortcut-description">Move camera left and right (far camera only)</div>
@@ -6814,19 +6885,25 @@
                         <div class = "key-shortcut"> &#8593; &#8595;</div>
                         <div class = "shortcut-description">Move camera forward and back (high camera only)</div>
                     </div>
-
                     <div class = "key-shortcut-container">
                         <div class = "key-shortcut"> [  ]</div>
                         <div class = "shortcut-description"> Rotate high level camera around scene</div>
                     </div>
+                    <div class ="shortcuts-subHeader">Environment controls</div>
                     <div class = "key-shortcut-container">
                         <div class = "key-shortcut">< ></div>
-                        <div class = "shortcut-description"> Move time back and forward by 1 hour</div>
+                        <div class = "shortcut-description">Move time back and forward by 1 hour</div>
+                    </div>
+                    <div class = "key-shortcut-container">
+                        <div class = "key-shortcut">1 to 9</div>
+                        <div class = "shortcut-description">Each key triggers different weather, climate and geological events. Press the same key again to increase the intensity of the event, until it resets to being 'off'</div>
                     </div>
                     <div class = "key-shortcut-container">
                         <div class = "key-shortcut">- +</div>
                         <div class = "shortcut-description">Lower or raise the sea level</div>
                     </div>
+
+                    <div class ="shortcuts-subHeader">Technical scene controls</div>
                     <div class = "key-shortcut-container">
                         <div class = "key-shortcut">`</div>
                         <div class = "shortcut-description">Toggle scene statistics</div>
