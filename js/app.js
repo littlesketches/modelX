@@ -9,7 +9,7 @@
 /**************************************************************************/
 /****  This app.js file is used to develop configuration logic and     ****/
 /****  features outside of the A-Frame canvas, which has script logic  ****/
-/****  written as as cusotm A-Frame components (see comopnent.js)      ****/
+/****  written as as custom A-Frame components (see comopnent.js)      ****/
 /**************************************************************************/
 
 
@@ -153,43 +153,62 @@ console.log('BUILDING APP...')
     }
 
     const state = {
-        timeLoaded:         new Date(),
-        time:               {},
-        modelTime:          {
-            hour:           8,
-            season:        'spring',
-            timeOfDay:      () => settings.environment.timeOfDay[state.modelTime.season][state.modelTime.hour],
+        model: {
+            timeLoaded:             new Date(),
+            time:                   {},
         },
-        environment: {
-            name:           'default',
-            nightLights:     false
+        visual: {
+            modelTime: {
+                hour:               10,
+                season:            'spring',
+                timeOfDay:          () => settings.environment.timeOfDay[state.visual.modelTime.season][state.visual.modelTime.hour],
+            },
+            environment: {
+                name:               'default',
+                nightLights:        false
+            },
+            hazard: {
+                rain:               false,          // true or false (on of off; likely to change to intensity)
+                snow:               false,          // true or false (on of off; likely to change to intensity)
+                flood:              'none',         // none, minor, medium and major (for heights )
+                wind:               'none',         // none, minor and major (where the windDamage determines the visual)
+                windDamage:         'none',         // none then incremental propotion (0 to 1) of felled to trees
+                bushfire:           null,           // null then incremental intensity (0, 0.5 and 1 mapping to position)
+                heat:               null,           // null, hotDay, veryHotDay, heatwave
+                seaLevel:           0,              // float number (delta) from the starting point, where around 2 initiates coastal inundation
+                drought:            'none',         // none, minor and major; triggering various water, vegetation/ag and ground cover changes
+                oceanAcidification: 'none',         // none, minor anad major: 
+                lightning:          null,           // Object for storing/clearing setInterval for lightning effect
+                treeSway:           null,           // Object for storing/clearing setInterval for wind affected swaying trees
+                heatPulse:          null,           // Object for storing/clearing setInterval for heat pulse effect
+                tropicalStorm:      false,          // true or false (on of off)
+                tornado:            false,          // true or false (on of off)
+                winterStorm:       'none',          // none, snow, blizard, iceStorm 
+                earthquake:        null,          // none, eartq
+            },
+            weather: {
+                windSpeed:          10, 
+                windDirection:      0,
+                temperature:        25
+            },
+            camera: {
+                activeID:           'flycam',
+                flyIndex:           0
+            },
+            animation: {
+                planeFlight:        false,
+                duckSail:           true,
+                windTurbine:        true,
+                blockTitleShowing:  false,
+            },
+            elements: {
+                origCol:            {}
+            }
         },
-        hazard: {
-            flood:          false,
-            wind:           false,
-            seaLevel:       0,
-            drought:        false,
-            oceanAcidification: false,
-            lighting:       '',
-            treeSway:       ''
-        },
-        weather: {
-            windSpeed:      10, 
-            windDirection:  0,
-            temperature:    25
-        },
-        camera: {
-            activeID:       'flycam',
-            flyIndex:       0
-        },
-        enableKeyEvents: true,
-        keydown:            '',
-        animation: {
-            planeFlight:        false,
-            duckSail:           true,
-            windTurbine:        true,
-            blockTitleShowing:  false,
 
+        ui: {
+            enableKeyEvents:    true,
+            keydown:            '',
         }
     }
 
@@ -246,15 +265,15 @@ console.log('BUILDING APP...')
 
 
 // Set current time to now
-    state.time.year = state.timeLoaded.getFullYear()
-    state.time.month = state.timeLoaded.getMonth()
-    state.time.hour = state.timeLoaded.getHours()
-    state.time.minutes = state.timeLoaded.getMinutes()
-    state.time.season = settings.time.seasonsByMonth[state.time.month]
-    state.environment.sunX = settings.environment.sunX[state.time.season]
+    state.model.time.year = state.model.timeLoaded.getFullYear()
+    state.model.time.month = state.model.timeLoaded.getMonth()
+    state.model.time.hour = state.model.timeLoaded.getHours()
+    state.model.time.minutes = state.model.timeLoaded.getMinutes()
+    state.model.time.season = settings.time.seasonsByMonth[state.model.time.month]
+
+    state.visual.environment.sunX = settings.environment.sunX[state.model.time.season]
 
 // Set Sun "x" position (based on season)
-
     const modelSchema = {
         modelYears: [... Array(settings.time.horizonYear - settings.time.baselineYear).keys()].map(d => d + settings.time.baselineYear)
     }
@@ -271,7 +290,6 @@ console.log('BUILDING APP...')
     }
 
     const activitySchema = {
-
         emissionsSector_Source: {
             "Stationary Energy": {
                 "Electricity":  {
@@ -287,7 +305,6 @@ console.log('BUILDING APP...')
                         "Wind generated on site":          {},
                         "Wind exported":                   {},
                     }
-
                 },    
                 "Natural gas (reticulated)":        {},    
                 "Natural gas (bottled)":            {},    
@@ -299,17 +316,10 @@ console.log('BUILDING APP...')
         economicSector: {
 
         }
-
-
     }
 
     const palette = {
         letterBlock:   ['#ff598f', '#fd8a5e', '#784283', '#01dddd', '#00bfaf', '#91aaff', '#ff9e9e', '#ff80c5', '#7afbff', '#8aff9c' ],
-        A: {
-            '01': 	'#FFA8CB',
-            '02': 	'#784283',
-            '03': 	'#FFD8EC',
-        }
     }
 
     const visualModel = {
@@ -323,7 +333,6 @@ console.log('BUILDING APP...')
 
         }
     }
-
 
 
 
@@ -424,8 +433,6 @@ console.log('BUILDING APP...')
 
             }
         },
-
-
     }
 
 
@@ -485,13 +492,25 @@ console.log('BUILDING APP...')
             }
         },
         
-        heatwave: {
+        heat: {
             morning: {          // 
                 'sky-top':      '#f8f0e2', 
                 'sky-bottom':   '#fffab3', 
                 hemilight: {
                     sky:        '#fff',
                     ground:     '#faf56b'
+                },
+                hotDay: {
+                    'sky-top':      '#f8df87', 
+                    'sky-bottom':   '#a9f8f9', 
+                },
+                veryHotDay: {
+                    'sky-top':      '#ea8334', 
+                    'sky-bottom':   '#f8df87', 
+                },
+                heatwave: {
+                    'sky-top':      '#ea8334', 
+                    'sky-bottom':   '#f8df87', 
                 }
             }, 
             day: {
@@ -500,6 +519,18 @@ console.log('BUILDING APP...')
                 hemilight: {
                     sky:        '#fff',
                     ground:     '#faf56b'
+                },
+                hotDay: {
+                    'sky-top':      '#02d2ed', 
+                    'sky-bottom':   '#804b81', 
+                },
+                veryHotDay: {
+                    'sky-top':      '#02d2ed', 
+                    'sky-bottom':   '#b07da0', 
+                },
+                heatwave: {
+                    'sky-top':      '#b07da0', 
+                    'sky-bottom':   '#f8df87', 
                 }
             }, 
             evening: {
@@ -508,11 +539,35 @@ console.log('BUILDING APP...')
                 hemilight: {
                     sky:        '#fff',
                     ground:     '#faf56b'
+                },
+                hotDay: {
+                    'sky-top':      '#3e0146', 
+                    'sky-bottom':   '#804b81', 
+                },
+                veryHotDay: {
+                    'sky-top':      '#3e0146', 
+                    'sky-bottom':   '#b07da0', 
+                },
+                heatwave: {
+                    'sky-top':      '#b07da0', 
+                    'sky-bottom':   '#f8df87', 
                 }
             }, 
             night: {
                 'sky-top':      '#012037', 
                 'sky-bottom':   '#004e75', 
+                hotDay: {
+                    'sky-top':      '#3e0146', 
+                    'sky-bottom':   '#817db0', 
+                },
+                veryHotDay: {
+                    'sky-top':      '#3e0146', 
+                    'sky-bottom':   '#b07da0', 
+                },
+                heatwave: {
+                    'sky-top':      '#3e0146', 
+                    'sky-bottom':   '#db1a1a'
+                }
             }
         },
 
@@ -657,6 +712,61 @@ console.log('BUILDING APP...')
             }
         },
 
+        snow: {
+            morning: {          // 
+                'sky-top':      '#323434', 
+                'sky-bottom':   '#9c94a8', 
+                'water':        '#377b7b',
+                hemilight: {
+                    sky:        '#949494',
+                    ground:     '#383838'
+                },
+                fog: {
+                    color:      '#656d72',
+                    far:        400,
+                }
+            }, 
+            day: {
+                'sky-top':      '#ababab', 
+                'sky-bottom':   '#f5f5f5', 
+                'water':        '#a3d2d2',
+                hemilight: {
+                    sky:        '#b2d2d0',
+                    ground:     '#ffa8fc'
+                },
+                fog: {
+                    color:      '#9cb0af',
+                    far:        400,
+                }
+            }, 
+            evening: {
+                'sky-top':      '#323434', 
+                'sky-bottom':   '#9c94a8',
+                'water':        '#377b7b',
+                hemilight: {
+                    sky:        '#949494',
+                    ground:     '#383838'
+                },
+                fog: {
+                    color:      '#656d72',
+                    far:        400,
+                }
+            }, 
+            night: {
+                'sky-top':      '#323434', 
+                'sky-bottom':   '#9c94a8', 
+                'water':        '#377b7b',                
+                hemilight: {
+                    sky:        '#949494',
+                    ground:     '#383838'
+                },
+                fog: {
+                    color:      '#656d72',
+                    far:        400,
+                }
+            }
+        },
+
         grandBudapest: {
             morning: {          // 
                 'sky-top':      '#323434', 
@@ -714,8 +824,6 @@ console.log('BUILDING APP...')
 
     }
 
-
-
     settings.climate = {
         hazard: {
             heatwave: {            // Wind?
@@ -748,9 +856,9 @@ console.log('BUILDING APP...')
         }
     }
 
-settings.solarFarm = {
-    rotationByHour: [   0, 0, 0, 0, 0, 0,        // MIDNIGHT TO 5AM
-                        -40, -32.5, -25, -17.5, -10 , -2.5,         // 6 AM TO MIDDAY
-                        2.5, 10 ,17.5, 25, 32.5, 40,        // MIDDAY TO 5PM
-                        40, 40, 40, 0, 0, 0],       // 6PM TO 11PM
-}
+    settings.solarFarm = {
+        rotationByHour: [   0, 0, 0, 0, 0, 0,        // MIDNIGHT TO 5AM
+                            -40, -32.5, -25, -17.5, -10 , -2.5,         // 6 AM TO MIDDAY
+                            2.5, 10 ,17.5, 25, 32.5, 40,        // MIDDAY TO 5PM
+                            40, 40, 40, 0, 0, 0],       // 6PM TO 11PM
+    }
