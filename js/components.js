@@ -1469,7 +1469,7 @@ console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
     // EXTERNAL EVENT CONTROLS : FOR UI AND TESTING
     AFRAME.registerComponent("add-external-listeners", { 
         init: function(){
-            window.addEventListener("ontouchstart", function(key){
+            window.addEventListener("touchstart", function(key){
                  //Enable Orbit control and VR mode options
                 sceneEls.scene.setAttribute('vr-mode-ui', {enabled: true})
                 sceneEls.cam.fly.setAttribute('oribt-controls', {minAzimuthAngle: 0, enabled: true})
