@@ -167,24 +167,25 @@ console.log('BUILDING APP...')
                 name:               'default',
                 nightLights:        false
             },
-            hazard: {               // For all hazards, the 'off' state is null or zero
-                bushfire:           null,           // null then incremental intensity (0, 0.5 and 1 mapping to position)
-                drought:            'none',         // none, minor and major; triggering various water, vegetation/ag and ground cover changes
-                earthquake:         null,          // none, eartq
-                flood:              'none',         // none, minor, medium and major (for heights )
-                heat:               null,           // null, hotDay, veryHotDay, heatwave
-                heatPulse:          null,           // Object for storing/clearing setInterval for heat pulse effect
-                lightning:          null,           // Object for storing/clearing setInterval for lightning effect
-                oceanAcidification: 'none',         // none, minor anad major: 
+            hazardVisible:          false,
+            hazard: {               // For all hazards, the 'off' state is false or zero
+                bushfire:           false,           // false then incremental intensity (0, 0.5 and 1 mapping to position)
+                drought:            false,           // false, minor and major; triggering various water, vegetation/ag and ground cover changes
+                earthquake:         false,           // false, eartq
+                flood:              false,           // false, minor, medium and major (for heights )
+                heat:               false,           // false, hotDay, veryHotDay, heatwave
+                heatPulse:          false,           // Object for storing/clearing setInterval for heat pulse effect
+                lightning:          false,           // Object for storing/clearing setInterval for lightning effect
+                oceanAcidification: false,           // false, minor anad major: 
                 rain:               false,          // true or false (on of off; likely to change to intensity)
                 snow:               false,          // true or false (on of off; likely to change to intensity)
                 seaLevel:           0,              // float number (delta) from the starting point, where around 2 initiates coastal inundation
                 tornado:            false,          // true or false (on of off)
-                treeSway:           null,           // Object for storing/clearing setInterval for wind affected swaying trees
-                tropicalStorm:      false,          // true or false (on of off)
-                wind:               'none',         // none, minor and major (where the windDamage determines the visual)
-                windDamage:         'none',         // none then incremental propotion (0 to 1) of felled to trees
-                winterStorm:       'none',          // none, snow, blizard, iceStorm 
+                treeSway:           false,           // Object for storing/clearing setInterval for wind affected swaying trees
+                tropicalStorm:      false,           // true or false (on of off)
+                wind:               false,           // false, minor and major (where the windDamage determines the visual)
+                winterStorm:        false,          // false, snow, blizard, iceStorm 
+                mudslide:          false,          // false, avalanche, mudslide 
             },
             weather: {
                 windSpeed:          10, 
@@ -194,7 +195,7 @@ console.log('BUILDING APP...')
             camera: {
                 activeID:           'flycam',
                 flyIndex:           0,
-                flyHeight:          'high'          // High or low camera
+                flyHeight:          'high'          // High or low camera for keyboard nav
             },
             animation: {
                 planeFlight:        false,

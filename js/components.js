@@ -320,7 +320,6 @@ console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
                 slchange:        {type: 'number',  default: 0 },  
                 dur:             {type: 'number',   default: 1000 },              
             },
-
             update: function(){
                 // Change sea level
                 const currentSea = sceneEls.enviro.sea.getAttribute('position')
@@ -365,6 +364,7 @@ console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
                 dur:                    {type: 'number',   default: 1000 },      
             },
             init: function(){
+console.log('SHOW CLOUDS')
                 // Move clouds in
                 document.getElementById('cloud-group-left').setAttribute('animation__pos', {
                     property:   'position',
@@ -446,6 +446,7 @@ console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
                 dur:                    {type: 'number',   default: 1000 },    
             },
             init: function(){
+console.log('SHOW LIGHTNING')
                 // Lightning effects
                 const currentEnviro = settings.days.stormFlood[state.visual.modelTime.timeOfDay()]
                 state.visual.hazard.lightning = setInterval(strike, 5000 + Math.random()* 10000 );
@@ -485,6 +486,7 @@ console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
             },
 
             update: function(){
+console.log('SHOW FLOOD')
                 // Raise the puddles
                 const  floodGroup = document.getElementById('nuisance-flood-group')
                 floodGroup.setAttribute('animation__puddles', {
@@ -1597,14 +1599,15 @@ console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
                         case 'Digit1':      // 1. THUNDERSTORM AND FLOODING EVENTS 
                             switch(state.visual.hazard.flood){  
                                 // Increase flood levels on subsequent keypress
-                                case 'none': 
-                                    state.visual.hazard.particles = true          
+                                case false: 
+                                    externalEvents.resetHazards()               // Clear any existing hazards
                                     externalEvents.changeEnvironment('stormFlood', 2000 )
                                     sceneEls.scene.setAttribute('hazard-rain', null)
                                     sceneEls.scene.setAttribute('hazard-lightning', null)
                                     setTimeout( () => { 
                                         sceneEls.scene.setAttribute('hazard-flood', {"floodLvl": 0.125}) 
                                     }, 2000)
+                                    state.visual.hazard.particles = true   
                                     state.visual.hazard.flood = 'minor'
                                     break
                                 // From minor to medium flood
@@ -1620,8 +1623,8 @@ console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
                                 // Reset after showing major flood 
                                 default:                        
                                     state.visual.hazard.particles = false
-                                    state.visual.hazard.lightning = null
-                                    state.visual.hazard.flood = 'none'
+                                    clearInterval(state.visual.hazard.lightning)
+                                    state.visual.hazard.flood = false
                                     sceneEls.scene.removeAttribute('hazard-rain')
                                     sceneEls.scene.removeAttribute('hazard-lightning')
                                     sceneEls.scene.removeAttribute('hazard-flood')
@@ -1631,13 +1634,13 @@ console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
                         
                         case 'Digit2':      // 2. EXTREME WIND (THUNDERSTORM) EVENTS 
                             switch(state.visual.hazard.wind){  
-                                case 'none': 
-                                    state.visual.hazard.particles = true
-                                    state.visual.hazard.lightning = true
+                                case false: 
+                                    externalEvents.resetHazards()               // Clear any existing hazards
                                     externalEvents.changeEnvironment('stormFlood', 2000 )
                                     sceneEls.scene.setAttribute('hazard-rain', null)
                                     sceneEls.scene.setAttribute('hazard-wind', null)
                                     sceneEls.scene.setAttribute('hazard-lightning', null)
+                                    state.visual.hazard.particles = true
                                     state.visual.hazard.wind = 'minor'
                                     break 
                                 // Increase wind levels on subsequent keypress
@@ -1647,9 +1650,9 @@ console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
                                     break
                                 // Reset after showing major wind event 
                                 default:    
-                                    state.visual.hazard.wind = 'none'
+                                    state.visual.hazard.wind = false
                                     state.visual.hazard.particles = false
-                                    state.visual.hazard.lightning = null
+                                    clearInterval(state.visual.hazard.lightning)
                                     sceneEls.scene.removeAttribute('hazard-wind')
                                     sceneEls.scene.removeAttribute('hazard-rain')
                                     sceneEls.scene.removeAttribute('hazard-lightning')
@@ -1659,10 +1662,11 @@ console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
                        
                         case 'Digit3':      // 3. HEAT DAYS AND HEATWAVE
                             switch(state.visual.hazard.heat){  
-                                case null: 
-                                    state.visual.hazard.heat = 'hotDay'
+                                case false: 
+                                    externalEvents.resetHazards()               // Clear any existing hazards
                                     externalEvents.changeEnvironment('heat', 2000)
                                     sceneEls.scene.setAttribute('hazard-heat', {intensity: 'hotDay'})
+                                    state.visual.hazard.heat = 'hotDay'
                                     break
                                 case 'hotDay': 
                                     state.visual.hazard.heat = 'veryHotDay'
@@ -1675,7 +1679,7 @@ console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
 
                                 // Reset after showing heat eevents
                                 default:    
-                                    state.visual.hazard.heat = null
+                                    state.visual.hazard.heat = false
                                     sceneEls.scene.removeAttribute('hazard-heat')
                                     externalEvents.changeEnvironment(state.visual.environment.name)
                             }                            
@@ -1683,9 +1687,10 @@ console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
                         
                         case 'Digit4':      // 4. DROUGHT | FOOD AND WATER SUPPLY SHORTAGE
                             switch(state.visual.hazard.drought){  
-                                case 'none':
-                                    state.visual.hazard.drought = 'minor'
+                                case false:
+                                    externalEvents.resetHazards()               // Clear any existing hazards
                                     sceneEls.scene.setAttribute('hazard-drought', {level: 'minor'})
+                                    state.visual.hazard.drought = 'minor'
                                     break
                                 case 'minor':
                                     state.visual.hazard.drought = 'major'
@@ -1700,7 +1705,8 @@ console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
                        
                         case 'Digit5':      // 5. BUSHFIRES | INTENSITY AND POSITION BASED
                             switch(state.visual.hazard.bushfire){  
-                                case null:
+                                case false:
+                                    externalEvents.resetHazards()               // Clear any existing hazards
                                     state.visual.hazard.bushfire = 0
                                     sceneEls.scene.setAttribute('hazard-bushfire', {intensity: 0})
                                     break
@@ -1713,7 +1719,7 @@ console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
                                     sceneEls.scene.setAttribute('hazard-bushfire', {intensity: 1})
                                     break
                                 default:
-                                    state.visual.hazard.bushfire = null
+                                    state.visual.hazard.bushfire = false
                                     sceneEls.scene.removeAttribute('hazard-bushfire')
                                     externalEvents.changeEnvironment(state.visual.environment.name)
                             }
@@ -1721,12 +1727,13 @@ console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
 
                         case 'Digit6':      // 6. OCEAN ACIDIFICATION | INTENSITY BASED
                             switch(state.visual.hazard.oceanAcidification){  
-                                case null:
-                                    state.visual.hazard['ocean-acidification'] = 'minor'
+                                case false:
+                                    externalEvents.resetHazards()               // Clear any existing hazards
+                                    state.visual.hazard.oceanAcidification = 'minor'
                                     sceneEls.scene.setAttribute('hazard-ocean-acidification', null)
                                     break
                                 default:
-                                    state.visual.hazard['ocean-acidification'] = false
+                                    state.visual.hazard.oceanAcidification = false
                                     sceneEls.scene.removeAttribute('hazard-ocean-acidification')
                                     externalEvents.changeEnvironment('default')
                             }
@@ -1735,8 +1742,9 @@ console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
                         case 'Digit7':      // 7. CYCLONES AND HURRICANES | SEA AND LAND BASED WIND EVENTS
                             switch(state.visual.hazard.tropicalStorm){  
                                 case false:
+                                    externalEvents.resetHazards()               // Clear any existing hazards
                                     externalEvents.changeEnvironment('stormFlood', 2000 )
-                                    state.visual.hazard.tropicalStorm = true
+                                    state.visual.hazard.tropicalStorm = 'tropical'
                                     state.visual.hazard.wind = 'major'
                                     sceneEls.scene.setAttribute('hazard-tropical-storm', null)
                                     sceneEls.scene.setAttribute('hazard-wind', {damage: 0.25})
@@ -1753,7 +1761,8 @@ console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
 
                         case 'Digit8':      // 8. WINTER AND ICE STORM
                             switch(state.visual.hazard.winterStorm){  
-                                case 'none':
+                                case false:
+                                    externalEvents.resetHazards()               // Clear any existing hazards
                                     externalEvents.changeEnvironment('snow', 2000 )
                                     state.visual.hazard.winterStorm = 'snow'
                                     state.visual.hazard.snow = true
@@ -1769,7 +1778,7 @@ console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
                                     break
                                 default:
                                     externalEvents.changeEnvironment(state.visual.environment.name)
-                                    state.visual.hazard.winterStorm = 'none'
+                                    state.visual.hazard.winterStorm = false
                                     sceneEls.scene.removeAttribute('hazard-winter-storm')
                             }
                             break
@@ -1779,10 +1788,9 @@ console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
 
                         case 'Digit0':      //  0. EARTHQUAKES AND TSUNAMIS
                             switch(state.visual.hazard.earthquake){  
-                                 case null:
+                                 case false:
                                     sceneEls.scene.setAttribute('hazard-earthquake', {intensity: 10})
                                     break
-
                                 default:
                             }
                             break
@@ -2104,9 +2112,9 @@ console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
 
         resetHazards: function(){
             state.visual.hazard.particles = false
-            state.visual.hazard.flood = 'none'
-            state.visual.hazard.wind = 'none'
-            state.visual.hazard.lightning = false
+            state.visual.hazard.flood = false
+            state.visual.hazard.wind = false
+            sceneEls.scene.setAttribute('hazard-sea-level', 'slchange: 0')
             sceneEls.scene.removeAttribute('hazard-rain')
             sceneEls.scene.removeAttribute('hazard-lightning')
             sceneEls.scene.removeAttribute('hazard-drought')
@@ -2118,9 +2126,9 @@ console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
             sceneEls.scene.removeAttribute('hazard-heat')
             clearInterval(state.visual.hazard.lightning)
             externalEvents.changeEnvironment(state.visual.environment.name)
+            console.log('All hazards reset')
         }
     }
-
 
 
 ////////////////////////////////////////////////////////////
