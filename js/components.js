@@ -1474,7 +1474,7 @@ console.log('TOUCH/ORBIT CAMERAS ENABLED')
                  //Enable Orbit control and VR mode options
                 sceneEls.scene.setAttribute('vr-mode-ui', {enabled: true})
                 sceneEls.cam.fly.setAttribute('oribt-controls', null)
-                sceneEls.cam.low.setAttribute('oribt-controls', {minAzimuthAngle: 0, enabled: true)
+                sceneEls.cam.low.setAttribute('oribt-controls', {minAzimuthAngle: 0, enabled: true})
                 // Disable look and wasd controls
                 sceneEls.cam.fly.setAttribute('look-controls', {enabled: 'false'})
                 sceneEls.cam.low.setAttribute('look-controls', {enabled: 'false'})
