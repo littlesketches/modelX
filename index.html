@@ -2493,8 +2493,8 @@
 
             <!-- CAMERAS-->
             <a-entity id="camera-group">
-                <a-entity id="lowcam-rig" rotation="0 0 0"  position="0 10 0" >
-                    <a-entity id="lowcam" rotation="0 0 0" camera="active: false; fov: 50" wasd-controls="acceleration:150" ></a-entity>
+                <a-entity id="lowcam-rig" rotation="0 0 0"  position="0 15 0" >
+                    <a-entity id="lowcam" rotation="0 0 0" camera="active: false; fov: 50" orbit-controls="enabled: true; initialPosition: 0 20 0; maxPolarAngle: 100"></a-entity>
                 </a-entity>
 
                 <a-entity id="flycam-rig" position="180 60 0" rotation="-10 90 0"  >
@@ -6875,7 +6875,7 @@
                     <div class ="shortcuts-subHeader">Keyboard shortcuts</div>
                     <div class = "key-shortcut-container">
                         <div class = "key-shortcut small">Space</div>
-                        <div class = "shortcut-description">Toggle between far and lowground camera</div>
+                        <div class = "shortcut-description">Toggle between far and low to ground 'orbit' camera</div>
                     </div>
                     <div class = "key-shortcut-container">
                         <div class = "key-shortcut">&#8592; &#8594;</div>
@@ -6883,11 +6883,15 @@
                     </div>
                     <div class = "key-shortcut-container">
                         <div class = "key-shortcut"> &#8593; &#8595;</div>
-                        <div class = "shortcut-description">Move camera forward and back (high camera only)</div>
+                        <div class = "shortcut-description">Move camera forward and back (far camera only)</div>
+                    </div>
+                    <div class = "key-shortcut-container">
+                        <div class = "key-shortcut">/</div>
+                        <div class = "shortcut-description">Raise and lower camera (far camera only)</div>
                     </div>
                     <div class = "key-shortcut-container">
                         <div class = "key-shortcut"> [  ]</div>
-                        <div class = "shortcut-description"> Rotate high level camera around scene</div>
+                        <div class = "shortcut-description"> Rotate far level camera around scene</div>
                     </div>
                     <div class ="shortcuts-subHeader">Environment controls</div>
                     <div class = "key-shortcut-container">
