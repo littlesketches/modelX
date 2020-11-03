@@ -4,20 +4,20 @@
 /****                                                                   ****/
 /****  An exploration of building 'dynamic models' in a humane form     ****/
 /****  By Little Sketches | Version 0.01 | Copyright applies until a    ****/
-/****  a completed protoype is released  under a Creative Commons       ****/
-/***   4.0 license                                                      ****/
+/****  a completed protoype is (eventually) released  under a Creative  ****/
+/***   Commons 4.0 license                                              ****/
 /***************************************************************************/
 /****  This components.js file is used for A-Frame scene interactivty   ****/
 /***************************************************************************/
 
 
-console.log('REGISTERING A-FRAME COMPONENTS...')
+console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
 
     AFRAME.registerComponent('setup', {
         init: function(){
             console.log('**** SETTING DOM ELEMENTS UP...****')
 
-            // Setup element references on initation for referencing in othercomponent code
+            // Iniiate element references on initation for referencing in othercomponent code
             sceneEls.scene = document.getElementById('scene')
 
             // Zones elements
@@ -57,11 +57,11 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
             // Camera elements
             sceneEls.cam = {
                 fly:            document.getElementById('flycam'),
-                vr:             document.getElementById('vrcam')
+                low:            document.getElementById('lowcam')
             }
             sceneEls.camRig = {
                 fly:            document.getElementById('flycam-rig'),
-                vr:             document.getElementById('vrcam-rig')
+                low:            document.getElementById('lowcam-rig')
             }
 
             // elements elements
@@ -445,7 +445,6 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
             schema: {   
                 dur:                    {type: 'number',   default: 1000 },    
             },
-
             init: function(){
                 // Lightning effects
                 const currentEnviro = settings.days.stormFlood[state.visual.modelTime.timeOfDay()]
@@ -1457,15 +1456,11 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
         })
 
 
-        AFRAME.registerComponent('hazard-ice-melt', {
-        })
-
         AFRAME.registerComponent('hazard-avalanche', {
         })
 
         AFRAME.registerComponent('hazard-mudslide', {
         })
-
 
         AFRAME.registerComponent('hazard-dust-storm', {
         })
@@ -1474,9 +1469,31 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
     // EXTERNAL EVENT CONTROLS : FOR UI AND TESTING
     AFRAME.registerComponent("add-external-listeners", { 
         init: function(){
+            window.addEventListener("ontouchstart", function(key){
+                 //Enable Orbit control and VR mode options
+                sceneEls.scene.setAttribute('vr-mode-ui', {enabled: true})
+                sceneEls.cam.fly.setAttribute('oribt-controls', {minAzimuthAngle: 0, enabled: true})
+                sceneEls.cam.low.setAttribute('oribt-controls', {minAzimuthAngle: 0, enabled: true})
+                // Disable look and wasd controls
+                sceneEls.cam.fly.setAttribute('look-controls', {enabled: false})
+                sceneEls.cam.low.setAttribute('look-controls', {enabled: false})
+                sceneEls.camRig.fly.setAttribute('wasd-controls', {enabled: false})
+                sceneEls.camRig.low.setAttribute('wasd-controls', {enabled: false})
+            })
+
             // KEYBOARD EVENTS
             window.addEventListener("keydown", function(key){
+                // Disable Orbit control and VR mode options
+                sceneEls.scene.setAttribute('vr-mode-ui', {enabled: false})
+                sceneEls.cam.fly.setAttribute('oribt-controls', {enabled: false})
+                sceneEls.cam.low.setAttribute('oribt-controls', {enabled: false})
+                // Enable look and wasd controls
+                sceneEls.cam.fly.setAttribute('look-controls', {enabled: true})
+                sceneEls.cam.low.setAttribute('look-controls', {enabled: true})
+                sceneEls.camRig.fly.setAttribute('wasd-controls', {enabled: true})
+                sceneEls.camRig.low.setAttribute('wasd-controls', {enabled: true})
 
+                // Keyboard events
                 if(state.ui.enableKeyEvents){
                     switch(key.code){
                         case 'Backquote': 
@@ -1488,6 +1505,9 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
                         case 'BracketRight':
                                 externalEvents.rotateFlyCam('right')
                             break
+                        case 'Backslash':
+                                externalEvents.toggleFlyCamHeight()
+                            break
                         case 'Period':
                                 externalEvents.changeHour('forward')
                             break
@@ -1495,7 +1515,7 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
                                 externalEvents.changeHour('back')
                             break
                         case 'Space':
-                                externalEvents.toggleCamera()
+                                externalEvents.toggleFlyCamHeight()
                             break
                         case 'ShiftRight':
                                 externalEvents.changeEnvironment()
@@ -1574,7 +1594,7 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
                             }
                         break
 
-                        // HAZAARD EVENTS
+                        // HAZARD EVENTS
                         case 'Digit1':      // 1. THUNDERSTORM AND FLOODING EVENTS 
                             switch(state.visual.hazard.flood){  
                                 // Increase flood levels on subsequent keypress
@@ -1782,15 +1802,11 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
                             sceneEls.scene.setAttribute('hazard-sea-level', 'slchange: '+state.visual.hazard.seaLevel )
                             console.log('Lowering sea level to '+state.visual.hazard.seaLevel)
                             break
-                        
-
-                        // 0. EARTHQUAKES AND TSUNAMIS | N
-
-
+                    
                         default:
                             clearTimeout(state.ui.keydown)  
                             document.getElementById('shortcuts').classList.remove('visible')
-
+                            console.log('Unused jkey code is: '+ key.code)
 
                     }
                 }
@@ -1820,404 +1836,413 @@ console.log('REGISTERING A-FRAME COMPONENTS...')
 /// METHODS ABLE TO BE CALLED EXTERNAL FROM THE SCENE   ////
 ////////////////////////////////////////////////////////////
 
-const externalEvents = {
-    toggleStats: function(){
-        document.getElementById('scene').toggleAttribute('stats')
-    },
-    toggleCamera: function(){
-        if(sceneEls.cam.fly.getAttribute('camera').active ){
-            sceneEls.cam.fly.setAttribute('camera', {active: false  })
-            sceneEls.cam.vr.setAttribute('camera', {active: true   })
-        } else {
-            sceneEls.cam.fly.setAttribute('camera',   {active: true   })
-            sceneEls.cam.vr.setAttribute('camera',    {active: false   })
-        }
-    },
+    const externalEvents = {
+        toggleStats: function(){
+            document.getElementById('scene').toggleAttribute('stats')
+        },
+        toggleCamera: function(){
+            if(sceneEls.cam.fly.getAttribute('camera').active ){
+                sceneEls.cam.fly.setAttribute('camera', {active: false  })
+                sceneEls.cam.low.setAttribute('camera', {active: true   })
+            } else {
+                sceneEls.cam.fly.setAttribute('camera',   {active: true   })
+                sceneEls.cam.low.setAttribute('camera',   {active: false   })
+            }
+        },
 
-    rotateFlyCam: function(direction, duration = 2000){
-        state.visual.enableKeyEvents = false
-        sceneEls.camRig.fly.removeAttribute('animation__position')
-        sceneEls.camRig.fly.removeAttribute('animation__rotation')     
+        rotateFlyCam: function(direction, duration = 2000){
+            state.visual.enableKeyEvents = false
+            sceneEls.camRig.fly.removeAttribute('animation__position')
+            sceneEls.camRig.fly.removeAttribute('animation__rotation')     
 
-        if(direction === 'left'){
-            state.visual.camera.flyIndex = (state.visual.camera.flyIndex  + 1) < view.cam.fly.length ? state.visual.camera.flyIndex  + 1 : 0
-            rotateY =  sceneEls.camRig.fly.getAttribute('rotation').y - 45
-        } else if(direction === 'right') {
-            state.visual.camera.flyIndex = (state.visual.camera.flyIndex  - 1) >= 0 ? state.visual.camera.flyIndex  - 1 : (view.cam.fly.length -1)
-            rotateY =  sceneEls.camRig.fly.getAttribute('rotation').y + 45
-        }
+            if(direction === 'left'){
+                state.visual.camera.flyIndex = (state.visual.camera.flyIndex  + 1) < view.cam.fly.length ? state.visual.camera.flyIndex  + 1 : 0
+                rotateY =  sceneEls.camRig.fly.getAttribute('rotation').y - 45
+            } else if(direction === 'right') {
+                state.visual.camera.flyIndex = (state.visual.camera.flyIndex  - 1) >= 0 ? state.visual.camera.flyIndex  - 1 : (view.cam.fly.length -1)
+                rotateY =  sceneEls.camRig.fly.getAttribute('rotation').y + 45
+            }
 
-        sceneEls.camRig.fly.setAttribute('animation__position', {
-            property: 'position',
-            dur: duration,
-            to: `${view.cam.fly[state.visual.camera.flyIndex].pos.x}  ${view.cam.fly[state.visual.camera.flyIndex].pos.y}  ${view.cam.fly[state.visual.camera.flyIndex].pos.z}`
-        })  
-        sceneEls.camRig.fly.setAttribute('animation__rotation', {
-            property: 'rotation',
-            dur: duration,
-            to: `-5 ${rotateY} 0}`
-        })  
-
-        sceneEls.cam.fly.removeAttribute('animation__rotation')
-        sceneEls.cam.fly.setAttribute('animation__rotation', {
-            property: 'fly',
-            dur: duration,
-            to: "0 0 0"
-        })
-        setTimeout( ()=> {
-            externalEvents.resetLookControls()         // Bind new instance of look-controls after after animation
-            state.ui.enableKeyEvents = true     
-        }, duration)
-    },
-
-    // Helper to attach new instance of look-controls after after animation
-    resetLookControls: function() {
-        sceneEls.cam.fly.removeAttribute('look-controls')
-        sceneEls.cam.fly.setAttribute('look-controls', {})
-    },
-
-    changeHour: function(direction, duration = 2000){
-        console.log('Moving hour '+direction+' to '+sceneEls.misc.sunPos[state.visual.modelTime.hour])
-    
-        externalEvents.resetHazards() // Reset all hazard (i.e. hazard environents)
-        if(direction === 'forward'){
-            state.visual.modelTime.hour = state.visual.modelTime.hour !== (sceneEls.misc.sunPos.length - 1) ? state.visual.modelTime.hour + 1 : 0
-        } else if(direction === 'back'){
-            state.visual.modelTime.hour = state.visual.modelTime.hour !== 0 ? state.visual.modelTime.hour  - 1 :  sceneEls.misc.sunPos.length - 1 
-        }
-        // Resposition sun an sun light
-        const newSunPos = document.getElementById(sceneEls.misc.sunPos[state.visual.modelTime.hour]).getAttribute('position')
-        sceneEls.enviro.sun.setAttribute('animation__position', {
-            property: 'position',
-            dur: duration,
-            to: `${newSunPos.x}  ${newSunPos.y}  ${newSunPos.z}`
-        })  
-        sceneEls.lights.sun.setAttribute('animation__position', {
-            property: 'position',
-            dur: duration,
-            to: `${newSunPos.x}  ${newSunPos.y}  ${newSunPos.z}`
-        })  
-        // Resposition moon body
-        const newMoonPos = document.getElementById(sceneEls.misc.moonPos[state.visual.modelTime.hour]).getAttribute('position')
-        sceneEls.enviro.moon.setAttribute('animation__position', {
-            property: 'position',
-            dur: duration,
-            to: `${newMoonPos.x}  ${newMoonPos.y}  ${newMoonPos.z}`
-        })  
-        // Change the hemi ambient light
-        sceneEls.lights.hemi.setAttribute('animation__light', {
-            property: 'light.intensity',
-            dur: duration,
-            to: settings.lights.hemi.intProp[state.visual.modelTime.season][state.visual.modelTime.hour] * settings.lights.hemi.maxIntensity
-        })  
-        // Change the environment
-        externalEvents.changeEnvironment()
-        // Turn lights on/off
-        if (state.visual.modelTime.timeOfDay() === "day" || state.visual.modelTime.timeOfDay() === "morning"){
-            externalEvents.turnNightLightsOff()
-        } else {
-            externalEvents.turnNightLightsOn()
-        }
-        // Track the solar  
-        const solarFarmEls = document.getElementsByClassName('solarRotatable')
-        for(let i = 0; i < solarFarmEls.length; i++){
-            solarFarmEls[i].setAttribute('animation__rotate', {
-                property:   'rotation',
-                dur:        duration,
-                to:         {x: settings.solarFarm.rotationByHour[state.visual.modelTime.hour] , y: 0, z: 0}
-            })            
-        }
-
-        // Control key events
-        state.ui.enableKeyEvents = false
-        setTimeout( ()=> {  state.ui.enableKeyEvents = true    }, duration)
-
-    },
-
-    changeEnvironment: function(name = state.visual.environment.name, duration = 2000, timeOfDay = state.visual.modelTime.timeOfDay()){
-        console.log('Changing environment to '+name, timeOfDay)
-        // Change the sky colour for time of day and "conditions"
-        sceneEls.enviro.sky.setAttribute('animation__topColour', {
-            property:   'material.topColor',
-            dur:        duration,
-            to:         settings.days[name][timeOfDay]['sky-top']
-        })  
-       sceneEls.enviro.sky.setAttribute('animation__bottomColour', {
-            property:   'material.bottomColor',
-            dur:        duration,
-            to:         settings.days[name][timeOfDay]['sky-bottom']
-        })  
-        // Change the hemisphere light colours and ocean colour
-        if(settings.days[name][timeOfDay].hemilight){
-            console.log('Changing hemi light colours...')
-            sceneEls.lights.hemi.setAttribute('animation__skyCol', {
-                property: 'light.color',
+            sceneEls.camRig.fly.setAttribute('animation__position', {
+                property: 'position',
                 dur: duration,
-                to: settings.days[name][timeOfDay].hemilight.sky
+                to: `${view.cam.fly[state.visual.camera.flyIndex].pos.x}  ${view.cam.fly[state.visual.camera.flyIndex].pos.y}  ${view.cam.fly[state.visual.camera.flyIndex].pos.z}`
             })  
-            sceneEls.lights.hemi.setAttribute('animation__groundCol', {
-                property: 'light.groundColor',
+            sceneEls.camRig.fly.setAttribute('animation__rotation', {
+                property: 'rotation',
                 dur: duration,
-                to: settings.days[name][timeOfDay].hemilight.ground
+                to: `-5 ${rotateY} 0}`
             })  
 
-        } else {
-            sceneEls.lights.hemi.setAttribute('animation__skyCol', {
-                property: 'light.color',
+            sceneEls.cam.fly.removeAttribute('animation__rotation')
+            sceneEls.cam.fly.setAttribute('animation__rotation', {
+                property: 'fly',
                 dur: duration,
-                to: settings.days.default[timeOfDay].hemilight.sky
-            })  
-            sceneEls.lights.hemi.setAttribute('animation__groundCol', {
-                property: 'light.groundColor',
-                dur: duration,
-                to: settings.days.default[timeOfDay].hemilight.ground
-            })  
-        }
-        // Change the water colour
-        if(settings.days[name][timeOfDay].water){
-            sceneEls.enviro.sea.removeAttribute('ocean')
-            sceneEls.enviro.sea.setAttribute('ocean', {
-                color:              settings.days[name][timeOfDay].water,
-                width:              10.8,
-                amplitude:          0.25,
-                amplitudeVariance:  0.25,
-                density:            20
-            })  
-        } else {
-            sceneEls.enviro.sea.removeAttribute('ocean')
-            sceneEls.enviro.sea.setAttribute('ocean', {
-                color:              settings.days.default[timeOfDay].water,
-                width:              10.8,
-                amplitude:          0.25,
-                amplitudeVariance:  0.25,
-                density:            20
-            })  
-        }
-        // Change the fog settings
-        if(settings.days[name][timeOfDay].fog){
-            sceneEls.scene.setAttribute('fog', {
-                color: settings.days[name][timeOfDay].fog.color,
-                far: settings.days[name][timeOfDay].fog.far
-            })  
-            sceneEls.scene.setAttribute('animation__far', {
-                property: 'fog.far',
-                dur: duration,
-                from: 1000,
-                to: settings.days[name][timeOfDay].fog.far
-            })  
-        } else {
-            sceneEls.scene.setAttribute('fog', {
-                color: settings.days.default[timeOfDay].fog.color,
-                far: settings.days.default[timeOfDay].fog.far
-            })  
-        }
-    },
-
-    turnNightLightsOn:  function(){
-        const glassEls =  document.getElementsByClassName('glass-group')
-        state.visual.environment.nightLights = true
-        for(const el of glassEls){
-            el.setAttribute('material', {'emissive': '#C7CEF6'})
-        }
-
-        document.getElementById('lighthouse-light').setAttribute('animation__rotation', {
-                property:       'rotation',
-                dur:            30000,
-                from:           '-10 -50 0',
-                to:             '-10 -180 0',
-                loop:           true,
-                dir:            'alternate'
+                to: "0 0 0"
             })
-        document.getElementById('lighthouse-light').setAttribute('animation__intensity', {
-            property:       'light.intensity',
-            dur:            1000,
-            to:             1
-        })
-    },
+            setTimeout( ()=> {
+                externalEvents.resetLookControls()         // Bind new instance of look-controls after after animation
+                state.ui.enableKeyEvents = true     
+            }, duration)
+        },
 
-    turnNightLightsOff:  function(){
-        const glassEls =  document.getElementsByClassName('glass-group')
-        state.visual.environment.nightLights = false
-        for(const el of glassEls){
-            el.setAttribute('material', {'emissive': '#000'})
+        toggleFlyCamHeight: function(){
+            const currentPos = sceneEls.camRig.fly.getAttribute('position')
+            switch(state.visual.camera.flyHeight){
+                case "high":
+                    sceneEls.camRig.fly.setAttribute('animation__pos', {
+                        property:       'position',
+                        dur:            1500,
+                        to:             {x: currentPos.x,  y: 10, z: currentPos.z}
+                    })
+                    sceneEls.camRig.fly.setAttribute('animation__rotation', {
+                        property:       'rotation',
+                        dur:            1500,
+                        to:             {x: 0,  y: 90, z: 0}
+                    })
+                    sceneEls.cam.fly.setAttribute('animation__rotation', {
+                        property:       'rotation',
+                        dur:            1500,
+                        to:             {x: 0,  y: 0, z: 0}
+                    })
+                    state.visual.camera.flyHeight = "low"
+                    break
+
+                case "low":
+                    sceneEls.camRig.fly.setAttribute('animation__pos', {
+                        property:       'position',
+                        dur:            1500,
+                        to:             {x: currentPos.x,  y: 90, z: currentPos.z}
+                    })
+                    sceneEls.camRig.fly.setAttribute('animation__rotation', {
+                        property:       'rotation',
+                        dur:            1500,
+                        to:             {x: -10,  y: 90, z: 0}
+                    })
+                    state.visual.camera.flyHeight = "high"
+                    break
+            }
+        },
+
+        // Helper to attach new instance of look-controls after after animation
+        resetLookControls: function() {
+            sceneEls.cam.fly.removeAttribute('look-controls')
+            sceneEls.cam.fly.setAttribute('look-controls', {})
+        },
+
+        changeHour: function(direction, duration = 2000){
+            console.log('Moving hour '+direction+' to '+sceneEls.misc.sunPos[state.visual.modelTime.hour])
+        
+            externalEvents.resetHazards() // Reset all hazard (i.e. hazard environents)
+            if(direction === 'forward'){
+                state.visual.modelTime.hour = state.visual.modelTime.hour !== (sceneEls.misc.sunPos.length - 1) ? state.visual.modelTime.hour + 1 : 0
+            } else if(direction === 'back'){
+                state.visual.modelTime.hour = state.visual.modelTime.hour !== 0 ? state.visual.modelTime.hour  - 1 :  sceneEls.misc.sunPos.length - 1 
+            }
+            // Resposition sun an sun light
+            const newSunPos = document.getElementById(sceneEls.misc.sunPos[state.visual.modelTime.hour]).getAttribute('position')
+            sceneEls.enviro.sun.setAttribute('animation__position', {
+                property: 'position',
+                dur: duration,
+                to: `${newSunPos.x}  ${newSunPos.y}  ${newSunPos.z}`
+            })  
+            sceneEls.lights.sun.setAttribute('animation__position', {
+                property: 'position',
+                dur: duration,
+                to: `${newSunPos.x}  ${newSunPos.y}  ${newSunPos.z}`
+            })  
+            // Resposition moon body
+            const newMoonPos = document.getElementById(sceneEls.misc.moonPos[state.visual.modelTime.hour]).getAttribute('position')
+            sceneEls.enviro.moon.setAttribute('animation__position', {
+                property: 'position',
+                dur: duration,
+                to: `${newMoonPos.x}  ${newMoonPos.y}  ${newMoonPos.z}`
+            })  
+            // Change the hemi ambient light
+            sceneEls.lights.hemi.setAttribute('animation__light', {
+                property: 'light.intensity',
+                dur: duration,
+                to: settings.lights.hemi.intProp[state.visual.modelTime.season][state.visual.modelTime.hour] * settings.lights.hemi.maxIntensity
+            })  
+            // Change the environment
+            externalEvents.changeEnvironment()
+            // Turn lights on/off
+            if (state.visual.modelTime.timeOfDay() === "day" || state.visual.modelTime.timeOfDay() === "morning"){
+                externalEvents.turnNightLightsOff()
+            } else {
+                externalEvents.turnNightLightsOn()
+            }
+            // Track the solar  
+            const solarFarmEls = document.getElementsByClassName('solarRotatable')
+            for(let i = 0; i < solarFarmEls.length; i++){
+                solarFarmEls[i].setAttribute('animation__rotate', {
+                    property:   'rotation',
+                    dur:        duration,
+                    to:         {x: settings.solarFarm.rotationByHour[state.visual.modelTime.hour] , y: 0, z: 0}
+                })            
+            }
+
+            // Control key events
+            state.ui.enableKeyEvents = false
+            setTimeout( ()=> {  state.ui.enableKeyEvents = true    }, duration)
+
+        },
+
+        changeEnvironment: function(name = state.visual.environment.name, duration = 2000, timeOfDay = state.visual.modelTime.timeOfDay()){
+            console.log('Changing environment to '+name, timeOfDay)
+            // Change the sky colour for time of day and "conditions"
+            sceneEls.enviro.sky.setAttribute('animation__topColour', {
+                property:   'material.topColor',
+                dur:        duration,
+                to:         settings.days[name][timeOfDay]['sky-top']
+            })  
+        sceneEls.enviro.sky.setAttribute('animation__bottomColour', {
+                property:   'material.bottomColor',
+                dur:        duration,
+                to:         settings.days[name][timeOfDay]['sky-bottom']
+            })  
+            // Change the hemisphere light colours and ocean colour
+            if(settings.days[name][timeOfDay].hemilight){
+                console.log('Changing hemi light colours...')
+                sceneEls.lights.hemi.setAttribute('animation__skyCol', {
+                    property: 'light.color',
+                    dur: duration,
+                    to: settings.days[name][timeOfDay].hemilight.sky
+                })  
+                sceneEls.lights.hemi.setAttribute('animation__groundCol', {
+                    property: 'light.groundColor',
+                    dur: duration,
+                    to: settings.days[name][timeOfDay].hemilight.ground
+                })  
+
+            } else {
+                sceneEls.lights.hemi.setAttribute('animation__skyCol', {
+                    property: 'light.color',
+                    dur: duration,
+                    to: settings.days.default[timeOfDay].hemilight.sky
+                })  
+                sceneEls.lights.hemi.setAttribute('animation__groundCol', {
+                    property: 'light.groundColor',
+                    dur: duration,
+                    to: settings.days.default[timeOfDay].hemilight.ground
+                })  
+            }
+            // Change the water colour
+            if(settings.days[name][timeOfDay].water){
+                sceneEls.enviro.sea.removeAttribute('ocean')
+                sceneEls.enviro.sea.setAttribute('ocean', {
+                    color:              settings.days[name][timeOfDay].water,
+                    width:              10.8,
+                    amplitude:          0.25,
+                    amplitudeVariance:  0.25,
+                    density:            20
+                })  
+            } else {
+                sceneEls.enviro.sea.removeAttribute('ocean')
+                sceneEls.enviro.sea.setAttribute('ocean', {
+                    color:              settings.days.default[timeOfDay].water,
+                    width:              10.8,
+                    amplitude:          0.25,
+                    amplitudeVariance:  0.25,
+                    density:            20
+                })  
+            }
+            // Change the fog settings
+            if(settings.days[name][timeOfDay].fog){
+                sceneEls.scene.setAttribute('fog', {
+                    color: settings.days[name][timeOfDay].fog.color,
+                    far: settings.days[name][timeOfDay].fog.far
+                })  
+                sceneEls.scene.setAttribute('animation__far', {
+                    property: 'fog.far',
+                    dur: duration,
+                    from: 1000,
+                    to: settings.days[name][timeOfDay].fog.far
+                })  
+            } else {
+                sceneEls.scene.setAttribute('fog', {
+                    color: settings.days.default[timeOfDay].fog.color,
+                    far: settings.days.default[timeOfDay].fog.far
+                })  
+            }
+        },
+
+        turnNightLightsOn:  function(){
+            const glassEls =  document.getElementsByClassName('glass-group')
+            state.visual.environment.nightLights = true
+            for(const el of glassEls){
+                el.setAttribute('material', {'emissive': '#C7CEF6'})
+            }
+
+            document.getElementById('lighthouse-light').setAttribute('animation__rotation', {
+                    property:       'rotation',
+                    dur:            30000,
+                    from:           '-10 -50 0',
+                    to:             '-10 -180 0',
+                    loop:           true,
+                    dir:            'alternate'
+                })
+            document.getElementById('lighthouse-light').setAttribute('animation__intensity', {
+                property:       'light.intensity',
+                dur:            1000,
+                to:             1
+            })
+        },
+
+        turnNightLightsOff:  function(){
+            const glassEls =  document.getElementsByClassName('glass-group')
+            state.visual.environment.nightLights = false
+            for(const el of glassEls){
+                el.setAttribute('material', {'emissive': '#000'})
+            }
+            document.getElementById('lighthouse-light').removeAttribute('animation__rotation')
+            document.getElementById('lighthouse-light').setAttribute('animation__intensity', {
+                property:       'light.intensity',
+                dur:            1000,
+                to:             0
+            })
+        },
+
+        resetHazards: function(){
+            state.visual.hazard.particles = false
+            state.visual.hazard.flood = 'none'
+            state.visual.hazard.wind = 'none'
+            state.visual.hazard.lightning = false
+            sceneEls.scene.removeAttribute('hazard-rain')
+            sceneEls.scene.removeAttribute('hazard-lightning')
+            sceneEls.scene.removeAttribute('hazard-drought')
+            sceneEls.scene.removeAttribute('hazard-tropical-storm')
+            sceneEls.scene.removeAttribute('hazard-winter-storm')
+            sceneEls.scene.removeAttribute('hazard-ocean-acidification')
+            sceneEls.scene.removeAttribute('hazard-flood')
+            sceneEls.scene.removeAttribute('hazard-wind')
+            sceneEls.scene.removeAttribute('hazard-heat')
+            clearInterval(state.visual.hazard.lightning)
+            externalEvents.changeEnvironment(state.visual.environment.name)
         }
-        document.getElementById('lighthouse-light').removeAttribute('animation__rotation')
-        document.getElementById('lighthouse-light').setAttribute('animation__intensity', {
-            property:       'light.intensity',
-            dur:            1000,
-            to:             0
-        })
-    },
-
-    resetHazards: function(){
-        state.visual.hazard.particles = false
-        state.visual.hazard.flood = 'none'
-        state.visual.hazard.wind = 'none'
-        state.visual.hazard.lightning = false
-        sceneEls.scene.removeAttribute('hazard-rain')
-        sceneEls.scene.removeAttribute('hazard-lightning')
-        sceneEls.scene.removeAttribute('hazard-flood')
-        sceneEls.scene.removeAttribute('hazard-wind')
-        externalEvents.changeEnvironment(state.visual.environment.name)
-        sceneEls.scene.removeAttribute('hazard-heat')
-
     }
 
-}
 
 
+////////////////////////////////////////////////////////////
+/////  GLSL SHADERS AND DEPENDENT EFFECTS COMPONENTS  //////
+////////////////////////////////////////////////////////////
 
-/////////
+    // from https://github.com/hughsk/glsl-noise/blob/master/periodic/3d.glsl
+    const shaders = {
 
-    // Orthographic camera
-    AFRAME.registerComponent('ortho', {
-        init: function () {
-            console.log('implementing an ortho')
-            var sceneEl = this.el.sceneEl;
-            sceneEl.addEventListener('render-target-loaded', () => {
-            this.originalCamera = sceneEl.camera;
-            this.cameraParent = sceneEl.camera.parent;
-            this.orthoCamera = new THREE.OrthographicCamera(-1, 1, 1, -1);
-            this.cameraParent.add(this.orthoCamera);
-            sceneEl.camera = this.orthoCamera;
-            });
-        },
-        remove: function () {
-            this.cameraParent.remove(this.orthoCamera);
-            sceneEl.camera = this.originalCamera;
-        }
-    });
+        pnoise3: ` // GLSL textureless classic 3D noise "cnoise",
+                    // with an RSL-style periodic variant "pnoise".
+                    // Author:  Stefan Gustavson (stefan.gustavson@liu.se)
+                    // Version: 2011-10-11
+                    //
+                    // Many thanks to Ian McEwan of Ashima Arts for the
+                    // ideas for permutation and gradient selection.
+                    // Copyright (c) 2011 Stefan Gustavson. All rights reserved.
+                    // Distributed under the MIT license. See LICENSE file.
+                    // https://github.com/ashima/webgl-noise
 
-    // Shader experiment
-    AFRAME.registerComponent("foo", {
-        init: function() {
-            console.log(this.el.object3D)
-            // console.log(this.el.getObject3D('color'))
-            //Multiple Colors
-            var materials = new THREE.MeshToonMaterial({
-                color: this.el.color
-            })
+                    vec3 mod289(vec3 x)
+                    {
+                        return x - floor(x * (1.0 / 289.0)) * 289.0;
+                    }
 
-            this.el.getObject3D('mesh').material = materials;
-            //mesh2 = mesh
-            // console.log(materials)
-        }
-    })
+                    vec4 mod289(vec4 x)
+                    {
+                        return x - floor(x * (1.0 / 289.0)) * 289.0;
+                    }
 
+                    vec4 permute(vec4 x)
+                    {
+                        return mod289(((x*34.0)+1.0)*x);
+                    }
 
+                    vec4 taylorInvSqrt(vec4 r)
+                    {
+                        return 1.79284291400159 - 0.85373472095314 * r;
+                    }
 
-// from https://github.com/hughsk/glsl-noise/blob/master/periodic/3d.glsl
-    const pnoise3 = `
-        // GLSL textureless classic 3D noise "cnoise",
-        // with an RSL-style periodic variant "pnoise".
-        // Author:  Stefan Gustavson (stefan.gustavson@liu.se)
-        // Version: 2011-10-11
-        //
-        // Many thanks to Ian McEwan of Ashima Arts for the
-        // ideas for permutation and gradient selection.
-        // Copyright (c) 2011 Stefan Gustavson. All rights reserved.
-        // Distributed under the MIT license. See LICENSE file.
-        // https://github.com/ashima/webgl-noise
+                    vec3 fade(vec3 t) {
+                        return t*t*t*(t*(t*6.0-15.0)+10.0);
+                    }
 
-        vec3 mod289(vec3 x)
-        {
-            return x - floor(x * (1.0 / 289.0)) * 289.0;
-        }
+                    // Classic Perlin noise, periodic variant
+                    float pnoise3(vec3 P, vec3 rep)
+                    {
+                        vec3 Pi0 = mod(floor(P), rep); // Integer part, modulo period
+                        vec3 Pi1 = mod(Pi0 + vec3(1.0), rep); // Integer part + 1, mod period
+                        Pi0 = mod289(Pi0);
+                        Pi1 = mod289(Pi1);
+                        vec3 Pf0 = fract(P); // Fractional part for interpolation
+                        vec3 Pf1 = Pf0 - vec3(1.0); // Fractional part - 1.0
+                        vec4 ix = vec4(Pi0.x, Pi1.x, Pi0.x, Pi1.x);
+                        vec4 iy = vec4(Pi0.yy, Pi1.yy);
+                        vec4 iz0 = Pi0.zzzz;
+                        vec4 iz1 = Pi1.zzzz;
 
-        vec4 mod289(vec4 x)
-        {
-            return x - floor(x * (1.0 / 289.0)) * 289.0;
-        }
+                        vec4 ixy = permute(permute(ix) + iy);
+                        vec4 ixy0 = permute(ixy + iz0);
+                        vec4 ixy1 = permute(ixy + iz1);
 
-        vec4 permute(vec4 x)
-        {
-            return mod289(((x*34.0)+1.0)*x);
-        }
+                        vec4 gx0 = ixy0 * (1.0 / 7.0);
+                        vec4 gy0 = fract(floor(gx0) * (1.0 / 7.0)) - 0.5;
+                        gx0 = fract(gx0);
+                        vec4 gz0 = vec4(0.5) - abs(gx0) - abs(gy0);
+                        vec4 sz0 = step(gz0, vec4(0.0));
+                        gx0 -= sz0 * (step(0.0, gx0) - 0.5);
+                        gy0 -= sz0 * (step(0.0, gy0) - 0.5);
 
-        vec4 taylorInvSqrt(vec4 r)
-        {
-            return 1.79284291400159 - 0.85373472095314 * r;
-        }
+                        vec4 gx1 = ixy1 * (1.0 / 7.0);
+                        vec4 gy1 = fract(floor(gx1) * (1.0 / 7.0)) - 0.5;
+                        gx1 = fract(gx1);
+                        vec4 gz1 = vec4(0.5) - abs(gx1) - abs(gy1);
+                        vec4 sz1 = step(gz1, vec4(0.0));
+                        gx1 -= sz1 * (step(0.0, gx1) - 0.5);
+                        gy1 -= sz1 * (step(0.0, gy1) - 0.5);
 
-        vec3 fade(vec3 t) {
-            return t*t*t*(t*(t*6.0-15.0)+10.0);
-        }
+                        vec3 g000 = vec3(gx0.x,gy0.x,gz0.x);
+                        vec3 g100 = vec3(gx0.y,gy0.y,gz0.y);
+                        vec3 g010 = vec3(gx0.z,gy0.z,gz0.z);
+                        vec3 g110 = vec3(gx0.w,gy0.w,gz0.w);
+                        vec3 g001 = vec3(gx1.x,gy1.x,gz1.x);
+                        vec3 g101 = vec3(gx1.y,gy1.y,gz1.y);
+                        vec3 g011 = vec3(gx1.z,gy1.z,gz1.z);
+                        vec3 g111 = vec3(gx1.w,gy1.w,gz1.w);
 
-        // Classic Perlin noise, periodic variant
-        float pnoise3(vec3 P, vec3 rep)
-        {
-            vec3 Pi0 = mod(floor(P), rep); // Integer part, modulo period
-            vec3 Pi1 = mod(Pi0 + vec3(1.0), rep); // Integer part + 1, mod period
-            Pi0 = mod289(Pi0);
-            Pi1 = mod289(Pi1);
-            vec3 Pf0 = fract(P); // Fractional part for interpolation
-            vec3 Pf1 = Pf0 - vec3(1.0); // Fractional part - 1.0
-            vec4 ix = vec4(Pi0.x, Pi1.x, Pi0.x, Pi1.x);
-            vec4 iy = vec4(Pi0.yy, Pi1.yy);
-            vec4 iz0 = Pi0.zzzz;
-            vec4 iz1 = Pi1.zzzz;
+                        vec4 norm0 = taylorInvSqrt(vec4(dot(g000, g000), dot(g010, g010), dot(g100, g100), dot(g110, g110)));
+                        g000 *= norm0.x;
+                        g010 *= norm0.y;
+                        g100 *= norm0.z;
+                        g110 *= norm0.w;
+                        vec4 norm1 = taylorInvSqrt(vec4(dot(g001, g001), dot(g011, g011), dot(g101, g101), dot(g111, g111)));
+                        g001 *= norm1.x;
+                        g011 *= norm1.y;
+                        g101 *= norm1.z;
+                        g111 *= norm1.w;
 
-            vec4 ixy = permute(permute(ix) + iy);
-            vec4 ixy0 = permute(ixy + iz0);
-            vec4 ixy1 = permute(ixy + iz1);
+                        float n000 = dot(g000, Pf0);
+                        float n100 = dot(g100, vec3(Pf1.x, Pf0.yz));
+                        float n010 = dot(g010, vec3(Pf0.x, Pf1.y, Pf0.z));
+                        float n110 = dot(g110, vec3(Pf1.xy, Pf0.z));
+                        float n001 = dot(g001, vec3(Pf0.xy, Pf1.z));
+                        float n101 = dot(g101, vec3(Pf1.x, Pf0.y, Pf1.z));
+                        float n011 = dot(g011, vec3(Pf0.x, Pf1.yz));
+                        float n111 = dot(g111, Pf1);
 
-            vec4 gx0 = ixy0 * (1.0 / 7.0);
-            vec4 gy0 = fract(floor(gx0) * (1.0 / 7.0)) - 0.5;
-            gx0 = fract(gx0);
-            vec4 gz0 = vec4(0.5) - abs(gx0) - abs(gy0);
-            vec4 sz0 = step(gz0, vec4(0.0));
-            gx0 -= sz0 * (step(0.0, gx0) - 0.5);
-            gy0 -= sz0 * (step(0.0, gy0) - 0.5);
-
-            vec4 gx1 = ixy1 * (1.0 / 7.0);
-            vec4 gy1 = fract(floor(gx1) * (1.0 / 7.0)) - 0.5;
-            gx1 = fract(gx1);
-            vec4 gz1 = vec4(0.5) - abs(gx1) - abs(gy1);
-            vec4 sz1 = step(gz1, vec4(0.0));
-            gx1 -= sz1 * (step(0.0, gx1) - 0.5);
-            gy1 -= sz1 * (step(0.0, gy1) - 0.5);
-
-            vec3 g000 = vec3(gx0.x,gy0.x,gz0.x);
-            vec3 g100 = vec3(gx0.y,gy0.y,gz0.y);
-            vec3 g010 = vec3(gx0.z,gy0.z,gz0.z);
-            vec3 g110 = vec3(gx0.w,gy0.w,gz0.w);
-            vec3 g001 = vec3(gx1.x,gy1.x,gz1.x);
-            vec3 g101 = vec3(gx1.y,gy1.y,gz1.y);
-            vec3 g011 = vec3(gx1.z,gy1.z,gz1.z);
-            vec3 g111 = vec3(gx1.w,gy1.w,gz1.w);
-
-            vec4 norm0 = taylorInvSqrt(vec4(dot(g000, g000), dot(g010, g010), dot(g100, g100), dot(g110, g110)));
-            g000 *= norm0.x;
-            g010 *= norm0.y;
-            g100 *= norm0.z;
-            g110 *= norm0.w;
-            vec4 norm1 = taylorInvSqrt(vec4(dot(g001, g001), dot(g011, g011), dot(g101, g101), dot(g111, g111)));
-            g001 *= norm1.x;
-            g011 *= norm1.y;
-            g101 *= norm1.z;
-            g111 *= norm1.w;
-
-            float n000 = dot(g000, Pf0);
-            float n100 = dot(g100, vec3(Pf1.x, Pf0.yz));
-            float n010 = dot(g010, vec3(Pf0.x, Pf1.y, Pf0.z));
-            float n110 = dot(g110, vec3(Pf1.xy, Pf0.z));
-            float n001 = dot(g001, vec3(Pf0.xy, Pf1.z));
-            float n101 = dot(g101, vec3(Pf1.x, Pf0.y, Pf1.z));
-            float n011 = dot(g011, vec3(Pf0.x, Pf1.yz));
-            float n111 = dot(g111, Pf1);
-
-            vec3 fade_xyz = fade(Pf0);
-            vec4 n_z = mix(vec4(n000, n100, n010, n110), vec4(n001, n101, n011, n111), fade_xyz.z);
-            vec2 n_yz = mix(n_z.xy, n_z.zw, fade_xyz.y);
-            float n_xyz = mix(n_yz.x, n_yz.y, fade_xyz.x);
-            return 2.2 * n_xyz;
-        }`;
+                        vec3 fade_xyz = fade(Pf0);
+                        vec4 n_z = mix(vec4(n000, n100, n010, n110), vec4(n001, n101, n011, n111), fade_xyz.z);
+                        vec2 n_yz = mix(n_z.xy, n_z.zw, fade_xyz.y);
+                        float n_xyz = mix(n_yz.x, n_yz.y, fade_xyz.x);
+                        return 2.2 * n_xyz;
+                    }`
+        
+    }
 
     AFRAME.registerShader('steam', {
         schema: {
             timeMsec: {type:'time', is:'uniform'}
         },
-        vertexShader: pnoise3 + `
+        vertexShader: shaders.pnoise3 + `
             // Based on @thespite's article:
             // "Vertex displacement with a noise function using GLSL and three.js"
             // Source: https://www.clicktorelease.com/blog/vertex-displacement-noise-3d-webgl-glsl-three-js/

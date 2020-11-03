@@ -149,7 +149,7 @@ console.log('BUILDING APP...')
                     23: 'night',  
                 }
             }
-        }
+        },
     }
 
     const state = {
@@ -167,24 +167,24 @@ console.log('BUILDING APP...')
                 name:               'default',
                 nightLights:        false
             },
-            hazard: {
+            hazard: {               // For all hazards, the 'off' state is null or zero
+                bushfire:           null,           // null then incremental intensity (0, 0.5 and 1 mapping to position)
+                drought:            'none',         // none, minor and major; triggering various water, vegetation/ag and ground cover changes
+                earthquake:         null,          // none, eartq
+                flood:              'none',         // none, minor, medium and major (for heights )
+                heat:               null,           // null, hotDay, veryHotDay, heatwave
+                heatPulse:          null,           // Object for storing/clearing setInterval for heat pulse effect
+                lightning:          null,           // Object for storing/clearing setInterval for lightning effect
+                oceanAcidification: 'none',         // none, minor anad major: 
                 rain:               false,          // true or false (on of off; likely to change to intensity)
                 snow:               false,          // true or false (on of off; likely to change to intensity)
-                flood:              'none',         // none, minor, medium and major (for heights )
+                seaLevel:           0,              // float number (delta) from the starting point, where around 2 initiates coastal inundation
+                tornado:            false,          // true or false (on of off)
+                treeSway:           null,           // Object for storing/clearing setInterval for wind affected swaying trees
+                tropicalStorm:      false,          // true or false (on of off)
                 wind:               'none',         // none, minor and major (where the windDamage determines the visual)
                 windDamage:         'none',         // none then incremental propotion (0 to 1) of felled to trees
-                bushfire:           null,           // null then incremental intensity (0, 0.5 and 1 mapping to position)
-                heat:               null,           // null, hotDay, veryHotDay, heatwave
-                seaLevel:           0,              // float number (delta) from the starting point, where around 2 initiates coastal inundation
-                drought:            'none',         // none, minor and major; triggering various water, vegetation/ag and ground cover changes
-                oceanAcidification: 'none',         // none, minor anad major: 
-                lightning:          null,           // Object for storing/clearing setInterval for lightning effect
-                treeSway:           null,           // Object for storing/clearing setInterval for wind affected swaying trees
-                heatPulse:          null,           // Object for storing/clearing setInterval for heat pulse effect
-                tropicalStorm:      false,          // true or false (on of off)
-                tornado:            false,          // true or false (on of off)
                 winterStorm:       'none',          // none, snow, blizard, iceStorm 
-                earthquake:        null,          // none, eartq
             },
             weather: {
                 windSpeed:          10, 
@@ -193,7 +193,8 @@ console.log('BUILDING APP...')
             },
             camera: {
                 activeID:           'flycam',
-                flyIndex:           0
+                flyIndex:           0,
+                flyHeight:          'high'          // High or low camera
             },
             animation: {
                 planeFlight:        false,
@@ -279,13 +280,18 @@ console.log('BUILDING APP...')
     }
 
     const modelData = {
+        list: {
+            seasons:    ['Summmer', 'Autumn', 'Winter', 'Spring'],  
+            zones:      ["Urban", "Industrial", "Suburban", "Agriculture", "Periurban", "Outer" ],
+            zonesAlias: ["Commercial", "Industrial", "Residential", "Agricultural", "Rural", "Heavy industry"]
+        },
 
-        actions: {
-            households: {
+        mitigation: {
+            actions: {
+                households: {
 
-            }
-
-
+                }
+            }    
         }
     }
 
@@ -320,6 +326,7 @@ console.log('BUILDING APP...')
 
     const palette = {
         letterBlock:   ['#ff598f', '#fd8a5e', '#784283', '#01dddd', '#00bfaf', '#91aaff', '#ff9e9e', '#ff80c5', '#7afbff', '#8aff9c' ],
+        builtEnvScale: ['#00a08f', '#fff', '#fee074', "ff9469", "ff6f61"]
     }
 
     const visualModel = {
@@ -340,31 +347,8 @@ console.log('BUILDING APP...')
 /// LIGHTING AND ENVIRONMENT SETTINGS  ///
 //////////////////////////////////////////
 
-
+    // Environment light intensity and colour settings, by 24hr cycle
     settings.lights = {
-
-        ambient: {
-            maxIntensity:   1.0,    
-            intProp: {
-                summer: [ 0.0, 0.0, 0.0, 0.05, 0.1, 0.15,           // MIDNIGHT TO 5AM
-                            0.2, 0.3, 0.5, 0.75, 0.9, 1.0,         // 6 AM TO MIDDAY
-                            1.0, 0.9, 0.75, 0.9, 0.8, 0.6,          // MIDDAY TO 5PM
-                            0.5, 0.2, 0.15, 0.1, 0.05, 0.0],       // 6PM TO 11PM
-                autumn: [ 0.0, 0.0, 0.0, 0.05, 0.1, 0.15,           // MIDNIGHT TO 5AM
-                            0.2, 0.3, 0.5, 0.75, 0.9, 1.0,         // 6 AM TO MIDDAY
-                            1.0, 0.9, 0.75, 0.9, 0.8, 0.6,          // MIDDAY TO 5PM
-                            0.5, 0.2, 0.15, 0.1, 0.05, 0.0],       // 6PM TO 11PM
-                winter: [ 0.0, 0.0, 0.0, 0.05, 0.1, 0.15,           // MIDNIGHT TO 5AM
-                            0.2, 0.3, 0.5, 0.75, 0.9, 1.0,         // 6 AM TO MIDDAY
-                            1.0, 0.9, 0.75, 0.9, 0.8, 0.6,          // MIDDAY TO 5PM
-                            0.5, 0.2, 0.15, 0.1, 0.05, 0.0],       // 6PM TO 11PM
-                spring: [ 0.0, 0.0, 0.0, 0.05, 0.1, 0.15,           // MIDNIGHT TO 5AM
-                            0.2, 0.3, 0.5, 0.75, 0.9, 1.0,         // 6 AM TO MIDDAY
-                            1.0, 0.9, 0.75, 0.9, 0.8, 0.6,          // MIDDAY TO 5PM
-                            0.5, 0.2, 0.15, 0.1, 0.05, 0.0],       // 6PM TO 11PM
-            }
-        },
-
         hemi: {
             maxIntensity:   1.0,    
             intProp: {
@@ -433,9 +417,31 @@ console.log('BUILDING APP...')
 
             }
         },
+
+        ambient: {
+            maxIntensity:   1.0,    
+            intProp: {
+                summer: [ 0.0, 0.0, 0.0, 0.05, 0.1, 0.15,           // MIDNIGHT TO 5AM
+                            0.2, 0.3, 0.5, 0.75, 0.9, 1.0,         // 6 AM TO MIDDAY
+                            1.0, 0.9, 0.75, 0.9, 0.8, 0.6,          // MIDDAY TO 5PM
+                            0.5, 0.2, 0.15, 0.1, 0.05, 0.0],       // 6PM TO 11PM
+                autumn: [ 0.0, 0.0, 0.0, 0.05, 0.1, 0.15,           // MIDNIGHT TO 5AM
+                            0.2, 0.3, 0.5, 0.75, 0.9, 1.0,         // 6 AM TO MIDDAY
+                            1.0, 0.9, 0.75, 0.9, 0.8, 0.6,          // MIDDAY TO 5PM
+                            0.5, 0.2, 0.15, 0.1, 0.05, 0.0],       // 6PM TO 11PM
+                winter: [ 0.0, 0.0, 0.0, 0.05, 0.1, 0.15,           // MIDNIGHT TO 5AM
+                            0.2, 0.3, 0.5, 0.75, 0.9, 1.0,         // 6 AM TO MIDDAY
+                            1.0, 0.9, 0.75, 0.9, 0.8, 0.6,          // MIDDAY TO 5PM
+                            0.5, 0.2, 0.15, 0.1, 0.05, 0.0],       // 6PM TO 11PM
+                spring: [ 0.0, 0.0, 0.0, 0.05, 0.1, 0.15,           // MIDNIGHT TO 5AM
+                            0.2, 0.3, 0.5, 0.75, 0.9, 1.0,         // 6 AM TO MIDDAY
+                            1.0, 0.9, 0.75, 0.9, 0.8, 0.6,          // MIDDAY TO 5PM
+                            0.5, 0.2, 0.15, 0.1, 0.05, 0.0],       // 6PM TO 11PM
+            }
+        },
     }
 
-
+    // Environment settings (sky and light colours, and fog) by day "name" and "time part" (i.e. morning, day, evening night)"
     settings.days = {
         default: {
             morning: {          // 
@@ -824,41 +830,10 @@ console.log('BUILDING APP...')
 
     }
 
-    settings.climate = {
-        hazard: {
-            heatwave: {            // Wind?
-            
-            },
-            flood: {              // Heavy Rain?
-
-            },
-            storm: {            // Wind?
-            
-            },
-            flood: {              // Heavy Rain?
-
-            }
-        },
-
-        stress: {
-            temperatureRise: {             // Drier?
-
-            },
-            seaLevelRise: {              // Polar / snow melting
-
-            },
-            drought: {             // Dry land, crops
-
-            },
-            ecosystemCollapse: {             
-
-            }
-        }
-    }
-
+    // Solar farm rotation angles by hour to track sun
     settings.solarFarm = {
-        rotationByHour: [   0, 0, 0, 0, 0, 0,        // MIDNIGHT TO 5AM
-                            -40, -32.5, -25, -17.5, -10 , -2.5,         // 6 AM TO MIDDAY
-                            2.5, 10 ,17.5, 25, 32.5, 40,        // MIDDAY TO 5PM
-                            40, 40, 40, 0, 0, 0],       // 6PM TO 11PM
+        rotationByHour: [   0, 0, 0, 0, 0, 0,                       // MIDNIGHT TO 5AM
+                            -40, -32.5, -25, -17.5, -10 , -2.5,     // 6 AM TO MIDDAY
+                            2.5, 10 ,17.5, 25, 32.5, 40,            // MIDDAY TO 5PM
+                            40, 40, 40, 0, 0, 0],                   // 6PM TO 11PM
     }
