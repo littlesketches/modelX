@@ -1472,7 +1472,6 @@ console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
             window.addEventListener("touchstart", function(){
                 const currentPos = sceneEls.camRig.fly.getAttribute('position')
 console.log('TOUCH/ORBIT CAMERAS ENABLED')
-
                  //Enable Orbit control and VR mode options
                 sceneEls.scene.setAttribute('vr-mode-ui', {enabled: true})
                 sceneEls.cam.fly.setAttribute('orbit-controls', {
