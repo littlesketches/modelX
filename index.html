@@ -1072,7 +1072,7 @@
                         <a-entity mixin="${basecol}" buffer-geometry-merger>
                             <a-box position="0 0.5 0" scale="3.5 1.75 6"></a-box>
                             <a-triangle position="0 1.875 3" scale="3.5 1 6" geometry="vertexA: 0 0.25 0" > </a-triangle>
-                            <a-triangle position="0 1.875 -3" scale="3.5 1 6" rotation="0 180 0" geometry="vertexA: 0 0.25 0" ></a-triangle>
+                            <a-triangle position="0 1.875 -3" scale="3.5 1 6" rotation="0 180 0" geometry="vertexA: 0 0.25 0" material="side: back" ></a-triangle>
                         </a-entity>
                         <a-entity class = "barn-roof" mixin="${roofcol}" buffer-geometry-merger>
                             <a-box position="1.1 1.7 0" scale="0.1 2.44 7" rotation="0 0 66.75"> </a-box>
@@ -2493,8 +2493,8 @@
 
             <!-- CAMERAS-->
             <a-entity id="camera-group">
-                <a-entity id="lowcam-rig" rotation="0 0 0"  position="0 15 0" >
-                    <a-entity id="lowcam" rotation="0 0 0" camera="active: false; fov: 50" orbit-controls="enabled: true; initialPosition: 0 20 0; maxPolarAngle: 100"></a-entity>
+                <a-entity id="lowcam-rig" rotation="0 0 0"  position="0 5 0" >
+                    <a-entity id="lowcam" rotation="0 0 0" camera="active: false; fov: 50" orbit-controls="enabled: true; initialPosition: 0 150 0; maxPolarAngle: 90"></a-entity>
                 </a-entity>
 
                 <a-entity id="flycam-rig" position="180 60 0" rotation="-10 90 0"  >
@@ -2606,9 +2606,9 @@
                     <!-- Environment and topography-->
                     <a-entity id="mountains-group">
                         <a-entity id="alps" class="topography surface model" gltf-model="#mdl-alps" position="-40 1.16 47.33" rotation="0 138 0" scale="0.8 0.8 0.8" visibility = "false">
-                            <a-cone id = "snowCap-01" mixin="col-snow" position="-7.8 41.5 -52" geometry="radiusTop: 0.2; height: 3; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45"  scale="24.2 10.4 10.9"> </a-cone>
-                            <a-cone id = "snowCap-02" mixin="col-snow" position="24.25 33.66 -56.3" rotation="0.0 -37.8 -118.6" geometry="radiusTop: 0.42; height: 2.51; radiusBottom: 0.86; segmentsHeight: 1; segmentsRadial: 6; thetaStart: 45" scale="59.25 8.96 14.46"> </a-cone>   
-                            <a-cone id = "snowCap-03" mixin="col-snow" position="69.16 55.39 -53.29" rotation="0 -3 -10" geometry="radiusTop: 0.1; height: 3; radiusBottom: 0.47; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45" scale="31.9 12.5 24.1"> </a-cone>
+                            <a-cone id="snowCap-01" mixin="col-snow" position="-8 42 -51" geometry="radiusTop: 0.2; height: 3; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45" scale="25 11 11" material=""> </a-cone>
+                            <a-cone id="snowCap-02" mixin="col-snow" position="25 33 -55" rotation="0 -37.8 -118.6" geometry="radiusTop: 0.42; height: 2.51; radiusBottom: 0.86; segmentsHeight: 1; segmentsRadial: 6; thetaStart: 45" scale="60 10 15" material=""> </a-cone>
+                            <a-cone id="snowCap-03" mixin="col-snow" position="69 55 -53" rotation="0 -3. -10" geometry="radiusTop: 0.1; height: 3; radiusBottom: 0.47; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45" scale="33 13 25" material=""> </a-cone>
                             <a-entity mixin="col-mountain" buffer-geometry-merger>
                                 <a-cone position="-7.8 41.5 -52"geometry="radiusTop: 0.2; height: 3; segmentsHeight: 1; segmentsRadial: 4; thetaStart: 45" material="flatShading: true" scale="23.8 10 10.5"> </a-cone>
                                 <a-cone position="24.25 33.66 -56.3" rotation="0.0 -37.8 -118.6" geometry="radiusTop: 0.42; height: 2.51; radiusBottom: 0.86; segmentsHeight: 1; segmentsRadial: 6; thetaStart: 45" material="flatShading: true" scale="58.85 8.56 14.06"> </a-cone>
@@ -2768,8 +2768,7 @@
 
                     <a-entity id="floodplain-group" class="topography-group" position="0 2.75 0">  
                         <a-entity id = "nuisance-flood-group" position ="0 -2 0">
-                            <a-entity id="central-floodplain" class="floodplain" position="0 0 0" scale="50 50 2" rotation="-90 0 0"></a-entity>    
-                            <a-entity id="industrial-floodplain" class="floodplain" position="0 0 -46.8" scale="60 50 2" rotation="-90 0 0"></a-entity>    
+                            <a-entity id="central-floodplain" class="floodplain" position="0 0 -5" scale="50 70 2" rotation="-90 0 0"></a-entity>                            <a-entity id="industrial-floodplain" class="floodplain" position="0 0 -46.8" scale="60 50 2" rotation="-90 0 0"></a-entity>    
                             <a-entity id="urban-floodplain" class="floodplain" position="45.8 0.125 -25.9" scale="45 60 2" rotation="-90 0 0"></a-entity>             
                             <a-entity id="suburban-floodplain" class="floodplain" position="0 0 48.88" scale="45 75 2" rotation="-90 0 0"></a-entity>    
                             <a-entity id="periurban-floodplain" class="floodplain" position="-39.8 0 25.9" scale="60 65 2" rotation="-90 0 0"></a-entity>    
@@ -5167,7 +5166,7 @@
                                     <a-cylinder position="0.7 2 -3.3" geometry="height: 2.5; radius: 0.175; segmentsRadial: 12"></a-cylinder>
                                     <a-cylinder position="-0.7 2 -3.3" geometry="height: 2.5; radius: 0.175; segmentsRadial: 12"></a-cylinder>
                                 </a-entity>
-                                <a-entity class="group-roof" position="0 3.25 0">
+                                <a-entity class="group-roof" position="0 3.5 0">
                                     <a-box mixin="col-govBuild-foundation" scale="4.6 0.2 6" position="0 0.1 -0.5"></a-box>
                                     <a-cylinder mixin="col-govBuild-roof" position="0 0.72 -0.5" rotation="-90 0 -180" geometry="height: 5.98; segmentsRadial: 3" material="flatShading: true" scale="2.65 1 1"></a-cylinder>
                                     <a-cylinder mixin="col-govBuild-base" position="0 0.68 -0.5" rotation="-90 0 -180" geometry="height: 6; segmentsRadial: 3" material="flatShading: true" scale="2.65 1 1"></a-cylinder>
