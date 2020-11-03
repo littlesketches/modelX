@@ -446,7 +446,6 @@ console.log('SHOW CLOUDS')
                 dur:                    {type: 'number',   default: 1000 },    
             },
             init: function(){
-console.log('SHOW LIGHTNING')
                 // Lightning effects
                 const currentEnviro = settings.days.stormFlood[state.visual.modelTime.timeOfDay()]
                 state.visual.hazard.lightning = setInterval(strike, 5000 + Math.random()* 10000 );
@@ -486,7 +485,6 @@ console.log('SHOW LIGHTNING')
             },
 
             update: function(){
-console.log('SHOW FLOOD')
                 // Raise the puddles
                 const  floodGroup = document.getElementById('nuisance-flood-group')
                 floodGroup.setAttribute('animation__puddles', {
@@ -886,17 +884,17 @@ console.log('SHOW FLOOD')
                 document.getElementById('snowCap-01').setAttribute('animation__scale', {
                     property:   'scale',
                     dur:        this.data.dur,
-                    to:         {x: 24.2, y: 10.4, z: 10.9}
+                    to:         {x: 25, y: 11, z: 11}
                 })
                 document.getElementById('snowCap-02').setAttribute('animation__scale', {
                     property:   'scale',
                     dur:        this.data.dur,
-                    to:         {x: 59.25, y: 8.96, z: 14.46}
+                    to:         {x: 60, y: 10, z: 15}
                 })
                 document.getElementById('snowCap-03').setAttribute('animation__scale', {
                     property:   'scale',
                     dur:        this.data.dur,
-                    to:         {x: 31.9, y: 12.5, z: 24.1}
+                    to:         {x: 33, y: 13, z: 25}
                 })
             }
 
@@ -1429,7 +1427,7 @@ console.log('SHOW FLOOD')
                 setTimeout(() => {shakeOut(this.data.intensity)}, 600 )
                 setTimeout(() => {shakeReturn(this.data.intensity)}, 700 )
                 setTimeout(() => {
-                    state.visual.hazard.earthquake = null
+                    state.visual.hazard.earthquake = false
                     sceneEls.scene.removeAttribute('hazard-earthquake')
                     sceneEls.zones.planet.removeAttribute('animation__pos')
                 }, 1200 )
@@ -1486,14 +1484,6 @@ console.log('SHOW FLOOD')
 
             // KEYBOARD EVENTS
             window.addEventListener("keydown", function(key){
-            // console.log('KEYBOARD CAMERAS ENABLED')
-            //                 // Disable Orbit control and VR mode options
-            //                 sceneEls.scene.setAttribute('vr-mode-ui', {enabled: false})
-            //                 sceneEls.cam.fly.removeAttribute('orbit-controls')
-            //                 // Enable look and wasd controls
-            //                 sceneEls.cam.fly.setAttribute('look-controls', null)
-            //                 sceneEls.cam.fly.setAttribute('wasd-controls', {acceleration: 150, enabled: true})
-
                 // Keyboard events
                 if(state.ui.enableKeyEvents){
                     switch(key.code){
@@ -1719,6 +1709,7 @@ console.log('SHOW FLOOD')
                                     sceneEls.scene.setAttribute('hazard-bushfire', {intensity: 1})
                                     break
                                 default:
+console.log('Stopping Bushfire!')
                                     state.visual.hazard.bushfire = false
                                     sceneEls.scene.removeAttribute('hazard-bushfire')
                                     externalEvents.changeEnvironment(state.visual.environment.name)
@@ -2114,9 +2105,11 @@ console.log('SHOW FLOOD')
             state.visual.hazard.particles = false
             state.visual.hazard.flood = false
             state.visual.hazard.wind = false
+            state.visual.hazard.bushfire = false
             sceneEls.scene.setAttribute('hazard-sea-level', 'slchange: 0')
             sceneEls.scene.removeAttribute('hazard-rain')
             sceneEls.scene.removeAttribute('hazard-lightning')
+            sceneEls.scene.removeAttribute('hazard-bushfire')
             sceneEls.scene.removeAttribute('hazard-drought')
             sceneEls.scene.removeAttribute('hazard-tropical-storm')
             sceneEls.scene.removeAttribute('hazard-winter-storm')
