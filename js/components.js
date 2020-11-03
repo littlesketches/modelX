@@ -1470,11 +1470,14 @@ console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
     AFRAME.registerComponent("add-external-listeners", { 
         init: function(){
             window.addEventListener("touchstart", function(){
+                const currentPos = sceneEls.camRig.fly.getAttribute('position')
 console.log('TOUCH/ORBIT CAMERAS ENABLED')
+
                  //Enable Orbit control and VR mode options
                 sceneEls.scene.setAttribute('vr-mode-ui', {enabled: true})
-                sceneEls.cam.fly.setAttribute('orbit-controls', null)
-
+                sceneEls.cam.fly.setAttribute('orbit-controls', {
+                    position: {x: currentPos.x, y: currentPos.y, z: currentPos.z}
+                })
                 // Disable look and wasd controls
                 sceneEls.cam.fly.removeAttribute('look-controls')
                 sceneEls.cam.fly.removeAttribute('wasd-controls')
@@ -1485,10 +1488,10 @@ console.log('TOUCH/ORBIT CAMERAS ENABLED')
 console.log('KEYBOARD CAMERAS ENABLED')
                 // Disable Orbit control and VR mode options
                 sceneEls.scene.setAttribute('vr-mode-ui', {enabled: false})
-                sceneEls.cam.fly.setAttribute('orbit-controls', {enabled: false})
+                sceneEls.cam.fly.removeAttribute('orbit-controls')
                 // Enable look and wasd controls
-                sceneEls.cam.fly.setAttribute('look-controls', {acceleration: 150, enabled: true})
-                sceneEls.camRig.fly.setAttribute('wasd-controls', {acceleration: 150, enabled: true})
+                sceneEls.cam.fly.setAttribute('look-controls', null)
+                sceneEls.cam.fly.setAttribute('wasd-controls', {acceleration: 150, enabled: true})
 
                 // Keyboard events
                 if(state.ui.enableKeyEvents){
