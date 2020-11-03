@@ -1469,20 +1469,22 @@ console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
     // EXTERNAL EVENT CONTROLS : FOR UI AND TESTING
     AFRAME.registerComponent("add-external-listeners", { 
         init: function(){
-            window.addEventListener("touchstart", function(key){
+            window.addEventListener("touchstart", function(){
+console.log('TOUCH/ORBIT CAMERAS ENABLED')
                  //Enable Orbit control and VR mode options
                 sceneEls.scene.setAttribute('vr-mode-ui', {enabled: true})
-                sceneEls.cam.fly.setAttribute('oribt-controls', {minAzimuthAngle: 0, enabled: true})
-                sceneEls.cam.low.setAttribute('oribt-controls', {minAzimuthAngle: 0, enabled: true})
+                sceneEls.cam.fly.setAttribute('oribt-controls', null)
+                sceneEls.cam.low.setAttribute('oribt-controls', {minAzimuthAngle: 0, enabled: true)
                 // Disable look and wasd controls
-                sceneEls.cam.fly.setAttribute('look-controls', {enabled: false})
-                sceneEls.cam.low.setAttribute('look-controls', {enabled: false})
-                sceneEls.camRig.fly.setAttribute('wasd-controls', {enabled: false})
-                sceneEls.camRig.low.setAttribute('wasd-controls', {enabled: false})
+                sceneEls.cam.fly.setAttribute('look-controls', {enabled: 'false'})
+                sceneEls.cam.low.setAttribute('look-controls', {enabled: 'false'})
+                sceneEls.camRig.fly.setAttribute('wasd-controls', {enabled: 'false'})
+                sceneEls.camRig.low.setAttribute('wasd-controls', {enabled: 'false'})
             })
 
             // KEYBOARD EVENTS
             window.addEventListener("keydown", function(key){
+console.log('KEYBOARD CAMERAS ENABLED')
                 // Disable Orbit control and VR mode options
                 sceneEls.scene.setAttribute('vr-mode-ui', {enabled: false})
                 sceneEls.cam.fly.setAttribute('oribt-controls', {enabled: false})
