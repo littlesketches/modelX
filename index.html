@@ -2,10 +2,10 @@
 <html>
     <head>
 	    <meta charset="utf-8" />
-		<title>The Humane Model X Project</title>	
+		<title>Project Dreams and Madness</title>	
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 	    <!-- <link rel="icon" href="img/favicon.ico" type="image/x-icon"> -->
-		<meta name="description" content="Emissiosns toy world">
+		<meta name="description" content="Building the Kingdom of Dreams and Madness">
 		<meta name="keywords" content="Human representations, Emissions reduction, Zero Net, Net Zero Speculative design, Design fiction, Futures">	
 		<meta name="author" content="little sketches">
         <meta name=”apple-mobile-web-app-capable” content=”yes”>
@@ -31,7 +31,6 @@
         <!-- <script src="https://unpkg.com/aframe-toggle-controls-component/dist/aframe-toggle-controls-component.min.js"></script>  -->
         <!-- <script src="https://unpkg.com/aframe-lines@^1.0.0/lines.js"></script> -->
 
-        <script src="https://unpkg.com/aframe-lensflare-component/dist/aframe-lensflare-component.min.js"></script>
     </head>
 
     <body>
@@ -2494,11 +2493,12 @@
 
             <!-- CAMERAS-->
             <a-entity id="camera-group">
-                <a-entity id="vrcam-rig" rotation="0 90 0" wasd-controls="acceleration:150; fly: false"  position="0 10.6 0" >
-                    <a-entity id="vrcam" camera="active: false; fov: 50" orbit-controls =" minAzimuthAngle : 0"></a-entity>
+                <a-entity id="lowcam-rig" rotation="0 0 0"  position="0 10 0" >
+                    <a-entity id="lowcam" rotation="0 0 0" camera="active: false; fov: 50" wasd-controls="acceleration:150; fly: false" ></a-entity>
                 </a-entity>
-                <a-entity id="flycam-rig" position="180 60 0" rotation="-10 90 0"  wasd-controls="acceleration: 150">
-                    <a-entity id="flycam" camera="active: true; fov: 45; zoom: 0.9; near: 0.1" look-controls ></a-entity>
+
+                <a-entity id="flycam-rig" position="180 60 0" rotation="-10 90 0"  >
+                    <a-entity id="flycam" camera="active: true; fov: 45; zoom: 0.9; near: 0.1" look-controls wasd-controls="acceleration: 150, enabled: true"></a-entity>
                 </a-entity> 
             </a-entity>
 
@@ -2763,7 +2763,7 @@
                         <a-entity id="periUrban-bedrock"    class="periUrban-zone subSurface"   mixin="bedrock-zone" position="-44.8 0 25.9" ></a-entity>
                         <a-entity id="agriculture-bedrock"  class="agriculture-zone subSurface"   mixin="bedrock-zone" position="-44.8 0 -25.9" ></a-entity>
                         <a-entity id="outer-bedrock"        class="outer-zone subSurface"   mixin="bedrock-zone" position="-44.8 0 -78.0" ></a-entity>
-                        <a-entity id="bay-bedrock"          class="waterfront-zone subSurface"   mixin="bedrock-zone" position="44.8 0 26.2" ></a-entity>
+                        <a-entity id="bay-bedrock"          class="bay-zone subSurface"   mixin="bedrock-zone" position="44.8 0 26.2" ></a-entity>
                     </a-entity>
 
                     <a-entity id="floodplain-group" class="topography-group" position="0 2.75 0">  
