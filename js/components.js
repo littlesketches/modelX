@@ -85,13 +85,494 @@
                     "moon-1800", "moon-1900", "moon-2000", "moon-2100", "moon-2200", "moon-2300" ]
             }    
 
-            // Emissions balloon anchors
+            // Emissions balloon anchor collections
             scene.els.anchors = {
+                // Emission sources
+                sources: {
+                    stationaryEnergy: {
+                        scope1: {
+                            electricityGeneration: {
+                                coalFired:                  document.querySelectorAll('.emissions-anchor.utility-coal'),
+                                gasFired:                   ''
+                            },
+                            mainsGas: {
+                                residential: {
+                                    smallDwellings:          document.querySelectorAll('.emissions-anchor.mains-gas.residential'),
+                                    largeDwellings:          document.querySelectorAll('.emissions-anchor.mains-gas.large-home'),
+                                    townhouses:              document.querySelectorAll('.emissions-anchor.mains-gas.townhouse')
+                                },               
+                                commercial:  {
+                                    offices:                document.querySelectorAll('.emissions-anchor.mains-gas.offices'),
+                                    retail:                 document.querySelectorAll('.emissions-anchor.mains-gas.retail'),
+                                    hospitality:            document.querySelectorAll('.emissions-anchor.mains-gas.hospitality'),
+                                    accomodation:           document.querySelectorAll('.emissions-anchor.mains-gas.accomodation')
+                                },          
+                                industrial: {
+                                    other:                  document.querySelectorAll('.emissions-anchor.mains-gas.industrial'),
+                                    mineral:                [],
+                                    chemical:               [],
+                                    metal:                  [],
+                                    electronics:             []
+                                },          
+                                agriculture:  {
+                                    farm:                   document.querySelectorAll('.emissions-anchor.mains-gas.farm'),
+                                },          
+                                institutional: {
+                                    government:             document.querySelectorAll('.emissions-anchor.mains-gas.government'),
+                                    hospital:               document.querySelectorAll('.emissions-anchor.mains-gas.hospital'),
+                                    airport:                document.querySelectorAll('.emissions-anchor.mains-gas.airport'),
+                                    school:                 document.querySelectorAll('.emissions-anchor.mains-gas.school'),
+                                    church:                 document.querySelectorAll('.emissions-anchor.mains-gas.church')
+                                }         
+                            },
+                            bottledLPG:{
+                                residential: {
+                                    smallDwellings:          document.querySelectorAll('.emissions-anchor.lpg.small-home'),
+                                    largeDwellings:          document.querySelectorAll('.emissions-anchor.lpg.large-home'),
+                                    townhouses:              document.querySelectorAll('.emissions-anchor.lpg.townhouse')
+                                },               
+                                commercial:  {
+                                    offices:                document.querySelectorAll('.emissions-anchor.lpg.offices'),
+                                    retail:                 document.querySelectorAll('.emissions-anchor.lpg.retail'),
+                                    hospitality:            document.querySelectorAll('.emissions-anchor.lpg.hospitality'),
+                                    accomodation:           document.querySelectorAll('.emissions-anchor.lpg.accomodation')
+                                },          
+                                industrial: {
+                                    other:                  document.querySelectorAll('.emissions-anchor.lpg.industrial'),
+                                    mineral:                [],
+                                    chemical:               [],
+                                    metal:                  [],
+                                    electronics:            []
+                                },          
+                                agriculture:  {
+                                    farm:                   document.querySelectorAll('.emissions-anchor.lpg.farm'),
+                                },          
+                                institutional: {
+                                    government:             document.querySelectorAll('.emissions-anchor.lpg.government'),
+                                    hospital:               document.querySelectorAll('.emissions-anchor.lpg.hospital'),
+                                    airport:                document.querySelectorAll('.emissions-anchor.lpg.airport'),
+                                    school:                 document.querySelectorAll('.emissions-anchor.lpg.school'),
+                                    church:                 document.querySelectorAll('.emissions-anchor.lpg.church')
+                                }        
+                            },
+                            wood: {
+                                residential: {
+                                    smallDwellings:          document.querySelectorAll('.emissions-anchor.firewood.small-home'),
+                                    largeDwellings:          document.querySelectorAll('.emissions-anchor.firewood.large-home'),
+                                    townhouses:              []
+                                },               
+                                commercial:                 {},          
+                                industrial:                 {},          
+                                agriculture:                {},          
+                                institutional:              {},
+                            },
+                            diesel: {
+                                residential: {
+                                    smallDwellings:          {},
+                                    largeDwellings:          {},
+                                    townhouses:              []
+                                },               
+                                commercial:                 {},          
+                                industrial:                 {},          
+                                agriculture:                {
+                                    generation:             document.querySelectorAll('.emissions-anchor.diesel-generators.farm'),
+                                    pumpsIrrigation:        document.querySelectorAll('.emissions-anchor.diesal-pumps.farm')
+                                },          
+                                institutional:              {
+                                    government:             document.querySelectorAll('.emissions-anchor.diesel.government'),
+                                    hospital:               document.querySelectorAll('.emissions-anchor.diesel.hospital'),
+                                    airport:                document.querySelectorAll('.emissions-anchor.diesel.airport'),
+                                },
+                            }
+                        },
+                        scope2: {
+                            gridElectricity: {
+                                residential: {
+                                    smallDwellings:         document.querySelectorAll('.emissions-anchor.grid-electricity.small-home'),
+                                    largeDwellings:         document.querySelectorAll('.emissions-anchor.grid-electricity.large-home'),
+                                    townhouses:             document.querySelectorAll('.emissions-anchor.grid-electricity.townhouse')
+                                },  
+                                commercial:  {
+                                    offices:                document.querySelectorAll('.emissions-anchor.grid-electricity.office-fiveLvl'),
+                                    officeTowers:           document.querySelectorAll('.emissions-anchor.grid-electricity.office-tower'),
+                                    retail:                 document.querySelectorAll('.emissions-anchor.grid-electricity.office-threeLvl'),
+                                    hospitality:            document.querySelectorAll('.emissions-anchor.grid-electricity.hospitality'),
+                                    accomodation:           document.querySelectorAll('.emissions-anchor.grid-electricity.accomodation')
+                                },   
+                                industrial: {
+                                    other:                  document.querySelectorAll('.emissions-anchor.grid-electricity.industrial'),
+                                    mineral:                [],
+                                    chemical:               [],
+                                    metal:                  [],
+                                    electronics:            []
+                                },          
+                                agriculture:  {
+                                    largeFarm:              document.querySelectorAll('.emissions-anchor.grid-electricity.large-barn'),
+                                    smallFarm:              document.querySelectorAll('.emissions-anchor.grid-electricity.small-barn')
+                                },          
+                                institutional: {
+                                    government:             document.querySelectorAll('.emissions-anchor.grid-electricity.govBuilding'),
+                                    airport:                document.querySelectorAll('.emissions-anchor.grid-electricity.airport'),   
+                                    hospital:               document.querySelectorAll('.emissions-anchor.grid-electricity.hospital'),
+                                    church:                 document.querySelectorAll('.emissions-anchor.grid-electricity.church'),
+                                    school:                 document.querySelectorAll('.emissions-anchor.grid-electricity.school'),
+                                }  
+                            },
+                        },
+                        scope3: {
+                            eletricityTransmission:         document.querySelectorAll('.emissions-anchor.grid-electricity.transmission'),
+                            eletricityDistribution:         document.querySelectorAll('.emissions-anchor.grid-electricity.distribution'),
+                            gasDistribution:                [],
+                        }
+                    },
+                    transportEnergy: {
+                        scope1: {
+                            road: {
+                                residential: {
+                                    passengerVehicle: {
+                                        petrol:             [],
+                                        diesel:             [],
+                                        lpg:                [],
+                                        biodiesel:          [],
+                                        ethanol:            [],
+                                    },
+                                    motorcyle: {
+                                        petrol:             [],
+                                        ethanol:            [],
+                                    },
+                                    other: {
+                                        petrol:             [],
+                                        diesel:             [],
+                                        lpg:                [],
+                                        biodiesel:          [],
+                                        ethanol:            [],
+                                    },
+                                },
+                                commercial: {
+                                    passengerVehicle: {
+                                        petrol:             [],
+                                        diesel:             [],
+                                        lpg:                [],
+                                        biodiesel:          [],
+                                        ethanol:            [],
+                                    },
+                                    lightCommercialVehicle: {
+                                        petrol:             [],
+                                        diesel:             [],
+                                        lpg:                [],
+                                        biodiesel:          [],
+                                        ethanol:            [],
+                                    },
+                                    heavyTrucks: {
+                                        petrol:             [],
+                                        diesel:             [],
+                                        lpg:                [],
+                                        biodiesel:          [],
+                                        ethanol:            [],
+                                    },
+                                    bus: {
+                                        petrol:             [],
+                                        diesel:             [],
+                                        lpg:                [],
+                                        biodiesel:          [],
+                                        ethanol:            [],
+                                    },
+                                    other: {
+                                        petrol:             [],
+                                        diesel:             [],
+                                        lpg:                [],
+                                        biodiesel:          [],
+                                        ethanol:            [],
+                                    },
+                                },
+                                industrial: {
+                                    passengerVehicle: {
+                                        petrol:             [],
+                                        diesel:             [],
+                                        lpg:                [],
+                                        biodiesel:          [],
+                                        ethanol:            [],
+                                    },
+                                    lightCommercialVehicle: {
+                                        petrol:             [],
+                                        diesel:             [],
+                                        lpg:                [],
+                                        biodiesel:          [],
+                                        ethanol:            [],
+                                    },
+                                    heavyTrucks: {
+                                        petrol:             [],
+                                        diesel:             [],
+                                        lpg:                [],
+                                        biodiesel:          [],
+                                        ethanol:            [],
+                                    },
+                                    other: {
+                                        petrol:             [],
+                                        diesel:             [],
+                                        lpg:                [],
+                                        biodiesel:          [],
+                                        ethanol:            [],
+                                    },
+                                },
+                                agriculture: {
+                                    passengerVehicle: {
+                                        petrol:             [],
+                                        diesel:             [],
+                                        lpg:                [],
+                                        biodiesel:          [],
+                                        ethanol:            [],
+                                    },
+                                    lightCommercialVehicle: {
+                                        petrol:             [],
+                                        diesel:             [],
+                                        lpg:                [],
+                                        biodiesel:          [],
+                                        ethanol:            [],
+                                    },
+                                    other: {
+                                        petrol:             [],
+                                        diesel:             [],
+                                        lpg:                [],
+                                        biodiesel:          [],
+                                        ethanol:            [],
+                                    },
+                                },
+                                institutional: {
+                                    passengerVehicle: {
+                                        petrol:             [],
+                                        diesel:             [],
+                                        lpg:                [],
+                                        biodiesel:          [],
+                                        ethanol:            [],
+                                    },
+                                    lightCommercialVehicle: {
+                                        petrol:             [],
+                                        diesel:             [],
+                                        lpg:                [],
+                                        biodiesel:          [],
+                                        ethanol:            [],
+                                    },
+                                    heavyTrucks: {
+                                        petrol:             [],
+                                        diesel:             [],
+                                        lpg:                [],
+                                        biodiesel:          [],
+                                        ethanol:            [],
+                                    },
+                                    bus: {
+                                        petrol:             [],
+                                        diesel:             [],
+                                        lpg:                [],
+                                        biodiesel:          [],
+                                        ethanol:            [],
+                                    },
+                                    other: {
+                                        petrol:             [],
+                                        diesel:             [],
+                                        lpg:                [],
+                                        biodiesel:          [],
+                                        ethanol:            [],
+                                    },
+                                },
+                            },
+                            offroad: {
+                                industrial: {
+                                    petrol:             [],
+                                    diesel:             [],
+                                    lpg:                [],
+                                    biodiesel:          [],
+                                    ethanol:            [],
+                                },
+                                agriculture: {
+                                    petrol:             [],
+                                    diesel:             [],
+                                    lpg:                [],
+                                    biodiesel:          [],
+                                    ethanol:            [],
+                                },
+                                institutional: {
+                                    petrol:             [],
+                                    diesel:             [],
+                                    lpg:                [],
+                                    biodiesel:          [],
+                                    ethanol:            [],
+                                },
+                            },
+                            aviation: {
+                                airplane: {
+                                    jetfuel:        document.querySelectorAll('.emissions-anchor.airplane'),
+                                    avgas:          [],
+                                },
+                                airplane: {
+                                    jetfuel:        [],
+                                    avgas:          [],
+                                }
+                            }
+                        }
+                    },
+                    solidWaste: {
+                        scope1: {
+                            landfill: {
+                                municipalSolidWaste:        document.querySelectorAll('.emissions-anchor.landfill.msw'),
+                                commercialAndIndustrial:    document.querySelectorAll('.emissions-anchor.landfill.ci'),
+                                constructionAndDemolition:  document.querySelectorAll('.emissions-anchor.landfill.cd'),
+                            },
+                            incineration:                    {},
+                            biologicalTreatment:             {},
+                        },
+                        scope3: {
+                            landfill: {
+                                municipalSolidWaste:            document.querySelectorAll('.emissions-anchor.bin-landfill'),
+                                commercialAndIndustrial:        document.querySelectorAll('.emissions-anchor.skip-landfill'),
+                            }
+                        },
+                    },
+                    wasteWater: {
+                        scope1: {
+                            treatment:                      {}
+                        },
+                        scope3: {
+                            landfill: {
+                                municipalSolidWaste:        document.querySelectorAll('.emissions-anchor.bin-landfill'),
+                                commercialAndIndustrial:    document.querySelectorAll('.emissions-anchor.skip-landfill'),
+                            }
+                        },
+                    },
+                    agriculture: {
+                        scope1: {
+                            livestock: {
+                                enteric: {
+                                    cattle:         document.querySelectorAll('.emissions-anchor.livestock.cow'),
+                                    pigs:           document.querySelectorAll('.emissions-anchor.livestock.pig'),
+                                    sheep:          document.querySelectorAll('.emissions-anchor.livestock.sheep'),
+                                    poultry:        document.querySelectorAll('.emissions-anchor.livestock.poultry')
+                                },
+                                manure: {}
+                            },
+                            grazing: {
+                                cattle:         [],
+                                pigs:           [],
+                                sheep:          [],
+                                poultry:        []
+                            },
+                            cropping: {
+                                wheat:              document.querySelectorAll('.emissions-anchor.agriculture.cropping-wheat'),
+                                corn:               document.querySelectorAll('.emissions-anchor.agriculture.cropping-corn'),
+                                other:              document.querySelectorAll('.emissions-anchor.agriculture.cropping-other')
+                            },
+                            fruitAndVeg: {
+                                apples:              document.querySelectorAll('.emissions-anchor.agriculture.ag-apples'),
+                            }
 
+                        },
+                        scope3: {
 
+                        }
+                    },
+                    land: {
+                        scope1: {
+                            conversion:             [],
+                            clearing:               [],
+                            reclearing:             [],
+                        }
+                    },
+                    industrialProcesses: {
+                        scope1: {
+                            industrial: {
+                                other:                  document.querySelectorAll('.emissions-anchor.lpg.industrial'),
+                                mineral:                [],
+                                chemical:               [],
+                                metal:                  [],
+                                electronics:            []
+                            },
+                        }
+                    },
+                    industrialProductUse: {
+                        scope1: {
+                            refrigerants: {
+                                residential:            [],
+                                commerical:             [],
+                                industrial:             [],
+                                institutional:          [],
+                                transport:  {
+                                    passengerVehicles:  [],
+                                }
+                            }
+                        }
+                    }
+                },
+                // Clean alternatives
+                switches: {       
+                    stationaryEnergy: {
+                        scope1: {
+                            electricityGeneration: {
+                                solar:                  document.querySelectorAll('.emissions-anchor.utility-solar'),
+                                wind:                   document.querySelectorAll('.emissions-anchor.utility-wind'),
+                                hydro:                  document.querySelectorAll('.emissions-anchor.utility-hydro')
+                            },
+                        },
+                        scope2: {
+                            onSiteSolar: {
+                                residential: {
+                                    smallDwellings:         document.querySelectorAll('.emissions-anchor.rooftop-solar'),
+                                    largeDwellings:         [],
+                                    townhouses:             []
+                                },  
+                                commercial:  {
+                                    offices:                [],
+                                    retail:                 [],
+                                    hospitality:            [],
+                                    accomodation:           []
+                                },   
+                                industrial: {
+                                    other:                  [],
+                                    mineral:                [],
+                                    chemical:               [],
+                                    metal:                  [],
+                                    electronics:            []
+                                },          
+                                agriculture:  {
+                                    largeFarm:              [],
+                                    smallFarm:              [],
+                                    groundMounted:          [],
+                                },          
+                                institutional: {
+                                    government:             [],
+                                    airport:                [],
+                                    hospital:               [],
+                                    church:                 [],
+                                    school:                 []
+                                }  
+                            },
+                        },
+                        scope3: {
+                            eletricityTransmission:         [],
+                            eletricityDistribution:         [],
+                            gasDistribution:                [],
+                        }
+                    },
+                },
+                // Carbon sinks 
+                sinks: {
+                    land: {
+                        scope1: {
+                            afforestation:             [],
+                            reforestation:             [],
+                        }
+                    },
+                    agriculture: {
+                        scope1: {
+                            soilSequestration:          []
+                        }
+                    }
+                }
             }
         }
     })
+
+
+                        
 
     AFRAME.registerComponent("position-sun", {        
         init: function() {
@@ -2340,7 +2821,8 @@
 
             // KEYBOARD EVENTS
             window.addEventListener("keydown", function(key){
-                // Keyboard events
+
+console.log(key.code)                // Keyboard events
                 if(state.ui.enableKeyEvents){
                     switch(key.code){
                         case 'Backquote': 
@@ -2421,17 +2903,7 @@
                             break
 
                         // HAZARD EVENTS
-                        case 'Digit1': 
-                        case 'Digit2': 
-                        case 'Digit3': 
-                        case 'Digit4': 
-                        case 'Digit5': 
-                        case 'Digit6': 
-                        case 'Digit7': 
-                        case 'Digit8': 
-                        case 'Digit9': 
-                        case 'Digit0': 
-                            state.scene.environment.hazardVisible = true
+                            // state.scene.environment.hazardVisible = true
 
                         case 'Digit1':      // 1. THUNDERSTORM AND FLOODING EVENTS 
                             switch(state.scene.hazard.flood){  
