@@ -65,7 +65,7 @@
                 low:            document.getElementById('lowcam-rig')
             }
 
-            // Miscellaneous elements
+            // Miscellaneous itemes
             scene.els.items = {
                 duckPath:       document.getElementById('duck-path-points'),
                 blockGroup:     document.getElementById('message-blocks-group')
@@ -83,7 +83,13 @@
                     "moon-0600", "moon-0700", "moon-0800", "moon-0900", "moon-1000", "moon-1100", 
                     "moon-1200", "moon-1300", "moon-1400", "moon-1500", "moon-1600", "moon-1700", 
                     "moon-1800", "moon-1900", "moon-2000", "moon-2100", "moon-2200", "moon-2300" ]
-            }            
+            }    
+
+            // Emissions balloon anchors
+            scene.els.anchors = {
+
+
+            }
         }
     })
 
@@ -2737,7 +2743,7 @@
 
         toggleFlyCamHeight: function(){
             const currentPos = scene.els.camRig.fly.getAttribute('position')
-            switch(state.scene.camPosera.flyHeight){
+            switch(state.scene.camera.flyHeight){
                 case "high":
                     scene.els.camRig.fly.setAttribute('animation__pos', {
                         property:       'position',
@@ -2754,7 +2760,7 @@
                         dur:            1500,
                         to:             {x: 0,  y: 0, z: 0}
                     })
-                    state.scene.camPosera.flyHeight = "low"
+                    state.scene.camera.flyHeight = "low"
                     break
 
                 case "low":
@@ -2768,7 +2774,7 @@
                         dur:            1500,
                         to:             {x: -10,  y: 90, z: 0}
                     })
-                    state.scene.camPosera.flyHeight = "high"
+                    state.scene.camera.flyHeight = "high"
                     break
             }
         },
