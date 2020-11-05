@@ -11,17 +11,18 @@
 /***************************************************************************/
 
 
-console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
+    console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
 
+    // SCENE SETUP COMPONENTS
     AFRAME.registerComponent('setup', {
         init: function(){
             console.log('**** SETTING DOM ELEMENTS UP...****')
 
             // Iniiate element references on initation for referencing in othercomponent code
-            sceneEls.scene = document.getElementById('scene')
+            scene.els.scene = document.getElementById('scene')
 
             // Zones elements
-            sceneEls.zones = {
+            scene.els.zones = {
                 planet:         document.getElementById('planet'),
                 central:        document.getElementsByClassName('central-zone'),
                 suburban:       document.getElementsByClassName('suburban-zone'),
@@ -32,7 +33,7 @@ console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
                 waterfront:     document.getElementsByClassName('waterfront-zone'),
             }
             // Lights
-            sceneEls.lights = {
+            scene.els.lights = {
                 hemi:           document.getElementById('ambient-hemiLight'),
                 ambient:        document.getElementById('ambient-light'),
                 sun:            document.getElementById('sun-light'),
@@ -40,7 +41,7 @@ console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
             }
 
             // Environment elements
-            sceneEls.enviro = {
+            scene.els.enviro = {
                 sun:            document.getElementById('sun-body'),
                 moon:           document.getElementById('moon-body'),
                 sky:            document.getElementById('sky'),
@@ -55,23 +56,23 @@ console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
                 vortex:         document.getElementById('vortex')
             }
             // Camera elements
-            sceneEls.cam = {
+            scene.els.cam = {
                 fly:            document.getElementById('flycam'),
                 low:            document.getElementById('lowcam')
             }
-            sceneEls.camRig = {
+            scene.els.camRig = {
                 fly:            document.getElementById('flycam-rig'),
                 low:            document.getElementById('lowcam-rig')
             }
 
-            // elements elements
-            sceneEls.items = {
+            // Miscellaneous elements
+            scene.els.items = {
                 duckPath:       document.getElementById('duck-path-points'),
                 blockGroup:     document.getElementById('message-blocks-group')
             }
 
             // Misc
-            sceneEls.misc = {
+            scene.els.misc = {
                sunPos: [
                     "sun-0000", "sun-0100", "sun-0200", "sun-0300", "sun-0400", "sun-0500", 
                     "sun-0600", "sun-0700", "sun-0800", "sun-0900", "sun-1000", "sun-1100", 
@@ -86,18 +87,17 @@ console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
         }
     })
 
-
     AFRAME.registerComponent("position-sun", {        
         init: function() {
-            console.log('Setting the sun and moon position for hour '+state.visual.modelTime.hour)
-            sceneEls.enviro.sun.setAttribute('position', document.getElementById(sceneEls.misc.sunPos[state.visual.modelTime.hour]).getAttribute('position'))
-            sceneEls.lights.sun.setAttribute('position', document.getElementById(sceneEls.misc.sunPos[state.visual.modelTime.hour]).getAttribute('position'))
+            console.log('Setting the sun and moon position for hour '+state.scene.time.hour)
+            scene.els.enviro.sun.setAttribute('position', document.getElementById(scene.els.misc.sunPos[state.scene.time.hour]).getAttribute('position'))
+            scene.els.lights.sun.setAttribute('position', document.getElementById(scene.els.misc.sunPos[state.scene.time.hour]).getAttribute('position'))
 
-            sceneEls.enviro.moon.setAttribute('position', document.getElementById(sceneEls.misc.moonPos[state.visual.modelTime.hour]).getAttribute('position'))
+            scene.els.enviro.moon.setAttribute('position', document.getElementById(scene.els.misc.moonPos[state.scene.time.hour]).getAttribute('position'))
 
             // Change the hemi ambient light
-            sceneEls.lights.hemi.setAttribute('light', { 
-                intensity: settings.lights.hemi.intProp[state.visual.modelTime.season][state.visual.modelTime.hour] * settings.lights.hemi.maxIntensity
+            scene.els.lights.hemi.setAttribute('light', { 
+                intensity: settings.lights.hemi.intProp[state.scene.time.season][state.scene.time.hour] * settings.lights.hemi.maxIntensity
             })  
             // Set solar farm axis
             const solarFarmEls = document.getElementsByClassName('solarRotatable')
@@ -105,7 +105,7 @@ console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
                 solarFarmEls[i].setAttribute('animation__rotate', {
                     property:   'rotation',
                     dur:        1000,
-                    to:         {x: settings.solarFarm.rotationByHour[state.visual.modelTime.hour] , y: 0, z: 0}
+                    to:         {x: settings.solarFarm.rotationByHour[state.scene.time.hour] , y: 0, z: 0}
                 })            
             }
 
@@ -114,204 +114,248 @@ console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
       }
     })
 
+    // SCENE SCENARIO AND ANIMATION COMPONENTS
+        AFRAME.registerComponent("cycle-sun", {
+            schema: {
+                dur:                {type: 'number',   default: simulation.dayLength},
+                hour:               { type: 'int',      default: 0}
+            },
 
-    AFRAME.registerComponent("cycle-sun", {
-        schema: {
-            dur:                {type: 'number',   default: simulation.dayLength},
-            hour:               { type: 'int',      default: 0}
-        },
+            init: function() {
+                console.log(`Initiating the sun cycle of ${this.data.dur / 1000 } seconds`)
 
-        init: function() {
-            console.log(`Initiating the sun cycle of ${this.data.dur / 1000 } seconds`)
-
-            // Create sun curve path from midnight
-            sceneEls.misc.sunPos.forEach((id, i) => {
-                const pos = document.getElementById(id).getAttribute('position')
-                pos.x = settings.days.sunX[state.visual.time.season]
-                document.getElementById(id).setAttribute('position', pos)
-            })
-            // Add animation along path for sun body and sun direcitonal light, starting at midnight
-            sceneEls.enviro.sun.setAttribute('alongpath', `curve: #sun-path-points; loop: true; dur: ${this.data.dur}; resetonplay: true ` )
-            sceneEls.lights.sun.setAttribute('alongpath', `curve: #sun-path-points ; loop: true; dur: ${this.data.dur}; resetonplay: true ` )
-        },
-
-        pause: function () {
-            clearInterval(state.visual.modelTime.timer)
-            console.log('Model clock stopped at '+state.visual.modelTime.hour)
-        },
-
-        play: function () {
-            // Start the hour of day timer
-            state.visual.modelTime.hour = 0
-            state.visual.modelTime.timer = setInterval( () => { 
-                state.visual.modelTime.hour = (state.visual.modelTime.hour + 1) % 24  
-                // console.log('Hour is '+state.visual.modelTime.hour )
-            }, this.data.dur / 24 )
-        }
-    })
-
-
-    AFRAME.registerComponent("fly-plane", {
-        init: function () {
-            document.getElementById("plane-animation").setAttribute('alongpath', {
-                curve:          "#airplane-path-points",
-                dur:            90000, 
-                rotate:         true
-            })
-            setTimeout( () => {
-                state.visual.animation.planeFlight = false
-                sceneEls.scene.removeAttribute('fly-plane') 
-            }, 90000)
-        }
-    })
-
-
-    AFRAME.registerComponent("sail-duck", {
-        update: function () {
-            document.getElementById("rubberDuck").setAttribute('alongpath', {
-                curve:          "#duck-path-points",
-                dur:            120000, 
-                loop:           true, 
-                rotate:         true
-            })
-        },
-        remove: function(){
-            document.getElementById("rubberDuck").removeAttribute('alongpath')
-        }
-    })
-
-
-    AFRAME.registerComponent("animate-lighthouse", {
-        play: function() {
-            document.getElementById("lighthouse-light").setAttribute('animation__lighthouse', {
-                property:       'rotation',
-                dur:            30000,
-                from:           '-10 -50 0',
-                to:             '-10 -180 0',
-                loop:           true,
-                dir:            'alternate'
-            })
-        }
-    })
-
-
-    AFRAME.registerComponent("show-block-title", {
-        schema: {
-            text:        {type: 'string',   default: "Hello world"},
-            tilt:        {type: 'array',    default: [10, -10]},
-            rotate:      {type: 'array',    default: [0, 0]},   
-            posZ:        {type: 'array',    default: [50, -50]},            
-            posX:        {type: 'array',    default: [0, 0]},            
-            posY:        {type: 'array',    default: [0, 0]},
-            letterSpace: {type: 'number',   default: 17.5},                     
-        },
-
-        init: function() {
-            const words = this.data.text.split(" "),
-                container = document.getElementById("message-blocks-group"),
-                noWords = words.length
-
-            container.innerHTML = ""            // Clear previous
-            let letterCount = 0;
-
-            words.forEach((word, i) => {
-                const noLetters = word.length,
-                    width = (noLetters - 1) * this.data.letterSpace,
-                    startPos = width/2,
-                    tilt = +this.data.tilt[i],
-                    rotate = +this.data.rotate[i]
-
-                const wordContainer =  document.createElement('a-entity')
-                wordContainer.setAttribute('id', 'message-block-word-'+i)
-                wordContainer.setAttribute('class', 'block-title')
-                wordContainer.setAttribute('position', { x: this.data.posX[i],   y:  this.data.posY[i],  z: this.data.posZ[i] })
-
-                const topString = document.createElement('a-cylinder')
-                topString.setAttribute('mixin', 'mobile-string')
-                topString.setAttribute('position', { x: 0,   y: 105,  z: 0 })
-                topString.setAttribute('rotation', { x: 0,   y: 90,   z: 0 })
-                topString.setAttribute('geometry', { radius: 0.25, height: 50 })
-
-                const mobile = document.createElement('a-cylinder')
-                mobile.setAttribute('mixin', 'mobile-bar')
-                mobile.setAttribute('position', { x: 0,   y: 80,  z: 0 })
-                mobile.setAttribute('rotation', { x: (90 + tilt), y: rotate,   z: 0 })
-                mobile.setAttribute('geometry', { height: (width + 5) })
-
-                const mobileGroup= document.createElement('a-entity')
-                mobileGroup.setAttribute('class', 'mobile-group')
-                mobileGroup.setAttribute('position', { x: 0,   y: Math.atan(tilt * Math.PI / 180) * 10,  z: 0 })                
-                mobileGroup.setAttribute('animation__mobile1', { property: 'rotation.y' ,  from: -5, to: 5, dur: 5000, delay: (2500* i), dir: 'alternate', loop: 'true' })                
-
-                word.split('').forEach((letter, j) => {
-                    const letterString= document.createElement('a-entity')
-                    letterString.setAttribute('mixin', 'mobile-string')
-                    letterString.setAttribute('position', { x: 0,   y: (startPos - this.data.letterSpace * j) ,  z: 10 })
-                    letterString.setAttribute('rotation', { x: (-90  -tilt), y: 0,   z: 0 })
-                    letterString.setAttribute('geometry', {primitive: 'cylinder', height: 20})
-
-                    const letterBox = document.createElement('a-box')
-                    letterBox.setAttribute('position',  { x: 0,   y: -12.5,  z: 0 })
-                    letterBox.setAttribute('rotation',  { x: 0,     y: 90,   z: 0 })
-                    letterBox.setAttribute('scale',     { x: 10,    y: 10,   z: 10 })
-                    letterBox.setAttribute('material', { color: palette.letterBlock[letterCount % palette.letterBlock.length].trim() })
-
-                    const letterFrontText = document.createElement('a-entity')
-                    letterFrontText.setAttribute('position', { x: 0,   y: 0,  z: 0.5 })
-                    letterFrontText.setAttribute('scale', { x: 20, y: 20,   z: 20 })
-                    letterFrontText.setAttribute('text', { value: letter.toUpperCase(), align: 'center' })
-
-                    const letterBackText = document.createElement('a-entity')
-                    letterBackText.setAttribute('position', { x: 0,   y: 0,   z: -0.5 })
-                    letterBackText.setAttribute('rotation', { x: 0,   y: 180,  z: 0 })
-                    letterBackText.setAttribute('scale', { x: 20, y: 20,   z: 20 })
-                    letterBackText.setAttribute('text', { value: letter.toUpperCase(), align: 'center' })
-
-                    const letterSideA = document.createElement('a-entity')
-                    letterSideA.setAttribute('position', { x: 0.525,   y: 0,   z: 0 })
-                    letterSideA.setAttribute('rotation', { x: 0,   y: 90,  z: 0 })
-                    letterSideA.setAttribute('scale', { x: 20, y: 20,   z: 20 })
-                    letterSideA.setAttribute('material', { side: 'back' })
-                    letterSideA.setAttribute('text', { value: letter.toUpperCase(), align: 'center' })
-
-                    const letterSideB = document.createElement('a-entity')
-                    letterSideB.setAttribute('position', { x: -0.525,   y: 0,   z: 0 })
-                    letterSideB.setAttribute('rotation', { x: 0,   y: -90,  z: 0 })
-                    letterSideB.setAttribute('scale', { x: 20,  y: 20,   z: 20 })
-                    letterSideA.setAttribute('material', { side: 'back' })
-                    letterSideB.setAttribute('text', { value: letter.toUpperCase(), align: 'center' })
-
-                    const letterBottom = document.createElement('a-entity')
-                    letterBottom.setAttribute('position', { x: 0,   y: -0.525,   z: 0 })
-                    letterBottom.setAttribute('rotation', { x: -90,   y: 0,  z: 0 })
-                    letterBottom.setAttribute('scale', { x: 20,  y: 20,   z: 20 })
-                    letterBottom.setAttribute('text', { value: letter.toUpperCase(), align: 'center', side: 'back' })
-
-                    const letterTop= document.createElement('a-entity')
-                    letterTop.setAttribute('position', { x: 0,   y: 0.525,   z: 0 })
-                    letterTop.setAttribute('rotation', { x: 90,   y: 0,  z: 0 })
-                    letterTop.setAttribute('scale', { x: 20,  y: 20,   z: 20 })
-                    letterTop.setAttribute('text', { value: letter.toUpperCase(), align: 'center', side: 'back' })
-
-                    letterBox.appendChild(letterBottom)
-                    letterBox.appendChild(letterTop)
-                    letterBox.appendChild(letterSideA)
-                    letterBox.appendChild(letterSideB)
-                    letterBox.appendChild(letterBackText)
-                    letterBox.appendChild(letterFrontText)
-                    letterString.appendChild(letterBox)
-                    mobileGroup.appendChild(letterString)
-                    letterCount++
+                // Create sun curve path from midnight
+                scene.els.misc.sunPos.forEach((id, i) => {
+                    const pos = document.getElementById(id).getAttribute('position')
+                    pos.x = settings.days.sunX[state.scene.time.season]
+                    document.getElementById(id).setAttribute('position', pos)
                 })
+                // Add animation along path for sun body and sun direcitonal light, starting at midnight
+                scene.els.enviro.sun.setAttribute('alongpath', `curve: #sun-path-points; loop: true; dur: ${this.data.dur}; resetonplay: true ` )
+                scene.els.lights.sun.setAttribute('alongpath', `curve: #sun-path-points ; loop: true; dur: ${this.data.dur}; resetonplay: true ` )
+            },
 
-                // Append all containers
-                mobile.appendChild(mobileGroup)
-                wordContainer.appendChild(topString)
-                wordContainer.appendChild(mobile)
-                container.appendChild(wordContainer)
-            })
-        },
-    })
+            pause: function () {
+                clearInterval(state.scene.time.timer)
+                console.log('Model clock stopped at '+state.scene.time.hour)
+            },
+
+            play: function () {
+                // Start the hour of day timer
+                state.scene.time.hour = 0
+                state.scene.time.timer = setInterval( () => { 
+                    state.scene.time.hour = (state.scene.time.hour + 1) % 24  
+                    // console.log('Hour is '+state.scene.time.hour )
+                }, this.data.dur / 24 )
+            }
+        })
+
+
+        AFRAME.registerComponent("fly-plane", {
+            init: function () {
+                document.getElementById("plane-animation").setAttribute('alongpath', {
+                    curve:          "#airplane-path-points",
+                    dur:            90000, 
+                    rotate:         true
+                })
+                setTimeout( () => {
+                    state.scene.animation.planeFlight = false
+                    scene.els.scene.removeAttribute('fly-plane') 
+                }, 90000)
+            }
+        })
+
+
+        AFRAME.registerComponent("sail-duck", {
+            update: function () {
+                document.getElementById("rubberDuck").setAttribute('alongpath', {
+                    curve:          "#duck-path-points",
+                    dur:            120000, 
+                    loop:           true, 
+                    rotate:         true
+                })
+            },
+            remove: function(){
+                document.getElementById("rubberDuck").removeAttribute('alongpath')
+            }
+        })
+
+
+        AFRAME.registerComponent("animate-lighthouse", {
+            play: function() {
+                document.getElementById("lighthouse-light").setAttribute('animation__lighthouse', {
+                    property:       'rotation',
+                    dur:            30000,
+                    from:           '-10 -50 0',
+                    to:             '-10 -180 0',
+                    loop:           true,
+                    dir:            'alternate'
+                })
+            }
+        })
+
+
+        AFRAME.registerComponent("nightlights", {
+            schema: {
+                dur:             {type: 'number',   default: 1000 },              
+            },            
+            init: function() {
+                const glassEls =  document.getElementsByClassName('glass-group')
+                state.scene.environment.nightLights = true
+                for(const el of glassEls){
+                    el.setAttribute('material', {'emissive': '#C7CEF6'})
+                }
+                document.getElementById('lighthouse-light').setAttribute('animation__rotation', {
+                        property:       'rotation',
+                        dur:            30000,
+                        from:           '-10 -50 0',
+                        to:             '-10 -180 0',
+                        loop:           true,
+                        dir:            'alternate'
+                    })
+                document.getElementById('lighthouse-light').setAttribute('animation__intensity', {
+                    property:       'light.intensity',
+                    dur:            this.data.dur,
+                    to:             1
+                })
+            },
+
+            remove: function(){
+                const glassEls =  document.getElementsByClassName('glass-group')
+                state.scene.environment.nightLights = false
+                for(const el of glassEls){
+                    el.setAttribute('material', {'emissive': '#000'})
+                }
+                document.getElementById('lighthouse-light').removeAttribute('animation__rotation')
+                document.getElementById('lighthouse-light').setAttribute('animation__intensity', {
+                    property:       'light.intensity',
+                    dur:            this.data.dur,
+                    to:             0
+                })
+            }
+        })
+
+
+        AFRAME.registerComponent("show-block-title", {
+            schema: {
+                text:        {type: 'string',   default: "Hello world"},
+                tilt:        {type: 'array',    default: [10, -10]},
+                rotate:      {type: 'array',    default: [0, 0]},   
+                posZ:        {type: 'array',    default: [50, -50]},            
+                posX:        {type: 'array',    default: [0, 0]},            
+                posY:        {type: 'array',    default: [0, 0]},
+                letterSpace: {type: 'number',   default: 17.5},                     
+            },
+
+            init: function() {
+                const words = this.data.text.split(" "),
+                    container = document.getElementById("message-blocks-group"),
+                    noWords = words.length
+
+                container.innerHTML = ""            // Clear previous
+                let letterCount = 0;
+
+                words.forEach((word, i) => {
+                    const noLetters = word.length,
+                        width = (noLetters - 1) * this.data.letterSpace,
+                        startPos = width/2,
+                        tilt = +this.data.tilt[i],
+                        rotate = +this.data.rotate[i]
+
+                    const wordContainer =  document.createElement('a-entity')
+                    wordContainer.setAttribute('id', 'message-block-word-'+i)
+                    wordContainer.setAttribute('class', 'block-title')
+                    wordContainer.setAttribute('position', { x: this.data.posX[i],   y:  this.data.posY[i],  z: this.data.posZ[i] })
+
+                    const topString = document.createElement('a-cylinder')
+                    topString.setAttribute('mixin', 'mobile-string')
+                    topString.setAttribute('position', { x: 0,   y: 105,  z: 0 })
+                    topString.setAttribute('rotation', { x: 0,   y: 90,   z: 0 })
+                    topString.setAttribute('geometry', { radius: 0.25, height: 50 })
+
+                    const mobile = document.createElement('a-cylinder')
+                    mobile.setAttribute('mixin', 'mobile-bar')
+                    mobile.setAttribute('position', { x: 0,   y: 80,  z: 0 })
+                    mobile.setAttribute('rotation', { x: (90 + tilt), y: rotate,   z: 0 })
+                    mobile.setAttribute('geometry', { height: (width + 5) })
+
+                    const mobileGroup= document.createElement('a-entity')
+                    mobileGroup.setAttribute('class', 'mobile-group')
+                    mobileGroup.setAttribute('position', { x: 0,   y: Math.atan(tilt * Math.PI / 180) * 10,  z: 0 })                
+                    mobileGroup.setAttribute('animation__mobile1', { property: 'rotation.y' ,  from: -5, to: 5, dur: 5000, delay: (2500* i), dir: 'alternate', loop: 'true' })                
+
+                    word.split('').forEach((letter, j) => {
+                        const letterString= document.createElement('a-entity')
+                        letterString.setAttribute('mixin', 'mobile-string')
+                        letterString.setAttribute('position', { x: 0,   y: (startPos - this.data.letterSpace * j) ,  z: 10 })
+                        letterString.setAttribute('rotation', { x: (-90  -tilt), y: 0,   z: 0 })
+                        letterString.setAttribute('geometry', {primitive: 'cylinder', height: 20})
+
+                        const letterBox = document.createElement('a-box')
+                        letterBox.setAttribute('position',  { x: 0,   y: -12.5,  z: 0 })
+                        letterBox.setAttribute('rotation',  { x: 0,     y: 90,   z: 0 })
+                        letterBox.setAttribute('scale',     { x: 10,    y: 10,   z: 10 })
+                        letterBox.setAttribute('material', { color: palette.letterBlock[letterCount % palette.letterBlock.length].trim() })
+
+                        const letterFrontText = document.createElement('a-entity')
+                        letterFrontText.setAttribute('position', { x: 0,   y: 0,  z: 0.5 })
+                        letterFrontText.setAttribute('scale', { x: 20, y: 20,   z: 20 })
+                        letterFrontText.setAttribute('text', { value: letter.toUpperCase(), align: 'center' })
+
+                        const letterBackText = document.createElement('a-entity')
+                        letterBackText.setAttribute('position', { x: 0,   y: 0,   z: -0.5 })
+                        letterBackText.setAttribute('rotation', { x: 0,   y: 180,  z: 0 })
+                        letterBackText.setAttribute('scale', { x: 20, y: 20,   z: 20 })
+                        letterBackText.setAttribute('text', { value: letter.toUpperCase(), align: 'center' })
+
+                        const letterSideA = document.createElement('a-entity')
+                        letterSideA.setAttribute('position', { x: 0.525,   y: 0,   z: 0 })
+                        letterSideA.setAttribute('rotation', { x: 0,   y: 90,  z: 0 })
+                        letterSideA.setAttribute('scale', { x: 20, y: 20,   z: 20 })
+                        letterSideA.setAttribute('material', { side: 'back' })
+                        letterSideA.setAttribute('text', { value: letter.toUpperCase(), align: 'center' })
+
+                        const letterSideB = document.createElement('a-entity')
+                        letterSideB.setAttribute('position', { x: -0.525,   y: 0,   z: 0 })
+                        letterSideB.setAttribute('rotation', { x: 0,   y: -90,  z: 0 })
+                        letterSideB.setAttribute('scale', { x: 20,  y: 20,   z: 20 })
+                        letterSideA.setAttribute('material', { side: 'back' })
+                        letterSideB.setAttribute('text', { value: letter.toUpperCase(), align: 'center' })
+
+                        const letterBottom = document.createElement('a-entity')
+                        letterBottom.setAttribute('position', { x: 0,   y: -0.525,   z: 0 })
+                        letterBottom.setAttribute('rotation', { x: -90,   y: 0,  z: 0 })
+                        letterBottom.setAttribute('scale', { x: 20,  y: 20,   z: 20 })
+                        letterBottom.setAttribute('text', { value: letter.toUpperCase(), align: 'center', side: 'back' })
+
+                        const letterTop= document.createElement('a-entity')
+                        letterTop.setAttribute('position', { x: 0,   y: 0.525,   z: 0 })
+                        letterTop.setAttribute('rotation', { x: 90,   y: 0,  z: 0 })
+                        letterTop.setAttribute('scale', { x: 20,  y: 20,   z: 20 })
+                        letterTop.setAttribute('text', { value: letter.toUpperCase(), align: 'center', side: 'back' })
+
+                        letterBox.appendChild(letterBottom)
+                        letterBox.appendChild(letterTop)
+                        letterBox.appendChild(letterSideA)
+                        letterBox.appendChild(letterSideB)
+                        letterBox.appendChild(letterBackText)
+                        letterBox.appendChild(letterFrontText)
+                        letterString.appendChild(letterBox)
+                        mobileGroup.appendChild(letterString)
+                        letterCount++
+                    })
+
+                    // Append all containers
+                    mobile.appendChild(mobileGroup)
+                    wordContainer.appendChild(topString)
+                    wordContainer.appendChild(mobile)
+                    container.appendChild(wordContainer)
+                })
+            },
+        })
+
+
+    // SCENE INTERACTION COMPONENT COMPONENTS
 
 
     // CLIMATE RISK / HAZARD EVENT VISUALISATIONS
@@ -322,21 +366,21 @@ console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
             },
             update: function(){
                 // Change sea level
-                const currentSea = sceneEls.enviro.sea.getAttribute('position')
-                sceneEls.enviro.sea.setAttribute('animation__seaLevel', {
+                const currentSea = scene.els.enviro.sea.getAttribute('position')
+                scene.els.enviro.sea.setAttribute('animation__seaLevel', {
                     property:       'position',
                     dur:            this.data.dur,
                     to:             {x: currentSea.x,   y: 2 + this.data.slchange, z: currentSea.z}
                 })
                 // Change angle to show 'creeping inundation' (above 2)
                 if(this.data.slchange > 2){
-                    sceneEls.enviro.oceanGroup.setAttribute('animation__seaAngle', {
+                    scene.els.enviro.oceanGroup.setAttribute('animation__seaAngle', {
                         property:       'rotation',
                         dur:            this.data.dur,
                         to:             {x: 0,   y: 0,  z: 1}
                     })
                 } else {
-                    sceneEls.enviro.oceanGroup.setAttribute('animation__seaAngle', {
+                    scene.els.enviro.oceanGroup.setAttribute('animation__seaAngle', {
                         property:       'rotation',
                         dur:            this.data.dur,
                         to:             {x: 0,   y: 0,  z: 0}
@@ -364,7 +408,6 @@ console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
                 dur:                    {type: 'number',   default: 1000 },      
             },
             init: function(){
-console.log('SHOW CLOUDS')
                 // Move clouds in
                 document.getElementById('cloud-group-left').setAttribute('animation__pos', {
                     property:   'position',
@@ -378,7 +421,7 @@ console.log('SHOW CLOUDS')
                 })
                 // Start rain particles after the clouds
                 setTimeout(() => {
-                    sceneEls.enviro.particles.setAttribute('particle-system', {
+                    scene.els.enviro.particles.setAttribute('particle-system', {
                         preset:              'dust',
                         blending:            1,
                         size:                2,
@@ -421,7 +464,7 @@ console.log('SHOW CLOUDS')
                     to:         {x: 200, y: 0, z: 0}
                 })
                 // Stop the rain
-                sceneEls.enviro.particles.removeAttribute('particle-system')
+                scene.els.enviro.particles.removeAttribute('particle-system')
                 // Remove the puddles and reset the flood group height
                 const floodplains = document.getElementsByClassName('floodplain'),
                     floodGroup = document.getElementById('nuisance-flood-group')
@@ -447,18 +490,18 @@ console.log('SHOW CLOUDS')
             },
             init: function(){
                 // Lightning effects
-                const currentEnviro = settings.days.stormFlood[state.visual.modelTime.timeOfDay()]
-                state.visual.hazard.lightning = setInterval(strike, 5000 + Math.random()* 10000 );
+                const currentEnviro = settings.days.stormFlood[state.scene.time.timeOfDay()]
+                state.scene.hazard.lightning = setInterval(strike, 5000 + Math.random()* 10000 );
                 function strike(){
-                    sceneEls.enviro.sky.setAttribute('material', { topColor:   '#fff' })
-                    sceneEls.enviro.lightningGroup.setAttribute('visible', 'true')
+                    scene.els.enviro.sky.setAttribute('material', { topColor:   '#fff' })
+                    scene.els.enviro.lightningGroup.setAttribute('visible', 'true')
                     setTimeout(() => {
-                       sceneEls.enviro.sky.setAttribute('material', {  topColor:  currentEnviro['sky-top']  })
+                       scene.els.enviro.sky.setAttribute('material', {  topColor:  currentEnviro['sky-top']  })
                        setTimeout(() => {
-                            sceneEls.enviro.sky.setAttribute('material', { topColor:   '#fff' })               
+                            scene.els.enviro.sky.setAttribute('material', { topColor:   '#fff' })               
                             setTimeout( ()=> {
-                                sceneEls.enviro.sky.setAttribute('material', {  topColor:  currentEnviro['sky-top']  })
-                                sceneEls.enviro.lightningGroup.setAttribute('visible', 'false')
+                                scene.els.enviro.sky.setAttribute('material', {  topColor:  currentEnviro['sky-top']  })
+                                scene.els.enviro.lightningGroup.setAttribute('visible', 'false')
                             }, 50)
                         }, 30);
                     }, 30);
@@ -467,7 +510,7 @@ console.log('SHOW CLOUDS')
 
             remove: function(){
                 // Stop the lightning
-                clearInterval(state.visual.hazard.lightning)
+                clearInterval(state.scene.hazard.lightning)
             }
         })
 
@@ -524,7 +567,7 @@ console.log('SHOW CLOUDS')
             update: function(){
                 // Windy rain
                 setTimeout( () => {
-                    sceneEls.enviro.particles.setAttribute('particle-system', {
+                    scene.els.enviro.particles.setAttribute('particle-system', {
                         preset:              'dust',
                         blending:            1,
                         size:                2,
@@ -538,7 +581,7 @@ console.log('SHOW CLOUDS')
                         accelerationValue:   {x: 0, y: 50, z: 0}
                     })
                 }, this.data.dur)
-                clearInterval(state.visual.hazard.treeSway)
+                clearInterval(state.scene.hazard.treeSway)
                 const treeEls = document.querySelectorAll('.tree'),
                     fallenRatio = this.data.damage === 0 ? 0 : Math.round(1 / this.data.damage)
 
@@ -560,7 +603,7 @@ console.log('SHOW CLOUDS')
                     // Then sway standing trees
                     if(i === treeEls.length - 1){
                         const treeStandingEls = document.querySelectorAll('.standing')
-                        state.visual.hazard.treeSway = setInterval(() => {
+                        state.scene.hazard.treeSway = setInterval(() => {
                             sway(this.data.windIntensity, treeStandingEls)
                             setTimeout(() => {returnTrees(treeStandingEls)}, 3000);
                         }, 4500);            
@@ -588,9 +631,9 @@ console.log('SHOW CLOUDS')
 
             remove: function(){
                 // Stop the wind
-                sceneEls.enviro.particles.removeAttribute('particle-system')
+                scene.els.enviro.particles.removeAttribute('particle-system')
                 // Stop the trees swaying
-                clearInterval(state.visual.hazard.treeSway)
+                clearInterval(state.scene.hazard.treeSway)
                 const treeEls = document.getElementsByClassName('tree')
                 for(let i = 0; i < treeEls.length; i++){
                     treeEls[i].classList.remove("fallen")
@@ -763,7 +806,7 @@ console.log('SHOW CLOUDS')
             },
 
             remove: function(){
-                externalEvents.changeEnvironment(state.visual.environment.name, this.data.dur)
+                externalEvents.changeEnvironment(state.scene.environment.name, this.data.dur)
                 // Restore grass/ground conditions
                 const groundEls = document.getElementsByClassName('grass'),
                     fieldEls = document.getElementsByClassName('field'),
@@ -910,8 +953,8 @@ console.log('SHOW CLOUDS')
                 const intensity = this.data.intensity > 1 ? 1 : this.data.intensity,
                     posX =  (intensity) * 140
                 externalEvents.changeEnvironment('bushfire', this.data.dur)
-                sceneEls.enviro.fire.setAttribute('visible', true) 
-                sceneEls.enviro.fire.setAttribute('animation__position', {
+                scene.els.enviro.fire.setAttribute('visible', true) 
+                scene.els.enviro.fire.setAttribute('animation__position', {
                     property:       'position',
                     dur:            this.data.dur / 2,
                     from:           {x: 0 , y: -50, z: 0},  
@@ -944,21 +987,21 @@ console.log('SHOW CLOUDS')
                 const intensity = this.data.intensity > 1 ? 1 : this.data.intensity,
                     posX =  (intensity) * 140
 
-                sceneEls.enviro.fire.setAttribute('animation__position', {
+                scene.els.enviro.fire.setAttribute('animation__position', {
                     property:       'position',
                     dur:            this.data.dur / 2,
                     to:             {x: posX , y: 0, z: 0}
                 })
             },
             remove: function(){
-                externalEvents.changeEnvironment(state.visual.environment.name, this.data.dur)
-                sceneEls.enviro.fire.setAttribute('animation__position', {
+                externalEvents.changeEnvironment(state.scene.environment.name, this.data.dur)
+                scene.els.enviro.fire.setAttribute('animation__position', {
                     property:       'position',
                     dur:            this.data.dur,
                     to:             {x:0 , y: -50, z: 0},  
                 })
                 setTimeout(() => {
-                    sceneEls.enviro.fire.setAttribute('visible', false)
+                    scene.els.enviro.fire.setAttribute('visible', false)
                     document.getElementById('duckFiremanHat').setAttribute('visible', false)
                     document.getElementById("rubberDuck").setAttribute('alongpath', { rotate: true })
                     document.getElementById("rubberDuck").removeAttribute('look-at')
@@ -976,16 +1019,16 @@ console.log('SHOW CLOUDS')
                 intensity:              {type: 'string',   default: 'hotDay' },  
             },            
             init: function(){
-
+                document.getElementById('duckSunglasses').setAttribute('visible', true)
             },
             update: function(){
                 const heatstate = ['default', 'hotDay', 'veryHotDay', 'heatwave'],
                     pulseTime = this.data.dur, 
                     newIntensity = this.data.intensity,
                     baseIntensity = heatstate[heatstate.indexOf(newIntensity)-1]
-                clearInterval(state.visual.hazard.heatPulse)
+                clearInterval(state.scene.hazard.heatPulse)
                 if(this.data.intensity !== 'heatwave'){
-                    state.visual.hazard.heatPulse = setInterval(pulseSky, pulseTime );
+                    state.scene.hazard.heatPulse = setInterval(pulseSky, pulseTime );
                 } else {
                     setTimeout(() => changeSky('heat', pulseTime), pulseTime)
                 }
@@ -997,17 +1040,17 @@ console.log('SHOW CLOUDS')
                     }, pulseTime/2 );
                 };
                 function changeSky(direction, duration = pulseTime /2){
-                    const timeOfDay = state.visual.modelTime.timeOfDay(),
+                    const timeOfDay = state.scene.time.timeOfDay(),
                         topColor = direction === 'heat' ? settings.days.heat[timeOfDay][newIntensity]['sky-top'] 
                             : (baseIntensity === 'default') ? settings.days.heat[timeOfDay]['sky-top'] 
                             : settings.days.heat[timeOfDay][baseIntensity]['sky-top'] ,
                         bottomColor = direction === 'heat' ? settings.days.heat[timeOfDay][newIntensity]['sky-bottom'] : (baseIntensity === 'default') ? settings.days.heat[timeOfDay]['sky-bottom'] : settings.days.heat[timeOfDay][newIntensity]['sky-bottom']
-                    sceneEls.enviro.sky.setAttribute('animation__topColour', {
+                    scene.els.enviro.sky.setAttribute('animation__topColour', {
                         property:       'material.topColor',
                         dur:            duration,
                         to:             topColor
                     })  
-                    sceneEls.enviro.sky.setAttribute('animation__bottomColour', {
+                    scene.els.enviro.sky.setAttribute('animation__bottomColour', {
                         property:   'material.bottomColor',
                         dur:        duration,
                         to:         bottomColor
@@ -1015,7 +1058,8 @@ console.log('SHOW CLOUDS')
                 };
             },
             remove: function(){
-                clearInterval(state.visual.hazard.heatPulse)
+                clearInterval(state.scene.hazard.heatPulse)
+                document.getElementById('duckSunglasses').setAttribute('visible', false)
             }
         })
 
@@ -1037,21 +1081,21 @@ console.log('SHOW CLOUDS')
 
                 // Bring vortextgroup into view aftre delay for moving ducj out of view
                 setTimeout( ()=> {
-                    sceneEls.enviro.vortexGroup.setAttribute('visible', true)
-                    sceneEls.enviro.vortexGroup.setAttribute('animation__scale', {
+                    scene.els.enviro.vortexGroup.setAttribute('visible', true)
+                    scene.els.enviro.vortexGroup.setAttribute('animation__scale', {
                         property:       'scale',
                         from:           {x:0 , y: 0, z: 0},
                         to:             {x:1 , y: 1, z: 1},
                         dur:            3000
                     })
-                    sceneEls.enviro.vortexGroup.setAttribute('animation__position', {
+                    scene.els.enviro.vortexGroup.setAttribute('animation__position', {
                         property:       'position',
                         from:           {x:0 , y: -50, z: 0},
                         to:             {x:0 , y: -5, z: 0},
                         dur:            5000
                     })
                     // Lean the whole vortex
-                    sceneEls.enviro.vortexGroup.setAttribute('animation__rotate', {
+                    scene.els.enviro.vortexGroup.setAttribute('animation__rotate', {
                         property:       'rotation',
                         from:             {x:-5 , y: 0, z: 5},
                         to:             {x: 5 , y: 0, z: 10},
@@ -1060,12 +1104,12 @@ console.log('SHOW CLOUDS')
                         dir:            'alternate',
                     })
                     // Spin/size and move the vortex alogn path
-                    sceneEls.enviro.vortexGroup.setAttribute('alongpath', {
+                    scene.els.enviro.vortexGroup.setAttribute('alongpath', {
                         curve:          "#cyclone-path-points",
                         dur:            90000, 
                         loop:           'true'
                     })
-                    sceneEls.enviro.vortex.setAttribute('animation__scale', {
+                    scene.els.enviro.vortex.setAttribute('animation__scale', {
                         property:       'scale',
                         from:           {x:3 , y: 3, z: 3},
                         to:             {x:8 , y: 8, z: 8},
@@ -1073,7 +1117,7 @@ console.log('SHOW CLOUDS')
                         dir:            'alternate',
                         loop:           'true'
                     })
-                    sceneEls.enviro.vortex.setAttribute('animation__rotate', {
+                    scene.els.enviro.vortex.setAttribute('animation__rotate', {
                         property:       'rotation',
                         to:             {x:0 , y: 360, z: 8},
                         dur:            500,
@@ -1100,7 +1144,7 @@ console.log('SHOW CLOUDS')
             },
             remove: function(){
                 // Shrink the vortex
-                sceneEls.enviro.vortexGroup.setAttribute('animation__scale', {
+                scene.els.enviro.vortexGroup.setAttribute('animation__scale', {
                     property:       'scale',
                     to:             {x:0 , y: 0, z: 0},
                     dur:            1500
@@ -1118,12 +1162,12 @@ console.log('SHOW CLOUDS')
                         to:             {x:1 , y: 1, z: 1},
                         dur:            1000
                     })
-                    sceneEls.enviro.vortexGroup.setAttribute('visible', false)
-                    sceneEls.enviro.vortexGroup.removeAttribute('animation__scale')
-                    sceneEls.enviro.vortexGroup.removeAttribute('animation__rotate')
-                    sceneEls.enviro.vortex.removeAttribute('alongpath')
-                    sceneEls.enviro.vortex.removeAttribute('animation__scale')
-                    sceneEls.enviro.vortex.removeAttribute('animation__rotate')
+                    scene.els.enviro.vortexGroup.setAttribute('visible', false)
+                    scene.els.enviro.vortexGroup.removeAttribute('animation__scale')
+                    scene.els.enviro.vortexGroup.removeAttribute('animation__rotate')
+                    scene.els.enviro.vortex.removeAttribute('alongpath')
+                    scene.els.enviro.vortex.removeAttribute('animation__scale')
+                    scene.els.enviro.vortex.removeAttribute('animation__rotate')
                 }, 1500)
             }
 
@@ -1137,15 +1181,15 @@ console.log('SHOW CLOUDS')
             },     
             init: function(){
                 // Record any element colours that are changed to be snow' to enable resotation on removal
-                state.visual.elements.origCol.homeRoofs = []
-                state.visual.elements.origCol.barnRoofs = []
-                state.visual.elements.origCol.industrialRoofs = []
-                state.visual.elements.origCol.townhouseRoofs = []
-                state.visual.elements.origCol.centralHill = []
-                state.visual.elements.origCol.hotelRoofs = [],
-                state.visual.elements.origCol.foliage = [],
-                state.visual.elements.origCol.beach = [],
-                state.visual.elements.origCol.river = []
+                state.scene.elements.origCol.homeRoofs = []
+                state.scene.elements.origCol.barnRoofs = []
+                state.scene.elements.origCol.industrialRoofs = []
+                state.scene.elements.origCol.townhouseRoofs = []
+                state.scene.elements.origCol.centralHill = []
+                state.scene.elements.origCol.hotelRoofs = [],
+                state.scene.elements.origCol.foliage = [],
+                state.scene.elements.origCol.beach = [],
+                state.scene.elements.origCol.river = []
                 const homeRoofs = document.getElementsByClassName('home-roof'),
                     barnRoofs = document.getElementsByClassName('barn-roof'),
                     industrialRoofs = document.getElementsByClassName('industrial-roof'),
@@ -1156,37 +1200,37 @@ console.log('SHOW CLOUDS')
                     beach = document.getElementsByClassName('beach'),
                     river = document.getElementsByClassName('river')
                 for(let i = 0; i < homeRoofs.length; i++){
-                    state.visual.elements.origCol.homeRoofs.push( homeRoofs[i].getAttribute('material').color)
+                    state.scene.elements.origCol.homeRoofs.push( homeRoofs[i].getAttribute('material').color)
                 }
                 for(let i = 0; i < barnRoofs.length; i++){
-                    state.visual.elements.origCol.barnRoofs.push( barnRoofs[i].getAttribute('material').color)
+                    state.scene.elements.origCol.barnRoofs.push( barnRoofs[i].getAttribute('material').color)
                 }
                 for(let i = 0; i < industrialRoofs.length; i++){
-                    state.visual.elements.origCol.industrialRoofs.push( industrialRoofs[i].getAttribute('material').color)
+                    state.scene.elements.origCol.industrialRoofs.push( industrialRoofs[i].getAttribute('material').color)
                 }
                 for(let i = 0; i < townhouseRoofs.length; i++){
-                    state.visual.elements.origCol.townhouseRoofs.push( townhouseRoofs[i].getAttribute('material').color)
+                    state.scene.elements.origCol.townhouseRoofs.push( townhouseRoofs[i].getAttribute('material').color)
                 }
                 for(let i = 0; i < centralHill.length; i++){
-                    state.visual.elements.origCol.centralHill.push( centralHill[i].getAttribute('material').color)
+                    state.scene.elements.origCol.centralHill.push( centralHill[i].getAttribute('material').color)
                 }
                 for(let i = 0; i < hotelRoofs.length; i++){
-                    state.visual.elements.origCol.hotelRoofs.push( hotelRoofs[i].getAttribute('material').color)
+                    state.scene.elements.origCol.hotelRoofs.push( hotelRoofs[i].getAttribute('material').color)
                 }
                 for(let i = 0; i < foliage.length; i++){
-                    state.visual.elements.origCol.foliage.push( foliage[i].getAttribute('material').color)
+                    state.scene.elements.origCol.foliage.push( foliage[i].getAttribute('material').color)
                 }
                 for(let i = 0; i < beach.length; i++){
-                    state.visual.elements.origCol.beach.push( beach[i].getAttribute('material').color)
+                    state.scene.elements.origCol.beach.push( beach[i].getAttribute('material').color)
                 }
                 for(let i = 0; i < river.length; i++){
-                    state.visual.elements.origCol.river.push( river[i].getAttribute('material').color)
+                    state.scene.elements.origCol.river.push( river[i].getAttribute('material').color)
                 }
             },
             update: function(){
                 switch(this.data.intensity){
                     case 'snow':
-                        sceneEls.enviro.particles.setAttribute('particle-system', {
+                        scene.els.enviro.particles.setAttribute('particle-system', {
                             preset:              'snow',
                             blending:            2,
                             size:                1.5,
@@ -1200,8 +1244,8 @@ console.log('SHOW CLOUDS')
                             accelerationValue:   {x: 0, y: 50, z: 0}
                         })
                         setTimeout( () => {
-                            sceneEls.enviro.snowGroup.setAttribute('visible', true)
-                            sceneEls.enviro.snowGroup.setAttribute('animation__scale', {
+                            scene.els.enviro.snowGroup.setAttribute('visible', true)
+                            scene.els.enviro.snowGroup.setAttribute('animation__scale', {
                                 property:       'scale',    
                                 to:             {x: 1, y: 1.5, z: 1 },   
                                 dur:            this.data.dur
@@ -1217,10 +1261,10 @@ console.log('SHOW CLOUDS')
                         break
 
                     case 'blizzard':
-                        sceneEls.enviro.particles.setAttribute('particle-system', {
+                        scene.els.enviro.particles.setAttribute('particle-system', {
                             size:                2
                         })
-                        sceneEls.enviro.snowGroup.setAttribute('animation__scale', {
+                        scene.els.enviro.snowGroup.setAttribute('animation__scale', {
                             property:       'scale',   
                             to:             {x: 1, y: 3, z: 1 },   
                             dur:            this.data.dur
@@ -1246,10 +1290,10 @@ console.log('SHOW CLOUDS')
                         document.getElementById('duckSantaHat').setAttribute('visible', true)
                         break
                     case 'iceStorm':
-                        sceneEls.enviro.particles.setAttribute('particle-system', {
+                        scene.els.enviro.particles.setAttribute('particle-system', {
                             size:                3
                         })
-                        sceneEls.enviro.snowGroup.setAttribute('animation__scale', {
+                        scene.els.enviro.snowGroup.setAttribute('animation__scale', {
                             property:       'scale',   
                             to:             {x: 1, y: 4, z: 1 },   
                             dur:            this.data.dur
@@ -1274,13 +1318,13 @@ console.log('SHOW CLOUDS')
 
             },
             remove: function(){
-                sceneEls.enviro.particles.removeAttribute('particle-system')
-                sceneEls.enviro.snowGroup.setAttribute('animation__position', {
+                scene.els.enviro.particles.removeAttribute('particle-system')
+                scene.els.enviro.snowGroup.setAttribute('animation__position', {
                     property:       'position',   
                     to:             {x: 0, y: 0, z: 0 },   
                     dur:            this.data.dur
                 })
-                sceneEls.enviro.snowGroup.setAttribute('animation__scale', {
+                scene.els.enviro.snowGroup.setAttribute('animation__scale', {
                     property:       'position',   
                     to:             {x: 1, y: 1, z: 1 },   
                     dur:            this.data.dur
@@ -1300,71 +1344,71 @@ console.log('SHOW CLOUDS')
                     homeRoofs[i].setAttribute('animation__col', {
                         property:       'material.color',
                         dur:             this.data.dur,
-                        to:             state.visual.elements.origCol.homeRoofs[i]
+                        to:             state.scene.elements.origCol.homeRoofs[i]
                     })                    
                 }
                 for(let i = 0; i < barnRoofs.length; i++){
                     barnRoofs[i].setAttribute('animation__col', {
                         property:       'material.color',
                         dur:             this.data.dur,
-                        to:             state.visual.elements.origCol.barnRoofs[i]
+                        to:             state.scene.elements.origCol.barnRoofs[i]
                     })      
                 }
                 for(let i = 0; i < industrialRoofs.length; i++){
                     industrialRoofs[i].setAttribute('animation__col', {
                         property:       'material.color',
                         dur:             this.data.dur,
-                        to:             state.visual.elements.origCol.industrialRoofs[i]
+                        to:             state.scene.elements.origCol.industrialRoofs[i]
                     })      
                 }
                 for(let i = 0; i < townhouseRoofs.length; i++){
                     townhouseRoofs[i].setAttribute('animation__col', {
                         property:       'material.color',
                         dur:             this.data.dur,
-                        to:             state.visual.elements.origCol.townhouseRoofs[i]
+                        to:             state.scene.elements.origCol.townhouseRoofs[i]
                     })      
                 }
                   for(let i = 0; i < centralHill.length; i++){
                     centralHill[i].setAttribute('animation__col', {
                         property:       'material.color',
                         dur:             this.data.dur,
-                        to:             state.visual.elements.origCol.centralHill[i]
+                        to:             state.scene.elements.origCol.centralHill[i]
                     })      
                 }
                 for(let i = 0; i < hotelRoofs.length; i++){
                     hotelRoofs[i].setAttribute('animation__col', {
                         property:       'material.color',
                         dur:             this.data.dur,
-                        to:             state.visual.elements.origCol.hotelRoofs[i]
+                        to:             state.scene.elements.origCol.hotelRoofs[i]
                     })      
                 }
                 for(let i = 0; i < foliage.length; i++){
                     foliage[i].setAttribute('animation__col', {
                         property:       'material.color',
                         dur:             this.data.dur,
-                        to:             state.visual.elements.origCol.foliage[i]
+                        to:             state.scene.elements.origCol.foliage[i]
                     })      
                 }
                 for(let i = 0; i < beach.length; i++){
                     beach[i].setAttribute('animation__col', {
                         property:       'material.color',
                         dur:             this.data.dur,
-                        to:             state.visual.elements.origCol.beach[i]
+                        to:             state.scene.elements.origCol.beach[i]
                     })      
                 }
                 for(let i = 0; i < river.length; i++){
                     river[i].setAttribute('animation__col', {
                         property:       'material.color',
                         dur:             this.data.dur,
-                        to:             state.visual.elements.origCol.river[i]
+                        to:             state.scene.elements.origCol.river[i]
                     })      
                 }
 
                 setTimeout(() => {
-                    sceneEls.enviro.snowGroup.setAttribute('visible', false)
+                    scene.els.enviro.snowGroup.setAttribute('visible', false)
                     document.getElementById('duckSantaHat').setAttribute('visible', false)
                     // Clear the orginal element colour object 
-                    state.visual.elements.origCol = {}
+                    state.scene.elements.origCol = {}
                 },this.data.dur )
             }
         })
@@ -1377,7 +1421,7 @@ console.log('SHOW CLOUDS')
             },
 
             init: function(){
-                sceneEls.enviro.sea.removeAttribute('ocean')
+                scene.els.enviro.sea.removeAttribute('ocean')
             },
             update: function(){
                 // Set variables based on intensity
@@ -1389,7 +1433,7 @@ console.log('SHOW CLOUDS')
                     break
                 }
                 // Set ocean colour and mask visibility              
-                sceneEls.enviro.sea.setAttribute('ocean', {
+                scene.els.enviro.sea.setAttribute('ocean', {
                     color:              oceanColour,
                     width:              10.8,
                     amplitude:          0.25,
@@ -1399,8 +1443,8 @@ console.log('SHOW CLOUDS')
                 document.getElementById('duckMask').setAttribute('visible', maskVisible)
             },
             remove: function(){
-                sceneEls.enviro.sea.removeAttribute('ocean')
-                sceneEls.enviro.sea.setAttribute('ocean', {
+                scene.els.enviro.sea.removeAttribute('ocean')
+                scene.els.enviro.sea.setAttribute('ocean', {
                     color:              '#00fdff',
                     width:              10.8,
                     amplitude:          0.25,
@@ -1427,9 +1471,9 @@ console.log('SHOW CLOUDS')
                 setTimeout(() => {shakeOut(this.data.intensity)}, 600 )
                 setTimeout(() => {shakeReturn(this.data.intensity)}, 700 )
                 setTimeout(() => {
-                    state.visual.hazard.earthquake = false
-                    sceneEls.scene.removeAttribute('hazard-earthquake')
-                    sceneEls.zones.planet.removeAttribute('animation__pos')
+                    state.scene.hazard.earthquake = false
+                    scene.els.scene.removeAttribute('hazard-earthquake')
+                    scene.els.zones.planet.removeAttribute('animation__pos')
                 }, 1200 )
 
                 function shakeOut(intensity){
@@ -1438,7 +1482,7 @@ console.log('SHOW CLOUDS')
                         y: intensity * (1 - Math.random()*2), 
                         z: intensity * (1 - Math.random()*2)
                     }
-                    sceneEls.zones.planet.setAttribute('animation__pos', {
+                    scene.els.zones.planet.setAttribute('animation__pos', {
                         property:       'position',
                         to:             toObj,
                         dur:            100,
@@ -1446,7 +1490,7 @@ console.log('SHOW CLOUDS')
                     })
                 }
                 function shakeReturn(intensity){
-                    sceneEls.zones.planet.setAttribute('animation__pos', {
+                    scene.els.zones.planet.setAttribute('animation__pos', {
                         property:       'position',
                         to:             { x: 0, y: -3,   z: 0},
                         dur:            500
@@ -1465,21 +1509,827 @@ console.log('SHOW CLOUDS')
         AFRAME.registerComponent('hazard-dust-storm', {
         })
 
+    // EMISSIONS VISUALISATION COMPONENTS
+        AFRAME.registerComponent('emissions-activity-balloons', {
+            schema: {   
+                dur:                    {type: 'number',   default: 3000 },  
+            },
+            init: function(){
+                const woodEls = document.querySelectorAll('.emissions-anchor.wood-chimney'),
+                    rooftopSolarEls = document.querySelectorAll('.emissions-anchor.rooftop-solar'),
+                    smlHomeGridEls = document.querySelectorAll('.emissions-anchor.grid-electricity.small-home'),
+                    lrgHomeGridEls = document.querySelectorAll('.emissions-anchor.grid-electricity.large-home'),
+                    townhouseGridEls = document.querySelectorAll('.emissions-anchor.grid-electricity.townhouse'),
+                    smlBarnGridEls = document.querySelectorAll('.emissions-anchor.grid-electricity.large-barn'),
+                    lrgBarnGridEls = document.querySelectorAll('.emissions-anchor.grid-electricity.small-barn'),
+                    industrialGridEls = document.querySelectorAll('.emissions-anchor.grid-electricity.industrial'),
+                    hospitalGridEls = document.querySelectorAll('.emissions-anchor.grid-electricity.hospital'),
+                    churchGridEls = document.querySelectorAll('.emissions-anchor.grid-electricity.church'),
+                    schoolGridEls = document.querySelectorAll('.emissions-anchor.grid-electricity.school'),
+                    govBuildGridEls = document.querySelectorAll('.emissions-anchor.grid-electricity.govBuilding'),
+                    airportlGridEls = document.querySelectorAll('.emissions-anchor.grid-electricity.airport'),
+                    officeThreeLvlGridEls = document.querySelectorAll('.emissions-anchor.grid-electricity.office-threeLvl'),
+                    officeFiveLvlGridEls = document.querySelectorAll('.emissions-anchor.grid-electricity.office-fiveLvl'),
+                    officeTowerGridEls = document.querySelectorAll('.emissions-anchor.grid-electricity.office-tower'),
+                    hotelGridEls = document.querySelectorAll('.emissions-anchor.grid-electricity.hotel'),
+                    mainsGasEls = document.querySelectorAll('.emissions-anchor.reticulated-gas'),
+                    wasteResidentialEls = document.querySelectorAll('.emissions-anchor.bin-landfill'),
+                    wasteCommercialEls = document.querySelectorAll('.emissions-anchor.skip-landfill'),
+                    utilitySolarEls = document.querySelectorAll('.emissions-anchor.utility-solar'),
+                    utilityWindEls = document.querySelectorAll('.emissions-anchor.utility-wind'),
+                    utilityHydroEls = document.querySelectorAll('.emissions-anchor.utility-hydro'),
+                    utilityCoalEls = document.querySelectorAll('.emissions-anchor.utility-coal'),
+                    livestockCowEls = document.querySelectorAll('.emissions-anchor.livestock.cow'),
+                    livestockPigEls = document.querySelectorAll('.emissions-anchor.livestock.pig'),
+                    livestockSheepEls = document.querySelectorAll('.emissions-anchor.livestock.sheep'),
+                    livestockPoultryEls = document.querySelectorAll('.emissions-anchor.livestock.poultry'),
+                    agCroppingEls = document.querySelectorAll('.emissions-anchor.agriculture.cropping'),
+                    landfillResiEls = document.querySelectorAll('.emissions-anchor.landfill.resi'),
+                    landfillCandIEls = document.querySelectorAll('.emissions-anchor.landfill.candi'),
+                    landfillCandDEls = document.querySelectorAll('.emissions-anchor.landfill.candd'),
+                    airplaneEls = document.querySelectorAll('.emissions-anchor.airplane')
+
+
+                // Small Household grid electricity
+                for(let i = 0; i <smlHomeGridEls.length; i++ ){
+                    const balloonContainer =  document.createElement('a-entity'),
+                        anchorY = smlHomeGridEls[i].getAttribute('position').y,
+                        scale = 0.8
+                    balloonContainer.className +=" balloon source electricity gridElec stationaryEnergy"
+                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
+                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
+                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
+                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
+                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
+                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
+                    balloonContainer.setAttribute('animation__scale', {
+                        property:   'scale',
+                        from:       '0 0 0',
+                        to:         '1 1 1',
+                        dur:        this.data.dur
+                    })
+                    smlHomeGridEls[i].appendChild(balloonContainer)
+                }
+                // Large Household grid electricity
+                for(let i = 0; i <lrgHomeGridEls.length; i++ ){
+                    const balloonContainer =  document.createElement('a-entity'),
+                        anchorY = lrgHomeGridEls[i].getAttribute('position').y,
+                        scale = 0.8
+                    balloonContainer.className +=" balloon source electricity gridElec stationaryEnergy"
+                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
+                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
+                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
+                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
+                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
+                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
+                    balloonContainer.setAttribute('animation__scale', {
+                        property:   'scale',
+                        from:       '0 0 0',
+                        to:         '1 1 1',
+                        dur:        this.data.dur
+                    })
+                    lrgHomeGridEls[i].appendChild(balloonContainer)
+                }
+                // Townhouse Household grid electricity
+                for(let i = 0; i <townhouseGridEls.length; i++ ){
+                    const balloonContainer =  document.createElement('a-entity'),
+                        anchorY = townhouseGridEls[i].getAttribute('position').y,
+                        scale = 0.5
+                    balloonContainer.className +=" balloon source electricity gridElec stationaryEnergy"
+                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
+                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
+                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
+                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
+                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
+                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
+                    balloonContainer.setAttribute('animation__scale', {
+                        property:   'scale',
+                        from:       '0 0 0',
+                        to:         '1 1 1',
+                        dur:        this.data.dur
+                    })
+                    townhouseGridEls[i].appendChild(balloonContainer)
+                }
+                // Office: Three level  grid electricity
+                for(let i = 0; i <officeThreeLvlGridEls.length; i++ ){
+                    const balloonContainer =  document.createElement('a-entity'),
+                        anchorY = officeThreeLvlGridEls[i].getAttribute('position').y,
+                        scale = 2
+                    balloonContainer.className +=" balloon source electricity gridElec stationaryEnergy"
+                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
+                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
+                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
+                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
+                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
+                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
+                    balloonContainer.setAttribute('animation__scale', {
+                        property:   'scale',
+                        from:       '0 0 0',
+                        to:         '1 1 1',
+                        dur:        this.data.dur
+                    })
+                    officeThreeLvlGridEls[i].appendChild(balloonContainer)
+                }
+                // Office: Five level  grid electricity
+                for(let i = 0; i <officeFiveLvlGridEls.length; i++ ){
+                    const balloonContainer =  document.createElement('a-entity'),
+                        anchorY = officeFiveLvlGridEls[i].getAttribute('position').y,
+                        scale = 2
+                    balloonContainer.className +=" balloon source electricity gridElec stationaryEnergy"
+                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
+                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
+                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
+                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
+                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
+                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
+                    balloonContainer.setAttribute('animation__scale', {
+                        property:   'scale',
+                        from:       '0 0 0',
+                        to:         '1 1 1',
+                        dur:        this.data.dur
+                    })
+                    officeFiveLvlGridEls[i].appendChild(balloonContainer)
+                }
+                // Office tower grid electricity
+                for(let i = 0; i <officeTowerGridEls.length; i++ ){
+                    const balloonContainer =  document.createElement('a-entity'),
+                        anchorY = officeTowerGridEls[i].getAttribute('position').y,
+                        scale = 5
+                    balloonContainer.className +=" balloon source electricity gridElec stationaryEnergy"
+                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
+                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
+                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
+                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
+                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
+                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
+                    balloonContainer.setAttribute('animation__scale', {
+                        property:   'scale',
+                        from:       '0 0 0',
+                        to:         '1 1 1',
+                        dur:        this.data.dur
+                    })
+                    officeTowerGridEls[i].appendChild(balloonContainer)
+                }
+                // Small barn grid electricity
+                for(let i = 0; i <smlBarnGridEls.length; i++ ){
+                    const balloonContainer =  document.createElement('a-entity'),
+                        anchorY = smlBarnGridEls[i].getAttribute('position').y,
+                        scale = 0.5
+                    balloonContainer.className +=" balloon source electricity gridElec stationaryEnergy"
+                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
+                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
+                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
+                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
+                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
+                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
+                    balloonContainer.setAttribute('animation__scale', {
+                        property:   'scale',
+                        from:       '0 0 0',
+                        to:         '1 1 1',
+                        dur:        this.data.dur
+                    })
+                    smlBarnGridEls[i].appendChild(balloonContainer)
+                }
+                // Large barn grid electricity
+                for(let i = 0; i <lrgBarnGridEls.length; i++ ){
+                    const balloonContainer =  document.createElement('a-entity'),
+                        anchorY = lrgBarnGridEls[i].getAttribute('position').y,
+                        scale = 0.8
+                    balloonContainer.className +=" balloon source electricity gridElec stationaryEnergy"
+                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
+                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
+                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
+                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
+                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
+                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
+                    balloonContainer.setAttribute('animation__scale', {
+                        property:   'scale',
+                        from:       '0 0 0',
+                        to:         '1 1 1',
+                        dur:        this.data.dur
+                    })
+                    lrgBarnGridEls[i].appendChild(balloonContainer)
+                }
+                // Industrial grid electricity
+                for(let i = 0; i <industrialGridEls.length; i++ ){
+                    const balloonContainer =  document.createElement('a-entity'),
+                        anchorY = industrialGridEls[i].getAttribute('position').y,
+                        scale = 6
+                    balloonContainer.className +=" balloon source electricity gridElec stationaryEnergy"
+                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
+                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
+                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
+                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
+                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
+                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
+                    balloonContainer.setAttribute('animation__scale', {
+                        property:   'scale',
+                        from:       '0 0 0',
+                        to:         '1 1 1',
+                        dur:        this.data.dur
+                    })
+                    industrialGridEls[i].appendChild(balloonContainer)
+                }
+                // Hospital grid electricity
+                for(let i = 0; i <hospitalGridEls.length; i++ ){
+                    const balloonContainer =  document.createElement('a-entity'),
+                        anchorY = hospitalGridEls[i].getAttribute('position').y,
+                        scale = 3.5
+                    balloonContainer.className +=" balloon source electricity gridElec stationaryEnergy"
+                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
+                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
+                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
+                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
+                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
+                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
+                    balloonContainer.setAttribute('animation__scale', {
+                        property:   'scale',
+                        from:       '0 0 0',
+                        to:         '1 1 1',
+                        dur:        this.data.dur
+                    })
+                    hospitalGridEls[i].appendChild(balloonContainer)
+                }
+                // Airport grid electricity
+                for(let i = 0; i <airportlGridEls.length; i++ ){
+                    const balloonContainer =  document.createElement('a-entity'),
+                        anchorY = airportlGridEls[i].getAttribute('position').y,
+                        scale = 3
+                    balloonContainer.className +=" balloon source electricity gridElec stationaryEnergy"
+                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
+                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
+                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
+                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
+                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
+                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
+                    balloonContainer.setAttribute('animation__scale', {
+                        property:   'scale',
+                        from:       '0 0 0',
+                        to:         '1 1 1',
+                        dur:        this.data.dur
+                    })
+                    airportlGridEls[i].appendChild(balloonContainer)
+                }
+                // Church grid electricity
+                for(let i = 0; i < churchGridEls.length; i++ ){
+                    const balloonContainer =  document.createElement('a-entity'),
+                        anchorY = churchGridEls[i].getAttribute('position').y,
+                        scale = 1
+                    balloonContainer.className +=" balloon source electricity gridElec stationaryEnergy"
+                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
+                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
+                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
+                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
+                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
+                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
+                    balloonContainer.setAttribute('animation__scale', {
+                        property:   'scale',
+                        from:       '0 0 0',
+                        to:         '1 1 1',
+                        dur:        this.data.dur
+                    })
+                    churchGridEls[i].appendChild(balloonContainer)
+                }
+                // School grid electricity
+                for(let i = 0; i < schoolGridEls.length; i++ ){
+                    const balloonContainer =  document.createElement('a-entity'),
+                        anchorY = schoolGridEls[i].getAttribute('position').y,
+                        scale = 1.5
+                    balloonContainer.className +=" balloon source electricity gridElec stationaryEnergy"
+                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
+                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
+                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
+                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
+                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
+                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
+                    balloonContainer.setAttribute('animation__scale', {
+                        property:   'scale',
+                        from:       '0 0 0',
+                        to:         '1 1 1',
+                        dur:        this.data.dur
+                    })
+                    schoolGridEls[i].appendChild(balloonContainer)
+                }
+                // Government building grid electricity
+                for(let i = 0; i < govBuildGridEls.length; i++ ){
+                    const balloonContainer =  document.createElement('a-entity'),
+                        anchorY = govBuildGridEls[i].getAttribute('position').y,
+                        scale = 3
+                    balloonContainer.className +=" balloon source electricity gridElec stationaryEnergy"
+                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
+                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
+                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
+                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
+                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
+                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
+                    balloonContainer.setAttribute('animation__scale', {
+                        property:   'scale',
+                        from:       '0 0 0',
+                        to:         '1 1 1',
+                        dur:        this.data.dur
+                    })
+                    govBuildGridEls[i].appendChild(balloonContainer)
+                }
+                // Hotel grid electricity
+                for(let i = 0; i < hotelGridEls.length; i++ ){
+                    const balloonContainer =  document.createElement('a-entity'),
+                        anchorY = hotelGridEls[i].getAttribute('position').y,
+                        scale = 1.5
+                    balloonContainer.className +=" balloon source electricity gridElec stationaryEnergy"
+                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
+                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
+                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
+                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
+                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
+                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
+                    balloonContainer.setAttribute('animation__scale', {
+                        property:   'scale',
+                        from:       '0 0 0',
+                        to:         '1 1 1',
+                        dur:        this.data.dur
+                    })
+                    hotelGridEls[i].appendChild(balloonContainer)
+                }
+
+                // Household mains gas 
+                for(let i = 0; i < mainsGasEls.length; i++ ){
+                    const balloonContainer =  document.createElement('a-entity'),
+                        anchorY = mainsGasEls[i].getAttribute('position').y,
+                        scale = 0.25
+                    balloonContainer.className +=" balloon source electricity mainsGas stationaryEnergy"
+                    balloonContainer.setAttribute('position', '0 '+(10*scale)+' 0')
+                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
+                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
+                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
+                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
+                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringscale', '1 5 1')
+                    balloonContainer.setAttribute('data-stringpos', '0 -4.5 0')
+                    balloonContainer.setAttribute('animation__scale', {
+                        property:   'scale',
+                        from:       '0 0 0',
+                        to:         '1 1 1',
+                        dur:        this.data.dur
+                    })
+                    mainsGasEls[i].appendChild(balloonContainer)
+                }
+                // Household Wood
+                for(let i = 0; i < woodEls.length; i++ ){
+                    const balloonContainer =  document.createElement('a-entity'),
+                        anchorY = woodEls[i].getAttribute('position').y,
+                        scale = 0.125
+                    balloonContainer.className +=" balloon source wood stationaryEnergy"
+                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
+                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
+                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
+                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
+                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
+                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
+                    balloonContainer.setAttribute('animation__scale', {
+                        property:   'scale',
+                        from:       '0 0 0',
+                        to:         '1 1 1',
+                        dur:        this.data.dur
+                    })
+                    woodEls[i].appendChild(balloonContainer)
+                }
+                // Household-waste bins
+                for(let i = 0; i < wasteResidentialEls.length; i++ ){
+                    const balloonContainer =  document.createElement('a-entity'),
+                        anchorY = wasteResidentialEls[i].getAttribute('position').y,
+                        scale = 0.125
+                    balloonContainer.className +=" balloon source waste landfill"
+                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
+                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
+                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
+                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
+                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
+                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
+                    balloonContainer.setAttribute('animation__scale', {
+                        property:   'scale',
+                        from:       '0 0 0',
+                        to:         '1 1 1',
+                        dur:        this.data.dur
+                    })
+                    wasteResidentialEls[i].appendChild(balloonContainer)
+                }
+                // Commercial-waste skips
+                for(let i = 0; i < wasteCommercialEls.length; i++ ){
+                    const balloonContainer =  document.createElement('a-entity'),
+                        anchorY = wasteCommercialEls[i].getAttribute('position').y,
+                        scale = 0.75
+                    balloonContainer.className +=" balloon source waste landfill"
+                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
+                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
+                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
+                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
+                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
+                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
+                    balloonContainer.setAttribute('animation__scale', {
+                        property:   'scale',
+                        from:       '0 0 0',
+                        to:         '1 1 1',
+                        dur:        this.data.dur
+                    })
+                    wasteCommercialEls[i].appendChild(balloonContainer)
+                }
+                // Landfill waste: residential
+                for(let i = 0; i < landfillResiEls.length; i++ ){
+                    const balloonContainer =  document.createElement('a-entity'),
+                        anchorY = landfillResiEls[i].getAttribute('position').y,
+                        scale = 5
+                    balloonContainer.className +=" balloon source waste landfill"
+                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
+                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
+                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
+                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
+                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
+                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
+                    balloonContainer.setAttribute('animation__scale', {
+                        property:   'scale',
+                        from:       '0 0 0',
+                        to:         '1 1 1',
+                        dur:        this.data.dur
+                    })
+                    landfillResiEls[i].appendChild(balloonContainer)
+                }
+                // Landfill waste: Commercial and Industrial
+                for(let i = 0; i < landfillCandIEls.length; i++ ){
+                    const balloonContainer =  document.createElement('a-entity'),
+                        anchorY = landfillCandIEls[i].getAttribute('position').y,
+                        scale = 2.5
+                    balloonContainer.className +=" balloon source waste landfill"
+                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
+                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
+                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
+                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
+                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
+                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
+                    balloonContainer.setAttribute('animation__scale', {
+                        property:   'scale',
+                        from:       '0 0 0',
+                        to:         '1 1 1',
+                        dur:        this.data.dur
+                    })
+                    landfillCandIEls[i].appendChild(balloonContainer)
+                }
+                // Landfill waste: Construction and Demolition
+                for(let i = 0; i < landfillCandDEls.length; i++ ){
+                    const balloonContainer =  document.createElement('a-entity'),
+                        anchorY = landfillCandDEls[i].getAttribute('position').y,
+                        scale = 1
+                    balloonContainer.className +=" balloon source waste landfill"
+                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
+                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
+                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
+                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
+                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
+                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
+                    balloonContainer.setAttribute('animation__scale', {
+                        property:   'scale',
+                        from:       '0 0 0',
+                        to:         '1 1 1',
+                        dur:        this.data.dur
+                    })
+                    landfillCandDEls[i].appendChild(balloonContainer)
+                }
+
+                // Agriculture: Cows
+                for(let i = 0; i < livestockCowEls.length; i++ ){
+                    const balloonContainer =  document.createElement('a-entity'),
+                        anchorY = livestockCowEls[i].getAttribute('position').y,
+                        scale = 1
+                    balloonContainer.className +=" balloon source agriculture cattle"
+                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
+                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
+                    balloonContainer.setAttribute('data-col', 'col-balloon-brown')
+                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
+                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
+                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
+                    balloonContainer.setAttribute('animation__scale', {
+                        property:   'scale',
+                        from:       '0 0 0',
+                        to:         '1 1 1',
+                        dur:        this.data.dur
+                    })
+                    livestockCowEls[i].appendChild(balloonContainer)
+                }
+
+                // Agriculture: Pigs
+                for(let i = 0; i < livestockPigEls.length; i++ ){
+                    const balloonContainer =  document.createElement('a-entity'),
+                        anchorY = livestockPigEls[i].getAttribute('position').y,
+                        scale = 0.5
+                    balloonContainer.className +=" balloon source agriculture pigs"
+                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
+                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
+                    balloonContainer.setAttribute('data-col', 'col-balloon-brown')
+                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
+                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
+                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
+                    balloonContainer.setAttribute('animation__scale', {
+                        property:   'scale',
+                        from:       '0 0 0',
+                        to:         '1 1 1',
+                        dur:        this.data.dur
+                    })
+                    livestockPigEls[i].appendChild(balloonContainer)
+                }
+
+                // Agriculture: Sheep
+                for(let i = 0; i < livestockSheepEls.length; i++ ){
+                    const balloonContainer =  document.createElement('a-entity'),
+                        anchorY = livestockSheepEls[i].getAttribute('position').y,
+                        scale = 0.25
+                    balloonContainer.className +=" balloon source agriculture sheep"
+                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
+                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
+                    balloonContainer.setAttribute('data-col', 'col-balloon-brown')
+                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
+                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
+                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
+                    balloonContainer.setAttribute('animation__scale', {
+                        property:   'scale',
+                        from:       '0 0 0',
+                        to:         '1 1 1',
+                        dur:        this.data.dur
+                    })
+                    livestockSheepEls[i].appendChild(balloonContainer)
+                }
+
+                // Agriculture: Poultry
+                for(let i = 0; i < livestockPoultryEls.length; i++ ){
+                    const balloonContainer =  document.createElement('a-entity'),
+                        anchorY = livestockPoultryEls[i].getAttribute('position').y,
+                        scale = 0.125
+                    balloonContainer.className +=" balloon source agriculture poultry"
+                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
+                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
+                    balloonContainer.setAttribute('data-col', 'col-balloon-brown')
+                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
+                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
+                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
+                    balloonContainer.setAttribute('animation__scale', {
+                        property:   'scale',
+                        from:       '0 0 0',
+                        to:         '1 1 1',
+                        dur:        this.data.dur
+                    })
+                    livestockPoultryEls[i].appendChild(balloonContainer)
+                }
+                // Agriculture: Cropping
+                for(let i = 0; i < agCroppingEls.length; i++ ){
+                    const balloonContainer =  document.createElement('a-entity'),
+                        anchorY = agCroppingEls[i].getAttribute('position').y,
+                        scale = 1
+                    balloonContainer.className +=" balloon source agriculture cropping"
+                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
+                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
+                    balloonContainer.setAttribute('data-col', 'col-balloon-brown')
+                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
+                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
+                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
+                    balloonContainer.setAttribute('animation__scale', {
+                        property:   'scale',
+                        from:       '0 0 0',
+                        to:         '1 1 1',
+                        dur:        this.data.dur
+                    })
+                    agCroppingEls[i].appendChild(balloonContainer)
+                }
+
+                // Household rooftop solar (offset)
+                for(let i = 0; i <rooftopSolarEls.length; i++ ){
+                    const balloonContainer =  document.createElement('a-entity'),
+                        anchorY = rooftopSolarEls[i].getAttribute('position').y,
+                        scale = 0.5
+                    balloonContainer.className +=" balloon offset renewableElec solar stationaryEnergy"
+                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
+                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
+                    balloonContainer.setAttribute('data-col', 'col-balloon-green')
+                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
+                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
+                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
+                    balloonContainer.setAttribute('animation__scale', {
+                        property:   'scale',
+                        from:       '0 0 0',
+                        to:         '1 1 1',
+                        dur:        this.data.dur
+                    })
+                    rooftopSolarEls[i].appendChild(balloonContainer)
+                }
+
+                // Utility-scale solar (offset)
+                for(let i = 0; i <utilitySolarEls.length; i++ ){
+                    const balloonContainer =  document.createElement('a-entity'),
+                        anchorY = utilitySolarEls[i].getAttribute('position').y,
+                        scale = 0.8
+                    balloonContainer.className +=" balloon offset renewableElec solar stationaryEnergy"
+                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
+                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
+                    balloonContainer.setAttribute('data-col', 'col-balloon-green')
+                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
+                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
+                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
+                    balloonContainer.setAttribute('animation__scale', {
+                        property:   'scale',
+                        from:       '0 0 0',
+                        to:         '1 1 1',
+                        dur:        this.data.dur
+                    })
+                    utilitySolarEls[i].appendChild(balloonContainer)
+                }
+
+                // Utility-scale hydro (offset)
+                for(let i = 0; i < utilityHydroEls.length; i++ ){
+                    const balloonContainer =  document.createElement('a-entity'),
+                        anchorY = utilityHydroEls[i].getAttribute('position').y,
+                        scale = 5
+                    balloonContainer.className +=" balloon offset renewableElec solar stationaryEnergy"
+                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
+                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
+                    balloonContainer.setAttribute('data-col', 'col-balloon-green')
+                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
+                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
+                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
+                    balloonContainer.setAttribute('animation__scale', {
+                        property:   'scale',
+                        from:       '0 0 0',
+                        to:         '1 1 1',
+                        dur:        this.data.dur
+                    })
+                    utilityHydroEls[i].appendChild(balloonContainer)
+                }
+
+                // Utility-scale wind (offset)
+                for(let i = 0; i <utilityWindEls.length; i++ ){
+                    const balloonContainer =  document.createElement('a-entity'),
+                        anchorY = utilityWindEls[i].getAttribute('position').y,
+                        scale = 6
+                    balloonContainer.className +=" balloon offset renewableElec wind stationaryEnergy"
+                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
+                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
+                    balloonContainer.setAttribute('data-col', 'col-balloon-green')
+                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
+                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
+                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
+                    balloonContainer.setAttribute('animation__scale', {
+                        property:   'scale',
+                        from:       '0 0 0',
+                        to:         '1 1 1',
+                        dur:        this.data.dur
+                    })
+                    utilityWindEls[i].appendChild(balloonContainer)
+                }
+
+                // Utility-scale fossil fuels 
+                for(let i = 0; i <utilityCoalEls.length; i++ ){
+                    const balloonContainer =  document.createElement('a-entity'),
+                        anchorY = utilityCoalEls[i].getAttribute('position').y,
+                        scale = 10
+                    balloonContainer.className +=" balloon electricity generation coal stationaryEnergy"
+                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
+                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
+                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
+                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
+                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
+                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
+                    balloonContainer.setAttribute('animation__scale', {
+                        property:   'scale',
+                        from:       '0 0 0',
+                        to:         '1 1 1',
+                        dur:        this.data.dur
+                    })
+                    utilityCoalEls[i].appendChild(balloonContainer)
+                }
+
+                // Transport: air travel  
+                for(let i = 0; i <airplaneEls.length; i++ ){
+                    const balloonContainer =  document.createElement('a-entity'),
+                        anchorY = airplaneEls[i].getAttribute('position').y,
+                        scale = 8
+                    balloonContainer.className +=" balloon transportEnergy jetfuel airtravel"
+                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
+                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
+                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
+                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
+                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
+                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
+                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
+                    balloonContainer.setAttribute('animation__scale', {
+                        property:   'scale',
+                        from:       '0 0 0',
+                        to:         '1 1 1',
+                        dur:        this.data.dur
+                    })
+                    airplaneEls[i].appendChild(balloonContainer)
+                }
+
+            },
+
+            update: function(){
+
+            },
+
+            remove: function(){
+                const woodEls = document.querySelectorAll('.emissions-anchor.wood-chimney'),
+                    rooftopSolarEls = document.querySelectorAll('.emissions-anchor.rooftop-solar'),
+                    gridMeterEls = document.querySelectorAll('.emissions-anchor.grid-electricity'),
+                    mainsGasEls = document.querySelectorAll('.emissions-anchor.reticulated-gas'),
+                    wasteEls = document.querySelectorAll('.emissions-anchor.bin-landfill'),
+
+                    elGroups = [woodEls, rooftopSolarEls, gridMeterEls, mainsGasEls, wasteEls]
+
+                elGroups.forEach(group => {
+                    for(let i = 0; i < group.length; i++ ){
+                        group[i].setAttribute('animation__scale', {
+                            property:       'scale',
+                            dur:             1000,
+                            to:             '0 0 0'
+                        })
+                    }
+                })
+
+            }
+        })
 
     // EXTERNAL EVENT CONTROLS : FOR UI AND TESTING
     AFRAME.registerComponent("add-external-listeners", { 
         init: function(){
             // window.addEventListener("touchstart", function(){
-            //     const currentPos = sceneEls.camRig.fly.getAttribute('position')
+            //     const currentPos = scene.els.camRig.fly.getAttribute('position')
             //         console.log('TOUCH/ORBIT CAMERAS ENABLED')
             //      //Enable Orbit control and VR mode options
-            //     sceneEls.scene.setAttribute('vr-mode-ui', {enabled: true})
-            //     sceneEls.cam.fly.setAttribute('orbit-controls', {
+            //     scene.els.scene.setAttribute('vr-mode-ui', {enabled: true})
+            //     scene.els.cam.fly.setAttribute('orbit-controls', {
             //         position: {x: currentPos.x, y: currentPos.y, z: currentPos.z}
             //     })
             //     // Disable look and wasd controls
-            //     sceneEls.cam.fly.removeAttribute('look-controls')
-            //     sceneEls.cam.fly.removeAttribute('wasd-controls')
+            //     scene.els.cam.fly.removeAttribute('look-controls')
+            //     scene.els.cam.fly.removeAttribute('wasd-controls')
             // })
 
             // KEYBOARD EVENTS
@@ -1518,293 +2368,293 @@ console.log('SHOW CLOUDS')
                                 document.getElementById('shortcuts').classList.add('visible') 
                             break
                         case 'KeyP':
-                            if(!state.visual.animation.planeFlight){                                
-                                sceneEls.scene.setAttribute('fly-plane', null)
+                            if(!state.scene.animation.planeFlight){                                
+                                scene.els.scene.setAttribute('fly-plane', null)
                             }
                             break
-                        case 'keyE':   
+                        case 'KeyR':                       
+                                scene.els.scene.setAttribute('sail-duck', null)
+                            break
+                        case 'KeyE':   
                             const environments = Object.keys(settings.days),
-                                currentIndex = environments.indexOf(state.visual.environment.name),
+                                currentIndex = environments.indexOf(state.scene.environment.name),
                                 newEnvironment = environments[(currentIndex+1) % environments.length]  
-                            state.visual.environment.name = newEnvironment
+                            state.scene.environment.name = newEnvironment
                             externalEvents.changeEnvironment(newEnvironment)
                             console.log('Changing environment to '+newEnvironment)
                             break
-                        case 'KeyK':
-                            if(!state.visual.animation.blockTitleShowing){
-                                state.visual.animation.blockTitleShowing = true
-                                sceneEls.items.blockGroup.setAttribute('show-block-title', "text: Kieran World;  posZ: 35, -35;   posY: 5,  -10; posX: 0, 0; tilt: 10, -10; rotate: 0, 0; letterSpace: 15")
-                                sceneEls.items.blockGroup.setAttribute('animation', {
+
+                        case 'KeyQ':
+                            if(!state.scene.animation.blockTitleShowing){
+                                state.scene.animation.blockTitleShowing = true
+                                // scene.els.items.blockGroup.setAttribute('show-block-title', "text: Hello World;  posZ: 35, -35;   posY: 5,  -10; posX: 0, 0; tilt: 10, -10; rotate: 0, 0; letterSpace: 15")
+                                scene.els.items.blockGroup.setAttribute('show-block-title', "text: The Kingdom of Dreams & Madness;  posX: -20, -20, -20, 0, -20, 0; posY: 40, 40, 40, 0, -5, -15;  posZ: 70, 0, -70, 50, 5, -45;  tilt: 0, 0, 0, 10, 0, -10; rotate: 0, 0, 0, 0, 0, 0; letterSpace: 12.5")
+                                scene.els.items.blockGroup.setAttribute('animation', {
                                     property: 'position.y', from: 100, to: 0, dur: 3500, delay: 500
                                 })
                             } else {
-                                state.visual.animation.blockTitleShowing = false
-                                sceneEls.items.blockGroup.setAttribute('animation', {
+                                state.scene.animation.blockTitleShowing = false
+                                scene.els.items.blockGroup.setAttribute('animation', {
                                     property: 'position.y', from: 0, to: 100, dur: 3500, delay: 500
                                 })
                                 setTimeout( () => {
-                                    sceneEls.items.blockGroup.removeAttribute('show-block-title')
+                                    scene.els.items.blockGroup.removeAttribute('show-block-title')
                                 }, 3500)                                    
                             }
                             break
 
-                        case 'KeyM':
-                            if(!state.visual.animation.blockTitleShowing){
-                                state.visual.animation.blockTitleShowing = true
-                                sceneEls.items.blockGroup.setAttribute('show-block-title', "text: Matthew World;  posZ: 35, -35;   posY: 5,  -10; posX: 0, 0; tilt: 10, -10; rotate: 0, 0; letterSpace: 15")
-                                sceneEls.items.blockGroup.setAttribute('animation', {
-                                    property: 'position.y', from: 100, to: 0, dur: 3500, delay: 500
-                                })
+
+                        case 'KeyC':
+                            if(!state.scene.emissions.balloons){
+                                scene.els.scene.setAttribute('emissions-activity-balloons', null)
+                                state.scene.emissions.balloons = true
                             } else {
-                                state.visual.animation.blockTitleShowing = false
-                                sceneEls.items.blockGroup.setAttribute('animation', {
-                                    property: 'position.y', from: 0, to: 100, dur: 3500, delay: 500
-                                })
-                                setTimeout( () => {
-                                    sceneEls.items.blockGroup.removeAttribute('show-block-title')
-                                }, 3500)                                    
+                                scene.els.scene.removeAttribute('emissions-activity-balloons')
+                                state.scene.emissions.balloons = false
                             }
                             break
-
-                        case 'keyQ':
-                            if(!state.visual.animation.blockTitleShowing){
-                                state.visual.animation.blockTitleShowing = true
-                                // sceneEls.items.blockGroup.setAttribute('show-block-title', "text: Hello World;  posZ: 35, -35;   posY: 5,  -10; posX: 0, 0; tilt: 10, -10; rotate: 0, 0; letterSpace: 15")
-                                sceneEls.items.blockGroup.setAttribute('show-block-title', "text: The Kingdom of Dreams & Madness;  posX: -20, -20, -20, 0, -20, 0; posY: 40, 40, 40, 0, -5, -15;  posZ: 70, 0, -70, 50, 5, -45;  tilt: 0, 0, 0, 10, 0, -10; rotate: 0, 0, 0, 0, 0, 0; letterSpace: 12.5")
-                                sceneEls.items.blockGroup.setAttribute('animation', {
-                                    property: 'position.y', from: 100, to: 0, dur: 3500, delay: 500
-                                })
-                            } else {
-                                state.visual.animation.blockTitleShowing = false
-                                sceneEls.items.blockGroup.setAttribute('animation', {
-                                    property: 'position.y', from: 0, to: 100, dur: 3500, delay: 500
-                                })
-                                setTimeout( () => {
-                                    sceneEls.items.blockGroup.removeAttribute('show-block-title')
-                                }, 3500)                                    
-                            }
-                        break
 
                         // HAZARD EVENTS
+                        case 'Digit1': 
+                        case 'Digit2': 
+                        case 'Digit3': 
+                        case 'Digit4': 
+                        case 'Digit5': 
+                        case 'Digit6': 
+                        case 'Digit7': 
+                        case 'Digit8': 
+                        case 'Digit9': 
+                        case 'Digit0': 
+                            state.scene.environment.hazardVisible = true
+
                         case 'Digit1':      // 1. THUNDERSTORM AND FLOODING EVENTS 
-                            switch(state.visual.hazard.flood){  
+                            switch(state.scene.hazard.flood){  
                                 // Increase flood levels on subsequent keypress
                                 case false: 
                                     externalEvents.resetHazards()               // Clear any existing hazards
                                     externalEvents.changeEnvironment('stormFlood', 2000 )
-                                    sceneEls.scene.setAttribute('hazard-rain', null)
-                                    sceneEls.scene.setAttribute('hazard-lightning', null)
+                                    scene.els.scene.setAttribute('hazard-rain', null)
+                                    scene.els.scene.setAttribute('hazard-lightning', null)
                                     setTimeout( () => { 
-                                        sceneEls.scene.setAttribute('hazard-flood', {"floodLvl": 0.125}) 
+                                        scene.els.scene.setAttribute('hazard-flood', {"floodLvl": 0.125}) 
                                     }, 2000)
-                                    state.visual.hazard.particles = true   
-                                    state.visual.hazard.flood = 'minor'
+                                    state.scene.hazard.particles = true   
+                                    state.scene.hazard.flood = 'minor'
                                     break
                                 // From minor to medium flood
                                 case 'minor':
-                                    state.visual.hazard.flood = 'medium'
-                                    sceneEls.scene.setAttribute('hazard-flood', {"floodLvl": 0.5})
+                                    scene.els.scene.setAttribute('hazard-flood', {"floodLvl": 0.5})
+                                    state.scene.hazard.flood = 'medium'
                                     break
                                 // From medium to major flood
                                 case 'medium':
-                                    state.visual.hazard.flood = 'major'
-                                    sceneEls.scene.setAttribute('hazard-flood', {"floodLvl": 0.75})
+                                    state.scene.hazard.flood = 'major'
+                                    scene.els.scene.setAttribute('hazard-flood', {"floodLvl": 0.75})
                                     break
                                 // Reset after showing major flood 
                                 default:                        
-                                    state.visual.hazard.particles = false
-                                    clearInterval(state.visual.hazard.lightning)
-                                    state.visual.hazard.flood = false
-                                    sceneEls.scene.removeAttribute('hazard-rain')
-                                    sceneEls.scene.removeAttribute('hazard-lightning')
-                                    sceneEls.scene.removeAttribute('hazard-flood')
-                                    externalEvents.changeEnvironment(state.visual.environment.name)
+                                    clearInterval(state.scene.hazard.lightning)
+                                    scene.els.scene.removeAttribute('hazard-rain')
+                                    scene.els.scene.removeAttribute('hazard-lightning')
+                                    scene.els.scene.removeAttribute('hazard-flood')
+                                    externalEvents.changeEnvironment(state.scene.environment.name)
+                                    state.scene.hazard.particles = false
+                                    state.scene.hazard.flood = false
+                                    state.scene.hazard.lightning = false
+                                    state.scene.environment.hazardVisible =false
                             }
                             break
                         
                         case 'Digit2':      // 2. EXTREME WIND (THUNDERSTORM) EVENTS 
-                            switch(state.visual.hazard.wind){  
+                            switch(state.scene.hazard.wind){  
                                 case false: 
                                     externalEvents.resetHazards()               // Clear any existing hazards
                                     externalEvents.changeEnvironment('stormFlood', 2000 )
-                                    sceneEls.scene.setAttribute('hazard-rain', null)
-                                    sceneEls.scene.setAttribute('hazard-wind', null)
-                                    sceneEls.scene.setAttribute('hazard-lightning', null)
-                                    state.visual.hazard.particles = true
-                                    state.visual.hazard.wind = 'minor'
+                                    scene.els.scene.setAttribute('hazard-rain', null)
+                                    scene.els.scene.setAttribute('hazard-wind', null)
+                                    scene.els.scene.setAttribute('hazard-lightning', null)
+                                    state.scene.hazard.particles = true
+                                    state.scene.hazard.wind = 'minor'
                                     break 
                                 // Increase wind levels on subsequent keypress
                                 case 'minor': 
-                                    state.visual.hazard.wind = 'major'
-                                    sceneEls.scene.setAttribute('hazard-wind', {"damage": 0.25})
+                                    scene.els.scene.setAttribute('hazard-wind', {"damage": 0.25})
+                                    state.scene.hazard.wind = 'major'
                                     break
                                 // Reset after showing major wind event 
                                 default:    
-                                    state.visual.hazard.wind = false
-                                    state.visual.hazard.particles = false
-                                    clearInterval(state.visual.hazard.lightning)
-                                    sceneEls.scene.removeAttribute('hazard-wind')
-                                    sceneEls.scene.removeAttribute('hazard-rain')
-                                    sceneEls.scene.removeAttribute('hazard-lightning')
-                                    externalEvents.changeEnvironment(state.visual.environment.name)
+                                    clearInterval(state.scene.hazard.lightning)
+                                    scene.els.scene.removeAttribute('hazard-wind')
+                                    scene.els.scene.removeAttribute('hazard-rain')
+                                    scene.els.scene.removeAttribute('hazard-lightning')
+                                    externalEvents.changeEnvironment(state.scene.environment.name)
+                                    state.scene.hazard.wind = false
+                                    state.scene.hazard.particles = false
+                                    state.scene.environment.hazardVisible =false
                             }                            
                             break
                        
                         case 'Digit3':      // 3. HEAT DAYS AND HEATWAVE
-                            switch(state.visual.hazard.heat){  
+                            switch(state.scene.hazard.heat){  
                                 case false: 
                                     externalEvents.resetHazards()               // Clear any existing hazards
                                     externalEvents.changeEnvironment('heat', 2000)
-                                    sceneEls.scene.setAttribute('hazard-heat', {intensity: 'hotDay'})
-                                    state.visual.hazard.heat = 'hotDay'
+                                    scene.els.scene.setAttribute('hazard-heat', {intensity: 'hotDay'})
+                                    state.scene.hazard.heat = 'hotDay'
                                     break
                                 case 'hotDay': 
-                                    state.visual.hazard.heat = 'veryHotDay'
-                                    sceneEls.scene.setAttribute('hazard-heat', {intensity: 'veryHotDay'})
+                                    scene.els.scene.setAttribute('hazard-heat', {intensity: 'veryHotDay'})
+                                    state.scene.hazard.heat = 'veryHotDay'
                                     break 
                                 case 'veryHotDay': 
-                                    state.visual.hazard.heat = 'heatwave'
-                                    sceneEls.scene.setAttribute('hazard-heat', {intensity: 'heatwave'})
+                                    scene.els.scene.setAttribute('hazard-heat', {intensity: 'heatwave'})
+                                    state.scene.hazard.heat = 'heatwave'
                                     break
-
-                                // Reset after showing heat eevents
+                                // Reset after showing heat events
                                 default:    
-                                    state.visual.hazard.heat = false
-                                    sceneEls.scene.removeAttribute('hazard-heat')
-                                    externalEvents.changeEnvironment(state.visual.environment.name)
+                                    scene.els.scene.removeAttribute('hazard-heat')
+                                    externalEvents.changeEnvironment(state.scene.environment.name)
+                                    state.scene.hazard.heat = false
+                                    state.scene.environment.hazardVisible =false
                             }                            
                             break
                         
                         case 'Digit4':      // 4. DROUGHT | FOOD AND WATER SUPPLY SHORTAGE
-                            switch(state.visual.hazard.drought){  
+                            switch(state.scene.hazard.drought){  
                                 case false:
                                     externalEvents.resetHazards()               // Clear any existing hazards
-                                    sceneEls.scene.setAttribute('hazard-drought', {level: 'minor'})
-                                    state.visual.hazard.drought = 'minor'
+                                    scene.els.scene.setAttribute('hazard-drought', {level: 'minor'})
+                                    state.scene.hazard.drought = 'minor'
                                     break
                                 case 'minor':
-                                    state.visual.hazard.drought = 'major'
-                                    sceneEls.scene.setAttribute('hazard-drought', {level: 'major'})
+                                    scene.els.scene.setAttribute('hazard-drought', {level: 'major'})
+                                    state.scene.hazard.drought = 'major'
                                     break
                                 default:
-                                    state.visual.hazard.drought = false
-                                    sceneEls.scene.removeAttribute('hazard-drought')
-                                    externalEvents.changeEnvironment(state.visual.environment.name)
+                                    scene.els.scene.removeAttribute('hazard-drought')
+                                    externalEvents.changeEnvironment(state.scene.environment.name)
+                                    state.scene.hazard.drought = false
+                                    state.scene.environment.hazardVisible =false
                             }
                             break
                        
                         case 'Digit5':      // 5. BUSHFIRES | INTENSITY AND POSITION BASED
-                            switch(state.visual.hazard.bushfire){  
+                            switch(state.scene.hazard.bushfire){  
                                 case false:
                                     externalEvents.resetHazards()               // Clear any existing hazards
-                                    state.visual.hazard.bushfire = 0
-                                    sceneEls.scene.setAttribute('hazard-bushfire', {intensity: 0})
+                                    state.scene.hazard.bushfire = 0
+                                    scene.els.scene.setAttribute('hazard-bushfire', {intensity: 0})
                                     break
                                 case 0:
-                                    state.visual.hazard.bushfire = 0.5
-                                    sceneEls.scene.setAttribute('hazard-bushfire', {intensity: 0.5})
+                                    scene.els.scene.setAttribute('hazard-bushfire', {intensity: 0.5})
+                                    state.scene.hazard.bushfire = 0.5
                                     break
                                 case 0.5:
-                                    state.visual.hazard.bushfire = 1
-                                    sceneEls.scene.setAttribute('hazard-bushfire', {intensity: 1})
+                                    scene.els.scene.setAttribute('hazard-bushfire', {intensity: 1})
+                                    state.scene.hazard.bushfire = 1
                                     break
                                 default:
-console.log('Stopping Bushfire!')
-                                    state.visual.hazard.bushfire = false
-                                    sceneEls.scene.removeAttribute('hazard-bushfire')
-                                    externalEvents.changeEnvironment(state.visual.environment.name)
+                                    scene.els.scene.removeAttribute('hazard-bushfire')
+                                    externalEvents.changeEnvironment(state.scene.environment.name)
+                                    state.scene.hazard.bushfire = false
+                                    state.scene.environment.hazardVisible =false
                             }
                             break 
 
                         case 'Digit6':      // 6. OCEAN ACIDIFICATION | INTENSITY BASED
-                            switch(state.visual.hazard.oceanAcidification){  
+                            switch(state.scene.hazard.oceanAcidification){  
                                 case false:
                                     externalEvents.resetHazards()               // Clear any existing hazards
-                                    state.visual.hazard.oceanAcidification = 'minor'
-                                    sceneEls.scene.setAttribute('hazard-ocean-acidification', null)
+                                    state.scene.hazard.oceanAcidification = 'minor'
+                                    scene.els.scene.setAttribute('hazard-ocean-acidification', null)
                                     break
                                 default:
-                                    state.visual.hazard.oceanAcidification = false
-                                    sceneEls.scene.removeAttribute('hazard-ocean-acidification')
+                                    scene.els.scene.removeAttribute('hazard-ocean-acidification')
                                     externalEvents.changeEnvironment('default')
+                                    state.scene.hazard.oceanAcidification = false
+                                    state.scene.environment.hazardVisible =false
                             }
                             break
                     
                         case 'Digit7':      // 7. CYCLONES AND HURRICANES | SEA AND LAND BASED WIND EVENTS
-                            switch(state.visual.hazard.tropicalStorm){  
+                            switch(state.scene.hazard.tropicalStorm){  
                                 case false:
                                     externalEvents.resetHazards()               // Clear any existing hazards
                                     externalEvents.changeEnvironment('stormFlood', 2000 )
-                                    state.visual.hazard.tropicalStorm = 'tropical'
-                                    state.visual.hazard.wind = 'major'
-                                    sceneEls.scene.setAttribute('hazard-tropical-storm', null)
-                                    sceneEls.scene.setAttribute('hazard-wind', {damage: 0.25})
+                                    scene.els.scene.setAttribute('hazard-tropical-storm', null)
+                                    scene.els.scene.setAttribute('hazard-wind', {damage: 0.25})
+                                    state.scene.hazard.tropicalStorm = 'tropical'
+                                    state.scene.hazard.wind = 'major'
                                     break
                                 default:
-                                    externalEvents.changeEnvironment(state.visual.environment.name)
-                                    state.visual.hazard.tropicalStorm = false
-                                    state.visual.hazard.wind = 'none'
-                                    sceneEls.scene.removeAttribute('hazard-tropical-storm')
-                                    sceneEls.scene.removeAttribute('hazard-wind')
+                                    externalEvents.changeEnvironment(state.scene.environment.name)
+                                    scene.els.scene.removeAttribute('hazard-tropical-storm')
+                                    scene.els.scene.removeAttribute('hazard-wind')
                                     externalEvents.changeEnvironment('default')
+                                    state.scene.hazard.tropicalStorm = false
+                                    state.scene.hazard.wind = 'none'
+                                    state.scene.environment.hazardVisible = false
                             }
                             break
 
                         case 'Digit8':      // 8. WINTER AND ICE STORM
-                            switch(state.visual.hazard.winterStorm){  
+                            switch(state.scene.hazard.winterStorm){  
                                 case false:
                                     externalEvents.resetHazards()               // Clear any existing hazards
                                     externalEvents.changeEnvironment('snow', 2000 )
-                                    state.visual.hazard.winterStorm = 'snow'
-                                    state.visual.hazard.snow = true
-                                    sceneEls.scene.setAttribute('hazard-winter-storm', {intensity: 'snow'})
+                                    scene.els.scene.setAttribute('hazard-winter-storm', {intensity: 'snow'})
+                                    state.scene.hazard.winterStorm = 'snow'
+                                    state.scene.hazard.snow = true
                                     break
                                 case 'snow':
-                                    state.visual.hazard.winterStorm = 'bizzard'
-                                     sceneEls.scene.setAttribute('hazard-winter-storm', {intensity: 'blizzard'})
+                                    scene.els.scene.setAttribute('hazard-winter-storm', {intensity: 'blizzard'})
+                                    state.scene.hazard.winterStorm = 'bizzard'
                                     break
                                 case 'bizzard':
-                                    state.visual.hazard.winterStorm = 'iceStorm'
-                                     sceneEls.scene.setAttribute('hazard-winter-storm', {intensity: 'iceStorm'})
+                                    scene.els.scene.setAttribute('hazard-winter-storm', {intensity: 'iceStorm'})
+                                    state.scene.hazard.winterStorm = 'iceStorm'
                                     break
                                 default:
-                                    externalEvents.changeEnvironment(state.visual.environment.name)
-                                    state.visual.hazard.winterStorm = false
-                                    sceneEls.scene.removeAttribute('hazard-winter-storm')
+                                    externalEvents.changeEnvironment(state.scene.environment.name)
+                                    scene.els.scene.removeAttribute('hazard-winter-storm')
+                                    state.scene.hazard.winterStorm = false
+                                    state.scene.environment.hazardVisible = false
                             }
                             break
 
                         case 'Digit9':      //  9. AVALANCHE AND MUDSLIDE
+
                             break
 
                         case 'Digit0':      //  0. EARTHQUAKES AND TSUNAMIS
-                            switch(state.visual.hazard.earthquake){  
+                            switch(state.scene.hazard.earthquake){  
                                  case false:
-                                    sceneEls.scene.setAttribute('hazard-earthquake', {intensity: 10})
+                                    scene.els.scene.setAttribute('hazard-earthquake', {intensity: 10})
                                     break
                                 default:
+                                    state.scene.environment.hazardVisible = false
                             }
                             break
 
                         // +/- SEA LEVEL CHANGES | INCREMENTAL
                         case 'Equal':
                         case 'NumpadAdd':
-                            state.visual.hazard.seaLevel = state.visual.hazard.seaLevel + 0.1 
-                            sceneEls.scene.setAttribute('hazard-sea-level', 'slchange: '+state.visual.hazard.seaLevel )
-                            console.log('Raising Sea level to '+state.visual.hazard.seaLevel)
+                            state.scene.hazard.seaLevel = state.scene.hazard.seaLevel + 0.1 
+                            scene.els.scene.setAttribute('hazard-sea-level', 'slchange: '+state.scene.hazard.seaLevel )
+                            console.log('Raising Sea level to '+state.scene.hazard.seaLevel)
                             // COASTAL EROSION
                             break
                         case 'Minus':
                         case 'NumpadSubtract':
-                            state.visual.hazard.seaLevel = state.visual.hazard.seaLevel - 0.1 
-                            sceneEls.scene.setAttribute('hazard-sea-level', 'slchange: '+state.visual.hazard.seaLevel )
-                            console.log('Lowering sea level to '+state.visual.hazard.seaLevel)
+                            state.scene.hazard.seaLevel = state.scene.hazard.seaLevel - 0.1 
+                            scene.els.scene.setAttribute('hazard-sea-level', 'slchange: '+state.scene.hazard.seaLevel )
+                            console.log('Lowering sea level to '+state.scene.hazard.seaLevel)
                             break
                     
                         default:
                             clearTimeout(state.ui.keydown)  
                             document.getElementById('shortcuts').classList.remove('visible')
-                            console.log('Unused jkey code is: '+ key.code)
+                            console.log('Unused key code is: '+ key.code)
 
                     }
                 }
@@ -1838,42 +2688,43 @@ console.log('Stopping Bushfire!')
         toggleStats: function(){
             document.getElementById('scene').toggleAttribute('stats')
         },
+
         toggleCamera: function(){
-            if(sceneEls.cam.fly.getAttribute('camera').active ){
-                sceneEls.cam.fly.setAttribute('camera', {active: false  })
-                sceneEls.cam.low.setAttribute('camera', {active: true   })
+            if(scene.els.cam.fly.getAttribute('camera').active ){
+                scene.els.cam.fly.setAttribute('camera', {active: false  })
+                scene.els.cam.low.setAttribute('camera', {active: true   })
             } else {
-                sceneEls.cam.fly.setAttribute('camera',   {active: true   })
-                sceneEls.cam.low.setAttribute('camera',   {active: false   })
+                scene.els.cam.fly.setAttribute('camera',   {active: true   })
+                scene.els.cam.low.setAttribute('camera',   {active: false   })
             }
         },
 
         rotateFlyCam: function(direction, duration = 2000){
-            state.visual.enableKeyEvents = false
-            sceneEls.camRig.fly.removeAttribute('animation__position')
-            sceneEls.camRig.fly.removeAttribute('animation__rotation')     
+            state.scene.enableKeyEvents = false
+            scene.els.camRig.fly.removeAttribute('animation__position')
+            scene.els.camRig.fly.removeAttribute('animation__rotation')     
 
             if(direction === 'left'){
-                state.visual.camera.flyIndex = (state.visual.camera.flyIndex  + 1) < view.cam.fly.length ? state.visual.camera.flyIndex  + 1 : 0
-                rotateY =  sceneEls.camRig.fly.getAttribute('rotation').y - 45
+                state.scene.camPosera.flyIndex = (state.scene.camPosera.flyIndex  + 1) < scene.camPos.overheadRing.length ? state.scene.camPosera.flyIndex  + 1 : 0
+                rotateY =  scene.els.camRig.fly.getAttribute('rotation').y - 45
             } else if(direction === 'right') {
-                state.visual.camera.flyIndex = (state.visual.camera.flyIndex  - 1) >= 0 ? state.visual.camera.flyIndex  - 1 : (view.cam.fly.length -1)
-                rotateY =  sceneEls.camRig.fly.getAttribute('rotation').y + 45
+                state.scene.camPosera.flyIndex = (state.scene.camPosera.flyIndex  - 1) >= 0 ? state.scene.camPosera.flyIndex  - 1 : (scene.camPos.overheadRing.length -1)
+                rotateY =  scene.els.camRig.fly.getAttribute('rotation').y + 45
             }
 
-            sceneEls.camRig.fly.setAttribute('animation__position', {
+            scene.els.camRig.fly.setAttribute('animation__position', {
                 property: 'position',
                 dur: duration,
-                to: `${view.cam.fly[state.visual.camera.flyIndex].pos.x}  ${view.cam.fly[state.visual.camera.flyIndex].pos.y}  ${view.cam.fly[state.visual.camera.flyIndex].pos.z}`
+                to: `${scene.camPos.overheadRing[state.scene.camPosera.flyIndex].pos.x}  ${scene.camPos.overheadRing[state.scene.camPosera.flyIndex].pos.y}  ${scene.camPos.overheadRing[state.scene.camPosera.flyIndex].pos.z}`
             })  
-            sceneEls.camRig.fly.setAttribute('animation__rotation', {
+            scene.els.camRig.fly.setAttribute('animation__rotation', {
                 property: 'rotation',
                 dur: duration,
                 to: `-5 ${rotateY} 0}`
             })  
 
-            sceneEls.cam.fly.removeAttribute('animation__rotation')
-            sceneEls.cam.fly.setAttribute('animation__rotation', {
+            scene.els.cam.fly.removeAttribute('animation__rotation')
+            scene.els.cam.fly.setAttribute('animation__rotation', {
                 property: 'fly',
                 dur: duration,
                 to: "0 0 0"
@@ -1885,98 +2736,108 @@ console.log('Stopping Bushfire!')
         },
 
         toggleFlyCamHeight: function(){
-            const currentPos = sceneEls.camRig.fly.getAttribute('position')
-            switch(state.visual.camera.flyHeight){
+            const currentPos = scene.els.camRig.fly.getAttribute('position')
+            switch(state.scene.camPosera.flyHeight){
                 case "high":
-                    sceneEls.camRig.fly.setAttribute('animation__pos', {
+                    scene.els.camRig.fly.setAttribute('animation__pos', {
                         property:       'position',
                         dur:            1500,
                         to:             {x: currentPos.x,  y: 10, z: currentPos.z}
                     })
-                    sceneEls.camRig.fly.setAttribute('animation__rotation', {
+                    scene.els.camRig.fly.setAttribute('animation__rotation', {
                         property:       'rotation',
                         dur:            1500,
                         to:             {x: 0,  y: 90, z: 0}
                     })
-                    sceneEls.cam.fly.setAttribute('animation__rotation', {
+                    scene.els.cam.fly.setAttribute('animation__rotation', {
                         property:       'rotation',
                         dur:            1500,
                         to:             {x: 0,  y: 0, z: 0}
                     })
-                    state.visual.camera.flyHeight = "low"
+                    state.scene.camPosera.flyHeight = "low"
                     break
 
                 case "low":
-                    sceneEls.camRig.fly.setAttribute('animation__pos', {
+                    scene.els.camRig.fly.setAttribute('animation__pos', {
                         property:       'position',
                         dur:            1500,
                         to:             {x: currentPos.x,  y: 90, z: currentPos.z}
                     })
-                    sceneEls.camRig.fly.setAttribute('animation__rotation', {
+                    scene.els.camRig.fly.setAttribute('animation__rotation', {
                         property:       'rotation',
                         dur:            1500,
                         to:             {x: -10,  y: 90, z: 0}
                     })
-                    state.visual.camera.flyHeight = "high"
+                    state.scene.camPosera.flyHeight = "high"
                     break
             }
         },
 
         // Helper to attach new instance of look-controls after after animation
         resetLookControls: function() {
-            sceneEls.cam.fly.removeAttribute('look-controls')
-            sceneEls.cam.fly.setAttribute('look-controls', {})
+            scene.els.cam.fly.removeAttribute('look-controls')
+            scene.els.cam.fly.setAttribute('look-controls', {})
         },
 
         changeHour: function(direction, duration = 2000){
-            console.log('Moving hour '+direction+' to '+sceneEls.misc.sunPos[state.visual.modelTime.hour])
-        
-            externalEvents.resetHazards() // Reset all hazard (i.e. hazard environents)
+            console.log('Moving hour '+direction+' to '+scene.els.misc.sunPos[state.scene.time.hour])
             if(direction === 'forward'){
-                state.visual.modelTime.hour = state.visual.modelTime.hour !== (sceneEls.misc.sunPos.length - 1) ? state.visual.modelTime.hour + 1 : 0
+                state.scene.time.hour = state.scene.time.hour !== (scene.els.misc.sunPos.length - 1) ? state.scene.time.hour + 1 : 0
             } else if(direction === 'back'){
-                state.visual.modelTime.hour = state.visual.modelTime.hour !== 0 ? state.visual.modelTime.hour  - 1 :  sceneEls.misc.sunPos.length - 1 
+                state.scene.time.hour = state.scene.time.hour !== 0 ? state.scene.time.hour  - 1 :  scene.els.misc.sunPos.length - 1 
             }
             // Resposition sun an sun light
-            const newSunPos = document.getElementById(sceneEls.misc.sunPos[state.visual.modelTime.hour]).getAttribute('position')
-            sceneEls.enviro.sun.setAttribute('animation__position', {
+            const newSunPos = document.getElementById(scene.els.misc.sunPos[state.scene.time.hour]).getAttribute('position')
+            scene.els.enviro.sun.setAttribute('animation__position', {
                 property: 'position',
                 dur: duration,
                 to: `${newSunPos.x}  ${newSunPos.y}  ${newSunPos.z}`
             })  
-            sceneEls.lights.sun.setAttribute('animation__position', {
+            scene.els.lights.sun.setAttribute('animation__position', {
                 property: 'position',
                 dur: duration,
                 to: `${newSunPos.x}  ${newSunPos.y}  ${newSunPos.z}`
             })  
             // Resposition moon body
-            const newMoonPos = document.getElementById(sceneEls.misc.moonPos[state.visual.modelTime.hour]).getAttribute('position')
-            sceneEls.enviro.moon.setAttribute('animation__position', {
+            const newMoonPos = document.getElementById(scene.els.misc.moonPos[state.scene.time.hour]).getAttribute('position')
+            scene.els.enviro.moon.setAttribute('animation__position', {
                 property: 'position',
                 dur: duration,
                 to: `${newMoonPos.x}  ${newMoonPos.y}  ${newMoonPos.z}`
             })  
             // Change the hemi ambient light
-            sceneEls.lights.hemi.setAttribute('animation__light', {
+            scene.els.lights.hemi.setAttribute('animation__light', {
                 property: 'light.intensity',
                 dur: duration,
-                to: settings.lights.hemi.intProp[state.visual.modelTime.season][state.visual.modelTime.hour] * settings.lights.hemi.maxIntensity
+                to: settings.lights.hemi.intProp[state.scene.time.season][state.scene.time.hour] * settings.lights.hemi.maxIntensity
             })  
             // Change the environment
             externalEvents.changeEnvironment()
+
             // Turn lights on/off
-            if (state.visual.modelTime.timeOfDay() === "day" || state.visual.modelTime.timeOfDay() === "morning"){
-                externalEvents.turnNightLightsOff()
+            if ((state.scene.time.timeOfDay() === "day" || state.scene.time.timeOfDay() === "morning")){
+                if(state.scene.environment.nightLights){
+                    console.log(state.scene.time.timeOfDay(), 'TURN LIGHTS OFF')
+                    scene.els.scene.removeAttribute('nightlights')
+                } else {
+                    console.log('KEEP LIGHTS OFF')
+                }   
             } else {
-                externalEvents.turnNightLightsOn()
+                if(!state.scene.environment.nightLights){
+                    console.log(state.scene.time.timeOfDay(), 'TURN LIGHTS ON')
+                    scene.els.scene.setAttribute('nightlights', null)
+                } else {
+                    console.log('KEEP LIGHTS ON')
+                }
             }
+
             // Track the solar  
             const solarFarmEls = document.getElementsByClassName('solarRotatable')
             for(let i = 0; i < solarFarmEls.length; i++){
                 solarFarmEls[i].setAttribute('animation__rotate', {
                     property:   'rotation',
                     dur:        duration,
-                    to:         {x: settings.solarFarm.rotationByHour[state.visual.modelTime.hour] , y: 0, z: 0}
+                    to:         {x: settings.solarFarm.rotationByHour[state.scene.time.hour] , y: 0, z: 0}
                 })            
             }
 
@@ -1986,40 +2847,39 @@ console.log('Stopping Bushfire!')
 
         },
 
-        changeEnvironment: function(name = state.visual.environment.name, duration = 2000, timeOfDay = state.visual.modelTime.timeOfDay()){
+        changeEnvironment: function(name = state.scene.environment.name, duration = 2000, timeOfDay = state.scene.time.timeOfDay()){
             console.log('Changing environment to '+name, timeOfDay)
             // Change the sky colour for time of day and "conditions"
-            sceneEls.enviro.sky.setAttribute('animation__topColour', {
+            scene.els.enviro.sky.setAttribute('animation__topColour', {
                 property:   'material.topColor',
                 dur:        duration,
                 to:         settings.days[name][timeOfDay]['sky-top']
             })  
-        sceneEls.enviro.sky.setAttribute('animation__bottomColour', {
+            scene.els.enviro.sky.setAttribute('animation__bottomColour', {
                 property:   'material.bottomColor',
                 dur:        duration,
                 to:         settings.days[name][timeOfDay]['sky-bottom']
             })  
             // Change the hemisphere light colours and ocean colour
             if(settings.days[name][timeOfDay].hemilight){
-                console.log('Changing hemi light colours...')
-                sceneEls.lights.hemi.setAttribute('animation__skyCol', {
+                scene.els.lights.hemi.setAttribute('animation__skyCol', {
                     property: 'light.color',
                     dur: duration,
                     to: settings.days[name][timeOfDay].hemilight.sky
                 })  
-                sceneEls.lights.hemi.setAttribute('animation__groundCol', {
+                scene.els.lights.hemi.setAttribute('animation__groundCol', {
                     property: 'light.groundColor',
                     dur: duration,
                     to: settings.days[name][timeOfDay].hemilight.ground
                 })  
 
             } else {
-                sceneEls.lights.hemi.setAttribute('animation__skyCol', {
+                scene.els.lights.hemi.setAttribute('animation__skyCol', {
                     property: 'light.color',
                     dur: duration,
                     to: settings.days.default[timeOfDay].hemilight.sky
                 })  
-                sceneEls.lights.hemi.setAttribute('animation__groundCol', {
+                scene.els.lights.hemi.setAttribute('animation__groundCol', {
                     property: 'light.groundColor',
                     dur: duration,
                     to: settings.days.default[timeOfDay].hemilight.ground
@@ -2027,8 +2887,8 @@ console.log('Stopping Bushfire!')
             }
             // Change the water colour
             if(settings.days[name][timeOfDay].water){
-                sceneEls.enviro.sea.removeAttribute('ocean')
-                sceneEls.enviro.sea.setAttribute('ocean', {
+                scene.els.enviro.sea.removeAttribute('ocean')
+                scene.els.enviro.sea.setAttribute('ocean', {
                     color:              settings.days[name][timeOfDay].water,
                     width:              10.8,
                     amplitude:          0.25,
@@ -2036,8 +2896,8 @@ console.log('Stopping Bushfire!')
                     density:            20
                 })  
             } else {
-                sceneEls.enviro.sea.removeAttribute('ocean')
-                sceneEls.enviro.sea.setAttribute('ocean', {
+                scene.els.enviro.sea.removeAttribute('ocean')
+                scene.els.enviro.sea.setAttribute('ocean', {
                     color:              settings.days.default[timeOfDay].water,
                     width:              10.8,
                     amplitude:          0.25,
@@ -2047,78 +2907,42 @@ console.log('Stopping Bushfire!')
             }
             // Change the fog settings
             if(settings.days[name][timeOfDay].fog){
-                sceneEls.scene.setAttribute('fog', {
+                scene.els.scene.setAttribute('fog', {
                     color: settings.days[name][timeOfDay].fog.color,
                     far: settings.days[name][timeOfDay].fog.far
                 })  
-                sceneEls.scene.setAttribute('animation__far', {
+                scene.els.scene.setAttribute('animation__far', {
                     property: 'fog.far',
                     dur: duration,
                     from: 1000,
                     to: settings.days[name][timeOfDay].fog.far
                 })  
             } else {
-                sceneEls.scene.setAttribute('fog', {
+                scene.els.scene.setAttribute('fog', {
                     color: settings.days.default[timeOfDay].fog.color,
                     far: settings.days.default[timeOfDay].fog.far
                 })  
             }
         },
 
-        turnNightLightsOn:  function(){
-            const glassEls =  document.getElementsByClassName('glass-group')
-            state.visual.environment.nightLights = true
-            for(const el of glassEls){
-                el.setAttribute('material', {'emissive': '#C7CEF6'})
-            }
-
-            document.getElementById('lighthouse-light').setAttribute('animation__rotation', {
-                    property:       'rotation',
-                    dur:            30000,
-                    from:           '-10 -50 0',
-                    to:             '-10 -180 0',
-                    loop:           true,
-                    dir:            'alternate'
-                })
-            document.getElementById('lighthouse-light').setAttribute('animation__intensity', {
-                property:       'light.intensity',
-                dur:            1000,
-                to:             1
-            })
-        },
-
-        turnNightLightsOff:  function(){
-            const glassEls =  document.getElementsByClassName('glass-group')
-            state.visual.environment.nightLights = false
-            for(const el of glassEls){
-                el.setAttribute('material', {'emissive': '#000'})
-            }
-            document.getElementById('lighthouse-light').removeAttribute('animation__rotation')
-            document.getElementById('lighthouse-light').setAttribute('animation__intensity', {
-                property:       'light.intensity',
-                dur:            1000,
-                to:             0
-            })
-        },
-
         resetHazards: function(){
-            state.visual.hazard.particles = false
-            state.visual.hazard.flood = false
-            state.visual.hazard.wind = false
-            state.visual.hazard.bushfire = false
-            sceneEls.scene.setAttribute('hazard-sea-level', 'slchange: 0')
-            sceneEls.scene.removeAttribute('hazard-rain')
-            sceneEls.scene.removeAttribute('hazard-lightning')
-            sceneEls.scene.removeAttribute('hazard-bushfire')
-            sceneEls.scene.removeAttribute('hazard-drought')
-            sceneEls.scene.removeAttribute('hazard-tropical-storm')
-            sceneEls.scene.removeAttribute('hazard-winter-storm')
-            sceneEls.scene.removeAttribute('hazard-ocean-acidification')
-            sceneEls.scene.removeAttribute('hazard-flood')
-            sceneEls.scene.removeAttribute('hazard-wind')
-            sceneEls.scene.removeAttribute('hazard-heat')
-            clearInterval(state.visual.hazard.lightning)
-            externalEvents.changeEnvironment(state.visual.environment.name)
+            state.scene.hazard.particles = false
+            state.scene.hazard.flood = false
+            state.scene.hazard.wind = false
+            state.scene.hazard.bushfire = false
+            scene.els.scene.setAttribute('hazard-sea-level', 'slchange: 0')
+            scene.els.scene.removeAttribute('hazard-rain')
+            scene.els.scene.removeAttribute('hazard-lightning')
+            scene.els.scene.removeAttribute('hazard-bushfire')
+            scene.els.scene.removeAttribute('hazard-drought')
+            scene.els.scene.removeAttribute('hazard-tropical-storm')
+            scene.els.scene.removeAttribute('hazard-winter-storm')
+            scene.els.scene.removeAttribute('hazard-ocean-acidification')
+            scene.els.scene.removeAttribute('hazard-flood')
+            scene.els.scene.removeAttribute('hazard-wind')
+            scene.els.scene.removeAttribute('hazard-heat')
+            clearInterval(state.scene.hazard.lightning)
+            externalEvents.changeEnvironment(state.scene.environment.name)
             console.log('All hazards reset')
         }
     }

@@ -15,8 +15,10 @@
 
 console.log('BUILDING APP...')
 
-    const settings = {
-        time:       {
+// INITIALISE DATA OBJECTS
+
+    const settings = {              // Expected to be initialised from external/editable JSON
+        modelTime:       {
             baselineYear: 2020,
             horizonYear: 2050,
             seasonsByMonth: {
@@ -152,22 +154,32 @@ console.log('BUILDING APP...')
         },
     }
 
+    // Model and scene state data
     const state = {
-        model: {
-            timeLoaded:             new Date(),
+        // User environment data
+        user: {
+            timeLoaded:             new Date(),         
             time:                   {},
+            location:               {},
+            weather:                {},
         },
-        visual: {
-            modelTime: {
+        // Visual state of A-FRAME scene
+        scene: {                  
+            time: {
                 hour:               10,
                 season:            'spring',
-                timeOfDay:          () => settings.environment.timeOfDay[state.visual.modelTime.season][state.visual.modelTime.hour],
+                timeOfDay:          () => settings.environment.timeOfDay[state.scene.time.season][state.scene.time.hour],
             },
             environment: {
                 name:               'default',
-                nightLights:        false
+                nightLights:        false,
+                hazardVisible:      false,
+                wind: {
+                    speed:          10, 
+                    heading:         0,         // Degrees from North
+                },
             },
-            hazardVisible:          false,
+            
             hazard: {               // For all hazards, the 'off' state is false or zero
                 bushfire:           false,           // false then incremental intensity (0, 0.5 and 1 mapping to position)
                 drought:            false,           // false, minor and major; triggering various water, vegetation/ag and ground cover changes
@@ -187,11 +199,7 @@ console.log('BUILDING APP...')
                 winterStorm:        false,          // false, snow, blizard, iceStorm 
                 mudslide:          false,          // false, avalanche, mudslide 
             },
-            weather: {
-                windSpeed:          10, 
-                windDirection:      0,
-                temperature:        25
-            },
+            
             camera: {
                 activeID:           'flycam',
                 flyIndex:           0,
@@ -205,25 +213,35 @@ console.log('BUILDING APP...')
             },
             elements: {
                 origCol:            {}
+            },
+            emissions: {
+                balloons:           false
             }
         },
 
-        ui: {
+        // Systems model and simulation state
+        model: {
+        },
+
+        // HTML User interface 
+        ui: {         
+            enabled:            false,
+            displayType:        '',                 // Narrative, Data?
             enableKeyEvents:    true,
             keydown:            '',
         }
     }
 
+    // Modelling simulation
     const simulation = {
         dayLength: 60000
     }
 
-    const sceneEls = {}
-
-
-    const view = {
-        cam: {
-            fly: [ // Clockwise from north-south
+    // Scene settings
+    const scene = {
+        els:               {},      // A-FRAME Scene element references: set through setup init (component)
+        camPos: {                    // Fixed camera positions for views
+            overheadRing: [ // Clockwise from north-south
                 {  // North-South flyover
                     pos:        {x: 180,    y: 60,      z: 0},
                     rotation:   {x: -10,     y: 90,      z: 0},
@@ -256,7 +274,6 @@ console.log('BUILDING APP...')
                     pos:        {x: 90 * 1.414,  y: 60,  z: -90 * 1.414},
                     rotation:   {x: -10,     y: 135,     z: 0},
                 },
-
             ],
             residential: {
             }
@@ -266,19 +283,18 @@ console.log('BUILDING APP...')
     }
 
 
-// Set current time to now
-    state.model.time.year = state.model.timeLoaded.getFullYear()
-    state.model.time.month = state.model.timeLoaded.getMonth()
-    state.model.time.hour = state.model.timeLoaded.getHours()
-    state.model.time.minutes = state.model.timeLoaded.getMinutes()
-    state.model.time.season = settings.time.seasonsByMonth[state.model.time.month]
 
-    state.visual.environment.sunX = settings.environment.sunX[state.model.time.season]
 
-// Set Sun "x" position (based on season)
-    const modelSchema = {
-        modelYears: [... Array(settings.time.horizonYear - settings.time.baselineYear).keys()].map(d => d + settings.time.baselineYear)
+
+// MOdel 
+    const schema = {
+        model: {
+            years:          [... Array(settings.modelTime.horizonYear - settings.modelTime.baselineYear).keys()].map(d => d + settings.modelTime.baselineYear)
+        }
+
     }
+
+
 
     const modelData = {
         list: {
@@ -838,3 +854,24 @@ console.log('BUILDING APP...')
                             2.5, 10 ,17.5, 25, 32.5, 40,            // MIDDAY TO 5PM
                             40, 40, 40, 0, 0, 0],                   // 6PM TO 11PM
     }
+
+
+
+
+//////////////////////////////////////////
+///////  USER SPECIFIC CONDITIONS  ///////
+//////////////////////////////////////////
+
+    // Set current user time from internal clock
+    state.user.time.year = state.user.timeLoaded.getFullYear()
+    state.user.time.month = state.user.timeLoaded.getMonth()
+    state.user.time.hour = state.user.timeLoaded.getHours()
+    state.user.time.minutes = state.user.timeLoaded.getMinutes()
+    state.user.time.season = settings.modelTime.seasonsByMonth[state.user.time.month]
+
+    // Get current location
+
+    // Get current weather
+ 
+    // Set Sun "x" position (based on season)
+    state.scene.environment.sunX = settings.environment.sunX[state.user.time.season]
