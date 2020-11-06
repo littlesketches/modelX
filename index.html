@@ -2603,10 +2603,10 @@
             <!-- CAMERAS-->
             <a-entity id="camera-group">
                 <a-entity id="lowcam-rig" rotation="0 0 0"  position="0 5 0" >
-                    <a-entity id="lowcam" rotation="0 0 0" camera="active: false; fov: 50" orbit-controls="enabled: true; initialPosition: 0 150 0; maxPolarAngle: 90"></a-entity>
+                    <a-entity id="lowcam" rotation="0 0 0" camera="active: true; fov: 50" orbit-controls="enabled: true; initialPosition: 0 150 0; maxPolarAngle: 90"></a-entity>
                 </a-entity>
                 <a-entity id="flycam-rig" position="180 60 0" rotation="-10 90 0"  >
-                    <a-entity id="flycam" camera="active: true; fov: 45; zoom: 0.9; near: 0.1" look-controls wasd-controls="acceleration: 150, enabled: true"></a-entity>
+                    <a-entity id="flycam" camera="active: false; fov: 45; zoom: 0.9; near: 0.1" look-controls wasd-controls="acceleration: 150, enabled: true"></a-entity>
                 </a-entity> 
             </a-entity>
 
