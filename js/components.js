@@ -2806,23 +2806,16 @@
     // EXTERNAL EVENT CONTROLS : FOR UI AND TESTING
     AFRAME.registerComponent("add-external-listeners", { 
         init: function(){
-            // window.addEventListener("touchstart", function(){
-            //     const currentPos = scene.els.camRig.fly.getAttribute('position')
-            //         console.log('TOUCH/ORBIT CAMERAS ENABLED')
-            //      //Enable Orbit control and VR mode options
-            //     scene.els.scene.setAttribute('vr-mode-ui', {enabled: true})
-            //     scene.els.cam.fly.setAttribute('orbit-controls', {
-            //         position: {x: currentPos.x, y: currentPos.y, z: currentPos.z}
-            //     })
-            //     // Disable look and wasd controls
-            //     scene.els.cam.fly.removeAttribute('look-controls')
-            //     scene.els.cam.fly.removeAttribute('wasd-controls')
-            // })
+            window.addEventListener("touchstart", function(){
+                console.log('TOUCH/ORBIT CAMERAS ENABLED')
+                scene.els.cam.fly.setAttribute('camera',   {active: true   })
+                scene.els.cam.low.setAttribute('camera',   {active: false   })
+            })
 
             // KEYBOARD EVENTS
             window.addEventListener("keydown", function(key){
 
-console.log(key.code)                // Keyboard events
+            // Keyboard events
                 if(state.ui.enableKeyEvents){
                     switch(key.code){
                         case 'Backquote': 
