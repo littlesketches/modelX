@@ -2808,8 +2808,8 @@
         init: function(){
             window.addEventListener("touchstart", function(){
                 console.log('TOUCH/ORBIT CAMERAS ENABLED')
-                scene.els.cam.fly.setAttribute('camera',   {active: true   })
-                scene.els.cam.low.setAttribute('camera',   {active: false   })
+                scene.els.cam.fly.setAttribute('camera',   {active: false   })
+                scene.els.cam.low.setAttribute('camera',   {active: true   })
             })
 
             // KEYBOARD EVENTS
