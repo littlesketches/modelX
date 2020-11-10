@@ -178,8 +178,7 @@ console.log('BUILDING APP...')
                     speed:          10, 
                     heading:         0,         // Degrees from North
                 },
-            },
-            
+            },            
             hazard: {               // For all hazards, the 'off' state is false or zero
                 bushfire:           false,           // false then incremental intensity (0, 0.5 and 1 mapping to position)
                 drought:            false,           // false, minor and major; triggering various water, vegetation/ag and ground cover changes
@@ -198,8 +197,7 @@ console.log('BUILDING APP...')
                 wind:               false,           // false, minor and major (where the windDamage determines the visual)
                 winterStorm:        false,          // false, snow, blizard, iceStorm 
                 mudslide:          false,          // false, avalanche, mudslide 
-            },
-            
+            },            
             camera: {
                 activeID:           'flycam',
                 flyIndex:           0,
@@ -278,23 +276,14 @@ console.log('BUILDING APP...')
             residential: {
             }
         }
-
-
     }
 
-
-
-
-
-// MOdel 
+    // Model 
     const schema = {
         model: {
             years:          [... Array(settings.modelTime.horizonYear - settings.modelTime.baselineYear).keys()].map(d => d + settings.modelTime.baselineYear)
         }
-
     }
-
-
 
     const modelData = {
         list: {
@@ -875,3 +864,6 @@ console.log('BUILDING APP...')
  
     // Set Sun "x" position (based on season)
     state.scene.environment.sunX = settings.environment.sunX[state.user.time.season]
+
+
+

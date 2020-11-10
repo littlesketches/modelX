@@ -14,592 +14,108 @@
     console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
 
     // SCENE SETUP COMPONENTS
-    AFRAME.registerComponent('setup', {
-        init: function(){
-            console.log('**** SETTING DOM ELEMENTS UP...****')
+        AFRAME.registerComponent('setup', {
+            init: function(){
+                console.log('**** SETTING DOM ELEMENTS UP...****')
 
-            // Iniiate element references on initation for referencing in othercomponent code
-            scene.els.scene = document.getElementById('scene')
-
-            // Zones elements
-            scene.els.zones = {
-                planet:         document.getElementById('planet'),
-                central:        document.getElementsByClassName('central-zone'),
-                suburban:       document.getElementsByClassName('suburban-zone'),
-                urban:          document.getElementsByClassName('urban-zone'),
-                periUrban:      document.getElementsByClassName('periUrban-zone'),
-                agriculture:    document.getElementsByClassName('agriculture-zone'),
-                outer:          document.getElementsByClassName('agriculture-zone'),
-                waterfront:     document.getElementsByClassName('waterfront-zone'),
-            }
-            // Lights
-            scene.els.lights = {
-                hemi:           document.getElementById('ambient-hemiLight'),
-                ambient:        document.getElementById('ambient-light'),
-                sun:            document.getElementById('sun-light'),
-                spot:           document.getElementById('spotlight-above')
-            }
-
-            // Environment elements
-            scene.els.enviro = {
-                sun:            document.getElementById('sun-body'),
-                moon:           document.getElementById('moon-body'),
-                sky:            document.getElementById('sky'),
-                sea:            document.getElementById('sea'),
-                oceanGroup:     document.getElementById('ocean-group'),
-                snowGroup:      document.getElementById('snow-group'),
-                particles:      document.getElementById('particles'),
-                lightningGroup: document.getElementById('lightning-group'),
-                grassGroup:     document.getElementById('ground-group'),
-                fire:           document.getElementById('fire-group'),
-                vortexGroup:    document.getElementById('vortex-group'),
-                vortex:         document.getElementById('vortex')
-            }
-            // Camera elements
-            scene.els.cam = {
-                fly:            document.getElementById('flycam'),
-                low:            document.getElementById('lowcam')
-            }
-            scene.els.camRig = {
-                fly:            document.getElementById('flycam-rig'),
-                low:            document.getElementById('lowcam-rig')
-            }
-
-            // Miscellaneous itemes
-            scene.els.items = {
-                duckPath:       document.getElementById('duck-path-points'),
-                blockGroup:     document.getElementById('message-blocks-group')
-            }
-
-            // Misc
-            scene.els.misc = {
-               sunPos: [
-                    "sun-0000", "sun-0100", "sun-0200", "sun-0300", "sun-0400", "sun-0500", 
-                    "sun-0600", "sun-0700", "sun-0800", "sun-0900", "sun-1000", "sun-1100", 
-                    "sun-1200", "sun-1300", "sun-1400", "sun-1500", "sun-1600", "sun-1700", 
-                    "sun-1800", "sun-1900", "sun-2000", "sun-2100", "sun-2200", "sun-2300" ],
-                moonPos: [
-                    "moon-0000", "moon-0100", "moon-0200", "moon-0300", "moon-0400", "moon-0500", 
-                    "moon-0600", "moon-0700", "moon-0800", "moon-0900", "moon-1000", "moon-1100", 
-                    "moon-1200", "moon-1300", "moon-1400", "moon-1500", "moon-1600", "moon-1700", 
-                    "moon-1800", "moon-1900", "moon-2000", "moon-2100", "moon-2200", "moon-2300" ]
-            }    
-
-            // Emissions balloon anchor collections
-            scene.els.anchors = {
-                // Emission sources
-                sources: {
-                    stationaryEnergy: {
-                        scope1: {
-                            electricityGeneration: {
-                                coalFired:                  document.querySelectorAll('.emissions-anchor.utility-coal'),
-                                gasFired:                   ''
-                            },
-                            mainsGas: {
-                                residential: {
-                                    smallDwellings:          document.querySelectorAll('.emissions-anchor.mains-gas.residential'),
-                                    largeDwellings:          document.querySelectorAll('.emissions-anchor.mains-gas.large-home'),
-                                    townhouses:              document.querySelectorAll('.emissions-anchor.mains-gas.townhouse')
-                                },               
-                                commercial:  {
-                                    offices:                document.querySelectorAll('.emissions-anchor.mains-gas.offices'),
-                                    retail:                 document.querySelectorAll('.emissions-anchor.mains-gas.retail'),
-                                    hospitality:            document.querySelectorAll('.emissions-anchor.mains-gas.hospitality'),
-                                    accomodation:           document.querySelectorAll('.emissions-anchor.mains-gas.accomodation')
-                                },          
-                                industrial: {
-                                    other:                  document.querySelectorAll('.emissions-anchor.mains-gas.industrial'),
-                                    mineral:                [],
-                                    chemical:               [],
-                                    metal:                  [],
-                                    electronics:             []
-                                },          
-                                agriculture:  {
-                                    farm:                   document.querySelectorAll('.emissions-anchor.mains-gas.farm'),
-                                },          
-                                institutional: {
-                                    government:             document.querySelectorAll('.emissions-anchor.mains-gas.government'),
-                                    hospital:               document.querySelectorAll('.emissions-anchor.mains-gas.hospital'),
-                                    airport:                document.querySelectorAll('.emissions-anchor.mains-gas.airport'),
-                                    school:                 document.querySelectorAll('.emissions-anchor.mains-gas.school'),
-                                    church:                 document.querySelectorAll('.emissions-anchor.mains-gas.church')
-                                }         
-                            },
-                            bottledLPG:{
-                                residential: {
-                                    smallDwellings:          document.querySelectorAll('.emissions-anchor.lpg.small-home'),
-                                    largeDwellings:          document.querySelectorAll('.emissions-anchor.lpg.large-home'),
-                                    townhouses:              document.querySelectorAll('.emissions-anchor.lpg.townhouse')
-                                },               
-                                commercial:  {
-                                    offices:                document.querySelectorAll('.emissions-anchor.lpg.offices'),
-                                    retail:                 document.querySelectorAll('.emissions-anchor.lpg.retail'),
-                                    hospitality:            document.querySelectorAll('.emissions-anchor.lpg.hospitality'),
-                                    accomodation:           document.querySelectorAll('.emissions-anchor.lpg.accomodation')
-                                },          
-                                industrial: {
-                                    other:                  document.querySelectorAll('.emissions-anchor.lpg.industrial'),
-                                    mineral:                [],
-                                    chemical:               [],
-                                    metal:                  [],
-                                    electronics:            []
-                                },          
-                                agriculture:  {
-                                    farm:                   document.querySelectorAll('.emissions-anchor.lpg.farm'),
-                                },          
-                                institutional: {
-                                    government:             document.querySelectorAll('.emissions-anchor.lpg.government'),
-                                    hospital:               document.querySelectorAll('.emissions-anchor.lpg.hospital'),
-                                    airport:                document.querySelectorAll('.emissions-anchor.lpg.airport'),
-                                    school:                 document.querySelectorAll('.emissions-anchor.lpg.school'),
-                                    church:                 document.querySelectorAll('.emissions-anchor.lpg.church')
-                                }        
-                            },
-                            wood: {
-                                residential: {
-                                    smallDwellings:          document.querySelectorAll('.emissions-anchor.firewood.small-home'),
-                                    largeDwellings:          document.querySelectorAll('.emissions-anchor.firewood.large-home'),
-                                    townhouses:              []
-                                },               
-                                commercial:                 {},          
-                                industrial:                 {},          
-                                agriculture:                {},          
-                                institutional:              {},
-                            },
-                            diesel: {
-                                residential: {
-                                    smallDwellings:          {},
-                                    largeDwellings:          {},
-                                    townhouses:              []
-                                },               
-                                commercial:                 {},          
-                                industrial:                 {},          
-                                agriculture:                {
-                                    generation:             document.querySelectorAll('.emissions-anchor.diesel-generators.farm'),
-                                    pumpsIrrigation:        document.querySelectorAll('.emissions-anchor.diesal-pumps.farm')
-                                },          
-                                institutional:              {
-                                    government:             document.querySelectorAll('.emissions-anchor.diesel.government'),
-                                    hospital:               document.querySelectorAll('.emissions-anchor.diesel.hospital'),
-                                    airport:                document.querySelectorAll('.emissions-anchor.diesel.airport'),
-                                },
-                            }
-                        },
-                        scope2: {
-                            gridElectricity: {
-                                residential: {
-                                    smallDwellings:         document.querySelectorAll('.emissions-anchor.grid-electricity.small-home'),
-                                    largeDwellings:         document.querySelectorAll('.emissions-anchor.grid-electricity.large-home'),
-                                    townhouses:             document.querySelectorAll('.emissions-anchor.grid-electricity.townhouse')
-                                },  
-                                commercial:  {
-                                    offices:                document.querySelectorAll('.emissions-anchor.grid-electricity.office-fiveLvl'),
-                                    officeTowers:           document.querySelectorAll('.emissions-anchor.grid-electricity.office-tower'),
-                                    retail:                 document.querySelectorAll('.emissions-anchor.grid-electricity.office-threeLvl'),
-                                    hospitality:            document.querySelectorAll('.emissions-anchor.grid-electricity.hospitality'),
-                                    accomodation:           document.querySelectorAll('.emissions-anchor.grid-electricity.accomodation')
-                                },   
-                                industrial: {
-                                    other:                  document.querySelectorAll('.emissions-anchor.grid-electricity.industrial'),
-                                    mineral:                [],
-                                    chemical:               [],
-                                    metal:                  [],
-                                    electronics:            []
-                                },          
-                                agriculture:  {
-                                    largeFarm:              document.querySelectorAll('.emissions-anchor.grid-electricity.large-barn'),
-                                    smallFarm:              document.querySelectorAll('.emissions-anchor.grid-electricity.small-barn')
-                                },          
-                                institutional: {
-                                    government:             document.querySelectorAll('.emissions-anchor.grid-electricity.govBuilding'),
-                                    airport:                document.querySelectorAll('.emissions-anchor.grid-electricity.airport'),   
-                                    hospital:               document.querySelectorAll('.emissions-anchor.grid-electricity.hospital'),
-                                    church:                 document.querySelectorAll('.emissions-anchor.grid-electricity.church'),
-                                    school:                 document.querySelectorAll('.emissions-anchor.grid-electricity.school'),
-                                }  
-                            },
-                        },
-                        scope3: {
-                            eletricityTransmission:         document.querySelectorAll('.emissions-anchor.grid-electricity.transmission'),
-                            eletricityDistribution:         document.querySelectorAll('.emissions-anchor.grid-electricity.distribution'),
-                            gasDistribution:                [],
-                        }
-                    },
-                    transportEnergy: {
-                        scope1: {
-                            road: {
-                                residential: {
-                                    passengerVehicle: {
-                                        petrol:             [],
-                                        diesel:             [],
-                                        lpg:                [],
-                                        biodiesel:          [],
-                                        ethanol:            [],
-                                    },
-                                    motorcyle: {
-                                        petrol:             [],
-                                        ethanol:            [],
-                                    },
-                                    other: {
-                                        petrol:             [],
-                                        diesel:             [],
-                                        lpg:                [],
-                                        biodiesel:          [],
-                                        ethanol:            [],
-                                    },
-                                },
-                                commercial: {
-                                    passengerVehicle: {
-                                        petrol:             [],
-                                        diesel:             [],
-                                        lpg:                [],
-                                        biodiesel:          [],
-                                        ethanol:            [],
-                                    },
-                                    lightCommercialVehicle: {
-                                        petrol:             [],
-                                        diesel:             [],
-                                        lpg:                [],
-                                        biodiesel:          [],
-                                        ethanol:            [],
-                                    },
-                                    heavyTrucks: {
-                                        petrol:             [],
-                                        diesel:             [],
-                                        lpg:                [],
-                                        biodiesel:          [],
-                                        ethanol:            [],
-                                    },
-                                    bus: {
-                                        petrol:             [],
-                                        diesel:             [],
-                                        lpg:                [],
-                                        biodiesel:          [],
-                                        ethanol:            [],
-                                    },
-                                    other: {
-                                        petrol:             [],
-                                        diesel:             [],
-                                        lpg:                [],
-                                        biodiesel:          [],
-                                        ethanol:            [],
-                                    },
-                                },
-                                industrial: {
-                                    passengerVehicle: {
-                                        petrol:             [],
-                                        diesel:             [],
-                                        lpg:                [],
-                                        biodiesel:          [],
-                                        ethanol:            [],
-                                    },
-                                    lightCommercialVehicle: {
-                                        petrol:             [],
-                                        diesel:             [],
-                                        lpg:                [],
-                                        biodiesel:          [],
-                                        ethanol:            [],
-                                    },
-                                    heavyTrucks: {
-                                        petrol:             [],
-                                        diesel:             [],
-                                        lpg:                [],
-                                        biodiesel:          [],
-                                        ethanol:            [],
-                                    },
-                                    other: {
-                                        petrol:             [],
-                                        diesel:             [],
-                                        lpg:                [],
-                                        biodiesel:          [],
-                                        ethanol:            [],
-                                    },
-                                },
-                                agriculture: {
-                                    passengerVehicle: {
-                                        petrol:             [],
-                                        diesel:             [],
-                                        lpg:                [],
-                                        biodiesel:          [],
-                                        ethanol:            [],
-                                    },
-                                    lightCommercialVehicle: {
-                                        petrol:             [],
-                                        diesel:             [],
-                                        lpg:                [],
-                                        biodiesel:          [],
-                                        ethanol:            [],
-                                    },
-                                    other: {
-                                        petrol:             [],
-                                        diesel:             [],
-                                        lpg:                [],
-                                        biodiesel:          [],
-                                        ethanol:            [],
-                                    },
-                                },
-                                institutional: {
-                                    passengerVehicle: {
-                                        petrol:             [],
-                                        diesel:             [],
-                                        lpg:                [],
-                                        biodiesel:          [],
-                                        ethanol:            [],
-                                    },
-                                    lightCommercialVehicle: {
-                                        petrol:             [],
-                                        diesel:             [],
-                                        lpg:                [],
-                                        biodiesel:          [],
-                                        ethanol:            [],
-                                    },
-                                    heavyTrucks: {
-                                        petrol:             [],
-                                        diesel:             [],
-                                        lpg:                [],
-                                        biodiesel:          [],
-                                        ethanol:            [],
-                                    },
-                                    bus: {
-                                        petrol:             [],
-                                        diesel:             [],
-                                        lpg:                [],
-                                        biodiesel:          [],
-                                        ethanol:            [],
-                                    },
-                                    other: {
-                                        petrol:             [],
-                                        diesel:             [],
-                                        lpg:                [],
-                                        biodiesel:          [],
-                                        ethanol:            [],
-                                    },
-                                },
-                            },
-                            offroad: {
-                                industrial: {
-                                    petrol:             [],
-                                    diesel:             [],
-                                    lpg:                [],
-                                    biodiesel:          [],
-                                    ethanol:            [],
-                                },
-                                agriculture: {
-                                    petrol:             [],
-                                    diesel:             [],
-                                    lpg:                [],
-                                    biodiesel:          [],
-                                    ethanol:            [],
-                                },
-                                institutional: {
-                                    petrol:             [],
-                                    diesel:             [],
-                                    lpg:                [],
-                                    biodiesel:          [],
-                                    ethanol:            [],
-                                },
-                            },
-                            aviation: {
-                                airplane: {
-                                    jetfuel:        document.querySelectorAll('.emissions-anchor.airplane'),
-                                    avgas:          [],
-                                },
-                                airplane: {
-                                    jetfuel:        [],
-                                    avgas:          [],
-                                }
-                            }
-                        }
-                    },
-                    solidWaste: {
-                        scope1: {
-                            landfill: {
-                                municipalSolidWaste:        document.querySelectorAll('.emissions-anchor.landfill.msw'),
-                                commercialAndIndustrial:    document.querySelectorAll('.emissions-anchor.landfill.ci'),
-                                constructionAndDemolition:  document.querySelectorAll('.emissions-anchor.landfill.cd'),
-                            },
-                            incineration:                    {},
-                            biologicalTreatment:             {},
-                        },
-                        scope3: {
-                            landfill: {
-                                municipalSolidWaste:            document.querySelectorAll('.emissions-anchor.bin-landfill'),
-                                commercialAndIndustrial:        document.querySelectorAll('.emissions-anchor.skip-landfill'),
-                            }
-                        },
-                    },
-                    wasteWater: {
-                        scope1: {
-                            treatment:                      {}
-                        },
-                        scope3: {
-                            landfill: {
-                                municipalSolidWaste:        document.querySelectorAll('.emissions-anchor.bin-landfill'),
-                                commercialAndIndustrial:    document.querySelectorAll('.emissions-anchor.skip-landfill'),
-                            }
-                        },
-                    },
-                    agriculture: {
-                        scope1: {
-                            livestock: {
-                                enteric: {
-                                    cattle:         document.querySelectorAll('.emissions-anchor.livestock.cow'),
-                                    pigs:           document.querySelectorAll('.emissions-anchor.livestock.pig'),
-                                    sheep:          document.querySelectorAll('.emissions-anchor.livestock.sheep'),
-                                    poultry:        document.querySelectorAll('.emissions-anchor.livestock.poultry')
-                                },
-                                manure: {}
-                            },
-                            grazing: {
-                                cattle:         [],
-                                pigs:           [],
-                                sheep:          [],
-                                poultry:        []
-                            },
-                            cropping: {
-                                wheat:              document.querySelectorAll('.emissions-anchor.agriculture.cropping-wheat'),
-                                corn:               document.querySelectorAll('.emissions-anchor.agriculture.cropping-corn'),
-                                other:              document.querySelectorAll('.emissions-anchor.agriculture.cropping-other')
-                            },
-                            fruitAndVeg: {
-                                apples:              document.querySelectorAll('.emissions-anchor.agriculture.ag-apples'),
-                            }
-
-                        },
-                        scope3: {
-
-                        }
-                    },
-                    land: {
-                        scope1: {
-                            conversion:             [],
-                            clearing:               [],
-                            reclearing:             [],
-                        }
-                    },
-                    industrialProcesses: {
-                        scope1: {
-                            industrial: {
-                                other:                  document.querySelectorAll('.emissions-anchor.lpg.industrial'),
-                                mineral:                [],
-                                chemical:               [],
-                                metal:                  [],
-                                electronics:            []
-                            },
-                        }
-                    },
-                    industrialProductUse: {
-                        scope1: {
-                            refrigerants: {
-                                residential:            [],
-                                commerical:             [],
-                                industrial:             [],
-                                institutional:          [],
-                                transport:  {
-                                    passengerVehicles:  [],
-                                }
-                            }
-                        }
-                    }
-                },
-                // Clean alternatives
-                switches: {       
-                    stationaryEnergy: {
-                        scope1: {
-                            electricityGeneration: {
-                                solar:                  document.querySelectorAll('.emissions-anchor.utility-solar'),
-                                wind:                   document.querySelectorAll('.emissions-anchor.utility-wind'),
-                                hydro:                  document.querySelectorAll('.emissions-anchor.utility-hydro')
-                            },
-                        },
-                        scope2: {
-                            onSiteSolar: {
-                                residential: {
-                                    smallDwellings:         document.querySelectorAll('.emissions-anchor.rooftop-solar'),
-                                    largeDwellings:         [],
-                                    townhouses:             []
-                                },  
-                                commercial:  {
-                                    offices:                [],
-                                    retail:                 [],
-                                    hospitality:            [],
-                                    accomodation:           []
-                                },   
-                                industrial: {
-                                    other:                  [],
-                                    mineral:                [],
-                                    chemical:               [],
-                                    metal:                  [],
-                                    electronics:            []
-                                },          
-                                agriculture:  {
-                                    largeFarm:              [],
-                                    smallFarm:              [],
-                                    groundMounted:          [],
-                                },          
-                                institutional: {
-                                    government:             [],
-                                    airport:                [],
-                                    hospital:               [],
-                                    church:                 [],
-                                    school:                 []
-                                }  
-                            },
-                        },
-                        scope3: {
-                            eletricityTransmission:         [],
-                            eletricityDistribution:         [],
-                            gasDistribution:                [],
-                        }
-                    },
-                },
-                // Carbon sinks 
-                sinks: {
-                    land: {
-                        scope1: {
-                            afforestation:             [],
-                            reforestation:             [],
-                        }
-                    },
-                    agriculture: {
-                        scope1: {
-                            soilSequestration:          []
-                        }
-                    }
+                // Iniiate element references on initation for referencing in othercomponent code
+                scene.els.scene = document.getElementById('scene')
+                // Zones elements
+                scene.els.zones = {
+                    planet:         document.getElementById('planet'),
+                    central:        document.getElementsByClassName('central-zone'),
+                    suburban:       document.getElementsByClassName('suburban-zone'),
+                    urban:          document.getElementsByClassName('urban-zone'),
+                    periUrban:      document.getElementsByClassName('periUrban-zone'),
+                    agriculture:    document.getElementsByClassName('agriculture-zone'),
+                    outer:          document.getElementsByClassName('agriculture-zone'),
+                    waterfront:     document.getElementsByClassName('waterfront-zone'),
                 }
+                // Lights
+                scene.els.lights = {
+                    hemi:           document.getElementById('ambient-hemiLight'),
+                    ambient:        document.getElementById('ambient-light'),
+                    sun:            document.getElementById('sun-light'),
+                    spot:           document.getElementById('spotlight-above')
+                }
+                // Environment elements
+                scene.els.enviro = {
+                    sun:            document.getElementById('sun-body'),
+                    moon:           document.getElementById('moon-body'),
+                    sky:            document.getElementById('sky'),
+                    sea:            document.getElementById('sea'),
+                    oceanGroup:     document.getElementById('ocean-group'),
+                    snowGroup:      document.getElementById('snow-group'),
+                    alpTops:        document.getElementById('alp-tops'),
+                    particles:      document.getElementById('particles'),
+                    lightningGroup: document.getElementById('lightning-group'),
+                    grassGroup:     document.getElementById('ground-group'),
+                    fire:           document.getElementById('fire-group'),
+                    vortexGroup:    document.getElementById('vortex-group'),
+                    vortex:         document.getElementById('vortex')
+                }
+                // Camera elements
+                scene.els.cam = {
+                    fly:            document.getElementById('flycam'),
+                    low:            document.getElementById('lowcam')
+                }
+                scene.els.camRig = {
+                    fly:            document.getElementById('flycam-rig'),
+                    low:            document.getElementById('lowcam-rig')
+                }
+                // Miscellaneous items
+                scene.els.items = {
+                    duckPath:       document.getElementById('duck-path-points'),
+                    blockGroup:     document.getElementById('message-blocks-group')
+                }
+                // Misc
+                scene.els.misc = {
+                sunPos: [
+                        "sun-0000", "sun-0100", "sun-0200", "sun-0300", "sun-0400", "sun-0500", 
+                        "sun-0600", "sun-0700", "sun-0800", "sun-0900", "sun-1000", "sun-1100", 
+                        "sun-1200", "sun-1300", "sun-1400", "sun-1500", "sun-1600", "sun-1700", 
+                        "sun-1800", "sun-1900", "sun-2000", "sun-2100", "sun-2200", "sun-2300" ],
+                    moonPos: [
+                        "moon-0000", "moon-0100", "moon-0200", "moon-0300", "moon-0400", "moon-0500", 
+                        "moon-0600", "moon-0700", "moon-0800", "moon-0900", "moon-1000", "moon-1100", 
+                        "moon-1200", "moon-1300", "moon-1400", "moon-1500", "moon-1600", "moon-1700", 
+                        "moon-1800", "moon-1900", "moon-2000", "moon-2100", "moon-2200", "moon-2300" ]
+                }    
+
+                const emissionsFeaturesSml = document.querySelectorAll('.house-small * .chimney, .house-small * .rooftop-solar, .house-small * .gas-meter, .house-small * .ac-unit, .house-small * .hot-water-tank, .house-small * .water-heat-pump, .house-small * .home-battery')
+                const emissionsFeaturesLrg = document.querySelectorAll('.house-large * .chimney, .house-large * .rooftop-solar, .house-large * .gas-meter, .house-large * .ac-unit, .house-large * .hot-water-tank, .house-large * .water-heat-pump .house-large * .home-battery')
+
+                emissionsFeaturesSml.forEach( el => { el.setAttribute('visible', true)  })
+                emissionsFeaturesLrg.forEach( el => { el.setAttribute('visible', true)  })
             }
+        })
+         
+        AFRAME.registerComponent("position-sun", {        
+            init: function() {
+                console.log('Setting the sun and moon position for hour '+state.scene.time.hour)
+                scene.els.enviro.sun.setAttribute('position', document.getElementById(scene.els.misc.sunPos[state.scene.time.hour]).getAttribute('position'))
+                scene.els.lights.sun.setAttribute('position', document.getElementById(scene.els.misc.sunPos[state.scene.time.hour]).getAttribute('position'))
+
+                scene.els.enviro.moon.setAttribute('position', document.getElementById(scene.els.misc.moonPos[state.scene.time.hour]).getAttribute('position'))
+
+                // Change the hemi ambient light
+                scene.els.lights.hemi.setAttribute('light', { 
+                    intensity: settings.lights.hemi.intProp[state.scene.time.season][state.scene.time.hour] * settings.lights.hemi.maxIntensity
+                })  
+                // Set solar farm axis
+                const solarFarmEls = document.getElementsByClassName('solarRotatable')
+                for(let i = 0; i < solarFarmEls.length; i++){
+                    solarFarmEls[i].setAttribute('animation__rotate', {
+                        property:   'rotation',
+                        dur:        1000,
+                        to:         {x: settings.solarFarm.rotationByHour[state.scene.time.hour] , y: 0, z: 0}
+                    })            
+                }
+
+                // Set the environment
+                externalEvents.changeEnvironment()
         }
-    })
-
-
-                        
-
-    AFRAME.registerComponent("position-sun", {        
-        init: function() {
-            console.log('Setting the sun and moon position for hour '+state.scene.time.hour)
-            scene.els.enviro.sun.setAttribute('position', document.getElementById(scene.els.misc.sunPos[state.scene.time.hour]).getAttribute('position'))
-            scene.els.lights.sun.setAttribute('position', document.getElementById(scene.els.misc.sunPos[state.scene.time.hour]).getAttribute('position'))
-
-            scene.els.enviro.moon.setAttribute('position', document.getElementById(scene.els.misc.moonPos[state.scene.time.hour]).getAttribute('position'))
-
-            // Change the hemi ambient light
-            scene.els.lights.hemi.setAttribute('light', { 
-                intensity: settings.lights.hemi.intProp[state.scene.time.season][state.scene.time.hour] * settings.lights.hemi.maxIntensity
-            })  
-            // Set solar farm axis
-            const solarFarmEls = document.getElementsByClassName('solarRotatable')
-            for(let i = 0; i < solarFarmEls.length; i++){
-                solarFarmEls[i].setAttribute('animation__rotate', {
-                    property:   'rotation',
-                    dur:        1000,
-                    to:         {x: settings.solarFarm.rotationByHour[state.scene.time.hour] , y: 0, z: 0}
-                })            
-            }
-
-            // Set the environment
-            externalEvents.changeEnvironment()
-      }
-    })
+        })
 
     // SCENE SCENARIO AND ANIMATION COMPONENTS
         AFRAME.registerComponent("cycle-sun", {
@@ -637,7 +153,6 @@
             }
         })
 
-
         AFRAME.registerComponent("fly-plane", {
             init: function () {
                 document.getElementById("plane-animation").setAttribute('alongpath', {
@@ -651,7 +166,6 @@
                 }, 90000)
             }
         })
-
 
         AFRAME.registerComponent("sail-duck", {
             update: function () {
@@ -667,7 +181,6 @@
             }
         })
 
-
         AFRAME.registerComponent("animate-lighthouse", {
             play: function() {
                 document.getElementById("lighthouse-light").setAttribute('animation__lighthouse', {
@@ -680,7 +193,6 @@
                 })
             }
         })
-
 
         AFRAME.registerComponent("nightlights", {
             schema: {
@@ -721,7 +233,6 @@
                 })
             }
         })
-
 
         AFRAME.registerComponent("show-block-title", {
             schema: {
@@ -842,9 +353,6 @@
         })
 
 
-    // SCENE INTERACTION COMPONENT COMPONENTS
-
-
     // CLIMATE RISK / HAZARD EVENT VISUALISATIONS
         AFRAME.registerComponent('hazard-sea-level', {
             schema: {
@@ -888,7 +396,6 @@
                 console.log('Changing sea level from '+currentSea.y+' to '+(currentSea.y + this.data.slchange))
             }
         })
-
 
         AFRAME.registerComponent('hazard-rain', {
             schema: {   
@@ -970,7 +477,6 @@
             }
         })
 
-
         AFRAME.registerComponent('hazard-lightning', {
             schema: {   
                 dur:                    {type: 'number',   default: 1000 },    
@@ -1000,7 +506,6 @@
                 clearInterval(state.scene.hazard.lightning)
             }
         })
-
 
         AFRAME.registerComponent('hazard-flood', {
             schema: {   
@@ -1042,7 +547,6 @@
                 }, this.data.dur * 2);
             }
         })
-
 
         AFRAME.registerComponent('hazard-wind', {
             schema: {   
@@ -1136,7 +640,6 @@
                 }
             }
         })
-
 
         AFRAME.registerComponent('hazard-drought', {
             schema: {   
@@ -1430,7 +933,6 @@
 
         })
 
-
         AFRAME.registerComponent('hazard-bushfire', {
             schema: {   
                 dur:                    {type: 'number',   default: 2000 },  
@@ -1499,7 +1001,6 @@
             }
         })
 
-
         AFRAME.registerComponent('hazard-heat', {
             schema: {   
                 dur:                    {type: 'number',   default: 3000 },  
@@ -1507,6 +1008,7 @@
             },            
             init: function(){
                 document.getElementById('duckSunglasses').setAttribute('visible', true)
+                scene.els.alpTops.setAttribute('visible', true)
             },
             update: function(){
                 const heatstate = ['default', 'hotDay', 'veryHotDay', 'heatwave'],
@@ -1546,10 +1048,10 @@
             },
             remove: function(){
                 clearInterval(state.scene.hazard.heatPulse)
+                scene.els.alpTops.setAttribute('visible', false)
                 document.getElementById('duckSunglasses').setAttribute('visible', false)
             }
         })
-
 
         AFRAME.registerComponent('hazard-tropical-storm', {
             init: function(){
@@ -1659,7 +1161,6 @@
             }
 
         })
-
 
         AFRAME.registerComponent('hazard-winter-storm', {
             schema: {   
@@ -1900,7 +1401,6 @@
             }
         })
 
-
         AFRAME.registerComponent('hazard-ocean-acidification', {
             schema: {   
                 dur:                    {type: 'number',   default: 2000 },  
@@ -1941,7 +1441,6 @@
                 document.getElementById('duckMask').setAttribute('visible', false)
             }
         })
-
 
         AFRAME.registerComponent('hazard-earthquake', {
             schema: {   
@@ -1986,7 +1485,6 @@
             },
         })
 
-
         AFRAME.registerComponent('hazard-avalanche', {
         })
 
@@ -2000,822 +1498,690 @@
         AFRAME.registerComponent('emissions-activity-balloons', {
             schema: {   
                 dur:                    {type: 'number',   default: 3000 },  
+                visible:                {type: 'boolean',   default: true} 
             },
             init: function(){
-                const woodEls = document.querySelectorAll('.emissions-anchor.wood-chimney'),
-                    rooftopSolarEls = document.querySelectorAll('.emissions-anchor.rooftop-solar'),
-                    smlHomeGridEls = document.querySelectorAll('.emissions-anchor.grid-electricity.small-home'),
-                    lrgHomeGridEls = document.querySelectorAll('.emissions-anchor.grid-electricity.large-home'),
-                    townhouseGridEls = document.querySelectorAll('.emissions-anchor.grid-electricity.townhouse'),
-                    smlBarnGridEls = document.querySelectorAll('.emissions-anchor.grid-electricity.large-barn'),
-                    lrgBarnGridEls = document.querySelectorAll('.emissions-anchor.grid-electricity.small-barn'),
-                    industrialGridEls = document.querySelectorAll('.emissions-anchor.grid-electricity.industrial'),
-                    hospitalGridEls = document.querySelectorAll('.emissions-anchor.grid-electricity.hospital'),
-                    churchGridEls = document.querySelectorAll('.emissions-anchor.grid-electricity.church'),
-                    schoolGridEls = document.querySelectorAll('.emissions-anchor.grid-electricity.school'),
-                    govBuildGridEls = document.querySelectorAll('.emissions-anchor.grid-electricity.govBuilding'),
-                    airportlGridEls = document.querySelectorAll('.emissions-anchor.grid-electricity.airport'),
-                    officeThreeLvlGridEls = document.querySelectorAll('.emissions-anchor.grid-electricity.office-threeLvl'),
-                    officeFiveLvlGridEls = document.querySelectorAll('.emissions-anchor.grid-electricity.office-fiveLvl'),
-                    officeTowerGridEls = document.querySelectorAll('.emissions-anchor.grid-electricity.office-tower'),
-                    hotelGridEls = document.querySelectorAll('.emissions-anchor.grid-electricity.hotel'),
-                    mainsGasEls = document.querySelectorAll('.emissions-anchor.reticulated-gas'),
-                    wasteResidentialEls = document.querySelectorAll('.emissions-anchor.bin-landfill'),
-                    wasteCommercialEls = document.querySelectorAll('.emissions-anchor.skip-landfill'),
-                    utilitySolarEls = document.querySelectorAll('.emissions-anchor.utility-solar'),
-                    utilityWindEls = document.querySelectorAll('.emissions-anchor.utility-wind'),
-                    utilityHydroEls = document.querySelectorAll('.emissions-anchor.utility-hydro'),
-                    utilityCoalEls = document.querySelectorAll('.emissions-anchor.utility-coal'),
-                    livestockCowEls = document.querySelectorAll('.emissions-anchor.livestock.cow'),
-                    livestockPigEls = document.querySelectorAll('.emissions-anchor.livestock.pig'),
-                    livestockSheepEls = document.querySelectorAll('.emissions-anchor.livestock.sheep'),
-                    livestockPoultryEls = document.querySelectorAll('.emissions-anchor.livestock.poultry'),
-                    agCroppingEls = document.querySelectorAll('.emissions-anchor.agriculture.cropping'),
-                    landfillResiEls = document.querySelectorAll('.emissions-anchor.landfill.resi'),
-                    landfillCandIEls = document.querySelectorAll('.emissions-anchor.landfill.candi'),
-                    landfillCandDEls = document.querySelectorAll('.emissions-anchor.landfill.candd'),
-                    airplaneEls = document.querySelectorAll('.emissions-anchor.airplane')
 
+                // Emissions balloon anchor collections
+                scene.els.anchors = {
+                    // Emission source objects
+                    sources: {
+                        stationaryEnergy: {
+                            scope1: {
+                                residential:{
+                                    mainsGas: {
+                                        smallDwellings:          document.querySelectorAll('.house-small * .emissions-anchor.mains-gas'),
+                                        largeDwellings:          document.querySelectorAll('.house-large * .emissions-anchor.mains-gas'),
+                                        townhouses:              []
+                                    },
+                                    bottledLPG: {
+                                    },
+                                    wood: {
+                                        smallDwellings:          document.querySelectorAll('.house-small * .emissions-anchor.firewood'),
+                                        largeDwellings:          document.querySelectorAll('.house-large * .emissions-anchor.firewood'),
+                                        townhouses:              []
+                                    }
+                                },
+                                commercial: {
+                                    mainsGas: {
+                                        offices:                document.querySelectorAll('.commercial-bldg.five-level * .emissions-anchor.mains-gas'),
+                                        retail:                 document.querySelectorAll('.commercial-bldg.three-level * .emissions-anchor.mains-gas'),
+                                        hospitality:            document.querySelectorAll('.hospitality * .emissions-anchor.mains-gas'),
+                                        accomodation:           document.querySelectorAll('.accomodation * .emissions-anchor.mains-gas')
+                                    },
+                                    bottledLPG:                 {},
+                                    diesel:                     {},
+                                },
+                                industrial: {
+                                    electricityGeneration: {
+                                        coalFired:              document.querySelectorAll('.emissions-anchor.utility-coal'),
+                                        gasFired:               []
+                                    },
+                                    mainsGas: {
+                                        other:                  [],
+                                        mineral:                [],
+                                        chemical:               [],
+                                        metal:                  [],
+                                        electronics:            []
+                                    },
+                                    bottledLPG:                 {},
+                                    diesel:                     {},
+                                },
+                                farming: {
+                                    mainsGas: {
+                                        largeFarm:                   document.querySelectorAll('.barn-large * .emissions-anchor.mains-gas'),
+                                        smallFarm:                   document.querySelectorAll('.barn-small * .emissions-anchor.mains-gas'),
+                                    },
+                                    bottledLPG:                 {},
+                                    diesel:                     {},
+                                },
+                                institutional: {
+                                    mainsGas: {
+                                        government:             document.querySelectorAll('.gov-building * .emissions-anchor.mains-gas'),
+                                        hospital:               document.querySelectorAll('.hospital * .emissions-anchor.mains-gas'),
+                                        airport:                document.querySelectorAll('.airport * .emissions-anchor.mains-gas'),
+                                        school:                 document.querySelectorAll('.school-building * .emissions-anchor.mains-gas'),
+                                        church:                 document.querySelectorAll('.emissions-anchor.mains-gas.church')
+                                    },
+                                    bottledLPG:                 {},
+                                    diesel:                     {},
+                                },
+                            },
+                            scope2: {
+                                residential: {
+                                    gridElectricity: {
+                                        smallDwellings:         document.querySelectorAll('.house-small * .emissions-anchor.grid-electricity'),
+                                        largeDwellings:         document.querySelectorAll('.house-large * .emissions-anchor.grid-electricity'),
+                                        townhouses:             document.querySelectorAll('.townhouse * .emissions-anchor.grid-electricity')
+                                    }
+                                },
+                                commercial: {
+                                    gridElectricity: {
+                                        offices:                document.querySelectorAll('.commercial-bldg.five-level * .emissions-anchor.grid-electricity'),
+                                        officeTowers:           document.querySelectorAll('.emissions-anchor.grid-electricity.office-tower'),
+                                        retail:                 document.querySelectorAll('.commercial-bldg.three-level * .emissions-anchor.grid-electricity'),
+                                        hospitality:            document.querySelectorAll('.emissions-anchor.grid-electricity.hospitality'),
+                                        accomodation:           document.querySelectorAll('.emissions-anchor.grid-electricity.accomodation')
+                                    }
+                                },
+                                industrial: {
+                                    gridElectricity: {
+                                        other:                  document.querySelectorAll('.emissions-anchor.grid-electricity.other'),
+                                        minerals:               document.querySelectorAll('.emissions-anchor.grid-electricity.minerals'),
+                                        chemicals:              document.querySelectorAll('.emissions-anchor.grid-electricity.chemicals'),
+                                        metals:                 document.querySelectorAll('.emissions-anchor.grid-electricity.metals'),
+                                        electronics:            document.querySelectorAll('.emissions-anchor.grid-electricity.electronics'),
+                                    }
+                                },
+                                farming: {
+                                    gridElectricity: {
+                                        largeFarm:              document.querySelectorAll('.barn-large * .emissions-anchor.grid-electricity'),
+                                        smallFarm:              document.querySelectorAll('.barn-small * .emissions-anchor.grid-electricity')
+                                    }
+                                },
+                                institutional: {
+                                    gridElectricity: {
+                                        government:             document.querySelectorAll('.gov-building * .emissions-anchor.grid-electricity'),
+                                        airport:                document.querySelectorAll('.emissions-anchor.grid-electricity.airport'),   
+                                        hospital:               document.querySelectorAll('.hospital * .emissions-anchor.grid-electricity'),
+                                        church:                 document.querySelectorAll('.emissions-anchor.grid-electricity.church'),
+                                        school:                 document.querySelectorAll('.school-building * .emissions-anchor.grid-electricity'),
+                                    }
+                                }
+                            },
+                            scope3: {
+                                industrial: {
+                                    gridElectricity: {
+                                        transmission:     document.querySelectorAll('.emissions-anchor.grid-transmission'),
+                                        distribution:     document.querySelectorAll('.emissions-anchor.grid-distribution'),
+                                    },
+                                    mainsGas: {
+                                        distribution:            [],
+                                    }
+                                }
+                            }
+                        },
+                        transportEnergy: {
+                            scope1: {
+                                residential: {
+                                    road: {
+                                        passengerVehicle: {
+                                            petrol:             [],
+                                            diesel:             [],
+                                            lpg:                [],
+                                            biodiesel:          [],
+                                            ethanol:            [],
+                                        },
+                                        motorcyle: {
+                                            petrol:             [],
+                                            ethanol:            [],
+                                        },
+                                        other: {
+                                            petrol:             [],
+                                            diesel:             [],
+                                            lpg:                [],
+                                            biodiesel:          [],
+                                            ethanol:            [],
+                                        }
+                                    },
+                                    aviation: {
+                                        passsengerAirTravel: {
+                                            jetfuel:            document.querySelectorAll('.emissions-anchor.airplane'),
+                                            avgas:              [],
+                                        }
+                                    }
+                                },
+                                commercial: {
+                                    road: {
+                                        passengerVehicle: {
+                                            petrol:             [],
+                                            diesel:             [],
+                                            lpg:                [],
+                                            biodiesel:          [],
+                                            ethanol:            [],
+                                        },
+                                        lightCommercialVehicle: {
+                                            petrol:             [],
+                                            diesel:             [],
+                                            lpg:                [],
+                                            biodiesel:          [],
+                                            ethanol:            [],
+                                        },
+                                        heavyTrucks: {
+                                            petrol:             [],
+                                            diesel:             [],
+                                            lpg:                [],
+                                            biodiesel:          [],
+                                            ethanol:            [],
+                                        },
+                                        bus: {
+                                            petrol:             [],
+                                            diesel:             [],
+                                            lpg:                [],
+                                            biodiesel:          [],
+                                            ethanol:            [],
+                                        },
+                                        other: {
+                                            petrol:             [],
+                                            diesel:             [],
+                                            lpg:                [],
+                                            biodiesel:          [],
+                                            ethanol:            [],
+                                        }
+                                    },
+                                    aviation: {
+                                        passsengerAirTravel: {
+                                            jetfuel:            [],
+                                            avgas:              [],
+                                        },
+                                        freight: {
+                                            jetfuel:            [],
+                                            avgas:              [],
+                                        }
+                                    }
+                                },
+                                industrial: {
+                                    road: {
+                                        passengerVehicle: {
+                                            petrol:             [],
+                                            diesel:             [],
+                                            lpg:                [],
+                                            biodiesel:          [],
+                                            ethanol:            [],
+                                        },
+                                        lightCommercialVehicle: {
+                                            petrol:             [],
+                                            diesel:             [],
+                                            lpg:                [],
+                                            biodiesel:          [],
+                                            ethanol:            [],
+                                        },
+                                        heavyTrucks: {
+                                            petrol:             [],
+                                            diesel:             [],
+                                            lpg:                [],
+                                            biodiesel:          [],
+                                            ethanol:            [],
+                                        },
+                                        other: {
+                                            petrol:             [],
+                                            diesel:             [],
+                                            lpg:                [],
+                                            biodiesel:          [],
+                                            ethanol:            [],
+                                        }
+                                        }
+                                },
+                                farming: {
+                                    road: {
+                                        passengerVehicle: {
+                                            petrol:             [],
+                                            diesel:             [],
+                                            lpg:                [],
+                                            biodiesel:          [],
+                                            ethanol:            [],
+                                        },
+                                        lightCommercialVehicle: {
+                                            petrol:             [],
+                                            diesel:             [],
+                                            lpg:                [],
+                                            biodiesel:          [],
+                                            ethanol:            [],
+                                        },
+                                        other: {
+                                            petrol:             [],
+                                            diesel:             [],
+                                            lpg:                [],
+                                            biodiesel:          [],
+                                            ethanol:            [],
+                                        }
+                                    },
+                                    offroad: {
+                                        all: {
+                                            petrol:             [],
+                                            diesel:             [],
+                                            lpg:                [],
+                                            biodiesel:          [],
+                                            ethanol:            [],
+                                        }
+                                    }
+                                },
+                                institutional: {
+                                    road: {
+                                        passengerVehicle: {
+                                            petrol:             [],
+                                            diesel:             [],
+                                            lpg:                [],
+                                            biodiesel:          [],
+                                            ethanol:            [],
+                                        },
+                                        lightCommercialVehicle: {
+                                            petrol:             [],
+                                            diesel:             [],
+                                            lpg:                [],
+                                            biodiesel:          [],
+                                            ethanol:            [],
+                                        },
+                                        heavyTrucks: {
+                                            petrol:             [],
+                                            diesel:             [],
+                                            lpg:                [],
+                                            biodiesel:          [],
+                                            ethanol:            [],
+                                        },
+                                        bus: {
+                                            petrol:             [],
+                                            diesel:             [],
+                                            lpg:                [],
+                                            biodiesel:          [],
+                                            ethanol:            [],
+                                        },
+                                        other: {
+                                            petrol:             [],
+                                            diesel:             [],
+                                            lpg:                [],
+                                            biodiesel:          [],
+                                            ethanol:            [],
+                                        }
+                                    },
+                                    offroad: {
+                                        all: {
+                                            petrol:             [],
+                                            diesel:             [],
+                                            lpg:                [],
+                                            biodiesel:          [],
+                                            ethanol:            [],
+                                        }
+                                    },
+                                    aviation: {
+                                        passsengerAirTravel: {
+                                            jetfuel:            document.querySelectorAll('.emissions-anchor.airplane'),
+                                            avgas:              [],
+                                        }
+                                    }
+                                },    
+                            }
+                        },
+                        waste: {
+                            scope1: {
+                                industrial: {
+                                    landfill: {
+                                        MSW:                    document.querySelectorAll('.emissions-anchor.landfill.msw'),
+                                        CandI:                  document.querySelectorAll('.emissions-anchor.landfill.ci'),
+                                        CandD:                  document.querySelectorAll('.emissions-anchor.landfill.cd'),
+                                    },
+                                    incineration:                    {},
+                                    biologicalTreatment:             {},
+                                }
+                            },
+                            scope3: {
+                                residential: {
+                                    MSW: {    
+                                        smallDwellings:         document.querySelectorAll('.house-small * .emissions-anchor.bin-landfill'),
+                                        largeDwellings:         document.querySelectorAll('.house-large * .emissions-anchor.bin-landfill')
+                                    }
+                                },
+                                commercial: {
+                                    CandI: {
+                                        offices:                document.querySelectorAll('.emissions-anchor.skip-landfill'),
+                                        officeTowers:           [],
+                                        retail:                 [],
+                                        hospitality:            [],
+                                        accomodation:           []
+                                    }               
+                                },  
+                                industrial: {
+                                    CandI: {
+                                        other:                  [],
+                                        mineral:                [],
+                                        chemical:               [],
+                                        metal:                  [],
+                                        electronics:            []
+                                    }               
+                                } ,
+                                institutional: {
+                                    CandI: {
+                                        government:             [],
+                                        hospital:               [],
+                                        airport:                [],
+                                    },
+                                    MSW: { 
+                                        school:                 [],
+                                        church:                 []
+                                    }
+                                }
+                            },
+                        },
+                        wasteWater: {
+                            scope1: {
+                                industrial: {
+                                    treatment: {
+                                        sewered:                 [],
+                                    }
+                                }
+                            },
+                            scope3: {
+                                residential:{
+                                    sewered: {
+                                        smallDwellings:         [],
+                                        largeDwellings:         [],
+                                        townhouses:             []
+                                    }
+                                },
+                                commercial:{
+                                    sewered: {
+                                        offices:                [],
+                                        officeTowers:           [],
+                                        retail:                 [],
+                                        hospitality:            [],
+                                        accomodation:           []     
+                                    }
+                                },
+                                industrial:{
+                                    sewered: {
+                                        other:                  [],
+                                        mineral:                [],
+                                        chemical:               [],
+                                        metal:                  [],
+                                        electronics:            []
+                                    }
+                                },
+                                farming:{},
+                                institutional:{
+                                    sewered: {
+                                        government:             [],
+                                        airport:                [],   
+                                        hospital:               [],
+                                        church:                 [],
+                                        school:                 [],
+                                    }
+                                },
+                            },
+                        },
+                        agriculture: {
+                            scope1: {
+                                farming: {
+                                    livestockEnteric: {
+                                        cattle:         document.querySelectorAll('.emissions-anchor.livestock.cow'),
+                                        pigs:           document.querySelectorAll('.emissions-anchor.livestock.pig'),
+                                        sheep:          document.querySelectorAll('.emissions-anchor.livestock.sheep'),
+                                        poultry:        document.querySelectorAll('.emissions-anchor.livestock.poultry')
+                                    },
+                                    livestockManure: {},
+                                    livestockGrazing: {
+                                        cattle:         [],
+                                        pigs:           [],
+                                        sheep:          [],
+                                        poultry:        []
+                                    },
+                                    cropping: {
+                                        wheat:          document.querySelectorAll('.emissions-anchor.agriculture.cropping-wheat'),
+                                        corn:           document.querySelectorAll('.emissions-anchor.agriculture.cropping-corn'),
+                                        other:          document.querySelectorAll('.emissions-anchor.agriculture.cropping-other')
+                                    },
+                                    fruitAndVeg: {
+                                        apples:         document.querySelectorAll('.emissions-anchor.agriculture.ag-apples'),
+                                    }
+                                },
+                            },
+                            scope3: {
 
-                // Small Household grid electricity
-                for(let i = 0; i <smlHomeGridEls.length; i++ ){
-                    const balloonContainer =  document.createElement('a-entity'),
-                        anchorY = smlHomeGridEls[i].getAttribute('position').y,
-                        scale = 0.8
-                    balloonContainer.className +=" balloon source electricity gridElec stationaryEnergy"
-                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
-                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
-                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
-                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
-                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
-                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
-                    balloonContainer.setAttribute('animation__scale', {
-                        property:   'scale',
-                        from:       '0 0 0',
-                        to:         '1 1 1',
-                        dur:        this.data.dur
-                    })
-                    smlHomeGridEls[i].appendChild(balloonContainer)
-                }
-                // Large Household grid electricity
-                for(let i = 0; i <lrgHomeGridEls.length; i++ ){
-                    const balloonContainer =  document.createElement('a-entity'),
-                        anchorY = lrgHomeGridEls[i].getAttribute('position').y,
-                        scale = 0.8
-                    balloonContainer.className +=" balloon source electricity gridElec stationaryEnergy"
-                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
-                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
-                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
-                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
-                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
-                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
-                    balloonContainer.setAttribute('animation__scale', {
-                        property:   'scale',
-                        from:       '0 0 0',
-                        to:         '1 1 1',
-                        dur:        this.data.dur
-                    })
-                    lrgHomeGridEls[i].appendChild(balloonContainer)
-                }
-                // Townhouse Household grid electricity
-                for(let i = 0; i <townhouseGridEls.length; i++ ){
-                    const balloonContainer =  document.createElement('a-entity'),
-                        anchorY = townhouseGridEls[i].getAttribute('position').y,
-                        scale = 0.5
-                    balloonContainer.className +=" balloon source electricity gridElec stationaryEnergy"
-                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
-                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
-                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
-                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
-                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
-                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
-                    balloonContainer.setAttribute('animation__scale', {
-                        property:   'scale',
-                        from:       '0 0 0',
-                        to:         '1 1 1',
-                        dur:        this.data.dur
-                    })
-                    townhouseGridEls[i].appendChild(balloonContainer)
-                }
-                // Office: Three level  grid electricity
-                for(let i = 0; i <officeThreeLvlGridEls.length; i++ ){
-                    const balloonContainer =  document.createElement('a-entity'),
-                        anchorY = officeThreeLvlGridEls[i].getAttribute('position').y,
-                        scale = 2
-                    balloonContainer.className +=" balloon source electricity gridElec stationaryEnergy"
-                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
-                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
-                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
-                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
-                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
-                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
-                    balloonContainer.setAttribute('animation__scale', {
-                        property:   'scale',
-                        from:       '0 0 0',
-                        to:         '1 1 1',
-                        dur:        this.data.dur
-                    })
-                    officeThreeLvlGridEls[i].appendChild(balloonContainer)
-                }
-                // Office: Five level  grid electricity
-                for(let i = 0; i <officeFiveLvlGridEls.length; i++ ){
-                    const balloonContainer =  document.createElement('a-entity'),
-                        anchorY = officeFiveLvlGridEls[i].getAttribute('position').y,
-                        scale = 2
-                    balloonContainer.className +=" balloon source electricity gridElec stationaryEnergy"
-                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
-                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
-                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
-                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
-                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
-                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
-                    balloonContainer.setAttribute('animation__scale', {
-                        property:   'scale',
-                        from:       '0 0 0',
-                        to:         '1 1 1',
-                        dur:        this.data.dur
-                    })
-                    officeFiveLvlGridEls[i].appendChild(balloonContainer)
-                }
-                // Office tower grid electricity
-                for(let i = 0; i <officeTowerGridEls.length; i++ ){
-                    const balloonContainer =  document.createElement('a-entity'),
-                        anchorY = officeTowerGridEls[i].getAttribute('position').y,
-                        scale = 5
-                    balloonContainer.className +=" balloon source electricity gridElec stationaryEnergy"
-                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
-                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
-                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
-                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
-                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
-                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
-                    balloonContainer.setAttribute('animation__scale', {
-                        property:   'scale',
-                        from:       '0 0 0',
-                        to:         '1 1 1',
-                        dur:        this.data.dur
-                    })
-                    officeTowerGridEls[i].appendChild(balloonContainer)
-                }
-                // Small barn grid electricity
-                for(let i = 0; i <smlBarnGridEls.length; i++ ){
-                    const balloonContainer =  document.createElement('a-entity'),
-                        anchorY = smlBarnGridEls[i].getAttribute('position').y,
-                        scale = 0.5
-                    balloonContainer.className +=" balloon source electricity gridElec stationaryEnergy"
-                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
-                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
-                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
-                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
-                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
-                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
-                    balloonContainer.setAttribute('animation__scale', {
-                        property:   'scale',
-                        from:       '0 0 0',
-                        to:         '1 1 1',
-                        dur:        this.data.dur
-                    })
-                    smlBarnGridEls[i].appendChild(balloonContainer)
-                }
-                // Large barn grid electricity
-                for(let i = 0; i <lrgBarnGridEls.length; i++ ){
-                    const balloonContainer =  document.createElement('a-entity'),
-                        anchorY = lrgBarnGridEls[i].getAttribute('position').y,
-                        scale = 0.8
-                    balloonContainer.className +=" balloon source electricity gridElec stationaryEnergy"
-                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
-                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
-                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
-                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
-                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
-                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
-                    balloonContainer.setAttribute('animation__scale', {
-                        property:   'scale',
-                        from:       '0 0 0',
-                        to:         '1 1 1',
-                        dur:        this.data.dur
-                    })
-                    lrgBarnGridEls[i].appendChild(balloonContainer)
-                }
-                // Industrial grid electricity
-                for(let i = 0; i <industrialGridEls.length; i++ ){
-                    const balloonContainer =  document.createElement('a-entity'),
-                        anchorY = industrialGridEls[i].getAttribute('position').y,
-                        scale = 6
-                    balloonContainer.className +=" balloon source electricity gridElec stationaryEnergy"
-                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
-                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
-                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
-                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
-                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
-                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
-                    balloonContainer.setAttribute('animation__scale', {
-                        property:   'scale',
-                        from:       '0 0 0',
-                        to:         '1 1 1',
-                        dur:        this.data.dur
-                    })
-                    industrialGridEls[i].appendChild(balloonContainer)
-                }
-                // Hospital grid electricity
-                for(let i = 0; i <hospitalGridEls.length; i++ ){
-                    const balloonContainer =  document.createElement('a-entity'),
-                        anchorY = hospitalGridEls[i].getAttribute('position').y,
-                        scale = 3.5
-                    balloonContainer.className +=" balloon source electricity gridElec stationaryEnergy"
-                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
-                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
-                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
-                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
-                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
-                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
-                    balloonContainer.setAttribute('animation__scale', {
-                        property:   'scale',
-                        from:       '0 0 0',
-                        to:         '1 1 1',
-                        dur:        this.data.dur
-                    })
-                    hospitalGridEls[i].appendChild(balloonContainer)
-                }
-                // Airport grid electricity
-                for(let i = 0; i <airportlGridEls.length; i++ ){
-                    const balloonContainer =  document.createElement('a-entity'),
-                        anchorY = airportlGridEls[i].getAttribute('position').y,
-                        scale = 3
-                    balloonContainer.className +=" balloon source electricity gridElec stationaryEnergy"
-                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
-                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
-                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
-                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
-                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
-                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
-                    balloonContainer.setAttribute('animation__scale', {
-                        property:   'scale',
-                        from:       '0 0 0',
-                        to:         '1 1 1',
-                        dur:        this.data.dur
-                    })
-                    airportlGridEls[i].appendChild(balloonContainer)
-                }
-                // Church grid electricity
-                for(let i = 0; i < churchGridEls.length; i++ ){
-                    const balloonContainer =  document.createElement('a-entity'),
-                        anchorY = churchGridEls[i].getAttribute('position').y,
-                        scale = 1
-                    balloonContainer.className +=" balloon source electricity gridElec stationaryEnergy"
-                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
-                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
-                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
-                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
-                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
-                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
-                    balloonContainer.setAttribute('animation__scale', {
-                        property:   'scale',
-                        from:       '0 0 0',
-                        to:         '1 1 1',
-                        dur:        this.data.dur
-                    })
-                    churchGridEls[i].appendChild(balloonContainer)
-                }
-                // School grid electricity
-                for(let i = 0; i < schoolGridEls.length; i++ ){
-                    const balloonContainer =  document.createElement('a-entity'),
-                        anchorY = schoolGridEls[i].getAttribute('position').y,
-                        scale = 1.5
-                    balloonContainer.className +=" balloon source electricity gridElec stationaryEnergy"
-                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
-                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
-                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
-                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
-                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
-                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
-                    balloonContainer.setAttribute('animation__scale', {
-                        property:   'scale',
-                        from:       '0 0 0',
-                        to:         '1 1 1',
-                        dur:        this.data.dur
-                    })
-                    schoolGridEls[i].appendChild(balloonContainer)
-                }
-                // Government building grid electricity
-                for(let i = 0; i < govBuildGridEls.length; i++ ){
-                    const balloonContainer =  document.createElement('a-entity'),
-                        anchorY = govBuildGridEls[i].getAttribute('position').y,
-                        scale = 3
-                    balloonContainer.className +=" balloon source electricity gridElec stationaryEnergy"
-                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
-                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
-                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
-                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
-                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
-                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
-                    balloonContainer.setAttribute('animation__scale', {
-                        property:   'scale',
-                        from:       '0 0 0',
-                        to:         '1 1 1',
-                        dur:        this.data.dur
-                    })
-                    govBuildGridEls[i].appendChild(balloonContainer)
-                }
-                // Hotel grid electricity
-                for(let i = 0; i < hotelGridEls.length; i++ ){
-                    const balloonContainer =  document.createElement('a-entity'),
-                        anchorY = hotelGridEls[i].getAttribute('position').y,
-                        scale = 1.5
-                    balloonContainer.className +=" balloon source electricity gridElec stationaryEnergy"
-                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
-                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
-                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
-                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
-                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
-                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
-                    balloonContainer.setAttribute('animation__scale', {
-                        property:   'scale',
-                        from:       '0 0 0',
-                        to:         '1 1 1',
-                        dur:        this.data.dur
-                    })
-                    hotelGridEls[i].appendChild(balloonContainer)
-                }
+                            }
+                        },
+                        land: {
+                            scope1: {
+                                farming: {
+                                    conversion:             [],
+                                    clearing:               [],
+                                    reclearing:             []
+                                },
+                                institutional: {
+                                    conversion:             [],
+                                    clearing:               [],
+                                    reclearing:             []
+                                }
+                            }
+                        },
+                        industrialProcesses: {
+                            scope1: {
+                                industrial: {
+                                    other:                  [],
+                                    mineral:                [],
+                                    chemical:               [],
+                                    metal:                  [],
+                                    electronics:            []
+                                },
+                            }
+                        },
+                        industrialProductUse: {
+                            scope1: {
+                                residential:  {
+                                    refrigerants: {
+                                        smallDwellings:         [],
+                                        largeDwellings:         [],
+                                        townhouses:             [],
+                                        transport:  {
+                                            passengerVehicles:  [],
+                                        }
+                                    }
+                                },
+                                commerical:  {
+                                    refrigerants: {
+                                        offices:                [],
+                                        officeTowers:           [],
+                                        retail:                 [],
+                                        hospitality:            [],
+                                        accomodation:           []   
+                                    }
+                                },
+                                industrial: { 
+                                    refrigerants: {
+                                        other:                  [],
+                                        mineral:                [],
+                                        chemical:               [],
+                                        metal:                  [],
+                                        electronics:            []      
+                                    }
+                                },
+                                institutional: {
+                                    refrigerants: {
+                                        government:             [],
+                                        airport:                [],   
+                                        hospital:               [],
+                                        church:                 [],
+                                        school:                 [],
+                                    }
+                                }
 
-                // Household mains gas 
-                for(let i = 0; i < mainsGasEls.length; i++ ){
-                    const balloonContainer =  document.createElement('a-entity'),
-                        anchorY = mainsGasEls[i].getAttribute('position').y,
-                        scale = 0.25
-                    balloonContainer.className +=" balloon source electricity mainsGas stationaryEnergy"
-                    balloonContainer.setAttribute('position', '0 '+(10*scale)+' 0')
-                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
-                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
-                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
-                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
-                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringscale', '1 5 1')
-                    balloonContainer.setAttribute('data-stringpos', '0 -4.5 0')
-                    balloonContainer.setAttribute('animation__scale', {
-                        property:   'scale',
-                        from:       '0 0 0',
-                        to:         '1 1 1',
-                        dur:        this.data.dur
-                    })
-                    mainsGasEls[i].appendChild(balloonContainer)
-                }
-                // Household Wood
-                for(let i = 0; i < woodEls.length; i++ ){
-                    const balloonContainer =  document.createElement('a-entity'),
-                        anchorY = woodEls[i].getAttribute('position').y,
-                        scale = 0.125
-                    balloonContainer.className +=" balloon source wood stationaryEnergy"
-                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
-                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
-                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
-                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
-                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
-                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
-                    balloonContainer.setAttribute('animation__scale', {
-                        property:   'scale',
-                        from:       '0 0 0',
-                        to:         '1 1 1',
-                        dur:        this.data.dur
-                    })
-                    woodEls[i].appendChild(balloonContainer)
-                }
-                // Household-waste bins
-                for(let i = 0; i < wasteResidentialEls.length; i++ ){
-                    const balloonContainer =  document.createElement('a-entity'),
-                        anchorY = wasteResidentialEls[i].getAttribute('position').y,
-                        scale = 0.125
-                    balloonContainer.className +=" balloon source waste landfill"
-                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
-                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
-                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
-                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
-                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
-                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
-                    balloonContainer.setAttribute('animation__scale', {
-                        property:   'scale',
-                        from:       '0 0 0',
-                        to:         '1 1 1',
-                        dur:        this.data.dur
-                    })
-                    wasteResidentialEls[i].appendChild(balloonContainer)
-                }
-                // Commercial-waste skips
-                for(let i = 0; i < wasteCommercialEls.length; i++ ){
-                    const balloonContainer =  document.createElement('a-entity'),
-                        anchorY = wasteCommercialEls[i].getAttribute('position').y,
-                        scale = 0.75
-                    balloonContainer.className +=" balloon source waste landfill"
-                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
-                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
-                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
-                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
-                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
-                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
-                    balloonContainer.setAttribute('animation__scale', {
-                        property:   'scale',
-                        from:       '0 0 0',
-                        to:         '1 1 1',
-                        dur:        this.data.dur
-                    })
-                    wasteCommercialEls[i].appendChild(balloonContainer)
-                }
-                // Landfill waste: residential
-                for(let i = 0; i < landfillResiEls.length; i++ ){
-                    const balloonContainer =  document.createElement('a-entity'),
-                        anchorY = landfillResiEls[i].getAttribute('position').y,
-                        scale = 5
-                    balloonContainer.className +=" balloon source waste landfill"
-                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
-                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
-                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
-                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
-                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
-                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
-                    balloonContainer.setAttribute('animation__scale', {
-                        property:   'scale',
-                        from:       '0 0 0',
-                        to:         '1 1 1',
-                        dur:        this.data.dur
-                    })
-                    landfillResiEls[i].appendChild(balloonContainer)
-                }
-                // Landfill waste: Commercial and Industrial
-                for(let i = 0; i < landfillCandIEls.length; i++ ){
-                    const balloonContainer =  document.createElement('a-entity'),
-                        anchorY = landfillCandIEls[i].getAttribute('position').y,
-                        scale = 2.5
-                    balloonContainer.className +=" balloon source waste landfill"
-                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
-                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
-                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
-                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
-                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
-                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
-                    balloonContainer.setAttribute('animation__scale', {
-                        property:   'scale',
-                        from:       '0 0 0',
-                        to:         '1 1 1',
-                        dur:        this.data.dur
-                    })
-                    landfillCandIEls[i].appendChild(balloonContainer)
-                }
-                // Landfill waste: Construction and Demolition
-                for(let i = 0; i < landfillCandDEls.length; i++ ){
-                    const balloonContainer =  document.createElement('a-entity'),
-                        anchorY = landfillCandDEls[i].getAttribute('position').y,
-                        scale = 1
-                    balloonContainer.className +=" balloon source waste landfill"
-                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
-                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
-                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
-                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
-                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
-                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
-                    balloonContainer.setAttribute('animation__scale', {
-                        property:   'scale',
-                        from:       '0 0 0',
-                        to:         '1 1 1',
-                        dur:        this.data.dur
-                    })
-                    landfillCandDEls[i].appendChild(balloonContainer)
-                }
-
-                // Agriculture: Cows
-                for(let i = 0; i < livestockCowEls.length; i++ ){
-                    const balloonContainer =  document.createElement('a-entity'),
-                        anchorY = livestockCowEls[i].getAttribute('position').y,
-                        scale = 1
-                    balloonContainer.className +=" balloon source agriculture cattle"
-                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
-                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
-                    balloonContainer.setAttribute('data-col', 'col-balloon-brown')
-                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
-                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
-                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
-                    balloonContainer.setAttribute('animation__scale', {
-                        property:   'scale',
-                        from:       '0 0 0',
-                        to:         '1 1 1',
-                        dur:        this.data.dur
-                    })
-                    livestockCowEls[i].appendChild(balloonContainer)
-                }
-
-                // Agriculture: Pigs
-                for(let i = 0; i < livestockPigEls.length; i++ ){
-                    const balloonContainer =  document.createElement('a-entity'),
-                        anchorY = livestockPigEls[i].getAttribute('position').y,
-                        scale = 0.5
-                    balloonContainer.className +=" balloon source agriculture pigs"
-                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
-                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
-                    balloonContainer.setAttribute('data-col', 'col-balloon-brown')
-                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
-                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
-                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
-                    balloonContainer.setAttribute('animation__scale', {
-                        property:   'scale',
-                        from:       '0 0 0',
-                        to:         '1 1 1',
-                        dur:        this.data.dur
-                    })
-                    livestockPigEls[i].appendChild(balloonContainer)
-                }
-
-                // Agriculture: Sheep
-                for(let i = 0; i < livestockSheepEls.length; i++ ){
-                    const balloonContainer =  document.createElement('a-entity'),
-                        anchorY = livestockSheepEls[i].getAttribute('position').y,
-                        scale = 0.25
-                    balloonContainer.className +=" balloon source agriculture sheep"
-                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
-                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
-                    balloonContainer.setAttribute('data-col', 'col-balloon-brown')
-                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
-                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
-                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
-                    balloonContainer.setAttribute('animation__scale', {
-                        property:   'scale',
-                        from:       '0 0 0',
-                        to:         '1 1 1',
-                        dur:        this.data.dur
-                    })
-                    livestockSheepEls[i].appendChild(balloonContainer)
-                }
-
-                // Agriculture: Poultry
-                for(let i = 0; i < livestockPoultryEls.length; i++ ){
-                    const balloonContainer =  document.createElement('a-entity'),
-                        anchorY = livestockPoultryEls[i].getAttribute('position').y,
-                        scale = 0.125
-                    balloonContainer.className +=" balloon source agriculture poultry"
-                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
-                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
-                    balloonContainer.setAttribute('data-col', 'col-balloon-brown')
-                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
-                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
-                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
-                    balloonContainer.setAttribute('animation__scale', {
-                        property:   'scale',
-                        from:       '0 0 0',
-                        to:         '1 1 1',
-                        dur:        this.data.dur
-                    })
-                    livestockPoultryEls[i].appendChild(balloonContainer)
-                }
-                // Agriculture: Cropping
-                for(let i = 0; i < agCroppingEls.length; i++ ){
-                    const balloonContainer =  document.createElement('a-entity'),
-                        anchorY = agCroppingEls[i].getAttribute('position').y,
-                        scale = 1
-                    balloonContainer.className +=" balloon source agriculture cropping"
-                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
-                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
-                    balloonContainer.setAttribute('data-col', 'col-balloon-brown')
-                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
-                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
-                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
-                    balloonContainer.setAttribute('animation__scale', {
-                        property:   'scale',
-                        from:       '0 0 0',
-                        to:         '1 1 1',
-                        dur:        this.data.dur
-                    })
-                    agCroppingEls[i].appendChild(balloonContainer)
+                            }
+                        }
+                    },
+                    // Clean alternatives
+                    switches: {       
+                        stationaryEnergy: {
+                            scope1: {
+                                industrial: {
+                                    electricityGeneration: {
+                                        solar:                  document.querySelectorAll('.emissions-anchor.utility-solar'),
+                                        wind:                   document.querySelectorAll('.emissions-anchor.utility-wind'),
+                                        hydro:                  document.querySelectorAll('.emissions-anchor.utility-hydro')
+                                    }
+                                }
+                            },
+                            scope2: {
+                                residential: {
+                                    onSiteSolar: {
+                                        smallDwellings:         document.querySelectorAll('.house-small * .emissions-anchor.rooftop-solar'),
+                                        largeDwellings:         document.querySelectorAll('.house-large * .emissions-anchor.rooftop-solar'),
+                                        townhouses:             []
+                                    },
+                                },
+                                commercial:  {
+                                    onSiteSolar: {
+                                        offices:                [],
+                                        retail:                 [],
+                                        hospitality:            [],
+                                        accomodation:           []
+                                    }
+                                },   
+                                industrial: {
+                                    onSiteSolar: {
+                                        other:                  [],
+                                        mineral:                [],
+                                        chemical:               [],
+                                        metal:                  [],
+                                        electronics:            []
+                                    }
+                                },          
+                                agriculture:  {
+                                    onSiteSolar: {
+                                        largeFarm:              [],
+                                        smallFarm:              [],
+                                        groundMounted:          [],
+                                    }
+                                },          
+                                institutional: {
+                                    onSiteSolar: {
+                                        government:             [],
+                                        airport:                [],
+                                        hospital:               [],
+                                        church:                 [],
+                                        school:                 document.querySelectorAll('.school-building * .emissions-anchor.rooftop-solar'),
+                                    }
+                                }  
+                            },
+                            scope3: {
+                            }
+                        },
+                    },
+                    // Carbon sinks 
+                    sinks: {
+                        land: {
+                            scope1: {
+                                afforestation:             [],
+                                reforestation:             [],
+                            }
+                        },
+                        agriculture: {
+                            scope1: {
+                                soilSequestration:          []
+                            }
+                        }
+                    }
                 }
 
-                // Household rooftop solar (offset)
-                for(let i = 0; i <rooftopSolarEls.length; i++ ){
-                    const balloonContainer =  document.createElement('a-entity'),
-                        anchorY = rooftopSolarEls[i].getAttribute('position').y,
-                        scale = 0.5
-                    balloonContainer.className +=" balloon offset renewableElec solar stationaryEnergy"
-                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
-                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
-                    balloonContainer.setAttribute('data-col', 'col-balloon-green')
-                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
-                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
-                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
-                    balloonContainer.setAttribute('animation__scale', {
-                        property:   'scale',
-                        from:       '0 0 0',
-                        to:         '1 1 1',
-                        dur:        this.data.dur
-                    })
-                    rooftopSolarEls[i].appendChild(balloonContainer)
-                }
+                Object.entries(scene.els.anchors).forEach( ([type, sectorObj]) => {
+                    Object.entries(scene.els.anchors[type]).forEach( ([emissionsSector, scopeObj]) => {
+                        Object.entries(scene.els.anchors[type][emissionsSector]).forEach( ([scope, sectorObj]) => {
+                            Object.entries(scene.els.anchors[type][emissionsSector][scope]).forEach( ([sector, sourceObj]) => {
+                                Object.entries(scene.els.anchors[type][emissionsSector][scope][sector]).forEach( ([emissionsSource, subsectorObj]) => {
+                                    Object.entries(scene.els.anchors[type][emissionsSector][scope][sector][emissionsSource]).forEach( ([subsource, anchorCollection]) => {
+                                        let scale, stringMultiplier, stringPosY, balloonCol
+                                        if( anchorCollection.length > 0) {
+                                            scale = Math.sqrt(model.scene.balloonScale[type][emissionsSector][scope][sector][emissionsSource][subsource].scale)
+                                            stringLength = model.scene.balloonScale[type][emissionsSector][scope][sector][emissionsSource][subsource].stringLength
+                                            stringPosY = model.scene.balloonScale[type][emissionsSector][scope][sector][emissionsSource][subsource].stringPosY
+                                            balloonCol = type === 'sources' ? 'col-balloon-black' : 'col-balloon-green'
+                                        }
 
-                // Utility-scale solar (offset)
-                for(let i = 0; i <utilitySolarEls.length; i++ ){
-                    const balloonContainer =  document.createElement('a-entity'),
-                        anchorY = utilitySolarEls[i].getAttribute('position').y,
-                        scale = 0.8
-                    balloonContainer.className +=" balloon offset renewableElec solar stationaryEnergy"
-                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
-                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
-                    balloonContainer.setAttribute('data-col', 'col-balloon-green')
-                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
-                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
-                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
-                    balloonContainer.setAttribute('animation__scale', {
-                        property:   'scale',
-                        from:       '0 0 0',
-                        to:         '1 1 1',
-                        dur:        this.data.dur
+                                        for(let i = 0; i < anchorCollection.length; i++ ){
+                                            const balloonContainer =  document.createElement('a-entity'),
+                                                anchorY = anchorCollection[i].getAttribute('position').y
+                                            balloonContainer.className +=`balloon ${type} ${scope} ${emissionsSector} ${emissionsSource} ${sector} ${subsource}`
+                                            balloonContainer.setAttribute('template', 'src:#tmp-balloon')
+                                            balloonContainer.setAttribute('data-balloonpos', `0 ${stringLength + scale * 0.9} 0`)
+                                            balloonContainer.setAttribute('data-col', balloonCol)
+                                            balloonContainer.setAttribute('data-stringcol', 'col-string-black')
+                                            balloonContainer.setAttribute('data-balloonscale', `${scale} ${scale} ${scale}`)
+                                            balloonContainer.setAttribute('data-stringscale', `1 ${stringLength} 1`)
+                                            balloonContainer.setAttribute('data-stringpos', `0 ${stringLength} 0`)
+                                            balloonContainer.setAttribute('visible', false)
+                                            // balloonContainer.setAttribute('animation__scale', {
+                                            //     property:   'scale',
+                                            //     from:       '0 0 0',
+                                            //     to:         '1 1 1',
+                                            //     dur:        this.data.dur
+                                            // })
+                                            // balloonContainer.setAttribute('animation__pos', {
+                                            //     property:   'position',
+                                            //     from:       `0 ${-3*scale}  0`,
+                                            //     to:         `0 0 0`,
+                                            //     dur:        this.data.dur
+                                            // })
+                                            anchorCollection[i].appendChild(balloonContainer)
+                                        }
+                                    })                        
+                                }) 
+                            })
+                        })
                     })
-                    utilitySolarEls[i].appendChild(balloonContainer)
-                }
-
-                // Utility-scale hydro (offset)
-                for(let i = 0; i < utilityHydroEls.length; i++ ){
-                    const balloonContainer =  document.createElement('a-entity'),
-                        anchorY = utilityHydroEls[i].getAttribute('position').y,
-                        scale = 5
-                    balloonContainer.className +=" balloon offset renewableElec solar stationaryEnergy"
-                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
-                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
-                    balloonContainer.setAttribute('data-col', 'col-balloon-green')
-                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
-                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
-                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
-                    balloonContainer.setAttribute('animation__scale', {
-                        property:   'scale',
-                        from:       '0 0 0',
-                        to:         '1 1 1',
-                        dur:        this.data.dur
-                    })
-                    utilityHydroEls[i].appendChild(balloonContainer)
-                }
-
-                // Utility-scale wind (offset)
-                for(let i = 0; i <utilityWindEls.length; i++ ){
-                    const balloonContainer =  document.createElement('a-entity'),
-                        anchorY = utilityWindEls[i].getAttribute('position').y,
-                        scale = 6
-                    balloonContainer.className +=" balloon offset renewableElec wind stationaryEnergy"
-                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
-                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
-                    balloonContainer.setAttribute('data-col', 'col-balloon-green')
-                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
-                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
-                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
-                    balloonContainer.setAttribute('animation__scale', {
-                        property:   'scale',
-                        from:       '0 0 0',
-                        to:         '1 1 1',
-                        dur:        this.data.dur
-                    })
-                    utilityWindEls[i].appendChild(balloonContainer)
-                }
-
-                // Utility-scale fossil fuels 
-                for(let i = 0; i <utilityCoalEls.length; i++ ){
-                    const balloonContainer =  document.createElement('a-entity'),
-                        anchorY = utilityCoalEls[i].getAttribute('position').y,
-                        scale = 10
-                    balloonContainer.className +=" balloon electricity generation coal stationaryEnergy"
-                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
-                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
-                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
-                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
-                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
-                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
-                    balloonContainer.setAttribute('animation__scale', {
-                        property:   'scale',
-                        from:       '0 0 0',
-                        to:         '1 1 1',
-                        dur:        this.data.dur
-                    })
-                    utilityCoalEls[i].appendChild(balloonContainer)
-                }
-
-                // Transport: air travel  
-                for(let i = 0; i <airplaneEls.length; i++ ){
-                    const balloonContainer =  document.createElement('a-entity'),
-                        anchorY = airplaneEls[i].getAttribute('position').y,
-                        scale = 8
-                    balloonContainer.className +=" balloon transportEnergy jetfuel airtravel"
-                    balloonContainer.setAttribute('position', '0 '+(4*scale)+' 0')
-                    balloonContainer.setAttribute('template', 'src:#tmp-balloon')
-                    balloonContainer.setAttribute('data-col', 'col-balloon-black')
-                    balloonContainer.setAttribute('data-stringcol', 'col-string-black')
-                    balloonContainer.setAttribute('data-scale', `${scale} ${scale} ${scale}`)
-                    balloonContainer.setAttribute('data-balloonscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringscale', '1 1 1')
-                    balloonContainer.setAttribute('data-stringpos', '0 -3 0')
-                    balloonContainer.setAttribute('animation__scale', {
-                        property:   'scale',
-                        from:       '0 0 0',
-                        to:         '1 1 1',
-                        dur:        this.data.dur
-                    })
-                    airplaneEls[i].appendChild(balloonContainer)
-                }
-
+                })
             },
 
             update: function(){
+                const balloonEls = document.querySelectorAll('.balloon'), 
+                    animationTime =  this.data.dur
 
+                balloonEls.forEach(el => {
+                    setTimeout( () => { 
+                        el.setAttribute('visible', this.data.visible)
+                    }, this.data.visible ? 0 : animationTime)
+                    el.setAttribute('animation__scale', {
+                        property:   'scale',
+                        from:       this.data.visible ? '0 0 0' : '1 1 1',
+                        to:         this.data.visible ? '1 1 1' : '0 0 0',
+                        dur:        this.data.dur
+                    })
+                    el.setAttribute('animation__pos', {
+                        property:   'position',
+                        from:       this.data.visible ? '0 -5 0' : '0 0 0',
+                        to:         this.data.visible ? '0  0' : '0 -5 0',
+                        dur:        this.data.dur
+                    })
+                })
             },
 
             remove: function(){
-                const woodEls = document.querySelectorAll('.emissions-anchor.wood-chimney'),
-                    rooftopSolarEls = document.querySelectorAll('.emissions-anchor.rooftop-solar'),
-                    gridMeterEls = document.querySelectorAll('.emissions-anchor.grid-electricity'),
-                    mainsGasEls = document.querySelectorAll('.emissions-anchor.reticulated-gas'),
-                    wasteEls = document.querySelectorAll('.emissions-anchor.bin-landfill'),
-
-                    elGroups = [woodEls, rooftopSolarEls, gridMeterEls, mainsGasEls, wasteEls]
-
-                elGroups.forEach(group => {
-                    for(let i = 0; i < group.length; i++ ){
-                        group[i].setAttribute('animation__scale', {
-                            property:       'scale',
-                            dur:             1000,
-                            to:             '0 0 0'
-                        })
-                    }
-                })
 
             }
+
         })
 
     // EXTERNAL EVENT CONTROLS : FOR UI AND TESTING
     AFRAME.registerComponent("add-external-listeners", { 
         init: function(){
             window.addEventListener("touchstart", function(){
-                console.log('TOUCH/ORBIT CAMERAS ENABLED')
-                scene.els.cam.fly.setAttribute('camera',   {active: false   })
-                scene.els.cam.low.setAttribute('camera',   {active: true   })
+                 // Enable Orbit control and VR mode options
+                scene.els.scene.setAttribute('vr-mode-ui', {enabled: true})
+                scene.els.cam.fly.setAttribute('camera', {active: false  })
+                scene.els.cam.low.setAttribute('camera', {active: true   })
             })
 
             // KEYBOARD EVENTS
             window.addEventListener("keydown", function(key){
-
-            // Keyboard events
+                // Turn off VR option if a keyboard is present
+                scene.els.scene.setAttribute('vr-mode-ui', {enabled: false})
+                // Keyboard events
                 if(state.ui.enableKeyEvents){
                     switch(key.code){
                         case 'Backquote': 
@@ -2885,14 +2251,9 @@
                             break
 
 
-                        case 'KeyC':
-                            if(!state.scene.emissions.balloons){
-                                scene.els.scene.setAttribute('emissions-activity-balloons', null)
-                                state.scene.emissions.balloons = true
-                            } else {
-                                scene.els.scene.removeAttribute('emissions-activity-balloons')
-                                state.scene.emissions.balloons = false
-                            }
+                        case 'KeyC':    // Toggle carbon 'balloons'
+                            state.scene.emissions.balloons = !state.scene.emissions.balloons
+                            scene.els.scene.setAttribute('emissions-activity-balloons', {visible: state.scene.emissions.balloons})
                             break
 
                         // HAZARD EVENTS
