@@ -166,7 +166,7 @@ console.log('BUILDING APP...')
         // Visual state of A-FRAME scene
         scene: {                  
             time: {
-                hour:               10,
+                hour:               9,
                 season:            'spring',
                 timeOfDay:          () => settings.environment.timeOfDay[state.scene.time.season][state.scene.time.hour],
             },
@@ -180,23 +180,23 @@ console.log('BUILDING APP...')
                 },
             },            
             hazard: {               // For all hazards, the 'off' state is false or zero
-                bushfire:           false,           // false then incremental intensity (0, 0.5 and 1 mapping to position)
-                drought:            false,           // false, minor and major; triggering various water, vegetation/ag and ground cover changes
-                earthquake:         false,           // false, eartq
-                flood:              false,           // false, minor, medium and major (for heights )
-                heat:               false,           // false, hotDay, veryHotDay, heatwave
-                heatPulse:          false,           // Object for storing/clearing setInterval for heat pulse effect
-                lightning:          false,           // Object for storing/clearing setInterval for lightning effect
-                oceanAcidification: false,           // false, minor anad major: 
+                bushfire:           false,          // false then incremental intensity (0, 0.5 and 1 mapping to position)
+                drought:            false,          // false, minor and major; triggering various water, vegetation/ag and ground cover changes
+                earthquake:         false,          // false, eartq
+                flood:              false,          // false, minor, medium and major (for heights )
+                heat:               false,          // false, hotDay, veryHotDay, heatwave
+                heatPulse:          false,          // Object for storing/clearing setInterval for heat pulse effect
+                lightning:          false,          // Object for storing/clearing setInterval for lightning effect
+                oceanAcidification: false,          // false, minor anad major: 
                 rain:               false,          // true or false (on of off; likely to change to intensity)
                 snow:               false,          // true or false (on of off; likely to change to intensity)
                 seaLevel:           0,              // float number (delta) from the starting point, where around 2 initiates coastal inundation
                 tornado:            false,          // true or false (on of off)
-                treeSway:           false,           // Object for storing/clearing setInterval for wind affected swaying trees
-                tropicalStorm:      false,           // true or false (on of off)
-                wind:               false,           // false, minor and major (where the windDamage determines the visual)
+                treeSway:           false,          // Object for storing/clearing setInterval for wind affected swaying trees
+                tropicalStorm:      false,          // true or false (on of off)
+                wind:               false,          // false, minor and major (where the windDamage determines the visual)
                 winterStorm:        false,          // false, snow, blizard, iceStorm 
-                mudslide:          false,          // false, avalanche, mudslide 
+                mudslide:          false,           // false, avalanche, mudslide 
             },            
             camera: {
                 activeID:           'flycam',
@@ -213,7 +213,15 @@ console.log('BUILDING APP...')
                 origCol:            {}
             },
             emissions: {
-                balloons:           false
+                balloons:           {
+                    net: {
+                        switches:   false, 
+                        sinks:    false, 
+                    },      
+                    sources:        false,
+                    switches:       false,
+                    sinks:          false
+                }
             }
         },
 
@@ -223,6 +231,7 @@ console.log('BUILDING APP...')
 
         // HTML User interface 
         ui: {         
+            touchMenu:          false,
             enabled:            false,
             displayType:        '',                 // Narrative, Data?
             enableKeyEvents:    true,
@@ -866,4 +875,268 @@ console.log('BUILDING APP...')
     state.scene.environment.sunX = settings.environment.sunX[state.user.time.season]
 
 
+//////////////////////////////////////////
+///////  USER INTERFACE CODE       ///////
+//////////////////////////////////////////
 
+        const ui = {
+            mainMenus: {},
+            methods: {
+                selectSector: function(selectedEl, menuName){
+                    document.querySelectorAll(`.${menuName}-item`).forEach(el => {
+                        el.classList.remove('active')
+                        el.classList.add('blur')
+                    })
+                    selectedEl.classList.add('active')
+                    selectedEl.classList.remove('blur')
+                    ui.methods.clearEvent()
+                },
+                selectSubMenu: function (type){
+                    document.querySelectorAll('.subMenu-container').forEach(el =>  el.classList.remove('active') )
+                    document.getElementById(`subMenu-${type}`).classList.add('active')
+                    // Setup first page
+                    document.querySelectorAll('.narrative-container').forEach(el =>  el.classList.add('hidden') )
+                    document.getElementById(`narrative-${type}-1`).classList.remove('hidden')
+                    document.getElementById(`narrative-${type}-1`).classList.add('show')
+                },
+                selectEvent: function(selectedEl){
+                    document.querySelectorAll('.subMenu-event-container').forEach(el => el.classList.remove('active') )
+                    selectedEl.classList.add('active')
+                    selectedEl.parentElement.parentElement.parentElement.classList.add('invite')
+                    document.querySelectorAll('.subMenu-main-header').forEach(el =>  el.classList.add('invite'))
+                    document.getElementById('details-pane-right').classList.add('active')
+                    ui.methods.updateEventDetails(selectedEl)
+                },
+                clearEvent: function(){
+                    document.querySelectorAll('.narrative-container').forEach(el => el.classList.remove('invite') )
+                    document.querySelectorAll('.subMenu-main-header').forEach(el => el.classList.remove('invite') )
+                    document.querySelectorAll('.subMenu-event-container').forEach(el => el.classList.remove('active') )
+                    document.getElementById('details-pane-right').classList.remove('active') 
+                },
+                updateEventDetails: function(selectedEl){
+                    const label = selectedEl.querySelector('.subMenu-event-label').childElementCount === 0 ? selectedEl.querySelector('.subMenu-event-label').innerHTML : selectedEl.querySelector('.subMenu-event-label').querySelector(':first-child').innerHTML,
+                        id = selectedEl.id,
+                        details = selectedEl.querySelector('.details-content') ? selectedEl.querySelector('.details-content').innerHTML : 'No details available'
+                    document.getElementById('details-header-right').innerHTML = label 
+                    document.getElementById('details-content-right').innerHTML = details
+                },
+                closeDetails: function(){
+                    document.getElementById('details-pane-right').classList.remove('active')
+                    document.querySelectorAll('.narrative-container').forEach(el => el.classList.remove('invite') )
+                    document.querySelectorAll('.subMenu-main-header').forEach(el => el.classList.remove('invite') )
+                },
+                addSubSectionNav: function(type){
+                    const articles = document.querySelectorAll(`.narrative-container.${type}`)
+                    articles.forEach((el, i) => {
+                        const currentContainer = document.getElementById(`narrative-${type}-${i+1}`), 
+                            nextContainer = document.getElementById(`narrative-${type}-${i+2}`), 
+                            prevContainer = document.getElementById(`narrative-${type}-${i}`), 
+                            forwardButton = document.querySelector(`#narrative-${type}-${i+1} * .narrative-controls-button.forward`),
+                            backButton = document.querySelector(`#narrative-${type}-${i+1} * .narrative-controls-button.back`)    
+
+                        if(forwardButton){
+                            if(i < articles.length - 1){
+                                forwardButton.addEventListener('click', function(){  // Flip the current container closed and show next page
+                                    nextContainer.classList.remove('hidden')
+                                    currentContainer.classList.remove('invite')
+                                    currentContainer.classList.add('flipClose')
+                                    setTimeout(()=>{
+                                        nextContainer.classList.add('show')
+                                        currentContainer.classList.remove('flipClose')
+                                        currentContainer.classList.add('hidden')
+                                        currentContainer.classList.remove('show')
+                                        ui.methods.clearEvent()    // Clear event button selections
+                                    }, 500)
+                                })
+                            } else {   // Setup final forward button to close the submenu
+                                forwardButton.innerHTML ="Close"
+                                forwardButton.classList.add('close')
+                                forwardButton.addEventListener('click', function(){  // Flip the current container  closed, hide pane and reset circle menu
+                                    currentContainer.classList.add('flipClose')
+                                    document.getElementById(`subMenu-${type}`).classList.remove('active')
+                                    setTimeout(()=>{
+                                        document.querySelectorAll('.main-menu-item').forEach(el => {
+                                            el.classList.remove('active') 
+                                            el.classList.remove('blur')
+                                        })
+                                        ui.methods.clearEvent()    // Clear event button selections
+                                    }, 500)
+                                })
+                            }
+                        }
+
+                        if(backButton){
+                            backButton.addEventListener('click', function(){ // Flip the current container closed and show previous page
+                                currentContainer.classList.remove('show')
+                                prevContainer.classList.add('flipClose')
+                                setTimeout(()=>{
+                                    prevContainer.classList.remove('hidden')
+                                    currentContainer.classList.add('hidden')
+                                    currentContainer.classList.remove('show')
+                                    currentContainer.classList.remove('invite')
+                                   document.querySelectorAll('.subMenu-main-header').forEach(el => el.classList.remove('invite'))
+                                }, 500)
+                                setTimeout(()=>{
+                                    prevContainer.classList.remove('flipClose')
+                                    prevContainer.classList.add('show')
+                                    ui.methods.clearEvent()    // Clear event button selections
+                                }, 550)
+                            })
+                        }
+                    })      
+                },
+
+                toggleMenu:  function(menuName) {
+                    const items =  ui.mainMenus[menuName].svg.querySelectorAll(`.${menuName}-item`),        
+                        label = ui.mainMenus[menuName].trigger.querySelector(`#${menuName}-label`),
+                        angle = 45,
+                        menuContainer = document.getElementById(`${menuName}-container`),
+                        pos = {
+                            top: menuContainer.classList.contains('top'),
+                            bottom: menuContainer.classList.contains('bottom'),
+                            left: menuContainer.classList.contains('left'),
+                            right: menuContainer.classList.contains('right'),
+                        },
+                        direction = (pos.top && pos.left) || (pos.bottom && pos.right) ? 'anticlockwise' : 'clockwise',
+                        polarity = direction === 'anticlockwise' ? -1 : 1,
+                        offset = direction === 'anticlockwise' ? 0 : 225
+
+                    if (!event) var event = window.event;
+                    event.stopPropagation();
+                    ui.mainMenus[menuName].open  = !ui.mainMenus[menuName].open ;
+                    ui.mainMenus[menuName].svg.classList.toggle('closed')
+
+                    if (ui.mainMenus[menuName].open) { // Open 
+                        const tl = new TimelineLite();
+                        tl.to(items, 0.2, {scale:1, ease:Back.easeOut.config(4)}, 0.05);
+                        for(var i=0; i<items.length; i++){
+                            tl.to(items[i], 0.7, {rotation: (polarity * i * angle + offset)+"deg", ease:Bounce.elastic}, 0.35);
+                        }
+                        label.innerHTML = "-";
+                        ui.mainMenus[menuName].svg.style.pointerEvents = "auto";
+                    } else { // Close menu
+                        const tl = new TimelineLite();
+                        for(var i=0; i<items.length; i++){
+                            tl.to(items[i], 0.3, {rotation: offset, ease:Circ.easeOut}, 0.05);
+                        }
+                        tl.to(items, .3, {scale:0, ease:Back.easeIn}, 0.3);
+
+                        label.innerHTML = "+";
+                        ui.mainMenus[menuName].svg.style.pointerEvents = "none";
+                        document.querySelectorAll(`.${menuName}-item`).forEach(el =>  {
+                            el.classList.remove('active')
+                            el.classList.remove('blur')
+                        })
+                        document.querySelectorAll('.subMenu-container').forEach(el =>  el.classList.remove('active') )
+                        ui.methods.closeDetails()
+                    }
+
+                    // Close all other main menus
+                    document.querySelectorAll(`.main-menu-svg:not(#${menuName})`).forEach(el => {
+                        el.classList.add('closed')
+                        ui.mainMenus[el.id].open = false
+                        const items =  ui.mainMenus[el.id].svg.querySelectorAll(`.${el.id}-item`), 
+                            label = ui.mainMenus[el.id].trigger.querySelector(`#${el.id}-label`),
+                            menuContainer = document.getElementById(`${el.id}-container`),
+                            pos = {
+                                top: menuContainer.classList.contains('top'),
+                                bottom: menuContainer.classList.contains('bottom'),
+                                left: menuContainer.classList.contains('left'),
+                                right: menuContainer.classList.contains('right'),
+                            },
+                            direction = (pos.top && pos.left) || (pos.bottom && pos.right) ? 'anticlockwise' : 'clockwise',
+                            polarity = direction === 'anticlockwise' ? -1 : 1,
+                            offset = direction === 'anticlockwise' ? 0 : 225
+                            tl = new TimelineLite();
+                        for(var i=0; i<items.length; i++){
+                            tl.to(items[i], 0.3, {rotation: offset, ease:Circ.easeOut}, 0.05);
+                        }
+                        tl.to(items, .3, {scale:0, ease:Back.easeIn}, 0.3);
+                        label.innerHTML = "+";
+                        ui.mainMenus[el.id].svg.style.pointerEvents = "none";
+                        document.querySelectorAll(`.${el.id}-item`).forEach(el =>  {
+                            el.classList.remove('active')
+                            el.classList.remove('blur')
+                        })
+                    })             
+                }                
+            }
+        } 
+
+        // Set up menu handler
+        function setupMenuInterface(){
+            ui.mainMenus = {
+                'menu-1': {
+                    container:          document.getElementById('menu-1-container'),
+                    svg:                document.getElementById('menu-1'),
+                    trigger:            document.getElementById('menu-1-trigger'),
+                    open:               false,
+                    lists: {
+                        sectors:        ['world', 'risk', 'emissions', 'actions']
+                    },
+                },
+                'menu-2': {
+                    container:          document.getElementById('menu-2-container'),
+                    svg:                document.getElementById('menu-2'),
+                    trigger:            document.getElementById('menu-2-trigger'),
+                    open:               false,
+                    lists: {
+                        modes:        ['explore', 'disasters', 'vr', 'info']
+                    }
+                }
+            }
+            const menuNames = ['menu-1', 'menu-2']
+            // Add circle sector trigger event /animation
+            menuNames.forEach(menuName =>{
+
+                ui.mainMenus[menuName].trigger.addEventListener('click', function(){ui.methods.toggleMenu(menuName)} , false);
+
+                // Close each menu on initiation
+                const tl = new TimelineLite(), 
+                    items =  document.querySelectorAll(`.${menuName}-item`),
+                    menuContainer = document.getElementById(`${menuName}-container`),
+                    pos = {
+                        top: menuContainer.classList.contains('top'),
+                        bottom: menuContainer.classList.contains('bottom'),
+                        left: menuContainer.classList.contains('left'),
+                        right: menuContainer.classList.contains('right'),
+                    },
+                    direction = (pos.top && pos.left) || (pos.bottom && pos.right) ? 'anticlockwise' : 'clockwise',
+                    offset = direction === 'anticlockwise' ? 0 : 225
+
+                for(var i=0; i<items.length; i++){
+                    tl.to(items[i], 0, {rotation: offset, ease:Circ.easeOut}, 0);
+                }
+                tl.to(items, 0, {scale:0, ease:Back.easeIn}, 0);
+
+                // Add subsection navigation and event listeners for selecting main menu items
+                if(ui.mainMenus[menuName].lists.sectors){
+                    ui.mainMenus[menuName].lists.sectors.forEach( sector => {
+                        ui.methods.addSubSectionNav(sector)                
+                        document.getElementById(`${menuName}-button-${sector}`).addEventListener('click', function(){ 
+                            ui.methods.selectSector(this, menuName)                 
+                            ui.methods.selectSubMenu(sector)
+                        })
+                    })
+                }
+                // Add free play mode menus..
+                if(ui.mainMenus[menuName].lists.modes){
+                    ui.mainMenus[menuName].lists.modes.forEach( mode => {
+                        console.log('Need to add a quick mode for '+mode)
+                    })
+                }
+            })
+
+            // Set details close button
+            document.getElementById('details-close-right').addEventListener('click', ui.methods.closeDetails)
+        };
+
+        // Add Event listeners (generic menu interactions only > to be added to add scene interactivity)
+        function addInteraction() {
+            document.querySelectorAll('.subMenu-event-container').forEach(el => {
+                el.addEventListener('click', function(){
+                    ui.methods.selectEvent(this)
+                })
+
+            })
+        }

@@ -95,7 +95,6 @@
                 console.log('Setting the sun and moon position for hour '+state.scene.time.hour)
                 scene.els.enviro.sun.setAttribute('position', document.getElementById(scene.els.misc.sunPos[state.scene.time.hour]).getAttribute('position'))
                 scene.els.lights.sun.setAttribute('position', document.getElementById(scene.els.misc.sunPos[state.scene.time.hour]).getAttribute('position'))
-
                 scene.els.enviro.moon.setAttribute('position', document.getElementById(scene.els.misc.moonPos[state.scene.time.hour]).getAttribute('position'))
 
                 // Change the hemi ambient light
@@ -111,10 +110,22 @@
                         to:         {x: settings.solarFarm.rotationByHour[state.scene.time.hour] , y: 0, z: 0}
                     })            
                 }
-
                 // Set the environment
                 externalEvents.changeEnvironment()
         }
+        })
+
+        AFRAME.registerComponent('initiate-ui', {
+            init: function(){
+                console.log('SCENE NOW LOADED')
+                document.getElementById('loader-background').classList.remove('active')
+                setupMenuInterface()
+                addInteraction() 
+                setTimeout(() => {
+                    document.getElementById('loader-background').classList.remove('active')
+                    document.getElementById('loader-container').classList.add('hidden')
+                }, 1500)
+            }
         })
 
     // SCENE SCENARIO AND ANIMATION COMPONENTS
@@ -1008,7 +1019,7 @@
             },            
             init: function(){
                 document.getElementById('duckSunglasses').setAttribute('visible', true)
-                scene.els.alpTops.setAttribute('visible', true)
+                scene.els.enviro.alpTops.setAttribute('visible', true)
             },
             update: function(){
                 const heatstate = ['default', 'hotDay', 'veryHotDay', 'heatwave'],
@@ -1048,7 +1059,7 @@
             },
             remove: function(){
                 clearInterval(state.scene.hazard.heatPulse)
-                scene.els.alpTops.setAttribute('visible', false)
+                scene.els.enviro.alpTops.setAttribute('visible', false)
                 document.getElementById('duckSunglasses').setAttribute('visible', false)
             }
         })
@@ -1497,11 +1508,13 @@
     // EMISSIONS VISUALISATION COMPONENTS
         AFRAME.registerComponent('emissions-activity-balloons', {
             schema: {   
-                dur:                    {type: 'number',   default: 3000 },  
-                visible:                {type: 'boolean',   default: true} 
+                dur:                {type: 'number',   default: 3000 },  
+                visible:            {type: 'boolean',  default: true}, 
+                type:               {type: 'string',   default: 'all'}, 
+                sourceNetSwitch:    {type: 'boolean',  default: false}, 
+                sourceNetSink:      {type: 'boolean',  default: false}, 
             },
             init: function(){
-
                 // Emissions balloon anchor collections
                 scene.els.anchors = {
                     // Emission source objects
@@ -2101,9 +2114,19 @@
                                             scale = Math.sqrt(model.scene.balloonScale[type][emissionsSector][scope][sector][emissionsSource][subsource].scale)
                                             stringLength = model.scene.balloonScale[type][emissionsSector][scope][sector][emissionsSource][subsource].stringLength
                                             stringPosY = model.scene.balloonScale[type][emissionsSector][scope][sector][emissionsSource][subsource].stringPosY
-                                            balloonCol = type === 'sources' ? 'col-balloon-black' : 'col-balloon-green'
+                                            switch(type){
+                                                case 'sources':
+                                                    balloonCol = 'col-balloon-black'
+                                                    break
+                                                case 'switches':
+                                                    balloonCol = 'col-balloon-green'
+                                                    break
+                                                case 'sinks':
+                                                    balloonCol = 'col-balloon-magenta'
+                                                    break
+                                            }   
                                         }
-
+                                        // Add ALL balloons (source/switch/sink)  
                                         for(let i = 0; i < anchorCollection.length; i++ ){
                                             const balloonContainer =  document.createElement('a-entity'),
                                                 anchorY = anchorCollection[i].getAttribute('position').y
@@ -2116,18 +2139,6 @@
                                             balloonContainer.setAttribute('data-stringscale', `1 ${stringLength} 1`)
                                             balloonContainer.setAttribute('data-stringpos', `0 ${stringLength} 0`)
                                             balloonContainer.setAttribute('visible', false)
-                                            // balloonContainer.setAttribute('animation__scale', {
-                                            //     property:   'scale',
-                                            //     from:       '0 0 0',
-                                            //     to:         '1 1 1',
-                                            //     dur:        this.data.dur
-                                            // })
-                                            // balloonContainer.setAttribute('animation__pos', {
-                                            //     property:   'position',
-                                            //     from:       `0 ${-3*scale}  0`,
-                                            //     to:         `0 0 0`,
-                                            //     dur:        this.data.dur
-                                            // })
                                             anchorCollection[i].appendChild(balloonContainer)
                                         }
                                     })                        
@@ -2139,377 +2150,223 @@
             },
 
             update: function(){
-                const balloonEls = document.querySelectorAll('.balloon'), 
-                    animationTime =  this.data.dur
+                const balloonEls = this.data.type === 'all' ? document.querySelectorAll('.balloon') :  document.querySelectorAll('.balloon.'+ this.data.type ), 
+                    sourceBalloonEls = document.querySelectorAll('.balloon.sources'),
+                    animationTime =  this.data.dur,
+                    sourceScale = (this.data.sourceNetSwitch && this.data.sourceNetSink) ? 0.7 : this.data.sourceNetSwitch ? 0.8 : this.data.sourceNetSink ? 0.9 : 1
 
+                // Show/hide TARGETED balloons
                 balloonEls.forEach(el => {
-                    setTimeout( () => { 
-                        el.setAttribute('visible', this.data.visible)
-                    }, this.data.visible ? 0 : animationTime)
-                    el.setAttribute('animation__scale', {
-                        property:   'scale',
-                        from:       this.data.visible ? '0 0 0' : '1 1 1',
-                        to:         this.data.visible ? '1 1 1' : '0 0 0',
-                        dur:        this.data.dur
-                    })
-                    el.setAttribute('animation__pos', {
-                        property:   'position',
-                        from:       this.data.visible ? '0 -5 0' : '0 0 0',
-                        to:         this.data.visible ? '0  0' : '0 -5 0',
-                        dur:        this.data.dur
-                    })
+                    // Define scales
+                    const currScale = el.getAttribute('scale')
+                    // Animate INTO VIEW
+                    if(this.data.visible){
+                        el.setAttribute('visible', true)  // Set visibility state
+                        // For sources where net impact needs to be checked
+                        if(this.data.type === 'sources'){
+                            el.setAttribute('animation__scale', {
+                                property:   'scale',
+                                from:       `${currScale.x} ${currScale.y} ${currScale.z}`,
+                                to:         `${sourceScale} ${sourceScale} ${sourceScale}`,
+                                dur:        this.data.dur
+                            })
+                        // For switches and sinks
+                        } else {
+                            el.setAttribute('animation__scale', {
+                                property:   'scale',
+                                from:       '0 0 0',
+                                to:         '1 1 1',
+                                dur:        this.data.dur
+                            })
+                        }
+                    // Animate to hidden
+                    }  else {
+                        el.setAttribute('animation__scale', {
+                            property:   'scale',
+                            from:       `${currScale.x} ${currScale.y} ${currScale.z}`,
+                            to:         '0 0 0',
+                            dur:        this.data.dur
+                        })
+                        setTimeout( () => {         // Set visibility state
+                            el.setAttribute('visible', false)
+                        }, animationTime)
+                    }         
                 })
+
+                // Adjust net impact on SOURCE balloons for switches and sinks
+                if(this.data.type !== 'sources'){
+                    sourceBalloonEls.forEach(el => {
+                        const currScale = el.getAttribute('scale')
+                        el.setAttribute('animation__scale', {
+                            property:   'scale',
+                            from:       `${currScale.x} ${currScale.y} ${currScale.z}`,
+                            to:         `${sourceScale} ${sourceScale} ${sourceScale}`,
+                            dur:        this.data.dur
+                        })
+                    })
+                }
             },
 
             remove: function(){
-
             }
-
         })
 
     // EXTERNAL EVENT CONTROLS : FOR UI AND TESTING
-    AFRAME.registerComponent("add-external-listeners", { 
-        init: function(){
-            window.addEventListener("touchstart", function(){
-                 // Enable Orbit control and VR mode options
-                scene.els.scene.setAttribute('vr-mode-ui', {enabled: true})
-                scene.els.cam.fly.setAttribute('camera', {active: false  })
-                scene.els.cam.low.setAttribute('camera', {active: true   })
-            })
-
-            // KEYBOARD EVENTS
-            window.addEventListener("keydown", function(key){
-                // Turn off VR option if a keyboard is present
-                scene.els.scene.setAttribute('vr-mode-ui', {enabled: false})
-                // Keyboard events
-                if(state.ui.enableKeyEvents){
-                    switch(key.code){
-                        case 'Backquote': 
+        AFRAME.registerComponent("add-external-listeners", { 
+            init: function(){
+                window.addEventListener("touchstart", function(){
+                    // Enable Orbit control and VR mode options
+                    scene.els.scene.setAttribute('vr-mode-ui', {enabled: true})
+                    scene.els.cam.fly.setAttribute('camera', {active: false  })
+                    scene.els.cam.low.setAttribute('camera', {active: true   })
+                })
+                // KEYBOARD EVENTS
+                window.addEventListener("keydown", function(key){
+                    // Turn off VR option if a keyboard is present
+                    scene.els.scene.setAttribute('vr-mode-ui', {enabled: false})
+                    // Keyboard events
+                    if(state.ui.enableKeyEvents){
+                        switch(key.code){
+                            case 'Backquote': 
                                 externalEvents.toggleStats()
-                            break
-                        case 'BracketLeft':
+                                break
+                            case 'BracketLeft':
                                 externalEvents.rotateFlyCam('left')
-                            break
-                        case 'BracketRight':
+                                break
+                            case 'BracketRight':
                                 externalEvents.rotateFlyCam('right')
-                            break
-                        case 'Backslash':
+                                break
+                            case 'Backslash':
                                 externalEvents.toggleFlyCamHeight()
-                            break
-                        case 'Period':
+                                break
+                            case 'Period':
                                 externalEvents.changeHour('forward')
-                            break
-                        case 'Comma':
+                                break
+                            case 'Comma':
                                 externalEvents.changeHour('back')
-                            break
-                        case 'Space':
+                                break
+                            case 'Space':
                                 externalEvents.toggleCamera()
-                            break
-                        case 'ShiftRight':
+                                break
+                            case 'ShiftRight':
                                 externalEvents.changeEnvironment()
-                            break
-                        case 'Enter':
+                                break
+                            case 'Enter':
                                 document.getElementById('scene').components.inspector.openInspector()
-                            break
-                        case 'MetaLeft':
+                                break
+                            case 'MetaLeft':
                                 document.getElementById('shortcuts').classList.add('visible') 
-                            break
-                        case 'KeyP':
-                            if(!state.scene.animation.planeFlight){                                
-                                scene.els.scene.setAttribute('fly-plane', null)
-                            }
-                            break
-                        case 'KeyR':                       
-                                scene.els.scene.setAttribute('sail-duck', null)
-                            break
-                        case 'KeyE':   
-                            const environments = Object.keys(settings.days),
-                                currentIndex = environments.indexOf(state.scene.environment.name),
-                                newEnvironment = environments[(currentIndex+1) % environments.length]  
-                            state.scene.environment.name = newEnvironment
-                            externalEvents.changeEnvironment(newEnvironment)
-                            console.log('Changing environment to '+newEnvironment)
-                            break
-
-                        case 'KeyQ':
-                            if(!state.scene.animation.blockTitleShowing){
-                                state.scene.animation.blockTitleShowing = true
-                                // scene.els.items.blockGroup.setAttribute('show-block-title', "text: Hello World;  posZ: 35, -35;   posY: 5,  -10; posX: 0, 0; tilt: 10, -10; rotate: 0, 0; letterSpace: 15")
-                                scene.els.items.blockGroup.setAttribute('show-block-title', "text: The Kingdom of Dreams & Madness;  posX: -20, -20, -20, 0, -20, 0; posY: 40, 40, 40, 0, -5, -15;  posZ: 70, 0, -70, 50, 5, -45;  tilt: 0, 0, 0, 10, 0, -10; rotate: 0, 0, 0, 0, 0, 0; letterSpace: 12.5")
-                                scene.els.items.blockGroup.setAttribute('animation', {
-                                    property: 'position.y', from: 100, to: 0, dur: 3500, delay: 500
-                                })
-                            } else {
-                                state.scene.animation.blockTitleShowing = false
-                                scene.els.items.blockGroup.setAttribute('animation', {
-                                    property: 'position.y', from: 0, to: 100, dur: 3500, delay: 500
-                                })
-                                setTimeout( () => {
-                                    scene.els.items.blockGroup.removeAttribute('show-block-title')
-                                }, 3500)                                    
-                            }
-                            break
-
-
-                        case 'KeyC':    // Toggle carbon 'balloons'
-                            state.scene.emissions.balloons = !state.scene.emissions.balloons
-                            scene.els.scene.setAttribute('emissions-activity-balloons', {visible: state.scene.emissions.balloons})
-                            break
-
-                        // HAZARD EVENTS
-                            // state.scene.environment.hazardVisible = true
-
-                        case 'Digit1':      // 1. THUNDERSTORM AND FLOODING EVENTS 
-                            switch(state.scene.hazard.flood){  
-                                // Increase flood levels on subsequent keypress
-                                case false: 
-                                    externalEvents.resetHazards()               // Clear any existing hazards
-                                    externalEvents.changeEnvironment('stormFlood', 2000 )
-                                    scene.els.scene.setAttribute('hazard-rain', null)
-                                    scene.els.scene.setAttribute('hazard-lightning', null)
-                                    setTimeout( () => { 
-                                        scene.els.scene.setAttribute('hazard-flood', {"floodLvl": 0.125}) 
-                                    }, 2000)
-                                    state.scene.hazard.particles = true   
-                                    state.scene.hazard.flood = 'minor'
-                                    break
-                                // From minor to medium flood
-                                case 'minor':
-                                    scene.els.scene.setAttribute('hazard-flood', {"floodLvl": 0.5})
-                                    state.scene.hazard.flood = 'medium'
-                                    break
-                                // From medium to major flood
-                                case 'medium':
-                                    state.scene.hazard.flood = 'major'
-                                    scene.els.scene.setAttribute('hazard-flood', {"floodLvl": 0.75})
-                                    break
-                                // Reset after showing major flood 
-                                default:                        
-                                    clearInterval(state.scene.hazard.lightning)
-                                    scene.els.scene.removeAttribute('hazard-rain')
-                                    scene.els.scene.removeAttribute('hazard-lightning')
-                                    scene.els.scene.removeAttribute('hazard-flood')
-                                    externalEvents.changeEnvironment(state.scene.environment.name)
-                                    state.scene.hazard.particles = false
-                                    state.scene.hazard.flood = false
-                                    state.scene.hazard.lightning = false
-                                    state.scene.environment.hazardVisible =false
-                            }
-                            break
-                        
-                        case 'Digit2':      // 2. EXTREME WIND (THUNDERSTORM) EVENTS 
-                            switch(state.scene.hazard.wind){  
-                                case false: 
-                                    externalEvents.resetHazards()               // Clear any existing hazards
-                                    externalEvents.changeEnvironment('stormFlood', 2000 )
-                                    scene.els.scene.setAttribute('hazard-rain', null)
-                                    scene.els.scene.setAttribute('hazard-wind', null)
-                                    scene.els.scene.setAttribute('hazard-lightning', null)
-                                    state.scene.hazard.particles = true
-                                    state.scene.hazard.wind = 'minor'
-                                    break 
-                                // Increase wind levels on subsequent keypress
-                                case 'minor': 
-                                    scene.els.scene.setAttribute('hazard-wind', {"damage": 0.25})
-                                    state.scene.hazard.wind = 'major'
-                                    break
-                                // Reset after showing major wind event 
-                                default:    
-                                    clearInterval(state.scene.hazard.lightning)
-                                    scene.els.scene.removeAttribute('hazard-wind')
-                                    scene.els.scene.removeAttribute('hazard-rain')
-                                    scene.els.scene.removeAttribute('hazard-lightning')
-                                    externalEvents.changeEnvironment(state.scene.environment.name)
-                                    state.scene.hazard.wind = false
-                                    state.scene.hazard.particles = false
-                                    state.scene.environment.hazardVisible =false
-                            }                            
-                            break
-                       
-                        case 'Digit3':      // 3. HEAT DAYS AND HEATWAVE
-                            switch(state.scene.hazard.heat){  
-                                case false: 
-                                    externalEvents.resetHazards()               // Clear any existing hazards
-                                    externalEvents.changeEnvironment('heat', 2000)
-                                    scene.els.scene.setAttribute('hazard-heat', {intensity: 'hotDay'})
-                                    state.scene.hazard.heat = 'hotDay'
-                                    break
-                                case 'hotDay': 
-                                    scene.els.scene.setAttribute('hazard-heat', {intensity: 'veryHotDay'})
-                                    state.scene.hazard.heat = 'veryHotDay'
-                                    break 
-                                case 'veryHotDay': 
-                                    scene.els.scene.setAttribute('hazard-heat', {intensity: 'heatwave'})
-                                    state.scene.hazard.heat = 'heatwave'
-                                    break
-                                // Reset after showing heat events
-                                default:    
-                                    scene.els.scene.removeAttribute('hazard-heat')
-                                    externalEvents.changeEnvironment(state.scene.environment.name)
-                                    state.scene.hazard.heat = false
-                                    state.scene.environment.hazardVisible =false
-                            }                            
-                            break
-                        
-                        case 'Digit4':      // 4. DROUGHT | FOOD AND WATER SUPPLY SHORTAGE
-                            switch(state.scene.hazard.drought){  
-                                case false:
-                                    externalEvents.resetHazards()               // Clear any existing hazards
-                                    scene.els.scene.setAttribute('hazard-drought', {level: 'minor'})
-                                    state.scene.hazard.drought = 'minor'
-                                    break
-                                case 'minor':
-                                    scene.els.scene.setAttribute('hazard-drought', {level: 'major'})
-                                    state.scene.hazard.drought = 'major'
-                                    break
-                                default:
-                                    scene.els.scene.removeAttribute('hazard-drought')
-                                    externalEvents.changeEnvironment(state.scene.environment.name)
-                                    state.scene.hazard.drought = false
-                                    state.scene.environment.hazardVisible =false
-                            }
-                            break
-                       
-                        case 'Digit5':      // 5. BUSHFIRES | INTENSITY AND POSITION BASED
-                            switch(state.scene.hazard.bushfire){  
-                                case false:
-                                    externalEvents.resetHazards()               // Clear any existing hazards
-                                    state.scene.hazard.bushfire = 0
-                                    scene.els.scene.setAttribute('hazard-bushfire', {intensity: 0})
-                                    break
-                                case 0:
-                                    scene.els.scene.setAttribute('hazard-bushfire', {intensity: 0.5})
-                                    state.scene.hazard.bushfire = 0.5
-                                    break
-                                case 0.5:
-                                    scene.els.scene.setAttribute('hazard-bushfire', {intensity: 1})
-                                    state.scene.hazard.bushfire = 1
-                                    break
-                                default:
-                                    scene.els.scene.removeAttribute('hazard-bushfire')
-                                    externalEvents.changeEnvironment(state.scene.environment.name)
-                                    state.scene.hazard.bushfire = false
-                                    state.scene.environment.hazardVisible =false
-                            }
-                            break 
-
-                        case 'Digit6':      // 6. OCEAN ACIDIFICATION | INTENSITY BASED
-                            switch(state.scene.hazard.oceanAcidification){  
-                                case false:
-                                    externalEvents.resetHazards()               // Clear any existing hazards
-                                    state.scene.hazard.oceanAcidification = 'minor'
-                                    scene.els.scene.setAttribute('hazard-ocean-acidification', null)
-                                    break
-                                default:
-                                    scene.els.scene.removeAttribute('hazard-ocean-acidification')
-                                    externalEvents.changeEnvironment('default')
-                                    state.scene.hazard.oceanAcidification = false
-                                    state.scene.environment.hazardVisible =false
-                            }
-                            break
-                    
-                        case 'Digit7':      // 7. CYCLONES AND HURRICANES | SEA AND LAND BASED WIND EVENTS
-                            switch(state.scene.hazard.tropicalStorm){  
-                                case false:
-                                    externalEvents.resetHazards()               // Clear any existing hazards
-                                    externalEvents.changeEnvironment('stormFlood', 2000 )
-                                    scene.els.scene.setAttribute('hazard-tropical-storm', null)
-                                    scene.els.scene.setAttribute('hazard-wind', {damage: 0.25})
-                                    state.scene.hazard.tropicalStorm = 'tropical'
-                                    state.scene.hazard.wind = 'major'
-                                    break
-                                default:
-                                    externalEvents.changeEnvironment(state.scene.environment.name)
-                                    scene.els.scene.removeAttribute('hazard-tropical-storm')
-                                    scene.els.scene.removeAttribute('hazard-wind')
-                                    externalEvents.changeEnvironment('default')
-                                    state.scene.hazard.tropicalStorm = false
-                                    state.scene.hazard.wind = 'none'
-                                    state.scene.environment.hazardVisible = false
-                            }
-                            break
-
-                        case 'Digit8':      // 8. WINTER AND ICE STORM
-                            switch(state.scene.hazard.winterStorm){  
-                                case false:
-                                    externalEvents.resetHazards()               // Clear any existing hazards
-                                    externalEvents.changeEnvironment('snow', 2000 )
-                                    scene.els.scene.setAttribute('hazard-winter-storm', {intensity: 'snow'})
-                                    state.scene.hazard.winterStorm = 'snow'
-                                    state.scene.hazard.snow = true
-                                    break
-                                case 'snow':
-                                    scene.els.scene.setAttribute('hazard-winter-storm', {intensity: 'blizzard'})
-                                    state.scene.hazard.winterStorm = 'bizzard'
-                                    break
-                                case 'bizzard':
-                                    scene.els.scene.setAttribute('hazard-winter-storm', {intensity: 'iceStorm'})
-                                    state.scene.hazard.winterStorm = 'iceStorm'
-                                    break
-                                default:
-                                    externalEvents.changeEnvironment(state.scene.environment.name)
-                                    scene.els.scene.removeAttribute('hazard-winter-storm')
-                                    state.scene.hazard.winterStorm = false
-                                    state.scene.environment.hazardVisible = false
-                            }
-                            break
-
-                        case 'Digit9':      //  9. AVALANCHE AND MUDSLIDE
-
-                            break
-
-                        case 'Digit0':      //  0. EARTHQUAKES AND TSUNAMIS
-                            switch(state.scene.hazard.earthquake){  
-                                 case false:
-                                    scene.els.scene.setAttribute('hazard-earthquake', {intensity: 10})
-                                    break
-                                default:
-                                    state.scene.environment.hazardVisible = false
-                            }
-                            break
-
-                        // +/- SEA LEVEL CHANGES | INCREMENTAL
-                        case 'Equal':
-                        case 'NumpadAdd':
-                            state.scene.hazard.seaLevel = state.scene.hazard.seaLevel + 0.1 
-                            scene.els.scene.setAttribute('hazard-sea-level', 'slchange: '+state.scene.hazard.seaLevel )
-                            console.log('Raising Sea level to '+state.scene.hazard.seaLevel)
-                            // COASTAL EROSION
-                            break
-                        case 'Minus':
-                        case 'NumpadSubtract':
-                            state.scene.hazard.seaLevel = state.scene.hazard.seaLevel - 0.1 
-                            scene.els.scene.setAttribute('hazard-sea-level', 'slchange: '+state.scene.hazard.seaLevel )
-                            console.log('Lowering sea level to '+state.scene.hazard.seaLevel)
-                            break
-                    
-                        default:
-                            clearTimeout(state.ui.keydown)  
-                            document.getElementById('shortcuts').classList.remove('visible')
-                            console.log('Unused key code is: '+ key.code)
-
-                    }
-                }
-            })
-
-            window.addEventListener("keyup", function(key){
-                if(state.ui.enableKeyEvents){
-                    switch(key.code){
-                        case 'MetaLeft':
+                                break
+                            case 'KeyP':
+                                if(!state.scene.animation.planeFlight){                                
+                                    scene.els.scene.setAttribute('fly-plane', null)
+                                }
+                                break
+                            case 'KeyR':                       
+                                    scene.els.scene.setAttribute('sail-duck', null)
+                                break
+                            case 'KeyE':   
+                                const environments = Object.keys(settings.days),
+                                    currentIndex = environments.indexOf(state.scene.environment.name),
+                                    newEnvironment = environments[(currentIndex+1) % environments.length]  
+                                state.scene.environment.name = newEnvironment
+                                externalEvents.changeEnvironment(newEnvironment)
+                                console.log('Changing environment to '+newEnvironment)
+                                break
+                            case 'KeyQ':
+                                if(!state.scene.animation.blockTitleShowing){
+                                    state.scene.animation.blockTitleShowing = true
+                                    // scene.els.items.blockGroup.setAttribute('show-block-title', "text: Hello World;  posZ: 35, -35;   posY: 5,  -10; posX: 0, 0; tilt: 10, -10; rotate: 0, 0; letterSpace: 15")
+                                    scene.els.items.blockGroup.setAttribute('show-block-title', "text: The Kingdom of Dreams & Madness;  posX: -20, -20, -20, 0, -20, 0; posY: 40, 40, 40, 0, -5, -15;  posZ: 70, 0, -70, 50, 5, -45;  tilt: 0, 0, 0, 10, 0, -10; rotate: 0, 0, 0, 0, 0, 0; letterSpace: 12.5")
+                                    scene.els.items.blockGroup.setAttribute('animation', {
+                                        property: 'position.y', from: 100, to: 0, dur: 3500, delay: 500
+                                    })
+                                } else {
+                                    state.scene.animation.blockTitleShowing = false
+                                    scene.els.items.blockGroup.setAttribute('animation', {
+                                        property: 'position.y', from: 0, to: 100, dur: 3500, delay: 500
+                                    })
+                                    setTimeout( () => {
+                                        scene.els.items.blockGroup.removeAttribute('show-block-title')
+                                    }, 3500)                                    
+                                }
+                                break
+                            case 'KeyC':    // Toggle carbon 'balloons'
+                                state.scene.emissions.balloons.sources = !state.scene.emissions.balloons.sources
+                                scene.els.scene.setAttribute('emissions-activity-balloons', {visible: state.scene.emissions.balloons.sources, dur: 3000, type: 'sources'})
+                                // Control key events
+                                state.ui.enableKeyEvents = false
+                                setTimeout( ()=> {  state.ui.enableKeyEvents = true    }, 3000)
+                                break
+                            // HAZARD EVENTS
+                            case 'Digit1':      // 1. THUNDERSTORM AND FLOODING EVENTS 
+                                externalEvents.hazards.stormFlood()
+                                break                            
+                            case 'Digit2':      // 2. EXTREME WIND (THUNDERSTORM) EVENTS 
+                                externalEvents.hazards.stormWind()                          
+                                break                        
+                            case 'Digit3':      // 3. HEAT DAYS AND HEATWAVE
+                                externalEvents.hazards.heat()                                                   
+                                break                            
+                            case 'Digit4':      // 4. DROUGHT | FOOD AND WATER SUPPLY SHORTAGE
+                                externalEvents.hazards.drought()  
+                                break                        
+                            case 'Digit5':      // 5. BUSHFIRES | INTENSITY AND POSITION BASED
+                                externalEvents.hazards.bushfire()  
+                                break 
+                            case 'Digit6':      // 6. OCEAN ACIDIFICATION | INTENSITY BASED
+                                externalEvents.hazards.acidifcation()  
+                                break                        
+                            case 'Digit7':      // 7. TROPICAL STORMS| SEA AND LAND BASED WIND EVENTS
+                                externalEvents.hazards.tropicalStorm()  
+                                break
+                            case 'Digit8':      // 8. WINTER AND ICE STORM
+                                externalEvents.hazards.winterStorm() 
+                                break
+                            case 'Digit9':      //  9. AVALANCHE AND MUDSLIDE
+                                break
+                            case 'Digit0':      //  0. EARTHQUAKES AND TSUNAMIS
+                                externalEvents.hazards.earthquake() 
+                                break
+                            // +/- SEA LEVEL CHANGES | INCREMENTAL
+                            case 'Equal':
+                            case 'NumpadAdd':
+                                externalEvents.hazards.seaLevelUp()
+                                console.log('Raising Sea level to '+state.scene.hazard.seaLevel)
+                                // COASTAL EROSION
+                                break
+                            case 'Minus':
+                            case 'NumpadSubtract':
+                               externalEvents.hazards.seaLevelDown()
+                                console.log('Lowering sea level to '+state.scene.hazard.seaLevel)
+                                break                        
+                            default:
                                 clearTimeout(state.ui.keydown)  
                                 document.getElementById('shortcuts').classList.remove('visible')
-                            break
-                        default:
-                            clearTimeout(state.ui.keydown)  
-                            document.getElementById('shortcuts').classList.remove('visible')
+                                console.log('Unused key code is: '+ key.code)
+                        }
                     }
-                }
-            })
+                })
 
-            // VOICE CONTROLLED EVENTS
+                window.addEventListener("keyup", function(key){
+                    if(state.ui.enableKeyEvents){
+                        switch(key.code){
+                            case 'MetaLeft':
+                                    clearTimeout(state.ui.keydown)  
+                                    document.getElementById('shortcuts').classList.remove('visible')
+                                break
+                            default:
+                                clearTimeout(state.ui.keydown)  
+                                document.getElementById('shortcuts').classList.remove('visible')
+                        }
+                    }
+                })
 
-        }
-     })
+                // CLICK / TOUCH EVENTS
+    
+                // VOICE CONTROLLED EVENTS
+            }
+        })
 
 
 ////////////////////////////////////////////////////////////
@@ -2517,17 +2374,124 @@
 ////////////////////////////////////////////////////////////
 
     const externalEvents = {
+        addTouchUI: function(){
+            document.getElementById('loader-button').addEventListener('click', function(){
+                scene.els.scene.setAttribute('initiate-ui', null)
+            })
+            document.getElementById('menu-time-forward').addEventListener('click', function(){
+                externalEvents.changeHour('forward')
+            }) 
+            document.getElementById('menu-time-back').addEventListener('click', function(){
+                externalEvents.changeHour('back')
+            }) 
+            document.getElementById('menu-stormFlood').addEventListener('click', function(){
+                externalEvents.hazards.stormFlood()
+                document.querySelectorAll('.menu-event-container').forEach(el => el.classList.remove('selected'))
+                this.classList.add('selected')
+            }) 
+            document.getElementById('menu-stormWind').addEventListener('click', function(){
+                externalEvents.hazards.stormWind()
+                document.querySelectorAll('.menu-event-container').forEach(el => el.classList.remove('selected'))
+                this.classList.add('selected')
+            }) 
+            document.getElementById('menu-heat').addEventListener('click', function(){
+                externalEvents.hazards.heat()
+                document.querySelectorAll('.menu-event-container').forEach(el => el.classList.remove('selected'))
+                this.classList.add('selected')
+            }) 
+            document.getElementById('menu-drought').addEventListener('click', function(){
+                externalEvents.hazards.drought()
+                document.querySelectorAll('.menu-event-container').forEach(el => el.classList.remove('selected'))
+                this.classList.add('selected')
+            }) 
+            document.getElementById('menu-bushfire').addEventListener('click', function(){
+                externalEvents.hazards.bushfire()
+                document.querySelectorAll('.menu-event-container').forEach(el => el.classList.remove('selected'))
+                this.classList.add('selected')
+            }) 
+            document.getElementById('menu-acidification').addEventListener('click', function(){
+                externalEvents.hazards.acidifcation()
+                document.querySelectorAll('.menu-event-container').forEach(el => el.classList.remove('selected'))
+                this.classList.add('selected')
+            }) 
+            document.getElementById('menu-tropicalStorm').addEventListener('click', function(){
+                externalEvents.hazards.tropicalStorm()
+                document.querySelectorAll('.menu-event-container').forEach(el => el.classList.remove('selected'))
+                this.classList.add('selected')
+            }) 
+            document.getElementById('menu-winterStorm').addEventListener('click', function(){
+                externalEvents.hazards.winterStorm()
+                document.querySelectorAll('.menu-event-container').forEach(el => el.classList.remove('selected'))
+                this.classList.add('selected')
+            })  
+            document.getElementById('menu-earthquake').addEventListener('click', function(){
+                externalEvents.hazards.earthquake()
+                document.querySelectorAll('.menu-event-container').forEach(el => el.classList.remove('selected'))
+                this.classList.add('selected')
+            })  
+            document.getElementById('menu-SLup').addEventListener('click', function(){
+                externalEvents.hazards.seaLevelUp()
+                document.querySelectorAll('.menu-event-container').forEach(el => el.classList.remove('selected'))
+                this.classList.add('selected')
+            })  
+            document.getElementById('menu-SLdown').addEventListener('click', function(){
+                externalEvents.hazards.seaLevelDown()
+                document.querySelectorAll('.menu-event-container').forEach(el => el.classList.remove('selected'))
+                this.classList.add('selected')
+            })  
+            // Emissions balloons
+            // document.getElementById('menu-balloon-sources').addEventListener('click', function(){
+            //     state.scene.emissions.balloons.sources = !state.scene.emissions.balloons.sources
+            //     state.scene.emissions.balloons.net.switches = state.scene.emissions.balloons.switches
+            //     state.scene.emissions.balloons.net.sinks = state.scene.emissions.balloons.sinks
+
+            //     scene.els.scene.setAttribute('emissions-activity-balloons', {
+            //         type:               'sources',
+            //         visible:            state.scene.emissions.balloons.sources, 
+            //         sourceNetSwitch:    state.scene.emissions.balloons.net.switches,
+            //         sourceNetSinks:     state.scene.emissions.balloons.net.sinks
+            //     })
+            //     // Control menu style click events
+            //     this.classList.toggle('selected')
+            //     this.classList.add('noPointerEvents')
+            //     setTimeout( () => {  this.classList.remove('noPointerEvents') }, 3000)
+            // })   
+            // document.getElementById('menu-balloon-switches').addEventListener('click', function(){
+            //     state.scene.emissions.balloons.switches = !state.scene.emissions.balloons.switches
+            //     state.scene.emissions.balloons.net.switches =  state.scene.emissions.balloons.switches 
+
+            //     scene.els.scene.setAttribute('emissions-activity-balloons', {
+            //         type:               'switches',
+            //         visible:            state.scene.emissions.balloons.switches, 
+            //         sourceNetSwitch:    state.scene.emissions.balloons.net.switches,
+            //         sourceNetSinks:     state.scene.emissions.balloons.net.sinks
+            //     })
+            //     // Control menu style click events
+            //     this.classList.toggle('selected')
+            //     this.classList.add('noPointerEvents')
+            //     setTimeout( () => {  this.classList.remove('noPointerEvents') }, 3000)
+            // })   
+
+       },
+
+        toggleTouchUI: function() {
+            state.ui.touchMenu = !state.ui.touchMenu
+            if(state.ui.touchMenu) {
+                document.getElementById('touch-UI').classList.toggle('active')
+            }
+        },
+
         toggleStats: function(){
             document.getElementById('scene').toggleAttribute('stats')
         },
 
         toggleCamera: function(){
             if(scene.els.cam.fly.getAttribute('camera').active ){
-                scene.els.cam.fly.setAttribute('camera', {active: false  })
-                scene.els.cam.low.setAttribute('camera', {active: true   })
+                scene.els.cam.fly.setAttribute('camera', {active: false })
+                scene.els.cam.low.setAttribute('camera', {active: true  })
             } else {
-                scene.els.cam.fly.setAttribute('camera',   {active: true   })
-                scene.els.cam.low.setAttribute('camera',   {active: false   })
+                scene.els.cam.fly.setAttribute('camera', {active: true  })
+                scene.els.cam.low.setAttribute('camera', {active: false })
             }
         },
 
@@ -2618,7 +2582,7 @@
             } else if(direction === 'back'){
                 state.scene.time.hour = state.scene.time.hour !== 0 ? state.scene.time.hour  - 1 :  scene.els.misc.sunPos.length - 1 
             }
-            // Resposition sun an sun light
+            // Resposition sun and sun light
             const newSunPos = document.getElementById(scene.els.misc.sunPos[state.scene.time.hour]).getAttribute('position')
             scene.els.enviro.sun.setAttribute('animation__position', {
                 property: 'position',
@@ -2645,38 +2609,63 @@
             })  
             // Change the environment
             externalEvents.changeEnvironment()
-
             // Turn lights on/off
             if ((state.scene.time.timeOfDay() === "day" || state.scene.time.timeOfDay() === "morning")){
-                if(state.scene.environment.nightLights){
-                    console.log(state.scene.time.timeOfDay(), 'TURN LIGHTS OFF')
-                    scene.els.scene.removeAttribute('nightlights')
-                } else {
-                    console.log('KEEP LIGHTS OFF')
-                }   
+                if(state.scene.environment.nightLights){ scene.els.scene.removeAttribute('nightlights')  } 
             } else {
-                if(!state.scene.environment.nightLights){
-                    console.log(state.scene.time.timeOfDay(), 'TURN LIGHTS ON')
-                    scene.els.scene.setAttribute('nightlights', null)
-                } else {
-                    console.log('KEEP LIGHTS ON')
-                }
+                if(!state.scene.environment.nightLights){ scene.els.scene.setAttribute('nightlights', null) } 
             }
-
             // Track the solar  
             const solarFarmEls = document.getElementsByClassName('solarRotatable')
             for(let i = 0; i < solarFarmEls.length; i++){
                 solarFarmEls[i].setAttribute('animation__rotate', {
                     property:   'rotation',
                     dur:        duration,
-                    to:         {x: settings.solarFarm.rotationByHour[state.scene.time.hour] , y: 0, z: 0}
+                    to:         {x: settings.solarFarm.rotationByHour[state.scene.time.hour], y: 0, z: 0}
                 })            
             }
-
+            // Change thew clock
+            externalEvents.changeClock(direction, duration)
             // Control key events
             state.ui.enableKeyEvents = false
-            setTimeout( ()=> {  state.ui.enableKeyEvents = true    }, duration)
+            setTimeout( () => {  state.ui.enableKeyEvents = true }, duration)
+        },
 
+        changeClock: function(direction = 'forward', duration = 2000){
+            // Prevent queuing of clicks
+            document.getElementById('clockhand-hour-group').classList.add('noPointerEvents')
+            document.getElementById('clockhand-min-group').classList.add('noPointerEvents')
+            // Move the hour hand
+            if(state.scene.time.hour % 12 === 0){
+                if(direction === 'forward'){
+                    document.getElementById('clockhand-hour-group').setAttribute('class', 'hour-12')
+                    setTimeout(() => {
+                        document.getElementById('clockhand-hour-group').style.transitionDuration = '0s'
+                        document.getElementById('clockhand-hour-group').setAttribute('class', 'hour-0')
+                    }, 2000)
+                } else if(direction === 'back'){
+                    document.getElementById('clockhand-hour-group').setAttribute('class', 'hour-0')
+                    setTimeout(() => {
+                        document.getElementById('clockhand-hour-group').style.transitionDuration = '0s'
+                        document.getElementById('clockhand-hour-group').setAttribute('class', 'hour-12')
+                    }, 2000)
+                }
+            } else {
+                document.getElementById('clockhand-hour-group').style.transitionDuration = '2s'
+                document.getElementById('clockhand-hour-group').setAttribute('class', 'hour-'+(state.scene.time.hour%12))
+            }
+            // Move the minute hand
+            const spin = (direction === 'forward') ? 'spinClockwise' : 'spinAntiClock'
+            document.getElementById('clockhand-min-group').style.transitionDuration = '2s'
+            document.getElementById('clockhand-min-group').classList.add(spin)
+            // Reset interactions
+            setTimeout( () => {  
+                document.getElementById('clockhand-min-group').style.transitionDuration = '0s'
+                document.getElementById('clockhand-min-group').classList.remove('spinClockwise')
+                document.getElementById('clockhand-min-group').classList.remove('spinAntiClock')
+                document.getElementById('clockhand-min-group').classList.remove('noPointerEvents')
+                document.getElementById('clockhand-hour-group').classList.remove('noPointerEvents')
+            }, duration)
         },
 
         changeEnvironment: function(name = state.scene.environment.name, duration = 2000, timeOfDay = state.scene.time.timeOfDay()){
@@ -2776,6 +2765,213 @@
             clearInterval(state.scene.hazard.lightning)
             externalEvents.changeEnvironment(state.scene.environment.name)
             console.log('All hazards reset')
+        }, 
+
+        hazards: {
+            stormFlood: function(){
+                switch(state.scene.hazard.flood){  
+                    // Increase flood levels on subsequent keypress
+                    case false: 
+                        externalEvents.resetHazards()               // Clear any existing hazards
+                        externalEvents.changeEnvironment('stormFlood', 2000 )
+                        scene.els.scene.setAttribute('hazard-rain', null)
+                        scene.els.scene.setAttribute('hazard-lightning', null)
+                        setTimeout( () => { 
+                            scene.els.scene.setAttribute('hazard-flood', {"floodLvl": 0.125}) 
+                        }, 2000)
+                        state.scene.hazard.particles = true   
+                        state.scene.hazard.flood = 'minor'
+                        break
+                    // From minor to medium flood
+                    case 'minor':
+                        scene.els.scene.setAttribute('hazard-flood', {"floodLvl": 0.5})
+                        state.scene.hazard.flood = 'medium'
+                        break
+                    // From medium to major flood
+                    case 'medium':
+                        state.scene.hazard.flood = 'major'
+                        scene.els.scene.setAttribute('hazard-flood', {"floodLvl": 0.75})
+                        break
+                    // Reset after showing major flood 
+                    default:                   
+                        clearInterval(state.scene.hazard.lightning)
+                        scene.els.scene.removeAttribute('hazard-rain')
+                        scene.els.scene.removeAttribute('hazard-lightning')
+                        scene.els.scene.removeAttribute('hazard-flood')
+                        externalEvents.changeEnvironment(state.scene.environment.name)
+                        state.scene.hazard.particles = false
+                        state.scene.hazard.flood = false
+                        state.scene.hazard.lightning = false
+                        state.scene.environment.hazardVisible =false
+                }
+            },
+            stormWind: function() {
+                switch(state.scene.hazard.wind){  
+                    case false: 
+                        externalEvents.resetHazards()               // Clear any existing hazards
+                        externalEvents.changeEnvironment('stormFlood', 2000 )
+                        scene.els.scene.setAttribute('hazard-rain', null)
+                        scene.els.scene.setAttribute('hazard-wind', null)
+                        scene.els.scene.setAttribute('hazard-lightning', null)
+                        state.scene.hazard.particles = true
+                        state.scene.hazard.wind = 'minor'
+                        break 
+                    // Increase wind levels on subsequent keypress
+                    case 'minor': 
+                        scene.els.scene.setAttribute('hazard-wind', {"damage": 0.25})
+                        state.scene.hazard.wind = 'major'
+                        break
+                    // Reset after showing major wind event 
+                    default:    
+                        clearInterval(state.scene.hazard.lightning)
+                        scene.els.scene.removeAttribute('hazard-wind')
+                        scene.els.scene.removeAttribute('hazard-rain')
+                        scene.els.scene.removeAttribute('hazard-lightning')
+                        externalEvents.changeEnvironment(state.scene.environment.name)
+                        state.scene.hazard.wind = false
+                        state.scene.hazard.particles = false
+                        state.scene.environment.hazardVisible =false
+                }   
+            },
+            heat: function() {
+                switch(state.scene.hazard.heat){  
+                    case false: 
+                        externalEvents.resetHazards()               // Clear any existing hazards
+                        externalEvents.changeEnvironment('heat', 2000)
+                        scene.els.scene.setAttribute('hazard-heat', {intensity: 'hotDay'})
+                        state.scene.hazard.heat = 'hotDay'
+                        break
+                    case 'hotDay': 
+                        scene.els.scene.setAttribute('hazard-heat', {intensity: 'veryHotDay'})
+                        state.scene.hazard.heat = 'veryHotDay'
+                        break 
+                    case 'veryHotDay': 
+                        scene.els.scene.setAttribute('hazard-heat', {intensity: 'heatwave'})
+                        state.scene.hazard.heat = 'heatwave'
+                        break
+                    // Reset after showing heat events
+                    default:    
+                        scene.els.scene.removeAttribute('hazard-heat')
+                        externalEvents.changeEnvironment(state.scene.environment.name)
+                        state.scene.hazard.heat = false
+                        state.scene.environment.hazardVisible =false
+                }   
+            },
+            drought: function() {
+                switch(state.scene.hazard.drought){  
+                    case false:
+                        externalEvents.resetHazards()               // Clear any existing hazards
+                        scene.els.scene.setAttribute('hazard-drought', {level: 'minor'})
+                        state.scene.hazard.drought = 'minor'
+                        break
+                    case 'minor':
+                        scene.els.scene.setAttribute('hazard-drought', {level: 'major'})
+                        state.scene.hazard.drought = 'major'
+                        break
+                    default:
+                        scene.els.scene.removeAttribute('hazard-drought')
+                        externalEvents.changeEnvironment(state.scene.environment.name)
+                        state.scene.hazard.drought = false
+                        state.scene.environment.hazardVisible =false
+                }
+            },
+            bushfire: function() {
+                switch(state.scene.hazard.bushfire){  
+                    case false:
+                        externalEvents.resetHazards()               // Clear any existing hazards
+                        state.scene.hazard.bushfire = 0
+                        scene.els.scene.setAttribute('hazard-bushfire', {intensity: 0})
+                        break
+                    case 0:
+                        scene.els.scene.setAttribute('hazard-bushfire', {intensity: 0.5})
+                        state.scene.hazard.bushfire = 0.5
+                        break
+                    case 0.5:
+                        scene.els.scene.setAttribute('hazard-bushfire', {intensity: 1})
+                        state.scene.hazard.bushfire = 1
+                        break
+                    default:
+                        scene.els.scene.removeAttribute('hazard-bushfire')
+                        externalEvents.changeEnvironment(state.scene.environment.name)
+                        state.scene.hazard.bushfire = false
+                        state.scene.environment.hazardVisible =false
+                }
+            },
+            acidifcation: function() {
+                switch(state.scene.hazard.oceanAcidification){  
+                    case false:
+                        externalEvents.resetHazards()               // Clear any existing hazards
+                        state.scene.hazard.oceanAcidification = 'minor'
+                        scene.els.scene.setAttribute('hazard-ocean-acidification', null)
+                        break
+                    default:
+                        scene.els.scene.removeAttribute('hazard-ocean-acidification')
+                        externalEvents.changeEnvironment('default')
+                        state.scene.hazard.oceanAcidification = false
+                        state.scene.environment.hazardVisible =false
+                }
+            },
+            tropicalStorm: function() {
+                switch(state.scene.hazard.tropicalStorm){  
+                    case false:
+                        externalEvents.resetHazards()               // Clear any existing hazards
+                        externalEvents.changeEnvironment('stormFlood', 2000 )
+                        scene.els.scene.setAttribute('hazard-tropical-storm', null)
+                        scene.els.scene.setAttribute('hazard-wind', {damage: 0.25})
+                        state.scene.hazard.tropicalStorm = 'tropical'
+                        state.scene.hazard.wind = 'major'
+                        break
+                    default:
+                        externalEvents.changeEnvironment(state.scene.environment.name)
+                        scene.els.scene.removeAttribute('hazard-tropical-storm')
+                        scene.els.scene.removeAttribute('hazard-wind')
+                        externalEvents.changeEnvironment('default')
+                        state.scene.hazard.tropicalStorm = false
+                        state.scene.hazard.wind = 'none'
+                        state.scene.environment.hazardVisible = false
+                }
+            },
+            winterStorm: function() {
+                switch(state.scene.hazard.winterStorm){  
+                    case false:
+                        externalEvents.resetHazards()               // Clear any existing hazards
+                        externalEvents.changeEnvironment('snow', 2000 )
+                        scene.els.scene.setAttribute('hazard-winter-storm', {intensity: 'snow'})
+                        state.scene.hazard.winterStorm = 'snow'
+                        state.scene.hazard.snow = true
+                        break
+                    case 'snow':
+                        scene.els.scene.setAttribute('hazard-winter-storm', {intensity: 'blizzard'})
+                        state.scene.hazard.winterStorm = 'bizzard'
+                        break
+                    case 'bizzard':
+                        scene.els.scene.setAttribute('hazard-winter-storm', {intensity: 'iceStorm'})
+                        state.scene.hazard.winterStorm = 'iceStorm'
+                        break
+                    default:
+                        externalEvents.changeEnvironment(state.scene.environment.name)
+                        scene.els.scene.removeAttribute('hazard-winter-storm')
+                        state.scene.hazard.winterStorm = false
+                        state.scene.environment.hazardVisible = false
+                }
+            },
+            earthquake: function() {
+                switch(state.scene.hazard.earthquake){  
+                    case false:
+                        scene.els.scene.setAttribute('hazard-earthquake', {intensity: 10})
+                        break
+                    default:
+                        state.scene.environment.hazardVisible = false
+                }
+            },
+            seaLevelUp: function(){
+                state.scene.hazard.seaLevel = state.scene.hazard.seaLevel + 0.1 
+                scene.els.scene.setAttribute('hazard-sea-level', 'slchange: '+state.scene.hazard.seaLevel )
+            },
+            seaLevelDown: function(){
+                state.scene.hazard.seaLevel = state.scene.hazard.seaLevel - 0.1 
+                scene.els.scene.setAttribute('hazard-sea-level', 'slchange: '+state.scene.hazard.seaLevel )
+            }
         }
     }
 
