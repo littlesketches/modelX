@@ -1,0 +1,433 @@
+/*********************************/
+/*** USER INTERFACE STYLING   ***/
+/*********************************/
+
+    /* MAIN MENUS: SEMI CIRCULAR 'CORNER' ITEM MENUS */
+    .main-menu-container{
+        position: absolute;
+        width: 20vw;
+        z-index: 20;
+    }
+        .main-menu-container.top{ top: 0; }
+        .main-menu-container.bottom{ bottom: 0; }
+        .main-menu-container.left{ left: 0; }
+        .main-menu-container.right{ right: 0; }
+
+    svg.main-menu-svg{ 
+        width: 100%;
+        display: block; 
+        margin: 0 auto; 
+        overflow: visible;
+        transition: all ease-in-out 500ms;
+        transform: translateX(0);
+    }
+        .main-menu-container.left .main-menu-svg.closed { 
+            transform:  translateX(-50%);
+            left: -20vw;
+        }
+        .main-menu-container.right .main-menu-svg.closed { 
+            transform:  translateX(50%);
+        }
+
+    .main-menu-item .menu-sector { 
+        fill: rgba(0, 0, 0, 0.15); 
+        stroke: #fff; 
+        transition: all .1s linear; 
+        cursor: pointer
+    }
+    .main-menu-item.blur {
+        opacity: 0.2;
+    }
+    .main-menu-item.blur:hover {
+        opacity: 1;
+    }
+        .main-menu-item:hover .menu-sector { 
+            fill: rgba(0, 0, 0, 0.3); 
+            opacity: null;
+        }
+    /* Sector items */
+    .main-menu-itemsContainer{
+        transform-origin: 250px 250px;
+        animation: all 500ms
+    }
+        .top .main-menu-itemsContainer{
+            transform: rotate(180deg);
+        }
+        .menu-trigger { 
+            fill: rgba(0, 0, 0, 0.5); 
+            pointer-events: auto;
+        }
+        .menu-trigger-label{
+            transition: all linear 500ms;
+        }
+        .main-menu-svg.closed  #menu-1-label{
+            transform: translateX(25px);
+        }
+        .main-menu-svg.closed  #menu-2-label{
+            transform: translateX(-25px);
+        }
+        .menu-trigger-label{
+            fill: #fff;        
+            font-size: 40px;
+        }
+        .menu-trigger:hover { 
+            cursor: pointer; 
+            fill: rgba(0, 0, 0, 1); 
+        }
+        .main-menu-item.active .menu-1-sector{
+            fill: rgba(0, 0, 0, 0.5); 
+        }
+    /* SVG icons  */
+        .main-menu-item use { 
+            fill: rgba(0, 0, 0, 0.7); 
+        }
+        .main-menu-item:hover use { 
+            fill: #fff; 
+        }
+        .main-menu-item.active use{
+            fill: #fff; 
+        }
+
+    /* RIGHT SIDE DETAILS PANEL*/
+        .details-container{
+            z-index: 30;
+            color: #fff;
+            position: absolute;
+            top: 0vh;
+            right: -30vw;
+            width: 30vw;
+            pointer-events:auto;
+            perspective-origin: right;
+            perspective: 1200px;
+            transition: all ease-in-out 500ms;
+        }
+        .details-container.right{
+            right: -30vw;
+        }
+        .details-container.right.active{
+            right: 0;
+        }
+        .details-content-group{
+            padding: 0.25rem 0.5rem;
+            background: rgba(0, 0, 0, 0.85);
+            color:#fff;
+            padding: 1.5vw  1.5vw 5vh 1.5vw;
+        }
+        .details-header{
+            font-size: 1vw;
+            font-weight: bold;
+            line-height: 1.5;
+        }
+        .details-content-container{
+            font-size: 1vw;
+            line-height: 1.5;
+        }
+        #details-close{
+            font-size: 2rem;
+            cursor: pointer;
+        }
+        #details-close:hover{
+            font-weight: bold;
+        }
+        .details-content{
+            display: none
+        }
+
+    /* LEFT SIDE NARRATIVE PANE / EVENT MENU*/
+        .subMenu-container{
+            color: #fff;
+            position: absolute;
+            top: 10vw;
+            left: -20vw;
+            height: 100vh;
+            width: 20vw;
+            pointer-events:auto;
+            perspective: 1200px;
+            perspective-origin: left;
+            transition: all ease-in-out 500ms;
+        }
+        .subMenu-container.active{
+            left: 0;
+        }
+        .subMenu-main-header{
+            font-size: 2.5vw;
+            font-weight: bold;
+            text-align: center;
+            color: rgba(0, 0, 0, 0.5);
+            transform-origin: 0 0;
+            transition: all ease-in-out 500ms;
+        }
+        .subMenu-main-header.invite{
+            transform: rotateY(45deg);
+        }
+        .subMenu-narrative-container{
+            position: fixed;
+            top: 0;
+            padding: 0.25rem 0.5rem;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 0 1vw 1vw 0;
+            color:#fff;
+            padding: 1.5vw 1.5vw 0.5vw;
+            margin-bottom: 0.25rem;    
+        }
+        .narrative-container{
+            transform: rotateY(-100deg);
+            transform-origin: 0 0;
+            transition: all ease-in-out 500ms;
+        }
+        .narrative-container.show{
+            transform: rotateY(0deg);
+        }
+        .narrative-container.show.invite{
+            transform: rotateY(45deg);
+        }
+        .narrative-container.flipClose{
+            transform: rotateY(100deg);
+        }
+            .subMenu-header{
+                font-size: 1.2vw;
+                font-weight: bold;
+            }
+            .subMenu-text{
+                line-height: 150%;
+                font-size: 1vw;
+            }
+            .subMenu-text ul{
+                padding-inline-start: 1rem;
+                margin-block-start: 0em;
+                margin-block-end: 0em;
+            }
+            .subMenu-text a {
+                color: #fff;
+                text-decoration: underline dotted ;
+            }
+            .subMenu-text a:hover {
+                font-weight: bold;
+                text-decoration: underline solid ;
+            }
+
+        /* Narrative back/forward */
+        .narrative-controls-container{
+            float: right;
+            /* margin-top: -1.5vw; */
+        }
+            .narrative-controls-button {
+                display: inline-flex;
+                align-items: center;
+                font-size: 2vw;
+                cursor: pointer;
+                opacity: 0.7;
+                padding-left: 1vw;
+            }
+            .narrative-controls-button:hover {
+                font-weight: bold;
+                opacity: 1
+            }
+            .narrative-controls-button.close{
+                font-size: 0.8vw;
+            }
+
+        /* Sub menu options */
+        .subMenu-option-container,
+        .subMenu-event-container,
+        .subMenu-emissions-container{
+            cursor: pointer;
+            padding: 0.25rem 0;
+            display: grid;  
+            grid-template-columns: 1fr 3fr;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 0 1vw 1vw 1vw;
+            margin-bottom: 0.25rem;
+            width: 100%;
+        }
+
+        .subMenu-option-container.active,
+        .subMenu-event-container.active,
+        .subMenu-emissions-container.active{
+            font-weight: bold;
+            color: aquamarine;
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        .subMenu-option-container:hover,
+        .subMenu-event-container:hover,
+        .subMenu-emissions-container:hover{
+            font-weight: bold;
+            background: rgba(0, 0, 0, 0.75);
+        }
+
+        .subMenu-option-container.active * use,
+        .subMenu-event-container.active * use,
+        .subMenu-emissions-container.active * use{
+            fill: aquamarine;
+        }
+            .subMenu-option-icon-container.button{
+                cursor: pointer;
+            }
+            .subMenu-option-label{
+                font-size: 0.8vw;
+                font-weight: bold;
+                text-align: center;
+                padding: 0.5vw;
+            }
+            .subMenu-optionGroup-container{
+                padding-bottom: 1rem;
+            }
+            .subMenu-option-container.three-pane,
+            .subMenu-option-container.four-pane{
+                width: 100%;
+                pointer-events: none;
+                background: none;
+            }
+            .subMenu-option-container.three-pane:hover,
+            .subMenu-option-container.four-pane:hover{
+                font-weight: normal;
+                background: null;
+            }
+            .subMenu-option-container.three-pane{
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+            .subMenu-option-container.four-pane{
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+            }
+            #menu-time-timeOfDay-container,
+            #menu-time-clock-container{
+                pointer-events: none;
+            }
+
+            .subMenu-option-container.three-pane :nth-child(1),
+            .subMenu-option-container.four-pane :nth-child(1){
+                grid-area: 1 / 1 / 2 / 2;   
+                align-self: center;
+                pointer-events: auto;
+            }
+            .subMenu-option-container.three-pane :nth-child(2),
+            .subMenu-option-container.four-pane :nth-child(2){
+                grid-area: 1 / 2 / 2 / 3;   
+            }
+            .subMenu-option-container.three-pane :nth-child(3),
+            .subMenu-option-container.four-pane :nth-child(3){
+                grid-area: 1 / 3 / 2 / 4;   
+            }
+            .subMenu-option-container.four-pane :nth-child(4){
+                grid-area: 1 / 4 / 2 / 5;   
+            }
+
+            .subMenu-event-button{
+                cursor: pointer;
+            }
+            .subMenu-option-icon-container,
+            .subMenu-event-icon-container,
+            .subMenu-emissions-icon-container{
+                grid-area: 1 / 1 / 2 / 2;   
+                width: 50%;
+                justify-self: center;
+                align-self: center;
+            }
+                .subMenu-option-icon-container * svg,
+                .subMenu-event-icon-container * svg,
+                .subMenu-emissions-icon-container * svg{
+                    width: 80%
+                }
+                .subMenu-option-icon-container * path,
+                .subMenu-event-icon-container * path,
+                .subMenu-emissions-icon-container * path{
+                    fill: #fff;
+                }
+                .subMenu-option-icon-container * use,
+                .subMenu-event-icon-container * use,
+                .subMenu-emissions-icon-container * use{
+                    fill: #fff;
+                }
+                .clockhand-group{
+                    transform-origin: '50% 50%';
+                }
+                .icon-clockhand{
+                    stroke: #fff;
+                    fill: none;
+                }
+                #clockhand-hour-group{
+                    transform-origin: 50% 50%;
+                    transition: all ease-in-out;	
+                    transition-duration: 2s;
+                }
+                #clockhand-hour-group.hour-0{ transform: rotate(0deg); }
+                #clockhand-hour-group.hour-1{ transform: rotate(30deg); }
+                #clockhand-hour-group.hour-2{ transform: rotate(60deg); }
+                #clockhand-hour-group.hour-3{ transform: rotate(90deg); }
+                #clockhand-hour-group.hour-4{ transform: rotate(120deg); }
+                #clockhand-hour-group.hour-5{ transform: rotate(150deg); }
+                #clockhand-hour-group.hour-6{ transform: rotate(180deg); }
+                #clockhand-hour-group.hour-7{ transform: rotate(210deg); }
+                #clockhand-hour-group.hour-8{ transform: rotate(240deg); }
+                #clockhand-hour-group.hour-9{ transform: rotate(270deg); }
+                #clockhand-hour-group.hour-10{ transform: rotate(300deg); }
+                #clockhand-hour-group.hour-11{ transform: rotate(330deg); }
+                #clockhand-hour-group.hour-12{ transform: rotate(360deg); }
+
+                #clockhand-min-group{
+                    transform-origin: 50% 50%;
+                    transition: all ease-in-out;	  
+                    transition-duration: 2s;
+                }
+                #clockhand-min-group.spinClockwise{ transform: rotate(360deg); }
+                #clockhand-min-group.spinAntiClock{ transform: rotate(-360deg); }
+
+                #menu-time-timeOfDay-label{
+                    text-align: center;
+                }
+                #menu-time-year-container{
+                }
+                #menu-time-year{
+                    text-align: center;
+                    font-size: 2vw;
+                    font-weight: bold;
+                }
+                #menu-time-year-label{
+                    text-align: center;
+                    font-size: 0.65vw;
+                }
+            .subMenu-event-label,
+            .subMenu-emissions-label{
+                grid-area: 1 / 2 / 2 / 3;
+                font-size: 1vw;
+                align-self: center;
+            }
+                .subMenu-event-label.upDown{        /* Option for sea level change */
+                    display: grid;      
+                    grid-template-columns: 3fr 1fr
+                }
+            .subMenu-event-label.left{
+                grid-area: 1 / 1 / 2 / 2;
+                text-align: center;
+                cursor: pointer;
+            }
+            .subMenu-event-label.right{
+                grid-area: 1 / 3 / 2 / 4;
+                text-align: center;
+                cursor: pointer;
+            }
+            .subMenu-event-label-upDown{
+                align-self: center;
+            }
+            .subMenu-event-UpDown-container{
+                grid-area: 1 / 2 / 2 / 3;  
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
+                .subMenu-event-button.up{
+                    font-size: 1rem;
+                    font-weight: bold;
+                    grid-area: 1 / 2 / 2 / 3;
+                    text-align: center;
+                }
+                .subMenu-event-button.down{
+                    font-size: 1rem;
+                    font-weight: bold;
+                    grid-area: 1 / 1 / 2 / 2;
+                    text-align: center;
+                }   
+        .subMenu-icon-label{
+            font-size: 0.65vw;
+            text-align: center;
+        }

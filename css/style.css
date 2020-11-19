@@ -2,10 +2,22 @@ body{
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
    font-weight: 300;
 }
+
+sup, sub {
+    vertical-align: baseline;
+    position: relative;
+    top: -0.4em;
+}
+sub { 
+    top: 0.4em; 
+}
+
 #scene{
     z-index: 0;
 }
-
+.hidden{
+    display: none !important;
+}
 #flat-ui-container{
     z-index: 1;
     position: absolute;
@@ -16,14 +28,93 @@ body{
     display: grid;
     pointer-events: none;
 }
+.noPointerEvents{
+    pointer-events: none;
+}
 
+
+/* LOADER */
+    #loader-container{
+        display:            grid;
+        position:           absolute;
+        top:                0;
+        left:               0;
+        width:              100vw;
+        height:             100vh;
+        z-index:            10;
+        cursor:             auto;
+    }
+    #loader-background{
+        position:           absolute;
+        top:                0;
+        left:               0;
+        width:              100vw;
+        height:             100vh;
+        transition:         backdrop-filter ease-in-out 3000ms;
+        backdrop-filter:    blur(0px) contrast(100%);
+    }
+    #loader-background.active{
+        backdrop-filter:     blur(40px) contrast(60%);
+    }
+    #loader-intro{
+        position:           relative;
+        background:        rgba(0, 0, 0, 0.3);
+        border-radius:      2vw;
+        border:             2.5px solid #fff;
+        color:             #fff;
+        width:              50vw;
+        height:             50vh;
+        align-self:         center;
+        justify-self:       center;
+        z-index:            30;
+    }
+        #loader-subHeader{
+            font-size:          1vw;
+            font-weight:        bold;
+            text-align:         center;
+            padding-top:        1vw;
+        }
+        #loader-header{
+            font-size:          2.5vw;
+            font-weight:        bold;
+            text-align:         center;
+            padding-top:        0.25vw;
+            padding-bottom:     1vw;
+        }
+        .loader-text{
+            font-size:          1vw;
+            line-height:        1.5;
+            padding:            1vw;
+            margin-bottom:      2vw;
+        }
+        .loader-button{
+            bottom: 5%;
+            margin: 0 auto;
+            font-size: 1vw;
+            font-weight: bold;
+            line-height: 1.5;
+            padding: 1vw;
+            width: 25vw;
+            background: #45b8bf;
+            color: #fff;
+            text-align: center;
+            border-radius: 2rem;
+            stroke: rgba(255, 255, 255, 0.2);
+            stroke-width: 0.5px;
+            cursor: pointer;
+            /* -webkit-filter: drop-shadow(4px 4px 6px rgba(217, 221, 200, 1)) drop-shadow(-2px -2px 2px rgba(255, 255, 255, 0.83));      
+            filter: drop-shadow(4px 4px 4px rgba(217, 221, 200, 1)) drop-shadow(-2px -2px 4px rgba(255, 255, 255, 0.83)); 	 */
+        }
+        .loader-button.ready{
+            cursor: pointer;
+        }
 /* INTERACTION SHORTUT MENU */
     #shortcuts{
         justify-self: center;
         align-self: center;
         display: grid;
         color: #404040;
-        width: 50vw;
+        width: 80vw;
         height: 80vh;
         border-radius: 2vw;
         grid-template-columns: 50% 50% ;
@@ -50,7 +141,6 @@ body{
             justify-self: center;
             padding: 0.5rem;
         }
-
         .shortcuts-subHeader{
             grid-area: 1 / 1 / 2 / 3;
             font-size: 1.25rem;
@@ -64,7 +154,6 @@ body{
             grid-area: 2 / 1 / 3 / 2;
             margin: 1rem 0rem;
         }
-
         #key-shortcuts-right{
             grid-area: 2 / 2 / 3 / 3;
             margin: 1rem 0rem;
@@ -74,7 +163,7 @@ body{
         .key-shortcut-container{
             display: grid;
             grid-template-columns: 1fr 4fr ;
-            margin: 0.5rem;
+            margin: 1rem;
         }
             .key-shortcut{
                 font-size: 1rem;
@@ -108,6 +197,7 @@ body{
                 overflow: hidden;
                 display: grid;
                 grid-template-columns: 1fr 1fr 1fr ;
+                pointer-events: none;
             }
                 /* THREE SUBPANES:  Header |  Summary  | Stats */
                 #tooltip-header-container{
@@ -121,6 +211,7 @@ body{
                         justify-self: center;
                         padding: 0.5rem;
                     }
+
                 .tooltip-subheader{
                     font-size: 1.75rem;
                     padding: 0.5rem 0rem;
@@ -149,8 +240,6 @@ body{
                         .tooltip-stat-unit{
                             grid-area: 1 / 3 / 2 / 4;
                         }
-
-
 
 @keyframes showElement {
   0%   {opacity: 0}
