@@ -13,10 +13,11 @@
 		<link rel="stylesheet" type="text/css" href="css/ui.css" />
 
         <!-- <script src="js/aframe.min.js"></script> -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js" integrity="sha512-IQLehpLoVS4fNzl7IfH8Iowfm5+RiMGtHykgZJl9AWMgqx0AmJ6cRWcB+GaGVtIsnC4voMfm8f2vwtY+6oPjpQ==" crossorigin="anonymous"></script>
-        <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
         <script src="js/data.js"></script>   
         <script src="js/app.js"></script>   
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js" integrity="sha512-IQLehpLoVS4fNzl7IfH8Iowfm5+RiMGtHykgZJl9AWMgqx0AmJ6cRWcB+GaGVtIsnC4voMfm8f2vwtY+6oPjpQ==" crossorigin="anonymous"></script>
+        <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+        <script src="js/ui.js"></script>   
         <script src="js/components.js"></script>   
         <script src="js/aframe-extras.min.js"></script>
         <script src="js/aframe-environment-component.min.js"></script>      
@@ -29,7 +30,6 @@
         <script src="js/aframe-orbit-controls.min.js"></script>
         <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
         <script src="https://unpkg.com/aframe-tooltip-component/dist/aframe-tooltip-component.min.js"></script>
-        <!-- <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script> -->
         <!-- <script src="https://github.com/ngokevin/aframe-physics-components/blob/master/dist/aframe-physics-components.min.js"></script>  -->
         <!-- <script src="https://unpkg.com/aframe-toggle-controls-component/dist/aframe-toggle-controls-component.min.js"></script>  -->
         <!-- <script src="https://unpkg.com/aframe-lines@^1.0.0/lines.js"></script> -->
@@ -44,35 +44,20 @@
                 <div id="loader-subHeader">Welcome to the</div>
                 <div id="loader-header">Kingdom of Dreams and Madness</div>
                 <div class = "loader-text">
-                    Home is where I want to be.
-                    Pick me up and turn me around.
-                    I feel numb, born with a weak heart.
-                    I guess I must be having fun.
-                    The less we say about it the better.
-                    Make it up as we go along.
-                    Feet on the ground, head in the sky.
-                    It's okay, I know nothing's wrong, nothing.
-                    Oh! I got plenty of time.
-                    Oh! You got light in your eyes.
-                    And you're standing here beside me.
-                    I love the passing of time.
-                    Never for money, always for love.
-                    Cover up and say goodnight, say goodnight.
-                    Home, is where I want to be.
-                    But I guess I'm already there.
-                    I come home, she lifted up her wings.
-                    I guess that this must be the place.
-                    I can't tell one from the other.
-                    Did I find you, or you find me?
-                    There was a time before we were born.
-                    If someone asks, this is where I'll be, where I'll be oh!
+                    <p>This is a speculative project that (further) explores the creation a new medium to help us think about exceedingly complex, urgent problems.
+                        The project centers on providing people with an interactive, virtual world to explore and experiment with.
+                        The world itself is a tangible representation of a 'model world': one whose characteristics of interest are is simulated in a connected mathematical model of the world.
+                        The marriage of visual and simulation-orientated models is the foundation for a new type of dynamic medium, that is accessible from the humble web browser.</p>
+                    <p>This project scratches the surface of new narrative opportunities, some which play around with new(ish) web technologies. 
+                        More ideas will be explored and added.
+                        The hope is that this new dynamic medium inspires radically different kinds of authorship that enables content and narrative to be brought to life, and in a form that activates fresh, unburdened and enlightened ways of thinking... </p> 
                 </div>
                 <div id="loader-button" class = "loader-button">Building the world. One moment please...</div>
-
             </div>
         </div>
+
         <!-- UI MENUS AND NARRATIVE PANES -->
-        <div id="flat-ui-container">
+        <div id="flat-ui-container">        
             <!-- Climate change menu (top left) -->
             <div id="menu-1-container" class="main-menu-container top left">
                 <svg id="menu-1" class="main-menu-svg closed" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-20 250 540 250" >
@@ -131,7 +116,7 @@
             <!-- Information mode menu (bottom left) -->
             <div id="menu-3-container"></div>
 
-            <!--  Left Pane: Climate change story 'flip book' -->
+            <!--  LEFT INFO AND CONTROLS PANE: Climate change story 'flip book' -->
             <div id="subMenu-world" class="subMenu-container">    
                 <div class="subMenu-main-header">Serious play</div>
 
@@ -196,7 +181,7 @@
                                         Its also common for people to live in cities, usually in more compact dwellings like townhouses and apartments.</p>
                                     <p>The density of activity means that urban areas require a most energy during the day when workers and shoppers come in.
                                         Commercial buildings do use quite a lot of energy - particularly for powering refrigeration, lighting, and heating, cooling and ventilation (HVAC) services.
-                                        Specialised facilities like hospitals, which operate 24 hours a day with specialised equipment and HVAC requirements, tend to use even more energy, even on a per area basis.
+                                        Facilities like hospitals, which operate 24 hours a day with specialised equipment and HVAC requirements, tend to use even more energy, even on a per area basis.
                                     <P>Overall though, because there are so many commercial businesses in Kodam, the their buildings consume almost 30% of Kodam's total energy demand. 
                                         This energy is mostly electricity, but also includes natural gas, and a bit some bottled LPG and firewood.
                                     <p>Transport: As the center of commerce the urban zone is also well linked to transport hubs and infrastructure that support private, public and freight transport by rail, air and sea.
@@ -214,8 +199,7 @@
                                 <div class="details-content">
                                     <p>Over here we have a built up, residential area. 
                                         The landscape is dominated by rows of households, each with their own little plot of land. 
-                                        The are is more community and family orientated, and is surrounded by community institutions like schools, parklands, places of recreation  and worship.
-                                    </p>
+                                        The are is more community and family orientated, and is surrounded by community institutions like schools, parklands, places of recreation  and worship.</p>
                                     <p>At home, citizens do just what we do at home.
                                         They store, prepare and cook using kitchen appliances (and then eat!)
                                         They keep themselves comfortable and clean, using appliances like air conditioners, fans, heaters, fireplaces, and hot water systems.
@@ -226,14 +210,12 @@
                                     <p> How much of these things each household does - the level of these activities - varies household to household, and is quite unique to the demographic of their occupants. 
                                         Working couples and families with school children for example, tend to be unoccupied during the day, while elderly retired folk are more likely to be home more of the time.    
                                         Big families and share houses will simply tend to just do more stuff, and also consume more.          
-                                        We can also see that homes come in different sizes, which is a bit of clue as to how many people might live in them.                          
-                                    </p>
+                                        We can also see that homes come in different sizes, which is a bit of clue as to how many people might live in them. </p>
                                     <p> There are however, quite a few important characteristics of homes that are hard to tell from the outside (at least in Kodam!).
                                         For example, the age of a home might interest because it can reveal clues about how it might have been constructed and with what materials and insulation.
                                         Its also hard to tell if the homes occupants own the home, or might be renting it.
                                         These might seem like like quite obtuse concerns right now, but they help us understand some technical limitations and willingness to improve the energy performance of these buildings. 
-                                        In these cases, we can better understand the thermal performance and opportunities improvement, and whether there are incentives for the owners and/or renters to invest in energy upgrades to the building.
-                                    </p>
+                                        In these cases, we can better understand the thermal performance and opportunities improvement, and whether there are incentives for the owners and/or renters to invest in energy upgrades to the building. </p>
                                     <p>The adults living in these homes often own a motor vehicle. 
                                         In Kodam each home has on average, 1.5 cars! 
                                         Cars are used to travel around: to work, school, the shops etc.
@@ -293,9 +275,7 @@
                                     <p>Fishing is both a recreational and commercial activity that expands Kodam's food bowl to include all sorts of fish and crustaceans!</p>
                                     <p>The ocean also provides access for ships that might carry freight or even passengers to other lands.</p>
                                     <p>Closer to shore, the vastness of the ocean might also mean its possible to install clean energy infrastructure like offshore wind, or even some newer technologies like tidal energy.
-                                        Blue carbon projects on coastal wetlands are another new and developing that could help to combat climate change.
-                                    </p>
-
+                                        Blue carbon projects on coastal wetlands are another new and developing that could help to combat climate change.</p>
                                 </div>
                             </div>
                             <div id="tour-zone-transport" class="subMenu-event-container">               
@@ -354,7 +334,6 @@
                                     </p>
                                 </div>
                             </div>
-
                         </div>
                         <div class="narrative-controls-container">
                             <div class="narrative-controls-button back">&larr;</div>
@@ -554,25 +533,25 @@
                             <div class = "subMenu-optionGroup-container">
                                 <div class="subMenu-option-label">Change the time of year</div>
                                 <div class="subMenu-option-container four-pane">   
-                                    <div id="menu-time-summer" class = "subMenu-event-label subMenu-event-icon-container">
+                                    <div id="menu-time-summer" class = "subMenu-event-label subMenu-event-icon-container season">
                                         <svg viewBox="0 0 50 50">
                                             <use xlink:href="#icon-summer"></use>
                                         </svg>
                                         <div class="subMenu-icon-label">Summer</div>
                                     </div>
-                                    <div id="menu-time-autumn" class = "subMenu-event-label subMenu-event-icon-container">
+                                    <div id="menu-time-autumn" class = "subMenu-event-label subMenu-event-icon-container season">
                                         <svg viewBox="0 0 50 50">
                                             <use xlink:href="#icon-autumn"></use>
                                         </svg>
                                         <div class="subMenu-icon-label">Autumn</div>
                                     </div>
-                                    <div id="menu-time-winter" class = "subMenu-event-label right subMenu-event-icon-container">
+                                    <div id="menu-time-winter" class = "subMenu-event-label right subMenu-event-icon-container season">
                                         <svg viewBox="0 0 50 50">
                                             <use xlink:href="#icon-winter"></use>
                                         </svg>
                                         <div class="subMenu-icon-label">Winter</div>
                                     </div>
-                                    <div id="menu-time-spring" class = "subMenu-event-label right subMenu-event-icon-container">
+                                    <div id="menu-time-spring" class = "subMenu-event-label right subMenu-event-icon-container season">
                                         <svg viewBox="0 0 50 50">
                                             <use xlink:href="#icon-spring"></use>
                                         </svg>
@@ -582,22 +561,38 @@
                             </div>
                             <div class = "subMenu-optionGroup-container">
                                 <div class="subMenu-option-label">Change the year</div>
-                                <div class="subMenu-option-container three-pane">   
-                                    <div id="menu-time-back" class = "subMenu-option-icon-container button">
-                                        <svg viewBox="0 0 50 50">
-                                            <use xlink:href="#icon-back-arrow"></use>
+                                <div class="subMenu-option-container five-pane">   
+                                    <div  class = "subMenu-option-year-container button"  delta="-10">
+                                        <svg id="menu-time-back-decade" class="year-button-icon" viewBox="0 0 50 50">
+                                            <circle r="20" cx="25" cy="25" class="year-button-circle"></circle>
+                                            <text x="25" y ="25" class="year-button-number">-10</text>
+                                            <text x="25" y ="35"  class="year-button-label">years</text>
                                         </svg>
-                                        <div class="subMenu-icon-label">Back</div>
+                                    </div>
+                                    <div class = "subMenu-option-year-container button"  delta="-1" >
+                                        <svg id="menu-time-back-year" class="year-button-icon" viewBox="0 0 50 50">
+                                            <circle r="20" cx="25" cy="25" class="year-button-circle"></circle>
+                                            <text x="25" y ="25" class="year-button-number">-1</text>
+                                            <text x="25" y ="35"  class="year-button-label">year</text>
+                                        </svg>
                                     </div>
                                     <div id='menu-time-year-container'>
                                         <div id='menu-time-year'>2020</div>
-                                        <div id="menu-time-year-label" class="subMenu-icon-label">A year to forget..</div>
+                                        <div id="menu-time-year-label" class="subMenu-icon-label hidden">A year to forget..</div>
                                     </div>
-                                    <div id="menu-time-forward" class = "subMenu-option-icon-container button">
-                                        <svg viewBox="0 0 50 50">
-                                            <use xlink:href="#icon-forward-arrow"></use>
+                                    <div class = "subMenu-option-year-container button" delta="1" >
+                                        <svg id="menu-time-forward-year" class="year-button-icon" viewBox="0 0 50 50">
+                                            <circle r="20" cx="25" cy="25" class="year-button-circle"></circle>
+                                            <text x="25" y ="25" class="year-button-number">+1</text>
+                                            <text x="25" y ="35"  class="year-button-label">year</text>
                                         </svg>
-                                        <div class="subMenu-icon-label">Forward</div>
+                                    </div>
+                                    <div class = "subMenu-option-year-container button" delta="10">
+                                        <svg id="menu-time-forward-decade" class="year-button-icon" viewBox="0 0 50 50">
+                                            <circle r="20" cx="25" cy="25" class="year-button-circle"></circle>
+                                            <text x="25" y ="25" class="year-button-number">+10</text>
+                                            <text x="25" y ="35"  class="year-button-label">years</text>
+                                        </svg>
                                     </div>
                                 </div>
                             </div>
@@ -692,7 +687,7 @@
                             </p>Tap on any of the hazards to see how they impact Kodam.</p>
                         </div>
                         <div class = "event-options-container">
-                            <div id="menu-heat" class="subMenu-event-container">               
+                            <div id="menu-heat" class="subMenu-event-container climate-risk">               
                                 <div class = "subMenu-event-label">Hot days and heatwave</div>
                                 <div class = "subMenu-event-icon-container">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
@@ -709,7 +704,7 @@
                                     <p>Tap the Hot days and heatwave button again <span class="details-button">(or here)</span> to change the intensity of the heat event.</p>
                                 </div>
                             </div>
-                            <div id="menu-drought" class="subMenu-event-container">               
+                            <div id="menu-drought" class="subMenu-event-container climate-risk">               
                                 <div class = "subMenu-event-label">Drought</div>
                                 <div class = "subMenu-event-icon-container">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
@@ -727,7 +722,7 @@
                                     <p>Tap the Drought button again <span class="details-button">(or here)</span> to change the intensity of the drought event.</p>
                                 </div>
                             </div>
-                            <div id="menu-desertification" class="subMenu-event-container">               
+                            <div id="menu-desertification" class="subMenu-event-container climate-risk">               
                                 <div class = "subMenu-event-label">Desertification</div>
                                 <div class = "subMenu-event-icon-container">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
@@ -739,7 +734,7 @@
                                     <p>Tap the Desertification button again <span class="details-button">(or here)</span> to change the intensity of the desertification event.</p>
                                 </div>
                             </div>
-                            <div id="menu-bushfire" class="subMenu-event-container">               
+                            <div id="menu-bushfire" class="subMenu-event-container climate-risk">               
                                 <div class = "subMenu-event-label">Bushfire</div>
                                 <div class = "subMenu-event-icon-container">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
@@ -754,12 +749,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="subMenu-event-container">               
+                            <div class="subMenu-event-container climate-risk">               
                                 <div class = "subMenu-event-label upDown">
                                     <div class = "subMenu-event-label-upDown">Sea Level Change</div>
                                     <div class = "menu-event-upDown-container">
-                                        <div id="menu-SLup"class = "menu-event-button up">+</div>
-                                        <div id="menu-SLdown" class = "menu-event-button down">-</div>                   
+                                        <div id="menu-seaLevelUp"class = "menu-event-button up">+</div>
+                                        <div id="menu-seaLevelDown" class = "menu-event-button down">-</div>                   
                                     </div>                   
                                 </div>
                                 <div class = "subMenu-event-icon-container">
@@ -777,7 +772,7 @@
                                     <p>Tap the the Sea Level Chang "+"" and "-" buttons  or <span class="details-button">here (+))</span>  and <span class="details-button">here (-)</span> to change the sea level araound Kodam.</p>
                                 </div>
                             </div>
-                            <div id="menu-acidification" class="subMenu-event-container">               
+                            <div id="menu-acidification" class="subMenu-event-container climate-risk">               
                                 <div class = "subMenu-event-label">Ocean acidification</div>
                                 <div class = "subMenu-event-icon-container">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
@@ -806,7 +801,7 @@
                             </p>Tap on any of the hazards to see how they impact Kodam.</p>
                         </div>
                         <div class = "event-options-container">
-                            <div id="menu-stormFlood" class="subMenu-event-container">               
+                            <div id="menu-stormFlood" class="subMenu-event-container climate-risk">               
                                 <div class = "subMenu-event-label">Storms and floods</div>
                                 <div class = "subMenu-event-icon-container">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
@@ -821,7 +816,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="menu-mudLandslides" class="subMenu-event-container">               
+                            <div id="menu-mudLandslides" class="subMenu-event-container climate-risk">               
                                 <div class = "subMenu-event-label">Land and mudslides</div>
                                 <div class = "subMenu-event-icon-container">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
@@ -835,7 +830,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="menu-stormWind" class="subMenu-event-container">               
+                            <div id="menu-stormWind" class="subMenu-event-container climate-risk">               
                                 <div class = "subMenu-event-label">Extreme wind events</div>
                                 <div class = "subMenu-event-icon-container">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
@@ -849,7 +844,7 @@
                                     </div> 
                                </div>
                             </div>
-                            <div id="menu-tropicalStorm" class="subMenu-event-container">        
+                            <div id="menu-tropicalStorm" class="subMenu-event-container climate-risk">        
                                 <div class = "subMenu-event-label">Tropical storm</div>       
                                 <div class = "subMenu-event-icon-container">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
@@ -863,7 +858,7 @@
                                     </div> 
                                 </div>
                             </div>
-                            <div id="menu-winterStorm" class="subMenu-event-container">   
+                            <div id="menu-winterStorm" class="subMenu-event-container climate-risk">   
                                 <div class = "subMenu-event-label">Winter storm</div>            
                                 <div class = "subMenu-event-icon-container">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
@@ -1454,6 +1449,7 @@
                         </div> 
                     </div>
                 </div>
+
                 <div id="narrative-emissions-11" class="narrative-container emissions">
                     <div class="subMenu-narrative-container"> 
                         <div class="subMenu-header">Emissions Scope</div>
@@ -1677,11 +1673,17 @@
             </div>
 
             <!--  Right: Details pane -->
-            <div id="details-pane-right" class="details-container right">    
+            <div id="details-pane-right" class="details-container right preview">    
                 <div class="details-content-group">
-                    <div id ="details-header-right" class="details-header"></div>
+                    <div class="details-header-container">
+                        <div id ="details-header-right" class="details-header"></div>
+                        <div id ="details-close-right" class="details-close">&otimes;</div>
+                    </div>
+                    <div id="details-intensity-container" class = "hidden"></div> 
                     <div id ="details-content-right" class="details-content-container"></div>
-                    <div id ="details-close-right" class="details-close">&rarr;</div>
+                    <div id="details-right-more" class="details-more-container">
+                        <div id="details-more-label">&#8618; Read more</div>                        
+                    </div>
                 </div>
             </div>
 
@@ -1836,10 +1838,13 @@
 
         <!-- AFRAME SCENE-->
         <a-scene id="scene" renderer="antialias: true"
-                setup add-external-listeners 
-                position-sun sail-duck
                 vr-mode-ui="enabled: false"
                 fog="type: linear"
+                init-elements 
+                add-external-listeners
+                set-environment
+                set-hourly-environment
+                sail-duck
             > 
 
             <!-- ASSETS: MIXINS, MODELS AND TEMPLATES-->
@@ -1998,11 +2003,7 @@
                         <a-mixin id="col-fountain"              material='color: #f5f5dc'></a-mixin>
                         <a-mixin id="col-fountain-water"        material='color: aqua; opacity: 0.9'></a-mixin>
                     <!-- Emissions features-->
-                        <a-mixin id="col-balloon-black"         material='color: #282828; flatShading: true'></a-mixin>
-                        <a-mixin id="col-balloon-brown"         material='color: #3d3635; flatShading: true'></a-mixin>
-                        <a-mixin id="col-balloon-white"         material='color: #fff; flatShading: true'></a-mixin>
-                        <a-mixin id="col-balloon-green"         material='color: #66ff00; flatShading: true'></a-mixin>
-                        <a-mixin id="col-balloon-magenta"        material='color: #ff1dce; flatShading: true'></a-mixin>
+                        <a-mixin id="col-balloon"         material='flatShading: true'></a-mixin>
                         <a-mixin id="col-string-black"          material='shader: line; color: #000; opacity: 0.5'></a-mixin>
                     <!-- Topography -->
                         <a-mixin id="col-snow" 	                material='color: #fff'></a-mixin>
@@ -4310,7 +4311,7 @@
 
                     <!-- Emissions elements-->
                     <script id="tmp-balloon"  type="text/html" >
-                        <a-entity class="balloon" mixin ="${col}" position="${balloonpos}" scale="${balloonscale}" buffer-geometry-merger>
+                        <a-entity class="balloon" mixin ="${mixin}" material="color: ${matcol}" position="${balloonpos}" scale="${balloonscale}" buffer-geometry-merger>
                             <a-sphere geometry="phiLength: 180; segmentsHeight: 8; segmentsWidth: 8" rotation="-90 0 0"></a-sphere>
                             <a-sphere geometry="phiLength: 180; segmentsHeight: 8; segmentsWidth: 8" rotation="90 0 0" scale="1 1 2"></a-sphere>
                             <a-cone position="0 -2 0" geometry="segmentsHeight: 8; height: 0.3; radiusBottom: 0.2"></a-cone>
@@ -4476,11 +4477,12 @@
             <!-- CAMERAS-->
             <a-entity id="camera-group">
                 <a-entity id="lowcam-rig" rotation="0 0 0"  position="0 5 0" >
-                    <a-entity id="lowcam" rotation="0 0 0" camera="active: false; fov: 50" orbit-controls="enabled: true; initialPosition: 0 150 0; maxPolarAngle: 90"></a-entity>
+                    <a-entity id="lowcam" rotation="0 0 0" camera="active: false; fov: 45" orbit-controls="enabled: true; initialPosition: 0 50 0; maxPolarAngle: 90; target: 0 10 0"></a-entity>
                 </a-entity>
-                <a-entity id="flycam-rig" position="180 60 0" rotation="-10 90 0"  >
-                    <a-entity id="flycam" camera="active: true; fov: 45; zoom: 0.9; near: 0.1" look-controls wasd-controls="acceleration: 150, enabled: true"></a-entity>
+                <a-entity id="flycam-rig" position="180 60 0" rotation="-10 90 0" >
+                    <a-entity id="flycam" camera="active: true; fov: 45; zoom: 0.9; near: 0.1" look-controls wasd-controls="acceleration: 150, enabled: true" ></a-entity>
                 </a-entity> 
+
             </a-entity>
 
             <!-- ANNOTATION-->
@@ -9460,6 +9462,7 @@
                         </a-entity>
                     </a-entity><!-- End of Other Zone-->
                 </a-entity><!-- End of features by zone groups-->
+
             </a-entity><!-- End of planet group-->
         </a-scene>
 
@@ -9467,7 +9470,6 @@
         <script>
             externalEvents.addTouchUI()
             document.getElementById('clockhand-hour-group').setAttribute('class', 'hour-'+(state.scene.time.hour%12))
-
         </script>
     </body>
 </html> 
