@@ -92,6 +92,7 @@
         .details-container{
             z-index: 30;
             color: #fff;
+            cursor: auto;
             position: absolute;
             top: 0vh;
             right: -30vw;
@@ -99,40 +100,99 @@
             pointer-events:auto;
             perspective-origin: right;
             perspective: 1200px;
+            height: auto;
             transition: all ease-in-out 500ms;
         }
+            .details-container.no-transition{
+                transition: all ease-in-out 200ms;
+            }
         .details-container.right{
             right: -30vw;
+        }
+        .details-container.right.preview{
+            height: 25vh;
+            overflow: hidden;
         }
         .details-container.right.active{
             right: 0;
         }
         .details-content-group{
             padding: 0.25rem 0.5rem;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgb(25, 25, 25);
             color:#fff;
-            padding: 1.5vw  1.5vw 5vh 1.5vw;
+            padding: 0.75vw  1.5vw 5vh 1.5vw;
         }
-        .details-header{
-            font-size: 1vw;
-            font-weight: bold;
-            line-height: 1.5;
+        .details-header-container{
         }
+            .details-header{
+                display: inline-block;
+                padding: 0.5vw 0;
+                font-size: 1.5vw;
+                font-weight: bold;
+                line-height: 1.25;
+            }
+            #details-close-right{
+                display: inline-block;
+                float:  right;
+                font-size: 2vw;
+                cursor: pointer;
+            }
+            #details-close-right:hover{
+                font-weight: bold;
+            }
         .details-content-container{
             font-size: 1vw;
             line-height: 1.5;
         }
-        #details-close{
-            font-size: 2rem;
-            cursor: pointer;
-        }
-        #details-close:hover{
-            font-weight: bold;
-        }
         .details-content{
             display: none
         }
-
+        .details-more-container{
+            position: absolute;
+            top: 17.5vh;
+            width: calc(100% - 3vw);
+            height: 7.5vh;
+            background: linear-gradient(to bottom,  
+                rgba(25, 25, 25, 0) 0%,  
+                rgba(25, 25, 25, 0.75) 25%,  
+                rgba(25, 25, 25, 1) 100%
+            ); 
+            margin-left: -1.5vw;
+            padding: 0vw 1.5vw;
+            transition: all ease-in-out 50ms;
+        }
+            .details-more-container.hide{
+                opacity: 0;
+                top: 25vh;
+                pointer-events: none;
+            }
+        #details-more-label{
+            display: inline-block;
+            line-height: 5vw;
+            cursor: pointer;
+            font-size: 1vw;
+            text-decoration: underline dotted;
+        }
+        #details-more-label{
+            float: left
+        }
+        .details-intensity-button{  
+            display: inline-block;
+            padding: 0rem 1rem 0rem 0rem;
+            cursor: pointer;
+            font-size: 1vw;
+            text-decoration: underline dotted;
+        }
+        .details-intensity-button.active{  
+            font-weight: bold;
+            text-decoration: none;
+        }
+            .details-more-label:hover,
+            .details-intensity-button:hover{  
+                font-weight: bold;
+                text-decoration: underline solid;
+            }
+      
     /* LEFT SIDE NARRATIVE PANE / EVENT MENU*/
         .subMenu-container{
             color: #fff;
@@ -274,13 +334,15 @@
                 padding-bottom: 1rem;
             }
             .subMenu-option-container.three-pane,
-            .subMenu-option-container.four-pane{
+            .subMenu-option-container.four-pane,
+            .subMenu-option-container.five-pane{
                 width: 100%;
                 pointer-events: none;
                 background: none;
             }
             .subMenu-option-container.three-pane:hover,
-            .subMenu-option-container.four-pane:hover{
+            .subMenu-option-container.four-pane:hover,
+            .subMenu-option-container.five-pane:hover{
                 font-weight: normal;
                 background: null;
             }
@@ -290,27 +352,36 @@
             .subMenu-option-container.four-pane{
                 grid-template-columns: 1fr 1fr 1fr 1fr;
             }
+            .subMenu-option-container.five-pane{
+                grid-template-columns: 0.5fr 0.5fr 1fr 0.5fr 0.5fr;
+            }
             #menu-time-timeOfDay-container,
-            #menu-time-clock-container{
+            #menu-time-clock-container,
+            #menu-time-year-container{
                 pointer-events: none;
             }
 
             .subMenu-option-container.three-pane :nth-child(1),
-            .subMenu-option-container.four-pane :nth-child(1){
+            .subMenu-option-container.four-pane :nth-child(1),
+            .subMenu-option-container.five-pane :nth-child(1){
                 grid-area: 1 / 1 / 2 / 2;   
-                align-self: center;
-                pointer-events: auto;
             }
             .subMenu-option-container.three-pane :nth-child(2),
-            .subMenu-option-container.four-pane :nth-child(2){
+            .subMenu-option-container.four-pane :nth-child(2),
+            .subMenu-option-container.five-pane :nth-child(2){
                 grid-area: 1 / 2 / 2 / 3;   
             }
             .subMenu-option-container.three-pane :nth-child(3),
-            .subMenu-option-container.four-pane :nth-child(3){
+            .subMenu-option-container.four-pane :nth-child(3),
+            .subMenu-option-container.five-pane :nth-child(3){
                 grid-area: 1 / 3 / 2 / 4;   
             }
-            .subMenu-option-container.four-pane :nth-child(4){
+            .subMenu-option-container.four-pane :nth-child(4),
+            .subMenu-option-container.five-pane :nth-child(4){
                 grid-area: 1 / 4 / 2 / 5;   
+            }
+            .subMenu-option-container.five-pane :nth-child(5){
+                grid-area: 1 / 5 / 2 / 6;   
             }
 
             .subMenu-event-button{
@@ -318,11 +389,24 @@
             }
             .subMenu-option-icon-container,
             .subMenu-event-icon-container,
+            .subMenu-option-year-container,
             .subMenu-emissions-icon-container{
                 grid-area: 1 / 1 / 2 / 2;   
                 width: 50%;
                 justify-self: center;
                 align-self: center;
+            }
+            .subMenu-event-icon-container.season{
+                opacity: 0.5;
+                cursor: pointer
+            }
+            .subMenu-event-icon-container.season:hover{
+                opacity: 0.7;
+                cursor: pointer
+            }
+            .subMenu-event-icon-container.season.active{
+                opacity: 1;
+                cursor: pointer
             }
                 .subMenu-option-icon-container * svg,
                 .subMenu-event-icon-container * svg,
@@ -380,13 +464,51 @@
                 }
                 #menu-time-year{
                     text-align: center;
-                    font-size: 2vw;
+                    font-size: 2.25vw;
                     font-weight: bold;
+                    text-stroke: #fff 1.5px;
+                    -webkit-text-stroke: #fff 1.15px;
+                    color: rgba(0,0,0,0);
+                    padding-bottom: 0.25rem;
                 }
                 #menu-time-year-label{
                     text-align: center;
                     font-size: 0.65vw;
                 }
+
+            .subMenu-option-year-container{
+                width: 80%;
+            }
+            svg.year-button-icon{
+                pointer-events: bounding-box;
+                cursor: pointer;
+                pointer-events: auto;
+            }
+                .year-button-circle{
+                    fill: none;
+                    stroke: #fff;
+                    stroke-width: 1.5px;
+                }
+                .year-button-number,
+                .year-button-label{
+                    text-anchor: middle;
+                    fill: #fff;
+                }
+                .year-button-number{
+                    font-size: 18px;
+                }
+                .year-button-label{
+                    font-size: 10px;
+                }
+
+                .subMenu-option-year-container:hover .year-button-circle {
+                    fill: #fff;
+                }
+                .subMenu-option-year-container:hover  .year-button-number,
+                .subMenu-option-year-container:hover  .year-button-label {
+                    fill: #000;
+                }
+
             .subMenu-event-label,
             .subMenu-emissions-label{
                 grid-area: 1 / 2 / 2 / 3;
