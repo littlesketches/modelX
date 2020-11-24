@@ -2437,10 +2437,10 @@
             init: function(){
                 window.addEventListener("touchstart", function(){
                     // Enable Orbit control and VR mode options
-                    scene.els.scene.setAttribute('vr-mode-ui', {enabled: true})
-                    scene.els.cam.fly.setAttribute('camera', {active: false  })
-                    scene.els.cam.low.setAttribute('camera', {active: true   })
-                })
+                //     scene.els.scene.setAttribute('vr-mode-ui', {enabled: true})
+                //     scene.els.cam.fly.setAttribute('camera', {active: false  })
+                //     scene.els.cam.low.setAttribute('camera', {active: true   })
+                // })
                 // KEYBOARD EVENTS
                 window.addEventListener("keydown", function(key){
                     // Turn off VR option if a keyboard is present
