@@ -43,39 +43,47 @@
             <div id="loader-intro">
                 <div id="loader-subHeader">Welcome to the</div>
                 <div id="loader-header">Kingdom of Dreams and Madness</div>
-                <div class = "loader-text">
-                    <p>This is a speculative project that (further) explores the creation a new medium to help us think about exceedingly complex, urgent problems.
-                        The project centers on providing people with an interactive, virtual world to explore and experiment with.
-                        The world itself is a tangible representation of a 'model world': one whose characteristics of interest are is simulated in a connected mathematical model of the world.
-                        The marriage of visual and simulation-orientated models is the foundation for a new type of dynamic medium, that is accessible from the humble web browser.</p>
-                    <p>This project scratches the surface of new narrative opportunities, some which play around with new(ish) web technologies. 
+                <div id="loader-text" class = "loader-text">
+                    <p>This is a speculative project that dabbles in the creation a new medium to help us think about exceedingly complex, urgent problems.
+                        The project gives people an interactive, virtual world to explore and experiment with.
+                        The world itself is a tangible representation of a 'model world' whose characteristics of interest are simulated in unison with a fully operational, systems-based mathematical model.
+                        This marriage of visual and simulation-orientated modelling is proposed as the foundation for a new type of dynamic medium.</p>
+                    <p>What you're looking at is a prototype that scratches the surface of new narrative opportunities, some which play around with new(ish) web technologies but are all accessible from the humble web browser.
                         More ideas will be explored and added.
-                        The hope is that this new dynamic medium inspires radically different kinds of authorship that enables content and narrative to be brought to life, and in a form that activates fresh, unburdened and enlightened ways of thinking... </p> 
+                        The hope is that this dynamic medium inspires radically different kinds of authorship that enables complex content and narrative to be brought to life, and in a form that activates new and enlightened ways of thinking... </p> 
                 </div>
-                <div id="loader-button" class = "loader-button">Building the world. One moment please...</div>
+                <div id="loader-instruction-text" class = "hidden">
+                    <p>This prototype has been designed with a four act narrative structure that...
+                                            </p>
+                </div>
+
+
+                <div class="loader-button-container">
+                    <div id="loader-button" class = "loader-button">Building the world. One moment please...</div>
+                </div>
             </div>
         </div>
 
         <!-- UI MENUS AND NARRATIVE PANES -->
-        <div id="flat-ui-container">        
+        <div id="flat-ui-container" >        
             <!-- Climate change menu (top left) -->
             <div id="menu-1-container" class="main-menu-container top left">
                 <svg id="menu-1" class="main-menu-svg closed" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-20 250 540 250" >
                     <g id="menu-1-itemsContainer" class ="main-menu-itemsContainer" data-svg-origin="250 250" >		
                         <a id="menu-1-button-world" class="menu-1-item main-menu-item"  transform="matrix(1,0,0,1,0,0)" data-svg-origin="250 250">
-                            <path class="menu-1-sector menu-sector" fill="none" stroke="#111" d="M350,250 l150,0 A250,250 0 0,0 426.7766952966369,73.22330470336314 l-106.06601717798213,106.0660171779821 A100,100 0 0,1 350,250"></path>
+                            <path id="m1-section-1" class="menu-1-sector menu-sector" fill="none" stroke="#111" d="M350,250 l150,0 A250,250 0 0,0 426.7766952966369,73.22330470336314 l-106.06601717798213,106.0660171779821 A100,100 0 0,1 350,250"></path>
                             <use xlink:href="#icon-world"  width="80" height="80"  x="374.4505615234375" y="141.88233947753906"  transform="rotate(-180 414.4505615234375 181.88233947753906)"></use>
                         </a>
                         <a id="menu-1-button-risk" class="menu-1-item main-menu-item" id="item-2" transform="matrix(0.7071,-0.7071,0.7071,0.7071,-103.55339059327378,249.99999999999997)"data-svg-origin="250 250">
-                            <path class="menu-1-sector menu-sector" fill="none" stroke="#111" d="M350,250 l150,0 A250,250 0 0,0 426.7766952966369,73.22330470336314 l-106.06601717798213,106.0660171779821 A100,100 0 0,1 350,250"></path>
+                            <path id="m1-section-2" class="menu-1-sector menu-sector" fill="none" stroke="#111" d="M350,250 l150,0 A250,250 0 0,0 426.7766952966369,73.22330470336314 l-106.06601717798213,106.0660171779821 A100,100 0 0,1 350,250"></path>
                             <use xlink:href="#icon-risk" width="80" height="80"  x="374.4505615234375" y="141.88233947753906"  transform="rotate(-135 414.4505615234375 181.88233947753906)"></use>
                         </a>
                         <a id="menu-1-button-emissions"  class="menu-1-item main-menu-item"  transform="matrix(0,-1,1,0,0,500)" data-svg-origin="250 250">
-                            <path class="menu-1-sector menu-sector" fill="none" stroke="#111" d="M350,250 l150,0 A250,250 0 0,0 426.7766952966369,73.22330470336314 l-106.06601717798213,106.0660171779821 A100,100 0 0,1 350,250"></path>
+                            <path id="m1-section-3" class="menu-1-sector menu-sector" fill="none" stroke="#111" d="M350,250 l150,0 A250,250 0 0,0 426.7766952966369,73.22330470336314 l-106.06601717798213,106.0660171779821 A100,100 0 0,1 350,250"></path>
                             <use xlink:href="#icon-global-emissions" width="80" height="80" x="374.4505615234375" y="141.88233947753906" transform="rotate(-90 414.4505615234375 181.88233947753906)"></use>
                         </a>
                         <a id="menu-1-button-actions" class="menu-1-item main-menu-item" id="item-4" transform="matrix(-0.7071,-0.7071,0.7071,-0.7071,249.99999999999997,603.5533905932738)" data-svg-origin="250 250">
-                            <path class="menu-1-sector menu-sector" fill="none" stroke="#111" d="M350,250 l150,0 A250,250 0 0,0 426.7766952966369,73.22330470336314 l-106.06601717798213,106.0660171779821 A100,100 0 0,1 350,250"></path>
+                            <path id="m1-section-4" class="menu-1-sector menu-sector" fill="none" stroke="#111" d="M350,250 l150,0 A250,250 0 0,0 426.7766952966369,73.22330470336314 l-106.06601717798213,106.0660171779821 A100,100 0 0,1 350,250"></path>
                             <use xlink:href="#icon-action"  width="80" height="80" x="374.4505615234375" y="141.88233947753906"  transform="rotate(-45 414.4505615234375 181.88233947753906)"></use>
                         </a>
                     </g>
@@ -122,12 +130,12 @@
 
                 <div id="narrative-world-1" class="narrative-container world">
                     <div class="subMenu-narrative-container"> 
-                        <div class="subMenu-header">A kingdom of dreams and madness...</div>
+                        <div class="subMenu-header">Dreams and madness...</div>
                         <div class="subMenu-text">
                             <p>Welcome to the land of Kodam! 
-                                Kodam is a peaceful little place, where citizens go about their lives and activities much like the 'real' world. 
+                                Kodam is a peaceful little place where citizens go about their lives and activities much like the 'real' world. 
                                 They live in dwellings, concentrated in residential and urban settings. 
-                                They farm the land and net the seas, to produce food. 
+                                They farm the land and net the seas, all to produce food. 
                                 They have developed on an industrial supply chain that extracts and recycles materials so that they can produce and buy stuff.
                                 They transport themselves and the goods they need across long distances by road, rail, sea and air. 
                                 To support all of this, they produce and distribute the energy they need, from a range of renewable and non-renewable sources. 
@@ -143,12 +151,12 @@
                     <div class="subMenu-narrative-container"> 
                         <div class="subMenu-header">Models as toys</div>
                         <div class="subMenu-text">
-                            <p>Kodam is just a 'toy version' of a world you might recognise.
+                            <p>Kodam is really just a 'toy version' of a world you might recognise.
                                 This is a powerful idea because it means we can think of Kodam as a representation of our world: 
-                                a kind of 'model world' and system with components and connections we're familiar with.</p>
-                            <p> We'll build on this idea of a toy model for thinking about some seriously complex problems. 
-                                But first, its useful to think about how all the different parts of Kodam fit together. 
-                                This will give us a common understanding and structure about how the world of Kodam is organised as a system.
+                                a kind of 'model world' featuring components and connections we're familiar with.</p>
+                            <p> We'll build on this idea of learning with a toy models to thinking about some seriously complex problems. 
+                                But first, its useful to familiarise ourselves with how all the different parts of Kodam fit together. 
+                                This will give us a common understanding and structure about how the world of Kodam is organised as a dynamic system.
                             </p>
                             <p> There are lots of ways to view and organise a system.
                                 Let's start by looking at some geographic areas of Kodam... 
@@ -344,14 +352,13 @@
 
                 <div id="narrative-world-4" class="narrative-container world hidden">
                     <div class="subMenu-narrative-container"> 
-                        <div class="subMenu-header">Who lives here?</div>
+                        <div class="subMenu-header">Common people</div>
                         <div class="subMenu-text">
                             <p>Now that we a good idea of Kodam's geography, it's useful to know a bit about the types of characters, or 'actors' who live in Kodam. 
-                                These are the folks that live in the those homes, work in those buildings, and travel around the land and sea.                                 
-                            </p>
+                                These are the folks that live in the those homes, work in those buildings, and travel around the land and sea.  </p>
                             <p>Of course, every citizen is different - they are individual 'agents' who behave according their own desires and peculiarities - so its not really right to lump them together. 
                                 But this is a toy we're talking about here, and it often makes sense to simplify and assume that there are some logical groups who have similar characteristics.
-                                One way to do this is to group and describe these actors as sectors of economy.
+                                One way to do this is to group and describe these groups as economic actors or sectors.
                             </p>
                         </div>
                         <div class="narrative-controls-container">
@@ -428,7 +435,7 @@
                                 </div>
                             </div>
                             <div id="tour-actors-land" class="subMenu-event-container">               
-                                <div class = "subMenu-event-label">Forestry and land sector</div>
+                                <div class = "subMenu-event-label">Forestry and land owners</div>
                                 <div class = "subMenu-event-icon-container">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
                                         <use xlink:href="#icon-acidification"></use>
@@ -459,15 +466,14 @@
 
                 <div id="narrative-world-6" class="narrative-container world hidden">
                     <div class="subMenu-narrative-container"> 
-                        <div class="subMenu-header">Activities: </div>
+                        <div class="subMenu-header">Activities: what we do </div>
                         <div class="subMenu-text">
-                            <p>We're going to come back to ways of organising the world when we talk more about where greenhouse emissions come from, becease there are some specific accounting categories that we'll need to know.
-                                But for now, we're going to talk about the very simple but important concept of 'activities'. 
+                            <p>We're going to come back to ways of organising the world when we talk more about the issue of climate change, because there are some specific emissions accounting categories that we'll need to know.
+                                But right now we need to mention the simple but important concept of 'activities'. 
                                 These are things we do and services we consume. 
-                                We're going to be looking at activities from greenhouse gas emissions perspective, which means that we're interseting in activites such as turning on lights at home, or driving a car to work; and less worried about say, talking a dog for a walk.
-                            </p>
-                            <p>In the end we'll consider a few hundred unique activities, each associated with an emissions source and sector (more on these concepts soon!).
-                            </p>
+                                We're going to be looking closely at activities that are linked to greenhouse gas emissions, so we're interested in activities like turning on lights at home, driving a car to work, planting trees etc. </p>
+                            <p>In the end we'll consider a few hundred unique activities that are associated with an emissions source and sector (more on these concepts soon!)
+                                Activities are what will make discussing climate actions seem familiar and real. </p>
                         </div>
                         <div class="narrative-controls-container">
                             <div class="narrative-controls-button back">&larr;</div>
@@ -480,8 +486,8 @@
                     <div class="subMenu-narrative-container"> 
                         <div class="subMenu-header">Controlling time</div>
                         <div class="subMenu-text">
-                            <p>Before me move on, its important to consider the concept of time and what this means for our toy world.
-                                Obviously, we're looking a system here that is spinning around a much bigger solar system, but we can 'model' and even control time in Kodam. 
+                            <p>The last 'worldly' concept we want to introduce is that of time, and what this means for our toy world.
+                                In Kodam  we can 'model' and even control time. 
                                 This helps us to see whats going on, and to see the world from a range of different, and very powerful perspectives.                               
                             </p>
                             <p>Time is critical because it lets us explore the 'dynamics' of the world. 
@@ -610,7 +616,7 @@
                         <div class="subMenu-header">Ready to play!</div>
                         <div class="subMenu-text">
                             <p>As you can see, there's a bit more to Kodam than meets the eye.
-                                Firstly, its not just a simple toy but a series of toys, more like a playroom filled with lots of toys!
+                                Firstly, its not just a simple toy but a set of connected toys: perhaps more like a playroom full of toys!
                                 Secondly we have a lot of different areas and while all different, all our toys feature some shared characteristics and connections.
                                 There are useful ways to organise this system to help us understand its components and connections                               
                             </p>
@@ -632,9 +638,10 @@
                         <div class="subMenu-header">Why climate change matters</div>
                         <div class="subMenu-text">
                             <p>Despite all these interwoven activities and actors, the miniature world of Kodam seems to just 'work'. 
-                                However it is inescapable that Kodam can only exist in harmony with the natural environment and the climate system.</p>
+                                However just like the real world, Kodam can only exist in harmony with the natural environment and the climate system.</p>
                             <p>Unfortunately, many of those activities emit greenhouse gases that are causing climate change. 
-                                We'll talk more about these activities shortly, however before we get there, we need to understand why Kodam needs to worry about climate change.</p>
+                               But why does Kodam in particular need to worry about climate change? 
+                                Let's start by introducing the concept of climate risk and explore how these risks affect the citizens of Kodam.</p>
                         </div>
                         <div class="narrative-controls-container">
                             <div class="narrative-controls-button back hidden">&larr;</div>
@@ -647,9 +654,9 @@
                     <div class="subMenu-narrative-container"> 
                         <div class="subMenu-header">Climate risk</div>
                         <div class="subMenu-text">
-                            <p>Climate risk is a tricky concept to explain because its easy confuse or conflate with a bunch of concepts such as: natural hazards, event intensity, exposure and vulnerability, frequency and duration, shocks and stresses, and uncertainty...to name just a few. </p>
+                            <p>Climate risk is a tricky concept to explain because its easy confuse or conflate with a bunch of concepts like: natural hazards; event intensity, frequency and duration; shocks and stresses; exposure and vulnerability, and uncertainty... to name just a few. </p>
                             <p>We'll start by thinking of risk as being associated to an unwanted outcome that we can play out in Kodam. 
-                                These tend to be physical outcomes that are triggered by unexpected, 'shock' events, or from a noticeable but gradual build up of some kind, which we can think of as a stress.
+                                These tend to be physical outcomes that are triggered by unexpected 'shock' events, or from a build up of some kind of pressure, which we can think of as a stress.
                                 Some examples could be damage to a building after a windy storm or flood, or fire; or a reduced water supply and food production from a long drought. </p>
                         </div>
                         <div class="narrative-controls-container">
@@ -663,15 +670,13 @@
                     <div class="subMenu-narrative-container"> 
                         <div class="subMenu-header">Natural hazards</div>
                         <div class="subMenu-text">
-                            <p>The natural events that trigger these unwanted consequences are called hazards. 
-                                Most of these are affected by climate change, which is expected to cause more intense events and alter their duration and frequency. 
-                                For example, scientists expect that some places will get more and more intense, short rainfall events (i.e. extreme storms), but experience less overall rain, leading to droughts. 
-                            </p>
+                            <p>The events that trigger these unwanted consequences are called natural hazards. 
+                                Many of these are affected by climate change, which is expected to cause more intense events and alter their duration and frequency. 
+                                For example, scientists expect that some places will get more frequent and intense, short rainfall events (i.e. extreme storms), but experience less overall rain, leading to droughts. </p>
                             <p>We should be aware that not all natural hazards are influenced by climate change. 
-                                And for some hazards, the link between climate change and their expected is not as clear as others. 
-                                Overall though, its pretty clear that climate change is increasing risk.
-                                Let's now explore the natural hazards facing Kodam. 
-                            </p>
+                                And for some hazards, the link between climate change and more damaging outcomes is not as clear as others. 
+                                Overall though, there is consensus that climate change is increasing risk.
+                                Let's now explore the natural hazards facing Kodam.  </p>
                         </div>
                         <div class="narrative-controls-container">
                             <div class="narrative-controls-button back">&larr;</div>
@@ -684,7 +689,8 @@
                     <div class="subMenu-narrative-container"> 
                         <div class="subMenu-header">Warming-related hazards</div>
                         <div class="subMenu-text instruction">
-                            </p>Tap on any of the hazards to see how they impact Kodam.</p>
+                            <p>Climate change is causing the average temperature in Kodam to rise</p>
+                            <p>Tap on any of the hazards to see how they impact Kodam.</p>
                         </div>
                         <div class = "event-options-container">
                             <div id="menu-heat" class="subMenu-event-container climate-risk">               
@@ -719,7 +725,6 @@
                                     <p> The ecological damage of drought is just as devastating however natural systems will to some extent, adapt and evolve. 
                                         Just think about how quickly the land regenerates and species return once a rainfall breaks a drought.
                                         That said, the conditions for drought are similar and intertwined with the phenomenon of desertification which has longer term affects.</p>
-                                    <p>Tap the Drought button again <span class="details-button">(or here)</span> to change the intensity of the drought event.</p>
                                 </div>
                             </div>
                             <div id="menu-desertification" class="subMenu-event-container climate-risk">               
@@ -744,18 +749,13 @@
                                         <p>Bushfires are devastating fires that rapidly burn through native vegetation and land.
                                             They almost always start in rural areas (i.e. where there's more dense natural vegetation) but can spread and threaten rural areas with and even more built up areas.</p>
                                         <p>Highly urban areas tend to be spared simply because of their distance to the bush, however bushfire smoke 
-                                            And yes, others categorise them as wildfires or brushfires...</p>
-                                        <p>Tap the Bushfires button again <span class="details-button">(or here)</span> to change the intensity of the bushfire event.</p>
+                                            And yes, others categorise them as wildfires or forest fires...</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="subMenu-event-container climate-risk">               
-                                <div class = "subMenu-event-label upDown">
-                                    <div class = "subMenu-event-label-upDown">Sea Level Change</div>
-                                    <div class = "menu-event-upDown-container">
-                                        <div id="menu-seaLevelUp"class = "menu-event-button up">+</div>
-                                        <div id="menu-seaLevelDown" class = "menu-event-button down">-</div>                   
-                                    </div>                   
+                            <div id="menu-seaLevel"  class="subMenu-event-container climate-risk">               
+                                <div class = "subMenu-event-label">
+                                    <div class = "subMenu-event-label-upDown">Sea Level Rise</div>               
                                 </div>
                                 <div class = "subMenu-event-icon-container">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
@@ -769,7 +769,6 @@
                                     <p>Rising seas levels lead to coastal inundation.
                                         This puts coastal settlements at risk from flooding, which is problem because most major cities and settlements (including Kodam), are on the coast! 
                                         Erosion?</p>
-                                    <p>Tap the the Sea Level Chang "+"" and "-" buttons  or <span class="details-button">here (+))</span>  and <span class="details-button">here (-)</span> to change the sea level araound Kodam.</p>
                                 </div>
                             </div>
                             <div id="menu-acidification" class="subMenu-event-container climate-risk">               
@@ -798,7 +797,8 @@
                     <div class="subMenu-narrative-container"> 
                         <div class="subMenu-header">Storm-related hazards</div>
                         <div class="subMenu-text instruction">
-                            </p>Tap on any of the hazards to see how they impact Kodam.</p>
+                            <p>Climate change is expected to trigger more intense storm and rainfall events in Kodam.</p>
+                            <p>Tap on any of the hazards to see how they impact Kodam.</p>
                         </div>
                         <div class = "event-options-container">
                             <div id="menu-stormFlood" class="subMenu-event-container climate-risk">               
@@ -812,7 +812,6 @@
                                             Kodam's is pretty flat and near the ocean, so its mostly under threat from flooding events, but in real world there are areas more susceptible to rainfall and how water flows that are known as flood plains. </p>
                                         <p>To cope with most rainfall, there are a series of surfaces gutters, drains and sewers that take rain water away, or even store that water in tanks and dams for us to use.</p>
                                         <p>Flash flooding occurs when this water system is overwhelmed by very intense rainfall events, causing water to flood our roads and buildings. </p>
-                                        <p>Tap the Storms and floods button again <span class="details-button">(or here)</span> to change the intensity of the rainfall and flooding event.</p>
                                     </div>
                                 </div>
                             </div>
@@ -826,7 +825,6 @@
                                         <p>Heavy rainfall events can also disrupt the stability of land and soils that are not used to being soaked with so much water.
                                             The loss in stability can be catastrophic in some regions and result in land and mud slides that can threaten urban areas. 
                                         </p>
-                                        <p>Tap the Land and mudslides button again <span class="details-button">(or here)</span> to change the intensity of the event.</p>
                                     </div>
                                 </div>
                             </div>
@@ -840,7 +838,6 @@
                                         <p>Extreme wind events are also associated with storms and can cause damage to trees and built infrastructure.
                                             However, it should be pointed out that link between climate change and more intense or frequent extreme wind events is not as certain a say, temperature rise.</p>
                                         <p></p>
-                                        <p>Tap the Extreme wind button again <span class="details-button">(or here)</span> to change the intensity of the rainfall and flooding event.</p>
                                     </div> 
                                </div>
                             </div>
@@ -880,7 +877,7 @@
 
                 <div id="narrative-risk-6" class="narrative-container risk">
                     <div class="subMenu-narrative-container"> 
-                        <div class="subMenu-header">Other hazards</div>
+                        <div class="subMenu-header">Other natural disasters</div>
                         <div class="subMenu-text instruction">
                             </p>There are a handful of other natural hazards that could impact Kodam. 
                                 These are geological events rather than weather or climate related, but are incredibly destructive and worth thinking about so we have an understanding hazards that not linked to climate change.</p>
@@ -893,22 +890,33 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
                                         <use xlink:href="#icon-earthquake"></use>
                                     </svg>
+                                    <div class="details-content hidden">
+                                        <p>Earthquakes are caused by...</p>
+                                    </div> 
                                 </div>
                             </div>
-                            <div id="menu-earthquake" class="subMenu-event-container">               
+                            <div id="menu-volcanic" class="subMenu-event-container">               
                                 <div class = "subMenu-event-label">Volcanic activity</div>
                                 <div class = "subMenu-event-icon-container">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
                                         <use xlink:href="#icon-earthquake"></use>
                                     </svg>
+                                    <div class="details-content hidden">
+                                        <p>Volcanic activity...</p>
+                                        <p>Volcanic activity...actually reduces the global warming effect</p>
+                                    </div> 
                                 </div>
                             </div>
-                            <div id="menu-earthquake" class="subMenu-event-container">               
+                            <div id="menu-tsunami" class="subMenu-event-container">               
                                 <div class = "subMenu-event-label">Tsunami</div>
                                 <div class = "subMenu-event-icon-container">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
                                         <use xlink:href="#icon-earthquake"></use>
                                     </svg>
+                                    <div class="details-content hidden">
+                                        <p>Tsunami's are...</p>
+                                        <p></p>
+                                    </div> 
                                 </div>
                             </div>
                         </div>
@@ -1084,113 +1092,11 @@
                     <div class="subMenu-narrative-container"> 
                         <div class="subMenu-header">Emissions sectors</div>
                         <div class="subMenu-text">
-                            <p>We can categorise all our emissions activity into six 'emissions sectors' that match how GHG inventories are constructed for countries (reporting to the <a href="https://www.ipcc.ch/" target ="_blank" >IPCC</a>) and places under voluntary standards like the <a href="https://ghgprotocol.org/greenhouse-gas-protocol-accounting-reporting-standard-cities" target="_blank">GHG Protocol for Cities</a>.</p>
-                            <p>You might notice that these sectors aren't the same as the 'economic sectors' we talked about earlier. 
+                            <p>We can categorise all our emissions activity into six 'emissions sectors' that match how GHG inventories are constructed for countries (reporting to the <a href="https://www.ipcc.ch/" target ="_blank" >IPCC</a>) and places, under voluntary standards like the <a href="https://ghgprotocol.org/greenhouse-gas-protocol-accounting-reporting-standard-cities" target="_blank">GHG Protocol for Cities</a>.
+                                These sectors are titled: Stationary energy, Transport, Waste (and wastewater), Industrial processes and product use, Agriculture, and Forestry and land use.</p>
+                            <p>You'll notice that these sectors don't really match same as the economic sectors we talked about earlier. 
                                 This is a bit annoying, but its ok: its just another way to think about the world!</p>
-                            <ul>
-                                <li>Stationary energy</li>
-                                <li>Transport</li>
-                                <li>Waste</li>
-                                <li>Industrial processes and product use</li>
-                                <li>Agriculture</li>
-                                <li>Forestry and land use</li>
-                            </ul>
-                           <p>Let's explore these sectors by identifying the emissions sources and sinks that belong to each one...</p>
-                        </div>
-                        <div class = "event-options-container hidden">
-                            <div id="menu-stationary-energy" class="subMenu-event-container">               
-                                <div class = "subMenu-event-label">Stationary energy</div>
-                                <div class = "subMenu-event-icon-container">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-                                        <use xlink:href="#icon-earthquake"></use>
-                                    </svg>
-                                    <div class="details-content hidden">
-                                        <p>Stationary energy is..used by Residential buildings, Commercial and institutional buildings and facilities, Manufacturing industries and construction, Energy industries, 
-                                            Agriculture, forestry, and fishing activities, Non-specified sources
-                                        </p>
-                                        <p>Fugitive emissions from mining, processing, storage, and transportation of coal and Fugitive emissions from oil and natural gas systems
-                                        </p>
-                                    </div> 
-                                </div>
-                            </div>
-                            <div id="menu-transport" class="subMenu-event-container">               
-                                <div class = "subMenu-event-label">Transportation</div>
-                                <div class = "subMenu-event-icon-container">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-                                        <use xlink:href="#icon-earthquake"></use>
-                                    </svg>
-                                    <div class="details-content hidden">
-                                        <p>Transportation cover the energy (i.e. mostly from liquid fuels) we use in the our vehicles, planes and ships. 
-                                        </p>
-                                        <p>Most vehicle transport is done on road, however there are also off road vehicles like heavy machinery used for construction, or farm vehicles like tractors.  </p>
-                                        <p>Transport emission are unique because the vehicle (or aviator or vessel) can leave Kodam
-                                            So we need to figure out just how to best 'account' for 'Kodam's share' of transport emissions.
-                                            Now there a a few ways to this <a href = "https://ghgprotocol.org/sites/default/files/standards/GHGP_GPC_0.pdf" target="_blank">(see Figure 7.3 here, on page 77)</a>
-                                            We're actually interested in the 'resident' activity approach for Kodam because it helps to think about the actions Kodam's citizens can take to reduce their transport emissions, rather than trying to reduce emissions by limit visitors to Kodam and trade with other lands!
-                                        <p>Thinking about transport 'activity' also help sto understand how to measure aviation and shipping fuels. 
-                                            Here, we think about the 'share' of trips that Kodam should be responsible for. 
-                                            This can be worked out by say, the number of passenger flights in and out by citizens, or in the case of shipping and freight, as simp,le as 'half', with the other 'half' attributed to the sender or receiver, depending on whether Kodam is importing or exporting, respectively.
-                                            </p>
-                                        <p>Interestingly, the electricity used to charge electric vehicles comes nuder stationary energy, because we plug them in just like an appliance!  </p>
-                                    </div> 
-                                </div>
-                            </div>
-                            <div id="menu-waste" class="subMenu-event-container">               
-                                <div class = "subMenu-event-label">Waste</div>
-                                <div class = "subMenu-event-icon-container">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-                                        <use xlink:href="#icon-earthquake"></use>
-                                    </svg>
-                                    <div class="details-content hidden">
-                                        <p>The waste includes waste disposal to landfill, and any treatment processes
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="menu-industrial-processes-and-product-use" class="subMenu-event-container">               
-                                <div class = "subMenu-event-label">Industrial processes and product use</div>
-                                <div class = "subMenu-event-icon-container">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-                                        <use xlink:href="#icon-earthquake"></use>
-                                    </svg>
-                                    <div class="details-content hidden">
-                                        <p>Industrial processes include...
-                                        </p>
-                                        <p>Emissions from industrial product use...
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="menu-agriculture" class="subMenu-event-container">               
-                                <div class = "subMenu-event-label">Agriculture</div>
-                                <div class = "subMenu-event-icon-container">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-                                        <use xlink:href="#icon-earthquake"></use>
-                                    </svg>
-                                    <div class="details-content hidden">
-                                        <p>Agriculture emissions e...
-                                        </p>
-                                        <p>Emissions from growing crops, grains, fruits and vegetables...
-                                        </p>
-                                        <p>Animal emissions...
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="menu-forestry-and-land" class="subMenu-event-container">               
-                                <div class = "subMenu-event-label">Forestry and land use</div>
-                                <div class = "subMenu-event-icon-container">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-                                        <use xlink:href="#icon-earthquake"></use>
-                                    </svg>
-                                   <div class="details-content hidden">
-                                        <p>Forestry and land use (which includes land use change).
-                                        </p>
-                                        <p>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                           <p>Now let's explore these sectors by identifying the emissions sources and sinks that belong to each one...</p>
                         </div>
                         <div class="narrative-controls-container">
                             <div class="narrative-controls-button back">&larr;</div>
@@ -1206,15 +1112,15 @@
                             <p> Use sector options below to display carbon sources emissions as 'black balloons' above connected to different parts of Kodam.</p>
                         </div>
                         <div class = "event-options-container">
-                            <div id="menu-sources-stationary-energy" class="subMenu-emissions-container emissions-sources">               
+                            <div id="menu-sources-stationaryEnergy" class="subMenu-emissions-container emissions-sources">               
                                 <div class = "subMenu-emissions-label">Stationary energy</div>
                                 <div class = "subMenu-emissions-icon-container ">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-                                        <path d="M42.466 18.295a7.63 7.63 0 00-.492-9.755c-4.281-5.062-10.457-2.105-10.457-2.105a7.687 7.687 0 00-7.231-2.53 8.186 8.186 0 00-6.385 4.845s-3.652-3.58-8.497 1.446-.911 9.335-.911 9.335-5.966 2.524-3.717 8.772a9.018 9.018 0 008.49 6.038s-.283 8.345 6.247 9.401a8.396 8.396 0 009.054-4.339s2.892 6.508 9.683 2.582c6.79-3.927 4.28-7.615 4.28-7.615s6.878-.774 7.442-7.094c.564-6.32-7.506-8.981-7.506-8.981zM23.91 28.057c-2.083.666-4.823.253-5.843-1.909a4.693 4.693 0 012.17-5.951c1.12-.593 2.111 1.099.99 1.692-1.12.593-2.054 2.249-1.309 3.536.745 1.287 2.372 1.092 3.486.723 1.113-.369 1.714 1.526.506 1.91zm6.03-3.89c-1.127 1.677-3.253 2.104-4.642.448a4.563 4.563 0 01-.1-5.358c1.07-1.193 3.13-.955 4.338-.13 1.728 1.15 1.417 3.521.405 5.04zm5.663 3.297h-2.589a1.027 1.027 0 01-.882-1.533c.304-.491.723-.89 1.041-1.352l.044-.08a1.1 1.1 0 01-1.266-1.25c.253-1.447 2.336-1.678 3.16-.594a2.321 2.321 0 01.232 2.17 2.95 2.95 0 01-.311.6h.571a1.02 1.02 0 010 2.04zm-7.42-6.783c-.426-.202-1.185-.383-1.54 0-.448.564-.217 2.061.188 2.582.651.853 1.295.072 1.627-.615.333-.687.514-1.59-.274-1.967zM5.39 44.198s3.97.274 4.036-2.987c.05-2.892-3.486-2.545-3.486-2.545s-1.902-2.893-4.064-1.65c-2.538 1.498-.918 4.477-.918 4.477s-2.358 2.61.325 4.202c2.994 1.786 4.107-1.497 4.107-1.497z"/>
+                                        <use xlink:href="#icon-emissions"></use>
                                     </svg>
                                 </div>
                             </div>
-                            <div id="menu-sources-transport" class="subMenu-emissions-container emissions-sources">               
+                            <div id="menu-sources-transportEnergy" class="subMenu-emissions-container emissions-sources">               
                                 <div class = "subMenu-emissions-label">Transport</div>
                                 <div class = "subMenu-emissions-icon-container ">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
@@ -1222,36 +1128,39 @@
                                     </svg>
                                 </div>
                             </div>
-                            <div id="menu-sources-waste" class="subMenu-emissions-container emissions-sources">               
-                                <div class = "subMenu-emissions-label">Waste</div>
+                            <div id="menu-sources-wasteAndWasteWater" class="subMenu-emissions-container emissions-sources">               
+                                <div class = "subMenu-emissions-label">Waste and wastewater</div>
                                 <div class = "subMenu-emissions-icon-container ">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-                                        <path d="M42.466 18.295a7.63 7.63 0 00-.492-9.755c-4.281-5.062-10.457-2.105-10.457-2.105a7.687 7.687 0 00-7.231-2.53 8.186 8.186 0 00-6.385 4.845s-3.652-3.58-8.497 1.446-.911 9.335-.911 9.335-5.966 2.524-3.717 8.772a9.018 9.018 0 008.49 6.038s-.283 8.345 6.247 9.401a8.396 8.396 0 009.054-4.339s2.892 6.508 9.683 2.582c6.79-3.927 4.28-7.615 4.28-7.615s6.878-.774 7.442-7.094c.564-6.32-7.506-8.981-7.506-8.981zM23.91 28.057c-2.083.666-4.823.253-5.843-1.909a4.693 4.693 0 012.17-5.951c1.12-.593 2.111 1.099.99 1.692-1.12.593-2.054 2.249-1.309 3.536.745 1.287 2.372 1.092 3.486.723 1.113-.369 1.714 1.526.506 1.91zm6.03-3.89c-1.127 1.677-3.253 2.104-4.642.448a4.563 4.563 0 01-.1-5.358c1.07-1.193 3.13-.955 4.338-.13 1.728 1.15 1.417 3.521.405 5.04zm5.663 3.297h-2.589a1.027 1.027 0 01-.882-1.533c.304-.491.723-.89 1.041-1.352l.044-.08a1.1 1.1 0 01-1.266-1.25c.253-1.447 2.336-1.678 3.16-.594a2.321 2.321 0 01.232 2.17 2.95 2.95 0 01-.311.6h.571a1.02 1.02 0 010 2.04zm-7.42-6.783c-.426-.202-1.185-.383-1.54 0-.448.564-.217 2.061.188 2.582.651.853 1.295.072 1.627-.615.333-.687.514-1.59-.274-1.967zM5.39 44.198s3.97.274 4.036-2.987c.05-2.892-3.486-2.545-3.486-2.545s-1.902-2.893-4.064-1.65c-2.538 1.498-.918 4.477-.918 4.477s-2.358 2.61.325 4.202c2.994 1.786 4.107-1.497 4.107-1.497z"/>
-                                    </svg>
+                                        <use xlink:href="#icon-emissions"></use>                                    </svg>
                                 </div>
                             </div>
-                            <div id="menu-sources-industrial-processes-and-product-use" class="subMenu-emissions-container emissions-sources">               
+                            <div id="menu-sources-industrialProcessesAndProductUse" class="subMenu-emissions-container emissions-sources">               
                                 <div class = "subMenu-emissions-label">Industrial processes and product use</div>
                                 <div class = "subMenu-emissions-icon-container ">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-                                        <path d="M42.466 18.295a7.63 7.63 0 00-.492-9.755c-4.281-5.062-10.457-2.105-10.457-2.105a7.687 7.687 0 00-7.231-2.53 8.186 8.186 0 00-6.385 4.845s-3.652-3.58-8.497 1.446-.911 9.335-.911 9.335-5.966 2.524-3.717 8.772a9.018 9.018 0 008.49 6.038s-.283 8.345 6.247 9.401a8.396 8.396 0 009.054-4.339s2.892 6.508 9.683 2.582c6.79-3.927 4.28-7.615 4.28-7.615s6.878-.774 7.442-7.094c.564-6.32-7.506-8.981-7.506-8.981zM23.91 28.057c-2.083.666-4.823.253-5.843-1.909a4.693 4.693 0 012.17-5.951c1.12-.593 2.111 1.099.99 1.692-1.12.593-2.054 2.249-1.309 3.536.745 1.287 2.372 1.092 3.486.723 1.113-.369 1.714 1.526.506 1.91zm6.03-3.89c-1.127 1.677-3.253 2.104-4.642.448a4.563 4.563 0 01-.1-5.358c1.07-1.193 3.13-.955 4.338-.13 1.728 1.15 1.417 3.521.405 5.04zm5.663 3.297h-2.589a1.027 1.027 0 01-.882-1.533c.304-.491.723-.89 1.041-1.352l.044-.08a1.1 1.1 0 01-1.266-1.25c.253-1.447 2.336-1.678 3.16-.594a2.321 2.321 0 01.232 2.17 2.95 2.95 0 01-.311.6h.571a1.02 1.02 0 010 2.04zm-7.42-6.783c-.426-.202-1.185-.383-1.54 0-.448.564-.217 2.061.188 2.582.651.853 1.295.072 1.627-.615.333-.687.514-1.59-.274-1.967zM5.39 44.198s3.97.274 4.036-2.987c.05-2.892-3.486-2.545-3.486-2.545s-1.902-2.893-4.064-1.65c-2.538 1.498-.918 4.477-.918 4.477s-2.358 2.61.325 4.202c2.994 1.786 4.107-1.497 4.107-1.497z"/>
-                                    </svg>
+                                        <use xlink:href="#icon-emissions"></use>                                    </svg>
                                 </div>
                             </div>
                             <div id="menu-sources-agriculture" class="subMenu-emissions-container emissions-sources">               
                                 <div class = "subMenu-emissions-label">Agriculture</div>
                                 <div class = "subMenu-emissions-icon-container ">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-                                        <path d="M42.466 18.295a7.63 7.63 0 00-.492-9.755c-4.281-5.062-10.457-2.105-10.457-2.105a7.687 7.687 0 00-7.231-2.53 8.186 8.186 0 00-6.385 4.845s-3.652-3.58-8.497 1.446-.911 9.335-.911 9.335-5.966 2.524-3.717 8.772a9.018 9.018 0 008.49 6.038s-.283 8.345 6.247 9.401a8.396 8.396 0 009.054-4.339s2.892 6.508 9.683 2.582c6.79-3.927 4.28-7.615 4.28-7.615s6.878-.774 7.442-7.094c.564-6.32-7.506-8.981-7.506-8.981zM23.91 28.057c-2.083.666-4.823.253-5.843-1.909a4.693 4.693 0 012.17-5.951c1.12-.593 2.111 1.099.99 1.692-1.12.593-2.054 2.249-1.309 3.536.745 1.287 2.372 1.092 3.486.723 1.113-.369 1.714 1.526.506 1.91zm6.03-3.89c-1.127 1.677-3.253 2.104-4.642.448a4.563 4.563 0 01-.1-5.358c1.07-1.193 3.13-.955 4.338-.13 1.728 1.15 1.417 3.521.405 5.04zm5.663 3.297h-2.589a1.027 1.027 0 01-.882-1.533c.304-.491.723-.89 1.041-1.352l.044-.08a1.1 1.1 0 01-1.266-1.25c.253-1.447 2.336-1.678 3.16-.594a2.321 2.321 0 01.232 2.17 2.95 2.95 0 01-.311.6h.571a1.02 1.02 0 010 2.04zm-7.42-6.783c-.426-.202-1.185-.383-1.54 0-.448.564-.217 2.061.188 2.582.651.853 1.295.072 1.627-.615.333-.687.514-1.59-.274-1.967zM5.39 44.198s3.97.274 4.036-2.987c.05-2.892-3.486-2.545-3.486-2.545s-1.902-2.893-4.064-1.65c-2.538 1.498-.918 4.477-.918 4.477s-2.358 2.61.325 4.202c2.994 1.786 4.107-1.497 4.107-1.497z"/>
-                                    </svg>
+                                        <use xlink:href="#icon-emissions"></use>                                    </svg>
                                 </div>
                             </div>
-                            <div id="menu-sources-forestry-and-land" class="subMenu-emissions-container emissions-sources">               
+                            <div id="menu-sources-landAndForestry" class="subMenu-emissions-container emissions-sources">               
                                 <div class = "subMenu-emissions-label">Forestry and land use</div>
                                 <div class = "subMenu-emissions-icon-container ">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-                                        <path d="M42.466 18.295a7.63 7.63 0 00-.492-9.755c-4.281-5.062-10.457-2.105-10.457-2.105a7.687 7.687 0 00-7.231-2.53 8.186 8.186 0 00-6.385 4.845s-3.652-3.58-8.497 1.446-.911 9.335-.911 9.335-5.966 2.524-3.717 8.772a9.018 9.018 0 008.49 6.038s-.283 8.345 6.247 9.401a8.396 8.396 0 009.054-4.339s2.892 6.508 9.683 2.582c6.79-3.927 4.28-7.615 4.28-7.615s6.878-.774 7.442-7.094c.564-6.32-7.506-8.981-7.506-8.981zM23.91 28.057c-2.083.666-4.823.253-5.843-1.909a4.693 4.693 0 012.17-5.951c1.12-.593 2.111 1.099.99 1.692-1.12.593-2.054 2.249-1.309 3.536.745 1.287 2.372 1.092 3.486.723 1.113-.369 1.714 1.526.506 1.91zm6.03-3.89c-1.127 1.677-3.253 2.104-4.642.448a4.563 4.563 0 01-.1-5.358c1.07-1.193 3.13-.955 4.338-.13 1.728 1.15 1.417 3.521.405 5.04zm5.663 3.297h-2.589a1.027 1.027 0 01-.882-1.533c.304-.491.723-.89 1.041-1.352l.044-.08a1.1 1.1 0 01-1.266-1.25c.253-1.447 2.336-1.678 3.16-.594a2.321 2.321 0 01.232 2.17 2.95 2.95 0 01-.311.6h.571a1.02 1.02 0 010 2.04zm-7.42-6.783c-.426-.202-1.185-.383-1.54 0-.448.564-.217 2.061.188 2.582.651.853 1.295.072 1.627-.615.333-.687.514-1.59-.274-1.967zM5.39 44.198s3.97.274 4.036-2.987c.05-2.892-3.486-2.545-3.486-2.545s-1.902-2.893-4.064-1.65c-2.538 1.498-.918 4.477-.918 4.477s-2.358 2.61.325 4.202c2.994 1.786 4.107-1.497 4.107-1.497z"/>
-                                    </svg>
+                                        <use xlink:href="#icon-emissions"></use>                                    </svg>
+                                </div>
+                            </div>
+                            <div id="menu-sources-all" class="subMenu-emissions-container emissions-sources">               
+                                <div class = "subMenu-emissions-label">All emissions sources</div>
+                                <div class = "subMenu-emissions-icon-container ">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+                                        <use xlink:href="#icon-emissions"></use>                                    </svg>
                                 </div>
                             </div>
 
@@ -1267,18 +1176,19 @@
                     <div class="subMenu-narrative-container"> 
                         <div class="subMenu-header">Emissions sinks (and offsets!) </div>
                         <div class="subMenu-text instruction">
-                            <p> Use sector options below to display carbon sinks and offsets as 'purple balloons'.</p>
+                            <p> Use sector options below to display carbon sinks and offsets as 'purple balloons'.
+                                Offsets or 'carbon credits' purchased by citizens of Kodam are emissions reduction that occur outside of Kodam, that count towards Kodam's net emissions.</p>
                         </div>
                         <div class = "event-options-container">
-                            <div id="menu-sinks-stationary-energy" class="subMenu-emissions-container emissions-sinks">               
+                            <div id="menu-sinks-stationaryEnergy" class="subMenu-emissions-container emissions-sources">               
                                 <div class = "subMenu-emissions-label">Stationary energy</div>
                                 <div class = "subMenu-emissions-icon-container ">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-                                        <path d="M42.466 18.295a7.63 7.63 0 00-.492-9.755c-4.281-5.062-10.457-2.105-10.457-2.105a7.687 7.687 0 00-7.231-2.53 8.186 8.186 0 00-6.385 4.845s-3.652-3.58-8.497 1.446-.911 9.335-.911 9.335-5.966 2.524-3.717 8.772a9.018 9.018 0 008.49 6.038s-.283 8.345 6.247 9.401a8.396 8.396 0 009.054-4.339s2.892 6.508 9.683 2.582c6.79-3.927 4.28-7.615 4.28-7.615s6.878-.774 7.442-7.094c.564-6.32-7.506-8.981-7.506-8.981zM23.91 28.057c-2.083.666-4.823.253-5.843-1.909a4.693 4.693 0 012.17-5.951c1.12-.593 2.111 1.099.99 1.692-1.12.593-2.054 2.249-1.309 3.536.745 1.287 2.372 1.092 3.486.723 1.113-.369 1.714 1.526.506 1.91zm6.03-3.89c-1.127 1.677-3.253 2.104-4.642.448a4.563 4.563 0 01-.1-5.358c1.07-1.193 3.13-.955 4.338-.13 1.728 1.15 1.417 3.521.405 5.04zm5.663 3.297h-2.589a1.027 1.027 0 01-.882-1.533c.304-.491.723-.89 1.041-1.352l.044-.08a1.1 1.1 0 01-1.266-1.25c.253-1.447 2.336-1.678 3.16-.594a2.321 2.321 0 01.232 2.17 2.95 2.95 0 01-.311.6h.571a1.02 1.02 0 010 2.04zm-7.42-6.783c-.426-.202-1.185-.383-1.54 0-.448.564-.217 2.061.188 2.582.651.853 1.295.072 1.627-.615.333-.687.514-1.59-.274-1.967zM5.39 44.198s3.97.274 4.036-2.987c.05-2.892-3.486-2.545-3.486-2.545s-1.902-2.893-4.064-1.65c-2.538 1.498-.918 4.477-.918 4.477s-2.358 2.61.325 4.202c2.994 1.786 4.107-1.497 4.107-1.497z"/>
+                                        <use xlink:href="#icon-emissions"></use>
                                     </svg>
                                 </div>
                             </div>
-                            <div id="menu-sinks-transport" class="subMenu-emissions-container emissions-sinks">               
+                            <div id="menu-sinks-transportEnergy" class="subMenu-emissions-container emissions-sources">               
                                 <div class = "subMenu-emissions-label">Transport</div>
                                 <div class = "subMenu-emissions-icon-container ">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
@@ -1286,44 +1196,39 @@
                                     </svg>
                                 </div>
                             </div>
-                            <div id="menu-sinks-waste" class="subMenu-emissions-container emissions-sinks">               
-                                <div class = "subMenu-emissions-label">Waste</div>
+                            <div id="menu-sinks-wasteAndWasteWater" class="subMenu-emissions-container emissions-sources">               
+                                <div class = "subMenu-emissions-label">Waste and wastewater</div>
                                 <div class = "subMenu-emissions-icon-container ">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-                                        <path d="M42.466 18.295a7.63 7.63 0 00-.492-9.755c-4.281-5.062-10.457-2.105-10.457-2.105a7.687 7.687 0 00-7.231-2.53 8.186 8.186 0 00-6.385 4.845s-3.652-3.58-8.497 1.446-.911 9.335-.911 9.335-5.966 2.524-3.717 8.772a9.018 9.018 0 008.49 6.038s-.283 8.345 6.247 9.401a8.396 8.396 0 009.054-4.339s2.892 6.508 9.683 2.582c6.79-3.927 4.28-7.615 4.28-7.615s6.878-.774 7.442-7.094c.564-6.32-7.506-8.981-7.506-8.981zM23.91 28.057c-2.083.666-4.823.253-5.843-1.909a4.693 4.693 0 012.17-5.951c1.12-.593 2.111 1.099.99 1.692-1.12.593-2.054 2.249-1.309 3.536.745 1.287 2.372 1.092 3.486.723 1.113-.369 1.714 1.526.506 1.91zm6.03-3.89c-1.127 1.677-3.253 2.104-4.642.448a4.563 4.563 0 01-.1-5.358c1.07-1.193 3.13-.955 4.338-.13 1.728 1.15 1.417 3.521.405 5.04zm5.663 3.297h-2.589a1.027 1.027 0 01-.882-1.533c.304-.491.723-.89 1.041-1.352l.044-.08a1.1 1.1 0 01-1.266-1.25c.253-1.447 2.336-1.678 3.16-.594a2.321 2.321 0 01.232 2.17 2.95 2.95 0 01-.311.6h.571a1.02 1.02 0 010 2.04zm-7.42-6.783c-.426-.202-1.185-.383-1.54 0-.448.564-.217 2.061.188 2.582.651.853 1.295.072 1.627-.615.333-.687.514-1.59-.274-1.967zM5.39 44.198s3.97.274 4.036-2.987c.05-2.892-3.486-2.545-3.486-2.545s-1.902-2.893-4.064-1.65c-2.538 1.498-.918 4.477-.918 4.477s-2.358 2.61.325 4.202c2.994 1.786 4.107-1.497 4.107-1.497z"/>
-                                    </svg>
+                                        <use xlink:href="#icon-emissions"></use>                                    </svg>
                                 </div>
                             </div>
-                            <div id="menu-sinks-industrial-processes-and-product-use" class="subMenu-emissions-container emissions-sinks">               
+                            <div id="menu-sinks-industrialProcessesAndProductUse" class="subMenu-emissions-container emissions-sources">               
                                 <div class = "subMenu-emissions-label">Industrial processes and product use</div>
                                 <div class = "subMenu-emissions-icon-container ">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-                                        <path d="M42.466 18.295a7.63 7.63 0 00-.492-9.755c-4.281-5.062-10.457-2.105-10.457-2.105a7.687 7.687 0 00-7.231-2.53 8.186 8.186 0 00-6.385 4.845s-3.652-3.58-8.497 1.446-.911 9.335-.911 9.335-5.966 2.524-3.717 8.772a9.018 9.018 0 008.49 6.038s-.283 8.345 6.247 9.401a8.396 8.396 0 009.054-4.339s2.892 6.508 9.683 2.582c6.79-3.927 4.28-7.615 4.28-7.615s6.878-.774 7.442-7.094c.564-6.32-7.506-8.981-7.506-8.981zM23.91 28.057c-2.083.666-4.823.253-5.843-1.909a4.693 4.693 0 012.17-5.951c1.12-.593 2.111 1.099.99 1.692-1.12.593-2.054 2.249-1.309 3.536.745 1.287 2.372 1.092 3.486.723 1.113-.369 1.714 1.526.506 1.91zm6.03-3.89c-1.127 1.677-3.253 2.104-4.642.448a4.563 4.563 0 01-.1-5.358c1.07-1.193 3.13-.955 4.338-.13 1.728 1.15 1.417 3.521.405 5.04zm5.663 3.297h-2.589a1.027 1.027 0 01-.882-1.533c.304-.491.723-.89 1.041-1.352l.044-.08a1.1 1.1 0 01-1.266-1.25c.253-1.447 2.336-1.678 3.16-.594a2.321 2.321 0 01.232 2.17 2.95 2.95 0 01-.311.6h.571a1.02 1.02 0 010 2.04zm-7.42-6.783c-.426-.202-1.185-.383-1.54 0-.448.564-.217 2.061.188 2.582.651.853 1.295.072 1.627-.615.333-.687.514-1.59-.274-1.967zM5.39 44.198s3.97.274 4.036-2.987c.05-2.892-3.486-2.545-3.486-2.545s-1.902-2.893-4.064-1.65c-2.538 1.498-.918 4.477-.918 4.477s-2.358 2.61.325 4.202c2.994 1.786 4.107-1.497 4.107-1.497z"/>
-                                    </svg>
+                                        <use xlink:href="#icon-emissions"></use>                                    </svg>
                                 </div>
                             </div>
-                            <div id="menu-sinks-agriculture" class="subMenu-emissions-container emissions-sinks">               
+                            <div id="menu-sinks-agriculture" class="subMenu-emissions-container emissions-sources">               
                                 <div class = "subMenu-emissions-label">Agriculture</div>
                                 <div class = "subMenu-emissions-icon-container ">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-                                        <path d="M42.466 18.295a7.63 7.63 0 00-.492-9.755c-4.281-5.062-10.457-2.105-10.457-2.105a7.687 7.687 0 00-7.231-2.53 8.186 8.186 0 00-6.385 4.845s-3.652-3.58-8.497 1.446-.911 9.335-.911 9.335-5.966 2.524-3.717 8.772a9.018 9.018 0 008.49 6.038s-.283 8.345 6.247 9.401a8.396 8.396 0 009.054-4.339s2.892 6.508 9.683 2.582c6.79-3.927 4.28-7.615 4.28-7.615s6.878-.774 7.442-7.094c.564-6.32-7.506-8.981-7.506-8.981zM23.91 28.057c-2.083.666-4.823.253-5.843-1.909a4.693 4.693 0 012.17-5.951c1.12-.593 2.111 1.099.99 1.692-1.12.593-2.054 2.249-1.309 3.536.745 1.287 2.372 1.092 3.486.723 1.113-.369 1.714 1.526.506 1.91zm6.03-3.89c-1.127 1.677-3.253 2.104-4.642.448a4.563 4.563 0 01-.1-5.358c1.07-1.193 3.13-.955 4.338-.13 1.728 1.15 1.417 3.521.405 5.04zm5.663 3.297h-2.589a1.027 1.027 0 01-.882-1.533c.304-.491.723-.89 1.041-1.352l.044-.08a1.1 1.1 0 01-1.266-1.25c.253-1.447 2.336-1.678 3.16-.594a2.321 2.321 0 01.232 2.17 2.95 2.95 0 01-.311.6h.571a1.02 1.02 0 010 2.04zm-7.42-6.783c-.426-.202-1.185-.383-1.54 0-.448.564-.217 2.061.188 2.582.651.853 1.295.072 1.627-.615.333-.687.514-1.59-.274-1.967zM5.39 44.198s3.97.274 4.036-2.987c.05-2.892-3.486-2.545-3.486-2.545s-1.902-2.893-4.064-1.65c-2.538 1.498-.918 4.477-.918 4.477s-2.358 2.61.325 4.202c2.994 1.786 4.107-1.497 4.107-1.497z"/>
-                                    </svg>
+                                        <use xlink:href="#icon-emissions"></use>                                    </svg>
                                 </div>
                             </div>
-                            <div id="menu-sinks-stationary-energy" class="subMenu-emissions-container emissions-sinks">               
+                            <div id="menu-sinks-landAndForestry" class="subMenu-emissions-container emissions-sources">               
                                 <div class = "subMenu-emissions-label">Forestry and land use</div>
                                 <div class = "subMenu-emissions-icon-container ">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-                                        <path d="M42.466 18.295a7.63 7.63 0 00-.492-9.755c-4.281-5.062-10.457-2.105-10.457-2.105a7.687 7.687 0 00-7.231-2.53 8.186 8.186 0 00-6.385 4.845s-3.652-3.58-8.497 1.446-.911 9.335-.911 9.335-5.966 2.524-3.717 8.772a9.018 9.018 0 008.49 6.038s-.283 8.345 6.247 9.401a8.396 8.396 0 009.054-4.339s2.892 6.508 9.683 2.582c6.79-3.927 4.28-7.615 4.28-7.615s6.878-.774 7.442-7.094c.564-6.32-7.506-8.981-7.506-8.981zM23.91 28.057c-2.083.666-4.823.253-5.843-1.909a4.693 4.693 0 012.17-5.951c1.12-.593 2.111 1.099.99 1.692-1.12.593-2.054 2.249-1.309 3.536.745 1.287 2.372 1.092 3.486.723 1.113-.369 1.714 1.526.506 1.91zm6.03-3.89c-1.127 1.677-3.253 2.104-4.642.448a4.563 4.563 0 01-.1-5.358c1.07-1.193 3.13-.955 4.338-.13 1.728 1.15 1.417 3.521.405 5.04zm5.663 3.297h-2.589a1.027 1.027 0 01-.882-1.533c.304-.491.723-.89 1.041-1.352l.044-.08a1.1 1.1 0 01-1.266-1.25c.253-1.447 2.336-1.678 3.16-.594a2.321 2.321 0 01.232 2.17 2.95 2.95 0 01-.311.6h.571a1.02 1.02 0 010 2.04zm-7.42-6.783c-.426-.202-1.185-.383-1.54 0-.448.564-.217 2.061.188 2.582.651.853 1.295.072 1.627-.615.333-.687.514-1.59-.274-1.967zM5.39 44.198s3.97.274 4.036-2.987c.05-2.892-3.486-2.545-3.486-2.545s-1.902-2.893-4.064-1.65c-2.538 1.498-.918 4.477-.918 4.477s-2.358 2.61.325 4.202c2.994 1.786 4.107-1.497 4.107-1.497z"/>
-                                    </svg>
+                                        <use xlink:href="#icon-emissions"></use>                                    </svg>
                                 </div>
                             </div>
-                            <div id="menu-emissions-offsets" class="subMenu-emissions-container emissions-sinks">               
-                                <div class = "subMenu-emissions-label">Carbon offsets</div>
+                            <div id="menu-sinks-all" class="subMenu-emissions-container emissions-sources">               
+                                <div class = "subMenu-emissions-label">All emissions sinks and offsets</div>
                                 <div class = "subMenu-emissions-icon-container ">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-                                        <path d="M42.466 18.295a7.63 7.63 0 00-.492-9.755c-4.281-5.062-10.457-2.105-10.457-2.105a7.687 7.687 0 00-7.231-2.53 8.186 8.186 0 00-6.385 4.845s-3.652-3.58-8.497 1.446-.911 9.335-.911 9.335-5.966 2.524-3.717 8.772a9.018 9.018 0 008.49 6.038s-.283 8.345 6.247 9.401a8.396 8.396 0 009.054-4.339s2.892 6.508 9.683 2.582c6.79-3.927 4.28-7.615 4.28-7.615s6.878-.774 7.442-7.094c.564-6.32-7.506-8.981-7.506-8.981zM23.91 28.057c-2.083.666-4.823.253-5.843-1.909a4.693 4.693 0 012.17-5.951c1.12-.593 2.111 1.099.99 1.692-1.12.593-2.054 2.249-1.309 3.536.745 1.287 2.372 1.092 3.486.723 1.113-.369 1.714 1.526.506 1.91zm6.03-3.89c-1.127 1.677-3.253 2.104-4.642.448a4.563 4.563 0 01-.1-5.358c1.07-1.193 3.13-.955 4.338-.13 1.728 1.15 1.417 3.521.405 5.04zm5.663 3.297h-2.589a1.027 1.027 0 01-.882-1.533c.304-.491.723-.89 1.041-1.352l.044-.08a1.1 1.1 0 01-1.266-1.25c.253-1.447 2.336-1.678 3.16-.594a2.321 2.321 0 01.232 2.17 2.95 2.95 0 01-.311.6h.571a1.02 1.02 0 010 2.04zm-7.42-6.783c-.426-.202-1.185-.383-1.54 0-.448.564-.217 2.061.188 2.582.651.853 1.295.072 1.627-.615.333-.687.514-1.59-.274-1.967zM5.39 44.198s3.97.274 4.036-2.987c.05-2.892-3.486-2.545-3.486-2.545s-1.902-2.893-4.064-1.65c-2.538 1.498-.918 4.477-.918 4.477s-2.358 2.61.325 4.202c2.994 1.786 4.107-1.497 4.107-1.497z"/>
-                                    </svg>
+                                        <use xlink:href="#icon-emissions"></use>                                    </svg>
                                 </div>
                             </div>
                         </div>
@@ -1339,12 +1244,11 @@
                         <div class="subMenu-header">How can we see already reduced emissions?</div>
                         <div class="subMenu-text">
                             <p> Seeing all these balloons is kind of fascinating and hopefully a bit alarming!
-                                You've probably noticed balloons have different sizes and, yes this size is linked to an estimate of GHGs are being emitted or removed from the atmosphere.</p>
-                            <p> What isn't shown how much carbon Kodam has avoided or prevented by adopting clean technologies and behaviours. 
-                                These are different from 'sinks' because we've already stopped GHGs from going into the atmosphere.</p>
+                                You've probably noticed that the balloons vary in size, which represents an estimate of the amount of GHGs are being emitted or removed from the atmosphere.</p>
+                            <p> What isn't shown is how much carbon Kodam has avoided by adopting clean technologies and behaviours. 
+                                These are different from 'sinks' because GHGs are never released into the atmosphere.</p>
                              <p> We call these 'switches' because it often involves switching a fuel source, or piece of technology to something with zero or less emissions than before.
-                                And in our balloon world, we firstly need another colour! 
-                                But we also need to reduce the size of our black balloons every time we put a new 'clean technology' piece into the world</p>
+                                 In our balloon world, we firstly need another colour! (And to reduce the size of our black balloons accordingly).</p>
                         </div>
                         <div class="narrative-controls-container">
                             <div class="narrative-controls-button back">&larr;</div>
@@ -1355,58 +1259,62 @@
 
                 <div id="narrative-emissions-8" class="narrative-container emissions">
                     <div class="subMenu-narrative-container"> 
-                        <div class="subMenu-header">"Switches": seeing emissions reduction</div>
+                        <div class="subMenu-header">The switch to low emissions alternatives</div>
                         <div class="subMenu-text instruction">
-                            <p> Here are a handfull of emissions reducing switches that we can add to Kodam. 
-                                There are many more 'actions' that we'll look into, so think of this as a small sample to show the emissions reductions already achieved in green balloons!</p>
+                            <p> HUse the sector options to see emissions reduction actions (switches) as 'green balloons' 
+                                This represents actions already taken. 
+                                We'll explore future actins shortly! </p>
                         </div>
                         <div class = "event-options-container">
-                            <div id="menu-switches-rooftop-solar" class="subMenu-emissions-container emissions-switches">               
-                                <div class = "subMenu-emissions-label">Household rooftop solar</div>
+                            <div id="menu-switches-stationaryEnergy" class="subMenu-emissions-container emissions-sources">               
+                                <div class = "subMenu-emissions-label">Stationary energy</div>
+                                <div class = "subMenu-emissions-icon-container ">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+                                        <use xlink:href="#icon-emissions"></use>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div id="menu-switches-transportEnergy" class="subMenu-emissions-container emissions-sources">               
+                                <div class = "subMenu-emissions-label">Transport</div>
                                 <div class = "subMenu-emissions-icon-container ">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
                                         <path d="M42.466 18.295a7.63 7.63 0 00-.492-9.755c-4.281-5.062-10.457-2.105-10.457-2.105a7.687 7.687 0 00-7.231-2.53 8.186 8.186 0 00-6.385 4.845s-3.652-3.58-8.497 1.446-.911 9.335-.911 9.335-5.966 2.524-3.717 8.772a9.018 9.018 0 008.49 6.038s-.283 8.345 6.247 9.401a8.396 8.396 0 009.054-4.339s2.892 6.508 9.683 2.582c6.79-3.927 4.28-7.615 4.28-7.615s6.878-.774 7.442-7.094c.564-6.32-7.506-8.981-7.506-8.981zM23.91 28.057c-2.083.666-4.823.253-5.843-1.909a4.693 4.693 0 012.17-5.951c1.12-.593 2.111 1.099.99 1.692-1.12.593-2.054 2.249-1.309 3.536.745 1.287 2.372 1.092 3.486.723 1.113-.369 1.714 1.526.506 1.91zm6.03-3.89c-1.127 1.677-3.253 2.104-4.642.448a4.563 4.563 0 01-.1-5.358c1.07-1.193 3.13-.955 4.338-.13 1.728 1.15 1.417 3.521.405 5.04zm5.663 3.297h-2.589a1.027 1.027 0 01-.882-1.533c.304-.491.723-.89 1.041-1.352l.044-.08a1.1 1.1 0 01-1.266-1.25c.253-1.447 2.336-1.678 3.16-.594a2.321 2.321 0 01.232 2.17 2.95 2.95 0 01-.311.6h.571a1.02 1.02 0 010 2.04zm-7.42-6.783c-.426-.202-1.185-.383-1.54 0-.448.564-.217 2.061.188 2.582.651.853 1.295.072 1.627-.615.333-.687.514-1.59-.274-1.967zM5.39 44.198s3.97.274 4.036-2.987c.05-2.892-3.486-2.545-3.486-2.545s-1.902-2.893-4.064-1.65c-2.538 1.498-.918 4.477-.918 4.477s-2.358 2.61.325 4.202c2.994 1.786 4.107-1.497 4.107-1.497z"/>
                                     </svg>
                                 </div>
                             </div>
-                            <div id="menu-switches-domestic-hot-water" class="subMenu-emissions-container emissions-switches">               
-                                <div class = "subMenu-emissions-label">Heat pump domestic hot water</div>
+                            <div id="menu-switches-wasteAndWasteWater" class="subMenu-emissions-container emissions-sources">               
+                                <div class = "subMenu-emissions-label">Waste and wastewater</div>
                                 <div class = "subMenu-emissions-icon-container ">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-                                        <path d="M42.466 18.295a7.63 7.63 0 00-.492-9.755c-4.281-5.062-10.457-2.105-10.457-2.105a7.687 7.687 0 00-7.231-2.53 8.186 8.186 0 00-6.385 4.845s-3.652-3.58-8.497 1.446-.911 9.335-.911 9.335-5.966 2.524-3.717 8.772a9.018 9.018 0 008.49 6.038s-.283 8.345 6.247 9.401a8.396 8.396 0 009.054-4.339s2.892 6.508 9.683 2.582c6.79-3.927 4.28-7.615 4.28-7.615s6.878-.774 7.442-7.094c.564-6.32-7.506-8.981-7.506-8.981zM23.91 28.057c-2.083.666-4.823.253-5.843-1.909a4.693 4.693 0 012.17-5.951c1.12-.593 2.111 1.099.99 1.692-1.12.593-2.054 2.249-1.309 3.536.745 1.287 2.372 1.092 3.486.723 1.113-.369 1.714 1.526.506 1.91zm6.03-3.89c-1.127 1.677-3.253 2.104-4.642.448a4.563 4.563 0 01-.1-5.358c1.07-1.193 3.13-.955 4.338-.13 1.728 1.15 1.417 3.521.405 5.04zm5.663 3.297h-2.589a1.027 1.027 0 01-.882-1.533c.304-.491.723-.89 1.041-1.352l.044-.08a1.1 1.1 0 01-1.266-1.25c.253-1.447 2.336-1.678 3.16-.594a2.321 2.321 0 01.232 2.17 2.95 2.95 0 01-.311.6h.571a1.02 1.02 0 010 2.04zm-7.42-6.783c-.426-.202-1.185-.383-1.54 0-.448.564-.217 2.061.188 2.582.651.853 1.295.072 1.627-.615.333-.687.514-1.59-.274-1.967zM5.39 44.198s3.97.274 4.036-2.987c.05-2.892-3.486-2.545-3.486-2.545s-1.902-2.893-4.064-1.65c-2.538 1.498-.918 4.477-.918 4.477s-2.358 2.61.325 4.202c2.994 1.786 4.107-1.497 4.107-1.497z"/>
-                                    </svg>
+                                        <use xlink:href="#icon-emissions"></use>                                    </svg>
                                 </div>
                             </div>
-                            <div id="menu-switches-led-lighting" class="subMenu-emissions-container emissions-switches">               
-                                <div class = "subMenu-emissions-label">Commercial LED lighting</div>
+                            <div id="menu-switches-industrialProcessesAndProductUse" class="subMenu-emissions-container emissions-sources">               
+                                <div class = "subMenu-emissions-label">Industrial processes and product use</div>
                                 <div class = "subMenu-emissions-icon-container ">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-                                        <path d="M42.466 18.295a7.63 7.63 0 00-.492-9.755c-4.281-5.062-10.457-2.105-10.457-2.105a7.687 7.687 0 00-7.231-2.53 8.186 8.186 0 00-6.385 4.845s-3.652-3.58-8.497 1.446-.911 9.335-.911 9.335-5.966 2.524-3.717 8.772a9.018 9.018 0 008.49 6.038s-.283 8.345 6.247 9.401a8.396 8.396 0 009.054-4.339s2.892 6.508 9.683 2.582c6.79-3.927 4.28-7.615 4.28-7.615s6.878-.774 7.442-7.094c.564-6.32-7.506-8.981-7.506-8.981zM23.91 28.057c-2.083.666-4.823.253-5.843-1.909a4.693 4.693 0 012.17-5.951c1.12-.593 2.111 1.099.99 1.692-1.12.593-2.054 2.249-1.309 3.536.745 1.287 2.372 1.092 3.486.723 1.113-.369 1.714 1.526.506 1.91zm6.03-3.89c-1.127 1.677-3.253 2.104-4.642.448a4.563 4.563 0 01-.1-5.358c1.07-1.193 3.13-.955 4.338-.13 1.728 1.15 1.417 3.521.405 5.04zm5.663 3.297h-2.589a1.027 1.027 0 01-.882-1.533c.304-.491.723-.89 1.041-1.352l.044-.08a1.1 1.1 0 01-1.266-1.25c.253-1.447 2.336-1.678 3.16-.594a2.321 2.321 0 01.232 2.17 2.95 2.95 0 01-.311.6h.571a1.02 1.02 0 010 2.04zm-7.42-6.783c-.426-.202-1.185-.383-1.54 0-.448.564-.217 2.061.188 2.582.651.853 1.295.072 1.627-.615.333-.687.514-1.59-.274-1.967zM5.39 44.198s3.97.274 4.036-2.987c.05-2.892-3.486-2.545-3.486-2.545s-1.902-2.893-4.064-1.65c-2.538 1.498-.918 4.477-.918 4.477s-2.358 2.61.325 4.202c2.994 1.786 4.107-1.497 4.107-1.497z"/>
-                                    </svg>
+                                        <use xlink:href="#icon-emissions"></use>                                    </svg>
                                 </div>
                             </div>
-                            <div id="menu-switches-hospital-hvac" class="subMenu-emissions-container emissions-switches">               
-                                <div class = "subMenu-emissions-label">Upgraded and efficient HVAC</div>
+                            <div id="menu-switches-agriculture" class="subMenu-emissions-container emissions-sources">               
+                                <div class = "subMenu-emissions-label">Agriculture</div>
                                 <div class = "subMenu-emissions-icon-container ">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-                                        <path d="M42.466 18.295a7.63 7.63 0 00-.492-9.755c-4.281-5.062-10.457-2.105-10.457-2.105a7.687 7.687 0 00-7.231-2.53 8.186 8.186 0 00-6.385 4.845s-3.652-3.58-8.497 1.446-.911 9.335-.911 9.335-5.966 2.524-3.717 8.772a9.018 9.018 0 008.49 6.038s-.283 8.345 6.247 9.401a8.396 8.396 0 009.054-4.339s2.892 6.508 9.683 2.582c6.79-3.927 4.28-7.615 4.28-7.615s6.878-.774 7.442-7.094c.564-6.32-7.506-8.981-7.506-8.981zM23.91 28.057c-2.083.666-4.823.253-5.843-1.909a4.693 4.693 0 012.17-5.951c1.12-.593 2.111 1.099.99 1.692-1.12.593-2.054 2.249-1.309 3.536.745 1.287 2.372 1.092 3.486.723 1.113-.369 1.714 1.526.506 1.91zm6.03-3.89c-1.127 1.677-3.253 2.104-4.642.448a4.563 4.563 0 01-.1-5.358c1.07-1.193 3.13-.955 4.338-.13 1.728 1.15 1.417 3.521.405 5.04zm5.663 3.297h-2.589a1.027 1.027 0 01-.882-1.533c.304-.491.723-.89 1.041-1.352l.044-.08a1.1 1.1 0 01-1.266-1.25c.253-1.447 2.336-1.678 3.16-.594a2.321 2.321 0 01.232 2.17 2.95 2.95 0 01-.311.6h.571a1.02 1.02 0 010 2.04zm-7.42-6.783c-.426-.202-1.185-.383-1.54 0-.448.564-.217 2.061.188 2.582.651.853 1.295.072 1.627-.615.333-.687.514-1.59-.274-1.967zM5.39 44.198s3.97.274 4.036-2.987c.05-2.892-3.486-2.545-3.486-2.545s-1.902-2.893-4.064-1.65c-2.538 1.498-.918 4.477-.918 4.477s-2.358 2.61.325 4.202c2.994 1.786 4.107-1.497 4.107-1.497z"/>
-                                    </svg>
+                                        <use xlink:href="#icon-emissions"></use>                                    </svg>
                                 </div>
                             </div>
-                            <div id="menu-switches-electric-vehicles" class="subMenu-emissions-container emissions-switches">               
-                                <div class = "subMenu-emissions-label">Electric vehicles</div>
+                            <div id="menu-switches-landAndForestry" class="subMenu-emissions-container emissions-sources">               
+                                <div class = "subMenu-emissions-label">Forestry and land use</div>
                                 <div class = "subMenu-emissions-icon-container ">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-                                        <path d="M42.466 18.295a7.63 7.63 0 00-.492-9.755c-4.281-5.062-10.457-2.105-10.457-2.105a7.687 7.687 0 00-7.231-2.53 8.186 8.186 0 00-6.385 4.845s-3.652-3.58-8.497 1.446-.911 9.335-.911 9.335-5.966 2.524-3.717 8.772a9.018 9.018 0 008.49 6.038s-.283 8.345 6.247 9.401a8.396 8.396 0 009.054-4.339s2.892 6.508 9.683 2.582c6.79-3.927 4.28-7.615 4.28-7.615s6.878-.774 7.442-7.094c.564-6.32-7.506-8.981-7.506-8.981zM23.91 28.057c-2.083.666-4.823.253-5.843-1.909a4.693 4.693 0 012.17-5.951c1.12-.593 2.111 1.099.99 1.692-1.12.593-2.054 2.249-1.309 3.536.745 1.287 2.372 1.092 3.486.723 1.113-.369 1.714 1.526.506 1.91zm6.03-3.89c-1.127 1.677-3.253 2.104-4.642.448a4.563 4.563 0 01-.1-5.358c1.07-1.193 3.13-.955 4.338-.13 1.728 1.15 1.417 3.521.405 5.04zm5.663 3.297h-2.589a1.027 1.027 0 01-.882-1.533c.304-.491.723-.89 1.041-1.352l.044-.08a1.1 1.1 0 01-1.266-1.25c.253-1.447 2.336-1.678 3.16-.594a2.321 2.321 0 01.232 2.17 2.95 2.95 0 01-.311.6h.571a1.02 1.02 0 010 2.04zm-7.42-6.783c-.426-.202-1.185-.383-1.54 0-.448.564-.217 2.061.188 2.582.651.853 1.295.072 1.627-.615.333-.687.514-1.59-.274-1.967zM5.39 44.198s3.97.274 4.036-2.987c.05-2.892-3.486-2.545-3.486-2.545s-1.902-2.893-4.064-1.65c-2.538 1.498-.918 4.477-.918 4.477s-2.358 2.61.325 4.202c2.994 1.786 4.107-1.497 4.107-1.497z"/>
-                                    </svg>
+                                        <use xlink:href="#icon-emissions"></use>                                    </svg>
                                 </div>
                             </div>
-                            <div id="menu-sinks-waste-" class="subMenu-emissions-container emissions-switches">               
-                                <div class = "subMenu-emissions-label">Waste to energy</div>
+                            <div id="menu-switches-all" class="subMenu-emissions-container emissions-sources">               
+                                <div class = "subMenu-emissions-label">All emissions avoided and switched</div>
                                 <div class = "subMenu-emissions-icon-container ">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-                                        <path d="M42.466 18.295a7.63 7.63 0 00-.492-9.755c-4.281-5.062-10.457-2.105-10.457-2.105a7.687 7.687 0 00-7.231-2.53 8.186 8.186 0 00-6.385 4.845s-3.652-3.58-8.497 1.446-.911 9.335-.911 9.335-5.966 2.524-3.717 8.772a9.018 9.018 0 008.49 6.038s-.283 8.345 6.247 9.401a8.396 8.396 0 009.054-4.339s2.892 6.508 9.683 2.582c6.79-3.927 4.28-7.615 4.28-7.615s6.878-.774 7.442-7.094c.564-6.32-7.506-8.981-7.506-8.981zM23.91 28.057c-2.083.666-4.823.253-5.843-1.909a4.693 4.693 0 012.17-5.951c1.12-.593 2.111 1.099.99 1.692-1.12.593-2.054 2.249-1.309 3.536.745 1.287 2.372 1.092 3.486.723 1.113-.369 1.714 1.526.506 1.91zm6.03-3.89c-1.127 1.677-3.253 2.104-4.642.448a4.563 4.563 0 01-.1-5.358c1.07-1.193 3.13-.955 4.338-.13 1.728 1.15 1.417 3.521.405 5.04zm5.663 3.297h-2.589a1.027 1.027 0 01-.882-1.533c.304-.491.723-.89 1.041-1.352l.044-.08a1.1 1.1 0 01-1.266-1.25c.253-1.447 2.336-1.678 3.16-.594a2.321 2.321 0 01.232 2.17 2.95 2.95 0 01-.311.6h.571a1.02 1.02 0 010 2.04zm-7.42-6.783c-.426-.202-1.185-.383-1.54 0-.448.564-.217 2.061.188 2.582.651.853 1.295.072 1.627-.615.333-.687.514-1.59-.274-1.967zM5.39 44.198s3.97.274 4.036-2.987c.05-2.892-3.486-2.545-3.486-2.545s-1.902-2.893-4.064-1.65c-2.538 1.498-.918 4.477-.918 4.477s-2.358 2.61.325 4.202c2.994 1.786 4.107-1.497 4.107-1.497z"/>
-                                    </svg>
+                                        <use xlink:href="#icon-emissions"></use>                                    </svg>
                                 </div>
                             </div>
                         </div>
@@ -1470,6 +1378,7 @@
                         </div> 
                     </div>
                 </div>
+
                 <div id="narrative-emissions-12" class="narrative-container emissions">
                     <div class="subMenu-narrative-container"> 
                         <div class="subMenu-header">Avoiding double counting</div>
@@ -1682,7 +1591,7 @@
                     <div id="details-intensity-container" class = "hidden"></div> 
                     <div id ="details-content-right" class="details-content-container"></div>
                     <div id="details-right-more" class="details-more-container">
-                        <div id="details-more-label">&#8618; Read more</div>                        
+                        <div id="details-more-label">&rarr; Read more</div>                        
                     </div>
                 </div>
             </div>
@@ -1767,7 +1676,11 @@
                 <symbol id="icon-earthquake" viewBox="0 0 50 50">
                     <path d="M40.827 21.47c-.694 0-1.333.384-1.658.996l-2.698 5.084-3.324-9.74a1.879 1.879 0 00-1.712-1.266 1.863 1.863 0 00-1.794 1.146l-2.281 5.417-3.6-21.564c-.165-.906-1.014-1.594-1.885-1.54-.921.021-1.692.626-1.817 1.54l-3.179 25.026-2.578-13.432a1.872 1.872 0 00-1.6-1.505 1.882 1.882 0 00-1.931 1.048l-4.218 8.79H0v3.749h7.733c.722 0 1.378-.413 1.69-1.065l2.268-4.725 3.656 19.049c.17.886.944 1.52 1.841 1.52h.05a1.876 1.876 0 001.808-1.62l3.13-24.591 2.623 16.193a1.875 1.875 0 001.638 1.528 1.88 1.88 0 001.934-1.137l2.817-6.687 3.135 9.179a1.877 1.877 0 001.626 1.262c.747.042 1.455-.33 1.806-.991l4.2-7.915H50V21.47z"/>
                 </symbol>
+                <symbol id="icon-emissions" viewBox="0 0 50 50">
+                    <path d="M42.466 18.295a7.63 7.63 0 00-.492-9.755c-4.281-5.062-10.457-2.105-10.457-2.105a7.687 7.687 0 00-7.231-2.53 8.186 8.186 0 00-6.385 4.845s-3.652-3.58-8.497 1.446-.911 9.335-.911 9.335-5.966 2.524-3.717 8.772a9.018 9.018 0 008.49 6.038s-.283 8.345 6.247 9.401a8.396 8.396 0 009.054-4.339s2.892 6.508 9.683 2.582c6.79-3.927 4.28-7.615 4.28-7.615s6.878-.774 7.442-7.094c.564-6.32-7.506-8.981-7.506-8.981zM23.91 28.057c-2.083.666-4.823.253-5.843-1.909a4.693 4.693 0 012.17-5.951c1.12-.593 2.111 1.099.99 1.692-1.12.593-2.054 2.249-1.309 3.536.745 1.287 2.372 1.092 3.486.723 1.113-.369 1.714 1.526.506 1.91zm6.03-3.89c-1.127 1.677-3.253 2.104-4.642.448a4.563 4.563 0 01-.1-5.358c1.07-1.193 3.13-.955 4.338-.13 1.728 1.15 1.417 3.521.405 5.04zm5.663 3.297h-2.589a1.027 1.027 0 01-.882-1.533c.304-.491.723-.89 1.041-1.352l.044-.08a1.1 1.1 0 01-1.266-1.25c.253-1.447 2.336-1.678 3.16-.594a2.321 2.321 0 01.232 2.17 2.95 2.95 0 01-.311.6h.571a1.02 1.02 0 010 2.04zm-7.42-6.783c-.426-.202-1.185-.383-1.54 0-.448.564-.217 2.061.188 2.582.651.853 1.295.072 1.627-.615.333-.687.514-1.59-.274-1.967zM5.39 44.198s3.97.274 4.036-2.987c.05-2.892-3.486-2.545-3.486-2.545s-1.902-2.893-4.064-1.65c-2.538 1.498-.918 4.477-.918 4.477s-2.358 2.61.325 4.202c2.994 1.786 4.107-1.497 4.107-1.497z"></path>
+                </symbol>
             </svg>
+
             <!-- Shortcuts pane-->
             <div id="shortcuts">
                 <div id ="shortcuts-header">Interaction options</div>
@@ -1835,16 +1748,10 @@
 
         </div>
 
-
         <!-- AFRAME SCENE-->
         <a-scene id="scene" renderer="antialias: true"
                 vr-mode-ui="enabled: false"
-                fog="type: linear"
-                init-elements 
-                add-external-listeners
-                set-environment
-                set-hourly-environment
-                sail-duck
+                fog="type: linear" 
             > 
 
             <!-- ASSETS: MIXINS, MODELS AND TEMPLATES-->
@@ -2007,7 +1914,8 @@
                         <a-mixin id="col-string-black"          material='shader: line; color: #000; opacity: 0.5'></a-mixin>
                     <!-- Topography -->
                         <a-mixin id="col-snow" 	                material='color: #fff'></a-mixin>
-                        <a-mixin id="col-ground" 	            material='color: #658C52'></a-mixin>
+                        <!-- <a-mixin id="col-ground" 	            material='color: #658C52'></a-mixin> -->
+                        <a-mixin id="col-ground" 	            material='color: #89B671; roughness: 0.8'></a-mixin>
                         <a-mixin id="col-topSoil" 	            material='color: #A6734D'></a-mixin>
                         <a-mixin id="col-subSoil" 	            material='color: #6F3C18'></a-mixin>
                         <a-mixin id="col-rock" 	                material='color: #B9B4A9'></a-mixin>
@@ -2018,6 +1926,7 @@
                         <a-mixin id="col-river" 	            material="color: #3BB3D0"></a-mixin>
                         <a-mixin id="col-rocks"                 material='color: #a9a9a9'></a-mixin>
                         <a-mixin id="col-sand" 		            material='color: #e4e585'></a-mixin>
+                        <a-mixin id="col-sand" 		            material='color: #F7EAC9'></a-mixin>
                         <a-mixin id="col-lightning" 		    material='color: yellow; emissive: yellow'></a-mixin>
                         <a-mixin id="col-snow" 		            material ="color: #fff; flatShading: true" ></a-mixin>
                         <a-mixin id="col-mountain" 		        material ="color: #949494; flatShading: true" ></a-mixin>
@@ -2102,7 +2011,7 @@
                         <a-mixin id="dirtRoad" 		material="color: #A6734D; flatShading: true"  geometry= "width: 2; height: 0.1"></a-mixin>
                     <!--Materials: topography-->
                         <a-mixin id="snow-zone"     material='color: #FFF' geometry="primitive: cylinder; segmentsRadial: 6; height: 0.8; radius: 30" rotation="0 90 0"></a-mixin>
-                        <a-mixin id="ground-zone"   material='color: #658C52' geometry="primitive: cylinder; segmentsRadial: 6; height: 0.3; radius: 30" rotation="0 90 0"></a-mixin>
+                        <a-mixin id="ground-zone"   material='color: #89B671; roughness: 0.8' geometry="primitive: cylinder; segmentsRadial: 6; height: 0.3; radius: 30" rotation="0 90 0"></a-mixin>
                         <a-mixin id="topSoil-zone"  material='color: #A6734D' geometry="primitive: cylinder; segmentsRadial: 6; height: 1; radius: 30" rotation="0 90 0"></a-mixin>
                         <a-mixin id="subSoil-zone" 	material='color: #6F3C18' geometry="primitive: cylinder; segmentsRadial: 6; height: 2; radius: 30" rotation="0 90 0"></a-mixin>
                         <a-mixin id="rock-zone"     material='color: #6f6b62' geometry="primitive: cylinder; segmentsRadial: 6; height: 4; radius: 30" rotation="0 90 0"></a-mixin>
@@ -4476,13 +4385,12 @@
 
             <!-- CAMERAS-->
             <a-entity id="camera-group">
-                <a-entity id="lowcam-rig" rotation="0 0 0"  position="0 5 0" >
-                    <a-entity id="lowcam" rotation="0 0 0" camera="active: false; fov: 45" orbit-controls="enabled: true; initialPosition: 0 50 0; maxPolarAngle: 90; target: 0 10 0"></a-entity>
+                <a-entity id="orbitcam-rig" rotation="0 0 0"  position="0 5 0" >
+                    <a-entity id="orbitcam" rotation="0 0 0" camera="active: false; fov: 45" orbit-controls="enabled: true; initialPosition: 0 50 0; maxPolarAngle: 90; target: 0 10 0"></a-entity>
                 </a-entity>
                 <a-entity id="flycam-rig" position="180 60 0" rotation="-10 90 0" >
                     <a-entity id="flycam" camera="active: true; fov: 45; zoom: 0.9; near: 0.1" look-controls wasd-controls="acceleration: 150, enabled: true" ></a-entity>
                 </a-entity> 
-
             </a-entity>
 
             <!-- ANNOTATION-->
@@ -4561,7 +4469,7 @@
                     <a-entity id="fire-group" position="0 0 0 " visible="false">
                         <a-sphere class="fire emissions" position="-150 -5 0" material="shader: steam; blending: additive" scale="150 150 250" radius="40" segments-height="128" segments-width="128" geometry="radius: 0.25; segmentsHeight: 64; segmentsWidth: 64"></a-sphere>      
                     </a-entity>
-                        <a-entity id="vortex-group" visible="false">
+                    <a-entity id="vortex-group" visible="false">
                         <a-entity id ="vortex-debris">
                             <a-entity id="vortex-duck" position="0 10 0" gltf-model="#mdl-rubberDuck"></a-entity>
                         </a-entity>
@@ -6577,7 +6485,7 @@
                                     </a-entity>  
                                 </a-entity>
                                 <!-- FRONT CUTAWAY-->
-                                <a-entity class="cutaway-section" position="0 0 1.5" rotation="0 0 0">
+                                <a-entity id="townhouse-cutaway" class="cutaway-section" position="0 0 1.5" rotation="0 0 0">
                                     <a-entity class="fontFacade-group" position="3 0 0">
                                         <a-entity class="frontWall-group" mixin="col-townhouse-A-brick" buffer-geometry-merger>
                                             <a-box position="0.225 2 -0.05" scale="3.1 4 0.1" ></a-box>
@@ -9468,8 +9376,18 @@
 
 
         <script>
-            externalEvents.addTouchUI()
-            document.getElementById('clockhand-hour-group').setAttribute('class', 'hour-'+(state.scene.time.hour%12))
+            //////////////////////////////////////////
+            ///////  LOAD SEQUENCING    ///////
+            //////////////////////////////////////////
+
+            externalEvents.primeInterface()
+            document.addEventListener('DOMContentLoaded', function() {
+                console.log('DOM LOADED')
+                document.getElementById('scene').setAttribute('init-scene-setup', null)
+                document.getElementById('loader-button').innerHTML = 'Continue...'
+                document.getElementById('loader-button').classList.add('ready')
+            });
+
         </script>
     </body>
 </html> 
