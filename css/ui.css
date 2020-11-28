@@ -216,6 +216,7 @@
             color: rgba(0, 0, 0, 0.5);
             transform-origin: 0 0;
             transition: all ease-in-out 500ms;
+            display: none;
         }
         .subMenu-main-header.invite{
             transform: rotateY(45deg);
@@ -229,11 +230,13 @@
             color:#fff;
             padding: 1.5vw 1.5vw 0.5vw;
             margin-bottom: 0.25rem;    
+            height: 70vh;
         }
         .narrative-container{
             transform: rotateY(-100deg);
             transform-origin: 0 0;
             transition: all ease-in-out 500ms;
+            margin-top: 2.5vh;
         }
         .narrative-container.show{
             transform: rotateY(0deg);
@@ -251,6 +254,7 @@
             .subMenu-text{
                 line-height: 150%;
                 font-size: 1vw;
+                max-height: 60vh;
             }
             .subMenu-text ul{
                 padding-inline-start: 1rem;
@@ -268,8 +272,9 @@
 
         /* Narrative back/forward */
         .narrative-controls-container{
-            float: right;
-            /* margin-top: -1.5vw; */
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
         }
             .narrative-controls-button {
                 display: inline-flex;

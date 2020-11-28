@@ -23,6 +23,46 @@ sub {
     top: 0.4em; 
 }
 
+.palette-bluey{
+    /* Bluey */
+    color: #37324F;   
+    color: #A3B6EF;   
+    color: #DBE5FA;   
+    color: #CCC373;   
+    /* Bingo */
+    color: #A9763D;
+    color: #D0A96B;
+    color: #F6F7D4;
+    color: #F7EAC9;
+    /*Scene 1 */
+    color: #C8E27F;
+    color: #B6CD73;
+    color: #788B8F;
+    color: #5E756D;
+    color: #AEC463;
+    color: #6A8086;
+
+    color: #B49DDD;
+    color: #9482DD;
+    color: #7362C7;
+
+    color: #7362C7;
+    color: #E5E694;
+    color: #D1A0B9;
+    color: #BEEB99;
+
+    color: #DDB5C0;
+    color: #E0F4A2;
+    color: #CDA26C;
+    color: #CBCAF3;
+    color: #E7F88D;
+    color: #C1ECD2;
+    color: #9CDD95;
+    color: #9CDD95;
+
+}
+
+
 #scene{
     z-index: 0;
 }
@@ -60,7 +100,7 @@ sub {
         left:               0;
         width:              100vw;
         height:             100vh;
-        transition:         all ease-in-out 3000ms;
+        transition:         all ease-in-out 1500ms;
         backdrop-filter:    blur(0px) contrast(100%);
         -webkit-backdrop-filter:    blur(0px) contrast(100%);
     }
@@ -110,16 +150,24 @@ sub {
             line-height:        1.5;
             padding:            0 3vw;
             margin-bottom:      4vh;
+            transition:         all ease-in-out 500ms;
+        }
+        .loader-text.faded{
+            opacity: 0
+        }
+        .loader-button-container{
+            position: absolute;
+            bottom: 1rem;
+            width: 100%;
         }
         .loader-button{
-            bottom: 5%;
             margin: 0 auto;
             font-size: 1vw;
             font-weight: bold;
             line-height: 1.5;
             padding: 1vw;
             width: 25vw;
-            background: #45b8bf;
+            background: #A3B6EF;
             color: #fff;
             text-align: center;
             border-radius: 2rem;
@@ -127,8 +175,12 @@ sub {
             stroke-width: 0.5px;
             pointer-events: none;
             cursor: not-allowed;
-            /* -webkit-filter: drop-shadow(4px 4px 6px rgba(217, 221, 200, 1)) drop-shadow(-2px -2px 2px rgba(255, 255, 255, 0.83));      
-            filter: drop-shadow(4px 4px 4px rgba(217, 221, 200, 1)) drop-shadow(-2px -2px 4px rgba(255, 255, 255, 0.83)); 	 */
+            transition: all ease-in-out 50ms;
+        }
+        .loader-button:hover{
+            font-weight: bold;
+            width: 25vw;
+            background: #37324F;
         }
         .loader-button.ready{
             pointer-events: all;
