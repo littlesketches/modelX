@@ -168,7 +168,7 @@ console.log('BUILDING APP...')
         // Visual state of A-FRAME scene
         scene: {                  
             time: {
-                hour:               9,
+                hour:               12,
                 season:            'spring',
                 timeOfDay:          () => settings.environment.timeOfDay[state.scene.time.season][state.scene.time.hour],
             },
@@ -350,6 +350,11 @@ console.log('BUILDING APP...')
                     pos:            {x: -36,  y: 1,  z: 30},
                     rotation:       {x: 5,      y: 155,  z: 0}
                 },
+                // 'tour-misc-dollhouse':{
+                //     pos:            {x: -36,  y: 1,  z: 30},
+                //     rotation:       {x: 5,      y: 155,  z: 0}
+                // },
+
             },
         },
         hazard: {
@@ -432,18 +437,6 @@ console.log('BUILDING APP...')
                 sinks:          '#66ff00',      // Green
                 switches:        '#ff1dce',     // Magenta
             }
-        }
-    }
-
-    const visualModel = {
-        residential: {
-
-        }, 
-        commerical: {
-
-        }, 
-        industrial: {
-
         }
     }
 

@@ -14,11 +14,10 @@
     console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
 
     // SCENE SETUP AND WORLD UPDATE COMPONENTS
-        AFRAME.registerComponent('init-elements', {
+        AFRAME.registerComponent('init-scene-setup', {
             init: function(){
                 console.log('**** SETTING DOM ELEMENTS UP...****')
-
-                // Iniiate element references on initation for referencing in othercomponent code
+                // Initiate DOM element and group references in for referencing in other component code
                 scene.els.scene = document.getElementById('scene')
                 // Zones elements
                 scene.els.zones = {
@@ -57,11 +56,11 @@
                 // Camera elements
                 scene.els.cam = {
                     fly:            document.getElementById('flycam'),
-                    low:            document.getElementById('lowcam')
+                    orbit:          document.getElementById('orbitcam')
                 }
                 scene.els.camRig = {
                     fly:            document.getElementById('flycam-rig'),
-                    low:            document.getElementById('lowcam-rig')
+                    orbit:          document.getElementById('orbitcam-rig')
                 }
                 // Miscellaneous items
                 scene.els.items = {
@@ -81,21 +80,26 @@
                         "moon-1200", "moon-1300", "moon-1400", "moon-1500", "moon-1600", "moon-1700", 
                         "moon-1800", "moon-1900", "moon-2000", "moon-2100", "moon-2200", "moon-2300" ]
                 }    
-
+                // Home emissions features
                 const emissionsFeaturesSml = document.querySelectorAll('.house-small * .chimney, .house-small * .rooftop-solar, .house-small * .gas-meter, .house-small * .ac-unit, .house-small * .hot-water-tank, .house-small * .water-heat-pump, .house-small * .home-battery')
                 const emissionsFeaturesLrg = document.querySelectorAll('.house-large * .chimney, .house-large * .rooftop-solar, .house-large * .gas-meter, .house-large * .ac-unit, .house-large * .hot-water-tank, .house-large * .water-heat-pump .house-large * .home-battery')
 
                 emissionsFeaturesSml.forEach( el => { el.setAttribute('visible', true)  })
                 emissionsFeaturesLrg.forEach( el => { el.setAttribute('visible', true)  })
             },
+            update: function() {
+                console.log('**** SETTING UP SCENE ENVIRONMENT AND LISTENERS...****')
+                scene.els.scene.setAttribute('set-environment', null)
+                scene.els.scene.setAttribute('set-hourly-environment', null)
+                scene.els.scene.setAttribute('add-external-listeners', null)
+                scene.els.scene.setAttribute('emissions-activity-balloons', {visible: false})
+            }
         })
          
         AFRAME.registerComponent("set-environment", { 
             schema: {
                 dur:                  {type: 'number',    default: 2000},
                 name:                 {type: 'string',    default: state.scene.environment.name}
-            },
-            init: function(){
             },
             update: function(){
                 const timeOfDay = state.scene.time.timeOfDay()
@@ -238,25 +242,12 @@
             }
         })
 
-        AFRAME.registerComponent('initiate-ui', {
-            init: function(){
-                document.getElementById('loader-background').classList.remove('active')
-                setupMenuInterface()
-                addInteraction() 
-                setTimeout(() => {
-                    document.getElementById('loader-background').classList.remove('active')
-                    document.getElementById('loader-container').classList.add('hidden')
-                }, 1500)
-            }
-        })
-
-
     // CAMERA CONTROl
         AFRAME.registerComponent("move-fly-camera", {
             schema: {
                 dur:                {type: 'number',    default: 5000},
-                pos:                {type: 'array',     default: [0, 0, 0]},
-                rotation:           {type: 'array',     default: [0, 0, 0]},
+                pos:                {type: 'array',     default: [180, 60, 0]},
+                rotation:           {type: 'array',     default: [-10, 90, 0]},
                 reset:              {type: 'boolean',   default: false},
                 ease:               {type: 'string',    default: 'easeInOutCubic'},
                 camera:             {type: 'string',    default: ''}
@@ -304,48 +295,8 @@
             }
         })
 
-        AFRAME.registerComponent("move-low-camera", {
-            schema: {
-                dur:                {type: 'number',    default: 5000},
-                pos:                {type: 'array',     default: [0, 0, 0]},
-                target:             {type: 'array',     default: [0, 10, 0]},
-                reset:              {type: 'boolean',   default: false},
-                ease:               {type: 'string',    default: 'easeInOutCubic'},
-            },
 
-            update: function() {
-                const currentPos = scene.els.cam.low.getObject3D('camera').position,
-                    initPos = scene.els.cam.low.getAttribute('orbit-controls').initialPosition,
-                    moveToX = this.data.reset ? 0 : this.data.pos[0] - initPos.x,
-                    moveToY = this.data.reset ? 0 :  this.data.pos[1] - initPos.y,
-                    moveToZ = this.data.reset ? 0 :  this.data.pos[2] - initPos.z
-
-                console.log('Target position: '+ this.data.pos)
-                console.log('Duration: '+this.data.dur)
-                console.log('Move camera to:')
-                console.log('x: '+  moveToX)
-                console.log('y: '+  moveToY)
-                console.log('z: '+  moveToZ)
-                console.log('Move target to:')
-                console.log('x: '+  this.data.target[0])
-                console.log('y: '+  this.data.target[1])
-                console.log('z: '+  this.data.target[2])
-                scene.els.cam.low.setAttribute('animation__pos', {
-                    property:           'position',
-                    dur:                this.data.dur,
-                    to:                 `${moveToX}  ${moveToY} ${moveToZ}`,
-                    easing:              this.data.ease
-                })
-
-                scene.els.cam.low.setAttribute('animation__target', {
-                    property:           'orbit-controls.target',
-                    dur:                this.data.dur,
-                    to:                 `${this.data.target[0]}  ${this.data.target[1]} ${this.data.target[2]}`,
-                    easing:              this.data.ease
-                })
-            }
-        })
-
+    // MISCELLANEOUS SCENE CONTROl
         AFRAME.registerComponent("fly-plane", {
             init: function () {
                 document.getElementById("plane-animation").setAttribute('alongpath', {
@@ -372,6 +323,36 @@
 
             remove: function(){
                 document.getElementById("rubberDuck").removeAttribute('alongpath')
+            }
+        })
+
+        AFRAME.registerComponent("toggle-dollhouse", {
+            schema: {
+                dur:                  {type: 'number',    default: 4000},
+                delay:                {type: 'number',    default: 10000},
+                rotation:             {type: 'number',    default: -120}
+            },
+            update: function () {
+                const currentRotation = document.getElementById("townhouse-cutaway").getAttribute('rotation').y    
+                // Move the camera to dollhouse if opening the 
+                if(currentRotation === 0){
+                    scene.els.scene.setAttribute('move-fly-camera', {
+                        dur:                this.data.delay,
+                        pos:                [38, 3, -4.5],
+                        rotation:           [0, 0, 0]
+                    })   
+
+                }
+                // Open or close dollhouse depending on current rotation
+                document.getElementById("townhouse-cutaway").setAttribute('animation__rotation', {
+                    property:       'rotation',
+                    dur:            this.data.dur, 
+                    delay:          currentRotation === 0 ? (this.data.delay / 2) : 0, 
+                    to:             currentRotation === 0 ? `0 ${this.data.rotation} 0` : '0 0 0' 
+                })           
+            },
+
+            remove: function(){
             }
         })
 
@@ -428,18 +409,22 @@
             }
         })
 
-        AFRAME.registerComponent("show-block-title", {
+         AFRAME.registerComponent("show-block-title", {
             schema: {
-                text:        {type: 'string',   default: "Hello world"},
-                tilt:        {type: 'array',    default: [10, -10]},
-                rotate:      {type: 'array',    default: [0, 0]},   
-                posZ:        {type: 'array',    default: [50, -50]},            
-                posX:        {type: 'array',    default: [0, 0]},            
-                posY:        {type: 'array',    default: [0, 0]},
-                letterSpace: {type: 'number',   default: 17.5},                     
+                text:           {type: 'string',   default: "Hello world"},
+                tilt:           {type: 'array',    default: [10, -10]},
+                rotate:         {type: 'array',    default: [0, 0]},   
+                posZ:           {type: 'array',    default: [50, -50]},            
+                posX:           {type: 'array',    default: [0, 0]},            
+                posY:           {type: 'array',    default: [0, 0]},
+                letterSpace:    {type: 'number',   default: 17.5},      
+                duration:       {type: 'number',   default: 3500},               
+                delay:          {type: 'number',   default: 500}               
             },
 
-            init: function() {
+            update: function() {
+                document.getElementById("message-blocks-group").innerHTML = ""
+
                 const words = this.data.text.split(" "),
                     container = document.getElementById("message-blocks-group"),
                     noWords = words.length
@@ -544,7 +529,30 @@
                     container.appendChild(wordContainer)
                 })
             },
+            play: function(){
+                state.scene.animation.blockTitleShowing = true
+                scene.els.items.blockGroup.setAttribute('animation', {
+                    property: 'position.y', 
+                    from: 100, 
+                    to: 0, 
+                    dur: this.data.duration, 
+                    delay: this.data.delay
+                })
+            },
+            remove: function(){
+                state.scene.animation.blockTitleShowing = false
+                scene.els.items.blockGroup.setAttribute('animation', {
+                    property:   'position.y', 
+                    from:       scene.els.items.blockGroup.getAttribute('position').y, 
+                    to:         100, 
+                    dur:        1500
+                })
+                setTimeout( () => {
+                    document.getElementById("message-blocks-group").innerHTML = ""
+                }, this.data.duration + this.data.delay)    
+            }
         })
+
 
 
     // CLIMATE RISK / HAZARD EVENT VISUALISATIONS
@@ -1678,7 +1686,6 @@
             },
         })
 
-
         AFRAME.registerComponent('hazard-mudslide', {
         })
 
@@ -1691,10 +1698,12 @@
                 dur:                {type: 'number',   default: 3000 },  
                 visible:            {type: 'boolean',  default: true}, 
                 type:               {type: 'string',   default: 'all'}, 
+                selectorClass1:     {type: 'string',   default: 'all'}, 
                 sourceNetSwitch:    {type: 'boolean',  default: false}, 
                 sourceNetSink:      {type: 'boolean',  default: false}
             },
             init: function(){
+                console.log('*** ADDING EMISSIONS BALLOONS ***')
                 // Emissions balloon anchor collections
                 scene.els.anchors = {
                     // Emission source objects
@@ -1720,7 +1729,7 @@
                                         offices:                document.querySelectorAll('.commercial-bldg.five-level * .emissions-anchor.mains-gas'),
                                         retail:                 document.querySelectorAll('.commercial-bldg.three-level * .emissions-anchor.mains-gas'),
                                         hospitality:            document.querySelectorAll('.hospitality * .emissions-anchor.mains-gas'),
-                                        accomodation:           document.querySelectorAll('.accomodation * .emissions-anchor.mains-gas')
+                                        accommodation:          document.querySelectorAll('.accommodation * .emissions-anchor.mains-gas')
                                     },
                                     bottledLPG:                 {},
                                     diesel:                     {},
@@ -1774,7 +1783,7 @@
                                         officeTowers:           document.querySelectorAll('.emissions-anchor.grid-electricity.office-tower'),
                                         retail:                 document.querySelectorAll('.commercial-bldg.three-level * .emissions-anchor.grid-electricity'),
                                         hospitality:            document.querySelectorAll('.emissions-anchor.grid-electricity.hospitality'),
-                                        accomodation:           document.querySelectorAll('.emissions-anchor.grid-electricity.accomodation')
+                                        accommodation:           document.querySelectorAll('.emissions-anchor.grid-electricity.accommodation')
                                     }
                                 },
                                 industrial: {
@@ -2015,7 +2024,7 @@
                                 },    
                             }
                         },
-                        waste: {
+                        wasteAndWasteWater: {
                             scope1: {
                                 industrial: {
                                     landfill: {
@@ -2023,28 +2032,43 @@
                                         CandI:                  document.querySelectorAll('.emissions-anchor.landfill.ci'),
                                         CandD:                  document.querySelectorAll('.emissions-anchor.landfill.cd'),
                                     },
-                                    incineration:                    {},
-                                    biologicalTreatment:             {},
+                                    incineration:                {},
+                                    biologicalTreatment:         {},
+                                    wastewater:  {
+                                        sewered:                 []
+                                    }      
                                 }
                             },
                             scope3: {
                                 residential: {
-                                    MSW: {    
+                                    landfill: {    
                                         smallDwellings:         document.querySelectorAll('.house-small * .emissions-anchor.bin-landfill'),
                                         largeDwellings:         document.querySelectorAll('.house-large * .emissions-anchor.bin-landfill')
-                                    }
+                                    },
+                                    wastewater:  {    
+                                        smallDwellings:         [],
+                                        largeDwellings:         []
+                                    },      
                                 },
                                 commercial: {
-                                    CandI: {
+                                    landfill: {
                                         offices:                document.querySelectorAll('.emissions-anchor.skip-landfill'),
                                         officeTowers:           [],
                                         retail:                 [],
                                         hospitality:            [],
-                                        accomodation:           []
-                                    }               
+                                        accommodation:          []
+                                    },
+                                    wastewater: {
+                                        offices:                [],
+                                        officeTowers:           [],
+                                        retail:                 [],
+                                        hospitality:            [],
+                                        accommodation:          []
+
+                                    }                        
                                 },  
                                 industrial: {
-                                    CandI: {
+                                    landfill: {
                                         other:                  [],
                                         mineral:                [],
                                         chemical:               [],
@@ -2063,52 +2087,6 @@
                                         church:                 []
                                     }
                                 }
-                            },
-                        },
-                        wasteWater: {
-                            scope1: {
-                                industrial: {
-                                    treatment: {
-                                        sewered:                 [],
-                                    }
-                                }
-                            },
-                            scope3: {
-                                residential:{
-                                    sewered: {
-                                        smallDwellings:         [],
-                                        largeDwellings:         [],
-                                        townhouses:             []
-                                    }
-                                },
-                                commercial:{
-                                    sewered: {
-                                        offices:                [],
-                                        officeTowers:           [],
-                                        retail:                 [],
-                                        hospitality:            [],
-                                        accomodation:           []     
-                                    }
-                                },
-                                industrial:{
-                                    sewered: {
-                                        other:                  [],
-                                        mineral:                [],
-                                        chemical:               [],
-                                        metal:                  [],
-                                        electronics:            []
-                                    }
-                                },
-                                farming:{},
-                                institutional:{
-                                    sewered: {
-                                        government:             [],
-                                        airport:                [],   
-                                        hospital:               [],
-                                        church:                 [],
-                                        school:                 [],
-                                    }
-                                },
                             },
                         },
                         agriculture: {
@@ -2141,7 +2119,7 @@
 
                             }
                         },
-                        land: {
+                        landAndForestry: {
                             scope1: {
                                 farming: {
                                     conversion:             [],
@@ -2155,21 +2133,10 @@
                                 }
                             }
                         },
-                        industrialProcesses: {
-                            scope1: {
-                                industrial: {
-                                    other:                  [],
-                                    mineral:                [],
-                                    chemical:               [],
-                                    metal:                  [],
-                                    electronics:            []
-                                },
-                            }
-                        },
-                        industrialProductUse: {
+                        industrialProcessesAndProductUse: {
                             scope1: {
                                 residential:  {
-                                    refrigerants: {
+                                    refrigerantLeakage: {
                                         smallDwellings:         [],
                                         largeDwellings:         [],
                                         townhouses:             [],
@@ -2178,17 +2145,24 @@
                                         }
                                     }
                                 },
-                                commerical:  {
-                                    refrigerants: {
+                                commercial:  {
+                                    refrigerantLeakage: {
                                         offices:                [],
                                         officeTowers:           [],
                                         retail:                 [],
                                         hospitality:            [],
-                                        accomodation:           []   
+                                        accommodation:           []   
                                     }
                                 },
-                                industrial: { 
-                                    refrigerants: {
+                                industrial: {
+                                    processes:{
+                                        other:                  [],
+                                        mineral:                [],
+                                        chemical:               [],
+                                        metal:                  [],
+                                        electronics:            []
+                                    },
+                                    refrigerantLeakage: {
                                         other:                  [],
                                         mineral:                [],
                                         chemical:               [],
@@ -2196,18 +2170,8 @@
                                         electronics:            []      
                                     }
                                 },
-                                institutional: {
-                                    refrigerants: {
-                                        government:             [],
-                                        airport:                [],   
-                                        hospital:               [],
-                                        church:                 [],
-                                        school:                 [],
-                                    }
-                                }
-
                             }
-                        }
+                        },
                     },
                     // Clean alternatives
                     switches: {       
@@ -2227,14 +2191,14 @@
                                         smallDwellings:         document.querySelectorAll('.house-small * .emissions-anchor.rooftop-solar'),
                                         largeDwellings:         document.querySelectorAll('.house-large * .emissions-anchor.rooftop-solar'),
                                         townhouses:             []
-                                    },
+                                    }
                                 },
                                 commercial:  {
                                     onSiteSolar: {
                                         offices:                [],
                                         retail:                 [],
                                         hospitality:            [],
-                                        accomodation:           []
+                                        accommodation:           []
                                     }
                                 },   
                                 industrial: {
@@ -2266,10 +2230,20 @@
                             scope3: {
                             }
                         },
+                        transportEnergy: {
+                            scope1: {
+                                residential: {
+                                    petrolToEV:             ''
+                                },
+                                commercial: {
+                                    petrolToEV:             ''
+                                }
+                            }                   
+                        },
                     },
                     // Carbon sinks 
                     sinks: {
-                        land: {
+                        landAndForestry: {
                             scope1: {
                                 afforestation:             [],
                                 reforestation:             [],
@@ -2282,14 +2256,14 @@
                         }
                     }
                 }
-
+                // Add balloons for each anchor 
                 Object.entries(scene.els.anchors).forEach( ([type, sectorObj]) => {
                     Object.entries(scene.els.anchors[type]).forEach( ([emissionsSector, scopeObj]) => {
                         Object.entries(scene.els.anchors[type][emissionsSector]).forEach( ([scope, sectorObj]) => {
                             Object.entries(scene.els.anchors[type][emissionsSector][scope]).forEach( ([sector, sourceObj]) => {
                                 Object.entries(scene.els.anchors[type][emissionsSector][scope][sector]).forEach( ([emissionsSource, subsectorObj]) => {
                                     Object.entries(scene.els.anchors[type][emissionsSector][scope][sector][emissionsSource]).forEach( ([subsource, anchorCollection]) => {
-                                        let scale, stringMultiplier, stringPosY, balloonCol
+                                        let scale, stringMultiplier, stringPosY, balloonCol = '#fff'
                                         if( anchorCollection.length > 0) {
                                             scale = Math.sqrt(model.scene.balloonScale[type][emissionsSector][scope][sector][emissionsSource][subsource].scale)
                                             stringLength = model.scene.balloonScale[type][emissionsSector][scope][sector][emissionsSource][subsource].stringLength
@@ -2300,18 +2274,6 @@
                                         for(let i = 0; i < anchorCollection.length; i++ ){
                                             const balloonContainer =  document.createElement('a-entity'),
                                                 anchorY = anchorCollection[i].getAttribute('position').y
-
-                                            switch(type){
-                                                case 'sources':
-                                                    balloonCol = '#000' 
-                                                    break
-                                                case 'sinks':
-                                                    balloonCol = '#66ff00' 
-                                                    break   
-                                                case 'switches':
-                                                    balloonCol = '#ff1dce' 
-                                                    break                                                
-                                            }
 
                                             balloonContainer.className +=`balloon-group ${type} ${scope} ${emissionsSector} ${emissionsSource} ${sector} ${subsource}`
                                             balloonContainer.setAttribute('template', 'src:#tmp-balloon')
@@ -2331,15 +2293,41 @@
                         })
                     })
                 })
+                state.scene.emissions.balloonsInitiated= true
             },
 
             update: function(){
-                const balloonGroupEls = this.data.type === 'all' ? document.querySelectorAll('.balloon-group') :  document.querySelectorAll('.balloon-group.'+ this.data.type ), 
-                    sourceGroupBalloonEls = document.querySelectorAll('.balloon-group.sources'),
+                // Update balloon settings
+                const targetSelector = this.data.selectorClass1 === 'all' ? `.balloon-group.${this.data.type}` : `.balloon-group.${this.data.type}.${this.data.selectorClass1}`,
+                    balloonGroupEls = this.data.type === 'all' ? document.querySelectorAll('.balloon-group') :  document.querySelectorAll(targetSelector), 
+                    nonTargetedSelector = this.data.selectorClass1 === 'all' ? `.balloon-group:not(.${this.data.type})` : `.balloon-group:not(.${this.data.type}), .balloon-group:not(.${this.data.selectorClass1})`,
+                    nonTargetedGroupEls = this.data.type === 'all' ? [] : document.querySelectorAll(nonTargetedSelector),
+                    sourceGroupBalloonEls = document.querySelectorAll(`.balloon-group.sources${this.data.selector}`),
                     animationTime =  this.data.dur,
+                    delay = this.data.dur / 2, 
                     sourceScale = (this.data.sourceNetSwitch && this.data.sourceNetSink) ? 0.7 : this.data.sourceNetSwitch ? 0.8 : this.data.sourceNetSink ? 0.9 : 1
 
-                // Show/hide TARGETED balloons
+                    console.log(targetSelector)
+                    console.log(balloonGroupEls.length)
+                    console.log(nonTargetedSelector)
+                    console.log(nonTargetedGroupEls.length)
+                    console.log('Animation time: '+animationTime)
+                    console.log('Delay time: '+delay)
+                // Hide all non-targeted balloons: animate out of view (if already in view)
+                nonTargetedGroupEls.forEach((el, i) => {
+                    if(this.data.visible){  // Hide the non-targeted balloons
+                        el.setAttribute('animation__scale', {
+                            property:   'scale',
+                            to:         '0 0 0',
+                            dur:        this.data.dur
+                        })
+                        setTimeout( () => {         // Set visibility state
+                            el.setAttribute('visible', false)
+                        }, animationTime)
+                    }
+                })
+
+                // Show/hide balloons TARGETED by type and selector
                 balloonGroupEls.forEach((el, i) => {
                     // Define scales
                     const currScale = el.getAttribute('scale')
@@ -2352,7 +2340,7 @@
                                 property:   'scale',
                                 from:       `${currScale.x} ${currScale.y} ${currScale.z}`,
                                 to:         `${sourceScale} ${sourceScale} ${sourceScale}`,
-                                dur:        this.data.dur
+                                dur:        animationTime,
                             })
                         // For switches and sinks
                         } else {
@@ -2360,22 +2348,25 @@
                                 property:   'scale',
                                 from:       '0 0 0',
                                 to:         '1 1 1',
-                                dur:        this.data.dur
+                                dur:        animationTime,
+                                delay:      delay
                             })
                         }
-                    // Animate to hidden
+                    // Animate to hidden (if visible === false)
                     }  else {
                         el.setAttribute('animation__scale', {
                             property:   'scale',
                             from:       `${currScale.x} ${currScale.y} ${currScale.z}`,
                             to:         '0 0 0',
-                            dur:        this.data.dur
+                            dur:        this.data.dur,
+                            delay:      delay
                         })
                         setTimeout( () => {         // Set visibility state
                             el.setAttribute('visible', false)
-                        }, animationTime)
+                        }, this.data.dur)
                     }         
                 })
+
 
                 // Adjust net impact on SOURCE balloons for switches and sinks
                 if(this.data.type !== 'sources'){
@@ -2399,8 +2390,8 @@
             schema: {   
                 dur:                {type: 'number',    default: 5000 },  
                 type:               {type: 'string',    default: 'all'}, 
-                random:             {type: 'boolean',   default: 'false'}, 
-
+                selector:           {type: 'string',    default: ''}, 
+                random:             {type: 'boolean',   default: false}, 
             },
             update: function(){
                 const balloonGroupEls = this.data.type === 'all' ? document.querySelectorAll('.balloon-group') :  document.querySelectorAll(`.balloon-group.${this.data.type}`), 
@@ -2421,7 +2412,6 @@
                             balloonCol = palette.emissions.balloons.switches
                         }   
                     }
-                    // balloonEls[i].setAttribute('material', {color: balloonCol})
                     balloonEls[i].setAttribute('animation__col', {
                         property:   'material.color',
                         duration:    this.data.dur,
@@ -2439,7 +2429,7 @@
                     // Enable Orbit control and VR mode options
                 //     scene.els.scene.setAttribute('vr-mode-ui', {enabled: true})
                 //     scene.els.cam.fly.setAttribute('camera', {active: false  })
-                //     scene.els.cam.low.setAttribute('camera', {active: true   })
+                //     scene.els.cam.orbit.setAttribute('camera', {active: true   })
                 })
                 // KEYBOARD EVENTS
                 window.addEventListener("keydown", function(key){
@@ -2452,13 +2442,13 @@
                                 externalEvents.toggleStats()
                                 break
                             case 'BracketLeft':
-                                externalEvents.rotateFlyCam('left')
+                                externalEvents.rotateflycam('left')
                                 break
                             case 'BracketRight':
-                                externalEvents.rotateFlyCam('right')
+                                externalEvents.rotateflycam('right')
                                 break
                             case 'Backslash':
-                                externalEvents.toggleFlyCamHeight()
+                                externalEvents.toggleflycamHeight()
                                 break
                             case 'Period':
                                 externalEvents.changeHour('forward')
@@ -2582,587 +2572,10 @@
                         }
                     }
                 })
-
-                // MENU EVENTS
-
-                // CLICK / TOUCH EVENTS
-    
-                // VOICE CONTROLLED EVENTS
-
             },
             play: function(){
             }
         })
-
-
-////////////////////////////////////////////////////////////
-/// METHODS ABLE TO BE CALLED EXTERNAL FROM THE SCENE   ////
-////////////////////////////////////////////////////////////
-
-    const externalEvents = {
-        addTouchUI: function(){
-            document.getElementById('loader-button').addEventListener('click', function(){
-                scene.els.scene.setAttribute('initiate-ui', null)
-                scene.els.items.blockGroup.setAttribute('show-block-title', "text: The Kingdom of Dreams & Madness;  posX: -20, -20, -20, 0, -20, 0; posY: 40, 40, 40, 0, -5, -15;  posZ: 70, 0, -70, 50, 5, -45;  tilt: 0, 0, 0, 10, 0, -10; rotate: 0, 0, 0, 0, 0, 0; letterSpace: 12.5")
-                scene.els.items.blockGroup.setAttribute('animation', {
-                    property: 'position.y', from: 100, to: 0, dur: 3500, delay: 500
-                })
-            })
-            document.getElementById('menu-time-forward').addEventListener('click', function(){
-                externalEvents.changeHour('forward')
-            }) 
-            document.getElementById('menu-time-back').addEventListener('click', function(){
-                externalEvents.changeHour('back')
-            }) 
-
-            // Hazard buttons: add DOM elemens and events for hazards
-            const hazardEls = ['menu-stormFlood', 'menu-stormWind', 'menu-heat', 'menu-drought', 'menu-bushfire', 'menu-acidification', 
-                'menu-tropicalStorm',  'menu-winterStorm', 'menu-earthquake', 'menu-seaLevelUp', 'menu-seaLevelDown' ]
-
-                hazardEls.forEach(id => {
-                    
-                    document.getElementById(id).addEventListener('click', function(){
-                        const hazard = this.id.slice(this.id.indexOf('-')+1),
-                            intensityContainer = document.getElementById('details-intensity-container'),
-                            hazardArray = scene.hazard.options[hazard]                      
-                        this.classList.add('selected')                  // Mark hazard button as selected
-
-                        // Add intensity options to details container
-                        intensityContainer.innerHTML = ''                        
-                        if(hazardArray.length > 0){
-                            hazardArray.forEach((option, i) => {
-                                const intensityButton = document.createElement('div')
-                                intensityButton.classList.add('details-intensity-button')                                
-                                intensityButton.innerHTML = option
-                                // Add listeners for each intesity option
-                                intensityButton.addEventListener('click', function(){
-                                    document.querySelectorAll('.details-intensity-button').forEach(el => el.classList.remove('active'))
-                                    this.classList.add('active')                                  
-                                    externalEvents.hazards[hazard](option)           // Call the hazard
-                                })
-                                intensityContainer.appendChild(intensityButton)      // Add button option to DOM
-                                // Show the first intensity option active by default (as hazard button triggers first option)
-                                if(i === 0){    
-                                    intensityButton.classList.add('active')
-                                    externalEvents.hazards[hazard](option)
-                                }
-                            })
-                        }
-                    }) 
-                })
-
-            // Emissions balloons
-            // document.getElementById('menu-balloon-sources').addEventListener('click', function(){
-            //     state.scene.emissions.balloons.sources = !state.scene.emissions.balloons.sources
-            //     state.scene.emissions.balloons.net.switches = state.scene.emissions.balloons.switches
-            //     state.scene.emissions.balloons.net.sinks = state.scene.emissions.balloons.sinks
-
-            //     scene.els.scene.setAttribute('emissions-activity-balloons', {
-            //         type:               'sources',
-            //         visible:            state.scene.emissions.balloons.sources, 
-            //         sourceNetSwitch:    state.scene.emissions.balloons.net.switches,
-            //         sourceNetSinks:     state.scene.emissions.balloons.net.sinks
-            //     })
-            //     // Control menu style click events
-            //     this.classList.toggle('selected')
-            //     this.classList.add('noPointerEvents')
-            //     setTimeout( () => {  this.classList.remove('noPointerEvents') }, 3000)
-            // })   
-            // document.getElementById('menu-balloon-switches').addEventListener('click', function(){
-            //     state.scene.emissions.balloons.switches = !state.scene.emissions.balloons.switches
-            //     state.scene.emissions.balloons.net.switches =  state.scene.emissions.balloons.switches 
-
-            //     scene.els.scene.setAttribute('emissions-activity-balloons', {
-            //         type:               'switches',
-            //         visible:            state.scene.emissions.balloons.switches, 
-            //         sourceNetSwitch:    state.scene.emissions.balloons.net.switches,
-            //         sourceNetSinks:     state.scene.emissions.balloons.net.sinks
-            //     })
-            //     // Control menu style click events
-            //     this.classList.toggle('selected')
-            //     this.classList.add('noPointerEvents')
-            //     setTimeout( () => {  this.classList.remove('noPointerEvents') }, 3000)
-            // })   
-
-            // Camera navigation
-            const navEls = Object.keys(scene.camPos.nav)
-            for(i = 0; i < navEls.length; i++){
-                navEls[i] = ui.buttonEl.nav[navEls[i]] =  document.getElementById(navEls[i])
-            }
-
-            Object.entries(ui.buttonEl.nav).forEach( ([name, el]) => {
-                el.addEventListener('click', function(){
-                    el.classList.toggle('active')
-                    if(el.classList.contains('active')){
-                        scene.els.scene.setAttribute('move-fly-camera', {
-                            pos:        Object.values(scene.camPos.nav[name].pos),
-                            rotation:   Object.values(scene.camPos.nav[name].rotation)
-                        })
-                    }
-                })
-            })
-        },
-
-        toggleTouchUI: function() {
-            state.ui.touchMenu = !state.ui.touchMenu
-            if(state.ui.touchMenu) {
-                document.getElementById('touch-UI').classList.toggle('active')
-            }
-        },
-
-        toggleStats: function(){
-            document.getElementById('scene').toggleAttribute('stats')
-        },
-
-        toggleCamera: function(){
-            if(scene.els.cam.fly.getAttribute('camera').active ){
-                scene.els.cam.fly.setAttribute('camera', {active: false })
-                scene.els.cam.low.setAttribute('camera', {active: true  })
-            } else {
-                scene.els.cam.fly.setAttribute('camera', {active: true  })
-                scene.els.cam.low.setAttribute('camera', {active: false })
-            }
-        },
-
-        rotateFlyCam: function(direction, duration = 2000){
-            state.scene.enableKeyEvents = false
-            scene.els.camRig.fly.removeAttribute('animation__position')
-            scene.els.camRig.fly.removeAttribute('animation__rotation')     
-
-            if(direction === 'left'){
-                state.scene.camPosera.flyIndex = (state.scene.camPosera.flyIndex  + 1) < scene.camPos.overheadRing.length ? state.scene.camPosera.flyIndex  + 1 : 0
-                rotateY =  scene.els.camRig.fly.getAttribute('rotation').y - 45
-            } else if(direction === 'right') {
-                state.scene.camPosera.flyIndex = (state.scene.camPosera.flyIndex  - 1) >= 0 ? state.scene.camPosera.flyIndex  - 1 : (scene.camPos.overheadRing.length -1)
-                rotateY =  scene.els.camRig.fly.getAttribute('rotation').y + 45
-            }
-
-            scene.els.camRig.fly.setAttribute('animation__position', {
-                property: 'position',
-                dur: duration,
-                to: `${scene.camPos.overheadRing[state.scene.camPosera.flyIndex].pos.x}  ${scene.camPos.overheadRing[state.scene.camPosera.flyIndex].pos.y}  ${scene.camPos.overheadRing[state.scene.camPosera.flyIndex].pos.z}`
-            })  
-            scene.els.camRig.fly.setAttribute('animation__rotation', {
-                property: 'rotation',
-                dur: duration,
-                to: `-5 ${rotateY} 0}`
-            })  
-
-            scene.els.cam.fly.removeAttribute('animation__rotation')
-            scene.els.cam.fly.setAttribute('animation__rotation', {
-                property: 'fly',
-                dur: duration,
-                to: "0 0 0"
-            })
-            setTimeout( ()=> {
-                externalEvents.resetLookControls()         // Bind new instance of look-controls after after animation
-                state.ui.enableKeyEvents = true     
-            }, duration)
-        },
-
-        toggleFlyCamHeight: function(){
-            const currentPos = scene.els.camRig.fly.getAttribute('position')
-            switch(state.scene.camera.flyHeight){
-                case "high":
-                    scene.els.camRig.fly.setAttribute('animation__pos', {
-                        property:       'position',
-                        dur:            1500,
-                        to:             {x: currentPos.x,  y: 10, z: currentPos.z}
-                    })
-                    scene.els.camRig.fly.setAttribute('animation__rotation', {
-                        property:       'rotation',
-                        dur:            1500,
-                        to:             {x: 0,  y: 90, z: 0}
-                    })
-                    scene.els.cam.fly.setAttribute('animation__rotation', {
-                        property:       'rotation',
-                        dur:            1500,
-                        to:             {x: 0,  y: 0, z: 0}
-                    })
-                    state.scene.camera.flyHeight = "low"
-                    break
-
-                case "low":
-                    scene.els.camRig.fly.setAttribute('animation__pos', {
-                        property:       'position',
-                        dur:            1500,
-                        to:             {x: currentPos.x,  y: 90, z: currentPos.z}
-                    })
-                    scene.els.camRig.fly.setAttribute('animation__rotation', {
-                        property:       'rotation',
-                        dur:            1500,
-                        to:             {x: -10,  y: 90, z: 0}
-                    })
-                    state.scene.camera.flyHeight = "high"
-                    break
-            }
-        },
-
-        // Helper to attach new instance of look-controls after after animation
-        resetLookControls: function() {
-            scene.els.cam.fly.removeAttribute('look-controls')
-            scene.els.cam.fly.setAttribute('look-controls', {})
-        },
-
-        changeSeasonSelector: function(season){
-            document.querySelectorAll('.subMenu-event-icon-container.season').forEach(season => season.classList.remove('active'))       
-            document.getElementById(`menu-time-${season}`).classList.add('active')                
-        },
-
-        changeHour: function(direction, duration = 2000){
-            console.log('Moving hour '+direction+' to '+scene.els.misc.sunPos[state.scene.time.hour])
-            if(direction === 'forward'){
-                state.scene.time.hour = state.scene.time.hour !== (scene.els.misc.sunPos.length - 1) ? state.scene.time.hour + 1 : 0
-            } else if(direction === 'back'){
-                state.scene.time.hour = state.scene.time.hour !== 0 ? state.scene.time.hour  - 1 :  scene.els.misc.sunPos.length - 1 
-            }
-            // Set the environment components affected by the change in hour
-            scene.els.scene.setAttribute('set-hourly-environment', {dur: duration, hour: state.scene.time.hour })
-            // Change thew clock
-            externalEvents.changeClock(direction, duration)
-            // Control key events
-            state.ui.enableKeyEvents = false
-            setTimeout( () => {  state.ui.enableKeyEvents = true }, duration)
-        },
-
-        changeClock: function(direction = 'forward', duration = 2000){
-            // Prevent queuing of clicks
-            document.getElementById('clockhand-hour-group').classList.add('noPointerEvents')
-            document.getElementById('clockhand-min-group').classList.add('noPointerEvents')
-            // Move the hour hand
-            if(state.scene.time.hour % 12 === 0){
-                if(direction === 'forward'){
-                    document.getElementById('clockhand-hour-group').setAttribute('class', 'hour-12')
-                    setTimeout(() => {
-                        document.getElementById('clockhand-hour-group').style.transitionDuration = '0s'
-                        document.getElementById('clockhand-hour-group').setAttribute('class', 'hour-0')
-                    }, 2000)
-                } else if(direction === 'back'){
-                    document.getElementById('clockhand-hour-group').setAttribute('class', 'hour-0')
-                    setTimeout(() => {
-                        document.getElementById('clockhand-hour-group').style.transitionDuration = '0s'
-                        document.getElementById('clockhand-hour-group').setAttribute('class', 'hour-12')
-                    }, 2000)
-                }
-            } else {
-                document.getElementById('clockhand-hour-group').style.transitionDuration = '2s'
-                document.getElementById('clockhand-hour-group').setAttribute('class', 'hour-'+(state.scene.time.hour%12))
-            }
-            // Move the minute hand
-            const spin = (direction === 'forward') ? 'spinClockwise' : 'spinAntiClock'
-            document.getElementById('clockhand-min-group').style.transitionDuration = '2s'
-            document.getElementById('clockhand-min-group').classList.add(spin)
-            // Reset interactions
-            setTimeout( () => {  
-                document.getElementById('clockhand-min-group').style.transitionDuration = '0s'
-                document.getElementById('clockhand-min-group').classList.remove('spinClockwise')
-                document.getElementById('clockhand-min-group').classList.remove('spinAntiClock')
-                document.getElementById('clockhand-min-group').classList.remove('noPointerEvents')
-                document.getElementById('clockhand-hour-group').classList.remove('noPointerEvents')
-            }, duration)
-        },
-
-        changeEnvironment: function(name = state.scene.environment.name, duration = 2000){
-            scene.els.scene.setAttribute('set-environment', {name: name, dur: duration})
-        },
-
-        resetHazards: function(){
-            state.scene.effect.particles = false
-            state.scene.effect.flood = false
-            state.scene.effect.wind = false
-            state.scene.effect.bushfire = false
-            scene.els.scene.setAttribute('hazard-sea-level', 'slchange: 0')
-            scene.els.scene.removeAttribute('hazard-rain')
-            scene.els.scene.removeAttribute('hazard-lightning')
-            scene.els.scene.removeAttribute('hazard-bushfire')
-            scene.els.scene.removeAttribute('hazard-drought')
-            scene.els.scene.removeAttribute('hazard-tropical-storm')
-            scene.els.scene.removeAttribute('hazard-winter-storm')
-            scene.els.scene.removeAttribute('hazard-ocean-acidification')
-            scene.els.scene.removeAttribute('hazard-flood')
-            scene.els.scene.removeAttribute('hazard-wind')
-            scene.els.scene.removeAttribute('hazard-heat')
-            clearInterval(state.scene.effect.lightning)
-            externalEvents.changeEnvironment(state.scene.environment.name)
-            console.log('All hazards reset')
-        }, 
-
-        hazards: {
-            stormFlood: function(type){
-                let introDuration = 0
-                 // For a new effect
-                if(!state.scene.effect.flood){
-                    introDuration = 2000
-                    externalEvents.resetHazards()               // Clear any existing hazards
-                    externalEvents.changeEnvironment('stormFlood', introDuration )
-                    scene.els.scene.setAttribute('hazard-rain', null)
-                    scene.els.scene.setAttribute('hazard-lightning', null)
-                    state.scene.effect.particles = true  
-                }
-                state.scene.effect.flood = type
-                switch(type){  
-                    // Increase flood levels on subsequent keypress
-                    case scene.hazard.options.stormFlood[0]:  // Minor flood
-                        setTimeout( () => { 
-                            scene.els.scene.setAttribute('hazard-flood', {"floodLvl": 0.125}) 
-                        }, introDuration)
-                        break
-                    case scene.hazard.options.stormFlood[1]:    // Medium flood
-                        setTimeout( () => { 
-                            scene.els.scene.setAttribute('hazard-flood', {"floodLvl": 0.5}) 
-                        }, introDuration)
-                        break
-                    case scene.hazard.options.stormFlood[2]:    // Major flood
-                        setTimeout( () => { 
-                            scene.els.scene.setAttribute('hazard-flood', {"floodLvl": 0.75}) 
-                        }, introDuration)
-                        break
-                    // Reset after showing major flood 
-                    default:          
-                        clearInterval(state.scene.effect.lightning)
-                        scene.els.scene.removeAttribute('hazard-rain')
-                        scene.els.scene.removeAttribute('hazard-lightning')
-                        scene.els.scene.removeAttribute('hazard-flood')
-                        externalEvents.changeEnvironment(state.scene.environment.name)
-                        state.scene.effect.particles = false
-                        state.scene.effect.flood = false
-                        state.scene.effect.lightning = false
-                        state.scene.environment.hazardVisible = false
-                }
-            },
-            stormWind: function(type) {
-                let introDuration = 0
-                 // For a new effect
-                if(!state.scene.effect.wind){
-                    introDuration = 2000
-                    externalEvents.resetHazards()               // Clear any existing hazards
-                    externalEvents.changeEnvironment('stormFlood', introDuration )
-                    scene.els.scene.setAttribute('hazard-rain', null)
-                    scene.els.scene.setAttribute('hazard-lightning', null)
-                    state.scene.effect.particles = true  
-                }
-                state.scene.effect.wind = type
-                switch(type){  
-                    case scene.hazard.options.stormWind[0]:     // Severe wind event
-                        setTimeout( () => { 
-                            scene.els.scene.setAttribute('hazard-wind', {"damage": 0})
-                        }, introDuration)
-                        break 
-                    case scene.hazard.options.stormWind[1]:       // Extreme wind event
-                        setTimeout( () => { 
-                            scene.els.scene.setAttribute('hazard-wind', {"damage": 0.25})
-                        }, introDuration)
-                        break
-                    // Reset after showing major wind event 
-                    default:    
-                        clearInterval(state.scene.effect.lightning)
-                        scene.els.scene.removeAttribute('hazard-wind')
-                        scene.els.scene.removeAttribute('hazard-rain')
-                        scene.els.scene.removeAttribute('hazard-lightning')
-                        externalEvents.changeEnvironment(state.scene.environment.name)
-                        state.scene.effect.particles = false
-                        state.scene.environment.hazardVisible =false
-                }   
-            },
-            heat: function(type) {
-                state.scene.effect.heat = type
-                if(!state.scene.effect.heat){
-                    externalEvents.resetHazards()               // Clear any existing hazards
-                    externalEvents.changeEnvironment('heat', 2000)
-                }
-                switch(type){  
-                    case scene.hazard.options.heat[0]:          // Hot day
-                        scene.els.scene.setAttribute('hazard-heat', {intensity: 'hotDay'})
-                        break
-                    case scene.hazard.options.heat[1]:          // Very hot day
-                        scene.els.scene.setAttribute('hazard-heat', {intensity: 'veryHotDay'})
-                        break 
-                    case scene.hazard.options.heat[2]:          // Heatwave
-                        scene.els.scene.setAttribute('hazard-heat', {intensity: 'heatwave'})
-                        break
-                    // Reset after showing heat events
-                    default:    
-                        scene.els.scene.removeAttribute('hazard-heat')
-                        externalEvents.changeEnvironment(state.scene.environment.name)
-                        state.scene.effect.heat = false
-                        state.scene.environment.hazardVisible =false
-                }   
-            },
-            drought: function(type) {
-                if(!state.scene.effect.drought){
-                    externalEvents.resetHazards()               // Clear any existing hazards
-                }
-                state.scene.effect.drought = type
-                switch(type){  
-                    case scene.hazard.options.drought[0]:          // Severe drought
-                        scene.els.scene.setAttribute('hazard-drought', {level: 'minor'})
-                        break
-                    case scene.hazard.options.drought[1]:          // Extreme drought{ 
-                        scene.els.scene.setAttribute('hazard-drought', {level: 'major'})
-                        break
-                    default:
-                        scene.els.scene.removeAttribute('hazard-drought')
-                        externalEvents.changeEnvironment(state.scene.environment.name)
-                        state.scene.effect.drought = false
-                        state.scene.environment.hazardVisible =false
-                }
-            },
-            bushfire: function(type) {
-                if(!state.scene.effect.bushfire){
-                    externalEvents.resetHazards()               // Clear any existing hazards
-                }
-                state.scene.effect.bushfire = type
-                switch(type){  
-                    case scene.hazard.options.bushfire[0]:          // Nearby
-                        scene.els.scene.setAttribute('hazard-bushfire', {intensity: 0})
-                        break
-                    case scene.hazard.options.bushfire[1]:          // Suburban
-                        scene.els.scene.setAttribute('hazard-bushfire', {intensity: 0.5})
-                        break
-                    case scene.hazard.options.bushfire[2]:          // Urban fire
-                        scene.els.scene.setAttribute('hazard-bushfire', {intensity: 1})
-                        break
-                    default:
-                        scene.els.scene.removeAttribute('hazard-bushfire')
-                        externalEvents.changeEnvironment(state.scene.environment.name)
-                        state.scene.effect.bushfire = false
-                        state.scene.environment.hazardVisible =false
-                }
-            },
-            desertification: function(type) {
-                state.scene.effect.desertification = type
-                if(!state.scene.effect.desertification){
-                    externalEvents.resetHazards()               // Clear any existing hazards
-                }                
-                switch(type){  
-                    case scene.hazard.options.desertification[0]:
-                        scene.els.scene.setAttribute('hazard-desertification', null)
-                        break
-                    default:
-                        scene.els.scene.removeAttribute('hazard-desertification')
-                        externalEvents.changeEnvironment('default')
-                        state.scene.effect.desertification = false
-                        state.scene.environment.hazardVisible =false
-                }
-            },
-            mudLandslides: function(type) {
-                state.scene.effect.mudLandslides = type
-                if(!state.scene.effect.mudLandslides){
-                    externalEvents.resetHazards()               // Clear any existing hazards
-                }                
-                switch(type){  
-                    case scene.hazard.options.desertification[0]:
-                        scene.els.scene.setAttribute('hazard-desertification', null)
-                        break
-                    default:
-                        scene.els.scene.removeAttribute('hazard-desertification')
-                        externalEvents.changeEnvironment('default')
-                        state.scene.effect.desertification = false
-                        state.scene.environment.hazardVisible =false
-                }
-            },
-
-            acidification: function(type) {
-                state.scene.effect.oceanAcidification = type
-                if(!state.scene.effect.oceanAcidification){
-                    externalEvents.resetHazards()               // Clear any existing hazards
-                }                
-                switch(type){  
-                    case scene.hazard.options.acidification[0]:
-                        scene.els.scene.setAttribute('hazard-ocean-acidification', null)
-                        break
-                    default:
-                        scene.els.scene.removeAttribute('hazard-ocean-acidification')
-                        externalEvents.changeEnvironment('default')
-                        state.scene.effect.oceanAcidification = false
-                        state.scene.environment.hazardVisible =false
-                }
-            },
-            tropicalStorm: function(type) {
-                introDuration = 0
-                if(!state.scene.effect.tropicalStorm){
-                    introDuration = 2000
-                    externalEvents.resetHazards()               // Clear any existing hazards
-                    // externalEvents.changeEnvironment('stormFlood', 2000 )
-                }
-                state.scene.effect.tropicalStorm = type
-                switch(type){  
-                    case scene.hazard.options.tropicalStorm[0]:
-                        setTimeout( () => { 
-                            scene.els.scene.setAttribute('hazard-tropical-storm', null)
-                            scene.els.scene.setAttribute('hazard-wind', {damage: 0.25})
-                            state.scene.effect.wind = 'major'
-                        }, introDuration)
-                        break
-                    default:
-                        externalEvents.changeEnvironment(state.scene.environment.name)
-                        scene.els.scene.removeAttribute('hazard-tropical-storm')
-                        scene.els.scene.removeAttribute('hazard-wind')
-                        externalEvents.changeEnvironment('default')
-                        state.scene.effect.tropicalStorm = false
-                        state.scene.effect.wind = 'none'
-                        state.scene.environment.hazardVisible = false
-                }
-            },
-            winterStorm: function(type){
-                introDuration = 0
-                if(!state.scene.effect.winterStorm){
-                    introDuration = 2000
-                    externalEvents.resetHazards()               // Clear any existing hazards
-                    externalEvents.changeEnvironment('snow', 2000 )
-                    state.scene.effect.snow = true
-                }
-                state.scene.effect.winterStorm = type
-
-                switch(type){  
-                    case scene.hazard.options.winterStorm[0]:
-                        setTimeout( () => { 
-                            scene.els.scene.setAttribute('hazard-winter-storm', {intensity: 'snow'})
-                        }, introDuration)
-                        break
-                    case scene.hazard.options.winterStorm[1]:
-                        setTimeout( () => { 
-                            scene.els.scene.setAttribute('hazard-winter-storm', {intensity: 'blizzard'})
-                        }, introDuration)
-                        break
-                    case scene.hazard.options.winterStorm[2]:
-                        setTimeout( () => { 
-                            scene.els.scene.setAttribute('hazard-winter-storm', {intensity: 'iceStorm'})
-                        }, introDuration)
-                        break
-                    default:
-                        externalEvents.changeEnvironment(state.scene.environment.name)
-                        scene.els.scene.removeAttribute('hazard-winter-storm')
-                        state.scene.effect.winterStorm = false
-                        state.scene.environment.hazardVisible = false
-                }
-            },
-            earthquake: function(type) {
-                switch(type){  
-                    case scene.hazard.options.earthquake[0]:
-                        scene.els.scene.setAttribute('hazard-earthquake', {intensity: 10})
-                        break
-                    default:
-                        state.scene.environment.hazardVisible = false
-                }
-            },
-            seaLevel: function(type){
-                switch(type){  
-                    case scene.hazard.options.seaLevel[0]: //Decrease
-                        state.scene.effect.seaLevel = state.scene.effect.seaLevel - 0.1 
-                        scene.els.scene.setAttribute('hazard-sea-level', 'slchange: '+state.scene.effect.seaLevel )
-                        break
-                    case scene.hazard.options.seaLevel[1]: // Decrease
-                        state.scene.effect.seaLevel = state.scene.effect.seaLevel + 0.1 
-                        scene.els.scene.setAttribute('hazard-sea-level', 'slchange: '+state.scene.effect.seaLevel )
-                        break
-                    case scene.hazard.options.seaLevel[2]: // Reset
-                        scene.els.scene.setAttribute('hazard-sea-level', 'slchange: 0')
-                        break
-                }
-            },
-        }
-    }
 
 
 

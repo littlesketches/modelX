@@ -611,7 +611,7 @@
                         scope1: {
                         }
                     },
-                    waste: {
+                    wasteAndWasteWater: {
                         scope1: {
                             industrial: {
                                 landfill: {
@@ -621,88 +621,51 @@
                                 },
                                 incineration:                    {},
                                 biologicalTreatment:             {},
+                                wastewater:  {
+                                    sewered:               {scale: 1.0,  stringLength: 2},
+                                }     
                             }
                         },
                         scope3: {
                             residential: {
-                                MSW: {    
+                                landfill: {    
                                     smallDwellings:         {scale: 0.25,  stringLength: 2},
                                     largeDwellings:         {scale: 0.35,  stringLength: 2},
-                                }
+                                },
+                                wastewater:  {    
+                                    smallDwellings:         {scale: 0.25,  stringLength: 2},
+                                    largeDwellings:         {scale: 0.35,  stringLength: 2},
+                                },   
                             },
                             commercial: {
-                                CandI: {
+                                landfill: {
                                     offices:                {scale: 0.75,  stringLength: 4},
-                                }               
+                                },     
+                                wastewater: {
+                                    offices:                {scale: 0.75,  stringLength: 4},
+                                }          
                             },  
                             industrial: {
-                                CandI: {
+                                landfill: {
                                     other:                  '',
                                     mineral:                '',
                                     chemical:               '',
                                     metal:                  '',
                                     electronics:            ''
-                                }               
+                                },
+                                wastewater: {}         
                             } ,
                             institutional: {
-                                CandI: {
+                                landfill: {
                                     government:             '',
                                     hospital:               '',
-                                    airport:                ''
-                                },
-                                MSW: { 
+                                    airport:                '',
                                     school:                 '',
                                     church:                 ''
-                                }
+                                },
+                                wastewater: {}
                             }
                         }
-                    },
-                    wasteWater: {
-                        scope1: {
-                            industrial: {
-                                treatment: {
-                                    sewered:                 '',
-                                    septics:                 ''
-                                }
-                            }
-                        },
-                        scope3: {
-                            residential:{
-                                sewered: {
-                                    smallDwellings:         '',
-                                    largeDwellings:         '',
-                                    townhouses:             ''
-                                }
-                            },
-                            commercial:{
-                                sewered: {
-                                    offices:                '',
-                                    officeTowers:           '',
-                                    retail:                 '',
-                                    hospitality:            '',
-                                    accomodation:           ''     
-                                }
-                            },
-                            industrial:{
-                                sewered: {
-                                    other:                  '',
-                                    mineral:                '',
-                                    chemical:               '',
-                                    metal:                  '',
-                                    electronics:            ''
-                                }
-                            },
-                            farming:{},
-                            institutional:{
-                                sewered: {
-                                    government:             '',
-                                    airport:                '',   
-                                    hospital:               '',
-                                    church:                 '',
-                                    school:                 '',
-                                }
-                            },
-                        },
                     },
                     agriculture: {
                         scope1: {
@@ -734,7 +697,7 @@
 
                         }
                     },
-                    land: {
+                    landAndForestry: {
                         scope1: {
                             farming: {
                                 conversion:             '',
@@ -752,15 +715,41 @@
                         scope1: {
                         }
                     },
-                    industrialProductUse: {
+                    industrialProcessesAndProductUse: {
                         scope1: {
-                            refrigerants: {
-                                residential:            [],
-                                commerical:             [],
-                                industrial:             [],
-                                institutional:          [],
-                                transport:  {
-                                    passengerVehicles:  [],
+                            residential:  {
+                                refrigerantLeakage: {
+                                    smallDwellings:         [],
+                                    largeDwellings:         [],
+                                    townhouses:             [],
+                                    transport:  {
+                                        passengerVehicles:  [],
+                                    }
+                                }
+                            },
+                            commercial:  {
+                                refrigerantLeakage: {
+                                    offices:                [],
+                                    officeTowers:           [],
+                                    retail:                 [],
+                                    hospitality:            [],
+                                    accommodation:           []   
+                                }
+                            },
+                            industrial: {
+                                processes:{
+                                    other:                  [],
+                                    mineral:                [],
+                                    chemical:               [],
+                                    metal:                  [],
+                                    electronics:            []
+                                },
+                                refrigerantLeakage: {
+                                    other:                  [],
+                                    mineral:                [],
+                                    chemical:               [],
+                                    metal:                  [],
+                                    electronics:            []      
                                 }
                             }
                         }
