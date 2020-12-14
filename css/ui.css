@@ -204,7 +204,7 @@
             pointer-events:auto;
             perspective: 1200px;
             perspective-origin: left;
-            transition: all ease-in-out 500ms;
+            transition: all ease-in-out 1500ms;
         }
         .subMenu-container.active{
             left: 0;
@@ -310,7 +310,7 @@
         .subMenu-event-container.active,
         .subMenu-emissions-container.active{
             font-weight: bold;
-            color: aquamarine;
+            color: #A3B6EF;
             background: rgba(0, 0, 0, 0.9);
         }
 
@@ -324,7 +324,7 @@
         .subMenu-option-container.active * use,
         .subMenu-event-container.active * use,
         .subMenu-emissions-container.active * use{
-            fill: aquamarine;
+            fill: #A3B6EF;
         }
             .subMenu-option-icon-container.button{
                 cursor: pointer;

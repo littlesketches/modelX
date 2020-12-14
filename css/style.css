@@ -100,7 +100,7 @@ sub {
         left:               0;
         width:              100vw;
         height:             100vh;
-        transition:         all ease-in-out 1500ms;
+        transition:         all ease-in-out 1000ms;
         backdrop-filter:    blur(0px) contrast(100%);
         -webkit-backdrop-filter:    blur(0px) contrast(100%);
     }
@@ -135,7 +135,7 @@ sub {
 
         #loader-subHeader{
             font-size:          1vw;
-            letter-spacing:     1.25px;
+            letter-spacing:     2.75px;
             padding-top:        4vh;
         }
         #loader-header{
