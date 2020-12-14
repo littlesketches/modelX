@@ -12,7 +12,7 @@
 
     // Audio play 'state', ToneJS Audio components and methods for composing music and phrase selection
     const audio = {
-        context:        new AudioContext(),
+        context:            typeof(window.AudioContext) !== 'undefined'  ? new AudioContext() :  new webkitAudioContext(),
         fx:  {
             masterGain:         new Tone.Gain(0.10).toDestination(),  
             leadGain:           new Tone.Gain(0.15).toDestination(),  
@@ -3367,7 +3367,6 @@
 //// SOUND RIG : SETUP TONE.JS COMPONENTS ////
 //////////////////////////////////////////////
    
-
     // 1. TRANSPORT SETUP
         Tone.Transport.bpm.value        = 140
         Tone.Transport.timeSignature    = [4,  4]
