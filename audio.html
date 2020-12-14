@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Decomposing Common People">
+        <meta name="author" content="Little Sketches ">
+        <style>
+            html, body{
+                width: 100vw;
+                height: 100vh;
+                font-family: 'Helvetica'
+            } 
+            #vis-wrapper{
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                display: grid;
+                    grid-template-columns: 1vw calc(100% - 2vw) 1vw ;
+                    grid-template-rows: 1vw calc(100% - 2vw) 1vw ;         
+                background: #fff;    
+                overflow: hidden;                   
+            }        
+            #vis-container{
+                overflow: hidden;
+                grid-area: 2 / 2 / 3 / 3;
+                display: grid;
+                    grid-template-columns: 100%;
+                    grid-template-rows: 100%;
+                    grid-template-areas: "audioVis"; 
+                 background: #000;   
+                 color: #fff;    
+            }
+            #audioVis-container{
+                grid-area: audioVis;
+                /* animation: rotation 120s infinite; */
+            }
+                @keyframes rotation {
+                  from { transform: rotate(0deg);}
+                  to { transform: rotate(360deg)}
+                }            
+            .container{
+                background: black;
+                transition-duration: 800ms;        
+            }
+            .container.loading{
+                background: none;        
+            }
+            #playButton{
+                fill: none;
+                cursor: pointer;
+                stroke: rgb(0, 255, 181);
+                stroke-width: 10px;
+                pointer-events: bounding-box;            
+                animation-duration: 300ms;              
+            }
+            #playButton:hover{
+                fill: rgba(0, 255, 181, 0.4);        
+             }
+           #narrative-container{
+                grid-area: audioVis;
+                display: grid;
+                grid-template-columns: 100%;
+                grid-template-rows: 100%;   
+           }
+           #mainTitle{
+                place-self: center center;    
+                font-size: 3vw;
+                color: #fff;
+                mix-blend-mode: luminosity;
+                pointer-events: none;
+                width: 50%;
+                text-align: center;
+                line-height: 1.3;
+           }
+        </style>
+    </head>
+    <body>
+        <div id = "vis-wrapper">
+            <div id = "vis-container">            
+                <div id = "audioVis-container" class = "container loading">
+                    <svg id = "audioVis" width = "100%" height="100%"></svg>
+                </div>
+            <div id = "narrative-container">
+                <div id = "mainTitle">Tap anywhere...because here's nothing else to do-ooo-oo-ooo!</div>
+            </div>
+            </div>
+        </div>
+
+        <!-- JavaScript Libraries -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.58/Tone.js"></script>  
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+        <script src="js/audio.js"></script>
+
+        <script>
+            ///////////////////////////////////////////////////////////
+            //// ENVIRONMENT / DOM SETUP  AND INTERFACE RENDERING  ////
+            ///////////////////////////////////////////////////////////   
+
+            const vis = {
+                elements:               {},                  
+                settings: {
+                    width:              1000,
+                    height:             1000,
+                    margin:             {left: 50, right: 50, top: 50, bottom: 50},
+                    performerRadius:    200,
+                    outerRadius:        400,
+                    performerPalette:   d3.scaleLinear()
+                                            .range(['blue', 'red', 'yellow', 'green' , 'white'])
+                                            .domain([1, 3, 6, 9, 12])
+                }   
+            }
+        
+            function setup(){
+                d3.select('body').on('click', async () =>{
+                    await Tone.start()
+                    d3.select('body').on('click', null)
+                    renderVis(1500) 
+                })
+            };
+
+            function renderVis(duration){
+                // 0. Vis settings
+                vis.settings.cx = vis.settings.width / 2
+                vis.settings.cy = vis.settings.height /2
+                vis.settings.noPerformers = audio.performers.length
+                vis.settings.angleGap = 2 * Math.PI / vis.settings.noPerformers
+                vis.settings.startAngle = 0
+                // 1. Add SVG groups
+                vis.elements.svg = d3.select('#audioVis').attr('viewBox', '0 0 '+vis.settings.width+' '+vis.settings.height)
+                vis.elements.backgroundGroup = vis.elements.svg.append('g').attr('id', 'visBackground-group')
+                vis.elements.performerGroup = vis.elements.svg.append('g').attr('id', 'performer-group')
+                vis.elements.phraseGroup = vis.elements.svg.append('g').attr('id', 'phrase-group')
+
+                // 2. Add a play/next button
+                vis.elements.backgroundGroup.append('circle')
+                    .attr('id', 'playButton')                     
+                    .attr('cx', vis.settings.cx)
+                    .attr('cy', vis.settings.cy)  
+                    .attr('r', "70vh")      
+                    .on('click', ()=> {audio.methods.updateMusicalPhrase(null, 'next')} )            
+
+                // 3. Add performer buttons/circles
+            };
+            // 3. Start audio context 
+            setup()
+        </script>
+
+    </body>
+
+</html>
