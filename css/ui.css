@@ -342,7 +342,6 @@
             .subMenu-option-container.four-pane,
             .subMenu-option-container.five-pane{
                 width: 100%;
-                pointer-events: none;
                 background: none;
             }
             .subMenu-option-container.three-pane:hover,
