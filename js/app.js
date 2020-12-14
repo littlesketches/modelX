@@ -207,6 +207,7 @@ console.log('BUILDING APP...')
                 flyHeight:          'high'          // High or low camera for keyboard nav
             },
             animation: {
+                intro:              false,
                 planeFlight:        false,
                 duckSail:           true,
                 windTurbine:        true,
@@ -299,8 +300,8 @@ console.log('BUILDING APP...')
                     rotation:       {x: -30,  y: 45,  z: 0}
                 },
                 'tour-zone-industrial': {
-                    pos:            {x: -25,  y: 10,  z: -35},
-                    rotation:       {x: -10,  y: 35,  z: 0}
+                    pos:            {x: 0,  y: 20,  z: 0},
+                    rotation:       {x: -10,  y: -5,  z: 0}
                 },
                 'tour-zone-aquatic': {
                     pos:            {x: 10,   y: 20,  z: 5},
@@ -441,6 +442,17 @@ console.log('BUILDING APP...')
     }
 
 
+
+const helpers= {
+
+    camelize: function(str) {
+        return str.replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, function(match, index) {
+            if (+match === 0) return ""; // or if (/\s+/.test(match)) for white spaces
+            return index === 0 ? match.toLowerCase() : match.toUpperCase();
+        });
+    }
+
+}
 
 //////////////////////////////////////////
 /// LIGHTING AND ENVIRONMENT SETTINGS  ///

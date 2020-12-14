@@ -13,6 +13,55 @@
 
     console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
 
+    // MATERIAL SHADER
+        AFRAME.registerShader('toon-shader', {
+            schema: {
+                // Where relevant, it is customary to support color.
+                // The A-Frame schema uses `type:'color'`, so it will parse string values like 'white' or 'red.
+                // `is:'uniform'` tells A-Frame this should appear as uniform value in the shader(s).
+                color: {type:'color', is:'uniform', default:'red'},
+                // It is customary to support opacity, for fading in and out.
+                opacity: {type:'number', is:'uniform', default:1.0}
+            },
+            
+            // Setting raw to true uses THREE.RawShaderMaterial instead of ShaderMaterial,
+            // so your shader strings are used as-is, for advanced shader usage.
+            // Here, we want the usual prefixes with GLSL constants etc.,
+            // so we set it to false.
+            // (Which is also the default, so we could have omitted it).
+            raw: false,
+            
+            // Here, we're going to use the default vertex shader by omitting vertexShader.
+            // But note that if your fragment shader cares about texture coordinates,
+            // the vertex shader should set varying values to use in the fragment shader. 
+            
+            // Since almost every WebVR-capable browser supports ES6,
+            // define our fragment shader as a multi-line string.
+            fragmentShader: 
+            `
+                // Use medium precision.
+                precision mediump float;
+
+                // This receives the color value from the schema, which becomes a vec3 in the shader.
+                uniform vec3 color;
+
+                // This receives the opacity value from the schema, which becomes a number.
+                uniform float opacity;
+
+                // This is the shader program.
+                // A fragment shader can set the color via gl_FragColor,
+                // or decline to draw anything via discard.
+                void main () {
+                    // Note that this shader doesn't use texture coordinates.
+                    // Set the RGB portion to our color,
+                    // and the alpha portion to our opacity.
+
+                    gl_FragColor = vec4(color, opacity);
+                }
+            `
+        });
+
+
     // SCENE SETUP AND WORLD UPDATE COMPONENTS
         AFRAME.registerComponent('init-scene-setup', {
             init: function(){
@@ -64,8 +113,12 @@
                 }
                 // Miscellaneous items
                 scene.els.items = {
-                    duckPath:       document.getElementById('duck-path-points'),
-                    blockGroup:     document.getElementById('message-blocks-group')
+                    duckPath:           document.getElementById('duck-path-points'),
+                    blockGroupTitle:    document.getElementById('message-blocks-container'),
+                    blockGroup01:       document.getElementById('chapter-01-blocks'),
+                    blockGroup02:       document.getElementById('chapter-02-blocks'),
+                    blockGroup03:       document.getElementById('chapter-03-blocks'),
+                    blockGroup04:       document.getElementById('chapter-04-blocks')
                 }
                 // Misc
                 scene.els.misc = {
@@ -93,6 +146,62 @@
                 scene.els.scene.setAttribute('set-hourly-environment', null)
                 scene.els.scene.setAttribute('add-external-listeners', null)
                 scene.els.scene.setAttribute('emissions-activity-balloons', {visible: false})
+                scene.els.items.blockGroupTitle.setAttribute('add-block-title', {
+                    id:            "title-blocks",
+                    text:           "The Kingdom of Dreams & Madness",
+                    posX:           [-20, -20, -20, 0, -20, 0], 
+                    posY:           [40, 40, 40, 0, -5, -15],
+                    posZ:           [70, 0, -70, 50, 5, -45],  
+                    tilt:           [0, 0, 0, 10, 0, -10], 
+                    rotate:         [0, 0, 0, 0, 0, 0], 
+                    letterSpace:    12.5,
+                })
+
+                scene.els.items.blockGroup01.setAttribute('add-block-title', {
+                    id:             "chapter-01-blocks",
+                    text:           'Hello World',
+                    posZ:           [35, -35],   
+                    posY:           [5,  -10], 
+                    posX:           [0, 0],
+                    tilt:           [10, -10], 
+                    rotate:         [0, 0],
+                    letterSpace:    15,
+                })
+    
+                scene.els.items.blockGroup02.setAttribute('add-block-title', {
+                    id:             "chapter-02-blocks",
+                    text:           'Climate risks',
+                    posZ:           [35, -35],   
+                    posY:           [5,  -10], 
+                    posX:           [0, 0],
+                    tilt:           [10, -10], 
+                    rotate:         [0, 0],
+                    letterSpace:    15
+                })
+
+                scene.els.items.blockGroup03.setAttribute('add-block-title', {
+                    id:             "chapter-03-blocks",
+                    text:           'Our problem',
+                    posZ:           [35, -35],   
+                    posY:           [5,  -10], 
+                    posX:           [0, 0],
+                    tilt:           [10, -10], 
+                    rotate:         [0, 0],
+                    letterSpace:    15
+                })
+    
+                scene.els.items.blockGroup04.setAttribute('add-block-title', {
+                    id:             "chapter-04-blocks",
+                    text:           'Climate action',
+                    posZ:           [35, -35],   
+                    posY:           [5,  -10], 
+                    posX:           [0, 0],
+                    tilt:           [10, -10], 
+                    rotate:         [0, 0],
+                    letterSpace:    15
+                })
+    
+
             }
         })
          
@@ -250,12 +359,16 @@
                 rotation:           {type: 'array',     default: [-10, 90, 0]},
                 reset:              {type: 'boolean',   default: false},
                 ease:               {type: 'string',    default: 'easeInOutCubic'},
-                camera:             {type: 'string',    default: ''}
+                cleartitles:        {type: 'boolean',   default: true},
             },
 
             update: function() {    
-                // Disable all event container buttons
+                // Disable all event container buttons and remove any title blocks
                 document.querySelectorAll('.subMenu-event-container').forEach(el => el.classList.add('noPointerEvents'))
+                if(state.scene.animation.blockTitleShowing && this.data.clearTitles){
+                    ['01', '02', '03', '04'].forEach(no => scene.els.items[`blockGroup${no}`].setAttribute('hide-block-title', {id: `chapter-${no}-blocks`}))
+                }
+
                 // Animate camera rig position and rotation
                 scene.els.camRig.fly.setAttribute('animation__pos', {
                     property:           'position',
@@ -295,7 +408,6 @@
             }
         })
 
-
     // MISCELLANEOUS SCENE CONTROl
         AFRAME.registerComponent("fly-plane", {
             init: function () {
@@ -320,7 +432,6 @@
                     rotate:         true
                 })
             },
-
             remove: function(){
                 document.getElementById("rubberDuck").removeAttribute('alongpath')
             }
@@ -409,7 +520,7 @@
             }
         })
 
-         AFRAME.registerComponent("show-block-title", {
+        AFRAME.registerComponent("add-block-title", {
             schema: {
                 text:           {type: 'string',   default: "Hello world"},
                 tilt:           {type: 'array',    default: [10, -10]},
@@ -418,19 +529,18 @@
                 posX:           {type: 'array',    default: [0, 0]},            
                 posY:           {type: 'array',    default: [0, 0]},
                 letterSpace:    {type: 'number',   default: 17.5},      
-                duration:       {type: 'number',   default: 3500},               
-                delay:          {type: 'number',   default: 500}               
+                duration:       {type: 'number',   default: 2500},               
+                delay:          {type: 'number',   default: 500},
+                id:             {type: 'string',   default: ""},
+                visible:        {type: 'boolean',  default: false},
             },
-
-            update: function() {
-                document.getElementById("message-blocks-group").innerHTML = ""
-
+            init: function() {
                 const words = this.data.text.split(" "),
-                    container = document.getElementById("message-blocks-group"),
+                    container = document.getElementById(this.data.id),
                     noWords = words.length
-
-                container.innerHTML = ""            // Clear previous
                 let letterCount = 0;
+                container.innerHTML = ""            // Clear previous
+
 
                 words.forEach((word, i) => {
                     const noLetters = word.length,
@@ -529,31 +639,60 @@
                     container.appendChild(wordContainer)
                 })
             },
-            play: function(){
-                state.scene.animation.blockTitleShowing = true
-                scene.els.items.blockGroup.setAttribute('animation', {
-                    property: 'position.y', 
-                    from: 100, 
-                    to: 0, 
-                    dur: this.data.duration, 
-                    delay: this.data.delay
-                })
+            update: function(){
+console.log('Adding '+this.data.text)
+                if(this.data.visible){
+                    // state.scene.animation.blockTitleShowing = true
+                    // scene.els.items.blockGroup.setAttribute('add-block-title', null)
+                    document.getElementById(this.data.id).setAttribute('visible', true)
+                } else {
+                    document.getElementById(this.data.id).setAttribute('visible', false)
+                }
             },
-            remove: function(){
-                state.scene.animation.blockTitleShowing = false
-                scene.els.items.blockGroup.setAttribute('animation', {
-                    property:   'position.y', 
-                    from:       scene.els.items.blockGroup.getAttribute('position').y, 
-                    to:         100, 
-                    dur:        1500
-                })
-                setTimeout( () => {
-                    document.getElementById("message-blocks-group").innerHTML = ""
-                }, this.data.duration + this.data.delay)    
-            }
         })
 
+        AFRAME.registerComponent("show-block-title", {
+            schema: {  
+                duration:       {type: 'number',   default: 2500},               
+                delay:          {type: 'number',   default: 200},
+                id:             {type: 'string',   default: ""},
+                visible:        {type: 'boolean',  default: true},
+            },
+            update: function(){
+                console.log('Showing '+this.data.id)
+                document.getElementById(this.data.id).removeAttribute('hide-block-title')
+                state.scene.animation.blockTitleShowing = true
+                document.getElementById(this.data.id).setAttribute('visible', true)
+                document.getElementById(this.data.id).setAttribute('animation', {
+                    property: 'position.y', 
+                    from: 150, 
+                    to: 0, 
+                    dur: this.data.duration
+                })
+            },  
+        })
 
+        AFRAME.registerComponent("hide-block-title", {
+            schema: {  
+                duration:       {type: 'number',   default: 500},               
+                delay:          {type: 'number',   default: 200},
+                id:             {type: 'string',   default: ""},
+                visible:        {type: 'boolean',  default: true},
+            },
+            update: function(){
+                console.log('Hiding '+this.data.id)
+                document.getElementById(this.data.id).removeAttribute('show-block-title')
+                document.getElementById(this.data.id).setAttribute('animation', {
+                    property:   'position.y', 
+                    from:       document.getElementById(this.data.id).getAttribute('position').y, 
+                    to:         100, 
+                    dur:        this.data.duration
+                })
+                setTimeout(() =>  {
+                    document.getElementById(this.data.id).setAttribute('visible', false)
+                },  this.data.duration + this.data.delay) 
+            }
+        })
 
     // CLIMATE RISK / HAZARD EVENT VISUALISATIONS
         AFRAME.registerComponent('hazard-sea-level', {
@@ -1703,7 +1842,8 @@
                 sourceNetSink:      {type: 'boolean',  default: false}
             },
             init: function(){
-                console.log('*** ADDING EMISSIONS BALLOONS ***')
+                // StockType > Sector > Scope > EconomicSector > Source > container? > 
+
                 // Emissions balloon anchor collections
                 scene.els.anchors = {
                     // Emission source objects
@@ -1712,39 +1852,60 @@
                             scope1: {
                                 residential:{
                                     mainsGas: {
-                                        smallDwellings:          document.querySelectorAll('.house-small * .emissions-anchor.mains-gas'),
-                                        largeDwellings:          document.querySelectorAll('.house-large * .emissions-anchor.mains-gas'),
-                                        townhouses:              []
+                                        smallDwellings: {
+                                            all:        document.querySelectorAll('.house-small * .emissions-anchor.mains-gas')
+                                        },
+                                        largeDwellings:  {
+                                            all:        document.querySelectorAll('.house-large * .emissions-anchor.mains-gas'),
+                                        },
+                                        townhouses:  {
+                                            all:        []
+                                        } 
                                     },
                                     bottledLPG: {
                                     },
                                     wood: {
-                                        smallDwellings:          document.querySelectorAll('.house-small * .emissions-anchor.firewood'),
-                                        largeDwellings:          document.querySelectorAll('.house-large * .emissions-anchor.firewood'),
-                                        townhouses:              []
+                                        smallDwellings: {
+                                            all:            document.querySelectorAll('.house-small * .emissions-anchor.firewood'),
+                                        },
+                                        largeDwellings: {        
+                                            all:            document.querySelectorAll('.house-large * .emissions-anchor.firewood'),
+                                        },
+                                        townhouses: {
+                                            all:              []
+                                        }
                                     }
                                 },
                                 commercial: {
                                     mainsGas: {
-                                        offices:                document.querySelectorAll('.commercial-bldg.five-level * .emissions-anchor.mains-gas'),
-                                        retail:                 document.querySelectorAll('.commercial-bldg.three-level * .emissions-anchor.mains-gas'),
-                                        hospitality:            document.querySelectorAll('.hospitality * .emissions-anchor.mains-gas'),
-                                        accommodation:          document.querySelectorAll('.accommodation * .emissions-anchor.mains-gas')
+                                        offices:   {
+                                            all:                document.querySelectorAll('.commercial-bldg.five-level * .emissions-anchor.mains-gas'),
+                                        },
+                                        retail:  {
+                                            all:                document.querySelectorAll('.commercial-bldg.three-level * .emissions-anchor.mains-gas'),
+                                        },
+                                        hospitality: {
+                                            all:                document.querySelectorAll('.hospitality * .emissions-anchor.mains-gas'),
+                                        },
+                                        accommodation: {
+                                            all:                document.querySelectorAll('.accommodation * .emissions-anchor.mains-gas')
+                                        }
                                     },
                                     bottledLPG:                 {},
                                     diesel:                     {},
                                 },
                                 industrial: {
                                     electricityGeneration: {
-                                        coalFired:              document.querySelectorAll('.emissions-anchor.utility-coal'),
-                                        gasFired:               []
+                                        coalFired:  {
+                                            generation:         document.querySelectorAll('.emissions-anchor.utility-coal'),
+                                        }
                                     },
                                     mainsGas: {
-                                        other:                  [],
-                                        mineral:                [],
-                                        chemical:               [],
-                                        metal:                  [],
-                                        electronics:            []
+                                        other:                  {},
+                                        mineral:                {},
+                                        chemical:               {},
+                                        metal:                  {},
+                                        electronics:            {}
                                     },
                                     bottledLPG:                 {},
                                     diesel:                     {},
@@ -1814,11 +1975,15 @@
                             scope3: {
                                 industrial: {
                                     gridElectricity: {
-                                        transmission:     document.querySelectorAll('.emissions-anchor.grid-transmission'),
-                                        distribution:     document.querySelectorAll('.emissions-anchor.grid-distribution'),
+                                        transmission: {
+                                            lineLosses:         document.querySelectorAll('.emissions-anchor.grid-transmission')
+                                        },
+                                        distribution: {
+                                            lineLosses:         document.querySelectorAll('.emissions-anchor.grid-distribution'),
+                                        }
                                     },
                                     mainsGas: {
-                                        distribution:            [],
+                                        distribution:            {},
                                     }
                                 }
                             }
@@ -1826,211 +1991,80 @@
                         transportEnergy: {
                             scope1: {
                                 residential: {
-                                    road: {
-                                        passengerVehicle: {
-                                            petrol:             [],
-                                            diesel:             [],
-                                            lpg:                [],
-                                            biodiesel:          [],
-                                            ethanol:            [],
-                                        },
-                                        motorcyle: {
-                                            petrol:             [],
-                                            ethanol:            [],
-                                        },
-                                        other: {
-                                            petrol:             [],
-                                            diesel:             [],
-                                            lpg:                [],
-                                            biodiesel:          [],
-                                            ethanol:            [],
+                                    petrol: {
+                                        road: {
+                                            passengerVehicle:       []
                                         }
                                     },
-                                    aviation: {
-                                        passsengerAirTravel: {
-                                            jetfuel:            document.querySelectorAll('.emissions-anchor.airplane'),
-                                            avgas:              [],
+                                    jetfuel: {
+                                        aviation: {
+                                            passsengerAirTravel:     document.querySelectorAll('.emissions-anchor.residential.aviation.passengerAirTravel.jetfuel')
                                         }
                                     }
                                 },
                                 commercial: {
-                                    road: {
-                                        passengerVehicle: {
-                                            petrol:             [],
-                                            diesel:             [],
-                                            lpg:                [],
-                                            biodiesel:          [],
-                                            ethanol:            [],
-                                        },
-                                        lightCommercialVehicle: {
-                                            petrol:             [],
-                                            diesel:             [],
-                                            lpg:                [],
-                                            biodiesel:          [],
-                                            ethanol:            [],
-                                        },
-                                        heavyTrucks: {
-                                            petrol:             [],
-                                            diesel:             [],
-                                            lpg:                [],
-                                            biodiesel:          [],
-                                            ethanol:            [],
-                                        },
-                                        bus: {
-                                            petrol:             [],
-                                            diesel:             [],
-                                            lpg:                [],
-                                            biodiesel:          [],
-                                            ethanol:            [],
-                                        },
-                                        other: {
-                                            petrol:             [],
-                                            diesel:             [],
-                                            lpg:                [],
-                                            biodiesel:          [],
-                                            ethanol:            [],
+                                    petrol: {
+                                        road: {
+                                            passengerVehicle:       [],
+                                            lightCommercialVehicle: [],
+                                            bus:                    [],
+                                            other:                  []
                                         }
                                     },
-                                    aviation: {
-                                        passsengerAirTravel: {
-                                            jetfuel:            [],
-                                            avgas:              [],
-                                        },
-                                        freight: {
-                                            jetfuel:            [],
-                                            avgas:              [],
+                                    diesel: {
+                                        road: {
+                                            passengerVehicle:       [],
+                                            lightCommercialVehicle: [],
+                                            heavyTrucks:            [],
+                                            bus:                    [],
+                                            other:                  []
+                                        }
+                                    },
+                                    lpg: {
+                                        road: {
+                                            passengerVehicle:       [],
+                                            lightCommercialVehicle: [],
+                                            heavyTrucks:            [],
+                                            bus:                    [],
+                                            other:                  []
+                                        }                                    
+                                    },
+                                    biodiesel: {
+                                        road: {
+                                            passengerVehicle:       [],
+                                            lightCommercialVehicle: [],
+                                            heavyTrucks:            [],
+                                            bus:                    [],
+                                            other:                  []
+                                        }                                    
+                                    },
+                                    ethanol: {
+                                        road: {
+                                            passengerVehicle:       [],
+                                            lightCommercialVehicle: [],
+                                            heavyTrucks:            [],
+                                            bus:                    [],
+                                            other:                  []
+                                        }                                    
+                                    },
+                                    jetfuel: {
+                                        aviation: {
+                                            passsengerAirTravel:    document.querySelectorAll('.emissions-anchor.commercial.aviation.passengerAirTravel.jetfuel'),
+                                            freight:                document.querySelectorAll('.emissions-anchor.commercial.aviation.freight.jetfuel'),
                                         }
                                     }
                                 },
-                                industrial: {
-                                    road: {
-                                        passengerVehicle: {
-                                            petrol:             [],
-                                            diesel:             [],
-                                            lpg:                [],
-                                            biodiesel:          [],
-                                            ethanol:            [],
-                                        },
-                                        lightCommercialVehicle: {
-                                            petrol:             [],
-                                            diesel:             [],
-                                            lpg:                [],
-                                            biodiesel:          [],
-                                            ethanol:            [],
-                                        },
-                                        heavyTrucks: {
-                                            petrol:             [],
-                                            diesel:             [],
-                                            lpg:                [],
-                                            biodiesel:          [],
-                                            ethanol:            [],
-                                        },
-                                        other: {
-                                            petrol:             [],
-                                            diesel:             [],
-                                            lpg:                [],
-                                            biodiesel:          [],
-                                            ethanol:            [],
-                                        }
-                                        }
-                                },
-                                farming: {
-                                    road: {
-                                        passengerVehicle: {
-                                            petrol:             [],
-                                            diesel:             [],
-                                            lpg:                [],
-                                            biodiesel:          [],
-                                            ethanol:            [],
-                                        },
-                                        lightCommercialVehicle: {
-                                            petrol:             [],
-                                            diesel:             [],
-                                            lpg:                [],
-                                            biodiesel:          [],
-                                            ethanol:            [],
-                                        },
-                                        other: {
-                                            petrol:             [],
-                                            diesel:             [],
-                                            lpg:                [],
-                                            biodiesel:          [],
-                                            ethanol:            [],
-                                        }
-                                    },
-                                    offroad: {
-                                        all: {
-                                            petrol:             [],
-                                            diesel:             [],
-                                            lpg:                [],
-                                            biodiesel:          [],
-                                            ethanol:            [],
-                                        }
-                                    }
-                                },
-                                institutional: {
-                                    road: {
-                                        passengerVehicle: {
-                                            petrol:             [],
-                                            diesel:             [],
-                                            lpg:                [],
-                                            biodiesel:          [],
-                                            ethanol:            [],
-                                        },
-                                        lightCommercialVehicle: {
-                                            petrol:             [],
-                                            diesel:             [],
-                                            lpg:                [],
-                                            biodiesel:          [],
-                                            ethanol:            [],
-                                        },
-                                        heavyTrucks: {
-                                            petrol:             [],
-                                            diesel:             [],
-                                            lpg:                [],
-                                            biodiesel:          [],
-                                            ethanol:            [],
-                                        },
-                                        bus: {
-                                            petrol:             [],
-                                            diesel:             [],
-                                            lpg:                [],
-                                            biodiesel:          [],
-                                            ethanol:            [],
-                                        },
-                                        other: {
-                                            petrol:             [],
-                                            diesel:             [],
-                                            lpg:                [],
-                                            biodiesel:          [],
-                                            ethanol:            [],
-                                        }
-                                    },
-                                    offroad: {
-                                        all: {
-                                            petrol:             [],
-                                            diesel:             [],
-                                            lpg:                [],
-                                            biodiesel:          [],
-                                            ethanol:            [],
-                                        }
-                                    },
-                                    aviation: {
-                                        passsengerAirTravel: {
-                                            jetfuel:            document.querySelectorAll('.emissions-anchor.airplane'),
-                                            avgas:              [],
-                                        }
-                                    }
-                                },    
                             }
                         },
                         wasteAndWasteWater: {
                             scope1: {
                                 industrial: {
                                     landfill: {
-                                        MSW:                    document.querySelectorAll('.emissions-anchor.landfill.msw'),
-                                        CandI:                  document.querySelectorAll('.emissions-anchor.landfill.ci'),
-                                        CandD:                  document.querySelectorAll('.emissions-anchor.landfill.cd'),
+                                        disposal: {
+                                            MSW:                    document.querySelectorAll('.emissions-anchor.landfill.msw'),
+                                            CandI:                  document.querySelectorAll('.emissions-anchor.landfill.ci'),
+                                            CandD:                  document.querySelectorAll('.emissions-anchor.landfill.cd'),
+                                        } 
                                     },
                                     incineration:                {},
                                     biologicalTreatment:         {},
@@ -2042,49 +2076,55 @@
                             scope3: {
                                 residential: {
                                     landfill: {    
-                                        smallDwellings:         document.querySelectorAll('.house-small * .emissions-anchor.bin-landfill'),
-                                        largeDwellings:         document.querySelectorAll('.house-large * .emissions-anchor.bin-landfill')
+                                        smallDwellings:  {
+                                            MSW:        document.querySelectorAll('.house-small * .emissions-anchor.bin-landfill'),
+                                        },
+                                        largeDwellings:   {
+                                            MSW:        document.querySelectorAll('.house-large * .emissions-anchor.bin-landfill')
+                                        }
                                     },
                                     wastewater:  {    
-                                        smallDwellings:         [],
-                                        largeDwellings:         []
+                                        smallDwellings:         {},
+                                        largeDwellings:         {}
                                     },      
                                 },
                                 commercial: {
                                     landfill: {
-                                        offices:                document.querySelectorAll('.emissions-anchor.skip-landfill'),
-                                        officeTowers:           [],
-                                        retail:                 [],
-                                        hospitality:            [],
-                                        accommodation:          []
+                                        offices: {
+                                            all:               document.querySelectorAll('.emissions-anchor.skip-landfill'),
+                                        },
+                                        officeTowers:           {},
+                                        retail:                 {},
+                                        hospitality:            {},
+                                        accommodation:          {}
                                     },
                                     wastewater: {
-                                        offices:                [],
-                                        officeTowers:           [],
-                                        retail:                 [],
-                                        hospitality:            [],
-                                        accommodation:          []
+                                        offices:                {},
+                                        officeTowers:           {},
+                                        retail:                 {},
+                                        hospitality:            {},
+                                        accommodation:          {}
 
                                     }                        
                                 },  
                                 industrial: {
                                     landfill: {
-                                        other:                  [],
-                                        mineral:                [],
-                                        chemical:               [],
-                                        metal:                  [],
-                                        electronics:            []
+                                        other:                  {},
+                                        mineral:                {},
+                                        chemical:               {},
+                                        metal:                  {},
+                                        electronics:            {}
                                     }               
                                 } ,
                                 institutional: {
                                     CandI: {
-                                        government:             [],
-                                        hospital:               [],
-                                        airport:                [],
+                                        government:             {},
+                                        hospital:               {},
+                                        airport:                {},
                                     },
                                     MSW: { 
-                                        school:                 [],
-                                        church:                 []
+                                        school:                 {},
+                                        church:                 {}
                                     }
                                 }
                             },
@@ -2092,138 +2132,165 @@
                         agriculture: {
                             scope1: {
                                 farming: {
-                                    livestockEnteric: {
-                                        cattle:         document.querySelectorAll('.emissions-anchor.livestock.cow'),
-                                        pigs:           document.querySelectorAll('.emissions-anchor.livestock.pig'),
-                                        sheep:          document.querySelectorAll('.emissions-anchor.livestock.sheep'),
-                                        poultry:        document.querySelectorAll('.emissions-anchor.livestock.poultry')
+                                    livestock: {
+                                        enteric: {
+                                            cattle:             document.querySelectorAll('.emissions-anchor.livestock.cow'),
+                                            pigs:               document.querySelectorAll('.emissions-anchor.livestock.pig'),
+                                            sheep:              document.querySelectorAll('.emissions-anchor.livestock.sheep'),
+                                            poultry:            document.querySelectorAll('.emissions-anchor.livestock.poultry')
+                                        }, 
+                                        manure:                 {},
+                                        grazing:                {}
                                     },
-                                    livestockManure: {},
-                                    livestockGrazing: {
-                                        cattle:         [],
-                                        pigs:           [],
-                                        sheep:          [],
-                                        poultry:        []
-                                    },
-                                    cropping: {
-                                        wheat:          document.querySelectorAll('.emissions-anchor.agriculture.cropping-wheat'),
-                                        corn:           document.querySelectorAll('.emissions-anchor.agriculture.cropping-corn'),
-                                        other:          document.querySelectorAll('.emissions-anchor.agriculture.cropping-other')
-                                    },
-                                    fruitAndVeg: {
-                                        apples:         document.querySelectorAll('.emissions-anchor.agriculture.ag-apples'),
+                                    produce: {
+                                        cropping: {
+                                            wheat:              document.querySelectorAll('.emissions-anchor.agriculture.cropping-wheat'),
+                                            corn:               document.querySelectorAll('.emissions-anchor.agriculture.cropping-corn'),
+                                            other:              document.querySelectorAll('.emissions-anchor.agriculture.cropping-other')
+                                        },
+                                        fruitAndVeg: {
+                                            apples:             document.querySelectorAll('.emissions-anchor.agriculture.ag-apples'),
+                                        }
                                     }
                                 },
                             },
                             scope3: {
-
                             }
                         },
                         landAndForestry: {
                             scope1: {
                                 farming: {
-                                    conversion:             [],
-                                    clearing:               [],
-                                    reclearing:             []
+                                    landUse: {
+                                        conversion:             [],
+                                        clearing:               [],
+                                        reclearing:             []
+                                    }
                                 },
                                 institutional: {
-                                    conversion:             [],
-                                    clearing:               [],
-                                    reclearing:             []
+                                    landUse: {
+                                        conversion:             [],
+                                        clearing:               [],
+                                        reclearing:             []
+                                    }
                                 }
                             }
                         },
                         industrialProcessesAndProductUse: {
                             scope1: {
                                 residential:  {
-                                    refrigerantLeakage: {
-                                        smallDwellings:         [],
-                                        largeDwellings:         [],
-                                        townhouses:             [],
-                                        transport:  {
-                                            passengerVehicles:  [],
-                                        }
-                                    }
+                                    smallDwellings: {
+                                        refrigerantLeakage:      []
+                                    },
+                                    largeDwellings: {
+                                        refrigerantLeakage:       []
+                                    },
+                                    townhouses: {
+                                        refrigerantLeakage:        []
+                                    },
                                 },
                                 commercial:  {
-                                    refrigerantLeakage: {
-                                        offices:                [],
-                                        officeTowers:           [],
-                                        retail:                 [],
-                                        hospitality:            [],
-                                        accommodation:           []   
+                                    offices: {
+                                        refrigerantLeakage:        []
+                                    }, 
+                                    retail: {
+                                        refrigerantLeakage:        []
+                                    }, 
+                                    hospitality: {
+                                        refrigerantLeakage:        []
+                                    }, 
+                                    accommodation: {
+                                        refrigerantLeakage:        []
                                     }
                                 },
                                 industrial: {
-                                    processes:{
-                                        other:                  [],
-                                        mineral:                [],
-                                        chemical:               [],
-                                        metal:                  [],
-                                        electronics:            []
+                                    minerals: {
+                                        processes:                  [],
+                                        refrigerantLeakage:         []
                                     },
-                                    refrigerantLeakage: {
-                                        other:                  [],
-                                        mineral:                [],
-                                        chemical:               [],
-                                        metal:                  [],
-                                        electronics:            []      
+                                    minerals: {
+                                        processes:                  [],
+                                        refrigerantLeakage:         []
+                                    },
+                                    chemicals: {
+                                        processes:                  [],
+                                        refrigerantLeakage:         []
+                                    },
+                                    metals: {
+                                        processes:                  [],
+                                        refrigerantLeakage:         []
+                                    },
+                                    electronics: {
+                                        processes:                  [],
+                                        refrigerantLeakage:         []
                                     }
                                 },
                             }
                         },
                     },
+
                     // Clean alternatives
                     switches: {       
                         stationaryEnergy: {
                             scope1: {
                                 industrial: {
                                     electricityGeneration: {
-                                        solar:                  document.querySelectorAll('.emissions-anchor.utility-solar'),
-                                        wind:                   document.querySelectorAll('.emissions-anchor.utility-wind'),
-                                        hydro:                  document.querySelectorAll('.emissions-anchor.utility-hydro')
+                                        solar:  {
+                                            exported:         document.querySelectorAll('.emissions-anchor.utility-solar'),
+                                        },
+                                        wind:  {   
+                                            exported:         document.querySelectorAll('.emissions-anchor.utility-wind'),
+                                        },
+                                        hydro: {
+                                            exported:         document.querySelectorAll('.emissions-anchor.utility-hydro')
+                                        }
                                     }
                                 }
                             },
                             scope2: {
                                 residential: {
                                     onSiteSolar: {
-                                        smallDwellings:         document.querySelectorAll('.house-small * .emissions-anchor.rooftop-solar'),
-                                        largeDwellings:         document.querySelectorAll('.house-large * .emissions-anchor.rooftop-solar'),
-                                        townhouses:             []
+                                        smallDwellings:  {
+                                            consumed:       document.querySelectorAll('.house-small * .emissions-anchor.rooftop-solar'),
+                                        },
+                                        largeDwellings:  {
+                                            consumed:       document.querySelectorAll('.house-large * .emissions-anchor.rooftop-solar'),
+                                        },
+                                        townhouses:            {}        
                                     }
                                 },
                                 commercial:  {
                                     onSiteSolar: {
-                                        offices:                [],
-                                        retail:                 [],
-                                        hospitality:            [],
-                                        accommodation:           []
+                                        offices:                {},
+                                        retail:                 {},
+                                        hospitality:            {},
+                                        accommodation:          {}
                                     }
                                 },   
                                 industrial: {
                                     onSiteSolar: {
-                                        other:                  [],
-                                        mineral:                [],
-                                        chemical:               [],
-                                        metal:                  [],
-                                        electronics:            []
+                                        other:                  {},
+                                        minerals:               {},
+                                        chemicals:              {},
+                                        metals:                 {},
+                                        electronics:            {}
                                     }
                                 },          
                                 agriculture:  {
                                     onSiteSolar: {
-                                        largeFarm:              [],
-                                        smallFarm:              [],
-                                        groundMounted:          [],
+                                        largeFarm:              {},
+                                        smallFarm:              {},
+                                        groundMounted:          {},
                                     }
                                 },          
                                 institutional: {
                                     onSiteSolar: {
-                                        government:             [],
-                                        airport:                [],
-                                        hospital:               [],
-                                        church:                 [],
-                                        school:                 document.querySelectorAll('.school-building * .emissions-anchor.rooftop-solar'),
+                                        government:             {},
+                                        airport:                {},
+                                        hospital:               {},
+                                        church:                 {},
+                                        school:  {
+                                            consumed:         document.querySelectorAll('.school-building * .emissions-anchor.rooftop-solar'),
+                                        }
                                     }
                                 }  
                             },
@@ -2233,10 +2300,14 @@
                         transportEnergy: {
                             scope1: {
                                 residential: {
-                                    petrolToEV:             ''
+                                    petrolToEV:  {
+
+                                    }           
                                 },
                                 commercial: {
-                                    petrolToEV:             ''
+                                    petrolToEV:   {
+
+                                    }     
                                 }
                             }                   
                         },
@@ -2256,6 +2327,8 @@
                         }
                     }
                 }
+
+
                 // Add balloons for each anchor 
                 Object.entries(scene.els.anchors).forEach( ([type, sectorObj]) => {
                     Object.entries(scene.els.anchors[type]).forEach( ([emissionsSector, scopeObj]) => {
@@ -2263,6 +2336,7 @@
                             Object.entries(scene.els.anchors[type][emissionsSector][scope]).forEach( ([sector, sourceObj]) => {
                                 Object.entries(scene.els.anchors[type][emissionsSector][scope][sector]).forEach( ([emissionsSource, subsectorObj]) => {
                                     Object.entries(scene.els.anchors[type][emissionsSector][scope][sector][emissionsSource]).forEach( ([subsource, anchorCollection]) => {
+
                                         let scale, stringMultiplier, stringPosY, balloonCol = '#fff'
                                         if( anchorCollection.length > 0) {
                                             scale = Math.sqrt(model.scene.balloonScale[type][emissionsSector][scope][sector][emissionsSource][subsource].scale)
@@ -2293,6 +2367,7 @@
                         })
                     })
                 })
+
                 state.scene.emissions.balloonsInitiated= true
             },
 
@@ -2304,15 +2379,15 @@
                     nonTargetedGroupEls = this.data.type === 'all' ? [] : document.querySelectorAll(nonTargetedSelector),
                     sourceGroupBalloonEls = document.querySelectorAll(`.balloon-group.sources${this.data.selector}`),
                     animationTime =  this.data.dur,
-                    delay = this.data.dur / 2, 
+                    delay = this.data.dur / 4, 
                     sourceScale = (this.data.sourceNetSwitch && this.data.sourceNetSink) ? 0.7 : this.data.sourceNetSwitch ? 0.8 : this.data.sourceNetSink ? 0.9 : 1
 
                     console.log(targetSelector)
-                    console.log(balloonGroupEls.length)
+                    console.log('Show: '+balloonGroupEls.length)
                     console.log(nonTargetedSelector)
-                    console.log(nonTargetedGroupEls.length)
+                    console.log('Hide: '+nonTargetedGroupEls.length)
                     console.log('Animation time: '+animationTime)
-                    console.log('Delay time: '+delay)
+                    console.log('Visible : '+this.data.visible)
                 // Hide all non-targeted balloons: animate out of view (if already in view)
                 nonTargetedGroupEls.forEach((el, i) => {
                     if(this.data.visible){  // Hide the non-targeted balloons
@@ -2384,6 +2459,7 @@
 
             remove: function(){
             }
+
         })
 
         AFRAME.registerComponent('set-balloon-colours', {
@@ -2472,6 +2548,9 @@
                                 if(!state.scene.animation.planeFlight){                                
                                     scene.els.scene.setAttribute('fly-plane', null)
                                 }
+                                break
+                            case 'KeyM':                       
+                                    audio.methods.updateMusicalPhrase()
                                 break
                             case 'KeyR':                       
                                     scene.els.scene.setAttribute('sail-duck', null)

@@ -165,7 +165,13 @@
                     }
                     label.innerHTML = "-";
                     ui.mainMenus[menuName].svg.style.pointerEvents = "auto";
-                    scene.els.items.blockGroup.removeAttribute('show-block-title')  
+                    // Reset the intro animation (balloons)
+                    if(state.scene.animation.intro){
+                        state.scene.animation.intro = false
+                        scene.els.scene.setAttribute('emissions-activity-balloons', {visible: false})
+                        scene.els.items.blockGroupTitle.setAttribute('hide-block-title', {id: "title-blocks"})  
+                    }
+                    
                 } else { // Close menu
                     const tl = new TimelineLite();
                     for(var i=0; i<items.length; i++){
@@ -174,6 +180,7 @@
                     tl.to(items, .3, {scale:0, ease:Back.easeIn}, 0.3);
 
                     label.innerHTML = "+";
+                    // Reset view
                     ui.mainMenus[menuName].svg.style.pointerEvents = "none";
                     document.querySelectorAll(`.${menuName}-item`).forEach(el =>  {
                         el.classList.remove('active')
@@ -182,6 +189,10 @@
                     document.querySelectorAll('.subMenu-container').forEach(el =>  el.classList.remove('active') )
                     ui.methods.closeDetails()
                     externalEvents.resetHazards()  
+                    scene.els.items.blockGroup01.setAttribute('hide-block-title', {id: "chapter-01-blocks"})
+                    scene.els.items.blockGroup02.setAttribute('hide-block-title', {id: "chapter-02-blocks"})
+                    scene.els.items.blockGroup03.setAttribute('hide-block-title', {id: "chapter-03-blocks"})
+                    scene.els.items.blockGroup04.setAttribute('hide-block-title', {id: "chapter-04-blocks"})
                 }
 
                 // Close all other main menus
@@ -235,11 +246,7 @@
                     })
 
                 // 2. Add climate hazard button event listeners: add DOM elements and events for hazards
-                    const hazardMenuEls = ['menu-heat', 'menu-drought', 'menu-bushfire', 'menu-acidification', 'menu-desertification',
-                        'menu-stormFlood', 'menu-stormWind', 'menu-mudLandslides', 'menu-tropicalStorm',  'menu-winterStorm',  'menu-seaLevel', 
-                        'menu-earthquake','menu-volcanic', 'menu-tsunami']
-
-                    hazardMenuEls.forEach(id => {
+                    ui.lists.hazardMenuEls.forEach(id => {
                         document.getElementById(id).addEventListener('click', function(){
                             const hazard = this.id.slice(this.id.indexOf('-')+1),
                                 intensityContainer = document.getElementById('details-intensity-container'),
@@ -276,26 +283,22 @@
                     })
 
                 // 3. Add emissions source/sinks/switch sector button event listeners
-                    const types = ['sources', 'switches', 'sinks'],
-                        emissionsSectorMenuEls = ['stationaryEnergy', 'transportEnergy', 'wasteAndWasteWater',  'industrialProcessesAndProductUse', 'agriculture','landAndForestry', 'all']
-
+                    const types = ['sources', 'switches', 'sinks']
                     types.forEach(type => {
-                        emissionsSectorMenuEls.forEach(sector => {
+                        ui.lists.emissionsSectorMenuEls.forEach(sector => {
                             const id = `menu-${type}-${sector}`
                             if(document.getElementById(id)){
                                 document.getElementById(id).addEventListener('click', function(){
                                     const intensityContainer = document.getElementById('details-intensity-container')
                                     intensityContainer.innerHTML = ''  
-
                                     document.querySelectorAll('.subMenu-emissions-container').forEach(el => el.classList.remove('active'))
                                     this.classList.add('active')                  // Mark emissions sector button as selected
-
                                     scene.els.scene.setAttribute('emissions-activity-balloons', {
                                         type:               type,
                                         selectorClass1:     sector,
-                                        dur:                3000
+                                        dur:                3000,
+                                        visible:            true
                                     })
-
                                     document.querySelectorAll('.subMenu-emissions-container').forEach(el =>{ 
                                         el.classList.add('noPointerEvents')
                                         setTimeout( () => el.classList.remove('noPointerEvents'))
@@ -353,9 +356,10 @@
                             ui.mainMenus[menuName].lists.sectors.forEach( sector => {
                                 ui.methods.addSubSectionNav(sector)                
                                 document.getElementById(`${menuName}-button-${sector}`).addEventListener('click', function(){ 
+                                    externalEvents.toggleSectionTitle(this.id)
                                     ui.methods.selectSector(this, menuName)                 
                                     ui.methods.selectSubMenu(sector)
-                                    externalEvents.toggleSectionTitle(this.id)
+                                    scene.els.scene.setAttribute('move-fly-camera', {pos: [180, 60, 0], rotation: [-10, 90, 0], cleartitles: false} )
                                 })
                             })
                         }
@@ -403,9 +407,14 @@
                     document.getElementById('menu-time-back').addEventListener('click', () => externalEvents.changeHour('back')) 
                     document.getElementById('clockhand-hour-group').setAttribute('class', 'hour-'+(state.scene.time.hour%12))
             }
+        },
+        lists: {
+            hazardMenuEls: ['menu-heat', 'menu-drought', 'menu-bushfire', 'menu-acidification', 'menu-desertification',
+                        'menu-stormFlood', 'menu-stormWind', 'menu-mudLandslides', 'menu-tropicalStorm',  'menu-winterStorm',  'menu-seaLevel', 
+                        'menu-earthquake','menu-volcanic', 'menu-tsunami'],
+            emissionsSectorMenuEls:  ['stationaryEnergy', 'transportEnergy', 'wasteAndWasteWater',  'industrialProcessesAndProductUse', 'agriculture','landAndForestry', 'all']
         }
     } 
-
 
 
 ////////////////////////////////////////////////////////////
@@ -416,9 +425,11 @@
         primeInterface: function(){
             console.log('PRIMING INTERFACE...')
 
-            document.getElementById('loader-button').addEventListener('click', function(){
+            document.getElementById('loader-button').addEventListener('click', async function(){
+                document.getElementById('loader-button').addEventListener('click', null)        // Ensure startApp not called twice
+                // 0. Start the ToneJS audio context
+                await Tone.start()
                 // 1. Switch to instruction pane
-                document.getElementById('loader-button').addEventListener('click', null)        // Enure startApp not called twice
                 document.getElementById('loader-text').classList.add('faded')
                 setTimeout( () => {
                     document.getElementById('loader-button').addEventListener('click', externalEvents.startApp)
@@ -426,14 +437,11 @@
                     document.getElementById('loader-text').innerHTML = document.getElementById('loader-instruction-text').innerHTML
                     document.getElementById('loader-text').classList.remove('faded')                    
                 }, 200)
-
                 // 2. Set balloon colours (to random!). Note: this is called here, after all balloons are created
                 scene.els.scene.setAttribute('set-balloon-colours', {random: true})
             })
-
             // Setup menu interface and interaction
              ui.methods.setupMenuInterface()     
-
         },
 
         startApp: function(){
@@ -442,21 +450,12 @@
             document.getElementById('loader-intro').classList.add('hidden')
             // Intro: sail the duck and call the mobile block title
             scene.els.scene.setAttribute('sail-duck', null)
-            scene.els.scene.setAttribute('emissions-activity-balloons', {'visible': true})
-            scene.els.items.blockGroup.setAttribute('show-block-title', {
-                text:           "The Kingdom of Dreams & Madness",
-                posX:           [-20, -20, -20, 0, -20, 0], 
-                posY:           [40, 40, 40, 0, -5, -15],
-                posZ:           [70, 0, -70, 50, 5, -45],  
-                tilt:           [0, 0, 0, 10, 0, -10], 
-                rotate:         [0, 0, 0, 0, 0, 0], 
-                letterSpace:    12.5
-            })
+            state.scene.animation.intro = true
+            scene.els.scene.setAttribute('emissions-activity-balloons', {visible: true})
+            scene.els.items.blockGroupTitle.setAttribute('show-block-title', {id: "title-blocks", dur: 3000})
             setTimeout(() => {
                 document.getElementById('loader-container').classList.add('hidden')
             }, 1000)
-
-
         },
 
         toggleTouchUI: function() {
@@ -570,60 +569,33 @@
         },
 
         toggleSectionTitle: function(sectionID){
-            console.log(sectionID)
-            scene.els.items.blockGroup.removeAttribute('show-block-title', {dur: 250})
-            setTimeout(() => {
-                switch(sectionID){
-                    case 'menu-1-button-world': 
-                        scene.els.items.blockGroup.setAttribute('show-block-title', {
-                            text:               'Hello World',
-                            posZ:               [35, -35],   
-                            posY:               [5,  -10], 
-                            posX:               [0, 0],
-                            tilt:               [10, -10], 
-                            rotate:             [0, 0],
-                            letterSpace:        15
-                        })
-                        break   
-                    case 'menu-1-button-risk': 
-                        scene.els.items.blockGroup.setAttribute('show-block-title', {
-                            text:               'Climate risks',
-                            posZ:               [35, -35],   
-                            posY:               [5,  -10], 
-                            posX:               [0, 0],
-                            tilt:               [10, -10], 
-                            rotate:             [0, 0],
-                            letterSpace:        15
-                        })
-                        break   
-                    case 'menu-1-button-emissions': 
-                        scene.els.items.blockGroup.setAttribute('show-block-title', {
-                            text:               'Our problem',
-                            posZ:               [35, -35],   
-                            posY:               [5,  -10], 
-                            posX:               [0, 0],
-                            tilt:               [10, -10], 
-                            rotate:             [0, 0],
-                            letterSpace:        15
-                        })
-                        break   
-                    case 'menu-1-button-actions': 
-                        scene.els.items.blockGroup.setAttribute('show-block-title', {
-                            text:               'Climate action',
-                            posZ:               [35, -35],   
-                            posY:               [5,  -10], 
-                            posX:               [0, 0],
-                            tilt:               [10, -10], 
-                            rotate:             [0, 0],
-                            letterSpace:        15
-                        })
-                        break   
-                    default:
-
-                }
-            }, 250)
-
-
+            switch(sectionID){
+                case 'menu-1-button-world': 
+                    scene.els.items.blockGroup01.setAttribute('show-block-title', {id: "chapter-01-blocks"})
+                    scene.els.items.blockGroup02.setAttribute('hide-block-title', {id: "chapter-02-blocks"})
+                    scene.els.items.blockGroup03.setAttribute('hide-block-title', {id: "chapter-03-blocks"})
+                    scene.els.items.blockGroup04.setAttribute('hide-block-title', {id: "chapter-04-blocks"})
+                    // ['02', '03', '04'].forEach(no => scene.els.items[`blockGroup${no}`].setAttribute('hide-block-title', {id: `chapter-${no}-blocks`}))
+                    break   
+                case 'menu-1-button-risk': 
+                    scene.els.items.blockGroup02.setAttribute('show-block-title', {id: "chapter-02-blocks"})
+                    scene.els.items.blockGroup01.setAttribute('hide-block-title', {id: "chapter-01-blocks"})
+                    scene.els.items.blockGroup03.setAttribute('hide-block-title', {id: "chapter-03-blocks"})
+                    scene.els.items.blockGroup04.setAttribute('hide-block-title', {id: "chapter-04-blocks"})
+                    break   
+                case 'menu-1-button-emissions': 
+                    scene.els.items.blockGroup03.setAttribute('show-block-title', {id: "chapter-03-blocks"})
+                    scene.els.items.blockGroup01.setAttribute('hide-block-title', {id: "chapter-01-blocks"})
+                    scene.els.items.blockGroup02.setAttribute('hide-block-title', {id: "chapter-02-blocks"})
+                    scene.els.items.blockGroup04.setAttribute('hide-block-title', {id: "chapter-04-blocks"})
+                    break   
+                case 'menu-1-button-actions': 
+                    scene.els.items.blockGroup04.setAttribute('show-block-title', {id: "chapter-04-blocks"})
+                    scene.els.items.blockGroup01.setAttribute('hide-block-title', {id: "chapter-01-blocks"})
+                    scene.els.items.blockGroup02.setAttribute('hide-block-title', {id: "chapter-02-blocks"})
+                    scene.els.items.blockGroup03.setAttribute('hide-block-title', {id: "chapter-03-blocks"})
+                    break   
+            }
         },
 
         changeSeasonSelector: function(season){

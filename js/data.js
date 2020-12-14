@@ -42,7 +42,6 @@
             },
         },
 
-
         scene: {
             builtEnv: {
                 dwellings: {
@@ -609,6 +608,70 @@
                     },
                     transportEnergy: {
                         scope1: {
+                            residential: {
+                                petrol: {
+                                    road: {
+                                        passengerVehicle:  []
+                                    }
+                                },
+                                jetfuel: {
+                                    aviation: {
+                                        passsengerAirTravel:     {scale: 4.0,  stringLength: 1.5}
+                                    }
+                                }
+                            },
+                            commercial: {
+                                petrol: {
+                                    road: {
+                                        passengerVehicle:       [],
+                                        lightCommercialVehicle: [],
+                                        bus:                    [],
+                                        other:                  []
+                                    }
+                                },
+                                diesel: {
+                                    road: {
+                                        passengerVehicle:       [],
+                                        lightCommercialVehicle: [],
+                                        heavyTrucks:            [],
+                                        bus:                    [],
+                                        other:                  []
+                                    }
+                                },
+                                lpg: {
+                                    road: {
+                                        passengerVehicle:       [],
+                                        lightCommercialVehicle: [],
+                                        heavyTrucks:            [],
+                                        bus:                    [],
+                                        other:                  []
+                                    }                                    
+                                },
+                                biodiesel: {
+                                    road: {
+                                        passengerVehicle:       [],
+                                        lightCommercialVehicle: [],
+                                        heavyTrucks:            [],
+                                        bus:                    [],
+                                        other:                  []
+                                    }                                    
+                                },
+                                ethanol: {
+                                    road: {
+                                        passengerVehicle:       [],
+                                        lightCommercialVehicle: [],
+                                        heavyTrucks:            [],
+                                        bus:                    [],
+                                        other:                  []
+                                    }                                    
+                                },
+                                jetfuel: {
+                                    aviation: {
+                                        passsengerAirTravel:    {scale: 5.0,  stringLength: 2},
+                                        freight:                {scale: 2.0,  stringLength: 1}
+                                    }
+                                }
+                            }
                         }
                     },
                     wasteAndWasteWater: {
@@ -829,3 +892,8 @@
             }
         }
     }   
+
+
+
+// document.getElementById('waitOnMe').emit('loaded');
+console.log('*** DATA MODEL LOADED ***')
