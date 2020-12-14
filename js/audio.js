@@ -39,7 +39,7 @@
             audioClock:            new Tone.Clock(time => { console.log(time) }, 1),
         },
         instruments: {
-            'synth_marimba-1':      new Tone.PolySynth({
+            'synth_marimba-1':      new Tone.FMSynth({
                 oscillator: {
                     partials:       [1, 0, 2, 0, 3]
                 },
@@ -50,7 +50,7 @@
                     release:        1.2
                 }
             }),
-            'synth_marimba-2':      new Tone.PolySynth({
+            'synth_marimba-2':      new Tone.FMSynth({
                 oscillator: {
                     partials:       [1, 0, 2, 0, 3]
                 },
@@ -61,7 +61,7 @@
                     release:        1.2
                 }
             }),
-            synth_kalimba:      new Tone.PolySynth({
+            synth_kalimba:      new Tone.FMSynth({
                 harmonicity:        8,
                 modulationIndex:    2,
                 oscillator: {
@@ -338,8 +338,8 @@
             { name: 'rhythmGuitar_1a',  instrument: 'synth_marimba-1'},
             { name: 'rhythmGuitar_1b',  instrument: 'synth_marimba-1'},
             { name: 'mainGuitar_1',     instrument: 'synth_kalimba'},
-            { name: 'piano_1a',         instrument: 'synth_sawtooth'},
-            { name: 'piano_1b',         instrument: 'synth_sawtooth'},
+            { name: 'piano_1a',         instrument: 'synth_coolGuy'},
+            { name: 'piano_1b',         instrument: 'synth_coolGuy'},
             { name: 'bass_1a',          instrument: 'synth_bass'},
             { name: 'bass_1b',          instrument: 'synth_bass'},
         ]
@@ -3376,8 +3376,9 @@
         //    --------------------------------------
         //    UNUSED: Compressor, distortion       
 
-        audio.instruments['synth_marimba-1'].chain(audio.fx.leadGain, audio.fx.masterGain)    
+        audio.instruments['synth_marimba-1'].chain(audio.fx.rhythmGain, audio.fx.masterGain)    
         audio.instruments['synth_kalimba'].chain(audio.fx.leadGain, audio.fx.masterGain)       
+        audio.instruments['synth_electricCello'].chain(audio.fx.leadGain, audio.fx.masterGain)       
         audio.instruments['synth_bell'].chain(audio.fx.leadGain, audio.fx.masterGain)    
         audio.instruments['synth_sawtooth'].chain(audio.fx.rhythmGain, audio.fx.masterGain)    
         audio.instruments['synth_bass'].chain(audio.fx.rhythmGain, audio.fx.masterGain)    
