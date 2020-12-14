@@ -640,7 +640,6 @@
                 })
             },
             update: function(){
-console.log('Adding '+this.data.text)
                 if(this.data.visible){
                     // state.scene.animation.blockTitleShowing = true
                     // scene.els.items.blockGroup.setAttribute('add-block-title', null)
@@ -2548,6 +2547,9 @@ console.log('Adding '+this.data.text)
                                 if(!state.scene.animation.planeFlight){                                
                                     scene.els.scene.setAttribute('fly-plane', null)
                                 }
+                                break
+                            case 'KeyH':                       
+                                    scene.els.scene.setAttribute('toggle-dollhouse', null)
                                 break
                             case 'KeyM':                       
                                     audio.methods.updateMusicalPhrase()

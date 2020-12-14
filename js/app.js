@@ -168,7 +168,7 @@ console.log('BUILDING APP...')
         // Visual state of A-FRAME scene
         scene: {                  
             time: {
-                hour:               12,
+                hour:               9,
                 season:            'spring',
                 timeOfDay:          () => settings.environment.timeOfDay[state.scene.time.season][state.scene.time.hour],
             },
