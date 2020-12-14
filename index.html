@@ -16,9 +16,8 @@
         <script src="js/data.js"></script>   
         <script src="js/app.js"></script>   
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js" integrity="sha512-IQLehpLoVS4fNzl7IfH8Iowfm5+RiMGtHykgZJl9AWMgqx0AmJ6cRWcB+GaGVtIsnC4voMfm8f2vwtY+6oPjpQ==" crossorigin="anonymous"></script>
+        <!-- A-FRAME AND AFRAME COMPONENTS -->
         <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-        <script src="js/ui.js"></script>   
-        <script src="js/components.js"></script>   
         <script src="js/aframe-extras.min.js"></script>
         <script src="js/aframe-environment-component.min.js"></script>      
         <script src="js/aframe-template-component.min.js"></script>
@@ -29,10 +28,19 @@
         <script src="js/aframe-geometry-merger-component.js"></script> 
         <script src="js/aframe-orbit-controls.min.js"></script>
         <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
-        <script src="https://unpkg.com/aframe-tooltip-component/dist/aframe-tooltip-component.min.js"></script>
+        <!-- <script src="https://unpkg.com/aframe-tooltip-component/dist/aframe-tooltip-component.min.js"></script> -->
         <!-- <script src="https://github.com/ngokevin/aframe-physics-components/blob/master/dist/aframe-physics-components.min.js"></script>  -->
         <!-- <script src="https://unpkg.com/aframe-toggle-controls-component/dist/aframe-toggle-controls-component.min.js"></script>  -->
         <!-- <script src="https://unpkg.com/aframe-lines@^1.0.0/lines.js"></script> -->
+        <script src="js/components.js"></script>   
+        <script src="js/ui.js"></script>   
+
+        <!-- TONE JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.58/Tone.js"></script>  
+        <script src="js/audio.js"></script>
+
+        <!-- <script src="https://d3js.org/d3.v5.min.js"></script> -->
+
     </head>
 
     <body>
@@ -46,18 +54,23 @@
                 <div id="loader-text" class = "loader-text">
                     <p>This is a speculative project that dabbles in the creation a new medium to help us think about exceedingly complex, urgent problems.
                         The project gives people an interactive, virtual world to explore and experiment with.
-                        The world itself is a tangible representation of a 'model world' whose characteristics of interest are simulated in unison with a fully operational, systems-based mathematical model.
+                        The world itself is a more tangible representation of a 'model world' whose characteristics of interest are simulated in a fully operational, systems-based mathematical model.
                         This marriage of visual and simulation-orientated modelling is proposed as the foundation for a new type of dynamic medium.</p>
-                    <p>What you're looking at is a prototype that scratches the surface of new narrative opportunities, some which play around with new(ish) web technologies but are all accessible from the humble web browser.
-                        More ideas will be explored and added.
-                        The hope is that this dynamic medium inspires radically different kinds of authorship that enables complex content and narrative to be brought to life, and in a form that activates new and enlightened ways of thinking... </p> 
+                    <p>This initial prototype scratches the surface of new narrative opportunities, some which play around with new(ish) web technologies that are all accessible from the humble browser.
+                        More polished and sophisticated ideas will be explored and added.
+                        The hope is that this dynamic medium inspires radically different kinds of authorship:
+                        one that enables complex content with nuanced narratives to be published in a form that activates new and enlightened ways of thinking... </p> 
                 </div>
                 <div id="loader-instruction-text" class = "hidden">
-                    <p>This prototype has been designed with a four act narrative structure that...
-                                            </p>
+                    <p>This prototype demonstrates how a narrative of climate change and community action might play out in a new dynamic medium. 
+                        Admittedly (at this stage), this prototype fails to explore some of the more radical aspirations for what a dynamic medium could do, but it's a start. 
+                        Importantly, the topic being explored - climate change - is not the real focus of this project, but used as an example 'problem' to build a tangible prototype.</p>
+                    <p>To explore this prototype you can access the "story mode" menu from the button in the top left of the page. 
+                        "Quick access" options - to the interactive features - can be accesses from the menu in the top right of the page.
+                        There are two switchable cameras available - a default "directors" camera that supports the story mode, and a user-manipulated "orbit" camera that can be toggled to at any time by either double tapping the screen (touchscreen) or by hitting the 'space' bar (on keyboard devices).
+                        The orbit camera allows you to use your touch screen or mouse to: zoom (pinch or mouse wheel scroll), pan (swipe or mouse click and drag) and an move (two finger swipe or mouse right click and dag) around the world.
+                    </p>
                 </div>
-
-
                 <div class="loader-button-container">
                     <div id="loader-button" class = "loader-button">Building the world. One moment please...</div>
                 </div>
@@ -136,7 +149,7 @@
                                 Kodam is a peaceful little place where citizens go about their lives and activities much like the 'real' world. 
                                 They live in dwellings, concentrated in residential and urban settings. 
                                 They farm the land and net the seas, all to produce food. 
-                                They have developed on an industrial supply chain that extracts and recycles materials so that they can produce and buy stuff.
+                                They have developed on an industrial supply chain that extracts and recycles materials so that they can produce the stuff they want.
                                 They transport themselves and the goods they need across long distances by road, rail, sea and air. 
                                 To support all of this, they produce and distribute the energy they need, from a range of renewable and non-renewable sources. 
                             <p>It might be a little place, but there is a lot going on!</p>
@@ -637,7 +650,7 @@
                     <div class="subMenu-narrative-container"> 
                         <div class="subMenu-header">Why climate change matters</div>
                         <div class="subMenu-text">
-                            <p>Despite all these interwoven activities and actors, the miniature world of Kodam seems to just 'work'. 
+                            <p>Despite all these interwoven activities and actors, the miniature world of Kodam seems to just 'works'. 
                                 However just like the real world, Kodam can only exist in harmony with the natural environment and the climate system.</p>
                             <p>Unfortunately, many of those activities emit greenhouse gases that are causing climate change. 
                                But why does Kodam in particular need to worry about climate change? 
@@ -1749,13 +1762,14 @@
         </div>
 
         <!-- AFRAME SCENE-->
-        <a-scene id="scene" renderer="antialias: true"
+        <a-scene id="scene" 
+                renderer="antialias: true"
                 vr-mode-ui="enabled: false"
                 fog="type: linear" 
             > 
-
+            <!-- <a-node id="waitOnMe"></a-node> -->
             <!-- ASSETS: MIXINS, MODELS AND TEMPLATES-->
-            <a-assets timeout="5000">
+            <a-assets>
                 <!-- PALETTES AND MATERIALS -->
                 <a-entity id="mixins">
                     <!-- Hanging "mobile" annotation-->
@@ -4396,7 +4410,11 @@
             <!-- ANNOTATION-->
             <a-entity id="annotation-group">
                 <a-entity id="message-blocks-container" look-at="#flycam">
-                    <a-entity id="message-blocks-group" position="0 100 0" rotation="0 -90 -20"></a-entity>
+                    <a-entity id="title-blocks" class="blocks-group" position="0 100 0" rotation="0 -90 -20"></a-entity>
+                    <a-entity id="chapter-01-blocks" class="blocks-group" position="0 100 0" rotation="0 -90 -20"></a-entity>
+                    <a-entity id="chapter-02-blocks" class="blocks-group" position="0 100 0" rotation="0 -90 -20"></a-entity>
+                    <a-entity id="chapter-03-blocks" class="blocks-group" position="0 100 0" rotation="0 -90 -20"></a-entity>
+                    <a-entity id="chapter-04-blocks" class="blocks-group" position="0 100 0" rotation="0 -90 -20"></a-entity>
                 </a-entity>
             </a-entity>
 
@@ -5043,7 +5061,9 @@
                             <a-entity class="emissions-anchor transport air airplane" position="-23 1 -62" ></a-entity>
                             <a-entity id="plane-animation" position="-12.6 1 -55.1" rotation="0 120 0">
                                 <a-entity class="plane" gltf-model="#mdl-planeRed" scale="0.25 0.25 0.25" rotation="0 -90 0"></a-entity>
-                                <a-entity class="emissions-anchor transport air airplane" position="0 0 0" ></a-entity>
+                                <a-entity class="emissions-anchor transport residential aviation airplane passengerAirTravel jetfuel " position="2 0 0" ></a-entity>
+                                <a-entity class="emissions-anchor transport air airplane commercial passenger" position="0 0 0" ></a-entity>
+                                <a-entity class="emissions-anchor transport air airplane commercial freight" position="0 0 -2" ></a-entity>
                             </a-entity>
                         </a-entity>
                     </a-entity><!-- End of vehicles -->
@@ -9377,17 +9397,16 @@
 
         <script>
             //////////////////////////////////////////
-            ///////  LOAD SEQUENCING    ///////
+            ///////  LOAD SEQUENCING           ///////
             //////////////////////////////////////////
 
             externalEvents.primeInterface()
-            document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('DOMContentLoaded',  () => {
                 console.log('DOM LOADED')
                 document.getElementById('scene').setAttribute('init-scene-setup', null)
                 document.getElementById('loader-button').innerHTML = 'Continue...'
                 document.getElementById('loader-button').classList.add('ready')
             });
-
         </script>
     </body>
 </html> 
