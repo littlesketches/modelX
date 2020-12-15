@@ -2518,8 +2518,7 @@
                         return false;
                     }
                     event.preventDefault();
-                    //action on double tap goes below
-                    alert('You tapped me Twice !!!');
+                    externalEvents.toggleCamera()
                 }
 
 
