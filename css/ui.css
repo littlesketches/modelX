@@ -2,7 +2,9 @@
 /*** USER INTERFACE STYLING   ***/
 /*********************************/
 
+    /*************************************************/
     /* MAIN MENUS: SEMI CIRCULAR 'CORNER' ITEM MENUS */
+    /*************************************************/
     .main-menu-container{
         position: absolute;
         width: 20vw;
@@ -61,15 +63,24 @@
             transition: all linear 500ms;
         }
         .main-menu-svg.closed  #menu-1-label{
-            transform: translateX(25px);
+            transform: translate(270px, 280px);
         }
         .main-menu-svg.closed  #menu-2-label{
-            transform: translateX(-25px);
+            transform: translate(-270px, 280px);
         }
         .menu-trigger-label{
             fill: #fff;        
             font-size: 40px;
         }
+        .menu-trigger circle{
+            cx: 250px;
+            cy: 250px;
+            r: 80px;
+        }
+        .menu-trigger text{
+            transform: translate(250px, 280px)
+        }
+
         .menu-trigger:hover { 
             cursor: pointer; 
             fill: rgba(0, 0, 0, 1); 
@@ -77,7 +88,7 @@
         .main-menu-item.active .menu-1-sector{
             fill: rgba(0, 0, 0, 0.5); 
         }
-    /* SVG icons  */
+        /* SVG menu icons  */
         .main-menu-item use { 
             fill: rgba(0, 0, 0, 0.7); 
         }
@@ -88,15 +99,17 @@
             fill: #fff; 
         }
 
-    /* RIGHT SIDE DETAILS PANEL*/
+    /***************************/
+    /* RIGHT SIDE DETAILS PANE */
+    /***************************/
         .details-container{
             z-index: 30;
             color: #fff;
             cursor: auto;
             position: absolute;
             top: 0vh;
-            right: -30vw;
             width: 30vw;
+            overflow: scroll;
             pointer-events:auto;
             perspective-origin: right;
             perspective: 1200px;
@@ -172,9 +185,7 @@
             cursor: pointer;
             font-size: 1vw;
             text-decoration: underline dotted;
-        }
-        #details-more-label{
-            float: left
+            float: left;
         }
         .details-intensity-button{  
             display: inline-block;
@@ -192,8 +203,10 @@
                 font-weight: bold;
                 text-decoration: underline solid;
             }
-      
-    /* LEFT SIDE NARRATIVE PANE / EVENT MENU*/
+
+    /******************************************/      
+    /* LEFT SIDE NARRATIVE PANE / EVENT MENU  */
+    /******************************************/   
         .subMenu-container{
             color: #fff;
             position: absolute;
@@ -231,6 +244,7 @@
             padding: 1.5vw 1.5vw 0.5vw;
             margin-bottom: 0.25rem;    
             height: 70vh;
+            overflow: scroll;
         }
         .narrative-container{
             transform: rotateY(-100deg);
@@ -272,17 +286,17 @@
 
         /* Narrative back/forward */
         .narrative-controls-container{
-            position: absolute;
             bottom: 1rem;
             right: 1rem;
         }
             .narrative-controls-button {
-                display: inline-flex;
+                display: inline;
                 align-items: center;
                 font-size: 2vw;
                 cursor: pointer;
                 opacity: 0.7;
                 padding-left: 1vw;
+                float: right
             }
             .narrative-controls-button:hover {
                 font-weight: bold;
@@ -305,7 +319,6 @@
             margin-bottom: 0.25rem;
             width: 100%;
         }
-
         .subMenu-option-container.active,
         .subMenu-event-container.active,
         .subMenu-emissions-container.active{
@@ -320,7 +333,6 @@
             font-weight: bold;
             background: rgba(0, 0, 0, 0.75);
         }
-
         .subMenu-option-container.active * use,
         .subMenu-event-container.active * use,
         .subMenu-emissions-container.active * use{
@@ -364,7 +376,6 @@
             #menu-time-year-container{
                 pointer-events: none;
             }
-
             .subMenu-option-container.three-pane :nth-child(1),
             .subMenu-option-container.four-pane :nth-child(1),
             .subMenu-option-container.five-pane :nth-child(1){
@@ -387,7 +398,6 @@
             .subMenu-option-container.five-pane :nth-child(5){
                 grid-area: 1 / 5 / 2 / 6;   
             }
-
             .subMenu-event-button{
                 cursor: pointer;
             }
@@ -452,7 +462,6 @@
                 #clockhand-hour-group.hour-10{ transform: rotate(300deg); }
                 #clockhand-hour-group.hour-11{ transform: rotate(330deg); }
                 #clockhand-hour-group.hour-12{ transform: rotate(360deg); }
-
                 #clockhand-min-group{
                     transform-origin: 50% 50%;
                     transition: all ease-in-out;	  
@@ -460,7 +469,6 @@
                 }
                 #clockhand-min-group.spinClockwise{ transform: rotate(360deg); }
                 #clockhand-min-group.spinAntiClock{ transform: rotate(-360deg); }
-
                 #menu-time-timeOfDay-label{
                     text-align: center;
                 }
@@ -557,3 +565,92 @@
             font-size: 0.65vw;
             text-align: center;
         }
+
+/****************************************/
+/*** USER INTERFACE MOBILE STYLING   ***/
+/***************************************/  
+
+    @media only screen and (max-width: 768px) {
+        /*************************************************/
+        /* MAIN MENUS: SEMI CIRCULAR 'CORNER' ITEM MENUS */
+        /*************************************************/
+        .main-menu-container{
+            width: 30vw;
+        }
+        .main-menu-container.left .main-menu-svg.closed { 
+            left: -30vw;
+        }
+        .menu-trigger-label{      
+            font-size: 60px;
+        }
+        .menu-trigger circle{
+            r: 95px;
+        }
+        .main-menu-svg.closed  #menu-1-label{
+            transform: translate(290px,300px);
+        }
+        .menu-trigger text{
+            transform: translate(250px, 300px)
+        }
+
+        /******************************************/      
+        /* LEFT SIDE NARRATIVE PANE / EVENT MENU  */
+        /******************************************/   
+        .subMenu-container{
+            top: 25vh;
+            left: -30vw;
+            height: 72.5vh;
+            width: 40vw;
+        }
+       .subMenu-header {
+            font-size: 1.75vw;
+        }
+        .subMenu-text {
+            font-size: 1.5vw;
+            line-height: 1.35;
+        }
+        .subMenu-option-container, .subMenu-event-container, .subMenu-emissions-container {
+            padding: 0.125rem 0;
+            margin-bottom: 0.125rem;
+        }
+        .subMenu-event-label, .subMenu-emissions-label {
+            font-size: 1.5vw;
+        }
+        .subMenu-option-label, .subMenu-icon-label  {
+            font-size: 1.25vw;
+        }
+        #menu-time-year{
+            font-size: 4.5vw;
+        }
+        .narrative-controls-container {
+            margin-top: -0.5rem;
+        }
+        .narrative-controls-button {
+            font-size: 4vw;
+        }
+        .narrative-controls-button.close {
+            font-size: 1.5vw;
+            padding-top: 0.75rem;
+        }
+
+        /***************************/
+        /* RIGHT SIDE DETAILS PANE */
+        /***************************/
+        .details-container{
+            width: 40vw;
+            height: 100vh;
+        }
+        .details-container.right{
+            right: -40vw;
+        }
+        .details-header{
+            font-size: 2vw;
+        }
+        #details-close-right{
+            font-size: 5vw;
+            margin-top: -0.5rem;
+        }
+        .details-content-container, #details-more-label{
+            font-size: 1.5vw;
+        }
+    }
