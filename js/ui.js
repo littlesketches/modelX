@@ -405,6 +405,9 @@
                     document.getElementById('menu-time-forward').addEventListener('click', () => externalEvents.changeHour('forward')) 
                     document.getElementById('menu-time-back').addEventListener('click', () => externalEvents.changeHour('back')) 
                     document.getElementById('clockhand-hour-group').setAttribute('class', 'hour-'+(state.scene.time.hour%12))
+
+                    // e. Household zoom 
+                    document.getElementById('menu-household').addEventListener('click', () => scene.els.scene.setAttribute('toggle-dollhouse', null))                 
             }
         },
         lists: {
@@ -481,7 +484,7 @@
                     scene.els.cam.fly.setAttribute('camera', {active: false })
                     scene.els.cam.orbit.setAttribute('camera', {active: true  })
                 }
-            } else {        // Otherwise toggle to other camera
+            } else {        // Otherwise toggle to orbit camera
                 if(scene.els.cam.fly.getAttribute('camera').active ){
                     scene.els.cam.fly.setAttribute('camera', {active: false })
                     scene.els.cam.orbit.setAttribute('camera', {active: true  })
