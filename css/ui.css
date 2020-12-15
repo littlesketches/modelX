@@ -286,6 +286,7 @@
 
         /* Narrative back/forward */
         .narrative-controls-container{
+            position: absolute;
             bottom: 1rem;
             right: 1rem;
         }
@@ -598,7 +599,7 @@
         /******************************************/   
         .subMenu-container{
             top: 25vh;
-            left: -30vw;
+            left: -40vw;
             height: 72.5vh;
             width: 40vw;
         }
@@ -624,6 +625,7 @@
         }
         .narrative-controls-container {
             margin-top: -0.5rem;
+            position: initial;
         }
         .narrative-controls-button {
             font-size: 4vw;
