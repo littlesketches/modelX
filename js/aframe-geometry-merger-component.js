@@ -134,6 +134,9 @@
 			mesh.parent.remove(mesh);
 			});
 
+			if(geometries.length === 0){ 
+				console.log('Did not merge geometry of ', this.el) 
+			}
 			const geometry = THREE.BufferGeometryUtils.mergeBufferGeometries(geometries);
 			this.mesh = new THREE.Mesh(geometry);
 			this.el.setObject3D('mesh', this.mesh);
@@ -335,7 +338,6 @@
 		 * @return {THREE.BufferGeometry}
 		 */
 		mergeBufferGeometries: function ( geometries, useGroups ) {
-
 			var isIndexed = geometries[ 0 ].index !== null;
 
 			var attributesUsed = new Set( Object.keys( geometries[ 0 ].attributes ) );

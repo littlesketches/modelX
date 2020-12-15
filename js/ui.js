@@ -116,7 +116,6 @@
                             })
                         }
                     }
-
                     if(backButton){
                         backButton.addEventListener('click', function(){ // Flip the current container closed and show previous page
                             currentContainer.classList.remove('show')
@@ -438,7 +437,9 @@
                     document.getElementById('loader-text').classList.remove('faded')                    
                 }, 200)
                 // 2. Set balloon colours (to random!). Note: this is called here, after all balloons are created
-                scene.els.scene.setAttribute('set-balloon-colours', {random: true})
+                if(scene.els.scene){
+                   scene.els.scene.setAttribute('set-balloon-colours', {random: true})
+                }
             })
             // Setup menu interface and interaction
              ui.methods.setupMenuInterface()     
@@ -448,11 +449,13 @@
             document.getElementById('loader-button').addEventListener('click', null)        // Enure startApp not called twice
             document.getElementById('loader-background').classList.remove('active')         // Un-blur background
             document.getElementById('loader-intro').classList.add('hidden')
-            // Intro: sail the duck and call the mobile block title
-            scene.els.scene.setAttribute('sail-duck', null)
-            state.scene.animation.intro = true
-            scene.els.scene.setAttribute('emissions-activity-balloons', {visible: true})
-            scene.els.items.blockGroupTitle.setAttribute('show-block-title', {id: "title-blocks", dur: 3000})
+            if(scene.els.scene){
+                // Intro: sail the duck and call the mobile block title
+                scene.els.scene.setAttribute('sail-duck', null)
+                state.scene.animation.intro = true
+                scene.els.scene.setAttribute('emissions-activity-balloons', {visible: true})
+                scene.els.items.blockGroupTitle.setAttribute('show-block-title', {id: "title-blocks", dur: 3000})
+            }
             setTimeout(() => {
                 document.getElementById('loader-container').classList.add('hidden')
             }, 1000)
@@ -569,13 +572,13 @@
         },
 
         toggleSectionTitle: function(sectionID){
+        if(scene.els.scene)
             switch(sectionID){
                 case 'menu-1-button-world': 
                     scene.els.items.blockGroup01.setAttribute('show-block-title', {id: "chapter-01-blocks"})
                     scene.els.items.blockGroup02.setAttribute('hide-block-title', {id: "chapter-02-blocks"})
                     scene.els.items.blockGroup03.setAttribute('hide-block-title', {id: "chapter-03-blocks"})
                     scene.els.items.blockGroup04.setAttribute('hide-block-title', {id: "chapter-04-blocks"})
-                    // ['02', '03', '04'].forEach(no => scene.els.items[`blockGroup${no}`].setAttribute('hide-block-title', {id: `chapter-${no}-blocks`}))
                     break   
                 case 'menu-1-button-risk': 
                     scene.els.items.blockGroup02.setAttribute('show-block-title', {id: "chapter-02-blocks"})

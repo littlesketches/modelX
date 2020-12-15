@@ -200,7 +200,6 @@
                     rotate:         [0, 0],
                     letterSpace:    15
                 })
-    
 
             }
         })
@@ -363,12 +362,12 @@
             },
 
             update: function() {    
-                // Disable all event container buttons and remove any title blocks
+                // Disable all event container buttons; remove any title blocks and set fly cam to active
                 document.querySelectorAll('.subMenu-event-container').forEach(el => el.classList.add('noPointerEvents'))
                 if(state.scene.animation.blockTitleShowing && this.data.clearTitles){
                     ['01', '02', '03', '04'].forEach(no => scene.els.items[`blockGroup${no}`].setAttribute('hide-block-title', {id: `chapter-${no}-blocks`}))
                 }
-
+                externalEvents.toggleCamera('flyCam')
                 // Animate camera rig position and rotation
                 scene.els.camRig.fly.setAttribute('animation__pos', {
                     property:           'position',
@@ -445,6 +444,8 @@
             },
             update: function () {
                 const currentRotation = document.getElementById("townhouse-cutaway").getAttribute('rotation').y    
+                // Switch to diretor camera
+
                 // Move the camera to dollhouse if opening the 
                 if(currentRotation === 0){
                     scene.els.scene.setAttribute('move-fly-camera', {
@@ -2506,6 +2507,22 @@
                 //     scene.els.cam.fly.setAttribute('camera', {active: false  })
                 //     scene.els.cam.orbit.setAttribute('camera', {active: true   })
                 })
+                // Double tap scene for camera switch
+                scene.els.scene.addEventListener("touchstart", tapHandler);
+                let tappedTwice = false;
+
+                function tapHandler(event) {
+                    if(!tappedTwice) {
+                        tappedTwice = true;
+                        setTimeout( function() { tappedTwice = false; }, 300 );
+                        return false;
+                    }
+                    event.preventDefault();
+                    //action on double tap goes below
+                    alert('You tapped me Twice !!!');
+                }
+
+
                 // KEYBOARD EVENTS
                 window.addEventListener("keydown", function(key){
                     // Turn off VR option if a keyboard is present
