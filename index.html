@@ -1936,13 +1936,13 @@
                         <a-mixin id="palette-G-roof" 	    material='color: #B0854A'></a-mixin>
                         <a-mixin id="palette-G-trim"	    material='color: ##F7F7E2'></a-mixin>
                         <a-mixin id="col-home-windows"	    material='color: #C7CEF6'></a-mixin>
-                        <a-mixin id="col-ch-01" 	    material='color: #658C52'></a-mixin>
-                        <a-mixin id="col-ch-02" 	    material='color: #A4A395'></a-mixin>
-                        <a-mixin id="col-fence" 	    material='color: #DEB886'></a-mixin>
-                        <a-mixin id="col-powerPole"     material='color: #5a6c69'></a-mixin>
-                        <a-mixin id="col-transTower"    material='color: gray'></a-mixin>
-                        <a-mixin id="col-powerFixture"  material='color: gray; metalness: 0.5'></a-mixin>
-                        <a-mixin id="col-powerline"     material='color: #000'></a-mixin>
+                        <a-mixin id="col-ch-01" 	        material='color: #658C52'></a-mixin>
+                        <a-mixin id="col-ch-02" 	        material='color: #A4A395'></a-mixin>
+                        <a-mixin id="col-fence" 	        material='color: #DEB886'></a-mixin>
+                        <a-mixin id="col-powerPole"         material='color: #5a6c69'></a-mixin>
+                        <a-mixin id="col-transTower"        material='color: gray'></a-mixin>
+                        <a-mixin id="col-powerFixture"      material='color: gray; metalness: 0.5'></a-mixin>
+                        <a-mixin id="col-powerline"         material='color: #000'></a-mixin>
                         <a-mixin id="col-railTrack"     material='color: gray; metalness: 0.5'></a-mixin>
                         <a-mixin id="col-railSleeper"   material='color: #443b35'></a-mixin>
                     <!-- Vegetation and Agricultural crops-->
@@ -3513,7 +3513,7 @@
                         </a-entity>
                     </script>
 
-                    <script id="tmp-factory" type="text/html">
+                    <script id="tmp-industrial-processing-facility" type="text/html">
                         <a-entity class="warehouse-building" >
                             <a-entity class="base-building" mixin="${basecol}" buffer-geometry-merger>
                                 <a-box class="warehouse-base" position="0 1.15 0" scale="7 2.3 5" material="flatShading: true" ></a-box>
@@ -4199,7 +4199,8 @@
                             </a-entity>
                         </a-entity>
                         <a-entity class="anchor-group">
-                            <a-entity position="0 25 0" class="emissions-anchor renewable-electricity utility-wind"></a-entity>
+                            <a-entity position="0 26 -1.5" class="local emissions-anchor"></a-entity>
+                            <a-entity position="0 26 1.25" class="local emissions-anchor"></a-entity>
                         </a-entity>
                     </script>
 
@@ -4260,10 +4261,10 @@
                             </a-entity>    
                         </a-entity>
                         <a-entity class="anchor-group">
-                            <a-entity position="1 1 0" class="emissions-anchor renewable-electricity utility-solar" position="0 2 0" ></a-entity>
-                            <a-entity position="3 1 0"class="emissions-anchor renewable-electricity utility-solar" position="0 2 0" ></a-entity>
-                            <a-entity position="-1 1 0"class="emissions-anchor renewable-electricity utility-solar" position="0 2 0" ></a-entity>
-                            <a-entity position="-3 1 0"class="emissions-anchor renewable-electricity utility-solar" position="0 2 0" ></a-entity>
+                            <a-entity position="1 1 0" class="local emissions-anchor" position="0 2 0" ></a-entity>
+                            <a-entity position="3 1 0" class="export emissions-anchor" position="0 2 0" ></a-entity>
+                            <a-entity position="-1 1 0"class="local emissions-anchor" position="0 2 0" ></a-entity>
+                            <a-entity position="-3 1 0"class="export emissions-anchor" position="0 2 0" ></a-entity>
                         </a-entity>
                     </script>      
 
@@ -6109,7 +6110,7 @@
                         <!--Built environment: Warehouse/factories -->
                         <a-entity id="industrial-electronics" class="non-residential-building mains-gas-connected-facility-with-solar-pv industrial-electronics-facility"" 
                             position="-4.5 0 -5" rotation="0 30 0">
-                            <a-entity template="src:#tmp-factory" 
+                            <a-entity template="src:#tmp-industrial-processing-facility" 
                                 data-basecol="col-warehouse-A-base" 
                                 data-trimcol="col-warehouse-A-trim">
                             </a-entity>
@@ -9621,13 +9622,13 @@
                         <!-- Built infrastructure -->
                         <a-entity  id="periUrban-infrastructure"  class="builtEnv-group utilites-group">                    
                             <!-- Wind farm -->
-                            <a-entity class="windFarm" >
+                            <a-entity class="utilities-and-services mains-gas-connected-facility wind-turbine" >
                                 <a-entity class="windTurbine" template="src:#tmp-windTurbine" data-anim="property: rotation; to: 0 0 360; loop: true; dur: 3000; easing: linear; delay: 0"   position="-17.1 0 -18.4" rotation="0 40 0"></a-entity>
                                 <a-entity class="windTurbine" template="src:#tmp-windTurbine" data-anim="property: rotation; to: 0 0 360; loop: true; dur: 3000; easing: linear; delay: 333" position="-24.2 0 -1.6" rotation="0 40 0"></a-entity>
                                 <a-entity class="windTurbine" template="src:#tmp-windTurbine" data-anim="property: rotation; to: 0 0 360; loop: true; dur: 3500; easing: linear; delay: 6673" position="-16.7 0 14.5" rotation="0 40 0"></a-entity>
                             </a-entity>
                             <!-- Solar farm -->
-                            <a-entity id="solar-farm" position="-11 0 -5.9">
+                            <a-entity id="solar-farm" class="utilities-and-services mains-gas-connected-facility solar-pv-array" position="-11 0 -5.9">
                                 <a-entity class="solar-1axis" template="src:#tmp-solar-1axis" position="-4.5 0 0"></a-entity>
                                 <a-entity class="solar-1axis" template="src:#tmp-solar-1axis" position="4.5 0 0"></a-entity>
                                 <a-entity class="solar-1axis" template="src:#tmp-solar-1axis" position="-4.5 0 2"></a-entity>
@@ -9813,7 +9814,7 @@
                                 </a-entity>
                             </a-entity>
                             <!-- Dam and hydro -->
-                            <a-entity id="dam-group">
+                            <a-entity id="dam-group" lass="utilities-and-services mains-gas-connected-facility hydro-electric-power-station" >
                                 <a-entity id="dam-rockline" position="-0.45 3.29 21.33" scale="0.6 0.6 0.6">
                                     <a-dodecahedron position="-19.19157 -5.2854 8.69958" mixin="col-rocks" geometry="radius: 7.4" rotation="-0.33 61.82 -5.65"></a-dodecahedron>
                                     <a-dodecahedron position="-30.24603 -4.02624 13.0044" mixin="col-rocks" geometry="radius: 7.45" rotation="-29.19 -24.06 -3.18"></a-dodecahedron>
@@ -9824,7 +9825,7 @@
                                 <a-entity mixin="col-damWall" buffer-geometry-merger>
                                     <a-box mixin="col-damWall" position="3.75 2 32.56" scale="15 6 1" rotation="0 -60 0" ></a-box>
                                     <a-box mixin="col-damWall" position="4.7 2 43.38" scale="11 6 1" rotation="0 60 0" ></a-box>
-                                    <a-box mixin="col-damWall" position="-5.05042 2 26.27218" scale="11 6 1" ></a-box>
+                                    <a-box mixin="col-damWall" position="-5.05 2 26.27" scale="11 6 1" ></a-box>
                                 </a-entity>
                             </a-entity>
                             <a-entity class="hydro-station" position="-2.55 0 22" rotation="0 90 0" >
@@ -9832,7 +9833,11 @@
                                 <a-entity class="power-station" template="src:#tmp-industrial-building-generic" 
                                     data-basecol="col-hydro-base" data-roofcol="col-hydro-roof" data-doorcol="col-hydro-door" data-windowcol="col-hydro-window">
                                 </a-entity>
-                                <a-entity class ="emissions-anchor utility-hydro"></a-entity>
+                            </a-entity>
+                            <a-entity class ="emissions-anchor-group">
+                                <a-entity class ='local emissions-anchor' position="4.7 7 43.38"></a-entity>
+                                <a-entity class ='export emissions-anchor' position="-5.05 2 26.27"></a-entity>
+
                             </a-entity>
                         </a-entity>
                     </a-entity> <!--End of PeriUrban -->
@@ -10093,8 +10098,14 @@
                                 <a-box class="road-line" mixin="road-stopline" position="-15.388 0 4.546"   geometry="width: 1.7"></a-box>     
                             </a-entity>
                         </a-entity>
+                        <!-- Extration site-->
+                        <a-entity id="coal-mine" class="mining-or-extraction-site mine coal-mine">
+                            <a-entity class="anchor-group">
+                                <a-entity  position="-13 -3.5 -8" class="central emissions-anchor"></a-entity>
+                            </a-entity>
+                        </a-entity> 
                         <!-- Centralised power station -->
-                        <a-entity id="power-station" position="0 0 -10" rotation="0 0 0">
+                        <a-entity id="power-station" class="utilities-and-services mains-gas-connected-facility power-station-cooling-tower" position="0 0 -10" rotation="0 0 0">
                             <a-entity id="power-station" position="18.45 0 -5.135">
                                 <a-entity class="power-station" position="-4 0 6" template="src:#tmp-industrial-building-generic" 
                                     data-basecol="col-power-station-base" data-roofcol="col-power-station-roof" data-doorcol="col-power-station-door" data-windowcol="col-power-station-window">
@@ -10122,35 +10133,34 @@
                                     <a-cylinder mixin="col-power-station-top" position="0 10 0" geometry="height: 0.1; radius: 4"></a-cylinder>
                                 </a-entity>
                                 <a-entity class="anchor-group">
-                                    <a-entity position="-7.33 10 -4.28"  class="emissions-anchor gridElec utility-coal"></a-entity>
-                                    <a-entity position="4.01 10 1.92"    class="emissions-anchor gridElec utility-coal" ></a-entity>
+                                    <a-entity position="-7.33 10 -4.28"  class="local emissions-anchor"></a-entity>
+                                    <a-entity position="4.01 10 1.92"    class="export emissions-anchor" ></a-entity>
                                 </a-entity>
                             </a-entity>
                         </a-entity>
                         <!-- Industrial processing facilities -->
                         <a-entity id="industrial-chemicals" class="non-residential-building mains-gas-connected-facility-with-solar-pv industrial-chemicals-facility">
-                            <a-entity position="5 0 19.5" rotation="0 120 0" template="src:#tmp-factory" 
+                            <a-entity position="5 0 19.5" rotation="0 120 0" template="src:#tmp-industrial-processing-facility" 
                                 data-basecol="col-warehouse-A-base" data-trimcol="col-warehouse-A-trim">
                             </a-entity> 
                         </a-entity>
                         <a-entity id="industrial-metals" class="non-residential-building mains-gas-connected-facility-with-solar-pv industrial-metals-facility">
-                            <a-entity position="-5 0 9"  rotation="0 120 0" template="src:#tmp-factory" 
+                            <a-entity position="-5 0 9"  rotation="0 120 0" template="src:#tmp-industrial-processing-facility" 
                                 data-basecol="col-warehouse-A-base" data-trimcol="col-warehouse-A-trim"></a-entity>
                         </a-entity>                         
                         <a-entity id="industrial-minerals" class="non-residential-building mains-gas-connected-facility-with-solar-pv industrial-minerals-facility">
-                            <a-entity position="2 0 -1.5"  rotation="0 120 0" template="src:#tmp-factory" 
-                            data-basecol="col-warehouse-A-base" data-trimcol="col-warehouse-A-trim"></a-entity>
+                            <a-entity position="2 0 -1.5"  rotation="0 120 0" template="src:#tmp-industrial-processing-facility" 
+                                data-basecol="col-warehouse-A-base" data-trimcol="col-warehouse-A-trim"></a-entity>
                         </a-entity>
                         <!-- Solid waste facility and landfill -->
                         <a-entity id="solid-waste-group" class="services-group">
                             <a-entity id="waste-treatment-facility" class="non-residential-building mains-gas-connected-facility-with-solar-pv solid-waste-treatment-facility">
-                                <a-entity position="-13 0 20.5" rotation="0 120 0" template="src:#tmp-factory" 
-                                    data-basecol="col-waste-facility-base" data-trimcol="col-waste-facility-roof"></a-entity>
-                                <a-entity class="emissions-anchor"> </a-entity>
+                                <a-entity position="-13 0 20.5" rotation="0 120 0" template="src:#tmp-industrial-processing-facility" 
+                                    data-basecol="col-warehouse-A-base" data-trimcol="col-warehouse-A-trim"></a-entity>
                             </a-entity> 
-                            <a-entity id="landfill-site" class="utilities-and-services landfill landfill-site"  position="-19.856 -2.5 11.368">
+                            <a-entity id="landfill-site" class="utilities-and-services landfill landfill-site"  position="-19.9 -2.5 11.4">
                                 <a-entity mixin="col-waste-01" buffer-geometry-merger>
-                                    <a-dodecahedron position="0.0161 -0.266 -0.91"  scale="2 1.2 1.5" rotation="0 45 0"></a-dodecahedron>
+                                    <a-dodecahedron position="0.016 -0.27 -0.91"  scale="2 1.2 1.5" rotation="0 45 0"></a-dodecahedron>
                                     <a-dodecahedron position="-4.551 0 -4.175"      scale="1.5 2 1" ></a-dodecahedron>
                                     <a-dodecahedron position="1.486 0 6.630"        scale="1 2 1" ></a-dodecahedron>
                                     <a-dodecahedron position="0.935 0 4.409"        scale="2 2 1" rotation="300 0"></a-dodecahedron>
