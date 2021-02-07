@@ -252,8 +252,8 @@ console.log('BUILDING APP...')
     // Data Visualisiton
     const vis = {
         scale: {
-            emissionsBalloon:         d3.scaleSqrt().domain([0, 20000]).range([0.25, 5]),
-            emissionsBalloonString:   d3.scaleSqrt().domain([0, 20000]).range([0.1, 5]),
+            emissionsBalloon:         d3.scaleSqrt().domain([0, 30000]).range([0.25, 3]),
+            emissionsBalloonString:   d3.scaleSqrt().domain([0, 30000]).range([0.1, 5]),
         }
     }
 

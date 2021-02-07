@@ -15,15 +15,15 @@
 
 const rawData = []
 
-const modelVisData ={
+const modelVisData = {
   "source": {
     "mining-or-extraction-site": {
-      "mine": {
+      "drilling-rig": {
         "oil-and-gas-extraction-facility": {
           "central": {
             "summary": {
-              "emissions": 0,
-              "naturalVol": 28463.77,
+              "emissions": 17000,
+              "naturalVol": 17000,
               "energy": 0,
               "abated_emissions": 0,
               "abated_naturalVol": 0,
@@ -47,17 +47,17 @@ const modelVisData ={
                 ]
               },
               "naturalVol_Unit": "mil. barrels",
-              "querySelector": ".oil-and-gas-extraction-facility.mining-or-extraction-site.mine * .emissions-anchor.central"
+              "querySelector": ".oil-and-gas-extraction-facility.mining-or-extraction-site.drilling-rig * .emissions-anchor.central"
             }
           }
         }
       },
-      "drilling-rig": {
+      "mine": {
         "coal-mine": {
           "central": {
             "summary": {
-              "emissions": 0,
-              "naturalVol": 0,
+              "emissions": 2061.32,
+              "naturalVol": 2061.32,
               "energy": 0,
               "abated_emissions": 0,
               "abated_naturalVol": 0,
@@ -77,7 +77,7 @@ const modelVisData ={
                 ]
               },
               "naturalVol_Unit": "M tonnes",
-              "querySelector": ".coal-mine.mining-or-extraction-site.drilling-rig * .emissions-anchor.central"
+              "querySelector": ".coal-mine.mining-or-extraction-site.mine * .emissions-anchor.central"
             }
           }
         }
