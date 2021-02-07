@@ -98,6 +98,9 @@
         .main-menu-item.active use{
             fill: #fff; 
         }
+        .content-divider{
+            
+        }
 
     /***************************/
     /* RIGHT SIDE DETAILS PANE */
@@ -196,7 +199,9 @@
         }
         .details-intensity-button.active{  
             font-weight: bold;
+            color: #D0A96B;
             text-decoration: none;
+
         }
             .details-more-label:hover,
             .details-intensity-button:hover{  
@@ -208,6 +213,7 @@
     /* LEFT SIDE NARRATIVE PANE / EVENT MENU  */
     /******************************************/   
         .subMenu-container{
+            font-family: 
             color: #fff;
             position: absolute;
             top: 10vw;
@@ -262,6 +268,7 @@
             transform: rotateY(100deg);
         }
             .subMenu-header{
+                font-family: 'Futura';
                 font-size: 1.2vw;
                 font-weight: bold;
             }
@@ -305,6 +312,7 @@
             }
             .narrative-controls-button.close{
                 font-size: 0.8vw;
+                margin-top: 0.7vw;
             }
 
         /* Sub menu options */
