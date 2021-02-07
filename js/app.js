@@ -2,10 +2,10 @@
 /**************************************************************************/
 /****              Project: Kingdom of Dreams and Madness              ****/
 /****                                                                  ****/
-/****  An exploration of building 'dynamic models' in a humane form     ****/
-/****  By Little Sketches | Version 0.01 | Copyright applies until a    ****/
-/****  a completed prototype is released  under a Creative Commons       ****/
-/***   4.0 license                                                      ****/
+/****  An exploration of building 'dynamic models' in a humane form    ****/
+/****  By Little Sketches | Version 0.01 | Copyright applies until a   ****/
+/****  a completed prototype is released  under a Creative Commons     ****/
+/***   4.0 license                                                     ****/
 /**************************************************************************/
 /****  This app.js file is used to develop configuration logic and     ****/
 /****  features outside of the A-Frame canvas, which has script logic  ****/
@@ -19,7 +19,7 @@ console.log('BUILDING APP...')
 
     const settings = {              // Expected to be initialised from external/editable JSON
         modelTime:       {
-            minYear: 2000,
+            minYear: 1950,
             maxYear: 2100,
             baselineYear: 2020,
             horizonYear: 2050,
@@ -183,6 +183,7 @@ console.log('BUILDING APP...')
             },            
             effect: {               // For all hazards, the 'off' state is false or zero
                 bushfire:           false,          // false then incremental intensity (0, 0.5 and 1 mapping to position)
+                desertification:    false,         // false, desertification
                 drought:            false,          // false, minor and major; triggering various water, vegetation/ag and ground cover changes
                 earthquake:         false,          // false, earth
                 flood:              false,          // false, minor, medium and major (for heights )
@@ -196,10 +197,10 @@ console.log('BUILDING APP...')
                 tornado:            false,          // true or false (on of off)
                 treeSway:           false,          // Object for storing/clearing setInterval for wind affected swaying trees
                 tropicalStorm:      false,          // true or false (on of off)
+                volcano:            false,          // true or false (on of off)
                 wind:               false,          // false, minor and major (where the windDamage determines the visual)
                 winterStorm:        false,          // false, snow, blizzard, iceStorm 
-                mudLandslides:      false,           // false, avalanche, mudslide 
-                desertification:     false,           // false, desertification
+                wetMass:            false,          // false, mudslide, avalanche 
             },            
             camera: {
                 activeID:           'lowCam',
@@ -246,6 +247,14 @@ console.log('BUILDING APP...')
     // Modelling simulation
     const simulation = {
         dayLength: 60000
+    }
+
+    // Data Visualisiton
+    const vis = {
+        scale: {
+            emissionsBalloon:         d3.scaleSqrt().domain([0, 20000]).range([0.25, 5]),
+            emissionsBalloonString:   d3.scaleSqrt().domain([0, 20000]).range([0.1, 5]),
+        }
     }
 
     // Scene settings
@@ -363,30 +372,33 @@ console.log('BUILDING APP...')
                 bushfire:               ['Major','Extreme','Unprecendented!', 'None'],
                 drought:                ['Severe drought', 'Extreme drought', 'None' ],         
                 heat:                   ['Hot day', 'Very hot day', 'Heatwave', 'None'],       
-                desertification:        ['Desertification', 'None'],
+                desertification:        ['Desertified land', 'None'],
                 acidification:          ['Ocean acidification', 'None'],         
                 stormFlood:             ['Minor flood', 'Medium flood', 'Major flood', 'None'],        
                 stormWind:              ['Strong winds', 'Extreme wind', 'None'],
-                mudLandslides:          ['Mud slides', 'Land slides', 'Avalanches', 'None'],       
+                wetMass:                ['Mud and landslides', 'Avalanches', 'None'],       
                 tropicalStorm:          ['Tropical storm', 'None'],     
                 winterStorm:            ['Snow storm', 'Blizzard', 'Ice storm', 'None'],
                 earthquake:             ['Shake!'],        
                 tsunami:                ['Tsunami', 'None'],     
+                volcano:                ['Volcanic eruption', 'None'],     
                 seaLevel:               ['Decrease', 'Increase', 'Reset']            
+            },
+            stages: {
+                rain:                   {},
+                tropicalStorm:          {},
+                tsunami:                {}
             }
         }
     }
 
     // Model 
-    const schema = {
-        model: {
-            years:          [... Array(settings.modelTime.horizonYear - settings.modelTime.baselineYear).keys()].map(d => d + settings.modelTime.baselineYear)
-        }
-    }
+    // schema.model.years = [... Array(settings.modelTime.horizonYear - settings.modelTime.baselineYear).keys()].map(d => d + settings.modelTime.baselineYear)
+        
 
     const modelData = {
         list: {
-            seasons:    ['Summmer', 'Autumn', 'Winter', 'Spring'],  
+            seasons:    ['Summer', 'Autumn', 'Winter', 'Spring'],  
             zones:      ["Urban", "Industrial", "Suburban", "Agriculture", "Periurban", "Outer" ],
             zonesAlias: ["Commercial", "Industrial", "Residential", "Agricultural", "Rural", "Heavy industry"]
         },
@@ -407,10 +419,10 @@ console.log('BUILDING APP...')
                     unit:           "MWh",
                     energy:         "GJ",
                     emissionsFactorBytype: {
-                        "Grid supplied":                    {Scope1: '',        Scope2: '',      Scope3: '',    Desc: '', Source: ''},
-                        "Grid supplied (GreenPower)":       {},
-                        "Solar generated on site":          {},
-                        "Solar exported":                   {},
+                        "Grid supplied":                   {Scope1: '',        Scope2: '',      Scope3: '',    Desc: '', Source: ''},
+                        "Grid supplied (GreenPower)":      {},
+                        "Solar generated on site":         {},
+                        "Solar exported":                  {},
                         "Wind generated on site":          {},
                         "Wind exported":                   {},
                         "Wind generated on site":          {},
@@ -421,9 +433,7 @@ console.log('BUILDING APP...')
                 "Natural gas (bottled)":            {},    
                 "Liquified Petroleum Gas":          {},    
             }
-
         },
-
         economicSector: {
 
         }
@@ -436,23 +446,36 @@ console.log('BUILDING APP...')
             balloons: {
                 sources:        '#282828',      // Charcoal
                 sinks:          '#66ff00',      // Green
-                switches:        '#ff1dce',     // Magenta
+                switches:       '#ff1dce',     // Magenta
             }
         }
     }
 
+    const helpers= {
+        camelize: function(str) {
+            return str.replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, function(match, index) {
+                if (+match === 0) return ""; // or if (/\s+/.test(match)) for white spaces
+                return index === 0 ? match.toLowerCase() : match.toUpperCase();
+            });
+        }, 
+        slugify: function (str) {
+            str = str.replace(/^\s+|\s+$/g, ''); // trim
+            str = str.toLowerCase();
+        
+            // remove accents, swap ñ for n, etc
+            var from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;";
+            var to   = "aaaaeeeeiiiioooouuuunc------";
+            for (var i=0, l=from.length ; i<l ; i++) {
+                str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+            }
 
+            str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+                .replace(/\s+/g, '-') // collapse whitespace and replace by -
+                .replace(/-+/g, '-'); // collapse dashes
 
-const helpers= {
-
-    camelize: function(str) {
-        return str.replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, function(match, index) {
-            if (+match === 0) return ""; // or if (/\s+/.test(match)) for white spaces
-            return index === 0 ? match.toLowerCase() : match.toUpperCase();
-        });
+            return str;
+        }
     }
-
-}
 
 //////////////////////////////////////////
 /// LIGHTING AND ENVIRONMENT SETTINGS  ///
@@ -463,19 +486,19 @@ const helpers= {
         hemi: {
             maxIntensity:   1.0,    
             intProp: {
-                summer: [ 0.15, 0.15, 0.15, 0.15, 0.2, 0.2,           // MIDNIGHT TO 5AM
+                summer: [ 0.15, 0.15, 0.15, 0.15, 0.2, 0.2,         // MIDNIGHT TO 5AM
                             0.25, 0.3, 0.5, 0.75, 0.9, 1.0,         // 6 AM TO MIDDAY
                             1.0, 0.9, 0.75, 0.9, 0.8, 0.6,          // MIDDAY TO 5PM
                             0.5, 0.2, 0.2, 0.15, 0.15, 0.15],       // 6PM TO 11PM
-                autumn: [ 0.15, 0.15, 0.15, 0.15, 0.2, 0.2,           // MIDNIGHT TO 5AM
+                autumn: [ 0.15, 0.15, 0.15, 0.15, 0.2, 0.2,         // MIDNIGHT TO 5AM
                             0.25, 0.3, 0.5, 0.75, 0.9, 1.0,         // 6 AM TO MIDDAY
                             1.0, 0.9, 0.75, 0.9, 0.8, 0.6,          // MIDDAY TO 5PM
                             0.5, 0.2, 0.2, 0.15, 0.15, 0.15],       // 6PM TO 11PM
-                winter: [ 0.15, 0.15, 0.15, 0.15, 0.2, 0.2,           // MIDNIGHT TO 5AM
+                winter: [ 0.15, 0.15, 0.15, 0.15, 0.2, 0.2,         // MIDNIGHT TO 5AM
                             0.25, 0.3, 0.5, 0.75, 0.9, 1.0,         // 6 AM TO MIDDAY
                             1.0, 0.9, 0.75, 0.9, 0.8, 0.6,          // MIDDAY TO 5PM
                             0.5, 0.2, 0.2, 0.15, 0.15, 0.15],       // 6PM TO 11PM
-                spring: [ 0.15, 0.15, 0.15, 0.15, 0.2, 0.2,           // MIDNIGHT TO 5AM
+                spring: [ 0.15, 0.15, 0.15, 0.15, 0.2, 0.2,         // MIDNIGHT TO 5AM
                             0.25, 0.3, 0.5, 0.75, 0.9, 1.0,         // 6 AM TO MIDDAY
                             1.0, 0.9, 0.75, 0.9, 0.8, 0.6,          // MIDDAY TO 5PM
                             0.5, 0.2, 0.2, 0.15, 0.15, 0.15],       // 6PM TO 11PM
@@ -943,10 +966,12 @@ const helpers= {
 
     // Solar farm rotation angles by hour to track sun
     settings.solarFarm = {
-        rotationByHour: [   0, 0, 0, 0, 0, 0,                       // MIDNIGHT TO 5AM
-                            -40, -32.5, -25, -17.5, -10 , -2.5,     // 6 AM TO MIDDAY
-                            2.5, 10 ,17.5, 25, 32.5, 40,            // MIDDAY TO 5PM
-                            40, 40, 40, 0, 0, 0],                   // 6PM TO 11PM
+        rotationByHour: [   
+            0, 0, 0, 0, 0, 0,                       // MIDNIGHT TO 5AM
+            -40, -32.5, -25, -17.5, -10 , -2.5,     // 6 AM TO MIDDAY
+            2.5, 10 ,17.5, 25, 32.5, 40,            // MIDDAY TO 5PM
+            40, 40, 40, 0, 0, 0                     // 6PM TO 11PM
+        ],
     }
 
 

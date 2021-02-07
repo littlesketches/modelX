@@ -66,6 +66,8 @@
         AFRAME.registerComponent('init-scene-setup', {
             init: function(){
                 console.log('**** SETTING DOM ELEMENTS UP...****')
+               scene.els.canvas = document.querySelector('#scene canvas')
+
                 // Initiate DOM element and group references in for referencing in other component code
                 scene.els.scene = document.getElementById('scene')
                 // Zones elements
@@ -99,6 +101,7 @@
                     lightningGroup: document.getElementById('lightning-group'),
                     grassGroup:     document.getElementById('ground-group'),
                     fire:           document.getElementById('fire-group'),
+                    lava:           document.getElementById('lava-group'),
                     vortexGroup:    document.getElementById('vortex-group'),
                     vortex:         document.getElementById('vortex')
                 }
@@ -134,8 +137,8 @@
                         "moon-1800", "moon-1900", "moon-2000", "moon-2100", "moon-2200", "moon-2300" ]
                 }    
                 // Home emissions features
-                const emissionsFeaturesSml = document.querySelectorAll('.house-small * .chimney, .house-small * .rooftop-solar, .house-small * .gas-meter, .house-small * .ac-unit, .house-small * .hot-water-tank, .house-small * .water-heat-pump, .house-small * .home-battery')
-                const emissionsFeaturesLrg = document.querySelectorAll('.house-large * .chimney, .house-large * .rooftop-solar, .house-large * .gas-meter, .house-large * .ac-unit, .house-large * .hot-water-tank, .house-large * .water-heat-pump .house-large * .home-battery')
+                const emissionsFeaturesSml = document.querySelectorAll('.detached-single-storey-home * .chimney, .detached-single-storey-home * .rooftop-solar, .detached-single-storey-home * .gas-meter, .detached-single-storey-home * .ac-unit, .detached-single-storey-home * .hot-water-tank, .detached-single-storey-home * .water-heat-pump, .detached-single-storey-home * .home-battery')
+                const emissionsFeaturesLrg = document.querySelectorAll('.detached-multi-storey-home * .chimney, .detached-multi-storey-home * .rooftop-solar, .detached-multi-storey-home * .gas-meter, .detached-multi-storey-home * .ac-unit, .detached-multi-storey-home * .hot-water-tank, .detached-multi-storey-home * .water-heat-pump .detached-multi-storey-home * .home-battery')
 
                 emissionsFeaturesSml.forEach( el => { el.setAttribute('visible', true)  })
                 emissionsFeaturesLrg.forEach( el => { el.setAttribute('visible', true)  })
@@ -145,7 +148,6 @@
                 scene.els.scene.setAttribute('set-environment', null)
                 scene.els.scene.setAttribute('set-hourly-environment', null)
                 scene.els.scene.setAttribute('add-external-listeners', null)
-                scene.els.scene.setAttribute('emissions-activity-balloons', {visible: false})
                 scene.els.items.blockGroupTitle.setAttribute('add-block-title', {
                     id:            "title-blocks",
                     text:           "The Kingdom of Dreams & Madness",
@@ -165,41 +167,48 @@
                     posX:           [0, 0],
                     tilt:           [10, -10], 
                     rotate:         [0, 0],
-                    letterSpace:    15,
+                    letterSpace:    12.5,
                 })
     
                 scene.els.items.blockGroup02.setAttribute('add-block-title', {
                     id:             "chapter-02-blocks",
-                    text:           'Climate risks',
-                    posZ:           [35, -35],   
-                    posY:           [5,  -10], 
+                    text:           'Under pressure',
+                    posZ:           [35, -45],   
+                    posY:           [10,  -10], 
                     posX:           [0, 0],
-                    tilt:           [10, -10], 
+                    tilt:           [10, -7.5], 
                     rotate:         [0, 0],
-                    letterSpace:    15
+                    letterSpace:    12.5
                 })
 
                 scene.els.items.blockGroup03.setAttribute('add-block-title', {
                     id:             "chapter-03-blocks",
-                    text:           'Our problem',
-                    posZ:           [35, -35],   
-                    posY:           [5,  -10], 
-                    posX:           [0, 0],
-                    tilt:           [10, -10], 
-                    rotate:         [0, 0],
-                    letterSpace:    15
+                    text:           'Burning down the house',
+                    posZ:           [35, -50, 30, -25],   
+                    posY:           [25, 20, -5, -5], 
+                    posX:           [0, 0, 0, 0],
+                    tilt:           [5, -10, -2.5, 2.5], 
+                    rotate:         [0, 0, 0, 0],
+                    letterSpace:    12.5
                 })
     
                 scene.els.items.blockGroup04.setAttribute('add-block-title', {
                     id:             "chapter-04-blocks",
-                    text:           'Climate action',
-                    posZ:           [35, -35],   
-                    posY:           [5,  -10], 
-                    posX:           [0, 0],
-                    tilt:           [10, -10], 
-                    rotate:         [0, 0],
-                    letterSpace:    15
+                    text:           'Nothing but flowers',
+                    posZ:           [35, -50, 0],   
+                    posY:           [15, 12.5, -10], 
+                    posX:           [0, 0, 0],
+                    tilt:           [10, -10, -2.5], 
+                    rotate:         [0, 0, 0],
+                    letterSpace:    12.5
                 })
+                // Home elements
+                document.querySelectorAll('.home-emissions-features').forEach( group => {
+                    for (let el of group.children) {
+                        el.setAttribute('visible', true)
+                    }                 
+                })
+
 
             }
         })
@@ -295,19 +304,21 @@
         AFRAME.registerComponent("set-hourly-environment", { 
             schema: {
                 dur:                  {type: 'number',    default: 2000},
-                time:                 {type: 'number',    default: state.scene.time.hour},
+                hour:                 {type: 'number',    default: state.scene.time.hour},
                 season:               {type: 'string',    default: state.scene.time.season}
             },
             init: function(){
-                externalEvents.changeSeasonSelector(state.scene.time.season)
+                if(typeof(externalEvents) !== 'undefined'){
+                    externalEvents.changeSeasonSelector(state.scene.time.season)
+                }
             },
             update: function(){           
                 console.log('Moving sun and other hourly elements for '+this.data.season)    
-                // Resposition sun and sun light (incl. adjust sun position for season)
+                // Re-position sun and sun light (incl. adjust sun position for season)
                 const newSunPos = {
-                    x: document.getElementById(scene.els.misc.sunPos[state.scene.time.hour]).getAttribute('position').x + settings.environment.sunOffset[this.data.season].x,
-                    y: document.getElementById(scene.els.misc.sunPos[state.scene.time.hour]).getAttribute('position').y + settings.environment.sunOffset[this.data.season].y,
-                    z: document.getElementById(scene.els.misc.sunPos[state.scene.time.hour]).getAttribute('position').z + settings.environment.sunOffset[this.data.season].z
+                    x: document.getElementById(scene.els.misc.sunPos[this.data.hour]).getAttribute('position').x + settings.environment.sunOffset[this.data.season].x,
+                    y: document.getElementById(scene.els.misc.sunPos[this.data.hour]).getAttribute('position').y + settings.environment.sunOffset[this.data.season].y,
+                    z: document.getElementById(scene.els.misc.sunPos[this.data.hour]).getAttribute('position').z + settings.environment.sunOffset[this.data.season].z
                 }
                 scene.els.enviro.sun.setAttribute('animation__position', {
                     property: 'position',
@@ -319,8 +330,8 @@
                     dur: this.data.dur,
                     to: `${newSunPos.x}  ${newSunPos.y}  ${newSunPos.z}`
                 })  
-                // Resposition moon body
-                const newMoonPos = document.getElementById(scene.els.misc.moonPos[state.scene.time.hour]).getAttribute('position')
+                // Re-position moon body
+                const newMoonPos = document.getElementById(scene.els.misc.moonPos[this.data.hour]).getAttribute('position')
                 scene.els.enviro.moon.setAttribute('animation__position', {
                     property: 'position',
                     dur: this.data.dur,
@@ -330,7 +341,7 @@
                 scene.els.lights.hemi.setAttribute('animation__light', {
                     property: 'light.intensity',
                     dur: this.data.dur,
-                    to: settings.lights.hemi.intProp[this.data.season][state.scene.time.hour] * settings.lights.hemi.maxIntensity
+                    to: settings.lights.hemi.intProp[this.data.season][this.data.hour] * settings.lights.hemi.maxIntensity
                 })  
                 // Turn lights on/off
                 if ((state.scene.time.timeOfDay() === "day" || state.scene.time.timeOfDay() === "morning")){
@@ -344,11 +355,81 @@
                     solarFarmEls[i].setAttribute('animation__rotate', {
                         property:   'rotation',
                         dur:        this.data.dur,
-                        to:         {x: settings.solarFarm.rotationByHour[state.scene.time.hour], y: 0, z: 0}
+                        to:         {x: settings.solarFarm.rotationByHour[this.data.hour], y: 0, z: 0}
                     })            
                 }
             }
         })
+
+        AFRAME.registerComponent('show-built-env-tech', {
+            update: function(){
+                console.log('*** SETTING VISIBILITY OF BUILT ENVIRONMENT TECHNOLOGIES ***')
+              
+                Object.keys(schema.builtEnvFeatures.dwellings).forEach(subClassName =>{
+                    const subClass = helpers.slugify(subClassName),
+                        containers = document.querySelectorAll(`.dwelling.${subClass}`),
+                        solarEls = document.querySelectorAll(`.dwelling.${subClass} .rooftop-solar`),
+                        mainsGasEls = document.querySelectorAll(`.dwelling.${subClass} .gas-meter`,),
+                        lpgEls = document.querySelectorAll(`.dwelling.${subClass} .lpg-bottle`),
+                        chimneyEls = document.querySelectorAll(`.dwelling.${subClass} .chimney`),
+                        waterTankEls = document.querySelectorAll(`.dwelling.${subClass} .hot-water-tank`),
+                        solarHWEls = document.querySelectorAll(`.dwelling.${subClass} .solar-hot-water`),
+                        heatPumpHWEls = document.querySelectorAll(`.dwelling.${subClass} .water-heat-pump`)
+
+                        console.log(subClassName)
+                        // 1. Set fuel types
+                        if(!schema.builtEnvFeatures.dwellings[subClassName].solarPV){
+                            solarEls.forEach(el =>  el.object3D.visible = false)
+                        } 
+                        if(!schema.builtEnvFeatures.dwellings[subClassName].mainsGas){
+                            mainsGasEls.forEach(el =>  el.object3D.visible = false)
+                        }
+                        if(!schema.builtEnvFeatures.dwellings[subClassName].lpgGas){
+                            lpgEls.forEach(el =>  el.object3D.visible = false)
+                        }
+                        if(!schema.builtEnvFeatures.dwellings[subClassName].wood){
+                            chimneyEls.forEach(el =>  el.object3D.visible = false)
+                        }
+
+                        // 2. Set cooling, and hot water type and battery
+                        containers.forEach( el => {
+                            const random_HW = Math.random(), 
+                                random_cooling = Math.random(),
+                                random_battery = Math.random()
+
+                            // a. Set hot water visibility
+                            if(random_HW < 0.6 || schema.builtEnvFeatures.dwellings[subClassName].gasHW){         // Elecric HW or Gas HW (show tank only)
+                                el.querySelectorAll('.water-heat-pump').forEach(el =>  el.object3D.visible = false)
+                                el.querySelectorAll('.solar-hot-water').forEach(el =>  el.object3D.visible = false)
+                            } else if(random_HW < 0.8){      // Heat pump and tank
+                                el.querySelectorAll('.solar-hot-water').forEach(el =>  el.object3D.visible = false)
+                            } else {                   // Solar hot water unit
+                                el.querySelectorAll('.hot-water-tank').forEach(el =>  el.object3D.visible = false)
+                                el.querySelectorAll('.water-heat-pump').forEach(el =>  el.object3D.visible = false)
+                            }
+
+                            // b. Set cooling unit visibility
+                            if(random_cooling < 0.4){   // Air conditioner 
+                                el.querySelectorAll('.evap-cooler').forEach(el =>  el.object3D.visible = false)
+                            } else if (random_cooling < 0.45){ // Evaporative cooler
+                                el.querySelectorAll('.air-conditioner').forEach(el =>  el.object3D.visible = false)
+                            } else {
+                                el.querySelectorAll('.evap-cooler').forEach(el =>  el.object3D.visible = false)
+                                el.querySelectorAll('.air-conditioner').forEach(el =>  el.object3D.visible = false)
+                            }
+                            // c. Set home battery visibility
+                            if(random_battery < 0.5 && schema.builtEnvFeatures.dwellings[subClassName].solarPV){   // Air conditioner 
+                                el.querySelectorAll('.home-battery').forEach(el =>  el.object3D.visible = false)                                
+                            }
+
+                        })
+
+                    
+                })
+
+            }
+        })
+
 
     // CAMERA CONTROl
         AFRAME.registerComponent("move-fly-camera", {
@@ -444,7 +525,7 @@
             },
             update: function () {
                 const currentRotation = document.getElementById("townhouse-cutaway").getAttribute('rotation').y    
-                // Switch to diretor camera
+                // Switch to director camera
 
                 // Move the camera to dollhouse if opening the 
                 if(currentRotation === 0){
@@ -641,13 +722,7 @@
                 })
             },
             update: function(){
-                if(this.data.visible){
-                    // state.scene.animation.blockTitleShowing = true
-                    // scene.els.items.blockGroup.setAttribute('add-block-title', null)
-                    document.getElementById(this.data.id).setAttribute('visible', true)
-                } else {
-                    document.getElementById(this.data.id).setAttribute('visible', false)
-                }
+                document.getElementById(this.data.id).setAttribute('visible', this.data.visible)
             },
         })
 
@@ -680,7 +755,6 @@
                 visible:        {type: 'boolean',  default: true},
             },
             update: function(){
-                console.log('Hiding '+this.data.id)
                 document.getElementById(this.data.id).removeAttribute('show-block-title')
                 document.getElementById(this.data.id).setAttribute('animation', {
                     property:   'position.y', 
@@ -755,7 +829,7 @@
                     to:         {x: -140, y: 0, z: 0}
                 })
                 // Start rain particles after the clouds
-                setTimeout(() => {
+               state.scene.effect.rain = setTimeout(() => {
                     scene.els.enviro.particles.setAttribute('particle-system', {
                         preset:              'dust',
                         blending:            1,
@@ -895,7 +969,6 @@
                 windIntensity:          {type: 'number',   default: 20 }, 
                 damage:                 {type: 'number',   default: 0 }  
             },
-
             update: function(){
                 // Windy rain
                 setTimeout( () => {
@@ -1274,6 +1347,19 @@
 
         })
 
+        AFRAME.registerComponent('hazard-desertification', {
+            schema: {   
+                dur:                    {type: 'number',   default: 2000 },  
+            },
+            update: function(){
+                // Desertification extras
+                console.log('Do desertification stuff!!!')
+            },
+            remove: function(){
+                console.log('UNDO desertification stuff!!!')
+            }
+        })
+
         AFRAME.registerComponent('hazard-bushfire', {
             schema: {   
                 dur:                    {type: 'number',   default: 2000 },  
@@ -1409,8 +1495,8 @@
                     dur:            1000
                 })
 
-                // Bring vortextgroup into view aftre delay for moving ducj out of view
-                setTimeout( ()=> {
+                // Bring vortex group into view aftre delay for moving ducj out of view
+                state.scene.effect.vortex= setTimeout( () => {
                     scene.els.enviro.vortexGroup.setAttribute('visible', true)
                     scene.els.enviro.vortexGroup.setAttribute('animation__scale', {
                         property:       'scale',
@@ -1433,7 +1519,7 @@
                         loop:           'true',
                         dir:            'alternate',
                     })
-                    // Spin/size and move the vortex alogn path
+                    // Spin/size and move the vortex along path
                     scene.els.enviro.vortexGroup.setAttribute('alongpath', {
                         curve:          "#cyclone-path-points",
                         dur:            90000, 
@@ -1473,6 +1559,7 @@
                 }, 1000)
             },
             remove: function(){
+                clearInterval(state.scene.effect.vortex)
                 // Shrink the vortex
                 scene.els.enviro.vortexGroup.setAttribute('animation__scale', {
                     property:       'scale',
@@ -1480,7 +1567,7 @@
                     dur:            1500
                 })
 
-                // Reset the rubber duck and animiation properties
+                // Reset the rubber duck and animation properties
                 setTimeout( ()=> {
                     document.getElementById('duck-group').setAttribute('animation__position', {
                         property:       'position',
@@ -1825,7 +1912,186 @@
             },
         })
 
-        AFRAME.registerComponent('hazard-mudslide', {
+        AFRAME.registerComponent('hazard-tsunami', {
+            schema: {   
+                seaOutDur:              {type: 'number',   default: 4000 },  
+                slOut:                  {type: 'number',   default: -3 },  
+                slIn:                   {type: 'number',   default: 6 },  
+                slInDur:                {type: 'number',   default: 10000 },  
+                intensity:              {type: 'string',   default: 'tsunami' },  
+            },     
+            init: function(){
+                // 1. Sea recedes (lower sea level)
+                const currentSea = scene.els.enviro.sea.getAttribute('position'),
+                    duckPoints = document.getElementsByClassName('duckPathPoint')
+                scene.els.enviro.sea.setAttribute('animation__seaLevel', {
+                    property:       'position',
+                    dur:            this.data.seaOutDur,
+                    to:             {x: currentSea.x,   y: 2 + this.data.slOut, z: currentSea.z}
+                })
+
+                state.scene.effect.tsunami =  setTimeout( () => {
+                    // Move the bloody duck!
+                    for(let i = 0; i < duckPoints.length; i++){
+                        const duckPoint = duckPoints[i].getAttribute('position')
+                        duckPoints[i].setAttribute('position', {
+                            x: duckPoint.x,  
+                            y: (-4 + this.data.slOut), 
+                            z: duckPoint.z 
+                        })
+                    }
+                    // 2. Raise the sea from its angle
+                    scene.els.enviro.sea.setAttribute('animation__seaLevel', {
+                        property:       'position',
+                        dur:            this.data.slInDur,
+                        to:             {x: currentSea.x,   y: 2 + this.data.slIn, z: currentSea.z}            
+                    })
+                    scene.els.enviro.oceanGroup.setAttribute('animation__seaAngle', {
+                        property:       'rotation',
+                        dur:            this.data.slInDur,
+                        to:             {x: 0,   y: 0,  z: 1}
+                    })
+                    setTimeout( () => {
+                        // Move the bloody duck!
+                        for(let i = 0; i < duckPoints.length; i++){
+                            const duckPoint = duckPoints[i].getAttribute('position')
+                            duckPoints[i].setAttribute('position', {
+                                x: duckPoint.x,  
+                                y: (-4 + this.data.slIn), 
+                                z: duckPoint.z 
+                            })
+                        }
+                    }, this.data.slInDur)
+                }, this.data.seaOutDur)
+            },
+            remove: function(){
+                clearTimeout(state.scene.effect.tsunami) 
+                scene.els.scene.setAttribute('hazard-sea-level', 'slchange: 0')
+            }
+        })
+
+        AFRAME.registerComponent('hazard-wet-mass', {
+            schema: {   
+                dur:                    {type: 'number',   default: 2000 },  
+                wetMassDelay:           {type: 'number',   default: 2000 },  
+                type:                   {type: 'string',   default: scene.hazard.options.wetMass[0] },  
+                floodLvl:               {type: 'number',   default: 0.5 },
+            },
+            update: function(){
+                // 1a. For a mudslide, start a storm 
+                if(this.data.type === scene.hazard.options.wetMass[0]){
+                    scene.els.scene.setAttribute('hazard-rain', null)
+                    scene.els.scene.setAttribute('hazard-lightning', null)
+                // 1b. For an avalanche
+                } else if (this.data.type === scene.hazard.options.wetMass[1]){
+                    scene.els.scene.removeAttribute('hazard-rain')
+                    scene.els.scene.removeAttribute('hazard-lightning')
+                    scene.els.scene.setAttribute('hazard-earthquake', {intensity: 5})
+                    const snowCapPos = document.getElementById('alp-snowCap-group').getAttribute('position')
+                    document.getElementById('alp-snowCap-group').setAttribute('animation__height', {
+                        property:       'position',
+                        dur:            500,
+                        to:             {x:0,   y: -10, z: 0}
+                    })
+                }
+                // 2. Setup and Show the wet mass objects
+                const  groundObjects=  document.querySelectorAll('.wetMass')
+                    color = this.data.type === scene.hazard.options.wetMass[0] ? document.getElementById('col-mud').getAttribute('material').color : 
+                        this.data.type === scene.hazard.options.wetMass[1] ? '#fff' : document.getElementById('col-ocean').getAttribute('material').color
+                for (let obj of groundObjects){
+                    obj.removeAttribute('ocean')
+                    obj.setAttribute('ocean', {
+                        width:              0.75,
+                        amplitude:          0.2,
+                        amplitudeVariance:  0,
+                        density:            20,
+                        color:              color,
+                        depth:              0.75,
+                        opacity:            1,
+                        speed:              0
+                    })
+                }
+                // 3. Raise the ground wet mass objects
+                document.getElementById('wetMass-group').setAttribute('animation__wetMass', {
+                    property:   'position',
+                    from:       {x: 0, y: 0, z: 0},
+                    to:         {x: 15, y: 3.5, z: -10},
+                    dur:        this.data.dur, 
+                    delay:      this.data.wetMassDelay, 
+                })
+            },
+            remove: function(){
+                scene.els.scene.removeAttribute('hazard-rain')
+                scene.els.scene.removeAttribute('hazard-lightning')
+                scene.els.scene.removeAttribute('hazard-earthquake')
+
+                const  groundObjects=  document.querySelectorAll('.wetMass')
+                for (let obj of groundObjects){
+                    obj.removeAttribute('ocean')
+                }
+                document.getElementById('wetMass-group').setAttribute('animation__wetMass', {
+                    property:   'position',
+                    to:          {x: 0, y: 0, z: 0},
+                    dur:        this.data.dur, 
+                })
+                document.getElementById('alp-snowCap-group').setAttribute('animation__height', {
+                    property:       'position',
+                    dur:            500,
+                    to:             {x:0,   y: 0, z: 0}
+                })
+                setTimeout(() => {
+                    document.getElementById('wetMass-group').removeAttribute('animation__wetMass')  
+                }, this.data.dur * 2);
+            }
+        })
+
+        AFRAME.registerComponent('hazard-volcano', {
+            schema: {   
+                dur:                    {type: 'number',   default: 1000 },  
+                type:                   {type: 'string',   default: scene.hazard.options.volcano[0] },  
+                floodLvl:               {type: 'number',   default: 0.5 },
+            },
+            update: function(){
+                // 1. Blow the  volcano top, change environment conditions to bushfire
+                const snowCap = document.getElementById('alp-snowCap-group')
+                snowCap.setAttribute('animation__position', {
+                    property:       'position',
+                    dur:            500,
+                    to:             {x: 0,   y: 200, z: 0}
+                })
+                snowCap.setAttribute('animation__rotation', {
+                    property:       'rotation',
+                    dur:            500,
+                    to:             {x: 1080,   y: 720, z: 360}
+                })
+                externalEvents.changeEnvironment('bushfire', this.data.dur)
+            
+                //  2. Add Lava
+                setTimeout( () =>{
+                    scene.els.enviro.lava.setAttribute('visible', true) 
+                }, this.data.dur)
+            },
+            remove: function(){
+                externalEvents.changeEnvironment(state.scene.environment.name, this.data.dur)
+                scene.els.scene.removeAttribute('hazard-earthquake')
+                scene.els.enviro.lava.setAttribute('visible', false)
+                const snowCap = document.getElementById('alp-snowCap-group')
+                snowCap.setAttribute('animation__position', {
+                    property:       'position',
+                    dur:            500,
+                    to:             '0 0 0'
+                })
+                snowCap.setAttribute('animation__rotation', {
+                    property:       'rotation',
+                    dur:            500,
+                    to:             '0 0 0'
+                })
+                setTimeout( () =>{
+                    snowCap.removeAttribute('animation__position')
+                    snowCap.removeAttribute('animation__rotation')
+                }, this.data.dur)
+            }
+
         })
 
         AFRAME.registerComponent('hazard-dust-storm', {
@@ -1837,521 +2103,89 @@
                 dur:                {type: 'number',   default: 3000 },  
                 visible:            {type: 'boolean',  default: true}, 
                 type:               {type: 'string',   default: 'all'}, 
-                selectorClass1:     {type: 'string',   default: 'all'}, 
+                selectorClass:      {type: 'string',   default: 'all'}, 
                 sourceNetSwitch:    {type: 'boolean',  default: false}, 
                 sourceNetSink:      {type: 'boolean',  default: false}
             },
             init: function(){
-                // StockType > Sector > Scope > EconomicSector > Source > container? > 
-
-                // Emissions balloon anchor collections
-                scene.els.anchors = {
-                    // Emission source objects
-                    sources: {
-                        stationaryEnergy: {
-                            scope1: {
-                                residential:{
-                                    mainsGas: {
-                                        smallDwellings: {
-                                            all:        document.querySelectorAll('.house-small * .emissions-anchor.mains-gas')
-                                        },
-                                        largeDwellings:  {
-                                            all:        document.querySelectorAll('.house-large * .emissions-anchor.mains-gas'),
-                                        },
-                                        townhouses:  {
-                                            all:        []
-                                        } 
-                                    },
-                                    bottledLPG: {
-                                    },
-                                    wood: {
-                                        smallDwellings: {
-                                            all:            document.querySelectorAll('.house-small * .emissions-anchor.firewood'),
-                                        },
-                                        largeDwellings: {        
-                                            all:            document.querySelectorAll('.house-large * .emissions-anchor.firewood'),
-                                        },
-                                        townhouses: {
-                                            all:              []
-                                        }
-                                    }
-                                },
-                                commercial: {
-                                    mainsGas: {
-                                        offices:   {
-                                            all:                document.querySelectorAll('.commercial-bldg.five-level * .emissions-anchor.mains-gas'),
-                                        },
-                                        retail:  {
-                                            all:                document.querySelectorAll('.commercial-bldg.three-level * .emissions-anchor.mains-gas'),
-                                        },
-                                        hospitality: {
-                                            all:                document.querySelectorAll('.hospitality * .emissions-anchor.mains-gas'),
-                                        },
-                                        accommodation: {
-                                            all:                document.querySelectorAll('.accommodation * .emissions-anchor.mains-gas')
-                                        }
-                                    },
-                                    bottledLPG:                 {},
-                                    diesel:                     {},
-                                },
-                                industrial: {
-                                    electricityGeneration: {
-                                        coalFired:  {
-                                            generation:         document.querySelectorAll('.emissions-anchor.utility-coal'),
-                                        }
-                                    },
-                                    mainsGas: {
-                                        other:                  {},
-                                        mineral:                {},
-                                        chemical:               {},
-                                        metal:                  {},
-                                        electronics:            {}
-                                    },
-                                    bottledLPG:                 {},
-                                    diesel:                     {},
-                                },
-                                farming: {
-                                    mainsGas: {
-                                        largeFarm:                   document.querySelectorAll('.barn-large * .emissions-anchor.mains-gas'),
-                                        smallFarm:                   document.querySelectorAll('.barn-small * .emissions-anchor.mains-gas'),
-                                    },
-                                    bottledLPG:                 {},
-                                    diesel:                     {},
-                                },
-                                institutional: {
-                                    mainsGas: {
-                                        government:             document.querySelectorAll('.gov-building * .emissions-anchor.mains-gas'),
-                                        hospital:               document.querySelectorAll('.hospital * .emissions-anchor.mains-gas'),
-                                        airport:                document.querySelectorAll('.airport * .emissions-anchor.mains-gas'),
-                                        school:                 document.querySelectorAll('.school-building * .emissions-anchor.mains-gas'),
-                                        church:                 document.querySelectorAll('.emissions-anchor.mains-gas.church')
-                                    },
-                                    bottledLPG:                 {},
-                                    diesel:                     {},
-                                },
-                            },
-                            scope2: {
-                                residential: {
-                                    gridElectricity: {
-                                        smallDwellings:         document.querySelectorAll('.house-small * .emissions-anchor.grid-electricity'),
-                                        largeDwellings:         document.querySelectorAll('.house-large * .emissions-anchor.grid-electricity'),
-                                        townhouses:             document.querySelectorAll('.townhouse * .emissions-anchor.grid-electricity')
-                                    }
-                                },
-                                commercial: {
-                                    gridElectricity: {
-                                        offices:                document.querySelectorAll('.commercial-bldg.five-level * .emissions-anchor.grid-electricity'),
-                                        officeTowers:           document.querySelectorAll('.emissions-anchor.grid-electricity.office-tower'),
-                                        retail:                 document.querySelectorAll('.commercial-bldg.three-level * .emissions-anchor.grid-electricity'),
-                                        hospitality:            document.querySelectorAll('.emissions-anchor.grid-electricity.hospitality'),
-                                        accommodation:           document.querySelectorAll('.emissions-anchor.grid-electricity.accommodation')
-                                    }
-                                },
-                                industrial: {
-                                    gridElectricity: {
-                                        other:                  document.querySelectorAll('.emissions-anchor.grid-electricity.other'),
-                                        minerals:               document.querySelectorAll('.emissions-anchor.grid-electricity.minerals'),
-                                        chemicals:              document.querySelectorAll('.emissions-anchor.grid-electricity.chemicals'),
-                                        metals:                 document.querySelectorAll('.emissions-anchor.grid-electricity.metals'),
-                                        electronics:            document.querySelectorAll('.emissions-anchor.grid-electricity.electronics'),
-                                    }
-                                },
-                                farming: {
-                                    gridElectricity: {
-                                        largeFarm:              document.querySelectorAll('.barn-large * .emissions-anchor.grid-electricity'),
-                                        smallFarm:              document.querySelectorAll('.barn-small * .emissions-anchor.grid-electricity')
-                                    }
-                                },
-                                institutional: {
-                                    gridElectricity: {
-                                        government:             document.querySelectorAll('.gov-building * .emissions-anchor.grid-electricity'),
-                                        airport:                document.querySelectorAll('.emissions-anchor.grid-electricity.airport'),   
-                                        hospital:               document.querySelectorAll('.hospital * .emissions-anchor.grid-electricity'),
-                                        church:                 document.querySelectorAll('.emissions-anchor.grid-electricity.church'),
-                                        school:                 document.querySelectorAll('.school-building * .emissions-anchor.grid-electricity'),
-                                    }
-                                }
-                            },
-                            scope3: {
-                                industrial: {
-                                    gridElectricity: {
-                                        transmission: {
-                                            lineLosses:         document.querySelectorAll('.emissions-anchor.grid-transmission')
-                                        },
-                                        distribution: {
-                                            lineLosses:         document.querySelectorAll('.emissions-anchor.grid-distribution'),
-                                        }
-                                    },
-                                    mainsGas: {
-                                        distribution:            {},
-                                    }
-                                }
-                            }
-                        },
-                        transportEnergy: {
-                            scope1: {
-                                residential: {
-                                    petrol: {
-                                        road: {
-                                            passengerVehicle:       []
-                                        }
-                                    },
-                                    jetfuel: {
-                                        aviation: {
-                                            passsengerAirTravel:     document.querySelectorAll('.emissions-anchor.residential.aviation.passengerAirTravel.jetfuel')
-                                        }
-                                    }
-                                },
-                                commercial: {
-                                    petrol: {
-                                        road: {
-                                            passengerVehicle:       [],
-                                            lightCommercialVehicle: [],
-                                            bus:                    [],
-                                            other:                  []
-                                        }
-                                    },
-                                    diesel: {
-                                        road: {
-                                            passengerVehicle:       [],
-                                            lightCommercialVehicle: [],
-                                            heavyTrucks:            [],
-                                            bus:                    [],
-                                            other:                  []
-                                        }
-                                    },
-                                    lpg: {
-                                        road: {
-                                            passengerVehicle:       [],
-                                            lightCommercialVehicle: [],
-                                            heavyTrucks:            [],
-                                            bus:                    [],
-                                            other:                  []
-                                        }                                    
-                                    },
-                                    biodiesel: {
-                                        road: {
-                                            passengerVehicle:       [],
-                                            lightCommercialVehicle: [],
-                                            heavyTrucks:            [],
-                                            bus:                    [],
-                                            other:                  []
-                                        }                                    
-                                    },
-                                    ethanol: {
-                                        road: {
-                                            passengerVehicle:       [],
-                                            lightCommercialVehicle: [],
-                                            heavyTrucks:            [],
-                                            bus:                    [],
-                                            other:                  []
-                                        }                                    
-                                    },
-                                    jetfuel: {
-                                        aviation: {
-                                            passsengerAirTravel:    document.querySelectorAll('.emissions-anchor.commercial.aviation.passengerAirTravel.jetfuel'),
-                                            freight:                document.querySelectorAll('.emissions-anchor.commercial.aviation.freight.jetfuel'),
-                                        }
-                                    }
-                                },
-                            }
-                        },
-                        wasteAndWasteWater: {
-                            scope1: {
-                                industrial: {
-                                    landfill: {
-                                        disposal: {
-                                            MSW:                    document.querySelectorAll('.emissions-anchor.landfill.msw'),
-                                            CandI:                  document.querySelectorAll('.emissions-anchor.landfill.ci'),
-                                            CandD:                  document.querySelectorAll('.emissions-anchor.landfill.cd'),
-                                        } 
-                                    },
-                                    incineration:                {},
-                                    biologicalTreatment:         {},
-                                    wastewater:  {
-                                        sewered:                 []
-                                    }      
-                                }
-                            },
-                            scope3: {
-                                residential: {
-                                    landfill: {    
-                                        smallDwellings:  {
-                                            MSW:        document.querySelectorAll('.house-small * .emissions-anchor.bin-landfill'),
-                                        },
-                                        largeDwellings:   {
-                                            MSW:        document.querySelectorAll('.house-large * .emissions-anchor.bin-landfill')
-                                        }
-                                    },
-                                    wastewater:  {    
-                                        smallDwellings:         {},
-                                        largeDwellings:         {}
-                                    },      
-                                },
-                                commercial: {
-                                    landfill: {
-                                        offices: {
-                                            all:               document.querySelectorAll('.emissions-anchor.skip-landfill'),
-                                        },
-                                        officeTowers:           {},
-                                        retail:                 {},
-                                        hospitality:            {},
-                                        accommodation:          {}
-                                    },
-                                    wastewater: {
-                                        offices:                {},
-                                        officeTowers:           {},
-                                        retail:                 {},
-                                        hospitality:            {},
-                                        accommodation:          {}
-
-                                    }                        
-                                },  
-                                industrial: {
-                                    landfill: {
-                                        other:                  {},
-                                        mineral:                {},
-                                        chemical:               {},
-                                        metal:                  {},
-                                        electronics:            {}
-                                    }               
-                                } ,
-                                institutional: {
-                                    CandI: {
-                                        government:             {},
-                                        hospital:               {},
-                                        airport:                {},
-                                    },
-                                    MSW: { 
-                                        school:                 {},
-                                        church:                 {}
-                                    }
-                                }
-                            },
-                        },
-                        agriculture: {
-                            scope1: {
-                                farming: {
-                                    livestock: {
-                                        enteric: {
-                                            cattle:             document.querySelectorAll('.emissions-anchor.livestock.cow'),
-                                            pigs:               document.querySelectorAll('.emissions-anchor.livestock.pig'),
-                                            sheep:              document.querySelectorAll('.emissions-anchor.livestock.sheep'),
-                                            poultry:            document.querySelectorAll('.emissions-anchor.livestock.poultry')
-                                        }, 
-                                        manure:                 {},
-                                        grazing:                {}
-                                    },
-                                    produce: {
-                                        cropping: {
-                                            wheat:              document.querySelectorAll('.emissions-anchor.agriculture.cropping-wheat'),
-                                            corn:               document.querySelectorAll('.emissions-anchor.agriculture.cropping-corn'),
-                                            other:              document.querySelectorAll('.emissions-anchor.agriculture.cropping-other')
-                                        },
-                                        fruitAndVeg: {
-                                            apples:             document.querySelectorAll('.emissions-anchor.agriculture.ag-apples'),
-                                        }
-                                    }
-                                },
-                            },
-                            scope3: {
-                            }
-                        },
-                        landAndForestry: {
-                            scope1: {
-                                farming: {
-                                    landUse: {
-                                        conversion:             [],
-                                        clearing:               [],
-                                        reclearing:             []
-                                    }
-                                },
-                                institutional: {
-                                    landUse: {
-                                        conversion:             [],
-                                        clearing:               [],
-                                        reclearing:             []
-                                    }
-                                }
-                            }
-                        },
-                        industrialProcessesAndProductUse: {
-                            scope1: {
-                                residential:  {
-                                    smallDwellings: {
-                                        refrigerantLeakage:      []
-                                    },
-                                    largeDwellings: {
-                                        refrigerantLeakage:       []
-                                    },
-                                    townhouses: {
-                                        refrigerantLeakage:        []
-                                    },
-                                },
-                                commercial:  {
-                                    offices: {
-                                        refrigerantLeakage:        []
-                                    }, 
-                                    retail: {
-                                        refrigerantLeakage:        []
-                                    }, 
-                                    hospitality: {
-                                        refrigerantLeakage:        []
-                                    }, 
-                                    accommodation: {
-                                        refrigerantLeakage:        []
-                                    }
-                                },
-                                industrial: {
-                                    minerals: {
-                                        processes:                  [],
-                                        refrigerantLeakage:         []
-                                    },
-                                    minerals: {
-                                        processes:                  [],
-                                        refrigerantLeakage:         []
-                                    },
-                                    chemicals: {
-                                        processes:                  [],
-                                        refrigerantLeakage:         []
-                                    },
-                                    metals: {
-                                        processes:                  [],
-                                        refrigerantLeakage:         []
-                                    },
-                                    electronics: {
-                                        processes:                  [],
-                                        refrigerantLeakage:         []
-                                    }
-                                },
-                            }
-                        },
-                    },
-
-                    // Clean alternatives
-                    switches: {       
-                        stationaryEnergy: {
-                            scope1: {
-                                industrial: {
-                                    electricityGeneration: {
-                                        solar:  {
-                                            exported:         document.querySelectorAll('.emissions-anchor.utility-solar'),
-                                        },
-                                        wind:  {   
-                                            exported:         document.querySelectorAll('.emissions-anchor.utility-wind'),
-                                        },
-                                        hydro: {
-                                            exported:         document.querySelectorAll('.emissions-anchor.utility-hydro')
-                                        }
-                                    }
-                                }
-                            },
-                            scope2: {
-                                residential: {
-                                    onSiteSolar: {
-                                        smallDwellings:  {
-                                            consumed:       document.querySelectorAll('.house-small * .emissions-anchor.rooftop-solar'),
-                                        },
-                                        largeDwellings:  {
-                                            consumed:       document.querySelectorAll('.house-large * .emissions-anchor.rooftop-solar'),
-                                        },
-                                        townhouses:            {}        
-                                    }
-                                },
-                                commercial:  {
-                                    onSiteSolar: {
-                                        offices:                {},
-                                        retail:                 {},
-                                        hospitality:            {},
-                                        accommodation:          {}
-                                    }
-                                },   
-                                industrial: {
-                                    onSiteSolar: {
-                                        other:                  {},
-                                        minerals:               {},
-                                        chemicals:              {},
-                                        metals:                 {},
-                                        electronics:            {}
-                                    }
-                                },          
-                                agriculture:  {
-                                    onSiteSolar: {
-                                        largeFarm:              {},
-                                        smallFarm:              {},
-                                        groundMounted:          {},
-                                    }
-                                },          
-                                institutional: {
-                                    onSiteSolar: {
-                                        government:             {},
-                                        airport:                {},
-                                        hospital:               {},
-                                        church:                 {},
-                                        school:  {
-                                            consumed:         document.querySelectorAll('.school-building * .emissions-anchor.rooftop-solar'),
-                                        }
-                                    }
-                                }  
-                            },
-                            scope3: {
-                            }
-                        },
-                        transportEnergy: {
-                            scope1: {
-                                residential: {
-                                    petrolToEV:  {
-
-                                    }           
-                                },
-                                commercial: {
-                                    petrolToEV:   {
-
-                                    }     
-                                }
-                            }                   
-                        },
-                    },
-                    // Carbon sinks 
-                    sinks: {
-                        landAndForestry: {
-                            scope1: {
-                                afforestation:             [],
-                                reforestation:             [],
-                            }
-                        },
-                        agriculture: {
-                            scope1: {
-                                soilSequestration:          []
-                            }
-                        }
-                    }
-                }
-
-
+                console.log('*** LAUNCHING BALLOONS ***')
+                let balloonCount = 0
                 // Add balloons for each anchor 
-                Object.entries(scene.els.anchors).forEach( ([type, sectorObj]) => {
-                    Object.entries(scene.els.anchors[type]).forEach( ([emissionsSector, scopeObj]) => {
-                        Object.entries(scene.els.anchors[type][emissionsSector]).forEach( ([scope, sectorObj]) => {
-                            Object.entries(scene.els.anchors[type][emissionsSector][scope]).forEach( ([sector, sourceObj]) => {
-                                Object.entries(scene.els.anchors[type][emissionsSector][scope][sector]).forEach( ([emissionsSource, subsectorObj]) => {
-                                    Object.entries(scene.els.anchors[type][emissionsSector][scope][sector][emissionsSource]).forEach( ([subsource, anchorCollection]) => {
+                Object.entries(modelVisData).forEach(([stockType, stockObj]) => {
+                    Object.entries(stockObj).forEach(([containerClass, conClassObj]) => {
+                        Object.entries(conClassObj).forEach(([containerSubClass, conSubClassObj]) => {
+                            Object.entries(conSubClassObj).forEach(([container, containerObj]) => {
+                                Object.entries(containerObj).forEach(([anchor, anchorObj]) => {
+                                    let scale, stringMultiplier, stringLength, stringDeltaY, balloonCol, anchorCollection
+                                    // Create balloons only only if there are emissions
+if(stockType === 'source' && containerClass ==='utilities-and-services'){
+    console.log(containerSubClass, container, anchor)
+}
+                                    if( (anchorObj.summary.emissions && anchorObj.summary.emissions > 0)  || 
+                                        (anchorObj.summary.abated_emissions && anchorObj.summary.abated_emissions > 0) ){
+                                        anchorCollection = document.querySelectorAll(anchorObj.summary.querySelector)
 
-                                        let scale, stringMultiplier, stringPosY, balloonCol = '#fff'
-                                        if( anchorCollection.length > 0) {
-                                            scale = Math.sqrt(model.scene.balloonScale[type][emissionsSector][scope][sector][emissionsSource][subsource].scale)
-                                            stringLength = model.scene.balloonScale[type][emissionsSector][scope][sector][emissionsSource][subsource].stringLength
-                                            stringPosY = model.scene.balloonScale[type][emissionsSector][scope][sector][emissionsSource][subsource].stringPosY
-                                        }
+
 
                                         // Add ALL balloons (source/switch/sink)  
                                         for(let i = 0; i < anchorCollection.length; i++ ){
                                             const balloonContainer =  document.createElement('a-entity'),
-                                                anchorY = anchorCollection[i].getAttribute('position').y
+                                                anchorY = anchorCollection[i].getAttribute('position').y    
+                                            // Get string length with minimum exceptions by container type
+                                            switch(container){
+                                                case 'detached-single-storey-home':
+                                                    stringLength = (anchor.slice(0,3) !== 'bin' && anchor.slice(0,4) !== 'skip') ? d3.max([vis.scale.emissionsBalloonString(anchorObj.summary.emissions), 1.25 - anchorY]) : stringLength = vis.scale.emissionsBalloonString(anchorObj.summary.emissions)
+                                                    break
+                                                case 'detached-multi-storey-home':
+                                                case 'government-building': 
+                                                    stringLength = (anchor.slice(0,3) !== 'bin' && anchor.slice(0,4) !== 'skip')? d3.max([vis.scale.emissionsBalloonString(anchorObj.summary.emissions), 1.75 - anchorY]) : stringLength = vis.scale.emissionsBalloonString(anchorObj.summary.emissions)
+                                                    break
+                                                case 'apartment-in-multi-storey-block':
+                                                case 'townhouse':
+                                                case 'commercial-office-building-low-rise': 
 
-                                            balloonContainer.className +=`balloon-group ${type} ${scope} ${emissionsSector} ${emissionsSource} ${sector} ${subsource}`
+                                                    stringLength = (anchor.slice(0,3) !== 'bin' && anchor.slice(0,4) !== 'skip') ? d3.max([vis.scale.emissionsBalloonString(anchorObj.summary.emissions), 3 - anchorY]) : stringLength = vis.scale.emissionsBalloonString(anchorObj.summary.emissions)
+                                                    break
+                                                case 'retail-premises':
+                                                    stringLength = (anchor.slice(0,3) !== 'bin' && anchor.slice(0,4) !== 'skip')  ? d3.max([vis.scale.emissionsBalloonString(anchorObj.summary.emissions), 2 - anchorY]) : stringLength = vis.scale.emissionsBalloonString(anchorObj.summary.emissions)
+                                                    break
+                                                default: 
+                                                    stringLength = vis.scale.emissionsBalloonString(anchorObj.summary.emissions)
+                                            }
+                                            // Set balloon scale and colour
+                                            switch(stockType){
+                                                case 'source':
+                                                    balloonCol = '#000'
+                                                    scale = vis.scale.emissionsBalloon(anchorObj.summary.emissions)
+                                                    break
+                                                case 'switch':
+                                                    balloonCol = '#4cbb17'
+                                                    scale = vis.scale.emissionsBalloon(anchorObj.summary.abated_emissions)
+                                                case 'storage':
+                                                    balloonCol = '#C7EA46'
+                                                    scale = vis.scale.emissionsBalloon(anchorObj.summary.abated_emissions)
+                                                    break
+                                                case 'sink':
+                                                    balloonCol = '#FF00FF'
+                                                    scale = vis.scale.emissionsBalloon(anchorObj.summary.abated_emissions)
+                                                    break
+                                                case 'credit':
+                                                    balloonCol = 'orange'
+                                                    scale = vis.scale.emissionsBalloon(anchorObj.summary.abated_emissions)
+                                                    break
+                                                case 'offset':
+                                                    balloonCol = 'purple'
+                                                    scale = vis.scale.emissionsBalloon(anchorObj.summary.abated_emissions)
+                                                    break
+                                                default:
+                                                    balloonCol = '#FFF'
+                                            }
+                                            balloonContainer.className +=`balloon-group ${stockType} ${containerClass} ${containerSubClass} 
+                                                ${helpers.slugify(anchorObj.summary.economicSector)}
+                                                ${helpers.slugify(anchorObj.summary.emissionsSubSector)}
+                                                ${helpers.slugify(anchorObj.summary.emissionsSource)}`
                                             balloonContainer.setAttribute('template', 'src:#tmp-balloon')
-                                            balloonContainer.setAttribute('data-balloonpos', `0 ${stringLength + scale * 0.9} 0`)
+                                            balloonContainer.setAttribute('data-balloonpos', `0 ${2 * stringLength} 0`)
                                             balloonContainer.setAttribute('data-mixin', 'col-balloon')
                                             balloonContainer.setAttribute('data-matcol', balloonCol)
                                             balloonContainer.setAttribute('data-stringcol', 'col-string-black')
@@ -2360,34 +2194,32 @@
                                             balloonContainer.setAttribute('data-stringpos', `0 ${stringLength} 0`)
                                             balloonContainer.setAttribute('visible', false)
                                             anchorCollection[i].appendChild(balloonContainer)
+                                            balloonCount++
                                         }
-                                    })                        
-                                }) 
-                            })
+                                    }
+                                })
+                            })                        
                         })
                     })
                 })
-
+                console.log('THERE ARE '+balloonCount+' BALLOONS!!!')
                 state.scene.emissions.balloonsInitiated= true
             },
 
             update: function(){
                 // Update balloon settings
-                const targetSelector = this.data.selectorClass1 === 'all' ? `.balloon-group.${this.data.type}` : `.balloon-group.${this.data.type}.${this.data.selectorClass1}`,
+                const targetSelector = this.data.selectorClass === 'all' ? `.balloon-group.${this.data.type}` : `.balloon-group.${this.data.type}.${this.data.selectorClass}`,
                     balloonGroupEls = this.data.type === 'all' ? document.querySelectorAll('.balloon-group') :  document.querySelectorAll(targetSelector), 
-                    nonTargetedSelector = this.data.selectorClass1 === 'all' ? `.balloon-group:not(.${this.data.type})` : `.balloon-group:not(.${this.data.type}), .balloon-group:not(.${this.data.selectorClass1})`,
+                    nonTargetedSelector = this.data.selectorClass === 'all' ? `.balloon-group:not(.${this.data.type})` : `.balloon-group:not(.${this.data.type}), .balloon-group:not(.${this.data.selectorClass})`,
                     nonTargetedGroupEls = this.data.type === 'all' ? [] : document.querySelectorAll(nonTargetedSelector),
                     sourceGroupBalloonEls = document.querySelectorAll(`.balloon-group.sources${this.data.selector}`),
                     animationTime =  this.data.dur,
                     delay = this.data.dur / 4, 
                     sourceScale = (this.data.sourceNetSwitch && this.data.sourceNetSink) ? 0.7 : this.data.sourceNetSwitch ? 0.8 : this.data.sourceNetSink ? 0.9 : 1
 
-                    console.log(targetSelector)
-                    console.log('Show: '+balloonGroupEls.length)
-                    console.log(nonTargetedSelector)
-                    console.log('Hide: '+nonTargetedGroupEls.length)
-                    console.log('Animation time: '+animationTime)
-                    console.log('Visible : '+this.data.visible)
+                    console.log('Show: '+balloonGroupEls.length+' balloons for querySelector of '+targetSelector)
+                    console.log('Hide: '+nonTargetedGroupEls.length+' balloons for querySelector of '+nonTargetedSelector)
+
                 // Hide all non-targeted balloons: animate out of view (if already in view)
                 nonTargetedGroupEls.forEach((el, i) => {
                     if(this.data.visible){  // Hide the non-targeted balloons
@@ -2442,7 +2274,6 @@
                     }         
                 })
 
-
                 // Adjust net impact on SOURCE balloons for switches and sinks
                 if(this.data.type !== 'sources'){
                     sourceGroupBalloonEls.forEach(el => {
@@ -2466,6 +2297,7 @@
             schema: {   
                 dur:                {type: 'number',    default: 5000 },  
                 type:               {type: 'string',    default: 'all'}, 
+                emissive:           {type: 'boolean',    default: false}, 
                 selector:           {type: 'string',    default: ''}, 
                 random:             {type: 'boolean',   default: false}, 
             },
@@ -2489,9 +2321,15 @@
                         }   
                     }
                     balloonEls[i].setAttribute('animation__col', {
-                        property:   'material.color',
+                        property:    'material.color',
                         duration:    this.data.dur,
                         to:          balloonCol
+                    })
+
+                    balloonEls[i].setAttribute('animation__emissive', {
+                        property:    'material.emissive',
+                        duration:    this.data.dur,
+                        to:          this.data.emissive ? balloonCol : '#000'
                     })
                 })
             }
@@ -2599,9 +2437,9 @@
                                     }, 3500)                                    
                                 }
                                 break
-                            case 'KeyC':    // Toggle carbon 'balloons'
+                            case 'KeyB':    // Toggle carbon 'balloons'
                                 state.scene.emissions.balloons.sources = !state.scene.emissions.balloons.sources
-                                scene.els.scene.setAttribute('emissions-activity-balloons', {visible: state.scene.emissions.balloons.sources, dur: 3000, type: 'sources'})
+                                scene.els.scene.setAttribute('emissions-activity-balloons', {visible:  state.scene.emissions.balloons.sources})
                                 // Control key events
                                 state.ui.enableKeyEvents = false
                                 setTimeout( ()=> {  state.ui.enableKeyEvents = true    }, 3000)

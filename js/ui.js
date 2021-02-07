@@ -34,8 +34,12 @@
             selectSubMenu: function (type){
                 document.querySelectorAll('.subMenu-container').forEach(el =>  el.classList.remove('active') )
                 document.getElementById(`subMenu-${type}`).classList.add('active')
-                // Setup first page
-                document.querySelectorAll('.narrative-container').forEach(el =>  el.classList.add('hidden') )
+                // Setup first page (and reset all classes)
+                document.querySelectorAll('.narrative-container').forEach(el =>  {
+                    el.classList.add('hidden') 
+                    el.classList.remove('show') 
+                    el.classList.remove('flipClose') 
+                })
                 document.getElementById(`narrative-${type}-1`).classList.remove('hidden')
                 document.getElementById(`narrative-${type}-1`).classList.add('show')
             },
@@ -50,7 +54,7 @@
                 document.getElementById('details-right-more').classList.remove('hide')
                 document.getElementById('details-intensity-container').classList.add('hidden')
                 ui.methods.updateEventDetails(selectedEl)
-                if(selectedEl.classList.contains('climate-risk')){
+                if(selectedEl.classList.contains('hazard-event')){
                     document.getElementById('details-intensity-container').classList.remove('hidden')
                 }
             },
@@ -62,6 +66,25 @@
             },
             updateEventDetails: function(selectedEl){
                 const label = selectedEl.querySelector('.subMenu-event-label').childElementCount === 0 ? selectedEl.querySelector('.subMenu-event-label').innerHTML : selectedEl.querySelector('.subMenu-event-label').querySelector(':first-child').innerHTML,
+                    id = selectedEl.id,
+                    details = selectedEl.querySelector('.details-content') ? selectedEl.querySelector('.details-content').innerHTML : 'No details available'
+                document.getElementById('details-header-right').innerHTML = label 
+                document.getElementById('details-content-right').innerHTML = details
+            },
+            selectEmissions: function(selectedEl){
+                document.querySelectorAll('.subMenu-event-container').forEach(el => el.classList.remove('active') )
+                selectedEl.classList.add('active')
+                selectedEl.parentElement.parentElement.parentElement.classList.add('invite')
+                document.querySelectorAll('.subMenu-main-header').forEach(el =>  el.classList.add('invite'))
+                document.getElementById('details-pane-right').classList.add('active')
+                document.getElementById('details-pane-right').classList.remove('no-transition')
+                document.getElementById('details-pane-right').classList.add('preview')
+                document.getElementById('details-right-more').classList.remove('hide')
+                document.getElementById('details-intensity-container').classList.add('hidden')
+                ui.methods.updateEmissionsDetails(selectedEl)
+            },
+            updateEmissionsDetails: function(selectedEl){
+                const label = selectedEl.querySelector('.subMenu-emissions-label').childElementCount === 0 ? selectedEl.querySelector('.subMenu-emissions-label').innerHTML : selectedEl.querySelector('.subMenu-emissions-label').querySelector(':first-child').innerHTML,
                     id = selectedEl.id,
                     details = selectedEl.querySelector('.details-content') ? selectedEl.querySelector('.details-content').innerHTML : 'No details available'
                 document.getElementById('details-header-right').innerHTML = label 
@@ -226,86 +249,88 @@
              // Set up menu handler   
             setupMenuInterface: function(){
                 // 1. Camera navigation button event listeners
-                    const navEls = Object.keys(scene.camPos.nav)
-                    for(i = 0; i < navEls.length; i++){
-                        navEls[i] = ui.buttonEl.nav[navEls[i]] =  document.getElementById(navEls[i])
-                    }
+                const navEls = Object.keys(scene.camPos.nav)
+                for(i = 0; i < navEls.length; i++){
+                    navEls[i] = ui.buttonEl.nav[navEls[i]] = document.getElementById(navEls[i])
+                }
 
-                    Object.entries(ui.buttonEl.nav).forEach( ([name, el]) => {
-                        el.addEventListener('click', function(){
-                            externalEvents.toggleCamera('flyCam')
-                            el.classList.toggle('active')
-                            if(el.classList.contains('active')){
-                                scene.els.scene.setAttribute('move-fly-camera', {
-                                    pos:        Object.values(scene.camPos.nav[name].pos),
-                                    rotation:   Object.values(scene.camPos.nav[name].rotation)
-                                })
-                            }
-                        })
+                Object.entries(ui.buttonEl.nav).forEach( ([name, el]) => {
+                    el.addEventListener('click', function(){
+                        externalEvents.toggleCamera('flyCam')
+                        el.classList.toggle('active')
+                        if(el.classList.contains('active')){
+                            scene.els.scene.setAttribute('move-fly-camera', {
+                                pos:        Object.values(scene.camPos.nav[name].pos),
+                                rotation:   Object.values(scene.camPos.nav[name].rotation)
+                            })
+                        }
                     })
+                })
 
                 // 2. Add climate hazard button event listeners: add DOM elements and events for hazards
-                    ui.lists.hazardMenuEls.forEach(id => {
-                        document.getElementById(id).addEventListener('click', function(){
-                            const hazard = this.id.slice(this.id.indexOf('-')+1),
-                                intensityContainer = document.getElementById('details-intensity-container'),
-                                hazardArray = scene.hazard.options[hazard]                      
-                            this.classList.add('selected')                  // Mark hazard button as selected
-
-                            // Add intensity options to details container
-                            intensityContainer.innerHTML = ''                        
-                            if(hazardArray.length > 0){
-                                hazardArray.forEach((option, i) => {
-                                    const intensityButton = document.createElement('div')
-                                    intensityButton.classList.add('details-intensity-button')                                
-                                    intensityButton.innerHTML = option
-                                    // Add listeners for each intensity option for all but sea level change                            
-                                    intensityButton.addEventListener('click', function(){
-                                        if(hazard !== 'seaLevel'){
-                                            document.querySelectorAll('.details-intensity-button').forEach(el => el.classList.remove('active'))
-                                            this.classList.add('active')         
-                                        }                         
-                                        externalEvents.hazards[hazard](option)           // Call the hazard
-                                    })
-                                    intensityContainer.appendChild(intensityButton)      // Add button option to DOM                                
-                                    if(i === 0){                                         // Show the first intensity option active by default (as hazard button triggers first option)
-                                        if(hazard !== 'seaLevel'){
-                                            intensityButton.classList.add('active')
-                                            externalEvents.hazards[hazard](option)
-                                        } else { 
-                                            externalEvents.hazards[hazard]('Expected Rise')         // Show custom SLR event with +/-  option available
-                                        }
-                                    }
+                ui.lists.hazardMenuEls.forEach(id => {
+                    document.getElementById(id).addEventListener('click', function(){
+                        const hazard = this.id.slice(this.id.indexOf('-')+1),
+                            intensityContainer = document.getElementById('details-intensity-container'),
+                            hazardArray = scene.hazard.options[hazard]                      
+                        this.classList.add('selected')                  // Mark hazard button as selected
+                        externalEvents.hideSectionTitle()               // Hide the block titles
+                        // Add intensity options to details container
+                        intensityContainer.innerHTML = ''                        
+                        if(hazardArray.length > 0){
+                            hazardArray.forEach((option, i) => {
+                                const intensityButton = document.createElement('div')
+                                intensityButton.classList.add('details-intensity-button')                                
+                                intensityButton.innerHTML = option
+                                // Add listeners for each intensity option for all but sea level change                            
+                                intensityButton.addEventListener('click', function(){
+                                    if(hazard !== 'seaLevel'){
+                                        document.querySelectorAll('.details-intensity-button').forEach(el => el.classList.remove('active'))
+                                        this.classList.add('active')         
+                                    }                         
+                                    externalEvents.hazards[hazard](option)           // Call the hazard
                                 })
-                            }
-                        }) 
-                    })
+                                intensityContainer.appendChild(intensityButton)      // Add button option to DOM                                
+                                if(i === 0){                                         // Show the first intensity option active by default (as hazard button triggers first option)
+                                    if(hazard !== 'seaLevel'){
+                                        intensityButton.classList.add('active')
+                                        externalEvents.hazards[hazard](option)
+                                    } else { 
+                                        externalEvents.hazards[hazard]('Expected Rise')         // Show custom SLR event with +/-  option available
+                                    }
+                                }
+                            })
+                        }
+                    }) 
+                })
+
 
                 // 3. Add emissions source/sinks/switch sector button event listeners
-                    const types = ['sources', 'switches', 'sinks']
-                    types.forEach(type => {
-                        ui.lists.emissionsSectorMenuEls.forEach(sector => {
-                            const id = `menu-${type}-${sector}`
-                            if(document.getElementById(id)){
-                                document.getElementById(id).addEventListener('click', function(){
-                                    const intensityContainer = document.getElementById('details-intensity-container')
-                                    intensityContainer.innerHTML = ''  
-                                    document.querySelectorAll('.subMenu-emissions-container').forEach(el => el.classList.remove('active'))
-                                    this.classList.add('active')                  // Mark emissions sector button as selected
-                                    scene.els.scene.setAttribute('emissions-activity-balloons', {
-                                        type:               type,
-                                        selectorClass1:     sector,
-                                        dur:                3000,
-                                        visible:            true
-                                    })
-                                    document.querySelectorAll('.subMenu-emissions-container').forEach(el =>{ 
-                                        el.classList.add('noPointerEvents')
-                                        setTimeout( () => el.classList.remove('noPointerEvents'))
-                                    })
+                const types = ['sources', 'switches', 'sinks']
+                types.forEach(type => {
+                    ui.lists.emissionsSectorMenuEls.forEach(sector => {
+                        const id = `menu-${type}-${sector}`
+                        if(document.getElementById(id)){
+                            document.getElementById(id).addEventListener('click', function(){
+                                // externalEvents.hideSectionTitle()               // Hide the block titles
+                                document.getElementById('details-intensity-container').innerHTML = ''   // Clear intensity menu 
+
+                                document.querySelectorAll('.subMenu-emissions-container').forEach(el => el.classList.remove('active'))
+                                this.classList.add('active')                  // Mark emissions sector button as selected
+                                // scene.els.scene.setAttribute('emissions-activity-balloons', {
+                                //     type:               type,
+                                //     selectorClass1:     sector,
+                                //     dur:                3000,
+                                //     visible:            true
+                                // })
+                                document.querySelectorAll('.subMenu-emissions-container').forEach(el =>{ 
+                                    el.classList.add('noPointerEvents')
+                                    setTimeout( () => el.classList.remove('noPointerEvents'))
                                 })
-                            }
-                        })
+                            })
+                        }
                     })
+                })
 
                 // SETUP & BUILD UI MENUS
                 ui.mainMenus = {
@@ -329,7 +354,7 @@
                     }
                 }
                 const menuNames = ['menu-1', 'menu-2']
-                // 1. Add circle sector trigger event /animation
+                // 1. Add circular sector trigger event /animation
                     menuNames.forEach(menuName =>{
                         ui.mainMenus[menuName].trigger.addEventListener('click', function(){ui.methods.toggleMenu(menuName)} , false);
                         // Close each menu on initiation
@@ -358,7 +383,7 @@
                                     externalEvents.toggleSectionTitle(this.id)
                                     ui.methods.selectSector(this, menuName)                 
                                     ui.methods.selectSubMenu(sector)
-                                    scene.els.scene.setAttribute('move-fly-camera', {pos: [180, 60, 0], rotation: [-10, 90, 0], cleartitles: false} )
+                                    // scene.els.scene.setAttribute('move-fly-camera', {pos: [180, 60, 0], rotation: [-10, 90, 0], cleartitles: false} )
                                 })
                             })
                         }
@@ -371,17 +396,17 @@
                     })
                 // 2. Set details close button and more info
                     document.getElementById('details-close-right').addEventListener('click', ui.methods.closeDetails)
-                    document.getElementById('details-more-label').addEventListener('click', () => {
-                        ui.methods.openMoreDetails()
-                    })
+                    document.getElementById('details-more-label').addEventListener('click', ui.methods.openMoreDetails)
                 // 3. Add Event listeners (generic menu interactions only > to be added to add scene interactivity)
                     // a. All event buttons
                     document.querySelectorAll('.subMenu-event-container').forEach(el => {
-                        el.addEventListener('click', function(){
-                            ui.methods.selectEvent(this)
-                        })
+                        el.addEventListener('click', function(){ ui.methods.selectEvent(this) })
                     })
-                    // b. Season selector buttons
+                    // b. All emissions buttons
+                    document.querySelectorAll('.subMenu-emissions-container').forEach(el => {
+                        el.addEventListener('click', function(){ ui.methods.selectEmissions(this) })
+                    })
+                    // c. Season selector buttons
                     document.querySelectorAll('.subMenu-event-icon-container.season').forEach(seasonEl => {
                         seasonEl.addEventListener('click', function(){
                             const season = this.id.slice(this.id.indexOf('-')+6)
@@ -390,7 +415,7 @@
                             scene.els.scene.setAttribute('set-hourly-environment', {season: season})
                         })
                     })
-                    // c. Year selector
+                    // d. Year selector
                     document.querySelectorAll('.subMenu-option-year-container.button').forEach(el => {
                         el.addEventListener('click', function(){
                             const currentYear = parseInt(+document.getElementById('menu-time-year').innerHTML),
@@ -399,6 +424,15 @@
                                         : targetYear > settings.modelTime.maxYear ? settings.modelTime.maxYear 
                                         : targetYear
                             document.getElementById('menu-time-year').innerHTML =  newYear
+                            // Image filter styling
+                            const historyLength  = settings.modelTime.baselineYear - settings.modelTime.minYear,
+                                sepiaPct = newYear < settings.modelTime.baselineYear ? (settings.modelTime.baselineYear - newYear)/historyLength*0.6 * 100 : 0
+                                contrastPct = newYear < settings.modelTime.baselineYear ? (1 - ((settings.modelTime.baselineYear - newYear )/historyLength * 0.2)) * 100 : 100
+                                saturatePct = newYear < settings.modelTime.baselineYear && newYear > 1970 ? 
+                                    (1 + (settings.modelTime.baselineYear - newYear )/ (settings.modelTime.baselineYear- 1970))  * 100 
+                                    : 100
+                            // CSS Filter settings
+                            scene.els.canvas.style.filter = `sepia(${sepiaPct}%) contrast(${contrastPct}%) saturate(${saturatePct}%)`
                         })
                     })    
                     // d. Time of day (clock) buttons and initiate clockhand
@@ -412,10 +446,11 @@
         },
         lists: {
             hazardMenuEls: ['menu-heat', 'menu-drought', 'menu-bushfire', 'menu-acidification', 'menu-desertification',
-                        'menu-stormFlood', 'menu-stormWind', 'menu-mudLandslides', 'menu-tropicalStorm',  'menu-winterStorm',  'menu-seaLevel', 
-                        'menu-earthquake','menu-volcanic', 'menu-tsunami'],
+                'menu-stormFlood', 'menu-stormWind', 'menu-wetMass', 'menu-tropicalStorm',  'menu-winterStorm',  'menu-seaLevel', 
+                'menu-earthquake','menu-volcano', 'menu-tsunami'],
             emissionsSectorMenuEls:  ['stationaryEnergy', 'transportEnergy', 'wasteAndWasteWater',  'industrialProcessesAndProductUse', 'agriculture','landAndForestry', 'all']
-        }
+        },
+        el:   {}
     } 
 
 
@@ -440,9 +475,9 @@
                     document.getElementById('loader-text').classList.remove('faded')                    
                 }, 200)
                 // 2. Set balloon colours (to random!). Note: this is called here, after all balloons are created
-                if(scene.els.scene){
-                   scene.els.scene.setAttribute('set-balloon-colours', {random: true})
-                }
+                // if(scene.els.scene){
+                //    scene.els.scene.setAttribute('set-balloon-colours', {random: true})
+                // }
             })
             // Setup menu interface and interaction
              ui.methods.setupMenuInterface()     
@@ -575,33 +610,41 @@
         },
 
         toggleSectionTitle: function(sectionID){
-        if(scene.els.scene)
-            switch(sectionID){
-                case 'menu-1-button-world': 
-                    scene.els.items.blockGroup01.setAttribute('show-block-title', {id: "chapter-01-blocks"})
-                    scene.els.items.blockGroup02.setAttribute('hide-block-title', {id: "chapter-02-blocks"})
-                    scene.els.items.blockGroup03.setAttribute('hide-block-title', {id: "chapter-03-blocks"})
-                    scene.els.items.blockGroup04.setAttribute('hide-block-title', {id: "chapter-04-blocks"})
-                    break   
-                case 'menu-1-button-risk': 
-                    scene.els.items.blockGroup02.setAttribute('show-block-title', {id: "chapter-02-blocks"})
-                    scene.els.items.blockGroup01.setAttribute('hide-block-title', {id: "chapter-01-blocks"})
-                    scene.els.items.blockGroup03.setAttribute('hide-block-title', {id: "chapter-03-blocks"})
-                    scene.els.items.blockGroup04.setAttribute('hide-block-title', {id: "chapter-04-blocks"})
-                    break   
-                case 'menu-1-button-emissions': 
-                    scene.els.items.blockGroup03.setAttribute('show-block-title', {id: "chapter-03-blocks"})
-                    scene.els.items.blockGroup01.setAttribute('hide-block-title', {id: "chapter-01-blocks"})
-                    scene.els.items.blockGroup02.setAttribute('hide-block-title', {id: "chapter-02-blocks"})
-                    scene.els.items.blockGroup04.setAttribute('hide-block-title', {id: "chapter-04-blocks"})
-                    break   
-                case 'menu-1-button-actions': 
-                    scene.els.items.blockGroup04.setAttribute('show-block-title', {id: "chapter-04-blocks"})
-                    scene.els.items.blockGroup01.setAttribute('hide-block-title', {id: "chapter-01-blocks"})
-                    scene.els.items.blockGroup02.setAttribute('hide-block-title', {id: "chapter-02-blocks"})
-                    scene.els.items.blockGroup03.setAttribute('hide-block-title', {id: "chapter-03-blocks"})
-                    break   
+            if(scene.els.scene){
+                switch(sectionID){
+                    case 'menu-1-button-world': 
+                        scene.els.items.blockGroup01.setAttribute('show-block-title', {id: "chapter-01-blocks"})
+                        scene.els.items.blockGroup02.setAttribute('hide-block-title', {id: "chapter-02-blocks"})
+                        scene.els.items.blockGroup03.setAttribute('hide-block-title', {id: "chapter-03-blocks"})
+                        scene.els.items.blockGroup04.setAttribute('hide-block-title', {id: "chapter-04-blocks"})
+                        break   
+                    case 'menu-1-button-risk': 
+                        scene.els.items.blockGroup02.setAttribute('show-block-title', {id: "chapter-02-blocks"})
+                        scene.els.items.blockGroup01.setAttribute('hide-block-title', {id: "chapter-01-blocks"})
+                        scene.els.items.blockGroup03.setAttribute('hide-block-title', {id: "chapter-03-blocks"})
+                        scene.els.items.blockGroup04.setAttribute('hide-block-title', {id: "chapter-04-blocks"})
+                        break   
+                    case 'menu-1-button-emissions': 
+                        scene.els.items.blockGroup03.setAttribute('show-block-title', {id: "chapter-03-blocks"})
+                        scene.els.items.blockGroup01.setAttribute('hide-block-title', {id: "chapter-01-blocks"})
+                        scene.els.items.blockGroup02.setAttribute('hide-block-title', {id: "chapter-02-blocks"})
+                        scene.els.items.blockGroup04.setAttribute('hide-block-title', {id: "chapter-04-blocks"})
+                        break   
+                    case 'menu-1-button-actions': 
+                        scene.els.items.blockGroup04.setAttribute('show-block-title', {id: "chapter-04-blocks"})
+                        scene.els.items.blockGroup01.setAttribute('hide-block-title', {id: "chapter-01-blocks"})
+                        scene.els.items.blockGroup02.setAttribute('hide-block-title', {id: "chapter-02-blocks"})
+                        scene.els.items.blockGroup03.setAttribute('hide-block-title', {id: "chapter-03-blocks"})
+                        break   
+                }
             }
+        },
+
+        hideSectionTitle: function(){
+            scene.els.items.blockGroup01.setAttribute('hide-block-title', {id: "chapter-01-blocks"})
+            scene.els.items.blockGroup02.setAttribute('hide-block-title', {id: "chapter-02-blocks"})
+            scene.els.items.blockGroup03.setAttribute('hide-block-title', {id: "chapter-03-blocks"})
+            scene.els.items.blockGroup04.setAttribute('hide-block-title', {id: "chapter-04-blocks"})
         },
 
         changeSeasonSelector: function(season){
@@ -618,6 +661,7 @@
             }
             // Set the environment components affected by the change in hour
             scene.els.scene.setAttribute('set-hourly-environment', {dur: duration, hour: state.scene.time.hour })
+            scene.els.scene.setAttribute('set-environment', null)
             // Change thew clock
             externalEvents.changeClock(direction, duration)
             // Control key events
@@ -663,26 +707,40 @@
         },
 
         changeEnvironment: function(name = state.scene.environment.name, duration = 2000){
+console.log("CHANGING ENVIRONMENT")
             scene.els.scene.setAttribute('set-environment', {name: name, dur: duration})
         },
 
         resetHazards: function(){
+            clearInterval(state.scene.effect.lightning)
+            clearInterval(state.scene.effect.rain)
+            clearInterval(state.scene.effect.tsunami)
+            clearInterval(state.scene.effect.vortex)
+            clearInterval(state.scene.effect.treeSway)
             state.scene.effect.particles = false
+            state.scene.effect.rain = false
             state.scene.effect.flood = false
             state.scene.effect.wind = false
             state.scene.effect.bushfire = false
+            state.scene.effect.tsunami = false
+            state.scene.effect.vortex = false
+            state.scene.effect.treeSway = false
             scene.els.scene.setAttribute('hazard-sea-level', 'slchange: 0')
             scene.els.scene.removeAttribute('hazard-rain')
             scene.els.scene.removeAttribute('hazard-lightning')
             scene.els.scene.removeAttribute('hazard-bushfire')
             scene.els.scene.removeAttribute('hazard-drought')
+            scene.els.scene.removeAttribute('hazard-desertification')
             scene.els.scene.removeAttribute('hazard-tropical-storm')
             scene.els.scene.removeAttribute('hazard-winter-storm')
             scene.els.scene.removeAttribute('hazard-ocean-acidification')
             scene.els.scene.removeAttribute('hazard-flood')
             scene.els.scene.removeAttribute('hazard-wind')
             scene.els.scene.removeAttribute('hazard-heat')
-            clearInterval(state.scene.effect.lightning)
+            scene.els.scene.removeAttribute('hazard-tsunami')
+            scene.els.scene.removeAttribute('hazard-wet-mass')
+            scene.els.scene.removeAttribute('hazard-volcano')
+
             externalEvents.changeEnvironment(state.scene.environment.name)
             console.log('All hazards reset')
         }, 
@@ -765,11 +823,11 @@
                 }   
             },
             heat: function(type) {
-                state.scene.effect.heat = type
                 if(!state.scene.effect.heat){
                     externalEvents.resetHazards()               // Clear any existing hazards
                     externalEvents.changeEnvironment('heat', 2000)
                 }
+                state.scene.effect.heat = type
                 switch(type){  
                     case scene.hazard.options.heat[0]:          // Hot day
                         scene.els.scene.setAttribute('hazard-heat', {intensity: 'hotDay'})
@@ -830,43 +888,28 @@
                 }
             },
             desertification: function(type) {
-                state.scene.effect.desertification = type
                 if(!state.scene.effect.desertification){
                     externalEvents.resetHazards()               // Clear any existing hazards
+                    scene.els.scene.setAttribute('hazard-drought', {level: 'major'})            // Set major drought as a starting point
                 }                
+                state.scene.effect.desertification = type
                 switch(type){  
                     case scene.hazard.options.desertification[0]:
                         scene.els.scene.setAttribute('hazard-desertification', null)
                         break
                     default:
+                        scene.els.scene.removeAttribute('hazard-drought')
                         scene.els.scene.removeAttribute('hazard-desertification')
                         externalEvents.changeEnvironment('default')
                         state.scene.effect.desertification = false
                         state.scene.environment.hazardVisible =false
                 }
             },
-            mudLandslides: function(type) {
-                state.scene.effect.mudLandslides = type
-                if(!state.scene.effect.mudLandslides){
-                    externalEvents.resetHazards()               // Clear any existing hazards
-                }                
-                switch(type){  
-                    case scene.hazard.options.desertification[0]:
-                        scene.els.scene.setAttribute('hazard-desertification', null)
-                        break
-                    default:
-                        scene.els.scene.removeAttribute('hazard-desertification')
-                        externalEvents.changeEnvironment('default')
-                        state.scene.effect.desertification = false
-                        state.scene.environment.hazardVisible =false
-                }
-            },
-
             acidification: function(type) {
-                state.scene.effect.oceanAcidification = type
                 if(!state.scene.effect.oceanAcidification){
                     externalEvents.resetHazards()               // Clear any existing hazards
-                }                
+                }        
+                state.scene.effect.oceanAcidification = type        
                 switch(type){  
                     case scene.hazard.options.acidification[0]:
                         scene.els.scene.setAttribute('hazard-ocean-acidification', null)
@@ -883,7 +926,6 @@
                 if(!state.scene.effect.tropicalStorm){
                     introDuration = 2000
                     externalEvents.resetHazards()               // Clear any existing hazards
-                    // externalEvents.changeEnvironment('stormFlood', 2000 )
                 }
                 state.scene.effect.tropicalStorm = type
                 switch(type){  
@@ -913,7 +955,6 @@
                     state.scene.effect.snow = true
                 }
                 state.scene.effect.winterStorm = type
-
                 switch(type){  
                     case scene.hazard.options.winterStorm[0]:
                         setTimeout( () => { 
@@ -937,6 +978,25 @@
                         state.scene.environment.hazardVisible = false
                 }
             },
+            wetMass: function(type) {    
+                if(!state.scene.effect.wetMass){
+                    externalEvents.resetHazards()               // Clear any existing hazards
+                }
+                state.scene.effect.wetMass = type
+                switch(type){  
+                    case scene.hazard.options.wetMass[0]:  
+                        // Mud and Landslide
+                        scene.els.scene.setAttribute('hazard-wet-mass', {type: type})
+                        break 
+                    case scene.hazard.options.wetMass[1]:  
+                        // Avalanche
+                        scene.els.scene.setAttribute('hazard-wet-mass', {type: type})
+                        break 
+                    // Reset 
+                    default:    
+                        scene.els.scene.removeAttribute('hazard-wet-mass')
+                }   
+            },
             earthquake: function(type) {
                 switch(type){  
                     case scene.hazard.options.earthquake[0]:
@@ -945,6 +1005,41 @@
                     default:
                         state.scene.environment.hazardVisible = false
                 }
+            },
+            tsunami: function(type) {     
+                if(!state.scene.effect.tsunami){
+                    externalEvents.resetHazards()               // Clear any existing hazards
+                }
+                state.scene.effect.tsunami = type           
+                switch(type){  
+                    case scene.hazard.options.tsunami[0]:  
+                        // Earthquake
+                        scene.els.scene.setAttribute('hazard-earthquake', {intensity: 15})
+                        scene.els.scene.setAttribute('hazard-tsunami', null)
+                        break 
+                    // Reset 
+                    default:    
+                        scene.els.scene.removeAttribute('hazard-earthquake')
+                        scene.els.scene.removeAttribute('hazard-tsunanmi')
+                        scene.els.scene.setAttribute('hazard-sea-level', 'slchange: 0')
+                }   
+            },
+            volcano: function(type) {                
+                if(!state.scene.effect.volcano){
+                    externalEvents.resetHazards()               // Clear any existing hazards
+                }
+                state.scene.effect.volcano = type    
+                switch(type){  
+                    case scene.hazard.options.volcano[0]:  
+                        // Earthquake
+                        scene.els.scene.setAttribute('hazard-earthquake', {intensity: 15})
+                        scene.els.scene.setAttribute('hazard-volcano', null)
+                        break 
+                    // Reset after showing major wind event 
+                    default:    
+                        scene.els.scene.removeAttribute('hazard-earthquake')
+                        scene.els.scene.removeAttribute('hazard-volcano')
+                }   
             },
             seaLevel: function(type){
                 switch(type){  
