@@ -3593,7 +3593,7 @@
                             <!-- <a-entity class="solar-hot-water"       position="1.9 0 -2.25"    rotation="0 -90 -77"template="src:#tmp-solar-hot-water" ></a-entity> -->
                             <a-entity scale="${featurescale}">
                                 <a-entity class="kitchen-exhaust"       position="1.5 1.5 1"   template="src:#tmp-kitchen-exhaust" ></a-entity>
-                                <a-entity class="rooftop solarPanel"    position="1.15 1.7 0" rotation="67 90 0">
+                                <a-entity class="rooftop solarPanel"    position="1.15 1.7 0" rotation="-67 90 0">
                                     <a-entity mixin="col-solarPV-01"  buffer-geometry-merger> 
                                         <a-box position="-0.6 0.55 0"  scale="1.15 1 0.1"></a-box> 
                                         <a-box position="-0.6 -0.55 0" scale="1.15 1 0.1"></a-box>
@@ -6324,15 +6324,24 @@
 
                         <!-- Airplanes-->	
                         <a-entity id="airplane-group">
-                            <a-entity class="plane" gltf-model="#mdl-planeRed" position="-23 1 -62" rotation="0 -90 0" scale="0.25 0.25 0.25"></a-entity>
-                            <a-entity class="emissions-anchor transport air airplane" position="-23 1 -62" ></a-entity>
+                            <a-entity class="plane" class="aircraft internal-combustion-engine airplane" 
+                                position="-23 1 -62" rotation="0 -90 0" >
+                                <a-entity gltf-model="#mdl-planeRed"  scale="0.25 0.25 0.25"></a-entity>
+                                <a-entity class="plane" gltf-model="#mdl-planeRed" scale="0.25 0.25 0.25" rotation="0 -90 0"></a-entity>
+                                <a-entity class="left-wing-inner emissions-anchor" position="1.5 0 -0.75" ></a-entity>
+                                <a-entity class="left-wing-outer emissions-anchor" position="3 0 -1.5" ></a-entity>
+                                <a-entity class="right-wing-inner emissions-anchor" position="-1.5 0 -0.75" ></a-entity>
+                                <a-entity class="right-wing-outer emissions-anchor" position="-3 0 -1.5" ></a-entity>
+                            </a-entity>
                             <a-entity id="plane-animation" class="aircraft internal-combustion-engine airplane"
                                 position="-12.6 1 -55.1" rotation="0 120 0">
-                                <a-entity class="plane" gltf-model="#mdl-planeRed" scale="0.25 0.25 0.25" rotation="0 -90 0"></a-entity>
-                                <a-entity class="left-wing-inner emissions-anchor" position="1 0 0" ></a-entity>
-                                <a-entity class="left-wing-outer emissions-anchor" position="2 0 0" ></a-entity>
-                                <a-entity class="right-wing-inner emissions-anchor" position="-1 0 0" ></a-entity>
-                                <a-entity class="right-wing-outer emissions-anchor" position="-2 0 0" ></a-entity>
+                                <a-entity>
+                                    <a-entity class="plane" gltf-model="#mdl-planeRed" scale="0.25 0.25 0.25" rotation="0 -90 0"></a-entity>
+                                    <a-entity class="left-wing-inner emissions-anchor" position="1.5 0 -0.75" ></a-entity>
+                                    <a-entity class="left-wing-outer emissions-anchor" position="3 0 -1.5" ></a-entity>
+                                    <a-entity class="right-wing-inner emissions-anchor" position="-1.5 0 -0.75" ></a-entity>
+                                    <a-entity class="right-wing-outer emissions-anchor" position="-3 0 -1.5" ></a-entity>
+                                </a-entity>
                             </a-entity>
                         </a-entity>
                     </a-entity><!-- End of vehicles -->
