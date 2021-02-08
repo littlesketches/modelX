@@ -2118,9 +2118,6 @@
                                 Object.entries(containerObj).forEach(([anchor, anchorObj]) => {
                                     let scale, stringMultiplier, stringLength, stringDeltaY, balloonCol, anchorCollection
                                     // Create balloons only only if there are emissions
-if(stockType === 'source' && containerClass ==='utilities-and-services'){
-    console.log(containerSubClass, container, anchor)
-}
                                     if( (anchorObj.summary.emissions && anchorObj.summary.emissions > 0)  || 
                                         (anchorObj.summary.abated_emissions && anchorObj.summary.abated_emissions > 0) ){
                                         anchorCollection = document.querySelectorAll(anchorObj.summary.querySelector)
@@ -2346,7 +2343,7 @@ if(stockType === 'source' && containerClass ==='utilities-and-services'){
                 //     scene.els.cam.orbit.setAttribute('camera', {active: true   })
                 })
                 // Double tap scene for camera switch
-                scene.els.scene.addEventListener("touchstart", tapHandler);
+                // scene.els.scene.addEventListener("touchstart", tapHandler);
                 let tappedTwice = false;
 
                 function tapHandler(event) {

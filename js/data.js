@@ -365,10 +365,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space cooling"
+                "Domestic space cooling"
               ],
               "technologies": {
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -394,10 +394,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space heating"
+                "Domestic space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Domestic space heating": [
                   "Radiator (electric element) heater",
                   "Reverse cycle split system (incl. ducted)",
                   "Heat pump hydronic"
@@ -580,7 +580,7 @@ const modelVisData = {
               "querySelector": ".detached-single-storey-home.dwelling.all-electric * .emissions-anchor.electricity-meter"
             }
           },
-          "bin-landfill": {
+          "bin-garbage": {
             "summary": {
               "emissions": 12.549999999999999,
               "naturalVol": 10,
@@ -605,7 +605,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "tonnes",
-              "querySelector": ".detached-single-storey-home.dwelling.all-electric * .emissions-anchor.bin-landfill"
+              "querySelector": ".detached-single-storey-home.dwelling.all-electric * .emissions-anchor.bin-garbage"
             }
           },
           "water-services": {
@@ -685,10 +685,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space cooling"
+                "Domestic space cooling"
               ],
               "technologies": {
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -714,10 +714,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space heating"
+                "Domestic space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Domestic space heating": [
                   "Radiator (electric element) heater",
                   "Reverse cycle split system (incl. ducted)",
                   "Heat pump hydronic"
@@ -900,7 +900,7 @@ const modelVisData = {
               "querySelector": ".detached-multi-storey-home.dwelling.all-electric * .emissions-anchor.electricity-meter"
             }
           },
-          "bin-landfill": {
+          "bin-garbage": {
             "summary": {
               "emissions": 21.97,
               "naturalVol": 17.51,
@@ -925,7 +925,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "tonnes",
-              "querySelector": ".detached-multi-storey-home.dwelling.all-electric * .emissions-anchor.bin-landfill"
+              "querySelector": ".detached-multi-storey-home.dwelling.all-electric * .emissions-anchor.bin-garbage"
             }
           },
           "water-services": {
@@ -1005,10 +1005,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space cooling"
+                "Domestic space cooling"
               ],
               "technologies": {
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -1034,10 +1034,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space heating"
+                "Domestic space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Domestic space heating": [
                   "Radiator (electric element) heater",
                   "Reverse cycle split system (incl. ducted)",
                   "Heat pump hydronic"
@@ -1220,7 +1220,7 @@ const modelVisData = {
               "querySelector": ".terrace-houses-multi-storey.dwelling.all-electric * .emissions-anchor.electricity-meter"
             }
           },
-          "bin-landfill": {
+          "bin-garbage": {
             "summary": {
               "emissions": 21.97,
               "naturalVol": 17.51,
@@ -1245,7 +1245,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "tonnes",
-              "querySelector": ".terrace-houses-multi-storey.dwelling.all-electric * .emissions-anchor.bin-landfill"
+              "querySelector": ".terrace-houses-multi-storey.dwelling.all-electric * .emissions-anchor.bin-garbage"
             }
           },
           "water-services": {
@@ -1325,10 +1325,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space cooling"
+                "Domestic space cooling"
               ],
               "technologies": {
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -1354,10 +1354,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space heating"
+                "Domestic space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Domestic space heating": [
                   "Radiator (electric element) heater",
                   "Reverse cycle split system (incl. ducted)",
                   "Heat pump hydronic"
@@ -1540,7 +1540,7 @@ const modelVisData = {
               "querySelector": ".apartment-in-multi-storey-block.dwelling.all-electric * .emissions-anchor.electricity-meter"
             }
           },
-          "bin-landfill": {
+          "bin-garbage": {
             "summary": {
               "emissions": 9.42,
               "naturalVol": 7.51,
@@ -1565,7 +1565,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "tonnes",
-              "querySelector": ".apartment-in-multi-storey-block.dwelling.all-electric * .emissions-anchor.bin-landfill"
+              "querySelector": ".apartment-in-multi-storey-block.dwelling.all-electric * .emissions-anchor.bin-garbage"
             }
           },
           "water-services": {
@@ -1647,10 +1647,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space cooling"
+                "Domestic space cooling"
               ],
               "technologies": {
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -1676,10 +1676,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space heating"
+                "Domestic space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Domestic space heating": [
                   "Radiator (electric element) heater",
                   "Reverse cycle split system (incl. ducted)",
                   "Heat pump hydronic"
@@ -1862,7 +1862,7 @@ const modelVisData = {
               "querySelector": ".detached-single-storey-home.dwelling.solar-all-electric * .emissions-anchor.electricity-meter"
             }
           },
-          "bin-landfill": {
+          "bin-garbage": {
             "summary": {
               "emissions": 12.549999999999999,
               "naturalVol": 10,
@@ -1887,7 +1887,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "tonnes",
-              "querySelector": ".detached-single-storey-home.dwelling.solar-all-electric * .emissions-anchor.bin-landfill"
+              "querySelector": ".detached-single-storey-home.dwelling.solar-all-electric * .emissions-anchor.bin-garbage"
             }
           },
           "water-services": {
@@ -1967,10 +1967,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space cooling"
+                "Domestic space cooling"
               ],
               "technologies": {
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -1996,10 +1996,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space heating"
+                "Domestic space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Domestic space heating": [
                   "Radiator (electric element) heater",
                   "Reverse cycle split system (incl. ducted)",
                   "Heat pump hydronic"
@@ -2182,7 +2182,7 @@ const modelVisData = {
               "querySelector": ".detached-multi-storey-home.dwelling.solar-all-electric * .emissions-anchor.electricity-meter"
             }
           },
-          "bin-landfill": {
+          "bin-garbage": {
             "summary": {
               "emissions": 21.97,
               "naturalVol": 17.51,
@@ -2207,7 +2207,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "tonnes",
-              "querySelector": ".detached-multi-storey-home.dwelling.solar-all-electric * .emissions-anchor.bin-landfill"
+              "querySelector": ".detached-multi-storey-home.dwelling.solar-all-electric * .emissions-anchor.bin-garbage"
             }
           },
           "water-services": {
@@ -2287,10 +2287,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space cooling"
+                "Domestic space cooling"
               ],
               "technologies": {
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -2316,10 +2316,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space heating"
+                "Domestic space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Domestic space heating": [
                   "Radiator (electric element) heater",
                   "Reverse cycle split system (incl. ducted)",
                   "Heat pump hydronic"
@@ -2502,7 +2502,7 @@ const modelVisData = {
               "querySelector": ".terrace-houses-multi-storey.dwelling.solar-all-electric * .emissions-anchor.electricity-meter"
             }
           },
-          "bin-landfill": {
+          "bin-garbage": {
             "summary": {
               "emissions": 21.97,
               "naturalVol": 17.51,
@@ -2527,7 +2527,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "tonnes",
-              "querySelector": ".terrace-houses-multi-storey.dwelling.solar-all-electric * .emissions-anchor.bin-landfill"
+              "querySelector": ".terrace-houses-multi-storey.dwelling.solar-all-electric * .emissions-anchor.bin-garbage"
             }
           },
           "water-services": {
@@ -2609,10 +2609,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space cooling"
+                "Domestic space cooling"
               ],
               "technologies": {
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -2638,10 +2638,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space heating"
+                "Domestic space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Domestic space heating": [
                   "Fireplace",
                   "Wood pellet heater"
                 ]
@@ -2823,7 +2823,7 @@ const modelVisData = {
               "querySelector": ".detached-single-storey-home.dwelling.all-electric-with-wood-heating * .emissions-anchor.electricity-meter"
             }
           },
-          "bin-landfill": {
+          "bin-garbage": {
             "summary": {
               "emissions": 12.549999999999999,
               "naturalVol": 10,
@@ -2848,7 +2848,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "tonnes",
-              "querySelector": ".detached-single-storey-home.dwelling.all-electric-with-wood-heating * .emissions-anchor.bin-landfill"
+              "querySelector": ".detached-single-storey-home.dwelling.all-electric-with-wood-heating * .emissions-anchor.bin-garbage"
             }
           },
           "water-services": {
@@ -2928,10 +2928,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space cooling"
+                "Domestic space cooling"
               ],
               "technologies": {
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -2957,10 +2957,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space heating"
+                "Domestic space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Domestic space heating": [
                   "Fireplace",
                   "Wood pellet heater"
                 ]
@@ -3142,7 +3142,7 @@ const modelVisData = {
               "querySelector": ".detached-multi-storey-home.dwelling.all-electric-with-wood-heating * .emissions-anchor.electricity-meter"
             }
           },
-          "bin-landfill": {
+          "bin-garbage": {
             "summary": {
               "emissions": 21.97,
               "naturalVol": 17.51,
@@ -3167,7 +3167,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "tonnes",
-              "querySelector": ".detached-multi-storey-home.dwelling.all-electric-with-wood-heating * .emissions-anchor.bin-landfill"
+              "querySelector": ".detached-multi-storey-home.dwelling.all-electric-with-wood-heating * .emissions-anchor.bin-garbage"
             }
           },
           "water-services": {
@@ -3247,10 +3247,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space cooling"
+                "Domestic space cooling"
               ],
               "technologies": {
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -3276,10 +3276,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space heating"
+                "Domestic space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Domestic space heating": [
                   "Fireplace",
                   "Wood pellet heater"
                 ]
@@ -3461,7 +3461,7 @@ const modelVisData = {
               "querySelector": ".terrace-houses-multi-storey.dwelling.all-electric-with-wood-heating * .emissions-anchor.electricity-meter"
             }
           },
-          "bin-landfill": {
+          "bin-garbage": {
             "summary": {
               "emissions": 21.97,
               "naturalVol": 17.51,
@@ -3486,7 +3486,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "tonnes",
-              "querySelector": ".terrace-houses-multi-storey.dwelling.all-electric-with-wood-heating * .emissions-anchor.bin-landfill"
+              "querySelector": ".terrace-houses-multi-storey.dwelling.all-electric-with-wood-heating * .emissions-anchor.bin-garbage"
             }
           },
           "water-services": {
@@ -3568,10 +3568,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space cooling"
+                "Domestic space cooling"
               ],
               "technologies": {
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -3597,10 +3597,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space heating"
+                "Domestic space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Domestic space heating": [
                   "Fireplace",
                   "Wood pellet heater"
                 ]
@@ -3782,7 +3782,7 @@ const modelVisData = {
               "querySelector": ".detached-single-storey-home.dwelling.solar-all-electric-with-wood-heating * .emissions-anchor.electricity-meter"
             }
           },
-          "bin-landfill": {
+          "bin-garbage": {
             "summary": {
               "emissions": 12.549999999999999,
               "naturalVol": 10,
@@ -3807,7 +3807,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "tonnes",
-              "querySelector": ".detached-single-storey-home.dwelling.solar-all-electric-with-wood-heating * .emissions-anchor.bin-landfill"
+              "querySelector": ".detached-single-storey-home.dwelling.solar-all-electric-with-wood-heating * .emissions-anchor.bin-garbage"
             }
           },
           "water-services": {
@@ -3887,10 +3887,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space cooling"
+                "Domestic space cooling"
               ],
               "technologies": {
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -3916,10 +3916,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space heating"
+                "Domestic space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Domestic space heating": [
                   "Fireplace",
                   "Wood pellet heater"
                 ]
@@ -4101,7 +4101,7 @@ const modelVisData = {
               "querySelector": ".detached-multi-storey-home.dwelling.solar-all-electric-with-wood-heating * .emissions-anchor.electricity-meter"
             }
           },
-          "bin-landfill": {
+          "bin-garbage": {
             "summary": {
               "emissions": 21.97,
               "naturalVol": 17.51,
@@ -4126,7 +4126,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "tonnes",
-              "querySelector": ".detached-multi-storey-home.dwelling.solar-all-electric-with-wood-heating * .emissions-anchor.bin-landfill"
+              "querySelector": ".detached-multi-storey-home.dwelling.solar-all-electric-with-wood-heating * .emissions-anchor.bin-garbage"
             }
           },
           "water-services": {
@@ -4206,10 +4206,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space cooling"
+                "Domestic space cooling"
               ],
               "technologies": {
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -4235,10 +4235,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space heating"
+                "Domestic space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Domestic space heating": [
                   "Fireplace",
                   "Wood pellet heater"
                 ]
@@ -4420,7 +4420,7 @@ const modelVisData = {
               "querySelector": ".terrace-houses-multi-storey.dwelling.solar-all-electric-with-wood-heating * .emissions-anchor.electricity-meter"
             }
           },
-          "bin-landfill": {
+          "bin-garbage": {
             "summary": {
               "emissions": 21.97,
               "naturalVol": 17.51,
@@ -4445,7 +4445,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "tonnes",
-              "querySelector": ".terrace-houses-multi-storey.dwelling.solar-all-electric-with-wood-heating * .emissions-anchor.bin-landfill"
+              "querySelector": ".terrace-houses-multi-storey.dwelling.solar-all-electric-with-wood-heating * .emissions-anchor.bin-garbage"
             }
           },
           "water-services": {
@@ -4524,10 +4524,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space cooling"
+                "Domestic space cooling"
               ],
               "technologies": {
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -4553,10 +4553,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space heating"
+                "Domestic space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Domestic space heating": [
                   "Gas convection heater",
                   "Heat pump hydronic"
                 ]
@@ -4737,7 +4737,7 @@ const modelVisData = {
               "querySelector": ".detached-single-storey-home.dwelling.dual-fuel-mains-gas-heating-hot-water-and-cooking * .emissions-anchor.electricity-meter"
             }
           },
-          "bin-landfill": {
+          "bin-garbage": {
             "summary": {
               "emissions": 12.549999999999999,
               "naturalVol": 10,
@@ -4762,7 +4762,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "tonnes",
-              "querySelector": ".detached-single-storey-home.dwelling.dual-fuel-mains-gas-heating-hot-water-and-cooking * .emissions-anchor.bin-landfill"
+              "querySelector": ".detached-single-storey-home.dwelling.dual-fuel-mains-gas-heating-hot-water-and-cooking * .emissions-anchor.bin-garbage"
             }
           },
           "water-services": {
@@ -4839,10 +4839,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space cooling"
+                "Domestic space cooling"
               ],
               "technologies": {
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -4868,10 +4868,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space heating"
+                "Domestic space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Domestic space heating": [
                   "Gas convection heater",
                   "Heat pump hydronic"
                 ]
@@ -5052,7 +5052,7 @@ const modelVisData = {
               "querySelector": ".detached-multi-storey-home.dwelling.dual-fuel-mains-gas-heating-hot-water-and-cooking * .emissions-anchor.electricity-meter"
             }
           },
-          "bin-landfill": {
+          "bin-garbage": {
             "summary": {
               "emissions": 21.97,
               "naturalVol": 17.51,
@@ -5077,7 +5077,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "tonnes",
-              "querySelector": ".detached-multi-storey-home.dwelling.dual-fuel-mains-gas-heating-hot-water-and-cooking * .emissions-anchor.bin-landfill"
+              "querySelector": ".detached-multi-storey-home.dwelling.dual-fuel-mains-gas-heating-hot-water-and-cooking * .emissions-anchor.bin-garbage"
             }
           },
           "water-services": {
@@ -5154,10 +5154,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space cooling"
+                "Domestic space cooling"
               ],
               "technologies": {
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -5183,10 +5183,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space heating"
+                "Domestic space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Domestic space heating": [
                   "Gas convection heater",
                   "Heat pump hydronic"
                 ]
@@ -5367,7 +5367,7 @@ const modelVisData = {
               "querySelector": ".apartment-in-multi-storey-block.dwelling.dual-fuel-mains-gas-heating-hot-water-and-cooking * .emissions-anchor.electricity-meter"
             }
           },
-          "bin-landfill": {
+          "bin-garbage": {
             "summary": {
               "emissions": 9.42,
               "naturalVol": 7.51,
@@ -5392,7 +5392,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "tonnes",
-              "querySelector": ".apartment-in-multi-storey-block.dwelling.dual-fuel-mains-gas-heating-hot-water-and-cooking * .emissions-anchor.bin-landfill"
+              "querySelector": ".apartment-in-multi-storey-block.dwelling.dual-fuel-mains-gas-heating-hot-water-and-cooking * .emissions-anchor.bin-garbage"
             }
           },
           "water-services": {
@@ -5471,10 +5471,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space cooling"
+                "Domestic space cooling"
               ],
               "technologies": {
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -5500,10 +5500,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space heating"
+                "Domestic space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Domestic space heating": [
                   "Gas convection heater",
                   "Heat pump hydronic"
                 ]
@@ -5684,7 +5684,7 @@ const modelVisData = {
               "querySelector": ".detached-single-storey-home.dwelling.solar-dual-fuel-mains-gas-heating-hot-water-and-cooking * .emissions-anchor.electricity-meter"
             }
           },
-          "bin-landfill": {
+          "bin-garbage": {
             "summary": {
               "emissions": 12.549999999999999,
               "naturalVol": 10,
@@ -5709,7 +5709,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "tonnes",
-              "querySelector": ".detached-single-storey-home.dwelling.solar-dual-fuel-mains-gas-heating-hot-water-and-cooking * .emissions-anchor.bin-landfill"
+              "querySelector": ".detached-single-storey-home.dwelling.solar-dual-fuel-mains-gas-heating-hot-water-and-cooking * .emissions-anchor.bin-garbage"
             }
           },
           "water-services": {
@@ -5786,10 +5786,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space cooling"
+                "Domestic space cooling"
               ],
               "technologies": {
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -5815,10 +5815,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space heating"
+                "Domestic space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Domestic space heating": [
                   "Gas convection heater",
                   "Heat pump hydronic"
                 ]
@@ -5999,7 +5999,7 @@ const modelVisData = {
               "querySelector": ".detached-multi-storey-home.dwelling.solar-dual-fuel-mains-gas-heating-hot-water-and-cooking * .emissions-anchor.electricity-meter"
             }
           },
-          "bin-landfill": {
+          "bin-garbage": {
             "summary": {
               "emissions": 21.97,
               "naturalVol": 17.51,
@@ -6024,7 +6024,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "tonnes",
-              "querySelector": ".detached-multi-storey-home.dwelling.solar-dual-fuel-mains-gas-heating-hot-water-and-cooking * .emissions-anchor.bin-landfill"
+              "querySelector": ".detached-multi-storey-home.dwelling.solar-dual-fuel-mains-gas-heating-hot-water-and-cooking * .emissions-anchor.bin-garbage"
             }
           },
           "water-services": {
@@ -6103,10 +6103,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space cooling"
+                "Domestic space cooling"
               ],
               "technologies": {
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -6132,10 +6132,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space heating"
+                "Domestic space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Domestic space heating": [
                   "Gas convection heater",
                   "Heat pump hydronic"
                 ]
@@ -6317,7 +6317,7 @@ const modelVisData = {
               "querySelector": ".detached-single-storey-home.dwelling.dual-fuel-mains-gas-cooking-and-heating * .emissions-anchor.electricity-meter"
             }
           },
-          "bin-landfill": {
+          "bin-garbage": {
             "summary": {
               "emissions": 12.549999999999999,
               "naturalVol": 10,
@@ -6342,7 +6342,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "tonnes",
-              "querySelector": ".detached-single-storey-home.dwelling.dual-fuel-mains-gas-cooking-and-heating * .emissions-anchor.bin-landfill"
+              "querySelector": ".detached-single-storey-home.dwelling.dual-fuel-mains-gas-cooking-and-heating * .emissions-anchor.bin-garbage"
             }
           },
           "water-services": {
@@ -6419,10 +6419,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space cooling"
+                "Domestic space cooling"
               ],
               "technologies": {
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -6448,10 +6448,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space heating"
+                "Domestic space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Domestic space heating": [
                   "Gas convection heater",
                   "Heat pump hydronic"
                 ]
@@ -6633,7 +6633,7 @@ const modelVisData = {
               "querySelector": ".detached-multi-storey-home.dwelling.dual-fuel-mains-gas-cooking-and-heating * .emissions-anchor.electricity-meter"
             }
           },
-          "bin-landfill": {
+          "bin-garbage": {
             "summary": {
               "emissions": 21.97,
               "naturalVol": 17.51,
@@ -6658,7 +6658,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "tonnes",
-              "querySelector": ".detached-multi-storey-home.dwelling.dual-fuel-mains-gas-cooking-and-heating * .emissions-anchor.bin-landfill"
+              "querySelector": ".detached-multi-storey-home.dwelling.dual-fuel-mains-gas-cooking-and-heating * .emissions-anchor.bin-garbage"
             }
           },
           "water-services": {
@@ -6735,10 +6735,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space cooling"
+                "Domestic space cooling"
               ],
               "technologies": {
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -6764,10 +6764,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space heating"
+                "Domestic space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Domestic space heating": [
                   "Gas convection heater",
                   "Heat pump hydronic"
                 ]
@@ -6949,7 +6949,7 @@ const modelVisData = {
               "querySelector": ".apartment-in-multi-storey-block.dwelling.dual-fuel-mains-gas-cooking-and-heating * .emissions-anchor.electricity-meter"
             }
           },
-          "bin-landfill": {
+          "bin-garbage": {
             "summary": {
               "emissions": 9.42,
               "naturalVol": 7.51,
@@ -6974,7 +6974,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "tonnes",
-              "querySelector": ".apartment-in-multi-storey-block.dwelling.dual-fuel-mains-gas-cooking-and-heating * .emissions-anchor.bin-landfill"
+              "querySelector": ".apartment-in-multi-storey-block.dwelling.dual-fuel-mains-gas-cooking-and-heating * .emissions-anchor.bin-garbage"
             }
           },
           "water-services": {
@@ -7053,10 +7053,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space cooling"
+                "Domestic space cooling"
               ],
               "technologies": {
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -7082,10 +7082,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space heating"
+                "Domestic space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Domestic space heating": [
                   "Gas convection heater",
                   "Heat pump hydronic"
                 ]
@@ -7267,7 +7267,7 @@ const modelVisData = {
               "querySelector": ".detached-single-storey-home.dwelling.solar-dual-fuel-mains-gas-cooking-and-heating * .emissions-anchor.electricity-meter"
             }
           },
-          "bin-landfill": {
+          "bin-garbage": {
             "summary": {
               "emissions": 12.549999999999999,
               "naturalVol": 10,
@@ -7292,7 +7292,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "tonnes",
-              "querySelector": ".detached-single-storey-home.dwelling.solar-dual-fuel-mains-gas-cooking-and-heating * .emissions-anchor.bin-landfill"
+              "querySelector": ".detached-single-storey-home.dwelling.solar-dual-fuel-mains-gas-cooking-and-heating * .emissions-anchor.bin-garbage"
             }
           },
           "water-services": {
@@ -7369,10 +7369,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space cooling"
+                "Domestic space cooling"
               ],
               "technologies": {
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -7398,10 +7398,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space heating"
+                "Domestic space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Domestic space heating": [
                   "Gas convection heater",
                   "Heat pump hydronic"
                 ]
@@ -7583,7 +7583,7 @@ const modelVisData = {
               "querySelector": ".detached-multi-storey-home.dwelling.solar-dual-fuel-mains-gas-cooking-and-heating * .emissions-anchor.electricity-meter"
             }
           },
-          "bin-landfill": {
+          "bin-garbage": {
             "summary": {
               "emissions": 21.97,
               "naturalVol": 17.51,
@@ -7608,7 +7608,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "tonnes",
-              "querySelector": ".detached-multi-storey-home.dwelling.solar-dual-fuel-mains-gas-cooking-and-heating * .emissions-anchor.bin-landfill"
+              "querySelector": ".detached-multi-storey-home.dwelling.solar-dual-fuel-mains-gas-cooking-and-heating * .emissions-anchor.bin-garbage"
             }
           },
           "water-services": {
@@ -7687,10 +7687,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space cooling"
+                "Domestic space cooling"
               ],
               "technologies": {
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -7716,10 +7716,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space heating"
+                "Domestic space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Domestic space heating": [
                   "Radiator (electric element) heater",
                   "Reverse cycle split system (incl. ducted)",
                   "Heat pump hydronic"
@@ -7902,7 +7902,7 @@ const modelVisData = {
               "querySelector": ".detached-single-storey-home.dwelling.dual-fuel-mains-gas-cooking-only * .emissions-anchor.electricity-meter"
             }
           },
-          "bin-landfill": {
+          "bin-garbage": {
             "summary": {
               "emissions": 12.549999999999999,
               "naturalVol": 10,
@@ -7927,7 +7927,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "tonnes",
-              "querySelector": ".detached-single-storey-home.dwelling.dual-fuel-mains-gas-cooking-only * .emissions-anchor.bin-landfill"
+              "querySelector": ".detached-single-storey-home.dwelling.dual-fuel-mains-gas-cooking-only * .emissions-anchor.bin-garbage"
             }
           },
           "water-services": {
@@ -8004,10 +8004,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space cooling"
+                "Domestic space cooling"
               ],
               "technologies": {
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -8033,10 +8033,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space heating"
+                "Domestic space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Domestic space heating": [
                   "Radiator (electric element) heater",
                   "Reverse cycle split system (incl. ducted)",
                   "Heat pump hydronic"
@@ -8219,7 +8219,7 @@ const modelVisData = {
               "querySelector": ".detached-multi-storey-home.dwelling.dual-fuel-mains-gas-cooking-only * .emissions-anchor.electricity-meter"
             }
           },
-          "bin-landfill": {
+          "bin-garbage": {
             "summary": {
               "emissions": 21.97,
               "naturalVol": 17.51,
@@ -8244,7 +8244,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "tonnes",
-              "querySelector": ".detached-multi-storey-home.dwelling.dual-fuel-mains-gas-cooking-only * .emissions-anchor.bin-landfill"
+              "querySelector": ".detached-multi-storey-home.dwelling.dual-fuel-mains-gas-cooking-only * .emissions-anchor.bin-garbage"
             }
           },
           "water-services": {
@@ -8323,10 +8323,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space cooling"
+                "Domestic space cooling"
               ],
               "technologies": {
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -8352,10 +8352,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space heating"
+                "Domestic space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Domestic space heating": [
                   "Radiator (electric element) heater",
                   "Reverse cycle split system (incl. ducted)",
                   "Heat pump hydronic"
@@ -8538,7 +8538,7 @@ const modelVisData = {
               "querySelector": ".detached-single-storey-home.dwelling.solar-dual-fuel-mains-gas-cooking-only * .emissions-anchor.electricity-meter"
             }
           },
-          "bin-landfill": {
+          "bin-garbage": {
             "summary": {
               "emissions": 12.549999999999999,
               "naturalVol": 10,
@@ -8563,7 +8563,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "tonnes",
-              "querySelector": ".detached-single-storey-home.dwelling.solar-dual-fuel-mains-gas-cooking-only * .emissions-anchor.bin-landfill"
+              "querySelector": ".detached-single-storey-home.dwelling.solar-dual-fuel-mains-gas-cooking-only * .emissions-anchor.bin-garbage"
             }
           },
           "water-services": {
@@ -8640,10 +8640,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space cooling"
+                "Domestic space cooling"
               ],
               "technologies": {
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -8669,10 +8669,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space heating"
+                "Domestic space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Domestic space heating": [
                   "Radiator (electric element) heater",
                   "Reverse cycle split system (incl. ducted)",
                   "Heat pump hydronic"
@@ -8855,7 +8855,7 @@ const modelVisData = {
               "querySelector": ".detached-multi-storey-home.dwelling.solar-dual-fuel-mains-gas-cooking-only * .emissions-anchor.electricity-meter"
             }
           },
-          "bin-landfill": {
+          "bin-garbage": {
             "summary": {
               "emissions": 21.97,
               "naturalVol": 17.51,
@@ -8880,7 +8880,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "tonnes",
-              "querySelector": ".detached-multi-storey-home.dwelling.solar-dual-fuel-mains-gas-cooking-only * .emissions-anchor.bin-landfill"
+              "querySelector": ".detached-multi-storey-home.dwelling.solar-dual-fuel-mains-gas-cooking-only * .emissions-anchor.bin-garbage"
             }
           },
           "water-services": {
@@ -8959,10 +8959,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space cooling"
+                "Domestic space cooling"
               ],
               "technologies": {
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -8988,10 +8988,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space heating"
+                "Domestic space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Domestic space heating": [
                   "Fireplace",
                   "Wood pellet heater"
                 ]
@@ -9172,7 +9172,7 @@ const modelVisData = {
               "querySelector": ".detached-single-storey-home.dwelling.dual-fuel-with-wood-heating-mains-gas-cooking-and-hot-water * .emissions-anchor.electricity-meter"
             }
           },
-          "bin-landfill": {
+          "bin-garbage": {
             "summary": {
               "emissions": 12.549999999999999,
               "naturalVol": 10,
@@ -9197,7 +9197,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "tonnes",
-              "querySelector": ".detached-single-storey-home.dwelling.dual-fuel-with-wood-heating-mains-gas-cooking-and-hot-water * .emissions-anchor.bin-landfill"
+              "querySelector": ".detached-single-storey-home.dwelling.dual-fuel-with-wood-heating-mains-gas-cooking-and-hot-water * .emissions-anchor.bin-garbage"
             }
           },
           "water-services": {
@@ -9274,10 +9274,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space cooling"
+                "Domestic space cooling"
               ],
               "technologies": {
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -9303,10 +9303,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space heating"
+                "Domestic space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Domestic space heating": [
                   "Fireplace",
                   "Wood pellet heater"
                 ]
@@ -9487,7 +9487,7 @@ const modelVisData = {
               "querySelector": ".detached-multi-storey-home.dwelling.dual-fuel-with-wood-heating-mains-gas-cooking-and-hot-water * .emissions-anchor.electricity-meter"
             }
           },
-          "bin-landfill": {
+          "bin-garbage": {
             "summary": {
               "emissions": 21.97,
               "naturalVol": 17.51,
@@ -9512,7 +9512,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "tonnes",
-              "querySelector": ".detached-multi-storey-home.dwelling.dual-fuel-with-wood-heating-mains-gas-cooking-and-hot-water * .emissions-anchor.bin-landfill"
+              "querySelector": ".detached-multi-storey-home.dwelling.dual-fuel-with-wood-heating-mains-gas-cooking-and-hot-water * .emissions-anchor.bin-garbage"
             }
           },
           "water-services": {
@@ -9591,10 +9591,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space cooling"
+                "Domestic space cooling"
               ],
               "technologies": {
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -9620,10 +9620,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space heating"
+                "Domestic space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Domestic space heating": [
                   "Fireplace",
                   "Wood pellet heater"
                 ]
@@ -9804,7 +9804,7 @@ const modelVisData = {
               "querySelector": ".terrace-houses-multi-storey.dwelling.dual-fuel-with-wood-heating-mains-gas-cooking-and-hot-water * .emissions-anchor.electricity-meter"
             }
           },
-          "bin-landfill": {
+          "bin-garbage": {
             "summary": {
               "emissions": 21.97,
               "naturalVol": 17.51,
@@ -9829,7 +9829,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "tonnes",
-              "querySelector": ".terrace-houses-multi-storey.dwelling.dual-fuel-with-wood-heating-mains-gas-cooking-and-hot-water * .emissions-anchor.bin-landfill"
+              "querySelector": ".terrace-houses-multi-storey.dwelling.dual-fuel-with-wood-heating-mains-gas-cooking-and-hot-water * .emissions-anchor.bin-garbage"
             }
           },
           "water-services": {
@@ -9908,10 +9908,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space cooling"
+                "Domestic space cooling"
               ],
               "technologies": {
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -9937,10 +9937,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space heating"
+                "Domestic space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Domestic space heating": [
                   "Fireplace",
                   "Wood pellet heater"
                 ]
@@ -10121,7 +10121,7 @@ const modelVisData = {
               "querySelector": ".detached-single-storey-home.dwelling.solar-dual-fuel-with-wood-heating-mains-gas-cooking-and-hot-water * .emissions-anchor.electricity-meter"
             }
           },
-          "bin-landfill": {
+          "bin-garbage": {
             "summary": {
               "emissions": 12.549999999999999,
               "naturalVol": 10,
@@ -10146,7 +10146,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "tonnes",
-              "querySelector": ".detached-single-storey-home.dwelling.solar-dual-fuel-with-wood-heating-mains-gas-cooking-and-hot-water * .emissions-anchor.bin-landfill"
+              "querySelector": ".detached-single-storey-home.dwelling.solar-dual-fuel-with-wood-heating-mains-gas-cooking-and-hot-water * .emissions-anchor.bin-garbage"
             }
           },
           "water-services": {
@@ -10223,10 +10223,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space cooling"
+                "Domestic space cooling"
               ],
               "technologies": {
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -10252,10 +10252,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space heating"
+                "Domestic space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Domestic space heating": [
                   "Fireplace",
                   "Wood pellet heater"
                 ]
@@ -10436,7 +10436,7 @@ const modelVisData = {
               "querySelector": ".detached-multi-storey-home.dwelling.solar-dual-fuel-with-wood-heating-mains-gas-cooking-and-hot-water * .emissions-anchor.electricity-meter"
             }
           },
-          "bin-landfill": {
+          "bin-garbage": {
             "summary": {
               "emissions": 21.97,
               "naturalVol": 17.51,
@@ -10461,7 +10461,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "tonnes",
-              "querySelector": ".detached-multi-storey-home.dwelling.solar-dual-fuel-with-wood-heating-mains-gas-cooking-and-hot-water * .emissions-anchor.bin-landfill"
+              "querySelector": ".detached-multi-storey-home.dwelling.solar-dual-fuel-with-wood-heating-mains-gas-cooking-and-hot-water * .emissions-anchor.bin-garbage"
             }
           },
           "water-services": {
@@ -10540,10 +10540,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space cooling"
+                "Domestic space cooling"
               ],
               "technologies": {
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -10569,10 +10569,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space heating"
+                "Domestic space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Domestic space heating": [
                   "Fireplace",
                   "Wood pellet heater"
                 ]
@@ -10779,7 +10779,7 @@ const modelVisData = {
               "querySelector": ".terrace-houses-multi-storey.dwelling.solar-dual-fuel-with-wood-heating-mains-gas-cooking-and-hot-water * .emissions-anchor.electricity-connection"
             }
           },
-          "bin-landfill": {
+          "bin-garbage": {
             "summary": {
               "emissions": 21.97,
               "naturalVol": 17.51,
@@ -10804,7 +10804,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "tonnes",
-              "querySelector": ".terrace-houses-multi-storey.dwelling.solar-dual-fuel-with-wood-heating-mains-gas-cooking-and-hot-water * .emissions-anchor.bin-landfill"
+              "querySelector": ".terrace-houses-multi-storey.dwelling.solar-dual-fuel-with-wood-heating-mains-gas-cooking-and-hot-water * .emissions-anchor.bin-garbage"
             }
           },
           "water-services": {
@@ -10883,10 +10883,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space cooling"
+                "Domestic space cooling"
               ],
               "technologies": {
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -10912,10 +10912,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space heating"
+                "Domestic space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Domestic space heating": [
                   "Radiator (electric element) heater",
                   "Reverse cycle split system (incl. ducted)",
                   "Heat pump hydronic"
@@ -11097,7 +11097,7 @@ const modelVisData = {
               "querySelector": ".detached-single-storey-home.dwelling.dual-fuel-lpg-cooking-and-hot-water * .emissions-anchor.electricity-meter"
             }
           },
-          "bin-landfill": {
+          "bin-garbage": {
             "summary": {
               "emissions": 12.549999999999999,
               "naturalVol": 10,
@@ -11122,7 +11122,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "tonnes",
-              "querySelector": ".detached-single-storey-home.dwelling.dual-fuel-lpg-cooking-and-hot-water * .emissions-anchor.bin-landfill"
+              "querySelector": ".detached-single-storey-home.dwelling.dual-fuel-lpg-cooking-and-hot-water * .emissions-anchor.bin-garbage"
             }
           },
           "water-services": {
@@ -11201,10 +11201,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space cooling"
+                "Domestic space cooling"
               ],
               "technologies": {
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -11230,10 +11230,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space heating"
+                "Domestic space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Domestic space heating": [
                   "Radiator (electric element) heater",
                   "Reverse cycle split system (incl. ducted)",
                   "Heat pump hydronic"
@@ -11415,7 +11415,7 @@ const modelVisData = {
               "querySelector": ".detached-single-storey-home.dwelling.solar-dual-fuel-lpg-cooking-and-hot-water * .emissions-anchor.electricity-meter"
             }
           },
-          "bin-landfill": {
+          "bin-garbage": {
             "summary": {
               "emissions": 12.549999999999999,
               "naturalVol": 10,
@@ -11440,7 +11440,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "tonnes",
-              "querySelector": ".detached-single-storey-home.dwelling.solar-dual-fuel-lpg-cooking-and-hot-water * .emissions-anchor.bin-landfill"
+              "querySelector": ".detached-single-storey-home.dwelling.solar-dual-fuel-lpg-cooking-and-hot-water * .emissions-anchor.bin-garbage"
             }
           },
           "water-services": {
@@ -11519,10 +11519,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space cooling"
+                "Domestic space cooling"
               ],
               "technologies": {
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -11548,10 +11548,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space heating"
+                "Domestic space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Domestic space heating": [
                   "Radiator (electric element) heater",
                   "Reverse cycle split system (incl. ducted)",
                   "Heat pump hydronic"
@@ -11734,7 +11734,7 @@ const modelVisData = {
               "querySelector": ".detached-single-storey-home.dwelling.dual-fuel-lpg-cooking-only * .emissions-anchor.electricity-meter"
             }
           },
-          "bin-landfill": {
+          "bin-garbage": {
             "summary": {
               "emissions": 12.549999999999999,
               "naturalVol": 10,
@@ -11759,7 +11759,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "tonnes",
-              "querySelector": ".detached-single-storey-home.dwelling.dual-fuel-lpg-cooking-only * .emissions-anchor.bin-landfill"
+              "querySelector": ".detached-single-storey-home.dwelling.dual-fuel-lpg-cooking-only * .emissions-anchor.bin-garbage"
             }
           },
           "water-services": {
@@ -11838,10 +11838,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space cooling"
+                "Domestic space cooling"
               ],
               "technologies": {
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -11867,10 +11867,10 @@ const modelVisData = {
               "economicSector": "Residential",
               "economicActor": "Households",
               "activities": [
-                "Space heating"
+                "Domestic space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Domestic space heating": [
                   "Radiator (electric element) heater",
                   "Reverse cycle split system (incl. ducted)",
                   "Heat pump hydronic"
@@ -12053,7 +12053,7 @@ const modelVisData = {
               "querySelector": ".detached-single-storey-home.dwelling.solar-dual-fuel-lpg-cooking-only * .emissions-anchor.electricity-meter"
             }
           },
-          "bin-landfill": {
+          "bin-garbage": {
             "summary": {
               "emissions": 12.549999999999999,
               "naturalVol": 10,
@@ -12078,7 +12078,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "tonnes",
-              "querySelector": ".detached-single-storey-home.dwelling.solar-dual-fuel-lpg-cooking-only * .emissions-anchor.bin-landfill"
+              "querySelector": ".detached-single-storey-home.dwelling.solar-dual-fuel-lpg-cooking-only * .emissions-anchor.bin-garbage"
             }
           },
           "water-services": {
@@ -13010,11 +13010,11 @@ const modelVisData = {
           }
         },
         "hospitality-venue": {
-          "cooling-anchor": {
+          "hvac-anchor": {
             "summary": {
-              "emissions": 3.59,
-              "naturalVol": 3.7,
-              "energy": 13.3,
+              "emissions": 4.44,
+              "naturalVol": 4.58,
+              "energy": 16.450000000000003,
               "abated_emissions": 0,
               "abated_naturalVol": 0,
               "abated_energy": 0,
@@ -13025,46 +13025,24 @@ const modelVisData = {
               "economicSector": "Hospitality",
               "economicActor": "Hospitality providers",
               "activities": [
-                "Space cooling"
+                "Commercial space cooling",
+                "Commercial space heating"
               ],
               "technologies": {
-                "Space cooling": [
+                "Commercial space cooling": [
                   "Split system",
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
                   "Passive cooling"
-                ]
-              },
-              "naturalVol_Unit": "MWh",
-              "querySelector": ".hospitality-venue.non-residential-building.all-electric-facility * .emissions-anchor.cooling-anchor"
-            }
-          },
-          "heating-anchor": {
-            "summary": {
-              "emissions": 0.8500000000000001,
-              "naturalVol": 0.8800000000000001,
-              "energy": 3.15,
-              "abated_emissions": 0,
-              "abated_naturalVol": 0,
-              "abated_energy": 0,
-              "emissionsSector": "Stationary energy",
-              "emissionsSubSector": "Commercial and institutional buildings/facilities",
-              "emissionsSource": "Grid electricity",
-              "economicSectorGroup": "Commercial",
-              "economicSector": "Hospitality",
-              "economicActor": "Hospitality providers",
-              "activities": [
-                "Space heating"
-              ],
-              "technologies": {
-                "Space heating": [
+                ],
+                "Commercial space heating": [
                   "Radiator (electric element) heater",
                   "Reverse cycle split system (incl. ducted)"
                 ]
               },
               "naturalVol_Unit": "MWh",
-              "querySelector": ".hospitality-venue.non-residential-building.all-electric-facility * .emissions-anchor.heating-anchor"
+              "querySelector": ".hospitality-venue.non-residential-building.all-electric-facility * .emissions-anchor.hvac-anchor"
             }
           },
           "hot-water-anchor": {
@@ -13838,11 +13816,11 @@ const modelVisData = {
           }
         },
         "school": {
-          "cooling-anchor": {
+          "hvac-anchor": {
             "summary": {
-              "emissions": 3.59,
-              "naturalVol": 3.7,
-              "energy": 13.3,
+              "emissions": 4.44,
+              "naturalVol": 4.58,
+              "energy": 16.450000000000003,
               "abated_emissions": 0,
               "abated_naturalVol": 0,
               "abated_energy": 0,
@@ -13853,46 +13831,24 @@ const modelVisData = {
               "economicSector": "Education providers",
               "economicActor": "Education providers",
               "activities": [
-                "Space cooling"
+                "Commercial space cooling",
+                "Commercial space heating"
               ],
               "technologies": {
-                "Space cooling": [
+                "Commercial space cooling": [
                   "Split system",
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
                   "Passive cooling"
-                ]
-              },
-              "naturalVol_Unit": "MWh",
-              "querySelector": ".school.non-residential-building.all-electric-facility * .emissions-anchor.cooling-anchor"
-            }
-          },
-          "heating-anchor": {
-            "summary": {
-              "emissions": 0.8500000000000001,
-              "naturalVol": 0.8800000000000001,
-              "energy": 3.15,
-              "abated_emissions": 0,
-              "abated_naturalVol": 0,
-              "abated_energy": 0,
-              "emissionsSector": "Stationary energy",
-              "emissionsSubSector": "Commercial and institutional buildings/facilities",
-              "emissionsSource": "Grid electricity",
-              "economicSectorGroup": "Municipal",
-              "economicSector": "Education providers",
-              "economicActor": "Education providers",
-              "activities": [
-                "Space heating"
-              ],
-              "technologies": {
-                "Space heating": [
+                ],
+                "Commercial space heating": [
                   "Radiator (electric element) heater",
                   "Reverse cycle split system (incl. ducted)"
                 ]
               },
               "naturalVol_Unit": "MWh",
-              "querySelector": ".school.non-residential-building.all-electric-facility * .emissions-anchor.heating-anchor"
+              "querySelector": ".school.non-residential-building.all-electric-facility * .emissions-anchor.hvac-anchor"
             }
           },
           "hot-water-anchor": {
@@ -14067,11 +14023,11 @@ const modelVisData = {
           }
         },
         "community-facility": {
-          "cooling-anchor": {
+          "hvac-anchor": {
             "summary": {
-              "emissions": 3.59,
-              "naturalVol": 3.7,
-              "energy": 13.3,
+              "emissions": 4.44,
+              "naturalVol": 4.58,
+              "energy": 16.450000000000003,
               "abated_emissions": 0,
               "abated_naturalVol": 0,
               "abated_energy": 0,
@@ -14082,46 +14038,24 @@ const modelVisData = {
               "economicSector": "Public institutions and infrastructure",
               "economicActor": "Public institutions and services",
               "activities": [
-                "Space cooling"
+                "Commercial space cooling",
+                "Commercial space heating"
               ],
               "technologies": {
-                "Space cooling": [
+                "Commercial space cooling": [
                   "Split system",
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
                   "Passive cooling"
-                ]
-              },
-              "naturalVol_Unit": "MWh",
-              "querySelector": ".community-facility.non-residential-building.all-electric-facility * .emissions-anchor.cooling-anchor"
-            }
-          },
-          "heating-anchor": {
-            "summary": {
-              "emissions": 0.8500000000000001,
-              "naturalVol": 0.8800000000000001,
-              "energy": 3.15,
-              "abated_emissions": 0,
-              "abated_naturalVol": 0,
-              "abated_energy": 0,
-              "emissionsSector": "Stationary energy",
-              "emissionsSubSector": "Commercial and institutional buildings/facilities",
-              "emissionsSource": "Grid electricity",
-              "economicSectorGroup": "Municipal",
-              "economicSector": "Public institutions and infrastructure",
-              "economicActor": "Public institutions and services",
-              "activities": [
-                "Space heating"
-              ],
-              "technologies": {
-                "Space heating": [
+                ],
+                "Commercial space heating": [
                   "Radiator (electric element) heater",
                   "Reverse cycle split system (incl. ducted)"
                 ]
               },
               "naturalVol_Unit": "MWh",
-              "querySelector": ".community-facility.non-residential-building.all-electric-facility * .emissions-anchor.heating-anchor"
+              "querySelector": ".community-facility.non-residential-building.all-electric-facility * .emissions-anchor.hvac-anchor"
             }
           },
           "hot-water-anchor": {
@@ -14886,11 +14820,11 @@ const modelVisData = {
           }
         },
         "hospitality-venue": {
-          "cooling-anchor": {
+          "hvac-anchor": {
             "summary": {
-              "emissions": 2.23,
-              "naturalVol": 2.3,
-              "energy": 8.309999999999999,
+              "emissions": 2.7600000000000002,
+              "naturalVol": 2.8499999999999996,
+              "energy": 10.28,
               "abated_emissions": 0,
               "abated_naturalVol": 0,
               "abated_energy": 0,
@@ -14901,46 +14835,24 @@ const modelVisData = {
               "economicSector": "Hospitality",
               "economicActor": "Hospitality providers",
               "activities": [
-                "Space cooling"
+                "Commercial space cooling",
+                "Commercial space heating"
               ],
               "technologies": {
-                "Space cooling": [
+                "Commercial space cooling": [
                   "Split system",
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
                   "Passive cooling"
-                ]
-              },
-              "naturalVol_Unit": "MWh",
-              "querySelector": ".hospitality-venue.non-residential-building.all-electric-facility-with-solar-pv * .emissions-anchor.cooling-anchor"
-            }
-          },
-          "heating-anchor": {
-            "summary": {
-              "emissions": 0.53,
-              "naturalVol": 0.55,
-              "energy": 1.97,
-              "abated_emissions": 0,
-              "abated_naturalVol": 0,
-              "abated_energy": 0,
-              "emissionsSector": "Stationary energy",
-              "emissionsSubSector": "Commercial and institutional buildings/facilities",
-              "emissionsSource": "Grid electricity",
-              "economicSectorGroup": "Commercial",
-              "economicSector": "Hospitality",
-              "economicActor": "Hospitality providers",
-              "activities": [
-                "Space heating"
-              ],
-              "technologies": {
-                "Space heating": [
+                ],
+                "Commercial space heating": [
                   "Radiator (electric element) heater",
                   "Reverse cycle split system (incl. ducted)"
                 ]
               },
               "naturalVol_Unit": "MWh",
-              "querySelector": ".hospitality-venue.non-residential-building.all-electric-facility-with-solar-pv * .emissions-anchor.heating-anchor"
+              "querySelector": ".hospitality-venue.non-residential-building.all-electric-facility-with-solar-pv * .emissions-anchor.hvac-anchor"
             }
           },
           "hot-water-anchor": {
@@ -15768,11 +15680,11 @@ const modelVisData = {
           }
         },
         "school": {
-          "cooling-anchor": {
+          "hvac-anchor": {
             "summary": {
-              "emissions": 0.67,
-              "naturalVol": 0.69,
-              "energy": 2.46,
+              "emissions": 0.8300000000000001,
+              "naturalVol": 0.8499999999999999,
+              "energy": 3.04,
               "abated_emissions": 0,
               "abated_naturalVol": 0,
               "abated_energy": 0,
@@ -15783,46 +15695,24 @@ const modelVisData = {
               "economicSector": "Education providers",
               "economicActor": "Education providers",
               "activities": [
-                "Space cooling"
+                "Commercial space cooling",
+                "Commercial space heating"
               ],
               "technologies": {
-                "Space cooling": [
+                "Commercial space cooling": [
                   "Split system",
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
                   "Passive cooling"
-                ]
-              },
-              "naturalVol_Unit": "MWh",
-              "querySelector": ".school.non-residential-building.all-electric-facility-with-solar-pv * .emissions-anchor.cooling-anchor"
-            }
-          },
-          "heating-anchor": {
-            "summary": {
-              "emissions": 0.16,
-              "naturalVol": 0.16,
-              "energy": 0.58,
-              "abated_emissions": 0,
-              "abated_naturalVol": 0,
-              "abated_energy": 0,
-              "emissionsSector": "Stationary energy",
-              "emissionsSubSector": "Commercial and institutional buildings/facilities",
-              "emissionsSource": "Grid electricity",
-              "economicSectorGroup": "Municipal",
-              "economicSector": "Education providers",
-              "economicActor": "Education providers",
-              "activities": [
-                "Space heating"
-              ],
-              "technologies": {
-                "Space heating": [
+                ],
+                "Commercial space heating": [
                   "Radiator (electric element) heater",
                   "Reverse cycle split system (incl. ducted)"
                 ]
               },
               "naturalVol_Unit": "MWh",
-              "querySelector": ".school.non-residential-building.all-electric-facility-with-solar-pv * .emissions-anchor.heating-anchor"
+              "querySelector": ".school.non-residential-building.all-electric-facility-with-solar-pv * .emissions-anchor.hvac-anchor"
             }
           },
           "hot-water-anchor": {
@@ -16051,11 +15941,11 @@ const modelVisData = {
           }
         },
         "community-facility": {
-          "cooling-anchor": {
+          "hvac-anchor": {
             "summary": {
-              "emissions": 0.67,
-              "naturalVol": 0.69,
-              "energy": 2.46,
+              "emissions": 0.8300000000000001,
+              "naturalVol": 0.8499999999999999,
+              "energy": 3.04,
               "abated_emissions": 0,
               "abated_naturalVol": 0,
               "abated_energy": 0,
@@ -16066,46 +15956,24 @@ const modelVisData = {
               "economicSector": "Public institutions and infrastructure",
               "economicActor": "Public institutions and services",
               "activities": [
-                "Space cooling"
+                "Commercial space cooling",
+                "Commercial space heating"
               ],
               "technologies": {
-                "Space cooling": [
+                "Commercial space cooling": [
                   "Split system",
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
                   "Passive cooling"
-                ]
-              },
-              "naturalVol_Unit": "MWh",
-              "querySelector": ".community-facility.non-residential-building.all-electric-facility-with-solar-pv * .emissions-anchor.cooling-anchor"
-            }
-          },
-          "heating-anchor": {
-            "summary": {
-              "emissions": 0.16,
-              "naturalVol": 0.16,
-              "energy": 0.58,
-              "abated_emissions": 0,
-              "abated_naturalVol": 0,
-              "abated_energy": 0,
-              "emissionsSector": "Stationary energy",
-              "emissionsSubSector": "Commercial and institutional buildings/facilities",
-              "emissionsSource": "Grid electricity",
-              "economicSectorGroup": "Municipal",
-              "economicSector": "Public institutions and infrastructure",
-              "economicActor": "Public institutions and services",
-              "activities": [
-                "Space heating"
-              ],
-              "technologies": {
-                "Space heating": [
+                ],
+                "Commercial space heating": [
                   "Radiator (electric element) heater",
                   "Reverse cycle split system (incl. ducted)"
                 ]
               },
               "naturalVol_Unit": "MWh",
-              "querySelector": ".community-facility.non-residential-building.all-electric-facility-with-solar-pv * .emissions-anchor.heating-anchor"
+              "querySelector": ".community-facility.non-residential-building.all-electric-facility-with-solar-pv * .emissions-anchor.hvac-anchor"
             }
           },
           "hot-water-anchor": {
@@ -17232,11 +17100,11 @@ const modelVisData = {
           }
         },
         "hospitality-venue": {
-          "cooling-anchor": {
+          "hvac-anchor": {
             "summary": {
-              "emissions": 3.59,
-              "naturalVol": 3.7,
-              "energy": 13.3,
+              "emissions": 24.84,
+              "naturalVol": 25.62,
+              "energy": 92.19,
               "abated_emissions": 0,
               "abated_naturalVol": 0,
               "abated_energy": 0,
@@ -17247,45 +17115,23 @@ const modelVisData = {
               "economicSector": "Hospitality",
               "economicActor": "Hospitality providers",
               "activities": [
-                "Space cooling"
+                "Commercial space cooling",
+                "Commercial space heating"
               ],
               "technologies": {
-                "Space cooling": [
+                "Commercial space cooling": [
                   "Split system",
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
                   "Passive cooling"
-                ]
-              },
-              "naturalVol_Unit": "MWh",
-              "querySelector": ".hospitality-venue.non-residential-building.mains-gas-connected-facility * .emissions-anchor.cooling-anchor"
-            }
-          },
-          "heating-anchor": {
-            "summary": {
-              "emissions": 21.25,
-              "naturalVol": 21.92,
-              "energy": 78.89,
-              "abated_emissions": 0,
-              "abated_naturalVol": 0,
-              "abated_energy": 0,
-              "emissionsSector": "Stationary energy",
-              "emissionsSubSector": "Commercial and institutional buildings/facilities",
-              "emissionsSource": "Grid electricity",
-              "economicSectorGroup": "Commercial",
-              "economicSector": "Hospitality",
-              "economicActor": "Hospitality providers",
-              "activities": [
-                "Space heating"
-              ],
-              "technologies": {
-                "Space heating": [
+                ],
+                "Commercial space heating": [
                   "Gas convection heater"
                 ]
               },
               "naturalVol_Unit": "MWh",
-              "querySelector": ".hospitality-venue.non-residential-building.mains-gas-connected-facility * .emissions-anchor.heating-anchor"
+              "querySelector": ".hospitality-venue.non-residential-building.mains-gas-connected-facility * .emissions-anchor.hvac-anchor"
             }
           },
           "hot-water-anchor": {
@@ -21079,41 +20925,11 @@ const modelVisData = {
           }
         },
         "school": {
-          "cooling-anchor": {
+          "hvac-anchor": {
             "summary": {
-              "emissions": 3.59,
-              "naturalVol": 3.7,
-              "energy": 13.3,
-              "abated_emissions": 0,
-              "abated_naturalVol": 0,
-              "abated_energy": 0,
-              "emissionsSector": "Stationary energy",
-              "emissionsSubSector": "Commercial and institutional buildings/facilities",
-              "emissionsSource": "Grid electricity",
-              "economicSectorGroup": "Municipal",
-              "economicSector": "Education providers",
-              "economicActor": "Education providers",
-              "activities": [
-                "Space cooling"
-              ],
-              "technologies": {
-                "Space cooling": [
-                  "Split system",
-                  "Air conditioning",
-                  "Evaporative cooling",
-                  "Fans (ceiling and portable)",
-                  "Passive cooling"
-                ]
-              },
-              "naturalVol_Unit": "MWh",
-              "querySelector": ".school.non-residential-building.mains-gas-connected-facility * .emissions-anchor.cooling-anchor"
-            }
-          },
-          "heating-anchor": {
-            "summary": {
-              "emissions": 1.21,
-              "naturalVol": 21.92,
-              "energy": 21.92,
+              "emissions": 4.8,
+              "naturalVol": 25.62,
+              "energy": 35.22,
               "abated_emissions": 0,
               "abated_naturalVol": 0,
               "abated_energy": 0,
@@ -21124,15 +20940,23 @@ const modelVisData = {
               "economicSector": "Education providers",
               "economicActor": "Education providers",
               "activities": [
-                "Space heating"
+                "Commercial space cooling",
+                "Commercial space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Commercial space cooling": [
+                  "Split system",
+                  "Air conditioning",
+                  "Evaporative cooling",
+                  "Fans (ceiling and portable)",
+                  "Passive cooling"
+                ],
+                "Commercial space heating": [
                   "Gas convection heater"
                 ]
               },
               "naturalVol_Unit": "GJ",
-              "querySelector": ".school.non-residential-building.mains-gas-connected-facility * .emissions-anchor.heating-anchor"
+              "querySelector": ".school.non-residential-building.mains-gas-connected-facility * .emissions-anchor.hvac-anchor"
             }
           },
           "hot-water-anchor": {
@@ -21359,41 +21183,11 @@ const modelVisData = {
           }
         },
         "community-facility": {
-          "cooling-anchor": {
+          "hvac-anchor": {
             "summary": {
-              "emissions": 3.59,
-              "naturalVol": 3.7,
-              "energy": 13.3,
-              "abated_emissions": 0,
-              "abated_naturalVol": 0,
-              "abated_energy": 0,
-              "emissionsSector": "Stationary energy",
-              "emissionsSubSector": "Commercial and institutional buildings/facilities",
-              "emissionsSource": "Grid electricity",
-              "economicSectorGroup": "Municipal",
-              "economicSector": "Public institutions and infrastructure",
-              "economicActor": "Public institutions and services",
-              "activities": [
-                "Space cooling"
-              ],
-              "technologies": {
-                "Space cooling": [
-                  "Split system",
-                  "Air conditioning",
-                  "Evaporative cooling",
-                  "Fans (ceiling and portable)",
-                  "Passive cooling"
-                ]
-              },
-              "naturalVol_Unit": "MWh",
-              "querySelector": ".community-facility.non-residential-building.mains-gas-connected-facility * .emissions-anchor.cooling-anchor"
-            }
-          },
-          "heating-anchor": {
-            "summary": {
-              "emissions": 0.61,
-              "naturalVol": 10.96,
-              "energy": 10.96,
+              "emissions": 4.2,
+              "naturalVol": 14.66,
+              "energy": 24.26,
               "abated_emissions": 0,
               "abated_naturalVol": 0,
               "abated_energy": 0,
@@ -21404,15 +21198,23 @@ const modelVisData = {
               "economicSector": "Public institutions and infrastructure",
               "economicActor": "Public institutions and services",
               "activities": [
-                "Space heating"
+                "Commercial space cooling",
+                "Commercial space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Commercial space cooling": [
+                  "Split system",
+                  "Air conditioning",
+                  "Evaporative cooling",
+                  "Fans (ceiling and portable)",
+                  "Passive cooling"
+                ],
+                "Commercial space heating": [
                   "Gas convection heater"
                 ]
               },
               "naturalVol_Unit": "GJ",
-              "querySelector": ".community-facility.non-residential-building.mains-gas-connected-facility * .emissions-anchor.heating-anchor"
+              "querySelector": ".community-facility.non-residential-building.mains-gas-connected-facility * .emissions-anchor.hvac-anchor"
             }
           },
           "hot-water-anchor": {
@@ -23108,11 +22910,11 @@ const modelVisData = {
           }
         },
         "hospitality-venue": {
-          "cooling-anchor": {
+          "hvac-anchor": {
             "summary": {
-              "emissions": 2.03,
-              "naturalVol": 2.0999999999999996,
-              "energy": 7.5600000000000005,
+              "emissions": 23.28,
+              "naturalVol": 24.020000000000003,
+              "energy": 86.45,
               "abated_emissions": 0,
               "abated_naturalVol": 0,
               "abated_energy": 0,
@@ -23123,45 +22925,23 @@ const modelVisData = {
               "economicSector": "Hospitality",
               "economicActor": "Hospitality providers",
               "activities": [
-                "Space cooling"
+                "Commercial space cooling",
+                "Commercial space heating"
               ],
               "technologies": {
-                "Space cooling": [
+                "Commercial space cooling": [
                   "Split system",
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
                   "Passive cooling"
-                ]
-              },
-              "naturalVol_Unit": "MWh",
-              "querySelector": ".hospitality-venue.non-residential-building.mains-gas-connected-facility-with-solar-pv * .emissions-anchor.cooling-anchor"
-            }
-          },
-          "heating-anchor": {
-            "summary": {
-              "emissions": 21.25,
-              "naturalVol": 21.92,
-              "energy": 78.89,
-              "abated_emissions": 0,
-              "abated_naturalVol": 0,
-              "abated_energy": 0,
-              "emissionsSector": "Stationary energy",
-              "emissionsSubSector": "Commercial and institutional buildings/facilities",
-              "emissionsSource": "Grid electricity",
-              "economicSectorGroup": "Commercial",
-              "economicSector": "Hospitality",
-              "economicActor": "Hospitality providers",
-              "activities": [
-                "Space heating"
-              ],
-              "technologies": {
-                "Space heating": [
+                ],
+                "Commercial space heating": [
                   "Gas convection heater"
                 ]
               },
               "naturalVol_Unit": "MWh",
-              "querySelector": ".hospitality-venue.non-residential-building.mains-gas-connected-facility-with-solar-pv * .emissions-anchor.heating-anchor"
+              "querySelector": ".hospitality-venue.non-residential-building.mains-gas-connected-facility-with-solar-pv * .emissions-anchor.hvac-anchor"
             }
           },
           "hot-water-anchor": {
@@ -26952,41 +26732,11 @@ const modelVisData = {
           }
         },
         "school": {
-          "cooling-anchor": {
+          "hvac-anchor": {
             "summary": {
-              "emissions": 0.67,
-              "naturalVol": 0.69,
-              "energy": 2.46,
-              "abated_emissions": 0,
-              "abated_naturalVol": 0,
-              "abated_energy": 0,
-              "emissionsSector": "Stationary energy",
-              "emissionsSubSector": "Commercial and institutional buildings/facilities",
-              "emissionsSource": "Grid electricity",
-              "economicSectorGroup": "Municipal",
-              "economicSector": "Education providers",
-              "economicActor": "Education providers",
-              "activities": [
-                "Space cooling"
-              ],
-              "technologies": {
-                "Space cooling": [
-                  "Split system",
-                  "Air conditioning",
-                  "Evaporative cooling",
-                  "Fans (ceiling and portable)",
-                  "Passive cooling"
-                ]
-              },
-              "naturalVol_Unit": "MWh",
-              "querySelector": ".school.non-residential-building.mains-gas-connected-facility-with-solar-pv * .emissions-anchor.cooling-anchor"
-            }
-          },
-          "heating-anchor": {
-            "summary": {
-              "emissions": 1.21,
-              "naturalVol": 21.92,
-              "energy": 21.92,
+              "emissions": 1.88,
+              "naturalVol": 22.610000000000003,
+              "energy": 24.380000000000003,
               "abated_emissions": 0,
               "abated_naturalVol": 0,
               "abated_energy": 0,
@@ -26997,15 +26747,23 @@ const modelVisData = {
               "economicSector": "Education providers",
               "economicActor": "Education providers",
               "activities": [
-                "Space heating"
+                "Commercial space cooling",
+                "Commercial space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Commercial space cooling": [
+                  "Split system",
+                  "Air conditioning",
+                  "Evaporative cooling",
+                  "Fans (ceiling and portable)",
+                  "Passive cooling"
+                ],
+                "Commercial space heating": [
                   "Gas convection heater"
                 ]
               },
               "naturalVol_Unit": "GJ",
-              "querySelector": ".school.non-residential-building.mains-gas-connected-facility-with-solar-pv * .emissions-anchor.heating-anchor"
+              "querySelector": ".school.non-residential-building.mains-gas-connected-facility-with-solar-pv * .emissions-anchor.hvac-anchor"
             }
           },
           "hot-water-anchor": {
@@ -27262,41 +27020,11 @@ const modelVisData = {
           }
         },
         "community-facility": {
-          "cooling-anchor": {
+          "hvac-anchor": {
             "summary": {
-              "emissions": 0.67,
-              "naturalVol": 0.69,
-              "energy": 2.46,
-              "abated_emissions": 0,
-              "abated_naturalVol": 0,
-              "abated_energy": 0,
-              "emissionsSector": "Stationary energy",
-              "emissionsSubSector": "Commercial and institutional buildings/facilities",
-              "emissionsSource": "Grid electricity",
-              "economicSectorGroup": "Municipal",
-              "economicSector": "Public institutions and infrastructure",
-              "economicActor": "Public institutions and services",
-              "activities": [
-                "Space cooling"
-              ],
-              "technologies": {
-                "Space cooling": [
-                  "Split system",
-                  "Air conditioning",
-                  "Evaporative cooling",
-                  "Fans (ceiling and portable)",
-                  "Passive cooling"
-                ]
-              },
-              "naturalVol_Unit": "MWh",
-              "querySelector": ".community-facility.non-residential-building.mains-gas-connected-facility-with-solar-pv * .emissions-anchor.cooling-anchor"
-            }
-          },
-          "heating-anchor": {
-            "summary": {
-              "emissions": 0.61,
-              "naturalVol": 10.96,
-              "energy": 10.96,
+              "emissions": 1.28,
+              "naturalVol": 11.65,
+              "energy": 13.420000000000002,
               "abated_emissions": 0,
               "abated_naturalVol": 0,
               "abated_energy": 0,
@@ -27307,15 +27035,23 @@ const modelVisData = {
               "economicSector": "Public institutions and infrastructure",
               "economicActor": "Public institutions and services",
               "activities": [
-                "Space heating"
+                "Commercial space cooling",
+                "Commercial space heating"
               ],
               "technologies": {
-                "Space heating": [
+                "Commercial space cooling": [
+                  "Split system",
+                  "Air conditioning",
+                  "Evaporative cooling",
+                  "Fans (ceiling and portable)",
+                  "Passive cooling"
+                ],
+                "Commercial space heating": [
                   "Gas convection heater"
                 ]
               },
               "naturalVol_Unit": "GJ",
-              "querySelector": ".community-facility.non-residential-building.mains-gas-connected-facility-with-solar-pv * .emissions-anchor.heating-anchor"
+              "querySelector": ".community-facility.non-residential-building.mains-gas-connected-facility-with-solar-pv * .emissions-anchor.hvac-anchor"
             }
           },
           "hot-water-anchor": {
@@ -28477,11 +28213,11 @@ const modelVisData = {
               "querySelector": ".farm-building-livestock.non-residential-building.electric-with-diesel-and-lpg * .emissions-anchor.irrigation-pump"
             }
           },
-          "barn-anchor": {
+          "farm-activities-anchor": {
             "summary": {
-              "emissions": 38.78,
-              "naturalVol": 40,
-              "energy": 144,
+              "emissions": 77.56,
+              "naturalVol": 80,
+              "energy": 288,
               "abated_emissions": 0,
               "abated_naturalVol": 0,
               "abated_energy": 0,
@@ -28492,43 +28228,21 @@ const modelVisData = {
               "economicSector": "Farming",
               "economicActor": "Farmers",
               "activities": [
-                "Farm animal care activities"
+                "Farm animal care activities",
+                "General farm activities"
               ],
               "technologies": {
                 "Farm animal care activities": [
                   "Animal care (inefficient)",
                   "Animal care (efficient)"
-                ]
-              },
-              "naturalVol_Unit": "MWh",
-              "querySelector": ".farm-building-livestock.non-residential-building.electric-with-diesel-and-lpg * .emissions-anchor.barn-anchor"
-            }
-          },
-          "center": {
-            "summary": {
-              "emissions": 38.78,
-              "naturalVol": 40,
-              "energy": 144,
-              "abated_emissions": 0,
-              "abated_naturalVol": 0,
-              "abated_energy": 0,
-              "emissionsSector": "Stationary energy",
-              "emissionsSubSector": "Commercial and institutional buildings/facilities",
-              "emissionsSource": "Grid electricity",
-              "economicSectorGroup": "Farming and fishing",
-              "economicSector": "Farming",
-              "economicActor": "Farmers",
-              "activities": [
-                "General farm activities"
-              ],
-              "technologies": {
+                ],
                 "General farm activities": [
                   "Farm plant and equipment (inefficient)",
                   "Farm plant and equipment (efficient)"
                 ]
               },
               "naturalVol_Unit": "MWh",
-              "querySelector": ".farm-building-livestock.non-residential-building.electric-with-diesel-and-lpg * .emissions-anchor.center"
+              "querySelector": ".farm-building-livestock.non-residential-building.electric-with-diesel-and-lpg * .emissions-anchor.farm-activities-anchor"
             }
           },
           "diesel-generator": {
@@ -28613,7 +28327,7 @@ const modelVisData = {
               "querySelector": ".farm-building-crops-and-grains.non-residential-building.electric-with-diesel-and-lpg * .emissions-anchor.silo-anchor"
             }
           },
-          "center": {
+          "farm-activities-anchor": {
             "summary": {
               "emissions": 38.78,
               "naturalVol": 40,
@@ -28637,7 +28351,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "MWh",
-              "querySelector": ".farm-building-crops-and-grains.non-residential-building.electric-with-diesel-and-lpg * .emissions-anchor.center"
+              "querySelector": ".farm-building-crops-and-grains.non-residential-building.electric-with-diesel-and-lpg * .emissions-anchor.farm-activities-anchor"
             }
           },
           "diesel-generator": {
@@ -28697,11 +28411,11 @@ const modelVisData = {
               "querySelector": ".farm-building-livestock.non-residential-building.electric-with-diesel-and-lpg-with-solar-pv * .emissions-anchor.irrigation-pump"
             }
           },
-          "barn-anchor": {
+          "farm-activities-anchor": {
             "summary": {
-              "emissions": 29.54,
-              "naturalVol": 30.46,
-              "energy": 109.66,
+              "emissions": 59.08,
+              "naturalVol": 60.92,
+              "energy": 219.32,
               "abated_emissions": 0,
               "abated_naturalVol": 0,
               "abated_energy": 0,
@@ -28712,43 +28426,21 @@ const modelVisData = {
               "economicSector": "Farming",
               "economicActor": "Farmers",
               "activities": [
-                "Farm animal care activities"
+                "Farm animal care activities",
+                "General farm activities"
               ],
               "technologies": {
                 "Farm animal care activities": [
                   "Animal care (inefficient)",
                   "Animal care (efficient)"
-                ]
-              },
-              "naturalVol_Unit": "MWh",
-              "querySelector": ".farm-building-livestock.non-residential-building.electric-with-diesel-and-lpg-with-solar-pv * .emissions-anchor.barn-anchor"
-            }
-          },
-          "center": {
-            "summary": {
-              "emissions": 29.54,
-              "naturalVol": 30.46,
-              "energy": 109.66,
-              "abated_emissions": 0,
-              "abated_naturalVol": 0,
-              "abated_energy": 0,
-              "emissionsSector": "Stationary energy",
-              "emissionsSubSector": "Commercial and institutional buildings/facilities",
-              "emissionsSource": "Grid electricity",
-              "economicSectorGroup": "Farming and fishing",
-              "economicSector": "Farming",
-              "economicActor": "Farmers",
-              "activities": [
-                "General farm activities"
-              ],
-              "technologies": {
+                ],
                 "General farm activities": [
                   "Farm plant and equipment (inefficient)",
                   "Farm plant and equipment (efficient)"
                 ]
               },
               "naturalVol_Unit": "MWh",
-              "querySelector": ".farm-building-livestock.non-residential-building.electric-with-diesel-and-lpg-with-solar-pv * .emissions-anchor.center"
+              "querySelector": ".farm-building-livestock.non-residential-building.electric-with-diesel-and-lpg-with-solar-pv * .emissions-anchor.farm-activities-anchor"
             }
           },
           "diesel-generator": {
@@ -28859,7 +28551,7 @@ const modelVisData = {
               "querySelector": ".farm-building-crops-and-grains.non-residential-building.electric-with-diesel-and-lpg-with-solar-pv * .emissions-anchor.silo-anchor"
             }
           },
-          "center": {
+          "farm-activities-anchor": {
             "summary": {
               "emissions": 29.54,
               "naturalVol": 30.46,
@@ -28883,7 +28575,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "MWh",
-              "querySelector": ".farm-building-crops-and-grains.non-residential-building.electric-with-diesel-and-lpg-with-solar-pv * .emissions-anchor.center"
+              "querySelector": ".farm-building-crops-and-grains.non-residential-building.electric-with-diesel-and-lpg-with-solar-pv * .emissions-anchor.farm-activities-anchor"
             }
           },
           "diesel-generator": {
@@ -29677,7 +29369,7 @@ const modelVisData = {
           }
         },
         "tractor": {
-          "center": {
+          "farm-activities-anchor": {
             "summary": {
               "emissions": 1.17,
               "naturalVol": 0.48,
@@ -29700,12 +29392,12 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "kL",
-              "querySelector": ".tractor.road-vehicle.internal-combustion-engine * .emissions-anchor.center"
+              "querySelector": ".tractor.road-vehicle.internal-combustion-engine * .emissions-anchor.farm-activities-anchor"
             }
           }
         },
         "off-road-vehicle": {
-          "center": {
+          "farm-activities-anchor": {
             "summary": {
               "emissions": 0.78,
               "naturalVol": 0.32,
@@ -29728,7 +29420,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "kL",
-              "querySelector": ".off-road-vehicle.road-vehicle.internal-combustion-engine * .emissions-anchor.center"
+              "querySelector": ".off-road-vehicle.road-vehicle.internal-combustion-engine * .emissions-anchor.farm-activities-anchor"
             }
           }
         }
@@ -30278,8 +29970,8 @@ const modelVisData = {
               "activities": [
                 "Solar electricity generated and used immediately on site",
                 "Food preparation (cooking)",
-                "Space cooling",
-                "Space heating",
+                "Domestic space cooling",
+                "Domestic space heating",
                 "Water heating",
                 "Lighting",
                 "Home entertaiment and office work",
@@ -30299,13 +29991,13 @@ const modelVisData = {
                   "Other kitchen appliances (inefficient)",
                   "Other kitchen appliances (efficient)"
                 ],
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
                   "Passive cooling"
                 ],
-                "Space heating": [
+                "Domestic space heating": [
                   "Radiator (electric element) heater",
                   "Reverse cycle split system (incl. ducted)",
                   "Heat pump hydronic"
@@ -30446,8 +30138,8 @@ const modelVisData = {
               "activities": [
                 "Solar electricity generated and used immediately on site",
                 "Food preparation (cooking)",
-                "Space cooling",
-                "Space heating",
+                "Domestic space cooling",
+                "Domestic space heating",
                 "Water heating",
                 "Lighting",
                 "Home entertaiment and office work",
@@ -30467,13 +30159,13 @@ const modelVisData = {
                   "Other kitchen appliances (inefficient)",
                   "Other kitchen appliances (efficient)"
                 ],
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
                   "Passive cooling"
                 ],
-                "Space heating": [
+                "Domestic space heating": [
                   "Radiator (electric element) heater",
                   "Reverse cycle split system (incl. ducted)",
                   "Heat pump hydronic"
@@ -30614,8 +30306,8 @@ const modelVisData = {
               "activities": [
                 "Solar electricity generated and used immediately on site",
                 "Food preparation (cooking)",
-                "Space cooling",
-                "Space heating",
+                "Domestic space cooling",
+                "Domestic space heating",
                 "Water heating",
                 "Lighting",
                 "Home entertaiment and office work",
@@ -30635,13 +30327,13 @@ const modelVisData = {
                   "Other kitchen appliances (inefficient)",
                   "Other kitchen appliances (efficient)"
                 ],
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
                   "Passive cooling"
                 ],
-                "Space heating": [
+                "Domestic space heating": [
                   "Radiator (electric element) heater",
                   "Reverse cycle split system (incl. ducted)",
                   "Heat pump hydronic"
@@ -30784,7 +30476,7 @@ const modelVisData = {
               "activities": [
                 "Solar electricity generated and used immediately on site",
                 "Food preparation (cooking)",
-                "Space cooling",
+                "Domestic space cooling",
                 "Water heating",
                 "Lighting",
                 "Home entertaiment and office work",
@@ -30804,7 +30496,7 @@ const modelVisData = {
                   "Other kitchen appliances (inefficient)",
                   "Other kitchen appliances (efficient)"
                 ],
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -30945,7 +30637,7 @@ const modelVisData = {
               "activities": [
                 "Solar electricity generated and used immediately on site",
                 "Food preparation (cooking)",
-                "Space cooling",
+                "Domestic space cooling",
                 "Water heating",
                 "Lighting",
                 "Home entertaiment and office work",
@@ -30965,7 +30657,7 @@ const modelVisData = {
                   "Other kitchen appliances (inefficient)",
                   "Other kitchen appliances (efficient)"
                 ],
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -31107,7 +30799,7 @@ const modelVisData = {
               "activities": [
                 "Solar electricity generated and used immediately on site",
                 "Food preparation (cooking)",
-                "Space cooling",
+                "Domestic space cooling",
                 "Water heating",
                 "Lighting",
                 "Home entertaiment and office work",
@@ -31127,7 +30819,7 @@ const modelVisData = {
                   "Other kitchen appliances (inefficient)",
                   "Other kitchen appliances (efficient)"
                 ],
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -31270,7 +30962,7 @@ const modelVisData = {
               "economicActor": "Households",
               "activities": [
                 "Solar electricity generated and used immediately on site",
-                "Space cooling",
+                "Domestic space cooling",
                 "Lighting",
                 "Home entertaiment and office work",
                 "Laundry",
@@ -31283,7 +30975,7 @@ const modelVisData = {
                 "Solar electricity generated and used immediately on site": [
                   "Rooftop solar PV"
                 ],
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -31419,7 +31111,7 @@ const modelVisData = {
               "economicActor": "Households",
               "activities": [
                 "Solar electricity generated and used immediately on site",
-                "Space cooling",
+                "Domestic space cooling",
                 "Lighting",
                 "Home entertaiment and office work",
                 "Laundry",
@@ -31432,7 +31124,7 @@ const modelVisData = {
                 "Solar electricity generated and used immediately on site": [
                   "Rooftop solar PV"
                 ],
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -31570,7 +31262,7 @@ const modelVisData = {
               "economicActor": "Households",
               "activities": [
                 "Solar electricity generated and used immediately on site",
-                "Space cooling",
+                "Domestic space cooling",
                 "Water heating",
                 "Lighting",
                 "Home entertaiment and office work",
@@ -31584,7 +31276,7 @@ const modelVisData = {
                 "Solar electricity generated and used immediately on site": [
                   "Rooftop solar PV"
                 ],
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -31725,7 +31417,7 @@ const modelVisData = {
               "economicActor": "Households",
               "activities": [
                 "Solar electricity generated and used immediately on site",
-                "Space cooling",
+                "Domestic space cooling",
                 "Water heating",
                 "Lighting",
                 "Home entertaiment and office work",
@@ -31739,7 +31431,7 @@ const modelVisData = {
                 "Solar electricity generated and used immediately on site": [
                   "Rooftop solar PV"
                 ],
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -31882,8 +31574,8 @@ const modelVisData = {
               "economicActor": "Households",
               "activities": [
                 "Solar electricity generated and used immediately on site",
-                "Space cooling",
-                "Space heating",
+                "Domestic space cooling",
+                "Domestic space heating",
                 "Water heating",
                 "Lighting",
                 "Home entertaiment and office work",
@@ -31897,13 +31589,13 @@ const modelVisData = {
                 "Solar electricity generated and used immediately on site": [
                   "Rooftop solar PV"
                 ],
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
                   "Passive cooling"
                 ],
-                "Space heating": [
+                "Domestic space heating": [
                   "Radiator (electric element) heater",
                   "Reverse cycle split system (incl. ducted)",
                   "Heat pump hydronic"
@@ -32043,8 +31735,8 @@ const modelVisData = {
               "economicActor": "Households",
               "activities": [
                 "Solar electricity generated and used immediately on site",
-                "Space cooling",
-                "Space heating",
+                "Domestic space cooling",
+                "Domestic space heating",
                 "Water heating",
                 "Lighting",
                 "Home entertaiment and office work",
@@ -32058,13 +31750,13 @@ const modelVisData = {
                 "Solar electricity generated and used immediately on site": [
                   "Rooftop solar PV"
                 ],
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
                   "Passive cooling"
                 ],
-                "Space heating": [
+                "Domestic space heating": [
                   "Radiator (electric element) heater",
                   "Reverse cycle split system (incl. ducted)",
                   "Heat pump hydronic"
@@ -32206,7 +31898,7 @@ const modelVisData = {
               "economicActor": "Households",
               "activities": [
                 "Solar electricity generated and used immediately on site",
-                "Space cooling",
+                "Domestic space cooling",
                 "Lighting",
                 "Home entertaiment and office work",
                 "Laundry",
@@ -32219,7 +31911,7 @@ const modelVisData = {
                 "Solar electricity generated and used immediately on site": [
                   "Rooftop solar PV"
                 ],
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -32355,7 +32047,7 @@ const modelVisData = {
               "economicActor": "Households",
               "activities": [
                 "Solar electricity generated and used immediately on site",
-                "Space cooling",
+                "Domestic space cooling",
                 "Lighting",
                 "Home entertaiment and office work",
                 "Laundry",
@@ -32368,7 +32060,7 @@ const modelVisData = {
                 "Solar electricity generated and used immediately on site": [
                   "Rooftop solar PV"
                 ],
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -32505,7 +32197,7 @@ const modelVisData = {
               "activities": [
                 "Solar electricity generated and used immediately on site",
                 "Food preparation (cooking)",
-                "Space cooling",
+                "Domestic space cooling",
                 "Lighting",
                 "Home entertaiment and office work",
                 "Laundry",
@@ -32522,7 +32214,7 @@ const modelVisData = {
                   "Other kitchen appliances (inefficient)",
                   "Other kitchen appliances (efficient)"
                 ],
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
@@ -32660,8 +32352,8 @@ const modelVisData = {
               "economicActor": "Households",
               "activities": [
                 "Solar electricity generated and used immediately on site",
-                "Space cooling",
-                "Space heating",
+                "Domestic space cooling",
+                "Domestic space heating",
                 "Lighting",
                 "Home entertaiment and office work",
                 "Laundry",
@@ -32674,13 +32366,13 @@ const modelVisData = {
                 "Solar electricity generated and used immediately on site": [
                   "Rooftop solar PV"
                 ],
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
                   "Passive cooling"
                 ],
-                "Space heating": [
+                "Domestic space heating": [
                   "Radiator (electric element) heater",
                   "Reverse cycle split system (incl. ducted)",
                   "Heat pump hydronic"
@@ -32817,8 +32509,8 @@ const modelVisData = {
               "economicActor": "Households",
               "activities": [
                 "Solar electricity generated and used immediately on site",
-                "Space cooling",
-                "Space heating",
+                "Domestic space cooling",
+                "Domestic space heating",
                 "Water heating",
                 "Lighting",
                 "Home entertaiment and office work",
@@ -32832,13 +32524,13 @@ const modelVisData = {
                 "Solar electricity generated and used immediately on site": [
                   "Rooftop solar PV"
                 ],
-                "Space cooling": [
+                "Domestic space cooling": [
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
                   "Passive cooling"
                 ],
-                "Space heating": [
+                "Domestic space heating": [
                   "Radiator (electric element) heater",
                   "Reverse cycle split system (incl. ducted)",
                   "Heat pump hydronic"
@@ -34389,8 +34081,8 @@ const modelVisData = {
               "economicSector": "Hospitality",
               "economicActor": "Hospitality providers",
               "activities": [
-                "Space cooling",
-                "Space heating",
+                "Commercial space cooling",
+                "Commercial space heating",
                 "Water heating",
                 "Food preparation (cooking)",
                 "Food storage (refrigeration)",
@@ -34399,14 +34091,14 @@ const modelVisData = {
                 "Other hospitality activities"
               ],
               "technologies": {
-                "Space cooling": [
+                "Commercial space cooling": [
                   "Split system",
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
                   "Passive cooling"
                 ],
-                "Space heating": [
+                "Commercial space heating": [
                   "Radiator (electric element) heater",
                   "Reverse cycle split system (incl. ducted)"
                 ],
@@ -34758,8 +34450,8 @@ const modelVisData = {
               "economicActor": "Education providers",
               "activities": [
                 "Solar electricity generated and used immediately on site",
-                "Space cooling",
-                "Space heating",
+                "Commercial space cooling",
+                "Commercial space heating",
                 "Water heating",
                 "Food preparation (cooking)",
                 "Food storage (refrigeration)",
@@ -34772,14 +34464,14 @@ const modelVisData = {
                 "Solar electricity generated and used immediately on site": [
                   "Rooftop solar PV"
                 ],
-                "Space cooling": [
+                "Commercial space cooling": [
                   "Split system",
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
                   "Passive cooling"
                 ],
-                "Space heating": [
+                "Commercial space heating": [
                   "Radiator (electric element) heater",
                   "Reverse cycle split system (incl. ducted)"
                 ],
@@ -34888,8 +34580,8 @@ const modelVisData = {
               "economicActor": "Public institutions and services",
               "activities": [
                 "Solar electricity generated and used immediately on site",
-                "Space cooling",
-                "Space heating",
+                "Commercial space cooling",
+                "Commercial space heating",
                 "Water heating",
                 "Food preparation (cooking)",
                 "Food storage (refrigeration)",
@@ -34902,14 +34594,14 @@ const modelVisData = {
                 "Solar electricity generated and used immediately on site": [
                   "Rooftop solar PV"
                 ],
-                "Space cooling": [
+                "Commercial space cooling": [
                   "Split system",
                   "Air conditioning",
                   "Evaporative cooling",
                   "Fans (ceiling and portable)",
                   "Passive cooling"
                 ],
-                "Space heating": [
+                "Commercial space heating": [
                   "Radiator (electric element) heater",
                   "Reverse cycle split system (incl. ducted)"
                 ],
@@ -35266,7 +34958,7 @@ const modelVisData = {
               "economicActor": "Hospitality providers",
               "activities": [
                 "Solar electricity generated and used immediately on site",
-                "Space cooling",
+                "Commercial space cooling",
                 "Food preparation (cooking)",
                 "Food storage (refrigeration)",
                 "Lighting",
@@ -35277,7 +34969,7 @@ const modelVisData = {
                 "Solar electricity generated and used immediately on site": [
                   "Rooftop solar PV"
                 ],
-                "Space cooling": [
+                "Commercial space cooling": [
                   "Split system",
                   "Air conditioning",
                   "Evaporative cooling",
@@ -36739,7 +36431,7 @@ const modelVisData = {
               "economicActor": "Education providers",
               "activities": [
                 "Solar electricity generated and used immediately on site",
-                "Space cooling",
+                "Commercial space cooling",
                 "Food preparation (cooking)",
                 "Food storage (refrigeration)",
                 "Lighting",
@@ -36751,7 +36443,7 @@ const modelVisData = {
                 "Solar electricity generated and used immediately on site": [
                   "Rooftop solar PV"
                 ],
-                "Space cooling": [
+                "Commercial space cooling": [
                   "Split system",
                   "Air conditioning",
                   "Evaporative cooling",
@@ -36857,7 +36549,7 @@ const modelVisData = {
               "economicActor": "Public institutions and services",
               "activities": [
                 "Solar electricity generated and used immediately on site",
-                "Space cooling",
+                "Commercial space cooling",
                 "Food preparation (cooking)",
                 "Food storage (refrigeration)",
                 "Lighting",
@@ -36869,7 +36561,7 @@ const modelVisData = {
                 "Solar electricity generated and used immediately on site": [
                   "Rooftop solar PV"
                 ],
-                "Space cooling": [
+                "Commercial space cooling": [
                   "Split system",
                   "Air conditioning",
                   "Evaporative cooling",
@@ -38989,7 +38681,7 @@ const modelVisData = {
           }
         },
         "tractor": {
-          "center": {
+          "farm-activities-anchor": {
             "summary": {
               "emissions": 5.13,
               "naturalVol": 1.8,
@@ -39012,12 +38704,12 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "kL",
-              "querySelector": ".tractor.road-vehicle.internal-combustion-engine * .emissions-anchor.center"
+              "querySelector": ".tractor.road-vehicle.internal-combustion-engine * .emissions-anchor.farm-activities-anchor"
             }
           }
         },
         "off-road-vehicle": {
-          "center": {
+          "farm-activities-anchor": {
             "summary": {
               "emissions": 12.82,
               "naturalVol": 4.5,
@@ -39040,7 +38732,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "kL",
-              "querySelector": ".off-road-vehicle.road-vehicle.internal-combustion-engine * .emissions-anchor.center"
+              "querySelector": ".off-road-vehicle.road-vehicle.internal-combustion-engine * .emissions-anchor.farm-activities-anchor"
             }
           }
         }

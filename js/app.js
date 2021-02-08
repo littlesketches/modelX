@@ -238,7 +238,7 @@ console.log('BUILDING APP...')
         ui: {         
             touchMenu:          false,
             enabled:            false,
-            displayType:        '',                 // Narrative, Data?
+            displayType:        '',                 // Narrative, Data
             enableKeyEvents:    true,
             keydown:            '',
         }
