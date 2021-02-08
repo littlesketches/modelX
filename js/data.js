@@ -29549,7 +29549,7 @@ const modelVisData = {
               "querySelector": ".airplane.aircraft.internal-combustion-engine * .emissions-anchor.left-wing-outer"
             }
           },
-          "right-wing-innter": {
+          "right-wing-inner": {
             "summary": {
               "emissions": 341.66,
               "naturalVol": 127.67,
@@ -29572,7 +29572,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "kL",
-              "querySelector": ".airplane.aircraft.internal-combustion-engine * .emissions-anchor.right-wing-innter"
+              "querySelector": ".airplane.aircraft.internal-combustion-engine * .emissions-anchor.right-wing-inner"
             }
           },
           "right-wing-outer": {
@@ -29633,7 +29633,7 @@ const modelVisData = {
           }
         },
         "helicopter": {
-          "right-wing-innter": {
+          "right-wing-inner": {
             "summary": {
               "emissions": 46.76,
               "naturalVol": 20,
@@ -29656,7 +29656,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "kL",
-              "querySelector": ".helicopter.aircraft.internal-combustion-engine * .emissions-anchor.right-wing-innter"
+              "querySelector": ".helicopter.aircraft.internal-combustion-engine * .emissions-anchor.right-wing-inner"
             }
           },
           "left-wing-inner": {
@@ -37742,8 +37742,8 @@ const modelVisData = {
           "solar-pv-offset": {
             "summary": {
               "emissions": 0,
-              "naturalVol": 12.37,
-              "energy": 44.55,
+              "naturalVol": 56.379999999999995,
+              "energy": 202.96,
               "abated_emissions": 10.91,
               "abated_naturalVol": 0,
               "abated_energy": 0,
@@ -37754,11 +37754,26 @@ const modelVisData = {
               "economicSector": "Farming",
               "economicActor": "Farmers",
               "activities": [
-                "Solar electricity generated and used immediately on site"
+                "Solar electricity generated and used immediately on site",
+                "Irrigation and pumps",
+                "Farm animal care activities",
+                "General farm activities"
               ],
               "technologies": {
                 "Solar electricity generated and used immediately on site": [
                   "Rooftop solar PV"
+                ],
+                "Irrigation and pumps": [
+                  "Irrigation and pumps (inefficient)",
+                  "Irrigation and pumps (efficient)"
+                ],
+                "Farm animal care activities": [
+                  "Animal care (inefficient)",
+                  "Animal care (efficient)"
+                ],
+                "General farm activities": [
+                  "Farm plant and equipment (inefficient)",
+                  "Farm plant and equipment (efficient)"
                 ]
               },
               "naturalVol_Unit": "MWh",
@@ -37789,43 +37804,6 @@ const modelVisData = {
               },
               "naturalVol_Unit": "MWh",
               "querySelector": ".farm-building-livestock.non-residential-building.electric-with-diesel-and-lpg-with-solar-pv * .emissions-anchor.solar-pv-avoided-grid"
-            }
-          },
-          "": {
-            "summary": {
-              "emissions": 0,
-              "naturalVol": 44.00999999999999,
-              "energy": 158.41000000000003,
-              "abated_emissions": 0,
-              "abated_naturalVol": 0,
-              "abated_energy": 0,
-              "emissionsSector": "Stationary energy",
-              "emissionsSubSector": "Commercial and institutional buildings/facilities",
-              "emissionsSource": "Solar PV (rooftop used on site)",
-              "economicSectorGroup": "Farming and fishing",
-              "economicSector": "Farming",
-              "economicActor": "Farmers",
-              "activities": [
-                "Irrigation and pumps",
-                "Farm animal care activities",
-                "General farm activities"
-              ],
-              "technologies": {
-                "Irrigation and pumps": [
-                  "Irrigation and pumps (inefficient)",
-                  "Irrigation and pumps (efficient)"
-                ],
-                "Farm animal care activities": [
-                  "Animal care (inefficient)",
-                  "Animal care (efficient)"
-                ],
-                "General farm activities": [
-                  "Farm plant and equipment (inefficient)",
-                  "Farm plant and equipment (efficient)"
-                ]
-              },
-              "naturalVol_Unit": "MWh",
-              "querySelector": ".farm-building-livestock.non-residential-building.electric-with-diesel-and-lpg-with-solar-pv * .emissions-anchor."
             }
           }
         },
