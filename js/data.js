@@ -20,10 +20,10 @@ const modelVisData = {
     "mining-or-extraction-site": {
       "drilling-rig": {
         "oil-and-gas-extraction-facility": {
-          "central": {
+          "oil-well": {
             "summary": {
-              "emissions": 17000,
-              "naturalVol": 17000,
+              "emissions": 12000,
+              "naturalVol": 12000,
               "energy": 0,
               "abated_emissions": 0,
               "abated_naturalVol": 0,
@@ -35,26 +35,48 @@ const modelVisData = {
               "economicSector": "Extractive industries",
               "economicActor": "Mining and oil and gas operators",
               "activities": [
-                "Natural gas extraction and recovery",
-                "Oil extraction and recovery"
+                "Natural gas extraction and recovery"
               ],
               "technologies": {
                 "Natural gas extraction and recovery": [
                   "Natural gas extraction from oil wells"
-                ],
+                ]
+              },
+              "naturalVol_Unit": "mil. barrels",
+              "querySelector": ".oil-and-gas-extraction-facility.mining-or-extraction-site.drilling-rig * .emissions-anchor.oil-well"
+            }
+          },
+          "drilling-rig": {
+            "summary": {
+              "emissions": 5000,
+              "naturalVol": 5000,
+              "energy": 0,
+              "abated_emissions": 0,
+              "abated_naturalVol": 0,
+              "abated_energy": 0,
+              "emissionsSector": "Stationary energy",
+              "emissionsSubSector": "Fugitive emissions from oil and natural gas systems",
+              "emissionsSource": "Fugitive emissions (oil and gas)",
+              "economicSectorGroup": "Extractive industries",
+              "economicSector": "Extractive industries",
+              "economicActor": "Mining and oil and gas operators",
+              "activities": [
+                "Oil extraction and recovery"
+              ],
+              "technologies": {
                 "Oil extraction and recovery": [
                   "OIl well drilling"
                 ]
               },
               "naturalVol_Unit": "mil. barrels",
-              "querySelector": ".oil-and-gas-extraction-facility.mining-or-extraction-site.drilling-rig * .emissions-anchor.central"
+              "querySelector": ".oil-and-gas-extraction-facility.mining-or-extraction-site.drilling-rig * .emissions-anchor.drilling-rig"
             }
           }
         }
       },
       "mine": {
         "coal-mine": {
-          "central": {
+          "excavated-mine": {
             "summary": {
               "emissions": 2061.32,
               "naturalVol": 2061.32,
@@ -77,7 +99,37 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "M tonnes",
-              "querySelector": ".coal-mine.mining-or-extraction-site.mine * .emissions-anchor.central"
+              "querySelector": ".coal-mine.mining-or-extraction-site.mine * .emissions-anchor.excavated-mine"
+            }
+          }
+        }
+      },
+      "mains-gas-connected-facility-with-solar-pv": {
+        "industrial-minerals-facility": {
+          "industrial-processes": {
+            "summary": {
+              "emissions": 1500,
+              "naturalVol": 1500,
+              "energy": 0,
+              "abated_emissions": 0,
+              "abated_naturalVol": 0,
+              "abated_energy": 0,
+              "emissionsSector": "Industrial processes and product use",
+              "emissionsSubSector": "Industrial processes",
+              "emissionsSource": "Industrial process: minerals",
+              "economicSectorGroup": "Industrial",
+              "economicSector": "Industrial processes",
+              "economicActor": "Industrial processing facilities",
+              "activities": [
+                "Industrial minerals activities"
+              ],
+              "technologies": {
+                "Industrial minerals activities": [
+                  "Industrial minerals plant and equipment (efficient)"
+                ]
+              },
+              "naturalVol_Unit": "t CO2-e",
+              "querySelector": ".industrial-minerals-facility.mining-or-extraction-site.mains-gas-connected-facility-with-solar-pv * .emissions-anchor.industrial-processes"
             }
           }
         }
@@ -15072,7 +15124,7 @@ const modelVisData = {
               ],
               "technologies": {
                 "Heating, cooling and ventilation (HVAC)": [
-                  "Split system",
+                  "Transmission and distribution lines",
                   "Fans and cooling towers (inefficent)",
                   "Fans and cooling towers (efficient)",
                   "Chillers (air cooled / inefficent)",
@@ -18573,7 +18625,7 @@ const modelVisData = {
               "querySelector": ".industrial-chemicals-facility.non-residential-building.mains-gas-connected-facility * .emissions-anchor.water-services"
             }
           },
-          "centre": {
+          "industrial-processes": {
             "summary": {
               "emissions": 31500,
               "naturalVol": 31500,
@@ -18597,7 +18649,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "t CO2-e",
-              "querySelector": ".industrial-chemicals-facility.non-residential-building.mains-gas-connected-facility * .emissions-anchor.centre"
+              "querySelector": ".industrial-chemicals-facility.non-residential-building.mains-gas-connected-facility * .emissions-anchor.industrial-processes"
             }
           }
         },
@@ -18912,7 +18964,7 @@ const modelVisData = {
               "querySelector": ".industrial-electronics-facility.non-residential-building.mains-gas-connected-facility * .emissions-anchor.water-services"
             }
           },
-          "centre": {
+          "industrial-processes": {
             "summary": {
               "emissions": 31500,
               "naturalVol": 31500,
@@ -18936,7 +18988,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "t CO2-e",
-              "querySelector": ".industrial-electronics-facility.non-residential-building.mains-gas-connected-facility * .emissions-anchor.centre"
+              "querySelector": ".industrial-electronics-facility.non-residential-building.mains-gas-connected-facility * .emissions-anchor.industrial-processes"
             }
           }
         },
@@ -19251,7 +19303,7 @@ const modelVisData = {
               "querySelector": ".industrial-metals-facility.non-residential-building.mains-gas-connected-facility * .emissions-anchor.water-services"
             }
           },
-          "centre": {
+          "industrial-processes": {
             "summary": {
               "emissions": 31500,
               "naturalVol": 31500,
@@ -19275,7 +19327,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "t CO2-e",
-              "querySelector": ".industrial-metals-facility.non-residential-building.mains-gas-connected-facility * .emissions-anchor.centre"
+              "querySelector": ".industrial-metals-facility.non-residential-building.mains-gas-connected-facility * .emissions-anchor.industrial-processes"
             }
           }
         },
@@ -19590,7 +19642,7 @@ const modelVisData = {
               "querySelector": ".industrial-minerals-facility.non-residential-building.mains-gas-connected-facility * .emissions-anchor.water-services"
             }
           },
-          "centre": {
+          "industrial-processes": {
             "summary": {
               "emissions": 31500,
               "naturalVol": 31500,
@@ -19614,7 +19666,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "t CO2-e",
-              "querySelector": ".industrial-minerals-facility.non-residential-building.mains-gas-connected-facility * .emissions-anchor.centre"
+              "querySelector": ".industrial-minerals-facility.non-residential-building.mains-gas-connected-facility * .emissions-anchor.industrial-processes"
             }
           }
         },
@@ -24408,7 +24460,7 @@ const modelVisData = {
               "querySelector": ".industrial-chemicals-facility.non-residential-building.mains-gas-connected-facility-with-solar-pv * .emissions-anchor.water-services"
             }
           },
-          "centre": {
+          "industrial-processes": {
             "summary": {
               "emissions": 31500,
               "naturalVol": 31500,
@@ -24432,7 +24484,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "t CO2-e",
-              "querySelector": ".industrial-chemicals-facility.non-residential-building.mains-gas-connected-facility-with-solar-pv * .emissions-anchor.centre"
+              "querySelector": ".industrial-chemicals-facility.non-residential-building.mains-gas-connected-facility-with-solar-pv * .emissions-anchor.industrial-processes"
             }
           }
         },
@@ -24747,7 +24799,7 @@ const modelVisData = {
               "querySelector": ".industrial-electronics-facility.non-residential-building.mains-gas-connected-facility-with-solar-pv * .emissions-anchor.water-services"
             }
           },
-          "centre": {
+          "industrial-processes": {
             "summary": {
               "emissions": 31500,
               "naturalVol": 31500,
@@ -24771,7 +24823,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "t CO2-e",
-              "querySelector": ".industrial-electronics-facility.non-residential-building.mains-gas-connected-facility-with-solar-pv * .emissions-anchor.centre"
+              "querySelector": ".industrial-electronics-facility.non-residential-building.mains-gas-connected-facility-with-solar-pv * .emissions-anchor.industrial-processes"
             }
           }
         },
@@ -25086,7 +25138,7 @@ const modelVisData = {
               "querySelector": ".industrial-metals-facility.non-residential-building.mains-gas-connected-facility-with-solar-pv * .emissions-anchor.water-services"
             }
           },
-          "centre": {
+          "industrial-processes": {
             "summary": {
               "emissions": 31500,
               "naturalVol": 31500,
@@ -25110,7 +25162,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "t CO2-e",
-              "querySelector": ".industrial-metals-facility.non-residential-building.mains-gas-connected-facility-with-solar-pv * .emissions-anchor.centre"
+              "querySelector": ".industrial-metals-facility.non-residential-building.mains-gas-connected-facility-with-solar-pv * .emissions-anchor.industrial-processes"
             }
           }
         },
@@ -25425,10 +25477,10 @@ const modelVisData = {
               "querySelector": ".industrial-minerals-facility.non-residential-building.mains-gas-connected-facility-with-solar-pv * .emissions-anchor.water-services"
             }
           },
-          "centre": {
+          "industrial-processes": {
             "summary": {
-              "emissions": 31500,
-              "naturalVol": 31500,
+              "emissions": 30000,
+              "naturalVol": 30000,
               "energy": 0,
               "abated_emissions": 0,
               "abated_naturalVol": 0,
@@ -25444,12 +25496,11 @@ const modelVisData = {
               ],
               "technologies": {
                 "Industrial minerals activities": [
-                  "Industrial minerals plant and equipment (inefficient)",
-                  "Industrial minerals plant and equipment (efficient)"
+                  "Industrial minerals plant and equipment (inefficient)"
                 ]
               },
               "naturalVol_Unit": "t CO2-e",
-              "querySelector": ".industrial-minerals-facility.non-residential-building.mains-gas-connected-facility-with-solar-pv * .emissions-anchor.centre"
+              "querySelector": ".industrial-minerals-facility.non-residential-building.mains-gas-connected-facility-with-solar-pv * .emissions-anchor.industrial-processes"
             }
           }
         },
@@ -29002,9 +29053,9 @@ const modelVisData = {
         "campervan": {
           "center-anchor": {
             "summary": {
-              "emissions": 160.77,
-              "naturalVol": 66,
-              "energy": 2257.2,
+              "emissions": 124.23,
+              "naturalVol": 51,
+              "energy": 1744.1999999999998,
               "abated_emissions": 0,
               "abated_naturalVol": 0,
               "abated_energy": 0,
@@ -29031,8 +29082,7 @@ const modelVisData = {
                   "Other road vehicles"
                 ],
                 "Commute for personal business": [
-                  "Other road vehicles",
-                  "Motorcycle"
+                  "Other road vehicles"
                 ]
               },
               "naturalVol_Unit": "kL",
@@ -29043,15 +29093,15 @@ const modelVisData = {
         "motorcycle": {
           "center-anchor": {
             "summary": {
-              "emissions": 109.62,
-              "naturalVol": 45,
-              "energy": 1539,
+              "emissions": 116.93,
+              "naturalVol": 48,
+              "energy": 1641.6,
               "abated_emissions": 0,
               "abated_naturalVol": 0,
               "abated_energy": 0,
               "emissionsSector": "Transport",
               "emissionsSubSector": "On-road transportation",
-              "emissionsSource": "Ethanol (E85)",
+              "emissionsSource": "Petrol",
               "economicSectorGroup": "Residential",
               "economicSector": "Residential",
               "economicActor": "Households",
@@ -29688,37 +29738,737 @@ const modelVisData = {
         }
       }
     },
-    "livestock": {
-      "cow-beef": {
-        "cattle-beef": {
-          "centre": {
+    "agricultural-land": {
+      "cattle-beef": {
+        "agricultural-grazing-land": {
+          "land-management-anchor": {
             "summary": {
-              "emissions": 0,
-              "naturalVol": 60000,
+              "emissions": 362.4,
+              "naturalVol": 12000,
               "energy": 0,
               "abated_emissions": 0,
               "abated_naturalVol": 0,
               "abated_energy": 0,
               "emissionsSector": "Forestry and land use",
               "emissionsSubSector": "Land",
-              "emissionsSource": "Livestock manure management",
+              "emissionsSource": "Agricultural land atmospheric deposition",
+              "economicSectorGroup": "Farming and fishing",
+              "economicSector": "Farming",
+              "economicActor": "Farmers",
+              "activities": [
+                "Grazing land management",
+                "Leaching and runoff from grazing land",
+                "Atmospheric deposition from grazing land"
+              ],
+              "technologies": {
+                "Grazing land management": [
+                  "Standard farming practices",
+                  "Efficient farming practices"
+                ],
+                "Leaching and runoff from grazing land": [
+                  "Standard farming practices",
+                  "Efficient farming practices"
+                ],
+                "Atmospheric deposition from grazing land": [
+                  "Standard farming practices",
+                  "Efficient farming practices"
+                ]
+              },
+              "naturalVol_Unit": "hectares",
+              "querySelector": ".agricultural-grazing-land.agricultural-land.cattle-beef * .emissions-anchor.land-management-anchor"
+            }
+          }
+        }
+      },
+      "cattle-dairy": {
+        "agricultural-grazing-land": {
+          "land-management-anchor": {
+            "summary": {
+              "emissions": 965.3,
+              "naturalVol": 10500,
+              "energy": 0,
+              "abated_emissions": 0,
+              "abated_naturalVol": 0,
+              "abated_energy": 0,
+              "emissionsSector": "Forestry and land use",
+              "emissionsSubSector": "Land",
+              "emissionsSource": "Agricultural land atmospheric deposition",
+              "economicSectorGroup": "Farming and fishing",
+              "economicSector": "Farming",
+              "economicActor": "Farmers",
+              "activities": [
+                "Grazing land management",
+                "Leaching and runoff from grazing land",
+                "Atmospheric deposition from grazing land"
+              ],
+              "technologies": {
+                "Grazing land management": [
+                  "Standard farming practices",
+                  "Efficient farming practices"
+                ],
+                "Leaching and runoff from grazing land": [
+                  "Standard farming practices",
+                  "Efficient farming practices"
+                ],
+                "Atmospheric deposition from grazing land": [
+                  "Standard farming practices",
+                  "Efficient farming practices"
+                ]
+              },
+              "naturalVol_Unit": "hectares",
+              "querySelector": ".agricultural-grazing-land.agricultural-land.cattle-dairy * .emissions-anchor.land-management-anchor"
+            }
+          }
+        }
+      },
+      "pig": {
+        "agricultural-grazing-land": {
+          "land-management-anchor": {
+            "summary": {
+              "emissions": 0.25,
+              "naturalVol": 1500,
+              "energy": 0,
+              "abated_emissions": 0,
+              "abated_naturalVol": 0,
+              "abated_energy": 0,
+              "emissionsSector": "Forestry and land use",
+              "emissionsSubSector": "Land",
+              "emissionsSource": "Agricultural land atmospheric deposition",
+              "economicSectorGroup": "Farming and fishing",
+              "economicSector": "Farming",
+              "economicActor": "Farmers",
+              "activities": [
+                "Grazing land management",
+                "Leaching and runoff from grazing land",
+                "Atmospheric deposition from grazing land"
+              ],
+              "technologies": {
+                "Grazing land management": [
+                  "Standard farming practices",
+                  "Efficient farming practices"
+                ],
+                "Leaching and runoff from grazing land": [
+                  "Standard farming practices",
+                  "Efficient farming practices"
+                ],
+                "Atmospheric deposition from grazing land": [
+                  "Standard farming practices",
+                  "Efficient farming practices"
+                ]
+              },
+              "naturalVol_Unit": "hectares",
+              "querySelector": ".agricultural-grazing-land.agricultural-land.pig * .emissions-anchor.land-management-anchor"
+            }
+          }
+        }
+      },
+      "poultry": {
+        "agricultural-grazing-land": {
+          "land-management-anchor": {
+            "summary": {
+              "emissions": 0.6,
+              "naturalVol": 9000,
+              "energy": 0,
+              "abated_emissions": 0,
+              "abated_naturalVol": 0,
+              "abated_energy": 0,
+              "emissionsSector": "Forestry and land use",
+              "emissionsSubSector": "Land",
+              "emissionsSource": "Agricultural land atmospheric deposition",
+              "economicSectorGroup": "Farming and fishing",
+              "economicSector": "Farming",
+              "economicActor": "Farmers",
+              "activities": [
+                "Grazing land management",
+                "Leaching and runoff from grazing land",
+                "Atmospheric deposition from grazing land"
+              ],
+              "technologies": {
+                "Grazing land management": [
+                  "Standard farming practices",
+                  "Efficient farming practices"
+                ],
+                "Leaching and runoff from grazing land": [
+                  "Standard farming practices",
+                  "Efficient farming practices"
+                ],
+                "Atmospheric deposition from grazing land": [
+                  "Standard farming practices",
+                  "Efficient farming practices"
+                ]
+              },
+              "naturalVol_Unit": "hectares",
+              "querySelector": ".agricultural-grazing-land.agricultural-land.poultry * .emissions-anchor.land-management-anchor"
+            }
+          }
+        }
+      },
+      "sheep": {
+        "agricultural-grazing-land": {
+          "land-management-anchor": {
+            "summary": {
+              "emissions": 15,
+              "naturalVol": 6000,
+              "energy": 0,
+              "abated_emissions": 0,
+              "abated_naturalVol": 0,
+              "abated_energy": 0,
+              "emissionsSector": "Forestry and land use",
+              "emissionsSubSector": "Land",
+              "emissionsSource": "Agricultural land atmospheric deposition",
+              "economicSectorGroup": "Farming and fishing",
+              "economicSector": "Farming",
+              "economicActor": "Farmers",
+              "activities": [
+                "Grazing land management",
+                "Leaching and runoff from grazing land",
+                "Atmospheric deposition from grazing land"
+              ],
+              "technologies": {
+                "Grazing land management": [
+                  "Standard farming practices",
+                  "Efficient farming practices"
+                ],
+                "Leaching and runoff from grazing land": [
+                  "Standard farming practices",
+                  "Efficient farming practices"
+                ],
+                "Atmospheric deposition from grazing land": [
+                  "Standard farming practices",
+                  "Efficient farming practices"
+                ]
+              },
+              "naturalVol_Unit": "hectares",
+              "querySelector": ".agricultural-grazing-land.agricultural-land.sheep * .emissions-anchor.land-management-anchor"
+            }
+          }
+        }
+      },
+      "barley": {
+        "agricultural-land-for-food-production": {
+          "land-management-anchor": {
+            "summary": {
+              "emissions": 2862.11,
+              "naturalVol": 10000,
+              "energy": 0,
+              "abated_emissions": 0,
+              "abated_naturalVol": 0,
+              "abated_energy": 0,
+              "emissionsSector": "Industrial processes and product use",
+              "emissionsSubSector": "Product use",
+              "emissionsSource": "Fertliser",
+              "economicSectorGroup": "Farming and fishing",
+              "economicSector": "Farming",
+              "economicActor": "Farmers",
+              "activities": [
+                "Growing crops and grains"
+              ],
+              "technologies": {
+                "Growing crops and grains": [
+                  "Standard farming practices",
+                  "Efficient farming practices",
+                  "Regenerative farming practices"
+                ]
+              },
+              "naturalVol_Unit": "kg product",
+              "querySelector": ".agricultural-land-for-food-production.agricultural-land.barley * .emissions-anchor.land-management-anchor"
+            }
+          }
+        }
+      },
+      "corn-maize": {
+        "agricultural-land-for-food-production": {
+          "land-management-anchor": {
+            "summary": {
+              "emissions": 146.95999999999998,
+              "naturalVol": 5000,
+              "energy": 0,
+              "abated_emissions": 0,
+              "abated_naturalVol": 0,
+              "abated_energy": 0,
+              "emissionsSector": "Industrial processes and product use",
+              "emissionsSubSector": "Product use",
+              "emissionsSource": "Fertliser",
+              "economicSectorGroup": "Farming and fishing",
+              "economicSector": "Farming",
+              "economicActor": "Farmers",
+              "activities": [
+                "Growing non-ceral crops"
+              ],
+              "technologies": {
+                "Growing non-ceral crops": [
+                  "Standard farming practices",
+                  "Efficient farming practices",
+                  "Regenerative farming practices"
+                ]
+              },
+              "naturalVol_Unit": "kg product",
+              "querySelector": ".agricultural-land-for-food-production.agricultural-land.corn-maize * .emissions-anchor.land-management-anchor"
+            }
+          }
+        }
+      },
+      "soybean": {
+        "agricultural-land-for-food-production": {
+          "land-management-anchor": {
+            "summary": {
+              "emissions": 349.79,
+              "naturalVol": 10000,
+              "energy": 0,
+              "abated_emissions": 0,
+              "abated_naturalVol": 0,
+              "abated_energy": 0,
+              "emissionsSector": "Industrial processes and product use",
+              "emissionsSubSector": "Product use",
+              "emissionsSource": "Fertliser",
+              "economicSectorGroup": "Farming and fishing",
+              "economicSector": "Farming",
+              "economicActor": "Farmers",
+              "activities": [
+                "Growing non-ceral crops"
+              ],
+              "technologies": {
+                "Growing non-ceral crops": [
+                  "Standard farming practices",
+                  "Efficient farming practices",
+                  "Regenerative farming practices"
+                ]
+              },
+              "naturalVol_Unit": "kg product",
+              "querySelector": ".agricultural-land-for-food-production.agricultural-land.soybean * .emissions-anchor.land-management-anchor"
+            }
+          }
+        }
+      },
+      "potatoes": {
+        "agricultural-land-for-food-production": {
+          "land-management-anchor": {
+            "summary": {
+              "emissions": 1000,
+              "naturalVol": 5000,
+              "energy": 0,
+              "abated_emissions": 0,
+              "abated_naturalVol": 0,
+              "abated_energy": 0,
+              "emissionsSector": "Industrial processes and product use",
+              "emissionsSubSector": "Product use",
+              "emissionsSource": "Fertliser",
+              "economicSectorGroup": "Farming and fishing",
+              "economicSector": "Farming",
+              "economicActor": "Farmers",
+              "activities": [
+                "Growing fruit and vegetables"
+              ],
+              "technologies": {
+                "Growing fruit and vegetables": [
+                  "Standard farming practices",
+                  "Efficient farming practices",
+                  "Regenerative farming practices"
+                ]
+              },
+              "naturalVol_Unit": "kg product",
+              "querySelector": ".agricultural-land-for-food-production.agricultural-land.potatoes * .emissions-anchor.land-management-anchor"
+            }
+          }
+        }
+      },
+      "apples": {
+        "agricultural-land-for-food-production": {
+          "land-management-anchor": {
+            "summary": {
+              "emissions": 5.14,
+              "naturalVol": 5000,
+              "energy": 0,
+              "abated_emissions": 0,
+              "abated_naturalVol": 0,
+              "abated_energy": 0,
+              "emissionsSector": "Industrial processes and product use",
+              "emissionsSubSector": "Product use",
+              "emissionsSource": "Fertliser",
+              "economicSectorGroup": "Farming and fishing",
+              "economicSector": "Farming",
+              "economicActor": "Farmers",
+              "activities": [
+                "Growing fruit and vegetables"
+              ],
+              "technologies": {
+                "Growing fruit and vegetables": [
+                  "Standard farming practices",
+                  "Efficient farming practices",
+                  "Regenerative farming practices"
+                ]
+              },
+              "naturalVol_Unit": "kg product",
+              "querySelector": ".agricultural-land-for-food-production.agricultural-land.apples * .emissions-anchor.land-management-anchor"
+            }
+          }
+        }
+      },
+      "oranges": {
+        "agricultural-land-for-food-production": {
+          "land-management-anchor": {
+            "summary": {
+              "emissions": 4.63,
+              "naturalVol": 5000,
+              "energy": 0,
+              "abated_emissions": 0,
+              "abated_naturalVol": 0,
+              "abated_energy": 0,
+              "emissionsSector": "Industrial processes and product use",
+              "emissionsSubSector": "Product use",
+              "emissionsSource": "Fertliser",
+              "economicSectorGroup": "Farming and fishing",
+              "economicSector": "Farming",
+              "economicActor": "Farmers",
+              "activities": [
+                "Growing fruit and vegetables"
+              ],
+              "technologies": {
+                "Growing fruit and vegetables": [
+                  "Standard farming practices",
+                  "Efficient farming practices",
+                  "Regenerative farming practices"
+                ]
+              },
+              "naturalVol_Unit": "kg product",
+              "querySelector": ".agricultural-land-for-food-production.agricultural-land.oranges * .emissions-anchor.land-management-anchor"
+            }
+          }
+        }
+      }
+    },
+    "livestock": {
+      "cattle-beef": {
+        "farm-animal": {
+          "animal-anchor": {
+            "summary": {
+              "emissions": 4737.960000000001,
+              "naturalVol": 8000,
+              "energy": 0,
+              "abated_emissions": 0,
+              "abated_naturalVol": 0,
+              "abated_energy": 0,
+              "emissionsSector": "Agriculture",
+              "emissionsSubSector": "Livestock",
+              "emissionsSource": "Livestock animal waste",
               "economicSectorGroup": "Farming and fishing",
               "economicSector": "Farming",
               "economicActor": "Farmers",
               "activities": [
                 "Livestock enteric fermentation",
-                "Livestock manure management"
+                "Livestock animal waste"
               ],
               "technologies": {
                 "Livestock enteric fermentation": [
-                  ""
+                  "Standard feed practices",
+                  "Low emissions feed practices"
                 ],
-                "Livestock manure management": [
-                  ""
+                "Livestock animal waste": [
+                  "Standard manure management",
+                  "Emissions capture (manure)"
                 ]
               },
               "naturalVol_Unit": "animals",
-              "querySelector": ".cattle-beef.livestock.cow-beef * .emissions-anchor.centre"
+              "querySelector": ".farm-animal.livestock.cattle-beef * .emissions-anchor.animal-anchor"
+            }
+          },
+          "manure-anchor": {
+            "summary": {
+              "emissions": 487.32,
+              "naturalVol": 8800,
+              "energy": 0,
+              "abated_emissions": 0,
+              "abated_naturalVol": 0,
+              "abated_energy": 0,
+              "emissionsSector": "Agriculture",
+              "emissionsSubSector": "Livestock",
+              "emissionsSource": "Livestock dung and urine",
+              "economicSectorGroup": "Farming and fishing",
+              "economicSector": "Farming",
+              "economicActor": "Farmers",
+              "activities": [
+                "Livestock manure management",
+                "Livestock dung and urine"
+              ],
+              "technologies": {
+                "Livestock manure management": [
+                  "Standard manure management",
+                  "Emissions capture (manure)"
+                ],
+                "Livestock dung and urine": [
+                  "Standard farming practices"
+                ]
+              },
+              "naturalVol_Unit": "animals",
+              "querySelector": ".farm-animal.livestock.cattle-beef * .emissions-anchor.manure-anchor"
+            }
+          }
+        }
+      },
+      "cattle-dairy": {
+        "farm-animal": {
+          "animal-anchor": {
+            "summary": {
+              "emissions": 7497,
+              "naturalVol": 7000,
+              "energy": 0,
+              "abated_emissions": 0,
+              "abated_naturalVol": 0,
+              "abated_energy": 0,
+              "emissionsSector": "Agriculture",
+              "emissionsSubSector": "Livestock",
+              "emissionsSource": "Livestock animal waste",
+              "economicSectorGroup": "Farming and fishing",
+              "economicSector": "Farming",
+              "economicActor": "Farmers",
+              "activities": [
+                "Livestock enteric fermentation",
+                "Livestock animal waste"
+              ],
+              "technologies": {
+                "Livestock enteric fermentation": [
+                  "Standard feed practices",
+                  "Low emissions feed practices"
+                ],
+                "Livestock animal waste": [
+                  "Standard manure management",
+                  "Emissions capture (manure)"
+                ]
+              },
+              "naturalVol_Unit": "animals",
+              "querySelector": ".farm-animal.livestock.cattle-dairy * .emissions-anchor.animal-anchor"
+            }
+          },
+          "manure-anchor": {
+            "summary": {
+              "emissions": 2085.65,
+              "naturalVol": 7000,
+              "energy": 0,
+              "abated_emissions": 0,
+              "abated_naturalVol": 0,
+              "abated_energy": 0,
+              "emissionsSector": "Agriculture",
+              "emissionsSubSector": "Livestock",
+              "emissionsSource": "Livestock dung and urine",
+              "economicSectorGroup": "Farming and fishing",
+              "economicSector": "Farming",
+              "economicActor": "Farmers",
+              "activities": [
+                "Livestock manure management",
+                "Livestock dung and urine"
+              ],
+              "technologies": {
+                "Livestock manure management": [
+                  "Standard manure management",
+                  "Emissions capture (manure)"
+                ],
+                "Livestock dung and urine": [
+                  "Standard farming practices"
+                ]
+              },
+              "naturalVol_Unit": "animals",
+              "querySelector": ".farm-animal.livestock.cattle-dairy * .emissions-anchor.manure-anchor"
+            }
+          }
+        }
+      },
+      "pig": {
+        "farm-animal": {
+          "animal-anchor": {
+            "summary": {
+              "emissions": 85.8,
+              "naturalVol": 1000,
+              "energy": 0,
+              "abated_emissions": 0,
+              "abated_naturalVol": 0,
+              "abated_energy": 0,
+              "emissionsSector": "Agriculture",
+              "emissionsSubSector": "Livestock",
+              "emissionsSource": "Livestock animal waste",
+              "economicSectorGroup": "Farming and fishing",
+              "economicSector": "Farming",
+              "economicActor": "Farmers",
+              "activities": [
+                "Livestock enteric fermentation",
+                "Livestock animal waste"
+              ],
+              "technologies": {
+                "Livestock enteric fermentation": [
+                  "Standard feed practices",
+                  "Low emissions feed practices"
+                ],
+                "Livestock animal waste": [
+                  "Standard manure management",
+                  "Emissions capture (manure)"
+                ]
+              },
+              "naturalVol_Unit": "animals",
+              "querySelector": ".farm-animal.livestock.pig * .emissions-anchor.animal-anchor"
+            }
+          },
+          "manure-anchor": {
+            "summary": {
+              "emissions": 308.55,
+              "naturalVol": 900,
+              "energy": 0,
+              "abated_emissions": 0,
+              "abated_naturalVol": 0,
+              "abated_energy": 0,
+              "emissionsSector": "Agriculture",
+              "emissionsSubSector": "Livestock",
+              "emissionsSource": "Livestock dung and urine",
+              "economicSectorGroup": "Farming and fishing",
+              "economicSector": "Farming",
+              "economicActor": "Farmers",
+              "activities": [
+                "Livestock manure management",
+                "Livestock dung and urine"
+              ],
+              "technologies": {
+                "Livestock manure management": [
+                  "Standard manure management",
+                  "Emissions capture (manure)"
+                ],
+                "Livestock dung and urine": [
+                  "Standard farming practices"
+                ]
+              },
+              "naturalVol_Unit": "animals",
+              "querySelector": ".farm-animal.livestock.pig * .emissions-anchor.manure-anchor"
+            }
+          }
+        }
+      },
+      "poultry": {
+        "farm-animal": {
+          "animal-anchor": {
+            "summary": {
+              "emissions": 6.9,
+              "naturalVol": 6000,
+              "energy": 0,
+              "abated_emissions": 0,
+              "abated_naturalVol": 0,
+              "abated_energy": 0,
+              "emissionsSector": "Agriculture",
+              "emissionsSubSector": "Livestock",
+              "emissionsSource": "Livestock animal waste",
+              "economicSectorGroup": "Farming and fishing",
+              "economicSector": "Farming",
+              "economicActor": "Farmers",
+              "activities": [
+                "Livestock enteric fermentation",
+                "Livestock animal waste"
+              ],
+              "technologies": {
+                "Livestock enteric fermentation": [
+                  "Standard feed practices",
+                  "Low emissions feed practices"
+                ],
+                "Livestock animal waste": [
+                  "Standard manure management",
+                  "Emissions capture (manure)"
+                ]
+              },
+              "naturalVol_Unit": "animals",
+              "querySelector": ".farm-animal.livestock.poultry * .emissions-anchor.animal-anchor"
+            }
+          },
+          "manure-anchor": {
+            "summary": {
+              "emissions": 70.2,
+              "naturalVol": 6000,
+              "energy": 0,
+              "abated_emissions": 0,
+              "abated_naturalVol": 0,
+              "abated_energy": 0,
+              "emissionsSector": "Agriculture",
+              "emissionsSubSector": "Livestock",
+              "emissionsSource": "Livestock dung and urine",
+              "economicSectorGroup": "Farming and fishing",
+              "economicSector": "Farming",
+              "economicActor": "Farmers",
+              "activities": [
+                "Livestock manure management",
+                "Livestock dung and urine"
+              ],
+              "technologies": {
+                "Livestock manure management": [
+                  "Standard manure management",
+                  "Emissions capture (manure)"
+                ],
+                "Livestock dung and urine": [
+                  "Standard farming practices"
+                ]
+              },
+              "naturalVol_Unit": "animals",
+              "querySelector": ".farm-animal.livestock.poultry * .emissions-anchor.manure-anchor"
+            }
+          }
+        }
+      },
+      "sheep": {
+        "farm-animal": {
+          "animal-anchor": {
+            "summary": {
+              "emissions": 168.6,
+              "naturalVol": 4000,
+              "energy": 0,
+              "abated_emissions": 0,
+              "abated_naturalVol": 0,
+              "abated_energy": 0,
+              "emissionsSector": "Agriculture",
+              "emissionsSubSector": "Livestock",
+              "emissionsSource": "Livestock animal waste",
+              "economicSectorGroup": "Farming and fishing",
+              "economicSector": "Farming",
+              "economicActor": "Farmers",
+              "activities": [
+                "Livestock enteric fermentation",
+                "Livestock animal waste"
+              ],
+              "technologies": {
+                "Livestock enteric fermentation": [
+                  "Standard feed practices",
+                  "Low emissions feed practices"
+                ],
+                "Livestock animal waste": [
+                  "Standard manure management",
+                  "Emissions capture (manure)"
+                ]
+              },
+              "naturalVol_Unit": "animals",
+              "querySelector": ".farm-animal.livestock.sheep * .emissions-anchor.animal-anchor"
+            }
+          },
+          "manure-anchor": {
+            "summary": {
+              "emissions": 190.6,
+              "naturalVol": 4000,
+              "energy": 0,
+              "abated_emissions": 0,
+              "abated_naturalVol": 0,
+              "abated_energy": 0,
+              "emissionsSector": "Agriculture",
+              "emissionsSubSector": "Livestock",
+              "emissionsSource": "Livestock dung and urine",
+              "economicSectorGroup": "Farming and fishing",
+              "economicSector": "Farming",
+              "economicActor": "Farmers",
+              "activities": [
+                "Livestock manure management",
+                "Livestock dung and urine"
+              ],
+              "technologies": {
+                "Livestock manure management": [
+                  "Standard manure management",
+                  "Emissions capture (manure)"
+                ],
+                "Livestock dung and urine": [
+                  "Standard farming practices"
+                ]
+              },
+              "naturalVol_Unit": "animals",
+              "querySelector": ".farm-animal.livestock.sheep * .emissions-anchor.manure-anchor"
             }
           }
         }
@@ -34192,7 +34942,7 @@ const modelVisData = {
                   "Rooftop solar PV"
                 ],
                 "Heating, cooling and ventilation (HVAC)": [
-                  "Split system",
+                  "Transmission and distribution lines",
                   "Fans and cooling towers (inefficent)",
                   "Fans and cooling towers (efficient)",
                   "Chillers (air cooled / inefficent)",
@@ -38021,6 +38771,224 @@ const modelVisData = {
       }
     },
     "road-vehicle": {
+      "electric-motor": {
+        "small-ev-passenger-vehicle": {
+          "center-anchor": {
+            "summary": {
+              "emissions": 0,
+              "naturalVol": 0,
+              "energy": 0,
+              "abated_emissions": 31.939999999999998,
+              "abated_naturalVol": 12.700000000000001,
+              "abated_energy": 0,
+              "emissionsSector": "Transport",
+              "emissionsSubSector": "On-road transportation",
+              "emissionsSource": "Battery (electric vehicle)",
+              "economicSectorGroup": "Residential",
+              "economicSector": "Residential",
+              "economicActor": "Households",
+              "activities": [
+                "Commute to work or education",
+                "Commute for shopping and pickup/dropoff",
+                "Commute for personal business"
+              ],
+              "technologies": {
+                "Commute to work or education": [
+                  "Small passenger EV"
+                ],
+                "Commute for shopping and pickup/dropoff": [
+                  "Small passenger EV"
+                ],
+                "Commute for personal business": [
+                  "Small passenger EV"
+                ]
+              },
+              "naturalVol_Unit": "kL",
+              "querySelector": ".small-ev-passenger-vehicle.road-vehicle.electric-motor * .emissions-anchor.center-anchor"
+            }
+          }
+        },
+        "medium-ev-passenger-vehicle": {
+          "center-anchor": {
+            "summary": {
+              "emissions": 0,
+              "naturalVol": 0,
+              "energy": 0,
+              "abated_emissions": 37.95,
+              "abated_naturalVol": 15.08,
+              "abated_energy": 0,
+              "emissionsSector": "Transport",
+              "emissionsSubSector": "On-road transportation",
+              "emissionsSource": "Battery (electric vehicle)",
+              "economicSectorGroup": "Residential",
+              "economicSector": "Residential",
+              "economicActor": "Households",
+              "activities": [
+                "Commute to work or education",
+                "Commute for shopping and pickup/dropoff",
+                "Commute for personal business"
+              ],
+              "technologies": {
+                "Commute to work or education": [
+                  "Medium passenger EV"
+                ],
+                "Commute for shopping and pickup/dropoff": [
+                  "Medium passenger EV"
+                ],
+                "Commute for personal business": [
+                  "Medium passenger EV"
+                ]
+              },
+              "naturalVol_Unit": "kL",
+              "querySelector": ".medium-ev-passenger-vehicle.road-vehicle.electric-motor * .emissions-anchor.center-anchor"
+            }
+          }
+        },
+        "large-ev-passenger-vehicle": {
+          "center-anchor": {
+            "summary": {
+              "emissions": 0,
+              "naturalVol": 0,
+              "energy": 0,
+              "abated_emissions": 43.3,
+              "abated_naturalVol": 17.2,
+              "abated_energy": 0,
+              "emissionsSector": "Transport",
+              "emissionsSubSector": "On-road transportation",
+              "emissionsSource": "Battery (electric vehicle)",
+              "economicSectorGroup": "Residential",
+              "economicSector": "Residential",
+              "economicActor": "Households",
+              "activities": [
+                "Commute to work or education",
+                "Commute for shopping and pickup/dropoff",
+                "Commute for personal business"
+              ],
+              "technologies": {
+                "Commute to work or education": [
+                  "Large passenger EV"
+                ],
+                "Commute for shopping and pickup/dropoff": [
+                  "Large passenger EV"
+                ],
+                "Commute for personal business": [
+                  "Large passenger EV"
+                ]
+              },
+              "naturalVol_Unit": "kL",
+              "querySelector": ".large-ev-passenger-vehicle.road-vehicle.electric-motor * .emissions-anchor.center-anchor"
+            }
+          }
+        },
+        "ev-sports-utility-vehicle": {
+          "center-anchor": {
+            "summary": {
+              "emissions": 0,
+              "naturalVol": 0,
+              "energy": 0,
+              "abated_emissions": 46.83,
+              "abated_naturalVol": 18.6,
+              "abated_energy": 0,
+              "emissionsSector": "Transport",
+              "emissionsSubSector": "On-road transportation",
+              "emissionsSource": "Battery (electric vehicle)",
+              "economicSectorGroup": "Residential",
+              "economicSector": "Residential",
+              "economicActor": "Households",
+              "activities": [
+                "Commute to work or education",
+                "Commute for shopping and pickup/dropoff",
+                "Commute for personal business"
+              ],
+              "technologies": {
+                "Commute to work or education": [
+                  "Ute, 4WD or utility EV"
+                ],
+                "Commute for shopping and pickup/dropoff": [
+                  "Ute, 4WD or utility EV"
+                ],
+                "Commute for personal business": [
+                  "Ute, 4WD or utility EV"
+                ]
+              },
+              "naturalVol_Unit": "kL",
+              "querySelector": ".ev-sports-utility-vehicle.road-vehicle.electric-motor * .emissions-anchor.center-anchor"
+            }
+          }
+        },
+        "electric-motorcycle": {
+          "center-anchor": {
+            "summary": {
+              "emissions": 0,
+              "naturalVol": 0,
+              "energy": 0,
+              "abated_emissions": 0,
+              "abated_naturalVol": 0,
+              "abated_energy": 0,
+              "emissionsSector": "Transport",
+              "emissionsSubSector": "On-road transportation",
+              "emissionsSource": "Battery (electric vehicle)",
+              "economicSectorGroup": "Residential",
+              "economicSector": "Residential",
+              "economicActor": "Households",
+              "activities": [
+                "Commute to work or education",
+                "Commute for shopping and pickup/dropoff",
+                "Commute for personal business"
+              ],
+              "technologies": {
+                "Commute to work or education": [
+                  "Electric motorcycle (or three wheel)"
+                ],
+                "Commute for shopping and pickup/dropoff": [
+                  "Electric motorcycle (or three wheel)"
+                ],
+                "Commute for personal business": [
+                  "Electric motorcycle (or three wheel)"
+                ]
+              },
+              "naturalVol_Unit": "kL",
+              "querySelector": ".electric-motorcycle.road-vehicle.electric-motor * .emissions-anchor.center-anchor"
+            }
+          }
+        },
+        "electric-campervan": {
+          "center-anchor": {
+            "summary": {
+              "emissions": 0,
+              "naturalVol": 0,
+              "energy": 0,
+              "abated_emissions": 32.730000000000004,
+              "abated_naturalVol": 13.2,
+              "abated_energy": 0,
+              "emissionsSector": "Transport",
+              "emissionsSubSector": "On-road transportation",
+              "emissionsSource": "Battery (electric vehicle)",
+              "economicSectorGroup": "Residential",
+              "economicSector": "Residential",
+              "economicActor": "Households",
+              "activities": [
+                "Commute to work or education",
+                "Commute for shopping and pickup/dropoff",
+                "Commute for personal business"
+              ],
+              "technologies": {
+                "Commute to work or education": [
+                  "Other EV"
+                ],
+                "Commute for shopping and pickup/dropoff": [
+                  "Other EV"
+                ],
+                "Commute for personal business": [
+                  "Other EV"
+                ]
+              },
+              "naturalVol_Unit": "kL",
+              "querySelector": ".electric-campervan.road-vehicle.electric-motor * .emissions-anchor.center-anchor"
+            }
+          }
+        }
+      },
       "internal-combustion-engine": {
         "small-passenger-vehicle-average-ice": {
           "center-anchor": {
