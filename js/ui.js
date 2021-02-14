@@ -190,7 +190,7 @@
                     // Reset the intro animation (balloons)
                     if(state.scene.animation.intro){
                         state.scene.animation.intro = false
-                        scene.els.scene.setAttribute('emissions-activity-balloons', {visible: false})
+                        // scene.els.scene.setAttribute('emissions-activity-balloons', {visible: false})
                         scene.els.items.blockGroupTitle.setAttribute('hide-block-title', {id: "title-blocks"})  
                     }
                     
@@ -491,7 +491,7 @@
                 // Intro: sail the duck and call the mobile block title
                 scene.els.scene.setAttribute('sail-duck', null)
                 state.scene.animation.intro = true
-                scene.els.scene.setAttribute('emissions-activity-balloons', {visible: true})
+                // scene.els.scene.setAttribute('emissions-activity-balloons', {visible: true})
                 scene.els.items.blockGroupTitle.setAttribute('show-block-title', {id: "title-blocks", dur: 3000})
             }
             setTimeout(() => {
@@ -707,7 +707,7 @@
         },
 
         changeEnvironment: function(name = state.scene.environment.name, duration = 2000){
-console.log("CHANGING ENVIRONMENT")
+            console.log("CHANGING ENVIRONMENT")
             scene.els.scene.setAttribute('set-environment', {name: name, dur: duration})
         },
 

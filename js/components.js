@@ -12,56 +12,6 @@
 
 
     console.log('REGISTERING CUSTOM A-FRAME COMPONENTS...')
-
-    // MATERIAL SHADER
-        AFRAME.registerShader('toon-shader', {
-            schema: {
-                // Where relevant, it is customary to support color.
-                // The A-Frame schema uses `type:'color'`, so it will parse string values like 'white' or 'red.
-                // `is:'uniform'` tells A-Frame this should appear as uniform value in the shader(s).
-                color: {type:'color', is:'uniform', default:'red'},
-                // It is customary to support opacity, for fading in and out.
-                opacity: {type:'number', is:'uniform', default:1.0}
-            },
-            
-            // Setting raw to true uses THREE.RawShaderMaterial instead of ShaderMaterial,
-            // so your shader strings are used as-is, for advanced shader usage.
-            // Here, we want the usual prefixes with GLSL constants etc.,
-            // so we set it to false.
-            // (Which is also the default, so we could have omitted it).
-            raw: false,
-            
-            // Here, we're going to use the default vertex shader by omitting vertexShader.
-            // But note that if your fragment shader cares about texture coordinates,
-            // the vertex shader should set varying values to use in the fragment shader. 
-            
-            // Since almost every WebVR-capable browser supports ES6,
-            // define our fragment shader as a multi-line string.
-            fragmentShader: 
-            `
-                // Use medium precision.
-                precision mediump float;
-
-                // This receives the color value from the schema, which becomes a vec3 in the shader.
-                uniform vec3 color;
-
-                // This receives the opacity value from the schema, which becomes a number.
-                uniform float opacity;
-
-                // This is the shader program.
-                // A fragment shader can set the color via gl_FragColor,
-                // or decline to draw anything via discard.
-                void main () {
-                    // Note that this shader doesn't use texture coordinates.
-                    // Set the RGB portion to our color,
-                    // and the alpha portion to our opacity.
-
-                    gl_FragColor = vec4(color, opacity);
-                }
-            `
-        });
-
-
     // SCENE SETUP AND WORLD UPDATE COMPONENTS
         AFRAME.registerComponent('init-scene-setup', {
             init: function(){
@@ -426,10 +376,8 @@
 
                     
                 })
-
             }
         })
-
 
     // CAMERA CONTROl
         AFRAME.registerComponent("move-fly-camera", {
@@ -2108,7 +2056,7 @@
                 sourceNetSink:      {type: 'boolean',  default: false}
             },
             init: function(){
-                console.log('*** LAUNCHING BALLOONS ***')
+                console.log('*** INFLATING BALLOONS ***')
                 let balloonCount = 0
                 // Add balloons for each anchor 
                 Object.entries(modelVisData).forEach(([stockType, stockObj]) => {
@@ -2116,67 +2064,95 @@
                         Object.entries(conClassObj).forEach(([containerSubClass, conSubClassObj]) => {
                             Object.entries(conSubClassObj).forEach(([container, containerObj]) => {
                                 Object.entries(containerObj).forEach(([anchor, anchorObj]) => {
-                                    let scale, stringMultiplier, stringLength, stringDeltaY, balloonCol, anchorCollection
+                                    let scale, stringMultiplier, stringLength, stringDeltaY, balloonCol, anchorCollection, emissionsPerAnchor
                                     // Create balloons only only if there are emissions
-                                    if( (anchorObj.summary.emissions && anchorObj.summary.emissions > 0)  || 
-                                        (anchorObj.summary.abated_emissions && anchorObj.summary.abated_emissions > 0) ){
+                                    if( (anchorObj.summary.emissions && anchorObj.summary.emissions > 0)  ||  ( anchorObj.summary.abated_emissions && anchorObj.summary.abated_emissions) > 0 ){
                                         anchorCollection = document.querySelectorAll(anchorObj.summary.querySelector)
 
+                                        switch(stockType){
+                                            case 'source': 
+                                                balloonCol = '#000'
+                                                let switchEmissions = 0
+                                                if(typeof modelVisData.switch[containerClass] !== 'undefined' &&
+                                                    typeof modelVisData.switch[containerClass][container] !== 'undefined' &&
+                                                    typeof modelVisData.switch[containerClass][container][containerSubClass] !== 'undefined' &&
+                                                    typeof modelVisData.switch[containerClass][container][containerSubClass][container] !== 'undefined' &&
+                                                    typeof modelVisData.switch[containerClass][container][containerSubClass][container][anchor] !== 'undefined'
+                                                    ){ // Get any source emissions from a switch
+                                                    switchEmissions = modelVisData.switch[containerClass][container][containerSubClass][container][anchor] 
+                                                }
+                                                emissionsPerAnchor =  (anchorObj.summary.emissions + switchEmissions) / anchorCollection.length  
+                                                break
+                                            case 'switch': 
+                                                balloonCol = '#4cbb17'
+                                                emissionsPerAnchor =  anchorObj.summary.abated_emissions / anchorCollection.length  
+                                                break
+                                            case 'storage':
+                                                balloonCol = '#C7EA46'
+                                                emissionsPerAnchor =  anchorObj.summary.emissions  / anchorCollection.length  
+                                                break
+                                            case 'sink':
+                                                balloonCol = '#FF00FF'
+                                                break
+                                                emissionsPerAnchor =  anchorObj.summary.emissions  / anchorCollection.length  
+                                            case 'credit':
+                                                balloonCol = 'orange'
+                                                emissionsPerAnchor =  anchorObj.summary.emissions  / anchorCollection.length  
+                                                break
+                                            case 'offset':
+                                                balloonCol = 'purple'
+                                                emissionsPerAnchor =  anchorObj.summary.emissions  / anchorCollection.length  
+                                                break
+                                            default: 
+                                                emissionsPerAnchor =  anchorObj.summary.emissions  / anchorCollection.length  
+                                        }
 
+                                        scale = vis.scale.emissionsBalloon(emissionsPerAnchor)
 
                                         // Add ALL balloons (source/switch/sink)  
                                         for(let i = 0; i < anchorCollection.length; i++ ){
                                             const balloonContainer =  document.createElement('a-entity'),
-                                                anchorY = anchorCollection[i].getAttribute('position').y    
+                                                anchorY = anchorCollection[i].getAttribute('position').y
+                                         
                                             // Get string length with minimum exceptions by container type
                                             switch(container){
                                                 case 'detached-single-storey-home':
-                                                    stringLength = (anchor.slice(0,3) !== 'bin' && anchor.slice(0,4) !== 'skip') ? d3.max([vis.scale.emissionsBalloonString(anchorObj.summary.emissions), 1.25 - anchorY]) : stringLength = vis.scale.emissionsBalloonString(anchorObj.summary.emissions)
+                                                case 'farm-building-livestock':
+                                                case 'farm-building-crops-and-grains':
+                                                    stringLength = (anchor.slice(0,3) !== 'bin' && anchor.slice(0,4) !== 'skip') ? d3.max([vis.scale.emissionsBalloonString(emissionsPerAnchor), 1.25 - anchorY]) : stringLength = vis.scale.emissionsBalloonString(emissionsPerAnchor)
                                                     break
                                                 case 'detached-multi-storey-home':
                                                 case 'government-building': 
-                                                    stringLength = (anchor.slice(0,3) !== 'bin' && anchor.slice(0,4) !== 'skip')? d3.max([vis.scale.emissionsBalloonString(anchorObj.summary.emissions), 1.75 - anchorY]) : stringLength = vis.scale.emissionsBalloonString(anchorObj.summary.emissions)
+                                                case 'hospitality-venue':
+                                                case 'school':
+                                                case 'waste-water-treatment-facility':
+                                                case 'resource-recovery-facility':
+                                                case 'transport-service-operator':
+                                                case 'community-facility':
+                                                case 'manufacturing-plant':
+                                                case 'warehouse-freight-and-logistics':
+                                                    stringLength = (anchor.slice(0,3) !== 'bin' && anchor.slice(0,4) !== 'skip')? d3.max([vis.scale.emissionsBalloonString(emissionsPerAnchor), 2 - anchorY]) : stringLength = vis.scale.emissionsBalloonString(emissionsPerAnchor)
                                                     break
+                                                case 'industrial-chemicals-facility':
+                                                case 'industrial-electronics-facility':
+                                                case 'industrial-metals-facility':
+                                                case 'industrial-minerals-facility':
+                                                case 'solid-waste-treatment-facility':
                                                 case 'apartment-in-multi-storey-block':
                                                 case 'townhouse':
                                                 case 'commercial-office-building-low-rise': 
-
-                                                    stringLength = (anchor.slice(0,3) !== 'bin' && anchor.slice(0,4) !== 'skip') ? d3.max([vis.scale.emissionsBalloonString(anchorObj.summary.emissions), 3 - anchorY]) : stringLength = vis.scale.emissionsBalloonString(anchorObj.summary.emissions)
+                                                case 'hospital': 
+                                                case 'airport': 
+                                                    stringLength = (anchor.slice(0,3) !== 'bin' && anchor.slice(0,4) !== 'skip') ? d3.max([vis.scale.emissionsBalloonString(emissionsPerAnchor), 3 - anchorY]) : stringLength = vis.scale.emissionsBalloonString(emissionsPerAnchor)
                                                     break
                                                 case 'retail-premises':
-                                                    stringLength = (anchor.slice(0,3) !== 'bin' && anchor.slice(0,4) !== 'skip')  ? d3.max([vis.scale.emissionsBalloonString(anchorObj.summary.emissions), 2 - anchorY]) : stringLength = vis.scale.emissionsBalloonString(anchorObj.summary.emissions)
+                                                    stringLength = (anchor.slice(0,3) !== 'bin' && anchor.slice(0,4) !== 'skip')  ? d3.max([vis.scale.emissionsBalloonString(emissionsPerAnchor), 3 - anchorY]) : stringLength = vis.scale.emissionsBalloonString(emissionsPerAnchor)
                                                     break
                                                 default: 
-                                                    stringLength = vis.scale.emissionsBalloonString(anchorObj.summary.emissions)
+                                                    stringLength = vis.scale.emissionsBalloonString(emissionsPerAnchor)
                                             }
-                                            // Set balloon scale and colour
-                                            switch(stockType){
-                                                case 'source':
-                                                    balloonCol = '#000'
-                                                    scale = vis.scale.emissionsBalloon(anchorObj.summary.emissions)
-                                                    break
-                                                case 'switch':
-                                                    balloonCol = '#4cbb17'
-                                                    scale = vis.scale.emissionsBalloon(anchorObj.summary.abated_emissions)
-                                                case 'storage':
-                                                    balloonCol = '#C7EA46'
-                                                    scale = vis.scale.emissionsBalloon(anchorObj.summary.abated_emissions)
-                                                    break
-                                                case 'sink':
-                                                    balloonCol = '#FF00FF'
-                                                    scale = vis.scale.emissionsBalloon(anchorObj.summary.abated_emissions)
-                                                    break
-                                                case 'credit':
-                                                    balloonCol = 'orange'
-                                                    scale = vis.scale.emissionsBalloon(anchorObj.summary.abated_emissions)
-                                                    break
-                                                case 'offset':
-                                                    balloonCol = 'purple'
-                                                    scale = vis.scale.emissionsBalloon(anchorObj.summary.abated_emissions)
-                                                    break
-                                                default:
-                                                    balloonCol = '#FFF'
-                                            }
+
+                                            // Render balloon
                                             balloonContainer.className +=`balloon-group ${stockType} ${containerClass} ${containerSubClass} 
                                                 ${helpers.slugify(anchorObj.summary.economicSector)}
                                                 ${helpers.slugify(anchorObj.summary.emissionsSubSector)}

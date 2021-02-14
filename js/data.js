@@ -20659,6 +20659,32 @@ const modelVisData = {
               "naturalVol_Unit": "kL",
               "querySelector": ".construction-site.non-residential-building.mains-gas-connected-facility * .emissions-anchor.activities-anchor"
             }
+          },
+          "diesel-generator": {
+            "summary": {
+              "emissions": 28.49,
+              "naturalVol": 10,
+              "energy": 386,
+              "abated_emissions": 0,
+              "abated_naturalVol": 0,
+              "abated_energy": 0,
+              "emissionsSector": "Stationary energy",
+              "emissionsSubSector": "Commercial and institutional buildings/facilities",
+              "emissionsSource": "Diesel (transport)",
+              "economicSectorGroup": "Industrial",
+              "economicSector": "Construction industry",
+              "economicActor": "Construction industries",
+              "activities": [
+                "Electricity generation from diesel"
+              ],
+              "technologies": {
+                "Electricity generation from diesel": [
+                  "Diesel generator"
+                ]
+              },
+              "naturalVol_Unit": "kL",
+              "querySelector": ".construction-site.non-residential-building.mains-gas-connected-facility * .emissions-anchor.diesel-generator"
+            }
           }
         },
         "government-building": {
@@ -29365,15 +29391,15 @@ const modelVisData = {
         "bus-average-ice": {
           "center-anchor": {
             "summary": {
-              "emissions": 417.64,
-              "naturalVol": 364.42,
-              "energy": 9117.69,
+              "emissions": 79.85,
+              "naturalVol": 28.03,
+              "energy": 1082.04,
               "abated_emissions": 0,
               "abated_naturalVol": 0,
               "abated_energy": 0,
               "emissionsSector": "Transport",
               "emissionsSubSector": "On-road transportation",
-              "emissionsSource": "Ethanol (E85)",
+              "emissionsSource": "Diesel (transport)",
               "economicSectorGroup": "Municipal",
               "economicSector": "Public transport",
               "economicActor": "Public transport services",
@@ -29393,15 +29419,15 @@ const modelVisData = {
         "bus-efficient-ice": {
           "center-anchor": {
             "summary": {
-              "emissions": 334.11,
-              "naturalVol": 291.53,
-              "energy": 7294.15,
+              "emissions": 63.88,
+              "naturalVol": 22.43,
+              "energy": 865.63,
               "abated_emissions": 0,
               "abated_naturalVol": 0,
               "abated_energy": 0,
               "emissionsSector": "Transport",
               "emissionsSubSector": "On-road transportation",
-              "emissionsSource": "Ethanol (E85)",
+              "emissionsSource": "Diesel (transport)",
               "economicSectorGroup": "Municipal",
               "economicSector": "Public transport",
               "economicActor": "Public transport services",
@@ -29531,6 +29557,42 @@ const modelVisData = {
               },
               "naturalVol_Unit": "kL",
               "querySelector": ".tractor.off-road-vehicle.internal-combustion-engine * .emissions-anchor.center-anchor"
+            }
+          }
+        }
+      }
+    },
+    "rail": {
+      "internal-combustion-engine": {
+        "train-diesel": {
+          "center-anchor": {
+            "summary": {
+              "emissions": 2884.29,
+              "naturalVol": 1012.5,
+              "energy": 39082.5,
+              "abated_emissions": 0,
+              "abated_naturalVol": 0,
+              "abated_energy": 0,
+              "emissionsSector": "Transport",
+              "emissionsSubSector": "Railways",
+              "emissionsSource": "Diesel (transport)",
+              "economicSectorGroup": "Municipal",
+              "economicSector": "Transport and freight",
+              "economicActor": "Transport and freight providers",
+              "activities": [
+                "Freight and goods transport",
+                "Train public transport services"
+              ],
+              "technologies": {
+                "Freight and goods transport": [
+                  "Train "
+                ],
+                "Train public transport services": [
+                  "Train "
+                ]
+              },
+              "naturalVol_Unit": "kL",
+              "querySelector": ".train-diesel.rail.internal-combustion-engine * .emissions-anchor.center-anchor"
             }
           }
         }
@@ -37811,65 +37873,289 @@ const modelVisData = {
           }
         }
       },
-      "electric-with-diesel-and-lpg": {
-        "construction-site": {
-          "activities-anchor": {
+      "electric-with-diesel-and-lpg-with-solar-pv": {
+        "farm-building-livestock": {
+          "solar-pv-offset": {
             "summary": {
-              "emissions": 56.97,
-              "naturalVol": 20,
-              "energy": 772,
-              "abated_emissions": 0,
+              "emissions": 0,
+              "naturalVol": 56.379999999999995,
+              "energy": 202.96,
+              "abated_emissions": 10.91,
               "abated_naturalVol": 0,
               "abated_energy": 0,
               "emissionsSector": "Stationary energy",
               "emissionsSubSector": "Commercial and institutional buildings/facilities",
-              "emissionsSource": "Diesel (transport)",
-              "economicSectorGroup": "Industrial",
-              "economicSector": "Construction industry",
-              "economicActor": "Construction industries",
+              "emissionsSource": "Solar PV (rooftop used on site)",
+              "economicSectorGroup": "Farming and fishing",
+              "economicSector": "Farming",
+              "economicActor": "Farmers",
               "activities": [
-                "Construction activities"
+                "Solar electricity generated and used immediately on site",
+                "Irrigation and pumps",
+                "Farm animal care activities",
+                "General farm activities"
               ],
               "technologies": {
-                "Construction activities": [
-                  "Construction plant, machinery and equipment"
+                "Solar electricity generated and used immediately on site": [
+                  "Rooftop solar PV"
+                ],
+                "Irrigation and pumps": [
+                  "Irrigation and pumps (inefficient)",
+                  "Irrigation and pumps (efficient)"
+                ],
+                "Farm animal care activities": [
+                  "Animal care (inefficient)",
+                  "Animal care (efficient)"
+                ],
+                "General farm activities": [
+                  "Farm plant and equipment (inefficient)",
+                  "Farm plant and equipment (efficient)"
                 ]
               },
-              "naturalVol_Unit": "kL",
-              "querySelector": ".construction-site.non-residential-building.electric-with-diesel-and-lpg * .emissions-anchor.activities-anchor"
+              "naturalVol_Unit": "MWh",
+              "querySelector": ".farm-building-livestock.non-residential-building.electric-with-diesel-and-lpg-with-solar-pv * .emissions-anchor.solar-pv-offset"
+            }
+          },
+          "solar-pv-avoided-grid": {
+            "summary": {
+              "emissions": 0,
+              "naturalVol": 0,
+              "energy": 0,
+              "abated_emissions": 0,
+              "abated_naturalVol": 54,
+              "abated_energy": 0,
+              "emissionsSector": "Stationary energy",
+              "emissionsSubSector": "Commercial and institutional buildings/facilities",
+              "emissionsSource": "Avoided grid losses",
+              "economicSectorGroup": "Farming and fishing",
+              "economicSector": "Farming",
+              "economicActor": "Farmers",
+              "activities": [
+                "Avoided electricity grid losses"
+              ],
+              "technologies": {
+                "Avoided electricity grid losses": [
+                  "Transmission and distribution lines"
+                ]
+              },
+              "naturalVol_Unit": "MWh",
+              "querySelector": ".farm-building-livestock.non-residential-building.electric-with-diesel-and-lpg-with-solar-pv * .emissions-anchor.solar-pv-avoided-grid"
+            }
+          }
+        },
+        "farm-building-crops-and-grains": {
+          "solar-pv-offset": {
+            "summary": {
+              "emissions": 0,
+              "naturalVol": 56.379999999999995,
+              "energy": 202.96,
+              "abated_emissions": 10.91,
+              "abated_naturalVol": 0,
+              "abated_energy": 0,
+              "emissionsSector": "Stationary energy",
+              "emissionsSubSector": "Commercial and institutional buildings/facilities",
+              "emissionsSource": "Solar PV (rooftop used on site)",
+              "economicSectorGroup": "Farming and fishing",
+              "economicSector": "Farming",
+              "economicActor": "Farmers",
+              "activities": [
+                "Solar electricity generated and used immediately on site",
+                "Irrigation and pumps",
+                "Farm food production and storage activities",
+                "General farm activities"
+              ],
+              "technologies": {
+                "Solar electricity generated and used immediately on site": [
+                  "Rooftop solar PV"
+                ],
+                "Irrigation and pumps": [
+                  "Irrigation and pumps (inefficient)",
+                  "Irrigation and pumps (efficient)"
+                ],
+                "Farm food production and storage activities": [
+                  "Food processing and storage equipment (inefficient)",
+                  "Food processing and storage equipment (efficient)"
+                ],
+                "General farm activities": [
+                  "Farm plant and equipment (inefficient)",
+                  "Farm plant and equipment (efficient)"
+                ]
+              },
+              "naturalVol_Unit": "MWh",
+              "querySelector": ".farm-building-crops-and-grains.non-residential-building.electric-with-diesel-and-lpg-with-solar-pv * .emissions-anchor.solar-pv-offset"
+            }
+          },
+          "solar-pv-avoided-grid": {
+            "summary": {
+              "emissions": 0,
+              "naturalVol": 0,
+              "energy": 0,
+              "abated_emissions": 0,
+              "abated_naturalVol": 54,
+              "abated_energy": 0,
+              "emissionsSector": "Stationary energy",
+              "emissionsSubSector": "Commercial and institutional buildings/facilities",
+              "emissionsSource": "Avoided grid losses",
+              "economicSectorGroup": "Farming and fishing",
+              "economicSector": "Farming",
+              "economicActor": "Farmers",
+              "activities": [
+                "Avoided electricity grid losses"
+              ],
+              "technologies": {
+                "Avoided electricity grid losses": [
+                  "Transmission and distribution lines"
+                ]
+              },
+              "naturalVol_Unit": "MWh",
+              "querySelector": ".farm-building-crops-and-grains.non-residential-building.electric-with-diesel-and-lpg-with-solar-pv * .emissions-anchor.solar-pv-avoided-grid"
+            }
+          }
+        }
+      },
+      "all-electric-facility": {
+        "commercial-office-building-low-rise": {
+          "skip-comingled": {
+            "summary": {
+              "emissions": 0,
+              "naturalVol": 1.6,
+              "energy": 0,
+              "abated_emissions": 0.32,
+              "abated_naturalVol": 0,
+              "abated_energy": 0,
+              "emissionsSector": "Waste",
+              "emissionsSubSector": "Incineration and open burning",
+              "emissionsSource": "Commercial and industrial comingled recylcables collection",
+              "economicSectorGroup": "Commercial",
+              "economicSector": "Office work",
+              "economicActor": "Offices",
+              "activities": [
+                "Commercial and industrial comingled collection"
+              ],
+              "technologies": {
+                "Commercial and industrial comingled collection": [
+                  "Comingled recyclable resource recovery"
+                ]
+              },
+              "naturalVol_Unit": "tonnes",
+              "querySelector": ".commercial-office-building-low-rise.non-residential-building.all-electric-facility * .emissions-anchor.skip-comingled"
+            }
+          }
+        },
+        "commercial-office-building-high-rise": {
+          "skip-comingled": {
+            "summary": {
+              "emissions": 0,
+              "naturalVol": 1.6,
+              "energy": 0,
+              "abated_emissions": 0.32,
+              "abated_naturalVol": 0,
+              "abated_energy": 0,
+              "emissionsSector": "Waste",
+              "emissionsSubSector": "Incineration and open burning",
+              "emissionsSource": "Commercial and industrial comingled recylcables collection",
+              "economicSectorGroup": "Commercial",
+              "economicSector": "Office work",
+              "economicActor": "Offices",
+              "activities": [
+                "Commercial and industrial comingled collection"
+              ],
+              "technologies": {
+                "Commercial and industrial comingled collection": [
+                  "Comingled recyclable resource recovery"
+                ]
+              },
+              "naturalVol_Unit": "tonnes",
+              "querySelector": ".commercial-office-building-high-rise.non-residential-building.all-electric-facility * .emissions-anchor.skip-comingled"
+            }
+          }
+        },
+        "retail-premises": {
+          "skip-comingled": {
+            "summary": {
+              "emissions": 0,
+              "naturalVol": 1,
+              "energy": 0,
+              "abated_emissions": 0.2,
+              "abated_naturalVol": 0,
+              "abated_energy": 0,
+              "emissionsSector": "Waste",
+              "emissionsSubSector": "Incineration and open burning",
+              "emissionsSource": "Commercial and industrial comingled recylcables collection",
+              "economicSectorGroup": "Commercial",
+              "economicSector": "Retail",
+              "economicActor": "Retailers",
+              "activities": [
+                "Commercial and industrial comingled collection"
+              ],
+              "technologies": {
+                "Commercial and industrial comingled collection": [
+                  "Comingled recyclable resource recovery"
+                ]
+              },
+              "naturalVol_Unit": "tonnes",
+              "querySelector": ".retail-premises.non-residential-building.all-electric-facility * .emissions-anchor.skip-comingled"
+            }
+          }
+        },
+        "hospitality-venue": {
+          "skip-comingled": {
+            "summary": {
+              "emissions": 0,
+              "naturalVol": 0.2,
+              "energy": 0,
+              "abated_emissions": 0.04,
+              "abated_naturalVol": 0,
+              "abated_energy": 0,
+              "emissionsSector": "Waste",
+              "emissionsSubSector": "Incineration and open burning",
+              "emissionsSource": "Commercial and industrial comingled recylcables collection",
+              "economicSectorGroup": "Commercial",
+              "economicSector": "Hospitality",
+              "economicActor": "Hospitality providers",
+              "activities": [
+                "Commercial and industrial comingled collection"
+              ],
+              "technologies": {
+                "Commercial and industrial comingled collection": [
+                  "Comingled recyclable resource recovery"
+                ]
+              },
+              "naturalVol_Unit": "tonnes",
+              "querySelector": ".hospitality-venue.non-residential-building.all-electric-facility * .emissions-anchor.skip-comingled"
+            }
+          }
+        },
+        "hotel-or-accomodation-venue": {
+          "skip-comingled": {
+            "summary": {
+              "emissions": 0,
+              "naturalVol": 2,
+              "energy": 0,
+              "abated_emissions": 0.4,
+              "abated_naturalVol": 0,
+              "abated_energy": 0,
+              "emissionsSector": "Waste",
+              "emissionsSubSector": "Incineration and open burning",
+              "emissionsSource": "Commercial and industrial comingled recylcables collection",
+              "economicSectorGroup": "Commercial",
+              "economicSector": "Hotels, accomodation and tourism",
+              "economicActor": "Hoteliers and tourism providers",
+              "activities": [
+                "Commercial and industrial comingled collection"
+              ],
+              "technologies": {
+                "Commercial and industrial comingled collection": [
+                  "Comingled recyclable resource recovery"
+                ]
+              },
+              "naturalVol_Unit": "tonnes",
+              "querySelector": ".hotel-or-accomodation-venue.non-residential-building.all-electric-facility * .emissions-anchor.skip-comingled"
             }
           }
         }
       },
       "mains-gas-connected-facility": {
-        "construction-site": {
-          "diesel-generator": {
-            "summary": {
-              "emissions": 28.49,
-              "naturalVol": 10,
-              "energy": 386,
-              "abated_emissions": 0,
-              "abated_naturalVol": 0,
-              "abated_energy": 0,
-              "emissionsSector": "Stationary energy",
-              "emissionsSubSector": "Commercial and institutional buildings/facilities",
-              "emissionsSource": "Diesel (transport)",
-              "economicSectorGroup": "Industrial",
-              "economicSector": "Construction industry",
-              "economicActor": "Construction industries",
-              "activities": [
-                "Electricity generation from diesel"
-              ],
-              "technologies": {
-                "Electricity generation from diesel": [
-                  "Diesel generator"
-                ]
-              },
-              "naturalVol_Unit": "kL",
-              "querySelector": ".construction-site.non-residential-building.mains-gas-connected-facility * .emissions-anchor.diesel-generator"
-            }
-          }
-        },
         "commercial-office-building-low-rise": {
           "skip-comingled": {
             "summary": {
@@ -38486,288 +38772,6 @@ const modelVisData = {
             }
           }
         }
-      },
-      "electric-with-diesel-and-lpg-with-solar-pv": {
-        "farm-building-livestock": {
-          "solar-pv-offset": {
-            "summary": {
-              "emissions": 0,
-              "naturalVol": 56.379999999999995,
-              "energy": 202.96,
-              "abated_emissions": 10.91,
-              "abated_naturalVol": 0,
-              "abated_energy": 0,
-              "emissionsSector": "Stationary energy",
-              "emissionsSubSector": "Commercial and institutional buildings/facilities",
-              "emissionsSource": "Solar PV (rooftop used on site)",
-              "economicSectorGroup": "Farming and fishing",
-              "economicSector": "Farming",
-              "economicActor": "Farmers",
-              "activities": [
-                "Solar electricity generated and used immediately on site",
-                "Irrigation and pumps",
-                "Farm animal care activities",
-                "General farm activities"
-              ],
-              "technologies": {
-                "Solar electricity generated and used immediately on site": [
-                  "Rooftop solar PV"
-                ],
-                "Irrigation and pumps": [
-                  "Irrigation and pumps (inefficient)",
-                  "Irrigation and pumps (efficient)"
-                ],
-                "Farm animal care activities": [
-                  "Animal care (inefficient)",
-                  "Animal care (efficient)"
-                ],
-                "General farm activities": [
-                  "Farm plant and equipment (inefficient)",
-                  "Farm plant and equipment (efficient)"
-                ]
-              },
-              "naturalVol_Unit": "MWh",
-              "querySelector": ".farm-building-livestock.non-residential-building.electric-with-diesel-and-lpg-with-solar-pv * .emissions-anchor.solar-pv-offset"
-            }
-          },
-          "solar-pv-avoided-grid": {
-            "summary": {
-              "emissions": 0,
-              "naturalVol": 0,
-              "energy": 0,
-              "abated_emissions": 0,
-              "abated_naturalVol": 54,
-              "abated_energy": 0,
-              "emissionsSector": "Stationary energy",
-              "emissionsSubSector": "Commercial and institutional buildings/facilities",
-              "emissionsSource": "Avoided grid losses",
-              "economicSectorGroup": "Farming and fishing",
-              "economicSector": "Farming",
-              "economicActor": "Farmers",
-              "activities": [
-                "Avoided electricity grid losses"
-              ],
-              "technologies": {
-                "Avoided electricity grid losses": [
-                  "Transmission and distribution lines"
-                ]
-              },
-              "naturalVol_Unit": "MWh",
-              "querySelector": ".farm-building-livestock.non-residential-building.electric-with-diesel-and-lpg-with-solar-pv * .emissions-anchor.solar-pv-avoided-grid"
-            }
-          }
-        },
-        "farm-building-crops-and-grains": {
-          "solar-pv-offset": {
-            "summary": {
-              "emissions": 0,
-              "naturalVol": 56.379999999999995,
-              "energy": 202.96,
-              "abated_emissions": 10.91,
-              "abated_naturalVol": 0,
-              "abated_energy": 0,
-              "emissionsSector": "Stationary energy",
-              "emissionsSubSector": "Commercial and institutional buildings/facilities",
-              "emissionsSource": "Solar PV (rooftop used on site)",
-              "economicSectorGroup": "Farming and fishing",
-              "economicSector": "Farming",
-              "economicActor": "Farmers",
-              "activities": [
-                "Solar electricity generated and used immediately on site",
-                "Irrigation and pumps",
-                "Farm food production and storage activities",
-                "General farm activities"
-              ],
-              "technologies": {
-                "Solar electricity generated and used immediately on site": [
-                  "Rooftop solar PV"
-                ],
-                "Irrigation and pumps": [
-                  "Irrigation and pumps (inefficient)",
-                  "Irrigation and pumps (efficient)"
-                ],
-                "Farm food production and storage activities": [
-                  "Food processing and storage equipment (inefficient)",
-                  "Food processing and storage equipment (efficient)"
-                ],
-                "General farm activities": [
-                  "Farm plant and equipment (inefficient)",
-                  "Farm plant and equipment (efficient)"
-                ]
-              },
-              "naturalVol_Unit": "MWh",
-              "querySelector": ".farm-building-crops-and-grains.non-residential-building.electric-with-diesel-and-lpg-with-solar-pv * .emissions-anchor.solar-pv-offset"
-            }
-          },
-          "solar-pv-avoided-grid": {
-            "summary": {
-              "emissions": 0,
-              "naturalVol": 0,
-              "energy": 0,
-              "abated_emissions": 0,
-              "abated_naturalVol": 54,
-              "abated_energy": 0,
-              "emissionsSector": "Stationary energy",
-              "emissionsSubSector": "Commercial and institutional buildings/facilities",
-              "emissionsSource": "Avoided grid losses",
-              "economicSectorGroup": "Farming and fishing",
-              "economicSector": "Farming",
-              "economicActor": "Farmers",
-              "activities": [
-                "Avoided electricity grid losses"
-              ],
-              "technologies": {
-                "Avoided electricity grid losses": [
-                  "Transmission and distribution lines"
-                ]
-              },
-              "naturalVol_Unit": "MWh",
-              "querySelector": ".farm-building-crops-and-grains.non-residential-building.electric-with-diesel-and-lpg-with-solar-pv * .emissions-anchor.solar-pv-avoided-grid"
-            }
-          }
-        }
-      },
-      "all-electric-facility": {
-        "commercial-office-building-low-rise": {
-          "skip-comingled": {
-            "summary": {
-              "emissions": 0,
-              "naturalVol": 1.6,
-              "energy": 0,
-              "abated_emissions": 0.32,
-              "abated_naturalVol": 0,
-              "abated_energy": 0,
-              "emissionsSector": "Waste",
-              "emissionsSubSector": "Incineration and open burning",
-              "emissionsSource": "Commercial and industrial comingled recylcables collection",
-              "economicSectorGroup": "Commercial",
-              "economicSector": "Office work",
-              "economicActor": "Offices",
-              "activities": [
-                "Commercial and industrial comingled collection"
-              ],
-              "technologies": {
-                "Commercial and industrial comingled collection": [
-                  "Comingled recyclable resource recovery"
-                ]
-              },
-              "naturalVol_Unit": "tonnes",
-              "querySelector": ".commercial-office-building-low-rise.non-residential-building.all-electric-facility * .emissions-anchor.skip-comingled"
-            }
-          }
-        },
-        "commercial-office-building-high-rise": {
-          "skip-comingled": {
-            "summary": {
-              "emissions": 0,
-              "naturalVol": 1.6,
-              "energy": 0,
-              "abated_emissions": 0.32,
-              "abated_naturalVol": 0,
-              "abated_energy": 0,
-              "emissionsSector": "Waste",
-              "emissionsSubSector": "Incineration and open burning",
-              "emissionsSource": "Commercial and industrial comingled recylcables collection",
-              "economicSectorGroup": "Commercial",
-              "economicSector": "Office work",
-              "economicActor": "Offices",
-              "activities": [
-                "Commercial and industrial comingled collection"
-              ],
-              "technologies": {
-                "Commercial and industrial comingled collection": [
-                  "Comingled recyclable resource recovery"
-                ]
-              },
-              "naturalVol_Unit": "tonnes",
-              "querySelector": ".commercial-office-building-high-rise.non-residential-building.all-electric-facility * .emissions-anchor.skip-comingled"
-            }
-          }
-        },
-        "retail-premises": {
-          "skip-comingled": {
-            "summary": {
-              "emissions": 0,
-              "naturalVol": 1,
-              "energy": 0,
-              "abated_emissions": 0.2,
-              "abated_naturalVol": 0,
-              "abated_energy": 0,
-              "emissionsSector": "Waste",
-              "emissionsSubSector": "Incineration and open burning",
-              "emissionsSource": "Commercial and industrial comingled recylcables collection",
-              "economicSectorGroup": "Commercial",
-              "economicSector": "Retail",
-              "economicActor": "Retailers",
-              "activities": [
-                "Commercial and industrial comingled collection"
-              ],
-              "technologies": {
-                "Commercial and industrial comingled collection": [
-                  "Comingled recyclable resource recovery"
-                ]
-              },
-              "naturalVol_Unit": "tonnes",
-              "querySelector": ".retail-premises.non-residential-building.all-electric-facility * .emissions-anchor.skip-comingled"
-            }
-          }
-        },
-        "hospitality-venue": {
-          "skip-comingled": {
-            "summary": {
-              "emissions": 0,
-              "naturalVol": 0.2,
-              "energy": 0,
-              "abated_emissions": 0.04,
-              "abated_naturalVol": 0,
-              "abated_energy": 0,
-              "emissionsSector": "Waste",
-              "emissionsSubSector": "Incineration and open burning",
-              "emissionsSource": "Commercial and industrial comingled recylcables collection",
-              "economicSectorGroup": "Commercial",
-              "economicSector": "Hospitality",
-              "economicActor": "Hospitality providers",
-              "activities": [
-                "Commercial and industrial comingled collection"
-              ],
-              "technologies": {
-                "Commercial and industrial comingled collection": [
-                  "Comingled recyclable resource recovery"
-                ]
-              },
-              "naturalVol_Unit": "tonnes",
-              "querySelector": ".hospitality-venue.non-residential-building.all-electric-facility * .emissions-anchor.skip-comingled"
-            }
-          }
-        },
-        "hotel-or-accomodation-venue": {
-          "skip-comingled": {
-            "summary": {
-              "emissions": 0,
-              "naturalVol": 2,
-              "energy": 0,
-              "abated_emissions": 0.4,
-              "abated_naturalVol": 0,
-              "abated_energy": 0,
-              "emissionsSector": "Waste",
-              "emissionsSubSector": "Incineration and open burning",
-              "emissionsSource": "Commercial and industrial comingled recylcables collection",
-              "economicSectorGroup": "Commercial",
-              "economicSector": "Hotels, accomodation and tourism",
-              "economicActor": "Hoteliers and tourism providers",
-              "activities": [
-                "Commercial and industrial comingled collection"
-              ],
-              "technologies": {
-                "Commercial and industrial comingled collection": [
-                  "Comingled recyclable resource recovery"
-                ]
-              },
-              "naturalVol_Unit": "tonnes",
-              "querySelector": ".hotel-or-accomodation-venue.non-residential-building.all-electric-facility * .emissions-anchor.skip-comingled"
-            }
-          }
-        }
       }
     },
     "road-vehicle": {
@@ -38991,17 +38995,17 @@ const modelVisData = {
       },
       "internal-combustion-engine": {
         "small-passenger-vehicle-average-ice": {
-          "center-anchor": {
+          "switch-anchor": {
             "summary": {
-              "emissions": 401.66,
-              "naturalVol": 141,
-              "energy": 5442.6,
-              "abated_emissions": 0,
+              "emissions": 46.42,
+              "naturalVol": 40.51,
+              "energy": 1013.3200000000002,
+              "abated_emissions": 47.24,
               "abated_naturalVol": 0,
               "abated_energy": 0,
               "emissionsSector": "Transport",
               "emissionsSubSector": "On-road transportation",
-              "emissionsSource": "Diesel (transport)",
+              "emissionsSource": "Ethanol (E85)",
               "economicSectorGroup": "Commercial",
               "economicSector": "Office work",
               "economicActor": "Offices",
@@ -39030,22 +39034,22 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "kL",
-              "querySelector": ".small-passenger-vehicle-average-ice.road-vehicle.internal-combustion-engine * .emissions-anchor.center-anchor"
+              "querySelector": ".small-passenger-vehicle-average-ice.road-vehicle.internal-combustion-engine * .emissions-anchor.switch-anchor"
             }
           }
         },
         "small-passenger-vehicle-efficient-ice": {
-          "center-anchor": {
+          "switch-anchor": {
             "summary": {
-              "emissions": 190.06000000000003,
-              "naturalVol": 66.72,
-              "energy": 2575.3900000000003,
-              "abated_emissions": 0,
+              "emissions": 21.180000000000003,
+              "naturalVol": 18.48,
+              "energy": 462.36999999999995,
+              "abated_emissions": 21.56,
               "abated_naturalVol": 0,
               "abated_energy": 0,
               "emissionsSector": "Transport",
               "emissionsSubSector": "On-road transportation",
-              "emissionsSource": "Diesel (transport)",
+              "emissionsSource": "Ethanol (E85)",
               "economicSectorGroup": "Municipal",
               "economicSector": "Government",
               "economicActor": "Government services",
@@ -39075,22 +39079,22 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "kL",
-              "querySelector": ".small-passenger-vehicle-efficient-ice.road-vehicle.internal-combustion-engine * .emissions-anchor.center-anchor"
+              "querySelector": ".small-passenger-vehicle-efficient-ice.road-vehicle.internal-combustion-engine * .emissions-anchor.switch-anchor"
             }
           }
         },
         "medium-passenger-vehicle-average-ice": {
-          "center-anchor": {
+          "switch-anchor": {
             "summary": {
-              "emissions": 605.0699999999999,
-              "naturalVol": 212.4,
-              "energy": 8198.64,
-              "abated_emissions": 0,
+              "emissions": 68.06,
+              "naturalVol": 59.400000000000006,
+              "energy": 1486.1799999999998,
+              "abated_emissions": 69.29,
               "abated_naturalVol": 0,
               "abated_energy": 0,
               "emissionsSector": "Transport",
               "emissionsSubSector": "On-road transportation",
-              "emissionsSource": "Diesel (transport)",
+              "emissionsSource": "Ethanol (E85)",
               "economicSectorGroup": "Commercial",
               "economicSector": "Office work",
               "economicActor": "Offices",
@@ -39119,22 +39123,22 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "kL",
-              "querySelector": ".medium-passenger-vehicle-average-ice.road-vehicle.internal-combustion-engine * .emissions-anchor.center-anchor"
+              "querySelector": ".medium-passenger-vehicle-average-ice.road-vehicle.internal-combustion-engine * .emissions-anchor.switch-anchor"
             }
           }
         },
         "medium-passenger-vehicle-efficient-ice": {
-          "center-anchor": {
+          "switch-anchor": {
             "summary": {
-              "emissions": 228.07,
-              "naturalVol": 80.05999999999999,
-              "energy": 3090.4599999999996,
-              "abated_emissions": 0,
+              "emissions": 25.42,
+              "naturalVol": 22.189999999999998,
+              "energy": 554.8399999999999,
+              "abated_emissions": 25.86,
               "abated_naturalVol": 0,
               "abated_energy": 0,
               "emissionsSector": "Transport",
               "emissionsSubSector": "On-road transportation",
-              "emissionsSource": "Diesel (transport)",
+              "emissionsSource": "Ethanol (E85)",
               "economicSectorGroup": "Municipal",
               "economicSector": "Government",
               "economicActor": "Government services",
@@ -39164,22 +39168,22 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "kL",
-              "querySelector": ".medium-passenger-vehicle-efficient-ice.road-vehicle.internal-combustion-engine * .emissions-anchor.center-anchor"
+              "querySelector": ".medium-passenger-vehicle-efficient-ice.road-vehicle.internal-combustion-engine * .emissions-anchor.switch-anchor"
             }
           }
         },
         "large-passenger-vehicle-average-ice": {
-          "center-anchor": {
+          "switch-anchor": {
             "summary": {
-              "emissions": 562.3199999999999,
-              "naturalVol": 197.4,
-              "energy": 7619.639999999999,
-              "abated_emissions": 0,
+              "emissions": 64.98,
+              "naturalVol": 56.71,
+              "energy": 1418.6299999999999,
+              "abated_emissions": 66.15,
               "abated_naturalVol": 0,
               "abated_energy": 0,
               "emissionsSector": "Transport",
               "emissionsSubSector": "On-road transportation",
-              "emissionsSource": "Diesel (transport)",
+              "emissionsSource": "Ethanol (E85)",
               "economicSectorGroup": "Commercial",
               "economicSector": "Office work",
               "economicActor": "Offices",
@@ -39208,22 +39212,22 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "kL",
-              "querySelector": ".large-passenger-vehicle-average-ice.road-vehicle.internal-combustion-engine * .emissions-anchor.center-anchor"
+              "querySelector": ".large-passenger-vehicle-average-ice.road-vehicle.internal-combustion-engine * .emissions-anchor.switch-anchor"
             }
           }
         },
         "large-passenger-vehicle-efficient-ice": {
-          "center-anchor": {
+          "switch-anchor": {
             "summary": {
-              "emissions": 266.09000000000003,
-              "naturalVol": 93.41,
-              "energy": 3605.54,
-              "abated_emissions": 0,
+              "emissions": 29.64,
+              "naturalVol": 25.86,
+              "energy": 647.3199999999999,
+              "abated_emissions": 30.17,
               "abated_naturalVol": 0,
               "abated_energy": 0,
               "emissionsSector": "Transport",
               "emissionsSubSector": "On-road transportation",
-              "emissionsSource": "Diesel (transport)",
+              "emissionsSource": "Ethanol (E85)",
               "economicSectorGroup": "Municipal",
               "economicSector": "Government",
               "economicActor": "Government services",
@@ -39253,22 +39257,22 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "kL",
-              "querySelector": ".large-passenger-vehicle-efficient-ice.road-vehicle.internal-combustion-engine * .emissions-anchor.center-anchor"
+              "querySelector": ".large-passenger-vehicle-efficient-ice.road-vehicle.internal-combustion-engine * .emissions-anchor.switch-anchor"
             }
           }
         },
         "sports-utility-vehicle-average-ice": {
-          "center-anchor": {
+          "switch-anchor": {
             "summary": {
-              "emissions": 607.62,
-              "naturalVol": 213.31,
-              "energy": 8233.39,
-              "abated_emissions": 0,
+              "emissions": 70.14,
+              "naturalVol": 61.21000000000001,
+              "energy": 1531.23,
+              "abated_emissions": 71.37999999999998,
               "abated_naturalVol": 0,
               "abated_energy": 0,
               "emissionsSector": "Transport",
               "emissionsSubSector": "On-road transportation",
-              "emissionsSource": "Diesel (transport)",
+              "emissionsSource": "Ethanol (E85)",
               "economicSectorGroup": "Industrial",
               "economicSector": "Manufacturing industry",
               "economicActor": "Manufacturing plants",
@@ -39301,22 +39305,22 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "kL",
-              "querySelector": ".sports-utility-vehicle-average-ice.road-vehicle.internal-combustion-engine * .emissions-anchor.center-anchor"
+              "querySelector": ".sports-utility-vehicle-average-ice.road-vehicle.internal-combustion-engine * .emissions-anchor.switch-anchor"
             }
           }
         },
         "sports-utility-vehicle-efficient-ice": {
-          "center-anchor": {
+          "switch-anchor": {
             "summary": {
-              "emissions": 289.19,
-              "naturalVol": 101.51999999999998,
-              "energy": 3918.67,
-              "abated_emissions": 0,
+              "emissions": 32.19,
+              "naturalVol": 28.08,
+              "energy": 702.5500000000001,
+              "abated_emissions": 32.75000000000001,
               "abated_naturalVol": 0,
               "abated_energy": 0,
               "emissionsSector": "Transport",
               "emissionsSubSector": "On-road transportation",
-              "emissionsSource": "Diesel (transport)",
+              "emissionsSource": "Ethanol (E85)",
               "economicSectorGroup": "Industrial",
               "economicSector": "Manufacturing industry",
               "economicActor": "Manufacturing plants",
@@ -39350,22 +39354,22 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "kL",
-              "querySelector": ".sports-utility-vehicle-efficient-ice.road-vehicle.internal-combustion-engine * .emissions-anchor.center-anchor"
+              "querySelector": ".sports-utility-vehicle-efficient-ice.road-vehicle.internal-combustion-engine * .emissions-anchor.switch-anchor"
             }
           }
         },
         "campervan": {
-          "center-anchor": {
+          "switch-anchor": {
             "summary": {
-              "emissions": 224.76,
-              "naturalVol": 78.9,
-              "energy": 3045.54,
-              "abated_emissions": 0,
+              "emissions": 20.63,
+              "naturalVol": 18,
+              "energy": 450.36,
+              "abated_emissions": 21,
               "abated_naturalVol": 0,
               "abated_energy": 0,
               "emissionsSector": "Transport",
               "emissionsSubSector": "On-road transportation",
-              "emissionsSource": "Diesel (transport)",
+              "emissionsSource": "Ethanol (E85)",
               "economicSectorGroup": "Residential",
               "economicSector": "Residential",
               "economicActor": "Households",
@@ -39390,22 +39394,62 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "kL",
-              "querySelector": ".campervan.road-vehicle.internal-combustion-engine * .emissions-anchor.center-anchor"
+              "querySelector": ".campervan.road-vehicle.internal-combustion-engine * .emissions-anchor.switch-anchor"
+            }
+          }
+        },
+        "motorcycle": {
+          "switch-anchor": {
+            "summary": {
+              "emissions": 45.39,
+              "naturalVol": 39.6,
+              "energy": 990.7900000000001,
+              "abated_emissions": 46.2,
+              "abated_naturalVol": 0,
+              "abated_energy": 0,
+              "emissionsSector": "Transport",
+              "emissionsSubSector": "On-road transportation",
+              "emissionsSource": "Ethanol (E85)",
+              "economicSectorGroup": "Residential",
+              "economicSector": "Residential",
+              "economicActor": "Households",
+              "activities": [
+                "Commute to work or education",
+                "Commute for shopping and pickup/dropoff",
+                "Commute for social and leisure activities",
+                "Commute for personal business"
+              ],
+              "technologies": {
+                "Commute to work or education": [
+                  "Motorcycle"
+                ],
+                "Commute for shopping and pickup/dropoff": [
+                  "Motorcycle"
+                ],
+                "Commute for social and leisure activities": [
+                  "Motorcycle"
+                ],
+                "Commute for personal business": [
+                  "Motorcycle"
+                ]
+              },
+              "naturalVol_Unit": "kL",
+              "querySelector": ".motorcycle.road-vehicle.internal-combustion-engine * .emissions-anchor.switch-anchor"
             }
           }
         },
         "light-commercial-vehicles-or-non-freight-truck-average-ice": {
-          "center-anchor": {
+          "switch-anchor": {
             "summary": {
-              "emissions": 158.96,
-              "naturalVol": 55.8,
-              "energy": 2153.88,
-              "abated_emissions": 0,
+              "emissions": 15.99,
+              "naturalVol": 13.95,
+              "energy": 349.03,
+              "abated_emissions": 16.27,
               "abated_naturalVol": 0,
               "abated_energy": 0,
               "emissionsSector": "Transport",
               "emissionsSubSector": "On-road transportation",
-              "emissionsSource": "Diesel (transport)",
+              "emissionsSource": "Ethanol (E85)",
               "economicSectorGroup": "Industrial",
               "economicSector": "Manufacturing industry",
               "economicActor": "Manufacturing plants",
@@ -39422,22 +39466,22 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "kL",
-              "querySelector": ".light-commercial-vehicles-or-non-freight-truck-average-ice.road-vehicle.internal-combustion-engine * .emissions-anchor.center-anchor"
+              "querySelector": ".light-commercial-vehicles-or-non-freight-truck-average-ice.road-vehicle.internal-combustion-engine * .emissions-anchor.switch-anchor"
             }
           }
         },
         "light-commercial-vehicles-or-non-freight-truck-efficient-ice": {
-          "center-anchor": {
+          "switch-anchor": {
             "summary": {
-              "emissions": 127.16,
-              "naturalVol": 44.64,
-              "energy": 1723.1,
-              "abated_emissions": 0,
+              "emissions": 12.790000000000001,
+              "naturalVol": 11.16,
+              "energy": 279.23,
+              "abated_emissions": 13.02,
               "abated_naturalVol": 0,
               "abated_energy": 0,
               "emissionsSector": "Transport",
               "emissionsSubSector": "On-road transportation",
-              "emissionsSource": "Diesel (transport)",
+              "emissionsSource": "Ethanol (E85)",
               "economicSectorGroup": "Industrial",
               "economicSector": "Manufacturing industry",
               "economicActor": "Manufacturing plants",
@@ -39454,22 +39498,22 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "kL",
-              "querySelector": ".light-commercial-vehicles-or-non-freight-truck-efficient-ice.road-vehicle.internal-combustion-engine * .emissions-anchor.center-anchor"
+              "querySelector": ".light-commercial-vehicles-or-non-freight-truck-efficient-ice.road-vehicle.internal-combustion-engine * .emissions-anchor.switch-anchor"
             }
           }
         },
         "rigid-and-articulated-trucks-average-ice": {
-          "center-anchor": {
+          "switch-anchor": {
             "summary": {
-              "emissions": 6.84,
-              "naturalVol": 2.4,
-              "energy": 92.64,
-              "abated_emissions": 0,
+              "emissions": 0.69,
+              "naturalVol": 0.6,
+              "energy": 15.01,
+              "abated_emissions": 0.7,
               "abated_naturalVol": 0,
               "abated_energy": 0,
               "emissionsSector": "Transport",
               "emissionsSubSector": "On-road transportation",
-              "emissionsSource": "Diesel (transport)",
+              "emissionsSource": "Ethanol (E85)",
               "economicSectorGroup": "Industrial",
               "economicSector": "Manufacturing industry",
               "economicActor": "Manufacturing plants",
@@ -39482,22 +39526,22 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "kL",
-              "querySelector": ".rigid-and-articulated-trucks-average-ice.road-vehicle.internal-combustion-engine * .emissions-anchor.center-anchor"
+              "querySelector": ".rigid-and-articulated-trucks-average-ice.road-vehicle.internal-combustion-engine * .emissions-anchor.switch-anchor"
             }
           }
         },
         "rigid-and-articulated-trucks-efficient-ice": {
-          "center-anchor": {
+          "switch-anchor": {
             "summary": {
-              "emissions": 5.47,
-              "naturalVol": 1.92,
-              "energy": 74.11,
-              "abated_emissions": 0,
+              "emissions": 0.55,
+              "naturalVol": 0.48,
+              "energy": 12.01,
+              "abated_emissions": 0.56,
               "abated_naturalVol": 0,
               "abated_energy": 0,
               "emissionsSector": "Transport",
               "emissionsSubSector": "On-road transportation",
-              "emissionsSource": "Diesel (transport)",
+              "emissionsSource": "Ethanol (E85)",
               "economicSectorGroup": "Industrial",
               "economicSector": "Manufacturing industry",
               "economicActor": "Manufacturing plants",
@@ -39510,22 +39554,22 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "kL",
-              "querySelector": ".rigid-and-articulated-trucks-efficient-ice.road-vehicle.internal-combustion-engine * .emissions-anchor.center-anchor"
+              "querySelector": ".rigid-and-articulated-trucks-efficient-ice.road-vehicle.internal-combustion-engine * .emissions-anchor.switch-anchor"
             }
           }
         },
         "garbage-truck-average-ice": {
-          "center-anchor": {
+          "switch-anchor": {
             "summary": {
-              "emissions": 205.1,
-              "naturalVol": 72,
-              "energy": 2779.2,
-              "abated_emissions": 0,
+              "emissions": 20.63,
+              "naturalVol": 18,
+              "energy": 450.36,
+              "abated_emissions": 21,
               "abated_naturalVol": 0,
               "abated_energy": 0,
               "emissionsSector": "Transport",
               "emissionsSubSector": "On-road transportation",
-              "emissionsSource": "Diesel (transport)",
+              "emissionsSource": "Ethanol (E85)",
               "economicSectorGroup": "Industrial",
               "economicSector": "Waste services",
               "economicActor": "Waste service providers",
@@ -39538,22 +39582,22 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "kL",
-              "querySelector": ".garbage-truck-average-ice.road-vehicle.internal-combustion-engine * .emissions-anchor.center-anchor"
+              "querySelector": ".garbage-truck-average-ice.road-vehicle.internal-combustion-engine * .emissions-anchor.switch-anchor"
             }
           }
         },
         "garbage-truck-efficient-ice": {
-          "center-anchor": {
+          "switch-anchor": {
             "summary": {
-              "emissions": 109.39,
-              "naturalVol": 38.4,
-              "energy": 1482.24,
-              "abated_emissions": 0,
+              "emissions": 11,
+              "naturalVol": 9.6,
+              "energy": 240.19,
+              "abated_emissions": 11.2,
               "abated_naturalVol": 0,
               "abated_energy": 0,
               "emissionsSector": "Transport",
               "emissionsSubSector": "On-road transportation",
-              "emissionsSource": "Diesel (transport)",
+              "emissionsSource": "Ethanol (E85)",
               "economicSectorGroup": "Industrial",
               "economicSector": "Waste services",
               "economicActor": "Waste service providers",
@@ -39566,22 +39610,78 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "kL",
-              "querySelector": ".garbage-truck-efficient-ice.road-vehicle.internal-combustion-engine * .emissions-anchor.center-anchor"
+              "querySelector": ".garbage-truck-efficient-ice.road-vehicle.internal-combustion-engine * .emissions-anchor.switch-anchor"
+            }
+          }
+        },
+        "airport-vehilce": {
+          "switch-anchor": {
+            "summary": {
+              "emissions": 3.44,
+              "naturalVol": 3,
+              "energy": 75.06,
+              "abated_emissions": 3.5,
+              "abated_naturalVol": 0,
+              "abated_energy": 0,
+              "emissionsSector": "Transport",
+              "emissionsSubSector": "On-road transportation",
+              "emissionsSource": "Ethanol (E85)",
+              "economicSectorGroup": "Municipal",
+              "economicSector": "Aviation industry",
+              "economicActor": "Airport service providers",
+              "activities": [
+                "On site transport services"
+              ],
+              "technologies": {
+                "On site transport services": [
+                  "Airport service vehicles"
+                ]
+              },
+              "naturalVol_Unit": "kL",
+              "querySelector": ".airport-vehilce.road-vehicle.internal-combustion-engine * .emissions-anchor.switch-anchor"
+            }
+          }
+        },
+        "ambulance": {
+          "switch-anchor": {
+            "summary": {
+              "emissions": 3.44,
+              "naturalVol": 3,
+              "energy": 75.06,
+              "abated_emissions": 3.5,
+              "abated_naturalVol": 0,
+              "abated_energy": 0,
+              "emissionsSector": "Transport",
+              "emissionsSubSector": "On-road transportation",
+              "emissionsSource": "Ethanol (E85)",
+              "economicSectorGroup": "Municipal",
+              "economicSector": "Health services",
+              "economicActor": "Health service providers",
+              "activities": [
+                "Ambulance and medical services"
+              ],
+              "technologies": {
+                "Ambulance and medical services": [
+                  "Ambulance vehicles"
+                ]
+              },
+              "naturalVol_Unit": "kL",
+              "querySelector": ".ambulance.road-vehicle.internal-combustion-engine * .emissions-anchor.switch-anchor"
             }
           }
         },
         "bus-average-ice": {
-          "center-anchor": {
+          "switch-anchor": {
             "summary": {
-              "emissions": 79.85,
-              "naturalVol": 28.03,
-              "energy": 1082.04,
+              "emissions": 417.64,
+              "naturalVol": 364.42,
+              "energy": 9117.69,
               "abated_emissions": 0,
               "abated_naturalVol": 0,
               "abated_energy": 0,
               "emissionsSector": "Transport",
               "emissionsSubSector": "On-road transportation",
-              "emissionsSource": "Diesel (transport)",
+              "emissionsSource": "Ethanol (E85)",
               "economicSectorGroup": "Municipal",
               "economicSector": "Public transport",
               "economicActor": "Public transport services",
@@ -39594,22 +39694,22 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "kL",
-              "querySelector": ".bus-average-ice.road-vehicle.internal-combustion-engine * .emissions-anchor.center-anchor"
+              "querySelector": ".bus-average-ice.road-vehicle.internal-combustion-engine * .emissions-anchor.switch-anchor"
             }
           }
         },
         "bus-efficient-ice": {
-          "center-anchor": {
+          "switch-anchor": {
             "summary": {
-              "emissions": 63.88,
-              "naturalVol": 22.43,
-              "energy": 865.63,
+              "emissions": 334.11,
+              "naturalVol": 291.53,
+              "energy": 7294.15,
               "abated_emissions": 0,
               "abated_naturalVol": 0,
               "abated_energy": 0,
               "emissionsSector": "Transport",
               "emissionsSubSector": "On-road transportation",
-              "emissionsSource": "Diesel (transport)",
+              "emissionsSource": "Ethanol (E85)",
               "economicSectorGroup": "Municipal",
               "economicSector": "Public transport",
               "economicActor": "Public transport services",
@@ -39622,22 +39722,22 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "kL",
-              "querySelector": ".bus-efficient-ice.road-vehicle.internal-combustion-engine * .emissions-anchor.center-anchor"
+              "querySelector": ".bus-efficient-ice.road-vehicle.internal-combustion-engine * .emissions-anchor.switch-anchor"
             }
           }
         },
         "tractor": {
           "farm-activities-anchor": {
             "summary": {
-              "emissions": 5.13,
-              "naturalVol": 1.8,
-              "energy": 69.48,
-              "abated_emissions": 0,
+              "emissions": 0.14,
+              "naturalVol": 0.12,
+              "energy": 3,
+              "abated_emissions": 0.14,
               "abated_naturalVol": 0,
               "abated_energy": 0,
               "emissionsSector": "Transport",
               "emissionsSubSector": "On-road transportation",
-              "emissionsSource": "Diesel (transport)",
+              "emissionsSource": "Ethanol (E85)",
               "economicSectorGroup": "Farming and fishing",
               "economicSector": "Public transport",
               "economicActor": "Public transport services",
@@ -39657,15 +39757,15 @@ const modelVisData = {
         "off-road-vehicle": {
           "farm-activities-anchor": {
             "summary": {
-              "emissions": 12.82,
-              "naturalVol": 4.5,
-              "energy": 173.7,
-              "abated_emissions": 0,
+              "emissions": 0.09,
+              "naturalVol": 0.08,
+              "energy": 2,
+              "abated_emissions": 0.09,
               "abated_naturalVol": 0,
               "abated_energy": 0,
               "emissionsSector": "Transport",
               "emissionsSubSector": "On-road transportation",
-              "emissionsSource": "Diesel (transport)",
+              "emissionsSource": "Ethanol (E85)",
               "economicSectorGroup": "Farming and fishing",
               "economicSector": "Public transport",
               "economicActor": "Public transport services",
@@ -39687,17 +39787,17 @@ const modelVisData = {
     "off-road-vehicle": {
       "internal-combustion-engine": {
         "off-road-vehicle": {
-          "center-anchor": {
+          "switch-anchor": {
             "summary": {
-              "emissions": 0.98,
-              "naturalVol": 0.35,
-              "energy": 13.34,
-              "abated_emissions": 0,
+              "emissions": 0.1,
+              "naturalVol": 0.09,
+              "energy": 2.16,
+              "abated_emissions": 0.1,
               "abated_naturalVol": 0,
               "abated_energy": 0,
               "emissionsSector": "Transport",
               "emissionsSubSector": "On-road transportation",
-              "emissionsSource": "Diesel (transport)",
+              "emissionsSource": "Ethanol (E85)",
               "economicSectorGroup": "Municipal",
               "economicSector": "Government",
               "economicActor": "Government services",
@@ -39710,22 +39810,22 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "kL",
-              "querySelector": ".off-road-vehicle.off-road-vehicle.internal-combustion-engine * .emissions-anchor.center-anchor"
+              "querySelector": ".off-road-vehicle.off-road-vehicle.internal-combustion-engine * .emissions-anchor.switch-anchor"
             }
           }
         },
         "tractor": {
-          "center-anchor": {
+          "switch-anchor": {
             "summary": {
-              "emissions": 0.98,
-              "naturalVol": 0.35,
-              "energy": 13.34,
-              "abated_emissions": 0,
+              "emissions": 0.03,
+              "naturalVol": 0.02,
+              "energy": 0.58,
+              "abated_emissions": 0.03,
               "abated_naturalVol": 0,
               "abated_energy": 0,
               "emissionsSector": "Transport",
               "emissionsSubSector": "On-road transportation",
-              "emissionsSource": "Diesel (transport)",
+              "emissionsSource": "Ethanol (E85)",
               "economicSectorGroup": "Municipal",
               "economicSector": "Government",
               "economicActor": "Government services",
@@ -39738,7 +39838,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "kL",
-              "querySelector": ".tractor.off-road-vehicle.internal-combustion-engine * .emissions-anchor.center-anchor"
+              "querySelector": ".tractor.off-road-vehicle.internal-combustion-engine * .emissions-anchor.switch-anchor"
             }
           }
         }
@@ -39747,17 +39847,17 @@ const modelVisData = {
     "rail": {
       "internal-combustion-engine": {
         "train-diesel": {
-          "center-anchor": {
+          "switch-anchor": {
             "summary": {
-              "emissions": 2884.29,
-              "naturalVol": 1012.5,
-              "energy": 39082.5,
+              "emissions": 0,
+              "naturalVol": 0,
+              "energy": 0,
               "abated_emissions": 0,
               "abated_naturalVol": 0,
               "abated_energy": 0,
               "emissionsSector": "Transport",
               "emissionsSubSector": "Railways",
-              "emissionsSource": "Diesel (transport)",
+              "emissionsSource": "Biodiesel (B20)",
               "economicSectorGroup": "Municipal",
               "economicSector": "Transport and freight",
               "economicActor": "Transport and freight providers",
@@ -39774,7 +39874,7 @@ const modelVisData = {
                 ]
               },
               "naturalVol_Unit": "kL",
-              "querySelector": ".train-diesel.rail.internal-combustion-engine * .emissions-anchor.center-anchor"
+              "querySelector": ".train-diesel.rail.internal-combustion-engine * .emissions-anchor.switch-anchor"
             }
           }
         }
