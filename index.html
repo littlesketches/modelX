@@ -15,8 +15,8 @@
 
 
         <!-- A-FRAME AND AFRAME COMPONENTS -->
-        <script src="js/aframe.min.js"></script> <!-- <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script> -->
-        <!-- <script src="js/aframe.js"></script>         -->
+        <!--  <script src="js/aframe.min.js"></script> <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script> -->
+        <script src="js/aframe.js"></script>        
         <script src="js/aframe-template-component.min.js"></script>
         <!-- <script src="js/aframe-template-component.js"></script> -->
         <script src="js/aframe-extras.min.js"></script>
@@ -2165,6 +2165,9 @@
                         <a-mixin id="col-vehicle-badge-abarth"      material='color: yellow; metalness: 0.25'></a-mixin>
                     <!-- Parks and Rec facilities-->
                         <a-mixin id="col-pitch-lines"               material='color: #fff'></a-mixin>
+                        <a-mixin id="col-crane-struts"              material='color: yellow'></a-mixin>
+                        <a-mixin id="col-crane-cables"              material='color: #00fdff'></a-mixin>
+                        <a-mixin id="col-crane-equip"               material='color: #00fdff'></a-mixin>
                     <!-- Animals-->
                         <a-mixin id="col-chicken-body"   	        material='color: #fff'></a-mixin>
                         <a-mixin id="col-chicken-feet"   	        material='color: orange'></a-mixin>
@@ -3419,11 +3422,11 @@
                                 </a-entity>
                                 <a-entity class="skylight-group" position="0 4.55 -0.55" rotation="0 90 0">
                                     <a-entity position="-0.3 -0.3 0" scale="1 1.5 1.5">
-                                        <a-cylinder position="-0.625 0.5 0"  geometry="radius: 0.5; segmentsHieght: 1; segmentsRadial: 3; height: 0.05" rotation="-90 -90 0" material="flatShading: true" scale="0.5 0.25 0.25"></a-cylinder>
-                                        <a-cylinder position="-0.3125 0.5 0" geometry="radius: 0.5; segmentsHieght: 1; segmentsRadial: 3; height: 0.05" rotation="-90 -90 0" material="flatShading: true" scale="0.5 0.25 0.25"></a-cylinder>
-                                        <a-cylinder position="0 0.5 0"       geometry="radius: 0.5; segmentsHieght: 1; segmentsRadial: 3; height: 0.05" rotation="-90 -90 0" material="flatShading: true" scale="0.5 0.25 0.25"></a-cylinder>
-                                        <a-cylinder position="0.3125 0.5 0"  geometry="radius: 0.5; segmentsHieght: 1; segmentsRadial: 3; height: 0.05" rotation="-90 -90 0" material="flatShading: true" scale="0.5 0.25 0.25"></a-cylinder>
-                                        <a-cylinder position="0.625 0.5 0"   geometry="radius: 0.5; segmentsHieght: 1; segmentsRadial: 3; height: 0.05" rotation="-90 -90 0" material="flatShading: true" scale="0.5 0.25 0.25"></a-cylinder>
+                                        <a-cylinder position="-0.625 0.5 0"  geometry="radius: 0.5; segmentsHeight: 1; segmentsRadial: 3; height: 0.05" rotation="-90 -90 0" material="flatShading: true" scale="0.5 0.25 0.25"></a-cylinder>
+                                        <a-cylinder position="-0.3125 0.5 0" geometry="radius: 0.5; segmentsHeight: 1; segmentsRadial: 3; height: 0.05" rotation="-90 -90 0" material="flatShading: true" scale="0.5 0.25 0.25"></a-cylinder>
+                                        <a-cylinder position="0 0.5 0"       geometry="radius: 0.5; segmentsHeight: 1; segmentsRadial: 3; height: 0.05" rotation="-90 -90 0" material="flatShading: true" scale="0.5 0.25 0.25"></a-cylinder>
+                                        <a-cylinder position="0.3125 0.5 0"  geometry="radius: 0.5; segmentsHeight: 1; segmentsRadial: 3; height: 0.05" rotation="-90 -90 0" material="flatShading: true" scale="0.5 0.25 0.25"></a-cylinder>
+                                        <a-cylinder position="0.625 0.5 0"   geometry="radius: 0.5; segmentsHeight: 1; segmentsRadial: 3; height: 0.05" rotation="-90 -90 0" material="flatShading: true" scale="0.5 0.25 0.25"></a-cylinder>
                                     </a-entity>  
                                 </a-entity>
                             </a-entity>
@@ -3642,11 +3645,11 @@
                                 </a-entity>
                                 <a-entity class="skylight-group" position="0 4.55 -0.55" rotation="0 90 0">
                                     <a-entity position="-0.3 -0.3 0" scale="1 1.5 1.5">
-                                        <a-cylinder position="-0.625 0.5 0"  geometry="radius: 0.5; segmentsHieght: 1; segmentsRadial: 3; height: 0.05" rotation="-90 -90 0" material="flatShading: true" scale="0.5 0.25 0.25"></a-cylinder>
-                                        <a-cylinder position="-0.3125 0.5 0" geometry="radius: 0.5; segmentsHieght: 1; segmentsRadial: 3; height: 0.05" rotation="-90 -90 0" material="flatShading: true" scale="0.5 0.25 0.25"></a-cylinder>
-                                        <a-cylinder position="0 0.5 0"       geometry="radius: 0.5; segmentsHieght: 1; segmentsRadial: 3; height: 0.05" rotation="-90 -90 0" material="flatShading: true" scale="0.5 0.25 0.25"></a-cylinder>
-                                        <a-cylinder position="0.3125 0.5 0"  geometry="radius: 0.5; segmentsHieght: 1; segmentsRadial: 3; height: 0.05" rotation="-90 -90 0" material="flatShading: true" scale="0.5 0.25 0.25"></a-cylinder>
-                                        <a-cylinder position="0.625 0.5 0"   geometry="radius: 0.5; segmentsHieght: 1; segmentsRadial: 3; height: 0.05" rotation="-90 -90 0" material="flatShading: true" scale="0.5 0.25 0.25"></a-cylinder>
+                                        <a-cylinder position="-0.625 0.5 0"  geometry="radius: 0.5; segmentsHeight: 1; segmentsRadial: 3; height: 0.05" rotation="-90 -90 0" material="flatShading: true" scale="0.5 0.25 0.25"></a-cylinder>
+                                        <a-cylinder position="-0.3125 0.5 0" geometry="radius: 0.5; segmentsHeight: 1; segmentsRadial: 3; height: 0.05" rotation="-90 -90 0" material="flatShading: true" scale="0.5 0.25 0.25"></a-cylinder>
+                                        <a-cylinder position="0 0.5 0"       geometry="radius: 0.5; segmentsHeight: 1; segmentsRadial: 3; height: 0.05" rotation="-90 -90 0" material="flatShading: true" scale="0.5 0.25 0.25"></a-cylinder>
+                                        <a-cylinder position="0.3125 0.5 0"  geometry="radius: 0.5; segmentsHeight: 1; segmentsRadial: 3; height: 0.05" rotation="-90 -90 0" material="flatShading: true" scale="0.5 0.25 0.25"></a-cylinder>
+                                        <a-cylinder position="0.625 0.5 0"   geometry="radius: 0.5; segmentsHeight: 1; segmentsRadial: 3; height: 0.05" rotation="-90 -90 0" material="flatShading: true" scale="0.5 0.25 0.25"></a-cylinder>
                                     </a-entity>  
                                 </a-entity>
                             </a-entity>
@@ -4579,7 +4582,7 @@
     
                     <script id="tmp-barn-small" type="text/html">
                         <a-entity class="barn">
-                            <a-entity mixin="${basecol}" material="side: double; flatShafing: true" buffer-geometry-merger>
+                            <a-entity mixin="${basecol}" material="side: double; flatShading: true" buffer-geometry-merger>
                                 <a-box position="0 0.75 0" scale="2.5 1.3 4"></a-box>
                                 <a-triangle position="0 1.875 2" scale="2.5 1 2.5" geometry="vertexA: 0 0.25 0"></a-triangle>
                                 <a-triangle position="0 1.875 -2" scale="2.5 1 -2.5" geometry="vertexA: 0 0.25 0"></a-triangle>
@@ -4609,7 +4612,7 @@
                             </a-entity>
                         </a-entity>                        
                         <a-entity class="barn annex" position="1.95 0 0">
-                            <a-entity mixin="${basecol}" material="side: double; flatShafing: true" buffer-geometry-merger>
+                            <a-entity mixin="${basecol}" material="side: double; flatShading: true" buffer-geometry-merger>
                                 <a-box  position="0 0.4 0" scale="1.4 0.6 2.5"></a-box>
                                 <a-triangle position="-0.7 1 1.25" scale="2.8 1 2.5" geometry="vertexA: 0 0 0; vertexB: 0 -0.3 0; vertexC: 0.5 -0.3 0"></a-triangle>
                                 <a-triangle position="-0.7 1 -1.25" scale="2.8 1 -2.5" geometry="vertexA: 0 0 0; vertexB: 0 -0.3 0; vertexC: 0.5 -0.3 0"></a-triangle>
@@ -5287,7 +5290,7 @@
                                         </a-entity>
                                         <a-entity position="-2.25 0 0">
                                             <a-box position="0 4.05 0" scale="0.3 0.5 7.1"></a-box>
-                                            <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; segmentsHeight: 1; hetaLength: 180" ></a-cylinder>
+                                            <a-cylinder position="0 4.325 0" rotation="0 90 90" geometry="radius: 0.15; height: 7.1; segmentsRadial: 12; segmentsHeight: 1; thetaLength: 180" ></a-cylinder>
                                         </a-entity>
                                     </a-entity>
                                     <a-entity position="0 0 0.5">
@@ -6189,7 +6192,7 @@
                                 <a-cylinder geometry="height: 1.5; segmentsRadial: 10; segmentsHeight: 1; radius: 2" position="0 16.5 0"></a-cylinder>
                             </a-entity>        
                             <a-entity class="glass-group" mixin="col-airport-window"  buffer-geometry-merger>
-                                <a-cone mixin="col-airport-window" geometry="height: 0.8; segmentsRadial: 10; segmentsHeight: 3; sradiusBottom: 2.65; radiusTop: 2.9" position="0 14.95 0"></a-cone>
+                                <a-cone mixin="col-airport-window" geometry="height: 0.8; segmentsRadial: 10; segmentsHeight: 3; radiusBottom: 2.65; radiusTop: 2.9" position="0 14.95 0"></a-cone>
                                 <a-cylinder mixin="col-airport-window" geometry="height: 0.9; segmentsRadial: 10; radius: 2.05; segmentsHeight: 1;" position="0 16.5 0"></a-cylinder>
                             </a-entity>                
                         </a-entity>
@@ -6656,7 +6659,7 @@
 
                     <script id="tmp-elecDist-pole" type="text/html">
                         <a-entity mixin="col-powerPole" material="flatShading: true" buffer-geometry-merger>
-                            <a-cylinder position="0 1 0" geometry="height: 2; radius: 0.05; segmentsRadial: 8; egmentsHeight: 1"></a-cylinder>       
+                            <a-cylinder position="0 1 0" geometry="height: 2; radius: 0.05; segmentsRadial: 8; segmentsHeight: 1"></a-cylinder>       
                             <a-box position="0 1.75 0" geometry="width: 0.75; depth: 0.08; height: 0.08"></a-box>
                         </a-entity>
                         <a-entity mixin="col-powerFixture" material="metalness: 0.5" buffer-geometry-merger>
@@ -6664,6 +6667,254 @@
                             <a-cylinder position="0.3 1.8 0" geometry="height: 0.1; radius: 0.025; segmentsRadial: 8; segmentsHeight: 1""></a-cylinder>
                         </a-entity>
                         <a-entity class="emissions-anchor grid-distribution" position="0 2 0"></a-entity>
+                    </script>
+
+                    <script id="tmp-crane" type="text/html">
+                        <a-entity class = "crane-structure" mixin="col-crane-struts" buffer-geometry-merger>
+                            <a-entity class = "tower">
+                                <a-box position="0.25 2.5 0.25"     scale="0.05 5 0.05"></a-box>
+                                <a-box position="-0.25 2.5 0.25"    scale="0.05 5 0.05"></a-box>
+                                <a-box position="0.25 2.5 -0.25"    scale="0.05 5 0.05"></a-box>
+                                <a-box position="-0.25 2.5 -0.25"   scale="0.05 5 0.05"></a-box>
+                                <a-box position="0 0.25 0.25" scale="0.71 0.035 0.035" rotation="0 0 45"></a-box>
+                                <a-box position="0 0.25 0.25" scale="0.71 0.035 0.035" rotation="0 0 -45"></a-box>
+                                <a-box position="0 0.25 -0.25" scale="0.71 0.035 0.035" rotation="0 0 45"></a-box>
+                                <a-box position="0 0.25 -0.25" scale="0.71 0.035 0.035" rotation="0 0 -45"></a-box>
+                                <a-box position="0.25 0.25 0" scale="0.035 0.035 0.71" rotation="-45 0 0"></a-box>
+                                <a-box position="0.25 0.25 0" scale="0.035 0.035 0.71" rotation="45 0 0"></a-box>
+                                <a-box position="-0.25 0.25 0" scale="0.035 0.035 0.71" rotation="-45 0 0"></a-box>
+                                <a-box position="-0.25 0.25 0" scale="0.035 0.035 0.71" rotation="45 0 0"></a-box>
+                                <a-entity position ="0 0.5 0">
+                                    <a-box position="0.25 0 0" scale="0.035 0.035 0.5"></a-box>
+                                    <a-box position="-0.25 0 0" scale="0.035 0.035 0.5"></a-box>
+                                    <a-box position="0 0 0.25" scale="0.5 0.035 0.035"></a-box>
+                                    <a-box position="0 0 -0.25" scale="0.5 0.035 0.035"></a-box>
+                                    <a-box position="0 0.25 0.25" scale="0.71 0.035 0.035" rotation="0 0 45"></a-box>
+                                    <a-box position="0 0.25 0.25" scale="0.71 0.035 0.035" rotation="0 0 -45"></a-box>
+                                    <a-box position="0 0.25 -0.25" scale="0.71 0.035 0.035" rotation="0 0 45"></a-box>
+                                    <a-box position="0 0.25 -0.25" scale="0.71 0.035 0.035" rotation="0 0 -45"></a-box>
+                                    <a-box position="0.25 0.25 0" scale="0.035 0.035 0.71" rotation="-45 0 0"></a-box>
+                                    <a-box position="0.25 0.25 0" scale="0.035 0.035 0.71" rotation="45 0 0"></a-box>
+                                    <a-box position="-0.25 0.25 0" scale="0.035 0.035 0.71" rotation="-45 0 0"></a-box>
+                                    <a-box position="-0.25 0.25 0" scale="0.035 0.035 0.71" rotation="45 0 0"></a-box>
+                                </a-entity>
+                                <a-entity position ="0 1 0">
+                                    <a-box position="0.25 0 0" scale="0.035 0.035 0.5"></a-box>
+                                    <a-box position="-0.25 0 0" scale="0.035 0.035 0.5"></a-box>
+                                    <a-box position="0 0 0.25" scale="0.5 0.035 0.035"></a-box>
+                                    <a-box position="0 0 -0.25" scale="0.5 0.035 0.035"></a-box>
+                                    <a-box position="0 0.25 0.25" scale="0.71 0.035 0.035" rotation="0 0 45"></a-box>
+                                    <a-box position="0 0.25 0.25" scale="0.71 0.035 0.035" rotation="0 0 -45"></a-box>
+                                    <a-box position="0 0.25 -0.25" scale="0.71 0.035 0.035" rotation="0 0 45"></a-box>
+                                    <a-box position="0 0.25 -0.25" scale="0.71 0.035 0.035" rotation="0 0 -45"></a-box>
+                                    <a-box position="0.25 0.25 0" scale="0.035 0.035 0.71" rotation="-45 0 0"></a-box>
+                                    <a-box position="0.25 0.25 0" scale="0.035 0.035 0.71" rotation="45 0 0"></a-box>
+                                    <a-box position="-0.25 0.25 0" scale="0.035 0.035 0.71" rotation="-45 0 0"></a-box>
+                                    <a-box position="-0.25 0.25 0" scale="0.035 0.035 0.71" rotation="45 0 0"></a-box>
+                                </a-entity>
+                                <a-entity position ="0 1.5 0">
+                                    <a-box position="0.25 0 0" scale="0.035 0.035 0.5"></a-box>
+                                    <a-box position="-0.25 0 0" scale="0.035 0.035 0.5"></a-box>
+                                    <a-box position="0 0 0.25" scale="0.5 0.035 0.035"></a-box>
+                                    <a-box position="0 0 -0.25" scale="0.5 0.035 0.035"></a-box>
+                                    <a-box position="0 0.25 0.25" scale="0.71 0.035 0.035" rotation="0 0 45"></a-box>
+                                    <a-box position="0 0.25 0.25" scale="0.71 0.035 0.035" rotation="0 0 -45"></a-box>
+                                    <a-box position="0 0.25 -0.25" scale="0.71 0.035 0.035" rotation="0 0 45"></a-box>
+                                    <a-box position="0 0.25 -0.25" scale="0.71 0.035 0.035" rotation="0 0 -45"></a-box>
+                                    <a-box position="0.25 0.25 0" scale="0.035 0.035 0.71" rotation="-45 0 0"></a-box>
+                                    <a-box position="0.25 0.25 0" scale="0.035 0.035 0.71" rotation="45 0 0"></a-box>
+                                    <a-box position="-0.25 0.25 0" scale="0.035 0.035 0.71" rotation="-45 0 0"></a-box>
+                                    <a-box position="-0.25 0.25 0" scale="0.035 0.035 0.71" rotation="45 0 0"></a-box>
+                                </a-entity>
+                                <a-entity position ="0 2 0">
+                                    <a-box position="0.25 0 0" scale="0.035 0.035 0.5"></a-box>
+                                    <a-box position="-0.25 0 0" scale="0.035 0.035 0.5"></a-box>
+                                    <a-box position="0 0 0.25" scale="0.5 0.035 0.035"></a-box>
+                                    <a-box position="0 0 -0.25" scale="0.5 0.035 0.035"></a-box>
+                                    <a-box position="0 0.25 0.25" scale="0.71 0.035 0.035" rotation="0 0 45"></a-box>
+                                    <a-box position="0 0.25 0.25" scale="0.71 0.035 0.035" rotation="0 0 -45"></a-box>
+                                    <a-box position="0 0.25 -0.25" scale="0.71 0.035 0.035" rotation="0 0 45"></a-box>
+                                    <a-box position="0 0.25 -0.25" scale="0.71 0.035 0.035" rotation="0 0 -45"></a-box>
+                                    <a-box position="0.25 0.25 0" scale="0.035 0.035 0.71" rotation="-45 0 0"></a-box>
+                                    <a-box position="0.25 0.25 0" scale="0.035 0.035 0.71" rotation="45 0 0"></a-box>
+                                    <a-box position="-0.25 0.25 0" scale="0.035 0.035 0.71" rotation="-45 0 0"></a-box>
+                                    <a-box position="-0.25 0.25 0" scale="0.035 0.035 0.71" rotation="-5 0 0"></a-box>
+                                </a-entity>
+                                <a-entity position ="0 2.5 0">
+                                    <a-box position="0.25 0 0" scale="0.035 0.035 0.5"></a-box>
+                                    <a-box position="-0.25 0 0" scale="0.035 0.035 0.5"></a-box>
+                                    <a-box position="0 0 0.25" scale="0.5 0.035 0.035"></a-box>
+                                    <a-box position="0 0 -0.25" scale="0.5 0.035 0.035"></a-box>
+                                    <a-box position="0 0.25 0.25" scale="0.71 0.035 0.035" rotation="0 0 45"></a-box>
+                                    <a-box position="0 0.25 0.25" scale="0.71 0.035 0.035" rotation="0 0 -45"></a-box>
+                                    <a-box position="0 0.25 -0.25" scale="0.71 0.035 0.035" rotation="0 0 45"></a-box>
+                                    <a-box position="0 0.25 -0.25" scale="0.71 0.035 0.035" rotation="0 0 -45"></a-box>
+                                    <a-box position="0.25 0.25 0" scale="0.035 0.035 0.71" rotation="-45 0 0"></a-box>
+                                    <a-box position="0.25 0.25 0" scale="0.035 0.035 0.71" rotation="45 0 0"></a-box>
+                                    <a-box position="-0.25 0.25 0" scale="0.035 0.035 0.71" rotation="-45 0 0"></a-box>
+                                    <a-box position="-0.25 0.25 0" scale="0.035 0.035 0.71" rotation="45 0 0"></a-box>
+                                </a-entity>
+                                <a-entity position ="0 3 0">
+                                    <a-box position="0.25 0 0" scale="0.035 0.035 0.5"></a-box>
+                                    <a-box position="-0.25 0 0" scale="0.035 0.035 0.5"></a-box>
+                                    <a-box position="0 0 0.25" scale="0.5 0.035 0.035"></a-box>
+                                    <a-box position="0 0 -0.25" scale="0.5 0.035 0.035"></a-box>
+                                    <a-box position="0 0.25 0.25" scale="0.71 0.035 0.035" rotation="0 0 45"></a-box>
+                                    <a-box position="0 0.25 0.25" scale="0.71 0.035 0.035" rotation="0 0 -45"></a-box>
+                                    <a-box position="0 0.25 -0.25" scale="0.71 0.035 0.035" rotation="0 0 45"></a-box>
+                                    <a-box position="0 0.25 -0.25" scale="0.71 0.035 0.035" rotation="0 0 -45"></a-box>
+                                    <a-box position="0.25 0.25 0" scale="0.035 0.035 0.71" rotation="-45 0 0"></a-box>
+                                    <a-box position="0.25 0.25 0" scale="0.035 0.035 0.71" rotation="45 0 0"></a-box>
+                                    <a-box position="-0.25 0.25 0" scale="0.035 0.035 0.71" rotation="-45 0 0"></a-box>
+                                    <a-box position="-0.25 0.25 0" scale="0.035 0.035 0.71" rotation="45 0 0"></a-box>
+                                </a-entity>
+                                <a-entity position ="0 3.5 0">
+                                    <a-box position="0.25 0 0" scale="0.035 0.035 0.5"></a-box>
+                                    <a-box position="-0.25 0 0" scale="0.035 0.035 0.5"></a-box>
+                                    <a-box position="0 0 0.25" scale="0.5 0.035 0.035"></a-box>
+                                    <a-box position="0 0 -0.25" scale="0.5 0.035 0.035"></a-box>
+                                    <a-box position="0 0.25 0.25" scale="0.71 0.035 0.035" rotation="0 0 45"></a-box>
+                                    <a-box position="0 0.25 0.25" scale="0.71 0.035 0.035" rotation="0 0 -45"></a-box>
+                                    <a-box position="0 0.25 -0.25" scale="0.71 0.035 0.035" rotation="0 0 45"></a-box>
+                                    <a-box position="0 0.25 -0.25" scale="0.71 0.035 0.035" rotation="0 0 -45"></a-box>
+                                    <a-box position="0.25 0.25 0" scale="0.035 0.035 0.71" rotation="-45 0 0"></a-box>
+                                    <a-box position="0.25 0.25 0" scale="0.035 0.035 0.71" rotation="45 0 0"></a-box>
+                                    <a-box position="-0.25 0.25 0" scale="0.035 0.035 0.71" rotation="-45 0 0"></a-box>
+                                    <a-box position="-0.25 0.25 0" scale="0.035 0.035 0.71" rotation="45 0 0"></a-box>
+                                </a-entity>
+                                <a-entity position ="0 4 0">
+                                    <a-box position="0.25 0 0" scale="0.035 0.035 0.5"></a-box>
+                                    <a-box position="-0.25 0 0" scale="0.035 0.035 0.5"></a-box>
+                                    <a-box position="0 0 0.25" scale="0.5 0.035 0.035"></a-box>
+                                    <a-box position="0 0 -0.25" scale="0.5 0.035 0.035"></a-box>
+                                    <a-box position="0 0.25 0.25" scale="0.71 0.035 0.035" rotation="0 0 45"></a-box>
+                                    <a-box position="0 0.25 0.25" scale="0.71 0.035 0.035" rotation="0 0 -45"></a-box>
+                                    <a-box position="0 0.25 -0.25" scale="0.71 0.035 0.035" rotation="0 0 45"></a-box>
+                                    <a-box position="0 0.25 -0.25" scale="0.71 0.035 0.035" rotation="0 0 -45"></a-box>
+                                    <a-box position="0.25 0.25 0" scale="0.035 0.035 0.71" rotation="-45 0 0"></a-box>
+                                    <a-box position="0.25 0.25 0" scale="0.035 0.035 0.71" rotation="45 0 0"></a-box>
+                                    <a-box position="-0.25 0.25 0" scale="0.035 0.035 0.71" rotation="-45 0 0"></a-box>
+                                    <a-box position="-0.25 0.25 0" scale="0.035 0.035 0.71" rotation="45 0 0"></a-box>
+                                </a-entity>
+                                <a-entity position ="0 4.5 0">
+                                    <a-box position="0.25 0 0" scale="0.035 0.035 0.5"></a-box>
+                                    <a-box position="-0.25 0 0" scale="0.035 0.035 0.5"></a-box>
+                                    <a-box position="0 0 0.25" scale="0.5 0.035 0.035"></a-box>
+                                    <a-box position="0 0 -0.25" scale="0.5 0.035 0.035"></a-box>
+                                    <a-box position="0 0.25 0.25" scale="0.71 0.035 0.035" rotation="0 0 45"></a-box>
+                                    <a-box position="0 0.25 0.25" scale="0.71 0.035 0.035" rotation="0 0 -45"></a-box>
+                                    <a-box position="0 0.25 -0.25" scale="0.71 0.035 0.035" rotation="0 0 45"></a-box>
+                                    <a-box position="0 0.25 -0.25" scale="0.71 0.035 0.035" rotation="0 0 -45"></a-box>
+                                    <a-box position="0.25 0.25 0" scale="0.035 0.035 0.71" rotation="45 0 0"></a-box>
+                                    <a-box position="0.25 0.25 0" scale="0.035 0.035 0.71" rotation="-45 0 0"></a-box>
+                                    <a-box position="-0.25 0.25 0" scale="0.035 0.035 0.71" rotation="-45 0 0"></a-box>
+                                    <a-box position="-0.25 0.25 0" scale="0.035 0.035 0.71" rotation="45 0 0"></a-box>
+                                </a-entity>
+                                <a-entity position ="0 5 0">
+                                    <a-box position="0.25 0 0" scale="0.035 0.035 0.5"></a-box>
+                                    <a-box position="-0.25 0 0" scale="0.035 0.035 0.5"></a-box>
+                                    <a-box position="0 0 0.25" scale="0.5 0.035 0.035"></a-box>
+                                    <a-box position="0 0 -0.25" scale="0.5 0.035 0.035"></a-box>
+                                </a-entity>
+                            </a-entity>
+                            <a-entity class = "boom" position=" 0 5 0">
+                                <a-box position="0.5 0 0.25" scale="5.5 0.035 0.035"></a-box>
+                                <a-box position="0.5 0 -0.25" scale="5.5 0.035 0.035"></a-box>
+                                <a-box position="1.75 0.5 0.25" scale="2 0.035 0.035"></a-box>
+                                <a-box position="1.75 0.5 -0.25" scale="2 0.035 0.035"></a-box>
+                                <a-box position="-1.25 0.5 0.25" scale="1 0.035 0.035"></a-box>
+                                <a-box position="-1.25 0.5 -0.25" scale="1 0.035 0.035"></a-box>
+                                <a-box position="0.125 0.7 -0.25" scale="1.5 0.035 0.035" rotation="0 0 -80"></a-box>
+                                <a-box position="-0.125 0.7 -0.25" scale="1.5 0.035 0.035" rotation="0 0 80"></a-box>
+                                <a-box position="0.125 0.7 0.25" scale="1.5 0.035 0.035" rotation="0 0 -80"></a-box>
+                                <a-box position="-0.125 0.7 0.25" scale="1.5 0.035 0.035" rotation="0 0 80"></a-box>
+                                <a-box position="0 1.42 0" scale="0.035 0.035 0.5"></a-box>
+                                <a-entity position="0.5 0 0" >
+                                    <a-box position="0 0.25 0.25" scale="0.71 0.035 0.035" rotation="0 0 45"></a-box>
+                                    <a-box position="0.5 0.25 0.25" scale="0.71 0.035 0.035" rotation="0 0 -45"></a-box>
+                                    <a-box position="0 0.25 -0.25" scale="0.71 0.035 0.035" rotation="0 0 45"></a-box>
+                                    <a-box position="0.5 0.25 -0.25" scale="0.71 0.035 0.035" rotation="0 0 -45"></a-box>
+                                    <a-box position="0.25 0.5 0" scale="0.035 0.035 0.5"></a-box>
+                                    <a-box position="0.75 0 0" scale="0.035 0.035 0.5"></a-box>
+                                    <a-box position="0.25 0 0" scale="0.035 0.035 1.1" rotation="0 65 0"></a-box>
+                                    <a-box position="0.25 0 0" scale="0.035 0.035 1.1" rotation="0 -65 0"></a-box>
+                                    <a-box position="0.75 0.5 0" scale="0.035 0.035 1.1" rotation="0 65 0"></a-box>
+                                    <a-box position="0.75 0.5 0" scale="0.035 0.035 1.1" rotation="0 -65 0"></a-box>
+                                    <a-box position="0 0.25 0" scale="0.8 0.035 0.035" rotation="-10 40 35"></a-box>
+                                    <a-box position="0 0.25 0" scale="0.8 0.035 0.035" rotation="10 -40 35"></a-box>
+                                    <a-box position="0.5 0.25 0" scale="0.8 0.035 0.035" rotation="-10 40 -35"></a-box>
+                                    <a-box position="0.5 0.25 0" scale="0.8 0.035 0.035" rotation="10 -40 -35"></a-box>
+                                </a-entity>
+                                <a-entity position="1.5 0 0" >
+                                    <a-box position="0 0.25 0.25" scale="0.71 0.035 0.035" rotation="0 0 45"></a-box>
+                                    <a-box position="0.5 0.25 0.25" scale="0.71 0.035 0.035" rotation="0 0 -45"></a-box>
+                                    <a-box position="0 0.25 -0.25" scale="0.71 0.035 0.035" rotation="0 0 45"></a-box>
+                                    <a-box position="0.5 0.25 -0.25" scale="0.71 0.035 0.035" rotation="0 0 -45"></a-box>
+                                    <a-box position="0.25 0.5 0" scale="0.035 0.035 0.5"></a-box>
+                                    <a-box position="0.75 0 0" scale="0.035 0.035 0.5"></a-box>
+                                    <a-box position="0.25 0 0" scale="0.035 0.035 1.1" rotation="0 65 0"></a-box>
+                                    <a-box position="0.25 0 0" scale="0.035 0.035 1.1" rotation="0 -65 0"></a-box>
+                                    <a-box position="0.75 0.5 0" scale="0.035 0.035 1.1" rotation="0 65 0"></a-box>
+                                    <a-box position="0.75 0.5 0" scale="0.035 0.035 1.1" rotation="0 -65 0"></a-box>
+                                    <a-box position="0 0.25 0" scale="0.8 0.035 0.035" rotation="-10 40 35"></a-box>
+                                    <a-box position="0 0.25 0" scale="0.8 0.035 0.035" rotation="10 -40 35"></a-box>
+                                    <a-box position="0.5 0.25 0" scale="0.8 0.035 0.035" rotation="-10 40 -35"></a-box>
+                                    <a-box position="0.5 0.25 0" scale="0.8 0.035 0.035" rotation="10 -40 -35"></a-box>
+                                </a-entity>
+                                <a-entity position="2.5 0 0" >
+                                    <a-box position="0 0.25 0.25" scale="0.71 0.035 0.035" rotation="0 0 45"></a-box>
+                                    <a-box position="0.5 0.25 0.25" scale="0.71 0.035 0.035" rotation="0 0 -45"></a-box>
+                                    <a-box position="0 0.25 -0.25" scale="0.71 0.035 0.035" rotation="0 0 45"></a-box>
+                                    <a-box position="0.5 0.25 -0.25" scale="0.71 0.035 0.035" rotation="0 0 -45"></a-box>
+                                    <a-box position="0.25 0.5 0" scale="0.035 0.035 0.5"></a-box>
+                                    <a-box position="0.75 0 0" scale="0.035 0.035 0.5"></a-box>
+                                    <a-box position="0.25 0 0" scale="0.035 0.035 1.1" rotation="0 65 0"></a-box>
+                                    <a-box position="0.25 0 0" scale="0.035 0.035 1.1" rotation="0 -65 0"></a-box>
+                                </a-entity>
+                                <a-entity position="-1 0 0" >
+                                    <a-box position="0 0.25 0.25" scale="0.71 0.035 0.035" rotation="0 0 45"></a-box>
+                                    <a-box position="0.5 0.25 0.25" scale="0.71 0.035 0.035" rotation="0 0 -45"></a-box>
+                                    <a-box position="0 0.25 -0.25" scale="0.71 0.035 0.035" rotation="0 0 45"></a-box>
+                                    <a-box position="0.5 0.25 -0.25" scale="0.71 0.035 0.035" rotation="0 0 -45"></a-box>
+                                    <a-box position="0.25 0.5 0" scale="0.035 0.035 0.5"></a-box>
+                                    <a-box position="0.75 0 0" scale="0.035 0.035 0.5"></a-box>
+                                    <a-box position="0.25 0 0" scale="0.035 0.035 1.1" rotation="0 65 0"></a-box>
+                                    <a-box position="0.25 0 0" scale="0.035 0.035 1.1" rotation="0 -65 0"></a-box>
+                                    <a-box position="0 0.25 0" scale="0.8 0.035 0.035" rotation="-10 40 35"></a-box>
+                                    <a-box position="0 0.25 0" scale="0.8 0.035 0.035" rotation="10 -40 35"></a-box>
+                                    <a-box position="0.5 0.25 0" scale="0.8 0.035 0.035" rotation="-10 40 -35"></a-box>
+                                    <a-box position="0.5 0.25 0" scale="0.8 0.035 0.035" rotation="10 -40 -35"></a-box>
+                                </a-entity>
+                                <a-entity position="-2 0 0" >
+                                    <a-box position="0 0.25 0.25" scale="0.71 0.035 0.035" rotation="0 0 45"></a-box>
+                                    <a-box position="0.5 0.25 0.25" scale="0.71 0.035 0.035" rotation="0 0 -45"></a-box>
+                                    <a-box position="0 0.25 -0.25" scale="0.71 0.035 0.035" rotation="0 0 45"></a-box>
+                                    <a-box position="0.5 0.25 -0.25" scale="0.71 0.035 0.035" rotation="0 0 -45"></a-box>
+                                    <a-box position="0 0.25 0" scale="0.8 0.035 0.035" rotation="-10 40 35"></a-box>
+                                    <a-box position="0 0.25 0" scale="0.8 0.035 0.035" rotation="10 -40 35"></a-box>
+                                    <a-box position="0.5 0.25 0" scale="0.8 0.035 0.035" rotation="-10 40 -35"></a-box>
+                                    <a-box position="0.5 0.25 0" scale="0.8 0.035 0.035" rotation="10 -40 -35"></a-box>
+
+                                    <a-box position="0.25 0.5 0" scale="0.035 0.035 0.5"></a-box>
+                                    <a-box position="0.75 0 0" scale="0.035 0.035 0.5"></a-box>
+                                    <a-box position="-0.25 0 0" scale="0.035 0.035 0.5"></a-box>
+                                    <a-box position="0.25 0 0" scale="0.035 0.035 1.1" rotation="0 65 0"></a-box>
+                                    <a-box position="0.25 0 0" scale="0.035 0.035 1.1" rotation="0 -65 0"></a-box>
+                                    <a-box position="0.75 0.5 0" scale="0.035 0.035 1.1" rotation="0 65 0"></a-box>
+                                    <a-box position="0.75 0.5 0" scale="0.035 0.035 1.1" rotation="0 -65 0"></a-box>
+                                </a-entity>
+                            </a-entity>
+                        </a-entity>
+                        <a-entity class = "crane-cables" mixin="col-crane-cables" buffer-geometry-merger>
+                            <a-cylinder position="1.4 5.95 -0.25" rotation="-71 90 0" radius="0.01" geometry="height: 2.95"></a-cylinder>
+                            <a-cylinder position="-0.88 5.97 -0.25" rotation="62 90 0" radius="0.01" geometry="height: 2"></a-cylinder>
+                            <a-cylinder position="1.4 5.95 0.25" rotation="-71 90 0" radius="0.01" geometry="height: 2.95"></a-cylinder>
+                            <a-cylinder position="-0.88 5.97 0.25" rotation="62 90 0" radius="0.01" geometry="height: 2"></a-cylinder>
+                        </a-entity>
+                        <a-entity class = "crane-equipment" mixin="col-crane-equip" buffer-geometry-merger>
+                                <a-box position="2 4.95  0"     scale="0.25 0.1 0.5"></a-box>
+                                <a-box position="2 4.7 0"     scale="0.075 0.5 0.075"></a-box>
+                        </a-entity>
                     </script>
 
                     <!-- Vehicles-->
@@ -6719,7 +6970,7 @@
                                     <a-triangle scale="0.98 0.2 0.2" geometry="vertexA: -0.18 0.24 -0.35; vertexC: 0.67 -0.29 0; vertexB: -0.18 -0.49 -0.01" position="0.78293 0.34448 0.48797"></a-triangle>                    
                                     <a-triangle geometry="vertexA: -0.02 0 0; vertexC: 0.22 0 0; vertexB: 0.24 0.09 -0.03" position="-1.288 0.16338 0.470"></a-triangle>                    
                                 </a-entity> 
-                        </a-entity>                  
+                            </a-entity>                  
                             <a-entity class="lights-group">
                                 <a-box mixin="col-cybertruck-brakelights" scale="0.018 0.02 0.89" position="0.777 0.732 0"></a-box>  
                                 <a-box mixin="col-cybertruck-headlights" scale="0.018 0.03 0.56" position="-2.107 0.565 0"></a-box>
@@ -6753,9 +7004,9 @@
                                     <a-cylinder mixin="col-cybertruck-rims" rotation="90 0 0" geometry="radius: 0.18; height: 0.05; segmentsRadial: 10"></a-cylinder>                            
                                 </a-entity>
                             </a-entity>
-                            <a-entity class="anchor-group">
-                                <a-entity class ="center-anchor emissions-anchor" position="-0.675 0.8 0"></a-entity>
-                            </a-entity>
+                        </a-entity>
+                        <a-entity class="anchor-group">
+                            <a-entity class ="center-anchor emissions-anchor" position="-0.675 1 0"></a-entity>
                         </a-entity>
                     </script>
 
@@ -6865,9 +7116,10 @@
                                     </a-entity>
                                 </a-entity>
                             </a-entity>
-                            <a-entity class="anchor-group">
-                                <a-entity class ="center-anchor emissions-anchor" position="0 0.5 0"></a-entity>
-                            </a-entity>
+                        </a-entity>
+                        <a-entity class="anchor-group">
+                            <a-entity class ="center-anchor emissions-anchor" position="-0.1 0.5 0"></a-entity>
+                            <a-entity class ="switch-anchor emissions-anchor" position="0.5 0.4 0"></a-entity>
                         </a-entity>
                     </script>
 
@@ -6949,9 +7201,10 @@
                                     </a-entity>
                                 </a-entity>
                             </a-entity>
-                            <a-entity class="anchor-group">
-                                <a-entity class ="center-anchor emissions-anchor" position="0 0.5 0"></a-entity>
-                            </a-entity>
+                        </a-entity>
+                        <a-entity class="anchor-group">
+                            <a-entity class ="center-anchor emissions-anchor" position="0 0.8 0"></a-entity>
+                            <a-entity class ="switch-anchor emissions-anchor" position="1 0.6 0"></a-entity>
                         </a-entity>
                     </script>
 
@@ -7162,7 +7415,7 @@
                             <a-cone position="0.55 0.42 0" rotation="0 90 0" geometry="height: 0.2; segmentsHeight: 11; segmentsRadial: 4; radiusBottom: 0.01; radiusTop: 0.02"></a-cone>
                         </a-entity>
                         <a-entity class="anchor-group">
-                            <a-entity class="animal-anchor emissions-anchor" position="0 0.7 0"></a-entity>
+                            <a-entity class="animal-anchor emissions-anchor" position="0 0.9 0"></a-entity>
                         </a-entity>
                     </script>
 
@@ -8702,7 +8955,7 @@
                                     position="44.5 0.1 -26.6" rotation="0 90 0"
                                     template="src: #tmp-charger" data-basecol="col-vehicle-purple" data-trimcol="col-vehicle-trimDark"  data-windowcol="col-vehicle-window" data-rimcol="col-vehicle-rims-A" data-chromecol="col-vehicle-chrome"></a-entity>
                                 <a-entity id="resi-vehicle-10" class="road-vehicle internal-combustion-engine large-passenger-vehicle-average-ice" 
-                                    position="-30 0.1 -26.6" rotation="0 -60 0"
+                                    position="-30 0.1 35" rotation="0 -60 0"
                                     template="src: #tmp-charger" data-basecol="col-vehicle-orange" data-trimcol="col-vehicle-trimDark"  data-windowcol="col-vehicle-window" data-rimcol="col-vehicle-rims-A" data-chromecol="col-vehicle-chrome"></a-entity>
 
                                 <a-entity id="resi-vehicle-11" class="road-vehicle internal-combustion-engine large-passenger-vehicle-average-ice"
@@ -8804,7 +9057,7 @@
 
                         <!-- Built environment: Hospital -->
                         <a-entity id="hospital-01" class="non-residential-building mains-gas-connected-facility-with-solar-pv hospital" 
-                            position="-23.6 0 -4.0"  rotation="0 -90 0">
+                            position="-23.6 0 -1"  rotation="0 -90 0">
                             <a-entity template="src:#tmp-hospital"
                                 data-basecol="col-hospital-base" data-trimcol="col-hospital-trim" data-doorcol="col-hospital-door" data-windowcol="col-hospital-window" data-equipcol="col-hospital-equip"></a-entity>
                         </a-entity>
@@ -8954,6 +9207,12 @@
                             </a-entity>
                             <a-entity id="airport-terminal" template="src:#tmp-airport-terminal"  position="17.69 0 -7.92" rotation="0 30 0"> </a-entity>
                         </a-entity>
+            
+                        <!-- Construction site -->
+                        <a-entity id = "construction-site" position="-22.5 0 -2.5" >
+                            <a-entity id="crane" template="src: #tmp-crane"></a-entity>
+                        </a-entity>
+
                     </a-entity><!-- End of industrial zone -->
 
                     <!---URBAN CITY ZONE -->
@@ -9372,8 +9631,8 @@
 
                         <!-- Built environment -->
                         <a-entity id="church-grounds" position="25.66 0 -5.167">
-                            <a-box class="carpark" mixin="tarmac" position="-3.79609 0 -1.74264" geometry="depth: 11; width: 2"></a-box>
-                            <a-box class="carpark" mixin="tarmac" position="-0.77707 0 -9.1454" geometry="depth: 4; width: 8"></a-box>
+                            <a-box class="carpark" mixin="tarmac" position="-3.796 0 -1.743" geometry="depth: 11; width: 2"></a-box>
+                            <a-box class="carpark" mixin="tarmac" position="-0.778 0 -9.145" geometry="depth: 4; width: 8"></a-box>
                             <a-entity id="church-building" gltf-model="#mdl-church" position="-0.4 0 -2.1" scale="0.3 0.3 0.3"></a-entity> 
                             <a-entity class="emissions-anchor church grid-electricity" position="0.35 4 -2"></a-entity>
                         </a-entity>
@@ -9384,18 +9643,12 @@
                             <a-entity id="schoolhouse" gltf-model="#mdl-schoolHouse" rotation="0 180 0" scale="0.2 0.2 0.2" position="-0.48849 0.1 0.34592"></a-entity>
                             <a-entity class="non-residential-building mains-gas-connected-facility-with-solar-pv school" position="-3.1 0.1 -0.14">
                                 <a-entity class = "school-building" template="src: #tmp-school-building"
-                                    data-basecol="palette-E-base"
-                                    data-roofcol="palette-E-roof"
-                                    data-trimcol="palette-E-trim"
-                                    data-windowcol="col-home-windows" ></a-entity>
+                                    data-basecol="palette-E-base"  data-roofcol="palette-E-roof"    data-trimcol="palette-E-trim" data-windowcol="col-home-windows" ></a-entity>
                             </a-entity>
 
                             <a-entity class="non-residential-building mains-gas-connected-facility-with-solar-pv school" position="0.71 0.1 3.9" rotation="0 90 0">
                                 <a-entity class = "school-building" template="src: #tmp-school-building"
-                                    data-basecol="palette-E-base"
-                                    data-roofcol="palette-E-roof"
-                                    data-trimcol="palette-E-trim"
-                                    data-windowcol="col-home-windows" ></a-entity>
+                                    data-basecol="palette--base"  data-roofcol="palette-E-roof" data-trimcol="palette-E-trim" data-windowcol="col-home-windows" ></a-entity>
                                 <a-entity class ="waste-skip-group">
                                     <a-entity position ="-2 0 0.6" rotation="0 -90 0" scale="0.7 0.7 0.7" template="src: #tmp-skip"  
                                         data-bincol="col-bin-green"  data-lidcol="col-bin-lid-black" data-panecol="col-bin-pane"></a-entity>
@@ -10122,10 +10375,7 @@
                                     </a-entity>
                                     <a-entity class="home-group" position="-1 0 1">
                                         <a-entity class="home-baseBuilding home-large" template="src:#tmp-house-large" data-featurescale="1 1 1"
-                                            data-basecol="palette-E-base" 
-                                            data-roofcol="palette-E-roof" 
-                                            data-doorcol="palette-E-trim" 
-                                            data-windowcol="col-home-windows"></a-entity>
+                                            data-basecol="palette-E-base" data-roofcol="palette-E-roof"  data-doorcol="palette-E-trim" data-windowcol="col-home-windows"></a-entity>
                                     </a-entity>
                                 </a-entity>
 
@@ -10134,7 +10384,7 @@
                                 resident owner">
                                     <a-entity class="block-features">
                                         <a-box class="fence" mixin="col-fence" position="-3 0.4 -1" scale="0.05 0.8 11.5"></a-box>
-                                        <a-box class="driveway" mixin="driveway" position="1.8 -0.05 2.4"  geometry="depth: 7.3"></a-box>
+                                        <a-box class="driveway" mixin="driveway" position="1.8 -0.05 2.4" geometry="depth: 7.3"></a-box>
                                     </a-entity>
                                     <a-entity class="bins-group" position="2.65 0.05 -0.6" rotation="0 -90 0">
                                         <a-entity class="bins-group" template="src: #tmp-household-bins-group"></a-entity>
@@ -10147,10 +10397,7 @@
                                     </a-entity>
                                     <a-entity class="home-group" position="-1 0 1">
                                         <a-entity class="home-baseBuilding home-large" template="src:#tmp-house-large" data-featurescale="1 1 1"
-                                            data-basecol="palette-F-base" 
-                                            data-roofcol="palette-F-roof" 
-                                            data-doorcol="palette-F-trim" 
-                                            data-windowcol="col-home-windows"></a-entity>
+                                            data-basecol="palette-F-base" data-roofcol="palette-F-roof" data-doorcol="palette-F-trim" data-windowcol="col-home-windows"></a-entity>
                                     </a-entity>
                                 </a-entity>
 
@@ -10172,10 +10419,7 @@
                                     </a-entity>
                                     <a-entity class="home-group" position="-1 0 1">
                                         <a-entity class="home-baseBuilding home-large" template="src:#tmp-house-large" data-featurescale="1 1 1"
-                                            data-basecol="palette-G-base" 
-                                            data-roofcol="palette-G-roof" 
-                                            data-doorcol="palette-G-trim" 
-                                            data-windowcol="col-home-windows"></a-entity>
+                                            data-basecol="palette-C-base"  data-roofcol="palette-C-roof"  data-doorcol="palette-C-trim"   data-windowcol="col-home-windows"></a-entity>
                                     </a-entity>
                                 </a-entity>
 
@@ -10197,10 +10441,7 @@
                                     </a-entity>
                                     <a-entity class="home-group" position="-1 0 1">
                                         <a-entity class="home-baseBuilding home-large" template="src:#tmp-house-large" data-featurescale="1 1 1"
-                                            data-basecol="palette-B-base" 
-                                            data-roofcol="palette-B-roof" 
-                                            data-doorcol="palette-B-trim" 
-                                            data-windowcol="col-home-windows"></a-entity>
+                                            data-basecol="palette-B-base" data-roofcol="palette-B-roof" data-doorcol="palette-B-trim"  data-windowcol="col-home-windows"></a-entity>
                                     </a-entity>
                                 </a-entity>
 
@@ -10222,10 +10463,7 @@
                                     </a-entity>
                                     <a-entity class="home-group" position="-1 0 1">
                                         <a-entity class="home-baseBuilding home-large" template="src:#tmp-house-large" data-featurescale="1 1 1"
-                                            data-basecol="palette-A-base" 
-                                            data-roofcol="palette-A-roof" 
-                                            data-doorcol="palette-A-trim" 
-                                            data-windowcol="col-home-windows"></a-entity>
+                                            data-basecol="palette-A-base"  data-roofcol="palette-A-roof" data-doorcol="palette-A-trim" data-windowcol="col-home-windows"></a-entity>
                                     </a-entity>
                                 </a-entity>
 
@@ -10247,10 +10485,7 @@
                                     </a-entity>
                                     <a-entity class="home-group" position="-1 0 1">
                                         <a-entity class="home-baseBuilding home-large" template="src:#tmp-house-large" data-featurescale="1 1 1"
-                                            data-basecol="palette-B-base" 
-                                            data-roofcol="palette-B-roof" 
-                                            data-doorcol="palette-B-trim" 
-                                            data-windowcol="col-home-windows"></a-entity>
+                                            data-basecol="palette-B-base" data-roofcol="palette-B-roof" data-doorcol="palette-B-trim" data-windowcol="col-home-windows"></a-entity>
                                     </a-entity>
                                 </a-entity>
 
@@ -10272,10 +10507,7 @@
                                     </a-entity>
                                     <a-entity class="home-group" position="-1 0 1">
                                         <a-entity class="home-baseBuilding home-large" template="src:#tmp-house-large" data-featurescale="1 1 1"
-                                            data-basecol="palette-A-base" 
-                                            data-roofcol="palette-A-roof" 
-                                            data-doorcol="palette-A-trim" 
-                                            data-windowcol="col-home-windows"></a-entity>
+                                            data-basecol="palette-C-base" data-roofcol="palette-C-roof" data-doorcol="palette-C-trim" data-windowcol="col-home-windows"></a-entity>
                                     </a-entity>
                                 </a-entity>
 
@@ -10297,14 +10529,10 @@
                                     </a-entity>
                                     <a-entity class="home-group" position="-1 0 1">
                                         <a-entity class="home-baseBuilding home-large" template="src:#tmp-house-large" data-featurescale="1 1 1"
-                                            data-basecol="palette-B-base" 
-                                            data-roofcol="palette-B-roof" 
-                                            data-doorcol="palette-B-trim" 
-                                            data-windowcol="col-home-windows"></a-entity>
+                                            data-basecol="palette-E-base" data-roofcol="palette-E-roof" data-doorcol="palette-E-trim" data-windowcol="col-home-windows"></a-entity>
                                     </a-entity>
                                 </a-entity>
                             </a-entity>
-
                         </a-entity>
                     </a-entity><!-- end of suburban-->
 
@@ -10640,7 +10868,7 @@
                                 <a-entity class="manure-group">  
                                     <a-entity class="livestock pig farm-animal" template="src: #tmp-manure" position="-5 0 17" scale="0.5 0.5 0.5"></a-entity>
                                 </a-entity>
-                                <a-entity class="livestock pig agricultural-grazing-land">
+                                <a-entity class="agricultural-land pig agricultural-grazing-land">
                                     <a-entity class="land-management-anchor emissions-anchor" position="-4 0 17.5"></a-entity>
                                 </a-entity>
                             </a-entity>        
@@ -10665,7 +10893,7 @@
                                 <a-entity class="livestock sheep agricultural-grazing-land">
                                     <a-entity class="land-management-anchor emissions-anchor" position="-16 0 -3"></a-entity>
                                 </a-entity>
-                                <a-entity class="livestock poultry agricultural-grazing-land">
+                                <a-entity class="agricultural-land poultry agricultural-grazing-land">
                                     <a-entity class="land-management-anchor emissions-anchor" position="-13 0 -9"></a-entity>
                                 </a-entity>
                             </a-entity>
@@ -10687,7 +10915,7 @@
                                 <a-entity class="livestock cattle-dairy agricultural-grazing-land">
                                     <a-entity class="land-management-anchor emissions-anchor" position="-16 0 14"></a-entity>
                                 </a-entity>
-                                <a-entity class="livestock cattle-beef agricultural-grazing-land">
+                                <a-entity class="agricultural-land cattle-beef agricultural-grazing-land">
                                     <a-entity class="land-management-anchor emissions-anchor" position="-13 0 16"></a-entity>
                                 </a-entity>
                             </a-entity>
@@ -10697,25 +10925,45 @@
                         <a-entity id="ag-produce-group" class="produce-group">
                             <a-entity id="ag-produce-group" class="cropping-group">
                                 <a-entity id="crops-farm-04">
-                                    <a-box class="field" mixin="col-field" height="0.1" width="7" depth="9" position="5.25 0 3.0" rotation="0 30 0">
+                                    <a-box class="agricultural-land corn-maize agricultural-land-for-food-production" 
+                                        mixin="col-field" height="0.1" width="7" depth="9" position="5.25 0 3.0" rotation="0 30 0">
                                         <a-entity class="crop-group" rotation ="0 90 0" template="src:#tmp-field-corn"></a-entity>
                                         <a-entity rotation ="0 90 0" template="src:#tmp-field-soil" visible ="false"></a-entity>
+                                        <a-entity class="emissions-anchor-group">
+                                            <a-entity class="land-management-anchor emissions-anchor" position="0 0 0"></a-entity>
+                                        </a-entity>
                                     </a-box>	
-                                    <a-box class="field" mixin="col-field" height="0.1" width="7" depth="9" position="-2.5 0 -10.7" rotation="0 30 0">
+                                    <a-box class="agricultural-land barley agricultural-land-for-food-production" 
+                                        mixin="col-field" height="0.1" width="7" depth="9" position="-2.5 0 -10.7" rotation="0 30 0">
                                         <a-entity class="crop-group" rotation ="0 90 0" template="src:#tmp-field-wheat"></a-entity>
                                         <a-entity rotation ="0 90 0" template="src:#tmp-field-soil"  visible ="false"></a-entity>
+                                        <a-entity class="emissions-anchor-group">
+                                            <a-entity class="land-management-anchor emissions-anchor" position="0 0 0"></a-entity>
+                                        </a-entity>
                                     </a-box>	
-                                    <a-box class="field" mixin="col-field" height="0.1" width="7" depth="9" position="-7.5 0 -19.40" rotation="0 30 0">
+                                    <a-box class="agricultural-land corn-maize agricultural-land-for-food-production" 
+                                        mixin="col-field" height="0.1" width="7" depth="9" position="-7.5 0 -19.40" rotation="0 30 0">
                                         <a-entity class="crop-group" rotation ="0 90 0" template="src:#tmp-field-corn"></a-entity>
                                         <a-entity rotation ="0 90 0" template="src:#tmp-field-soil"  visible ="false"></a-entity>
+                                        <a-entity class="emissions-anchor-group">
+                                            <a-entity class="land-management-anchor emissions-anchor" position="0 0 0"></a-entity>
+                                        </a-entity>
                                     </a-box>	
-                                    <a-box class="field" mixin="col-field" height="0.1" width="7" depth="9" position="-0.45 0 -23.5" rotation="0 30 0">
+                                    <a-box class="agricultural-land potatoes agricultural-land-for-food-production"  
+                                        mixin="col-field" height="0.1" width="7" depth="9" position="-0.45 0 -23.5" rotation="0 30 0">
                                         <a-entity class="crop-group" rotation ="0 90 0" template="src:#tmp-field-generic"></a-entity>
                                         <a-entity rotation ="0 90 0" template="src:#tmp-field-soil"></a-entity>
-                                    </a-box>	
-                                    <a-box class="field" mixin="col-field" height="0.1" width="7" depth="9" position="4.60 0 -14.75" rotation="0 30 0">
+                                        <a-entity class="emissions-anchor-group">
+                                            <a-entity class="land-management-anchor emissions-anchor" position="0 0 0"></a-entity>
+                                        </a-entity>
+                                    </a-box>
+                                    <a-box class="agricultural-land soybean agricultural-land-for-food-production"    
+                                        mixin="col-field" height="0.1" width="7" depth="9" position="4.60 0 -14.75" rotation="0 30 0">
                                         <a-entity class="crop-group" rotation ="0 90 0" template="src:#tmp-field-generic"></a-entity>
                                         <a-entity rotation ="0 90 0"  template="src:#tmp-field-soil"></a-entity>
+                                        <a-entity class="emissions-anchor-group">
+                                            <a-entity class="land-management-anchor emissions-anchor" position="0 0 0"></a-entity>
+                                        </a-entity>
                                     </a-box>	
                                 </a-entity>   
                             </a-entity>         
