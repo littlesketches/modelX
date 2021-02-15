@@ -48,8 +48,8 @@ const modelVisData = {
           },
           "drilling-rig": {
             "summary": {
-              "emissions": 5000,
-              "naturalVol": 5000,
+              "emissions": 10000,
+              "naturalVol": 10000,
               "energy": 0,
               "abated_emissions": 0,
               "abated_naturalVol": 0,
@@ -61,11 +61,15 @@ const modelVisData = {
               "economicSector": "Extractive industries",
               "economicActor": "Mining and oil and gas operators",
               "activities": [
-                "Oil extraction and recovery"
+                "Oil extraction and recovery",
+                "Coal mining"
               ],
               "technologies": {
                 "Oil extraction and recovery": [
                   "OIl well drilling"
+                ],
+                "Coal mining": [
+                  "Petroleum refinery"
                 ]
               },
               "naturalVol_Unit": "mil. barrels",
@@ -78,8 +82,8 @@ const modelVisData = {
         "coal-mine": {
           "excavated-mine": {
             "summary": {
-              "emissions": 2061.32,
-              "naturalVol": 2061.32,
+              "emissions": 2242.38,
+              "naturalVol": 2242.38,
               "energy": 0,
               "abated_emissions": 0,
               "abated_naturalVol": 0,
@@ -140,9 +144,9 @@ const modelVisData = {
         "power-station-cooling-tower": {
           "local": {
             "summary": {
-              "emissions": 21832.93,
-              "naturalVol": 17598.77,
-              "energy": 63355.57,
+              "emissions": 23750.68,
+              "naturalVol": 19144.609999999997,
+              "energy": 68920.59,
               "abated_emissions": 0,
               "abated_naturalVol": 0,
               "abated_energy": 0,
@@ -167,9 +171,9 @@ const modelVisData = {
           },
           "export": {
             "summary": {
-              "emissions": 8834.23,
-              "naturalVol": 6795.56,
-              "energy": 24464.03,
+              "emissions": 9610.21,
+              "naturalVol": 7392.47,
+              "energy": 26612.9,
               "abated_emissions": 0,
               "abated_naturalVol": 0,
               "abated_energy": 0,
@@ -198,9 +202,9 @@ const modelVisData = {
         "electricity-transmission-lines": {
           "central": {
             "summary": {
-              "emissions": 27.93,
-              "naturalVol": 316.81,
-              "energy": 1140.51,
+              "emissions": 30.38,
+              "naturalVol": 344.64,
+              "energy": 1240.69,
               "abated_emissions": 0,
               "abated_naturalVol": 0,
               "abated_energy": 0,
@@ -226,9 +230,9 @@ const modelVisData = {
         "electricity-distribution-lines": {
           "central": {
             "summary": {
-              "emissions": 251.34,
-              "naturalVol": 2851.29,
-              "energy": 10264.63,
+              "emissions": 273.42,
+              "naturalVol": 3101.74,
+              "energy": 11166.25,
               "abated_emissions": 0,
               "abated_naturalVol": 0,
               "abated_energy": 0,
@@ -14612,7 +14616,7 @@ const modelVisData = {
               ],
               "technologies": {
                 "Heating, cooling and ventilation (HVAC)": [
-                  "Transmission and distribution lines",
+                  "Fans and cooling towers (inefficent)",
                   "Fans and cooling towers (efficient)",
                   "Chillers (air cooled / inefficent)",
                   "Chillers (water cooled / efficient)",
@@ -15124,7 +15128,7 @@ const modelVisData = {
               ],
               "technologies": {
                 "Heating, cooling and ventilation (HVAC)": [
-                  "Transmission and distribution lines",
+                  "Split system",
                   "Fans and cooling towers (inefficent)",
                   "Fans and cooling towers (efficient)",
                   "Chillers (air cooled / inefficent)",
@@ -20662,7 +20666,7 @@ const modelVisData = {
           },
           "diesel-generator": {
             "summary": {
-              "emissions": 28.49,
+              "emissions": 55.58,
               "naturalVol": 10,
               "energy": 386,
               "abated_emissions": 0,
@@ -20670,7 +20674,7 @@ const modelVisData = {
               "abated_energy": 0,
               "emissionsSector": "Stationary energy",
               "emissionsSubSector": "Commercial and institutional buildings/facilities",
-              "emissionsSource": "Diesel (transport)",
+              "emissionsSource": "Diesel (stationary)",
               "economicSectorGroup": "Industrial",
               "economicSector": "Construction industry",
               "economicActor": "Construction industries",
@@ -23263,7 +23267,7 @@ const modelVisData = {
               ],
               "technologies": {
                 "Heating, cooling and ventilation (HVAC)": [
-                  "Transmission and distribution lines",
+                  "Fans and cooling towers (inefficent)",
                   "Fans and cooling towers (efficient)",
                   "Chillers (air cooled / inefficent)",
                   "Chillers (water cooled / efficient)",
@@ -30544,9 +30548,9 @@ const modelVisData = {
           "local": {
             "summary": {
               "emissions": 0,
-              "naturalVol": 3484.9,
-              "energy": 12545.66,
-              "abated_emissions": 4381.02,
+              "naturalVol": 3032.81,
+              "energy": 10918.11,
+              "abated_emissions": 3812.67,
               "abated_naturalVol": 0,
               "abated_energy": 0,
               "emissionsSector": "Stationary energy",
@@ -30570,9 +30574,9 @@ const modelVisData = {
           "export": {
             "summary": {
               "emissions": 0,
-              "naturalVol": 0,
-              "energy": 0,
-              "abated_emissions": 0,
+              "naturalVol": 758.2,
+              "energy": 2729.53,
+              "abated_emissions": 953.17,
               "abated_naturalVol": 0,
               "abated_energy": 0,
               "emissionsSector": "Stationary energy",
@@ -30598,9 +30602,9 @@ const modelVisData = {
           "local": {
             "summary": {
               "emissions": 0,
-              "naturalVol": 3484.9,
-              "energy": 12545.66,
-              "abated_emissions": 4381.02,
+              "naturalVol": 2653.71,
+              "energy": 9553.35,
+              "abated_emissions": 3336.09,
               "abated_naturalVol": 0,
               "abated_energy": 0,
               "emissionsSector": "Stationary energy",
@@ -30624,9 +30628,9 @@ const modelVisData = {
           "export": {
             "summary": {
               "emissions": 0,
-              "naturalVol": 0,
-              "energy": 0,
-              "abated_emissions": 0,
+              "naturalVol": 1137.3,
+              "energy": 4094.29,
+              "abated_emissions": 1429.75,
               "abated_naturalVol": 0,
               "abated_energy": 0,
               "emissionsSector": "Stationary energy",
@@ -30652,9 +30656,9 @@ const modelVisData = {
           "local": {
             "summary": {
               "emissions": 0,
-              "naturalVol": 2613.68,
-              "energy": 9409.24,
-              "abated_emissions": 3285.77,
+              "naturalVol": 2274.61,
+              "energy": 8188.58,
+              "abated_emissions": 2859.51,
               "abated_naturalVol": 0,
               "abated_energy": 0,
               "emissionsSector": "Stationary energy",
@@ -30678,9 +30682,9 @@ const modelVisData = {
           "export": {
             "summary": {
               "emissions": 0,
-              "naturalVol": 0,
-              "energy": 0,
-              "abated_emissions": 0,
+              "naturalVol": 568.65,
+              "energy": 2047.15,
+              "abated_emissions": 714.88,
               "abated_naturalVol": 0,
               "abated_energy": 0,
               "emissionsSector": "Stationary energy",
@@ -30705,10 +30709,10 @@ const modelVisData = {
         "waste-to-energy-power-station": {
           "local": {
             "summary": {
-              "emissions": 52.27,
-              "naturalVol": 871.23,
-              "energy": 3136.41,
-              "abated_emissions": 1042.98,
+              "emissions": 56.87,
+              "naturalVol": 947.75,
+              "energy": 3411.91,
+              "abated_emissions": 1134.6,
               "abated_naturalVol": 0,
               "abated_energy": 0,
               "emissionsSector": "Stationary energy",
@@ -34730,7 +34734,7 @@ const modelVisData = {
                   "Rooftop solar PV"
                 ],
                 "Heating, cooling and ventilation (HVAC)": [
-                  "Transmission and distribution lines",
+                  "Fans and cooling towers (inefficent)",
                   "Fans and cooling towers (efficient)",
                   "Chillers (air cooled / inefficent)",
                   "Chillers (water cooled / efficient)",
@@ -35004,7 +35008,7 @@ const modelVisData = {
                   "Rooftop solar PV"
                 ],
                 "Heating, cooling and ventilation (HVAC)": [
-                  "Transmission and distribution lines",
+                  "Split system",
                   "Fans and cooling towers (inefficent)",
                   "Fans and cooling towers (efficient)",
                   "Chillers (air cooled / inefficent)",
@@ -35897,7 +35901,7 @@ const modelVisData = {
                   "Rooftop solar PV"
                 ],
                 "Heating, cooling and ventilation (HVAC)": [
-                  "Transmission and distribution lines",
+                  "Fans and cooling towers (inefficent)",
                   "Fans and cooling towers (efficient)",
                   "Chillers (air cooled / inefficent)",
                   "Chillers (water cooled / efficient)",
