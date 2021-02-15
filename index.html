@@ -2168,6 +2168,9 @@
                         <a-mixin id="col-crane-struts"              material='color: yellow'></a-mixin>
                         <a-mixin id="col-crane-cables"              material='color: #00fdff'></a-mixin>
                         <a-mixin id="col-crane-equip"               material='color: #00fdff'></a-mixin>
+                        <a-mixin id="col-generator-body"            material='color: #F0B823'></a-mixin>
+                        <a-mixin id="col-generator-grill"           material='color: #000'></a-mixin>
+                        <a-mixin id="col-concrete"                  material='color: #D2D1CD'></a-mixin>
                     <!-- Animals-->
                         <a-mixin id="col-chicken-body"   	        material='color: #fff'></a-mixin>
                         <a-mixin id="col-chicken-feet"   	        material='color: orange'></a-mixin>
@@ -4280,7 +4283,7 @@
                             <a-entity class="electricity-meter emissions-anchor"    position="1.6 0.7 1.25"></a-entity>
                             <a-entity class="lighting-anchor emissions-anchor"      position="0.45 0.7 1.35"></a-entity>
                             <a-entity class="water-services emissions-anchor"       position ="1.75 0 -1"></a-entity>
-                            <a-entity class="on-site-battery emissions-anchor"      position ="1.85 0.5 -0.5"></a-entity>
+                            <a-entity class="on-site-battery emissions-anchor"      position ="1.85 0.5 -0.7"></a-entity>
                             <a-entity class="gas-meter emissions-anchor"            position="1.85 0 1"></a-entity>
                             <a-entity class="hvac-anchor emissions-anchor"          position="-1.8 1 0"></a-entity>
                             <a-entity class="hot-water-anchor emissions-anchor"     position="0.65 0.6 -1.4"></a-entity>
@@ -4372,7 +4375,7 @@
                             <a-entity class="electricity-meter emissions-anchor"        position="1.6 0.7 1.25"></a-entity>
                             <a-entity class="lighting-anchor emissions-anchor"          position="0.45 0.7 1.35"></a-entity>
                             <a-entity class="water-services emissions-anchor"           position ="1.75 0 -1"></a-entity>
-                            <a-entity class="on-site-battery emissions-anchor"          position ="1.85 0.5 -0.5"></a-entity>
+                            <a-entity class="on-site-battery emissions-anchor"          position ="1.85 0.5 -0.7"></a-entity>
                             <a-entity class="gas-meter emissions-anchor"                position="1.85 0 1"></a-entity>
                             <a-entity class="hvac-anchor emissions-anchor"              position="-1.8 1.9 0"></a-entity>
                             <a-entity class="hot-water-anchor emissions-anchor"         position="0.65 0.6 -1.4"></a-entity>
@@ -5203,7 +5206,7 @@
                             <a-entity class="solar-pv-offset emissions-anchor"          position="3.5 5.25 0"></a-entity>
                             <a-entity class="solar-pv-export emissions-anchor"          position="3.5 5.25 0.5"></a-entity>
                             <a-entity class="solar-pv-avoided-grid emissions-anchor"    position="3.25 5.25 -0.5"></a-entity>
-                            <a-entity class="on-site-battery emissions-anchor"          position="4.05 5.5 -0.5"></a-entity>
+                            <a-entity class="on-site-battery emissions-anchor"          position="4.05 5.5 0"></a-entity>
                         </a-entity>
                         <a-entity class ="waste-skip-group">
                             <a-entity position ="1.75 0 -2.6" rotation="0 180 0" template="src: #tmp-skip"  
@@ -6526,8 +6529,8 @@
                             </a-entity>
                         </a-entity>
                         <a-entity class="anchor-group">
-                            <a-entity position="0 26 -1.5" class="local emissions-anchor"></a-entity>
-                            <a-entity position="0 26 1.25" class="local emissions-anchor"></a-entity>
+                            <a-entity position="0 25 -1.5" class="local emissions-anchor"></a-entity>
+                            <a-entity position="0 25 1.25" class="export emissions-anchor"></a-entity>
                         </a-entity>
                     </script>
 
@@ -6914,6 +6917,55 @@
                         <a-entity class = "crane-equipment" mixin="col-crane-equip" buffer-geometry-merger>
                                 <a-box position="2 4.95  0"     scale="0.25 0.1 0.5"></a-box>
                                 <a-box position="2 4.7 0"     scale="0.075 0.5 0.075"></a-box>
+                        </a-entity>
+                    </script>
+
+                    <script id="tmp-building-under-construction" type="text/html">
+                        <a-entity mixin="col-concrete"buffer-geometry-merger>
+                            <a-box position="0 2 0" scale="0.15 4 0.15"></a-box>
+                            <a-box position="-2 2 2" scale="0.15 4 0.15"></a-box>
+                            <a-box position="-2 2 1" scale="0.15 4 0.15"></a-box>
+                            <a-box position="-2 2 0" scale="0.15 4 0.15"></a-box>
+                            <a-box position="-2 2 -1" scale="0.15 4 0.15"></a-box>
+                            <a-box position="-2 2 -2" scale="0.15 4 0.15"></a-box>
+                            <a-box position="-1 2 2" scale="0.15 4 0.15"></a-box>
+                            <a-box position="-1 2 1" scale="0.15 4 0.15"></a-box>
+                            <a-box position="-1 2 0" scale="0.15 4 0.15"></a-box>
+                            <a-box position="-1 2 -1" scale="0.15 4 0.15"></a-box>
+                            <a-box position="-1 2 -2" scale="0.15 4 0.15"></a-box>
+                            <a-box position="0 2 2" scale="0.15 4 0.15"></a-box>
+                            <a-box position="0 2 1" scale="0.15 4 0.15"></a-box>
+                            <a-box position="0 2 0" scale="0.15 4 0.15"></a-box>
+                            <a-box position="0 2 -1" scale="0.15 4 0.15"></a-box>
+                            <a-box position="0 2 -2" scale="0.15 4 0.15"></a-box>
+                            <a-box position="1 2 2" scale="0.15 4 0.15"></a-box>
+                            <a-box position="1 2 1" scale="0.15 4 0.15"></a-box>
+                            <a-box position="1 2 0" scale="0.15 4 0.15"></a-box>
+                            <a-box position="1 2 -1" scale="0.15 4 0.15"></a-box>
+                            <a-box position="1 2 -2" scale="0.15 4 0.15"></a-box>
+                            <a-box position="2 2 2" scale="0.15 4 0.15"></a-box>
+                            <a-box position="2 2 1" scale="0.15 4 0.15"></a-box>
+                            <a-box position="2 2 0" scale="0.15 4 0.15"></a-box>
+                            <a-box position="2 2 -1" scale="0.15 4 0.15"></a-box>
+                            <a-box position="2 2 -2" scale="0.15 4 0.15"></a-box>
+                        </a-entity>
+                        <a-entity mixin="col-concrete" buffer-geometry-merger>
+                            <a-box position="0 1 0" scale="4.5 0.1 4.5"></a-box>
+                            <a-box position="0 2 0" scale="4.5 0.1 4.5"></a-box>
+                            <a-box position="0 3 0" scale="4.5 0.1 4.5"></a-box>
+                        </a-entity>
+                    </script>
+
+                    <script id = "tmp-diesel-generator" type="text/html">
+                        <a-box  mixin="col-generator-body"  position="0 0.2 0" scale="0.4 0.4 0.6"></a-box>
+                        <a-entity mixin="col-generator-grill" buffer-geometry-merger>
+                            <a-plane position="0 0.4005- 0.1" rotation="-90 0 0" scale="0.2 0.2 1"></a-plane>
+                            <a-plane position="0.2005 0.25 0.1" rotation="0 90 0" scale="0.1 0.1 1"></a-plane>
+                            <a-plane position="-0.2005 0.25 0.1" rotation="0 -90 0" scale="0.1 0.1 1"></a-plane>
+                            <a-plane position="-0.2005 0.025 0" rotation="0 -90 0" scale="0.6 0.05 1"></a-plane>
+                            <a-plane position="0.2005 0.025 0" rotation="0 90 0" scale="0.6 0.05 1"></a-plane>
+                            <a-plane position="0 0.025 0.3005" rotation="0 0 0" scale="0.4 0.05 1"></a-plane>
+                            <a-plane position="0 0.025 -0.3005" rotation="0 180 0" scale="0.4 0.05 1"></a-plane>
                         </a-entity>
                     </script>
 
@@ -8904,9 +8956,9 @@
                                 <a-entity class="distribution-pole" template="src: #tmp-elecDist-pole" position="-17.5 0 15.6" rotation="0 90 0"></a-entity>
                                 <a-entity class="distribution-pole" template="src: #tmp-elecDist-pole" position="5 0 15.6" rotation="0 90 0"></a-entity>
                                 <a-entity class="distribution-pole" template="src: #tmp-elecDist-pole" position="12.5 0 15.6" rotation="0 90 0"></a-entity>
-                                <a-entity class="distribution-pole" template="src: #tmp-elecDist-pole" position="-20.5 0 -2" rotation="0 -30 0"></a-entity>
+                                <a-entity class="distribution-pole" template="src: #tmp-elecDist-pole" position="-20.5 0 -2" rotation="0 0 0"></a-entity>
                                 <a-entity class="distribution-pole" template="src: #tmp-elecDist-pole" position="-20.8 0 -10.8"></a-entity>
-                                <a-entity class="distribution-pole" template="src: #tmp-elecDist-pole" position="-22 0 -10.8"></a-entity>
+                                <a-entity class="distribution-pole" template="src: #tmp-elecDist-pole" position="-15 0 3"></a-entity>
                             </a-entity>
                             <a-entity id="heavy-industry-grid" position="-44.8 3 -78.0">
                                 <a-entity class="distribution-pole" template="src: #tmp-elecDist-pole" position="-10.4 0 23" rotation="0 30 0"></a-entity>
@@ -8981,10 +9033,12 @@
                             <a-entity class="plane" class="aircraft internal-combustion-engine airplane" 
                                 position="-23 1 -62">
                                 <a-entity gltf-model="#mdl-planeRed"  scale="0.25 0.25 0.25" rotation="0 -90 0"></a-entity>
-                                <a-entity class="left-wing-inner emissions-anchor" position="1.5 0 -0.75"></a-entity>
-                                <a-entity class="left-wing-outer emissions-anchor" position="3 0 -1.5"></a-entity>
-                                <a-entity class="right-wing-inner emissions-anchor" position="-1.5 0 -0.75"></a-entity>
-                                <a-entity class="right-wing-outer emissions-anchor" position="-3 0 -1.5"></a-entity>
+                                    <a-entity>
+                                    <a-entity class="left-wing-inner emissions-anchor" position="1.5 0 -0.75"></a-entity>
+                                    <a-entity class="left-wing-outer emissions-anchor" position="3 0 -1.5"></a-entity>
+                                    <a-entity class="right-wing-inner emissions-anchor" position="-1.5 0 -0.75"></a-entity>
+                                    <a-entity class="right-wing-outer emissions-anchor" position="-3 0 -1.5"></a-entity>
+                                </a-entity>
                             </a-entity>
                             <a-entity id="plane-animation" class="aircraft internal-combustion-engine airplane"
                                 position="-12.6 1 -55.1" rotation="0 120 0">
@@ -9209,8 +9263,16 @@
                         </a-entity>
             
                         <!-- Construction site -->
-                        <a-entity id = "construction-site" position="-22.5 0 -2.5" >
-                            <a-entity id="crane" template="src: #tmp-crane"></a-entity>
+                        <a-entity id = "construction-site" class= "non-residential-building mains-gas-connected-facility construction-site"
+                            position="-23 0 -9" rotation="0 -90 0">
+                            <a-plane mixin="col-topSoil" position="0 0.005 0" rotation="-90 0 0" scale="8 6 1"></a-plane>
+                            <a-entity id="crane" position="-3 0 0" template="src: #tmp-crane"></a-entity>
+                            <a-entity id="building-construction" position="0 0 0" template="src: #tmp-building-under-construction"></a-entity>
+                            <a-entity id="construction-site-generator" position=" -3 0 1.5" template="src: #tmp-diesel-generator"></a-entity>
+                            <a-entity class="emissions-anchor-group">
+                                <a-entity class="activities-anchor emissions-anchor" position="-3 6.425 0"></a-entity>
+                                <a-entity class="diesel-generator emissions-anchor" position="-3 0.4 1.5"></a-entity>
+                            </a-entity >
                         </a-entity>
 
                     </a-entity><!-- End of industrial zone -->
@@ -9544,7 +9606,7 @@
                             position="8.75 0.3 -17.5" rotation="0 90 0" template="src:#tmp-store-1" data-featurescale = "1 1 -1"
                             data-basecol = "palette-C-base" data-roofcol = "palette-C-roof" data-trimcol = "palette-C-trim" data-doorcol = "palette-C-trim" data-windowcol = "col-home-windows"></a-entity>
                         <a-entity id="store-09" class="non-residential-building mains-gas-connected-facility-with-solar-pv hospitality-venue" 
-                            position="5.5 0.3 -17.5" rotation="0 90 0" template="src:#tmp-store-1" data-featurescale = "1 1 1"
+                            position="5.5 0.3 -17.5" rotation="0 -90 0" template="src:#tmp-store-1" data-featurescale = "1 1 1"
                             data-basecol = "palette-G-base" data-roofcol = "palette-G-roof" data-trimcol = "palette-G-trim" data-doorcol = "palette-G-trim" data-windowcol = "col-home-windows"></a-entity>
                         <a-entity id="store-10" class="non-residential-building mains-gas-connected-facility-with-solar-pv hospitality-venue" 
                             position="-12 0.3 -18" rotation="0 180 0" template="src:#tmp-store-1" data-featurescale = "1 1 -1"
